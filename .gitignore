@@ -1,0 +1,95 @@
+# Git 忽略配置
+
+# ===== 模型文件 =====
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+models/
+checkpoints/
+
+# ===== 压缩包 =====
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# ===== 数据集和缓存 =====
+datasets/
+hf_hub/
+modelscope/
+cache/
+pip_cache/
+
+# ===== 日志输出 =====
+*.log
+logs/
+outputs/
+ut_logs/
+stuck_logs_archive/
+ut_logs/
+
+# ===== Python =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# ===== 虚拟环境 =====
+.venv/
+.env/
+venv/
+ENV/
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===== 测试缓存 =====
+.pytest_cache/
+.deps/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ===== Docker =====
+docker_images/
+docker_bin/
+
+# ===== Node.js =====
+node_modules/
+.pnpm-store/
+
+# ===== Claude =====
+.claude/
+.opencode/
+
+# ===== 临时文件 =====
+*.tmp
+*.temp
+*.bak
+
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+
+# ===== 凭据文件 =====
+.bastion_creds
+
+# ===== 大型二进制 =====
+*.whl
+Miniconda*.sh

@@ -10,26 +10,77 @@
 ## 环境架构
 
 ```
-本机 (Windows)
+本机 (Windows + Git bash)
     │
-    │ SSH over Bastion (10.10.192.55)
+    │ SSH over Bastion (10.10.192.55:22)
+    │ 用户名格式: liuxin/<target_ip>/<role>
+    │ 认证: 静态密码 + 动态OTP
     ▼
 ┌─────────────────────────────────────────────┐
 │  t_ascend (10.102.234.45) - 联网            │
+│  Profile: t_ascend (daemon_port: 19922)     │
 │  - 下载pip包                                │
 │  - 下载HuggingFace模型                      │
 │  - 存储到 /gpfs/gcsp/M2.7_verify/           │
 └─────────────────────────────────────────────┘
                     │
-                    │  /gpfs 共享存储
+                    │  /gpfs 共享存储 (1.9PB)
                     ▼
 ┌─────────────────────────────────────────────┐
 │  t_h20 (10.10.154.13) - 未联网              │
-│  - Docker容器: v0.13.0_torch2.5.1_ut        │
+│  Profile: t_h20 (daemon_port: 19923)        │
+│  - Docker容器: v0.13.0_torch2.5.1_compile   │
 │  - 运行pytest测试                           │
 │  - 日志输出到 ut_logs/                      │
+│  - docker路径: /gpfs/gcsp/M2.7_verify/docker_bin/docker │
 └─────────────────────────────────────────────┘
 ```
+
+## Bastion连接方式
+
+### agent.py核心命令
+
+```powershell
+# 启动daemon (需输入OTP)
+python agent.py serve <profile>
+
+# 检查状态
+python agent.py -p <profile> ping
+
+# 执行命令
+python agent.py -p <profile> run "command"
+
+# 发送交互命令 (用于进入容器)
+python agent.py -p <profile> send "command"
+
+# 进入交互shell
+python agent.py -p <profile> shell
+
+# 文件传输
+python agent.py -p <profile> upload <local> <remote>
+python agent.py -p <profile> download <remote> <local>
+```
+
+### 进入测试容器的正确流程
+
+```powershell
+# 1. 启动daemon
+python agent.py serve t_h20
+
+# 2. 发送命令进入容器
+python agent.py -p t_h20 send "sudo docker exec -it v0.13.0_torch2.5.1_compile bash"
+
+# 3. 进入测试目录
+python agent.py -p t_h20 send "cd /gpfs/gcsp/M2.7_verify/vllm"
+
+# 4. 运行pytest
+python agent.py -p t_h20 send "pytest -vv -s tests/test_xxx.py 2>&1 | tee ut_logs/xxx_ut.log"
+```
+
+**注意**: 
+- 正确容器名: `v0.13.0_torch2.5.1_compile`
+- pytest路径: `/usr/local/bin/pytest`
+- Git bash会自动转换Unix路径，建议用`send`命令而非`run`命令进入容器后执行
 
 ## 快速开始
 
@@ -56,24 +107,24 @@ python agent.py -p t_h20 ping
 
 ### Step 3: 运行单元测试
 
+**重要**: 使用PowerShell运行agent.py，避免Git bash路径转换问题。
+
 进入容器执行测试：
 
-```bash
-# 进入容器并切换root
-sudo docker exec -it v0.13.0_torch2.5.1_ut bash
-sudo su
-
-# 进入vllm目录
-cd /gpfs/gcsp/M2.7_verify/vllm
-
-# 运行测试
-pytest -vv -s tests/test_xxx.py 2>&1 | tee ut_logs/xxx_ut.log
+```powershell
+# 使用PowerShell发送命令（避免路径转换）
+python agent.py -p t_h20 send "sudo docker exec -it v0.13.0_torch2.5.1_compile bash"
+python agent.py -p t_h20 send "cd /gpfs/gcsp/M2.7_verify/vllm"
+python agent.py -p t_h20 send "pytest -vv -s tests/test_xxx.py 2>&1 | tee ut_logs/xxx_ut.log"
 ```
 
-或通过agent.py远程执行：
+或在容器内直接运行：
 
-```powershell
-python agent.py -p t_h20 run --timeout 300 "sudo docker exec v0.13.0_torch2.5.1_ut bash -c 'cd /gpfs/gcsp/M2.7_verify/vllm && pytest -vv tests/test_seed_behavior.py 2>&1 | tee ut_logs/seed_ut.log'"
+```bash
+# 进入容器
+sudo docker exec -it v0.13.0_torch2.5.1_compile bash
+cd /gpfs/gcsp/M2.7_verify/vllm
+pytest -vv -s tests/test_xxx.py 2>&1 | tee ut_logs/xxx_ut.log
 ```
 
 ## 测试过滤规则

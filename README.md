@@ -1,21 +1,21 @@
-# 🚀 APMM - AI Performance Model Management
+# 🚀 APMM - Assisted Proof of Model Minimax-M2.7
 
-> **MiniMax-M2.7 模型 & vLLM 推理引擎验证框架**
+> **MiniMax-M2.7 模型验证框架 | vLLM 推理引擎适配测试**
 
 ---
 
 ## 📖 项目名称由来
 
-**APMM** = **A**I **P**erformance **M**odel **M**anagement
+**APMM** = **A**ssisted **P**roof of **M**odel **M**inimax-M2.7
 
 | 字母 | 含义 | 说明 |
 |:---:|------|------|
-| **A** | AI / Accuracy | 人工智能 & 模型精度验证 |
-| **P** | Performance | 推理性能基准测试 |
+| **A** | Assisted | 辅助验证流程，自动化测试执行 |
+| **P** | Proof | 证明模型能力，精度/性能基准验证 |
 | **M** | Model | 大语言模型适配验证 |
-| **M** | Management | 测试流程管理与追踪 |
+| **M** | Minimax-M2.7 | 目标验证模型 |
 
-APMM 是一个综合性验证框架，旨在为大语言模型部署提供**精度 ✅**、**性能 ⚡**、**功能 🔧** 的全方位验证能力。
+APMM 是 MiniMax-M2.7 模型的辅助验证框架，通过**单元测试 🧪**、**功能测试 🔧**、**性能测试 ⚡**、**精度测试 🎯** 全面验证模型在 vLLM 推理引擎上的运行能力，为生产部署提供可靠证明。
 
 ---
 

@@ -1,0 +1,24 @@
+{
+    "mode": "evaluation",
+    "workdir": "./data/workdir",
+    "patch_files": [
+        "./predictions.jsonl"
+    ],
+    "dataset_files": [
+        "/gpfs/gcsp/M2.7_verify/datasets/Multi-SWE-bench/*/*_dataset.jsonl"
+    ],
+    "force_build": false,
+    "output_dir": "./data/output",
+    "specifics": [],
+    "skips": [],
+    "repo_dir": "./data/repos",
+    "need_clone": true,
+    "global_env": [],
+    "clear_env": true,
+    "stop_on_error": false,
+    "max_workers": 8,
+    "max_workers_build_image": 4,
+    "max_workers_run_instance": 4,
+    "log_dir": "./data/logs",
+    "log_level": "INFO"
+}

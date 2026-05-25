@@ -1,0 +1,102 @@
+diff --git a/vllm/compilation/matcher_utils.py b/vllm/compilation/matcher_utils.py
+--- a/vllm/compilation/matcher_utils.py
++++ b/vllm/compilation/matcher_utils.py
+@@ -3,7 +3,7 @@
+ # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
+ from abc import ABC, abstractmethod
+
+ import torch
+-from torch._higher_order_ops import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._ops import OpOverload
+
+ from vllm.config import get_current_vllm_config
+
+diff --git a/vllm/compilation/fusion_attn.py b/vllm/compilation/fusion_attn.py
+--- a/vllm/compilation/fusion_attn.py
++++ b/vllm/compilation/fusion_attn.py
+@@ -7,7 +7,7 @@
+
+ import torch
+ import torch._inductor.pattern_matcher as pm
+ from torch import fx
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._inductor.pattern_matcher import PatternMatcherPass
+
+ from vllm.attention.layer import Attention
+
+diff --git a/vllm/compilation/fix_functionalization.py b/vllm/compilation/fix_functionalization.py
+--- a/vllm/compilation/fix_functionalization.py
++++ b/vllm/compilation/fix_functionalization.py
+@@ -5,7 +5,7 @@
+ from collections.abc import Iterable
+
+ import torch
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+
+ from vllm.logger import init_logger
+ from vllm.platforms import current_platform
+
+diff --git a/vllm/compilation/collective_fusion.py b/vllm/compilation/collective_fusion.py
+--- a/vllm/compilation/collective_fusion.py
++++ b/vllm/compilation/collective_fusion.py
+@@ -5,7 +5,7 @@
+ from collections.abc import Iterable, Iterator
+
+ from torch import fx
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._ops import OpOverload, OpOverloadPacket
+
+diff --git a/vllm/compilation/qk_norm_rope_fusion.py b/vllm/compilation/qk_norm_rope_fusion.py
+--- a/vllm/compilation/qk_norm_rope_fusion.py
++++ b/vllm/compilation/qk_norm_rope_fusion.py
+@@ -5,7 +5,5 @@
+
+ import torch
+ import torch._inductor.pattern_matcher as pm
+ import torch.fx as fx
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._inductor.pattern_matcher import PatternMatcherPass
+
+diff --git a/vllm/compilation/fx_utils.py b/vllm/compilation/fx_utils.py
+--- a/vllm/compilation/fx_utils.py
++++ b/vllm/compilation/fx_utils.py
+@@ -5,7 +5,7 @@
+ from collections.abc import Callable
+
+ import torch
+ import torch._inductor.pattern_matcher as pm
+ from torch import fx
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._inductor.pattern_matcher import PatternMatcherPass
+
+diff --git a/vllm/compilation/fusion.py b/vllm/compilation/fusion.py
+--- a/vllm/compilation/fusion.py
++++ b/vllm/compilation/fusion.py
+@@ -5,7 +5,7 @@
+ from typing import Any, NamedTuple
+
+ import torch
+ import torch._inductor.pattern_matcher as pm
+ from torch import fx
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._inductor.pattern_matcher import PatternMatcherPass
+ from torch._ops import OpOverload
+
+diff --git a/vllm/compilation/activation_quant_fusion.py b/vllm/compilation/activation_quant_fusion.py
+--- a/vllm/compilation/activation_quant_fusion.py
++++ b/vllm/compilation/activation_quant_fusion.py
+@@ -4,7 +4,7 @@
+
+ import torch
+-from torch._higher_order_ops.auto_functionalize import auto_functionalized
++from vllm.compilation.torch_compat import auto_functionalized
+ from torch._inductor.pattern_matcher import (
+     PatternMatcherPass,
+     fwd_only,

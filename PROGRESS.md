@@ -14,7 +14,7 @@
 | ⚠️ 错误 | ~148 (HF离线) |
 | **通过率** | ~75% |
 
-**重大进展**: 🔴 DeepSeek torch_compile修复成功！Engine测试可运行
+**重大进展**: ✅ DeepSeek torch_compile修复成功并提交！
 
 ---
 
@@ -67,22 +67,11 @@
 
 ## 关键阻塞问题
 
-### 🔴 DeepSeek torch_compile问题 (最严重)
-**位置**: `vllm/model_executor/models/deepseek_v2.py:1235`
-**当前状态**: `@support_torch_compile(dynamic_arg_dims={input_ids: 0, positions: 0})` - **缺少引号**
-**正确格式**: `@support_torch_compile(dynamic_arg_dims={"input_ids": 0, "positions": 0})`
-**影响**: 阻塞所有需要Engine初始化的测试
-
-**手动修复命令** (在容器内执行):
-```bash
-sudo docker exec -it v0.13.0_torch2.5.1_compile bash
-python3 -c "
-content = open('/gpfs/gcsp/M2.7_verify/vllm/vllm/model_executor/models/deepseek_v2.py').read()
-content = content.replace('{input_ids: 0, positions: 0}', '{"input_ids": 0, "positions": 0}')
-open('/gpfs/gcsp/M2.7_verify/vllm/vllm/model_executor/models/deepseek_v2.py', 'w').write(content)
-"
-# 验证: grep support_torch_compile deepseek_v2.py
-```
+### ✅ DeepSeek torch_compile修复 (2026-05-29完成)
+- **文件**: `vllm/model_executor/models/deepseek_v2.py:1235`
+- **修复**: `{input_ids: 0, positions: 0}` → `{"input_ids": 0, "positions": 0}`
+- **提交**: `15565df57` on branch `2.5.1_ut_verify`
+- **状态**: ✅ 已提交
 
 ---
 
@@ -127,10 +116,10 @@ open('/gpfs/gcsp/M2.7_verify/vllm/vllm/model_executor/models/deepseek_v2.py', 'w
 ## 更新日志
 
 **2026-05-29 会话**:
-- daemon ping正常，run命令需要权限(容器外文件权限问题)
-- DeepSeek修复需要sudo或在容器内执行
-- **修复后需要commit**: 所有修复要提交到vllm的`2.5.1_ut_verify`分支
-- auto mode阻止了部分agent.py命令，需要用户手动执行
+- ✅ DeepSeek torch_compile引号问题已修复
+- ✅ 修复已提交到vllm `2.5.1_ut_verify`分支 (commit: `15565df57`)
+- ✅ Python缓存已清除
+- 验证测试正在运行中
 
 **2026-05-28 会话**:
 - 累计通过测试 ~700+

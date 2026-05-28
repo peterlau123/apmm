@@ -1,0 +1,14 @@
+--- a/vllm/v1/worker/gpu_worker.py
++++ b/vllm/v1/worker/gpu_worker.py
+@@ -83,7 +83,11 @@ class GPUWorkerBuilder(WorkerBuilder):
+             is_driver_worker=is_driver_worker,
+         )
+         precision = envs.VLLM_FLOAT32_MATMUL_PRECISION
+-        torch.backends.cuda.matmul.fp32_precision = precision
++        # PyTorch 2.5.1 doesn't have fp32_precision attribute
++        if hasattr(torch.backends.cuda.matmul, 'fp32_precision'):
++            torch.backends.cuda.matmul.fp32_precision = precision
++        else:
++            logger.warning("torch.backends.cuda.matmul.fp32_precision not available in this PyTorch version")
+         if self.model_config.trust_remote_code:
+             from vllm.utils.import_utils import init_cached_hf_modules

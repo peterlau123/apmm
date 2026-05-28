@@ -213,6 +213,8 @@ D:\workspace\apmm\
 ├── docs/
 │   ├── bastion.md        # 堡垒机连接方案说明
 │   ├── test_statistics.md # 测试统计报告
+│   ├── test_summary.md   # 测试结果汇总（最终统计）
+│   ├── import_errors_summary.md # 导入错误分类详情
 │   └── README.md         # 本文件
 └── CLAUDE.md             # 项目说明
 ```
@@ -252,6 +254,32 @@ python agent.py -p t_h20 run "sudo docker ps -a | grep v0.13"
 
 ## 已知问题
 
+### HuggingFace模型无法访问（未联网环境）
+**症状**: `ConnectTimeoutError` 连接 `huggingface.co` 失败
+**原因**: t_h20未联网，无法直接访问HF Hub
+**解决方案**:
+```bash
+# 使用已有的本地模型缓存（位于t_ascend）
+# 已有模型：opt-125m, distilgpt2, Qwen系列等
+export HF_HOME=/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub
+export HF_HUB_CACHE=/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub
+
+# 若需下载新模型（在t_ascend执行）
+export HF_ENDPOINT=https://hf-mirror.com
+python3 -c 'from huggingface_hub import snapshot_download; snapshot_download("gpt2", local_dir="/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub/models--gpt2")'
+```
+
+**已有本地模型列表**:
+- `facebook/opt-125m` → `models--facebook--opt-125m`
+- `distilbert/distilgpt2` → `models--distilbert--distilgpt2`
+- `Qwen/Qwen3-0.6B` → `models--Qwen--Qwen3-0.6B`
+- 更多见 `/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub/`
+
+### 磁盘配额超限
+**症状**: `OSError: [Err no 122] Disk quota exceeded`
+**原因**: 用户配额限制，而非文件系统空间不足
+**解决方案**: 清理旧文件或申请更多配额
+
 ### LoRA导入错误
 ```
 ValueError: infer_schema(func): Parameter lora_a_stacked has unsupported type list[torch.Tensor]
@@ -263,6 +291,3 @@ ValueError: infer_schema(func): Parameter lora_a_stacked has unsupported type li
 No module named 'triton.language.target_info'
 ```
 原因: Triton版本兼容性问题
-
-### HuggingFace模型无法访问
-原因: 未联网机器无法访问HF Hub，需预先下载模型到共享存储

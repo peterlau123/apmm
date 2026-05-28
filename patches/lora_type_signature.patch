@@ -1,0 +1,21 @@
+--- a/vllm/lora/ops/triton_ops/fused_moe_lora_op.py
++++ b/vllm/lora/ops/triton_ops/fused_moe_lora_op.py
+@@ -1,6 +1,7 @@
+ # SPDX-License-Identifier: Apache-2.0
+
+ import torch
++from typing import List
+ import triton
+ import triton.language as tl
+
+@@ -200,7 +201,7 @@ def _fused_moe_lora_shrink(
+ def _fused_moe_lora_shrink(
+     a_intermediate_cache1: torch.Tensor,
+-    lora_a_stacked: list[
++    lora_a_stacked: List[
+         torch.Tensor
+     ],
+-    lora_b_stacked: list[
++    lora_b_stacked: List[
+         torch.Tensor
+     ],

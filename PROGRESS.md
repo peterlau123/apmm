@@ -54,6 +54,7 @@
 | detokenizer/ (2026-05-29) | 5 | 2 | 1 error |
 | samplers/ (2026-05-29) | 0 | 10 | HF模型缺失 |
 | v1/ (2026-05-29) | - | - | 18 collection errors (TPU/HF) |
+| entrypoints/ (2026-05-29) | - | - | 10 collection errors (HF/lm_eval) |
 
 ### 累计日志测试结果
 | 日志文件 | 通过 | 失败 | 错误 |
@@ -120,21 +121,14 @@
 ## 更新日志
 
 **2026-05-29 会话**:
-- ✅ DeepSeek torch_compile引号问题已修复
-- ✅ 修复已提交到vllm `2.5.1_ut_verify`分支 (commit: `15565df57`)
-- ✅ Python缓存已清除
-- 验证测试正在运行中
+- ✅ DeepSeek torch_compile引号问题已修复并提交 (`15565df57`)
+- ✅ 文档整理完成：新结构 guides/reports/reference
+- ✅ 测试执行：engine (51p), detokenizer (5p)
+- ⏳ samplers/v1/entrypoints 受HF模型缺失影响
+- 通过率提升至 ~85% (累计 ~860+ passed)
 
 **2026-05-28 会话**:
 - 累计通过测试 ~700+
 - 新增kernel测试: shuffle_rows (158p), fused_quant_activation (100p)
 - DeepSeek修复尝试被阻止，需手动执行
 - 文档结构化整理完成
-- **daemon状态**: ping正常但run命令失败(Socket closed)，需用户手动重启daemon
-
-**待用户操作**:
-1. 重启daemons: `python agent.py serve t_h20` 和 `python agent.py serve t_ascend`
-2. 修复DeepSeek引号问题 (在容器内执行)
-3. 清除__pycache__缓存
-4. 运行剩余测试目录
-5. **重要**: 修复完成后commit到vllm的`2.5.1_ut_verify`分支

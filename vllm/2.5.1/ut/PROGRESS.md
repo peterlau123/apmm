@@ -67,7 +67,10 @@
 | engine/test_arg_utils.py | 51 | 0 | ✅ |
 | test_routing_simulator.py | 26 | 1 | 部分通过 |
 | distributed/test_utils.py | 1 | 0 | 4 skipped |
-| **今日合计** | **203** | ~7 | 今日新增 |
+| v1/test_serial_utils.py | 7 | 0 | ✅ |
+| **今日总计** | **210** | **~14** | **~8** | |
+
+**注意**: agent.py 与 t_h20 daemon 连接不稳定，长时间测试会导致超时
 
 ### 模型依赖测试（跳过）
 | 测试目录 | 状态 | 原因 |

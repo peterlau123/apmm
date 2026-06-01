@@ -54,7 +54,20 @@
 | compile/test_wrapper | 0 | 2 | 快速失败 |
 | test_envs.py | 46 | 0 | ✅ 全通过 |
 | test_seed_behavior.py | 1 | 0 | ✅ |
-| **今日合计** | **780** | ~357 | |
+| test_embedded_commit.py | 1 | 0 | ✅ |
+| test_vllm_port.py | 4 | 0 | ✅ |
+| test_version.py | 7 | 6 | 部分通过 |
+| test_logger.py | 22 | 0 | ✅ |
+| test_scalartype.py | 12 | 0 | ✅ |
+| test_sequence.py | 1 | 0 | ✅ |
+| test_logprobs.py | 7 | 0 | ✅ |
+| test_inputs.py | 19 | 0 | 2 skipped |
+| test_outputs.py | 1 | 0 | ✅ |
+| tools/ | 4 | 0 | ✅ |
+| engine/test_arg_utils.py | 51 | 0 | ✅ |
+| test_routing_simulator.py | 26 | 1 | 部分通过 |
+| distributed/test_utils.py | 1 | 0 | 4 skipped |
+| **今日合计** | **203** | ~7 | 今日新增 |
 
 ### 模型依赖测试（跳过）
 | 测试目录 | 状态 | 原因 |

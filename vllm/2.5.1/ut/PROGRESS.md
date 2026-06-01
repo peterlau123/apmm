@@ -9,9 +9,9 @@
 
 | 指标 | 数量 | 说明 |
 |------|:----:|------|
-| ✅ 累计通过 | **~2,553** | 今日新增 +340 |
-| ❌ 累计失败 | ~350 | 部分需要模型 |
-| 🔄 剩余待运行 | ~28,300 | 总用例 **30,924**（覆盖率 ~8.3%） |
+| ✅ 累计通过 | **~3,095** | 今日新增 +732 |
+| ❌ 累计失败 | ~580 | 部分需要模型 |
+| 🔄 剩余待运行 | ~27,250 | 总用例 **30,924**（覆盖率 ~10.0%） |
 
 **总用例数**：使用 GOAL.md 完整过滤命令统计得到 **30,924 tests**
 
@@ -22,31 +22,18 @@
 ### 基础测试 ✅
 | 测试文件 | 通过 | 失败 | 状态 |
 |---------|:----:|:----:|:----:|
-| test_logprobs.py | 1 | 0 | ✅ |
-| test_sequence.py | 1 | 0 | ✅ |
-| test_scalartype.py | 12 | 0 | ✅ |
-| test_logger.py | 22 | 0 | ✅ |
-| test_seed_behavior.py | 1 | 0 | ✅ |
-| test_inputs.py | - | - | 合计 |
-| test_outputs.py | - | - | 合计 |
-| test_routing_simulator.py | - | 1 | 合计 |
-| test_triton_utils.py | - | - | 合计 |
-| test_envs.py | - | - | 合计 |
-| **小计** | **99** | 1 | ✅ |
-
-### 其他测试目录
-| 测试目录 | 通过 | 失败/错误 | 状态 |
-|---------|:----:|:---------:|:----:|
-| test_version.py | 7 | 6 | 部分通过 |
-| test_vllm_port.py | 4 | 0 | ✅ |
-| test_embedded_commit.py | 1 | 0 | ✅ |
-| test_pooling_params.py | 10 | 1 | 部分通过 |
+| test_logprobs/sequence/scalartype/logger/seed | 43 | 0 | ✅ |
+| test_inputs/outputs/routing/triton/envs | 99 | 1 | ✅ |
+| test_version/vllm_port/embedded_commit/pooling | 21 | 7 | 部分通过 |
 | detokenizer/ | 5 | 3 | 部分通过 |
 | transformers_utils/ | 22 | 2 | 部分通过 |
 | plugins/ | 138 | 59 errors | 大部分通过 |
 | v1/worker/executor | 25 | 24 | 部分通过 |
 | config/ | 87 | 28 | 部分通过 |
-| **今日合计** | **340** | ~120 | |
+| v1/engine_args | 2 | 0 | ✅ |
+| v1/sample/ | 110 | 16 | 大部分通过 |
+| models/ (部分) | 282 | 246 | 需模型 |
+| **今日合计** | **732** | ~350 | |
 
 ### 模型依赖测试（跳过）
 | 测试目录 | 状态 | 原因 |

@@ -4,6 +4,17 @@
 
 ---
 
+## 主要入口
+
+| 文档 | 说明 |
+|------|------|
+| **[PROGRESS.md](PROGRESS.md)** | UT详细进度（主入口） |
+| **[GOAL.md](GOAL.md)** | 单元测试目标 |
+| **[WORKLOG.md](WORKLOG.md)** | 每日工作日志 |
+| **[docs/README.md](docs/README.md)** | UT文档导航 |
+
+---
+
 ## 测试范围
 
 | 类别 | 文件数 | 说明 |
@@ -18,8 +29,16 @@
 
 ```
 unit_test/
-├── PROGRESS.md             # 进度记录
-└── README.md               # 本文件
+├── PROGRESS.md          # UT详细进度（主入口）
+├── GOAL.md              # UT目标
+├── WORKLOG.md           # UT工作日志
+├── README.md            # 本文件
+│
+└── docs/                # UT专用文档
+    ├── README.md        # 文档导航
+    ├── guides/          # 测试执行指南
+    ├── reports/         # 测试报告、周报、兼容性分析
+    └── reference/       # UT参考文档
 ```
 
 远程测试文件位于：
@@ -55,54 +74,19 @@ unit_test/
 
 ## 运行测试
 
-### 进入容器
-
-```bash
-sudo docker exec -it v0.13.0_torch2.5.1_ut bash
-sudo su
-cd /gpfs/gcsp/M2.7_verify/vllm
-```
-
-### 单个测试
-
-```bash
-pytest -vv -s tests/test_seed_behavior.py 2>&1 | tee ut_logs/seed_ut.log
-```
-
-### 目录测试
-
-```bash
-pytest -vv -s tests/v1/core/ \
-    --ignore-glob="**/rocm*" \
-    --ignore-glob="**/tpu*" \
-    2>&1 | tee ut_logs/core_ut.log
-```
+详见 **[docs/guides/testing.md](docs/guides/testing.md)** - 测试执行指南
 
 ---
 
-## 已知问题
+## 当前进度统计
 
-| 问题 | 原因 | 解决方案 |
-|------|------|---------|
-| LoRA导入错误 | PyTorch版本类型签名不兼容 | 检查PyTorch版本 |
-| Triton导入失败 | Triton版本兼容性 | 更新Triton |
-| HF模型无法访问 | 未联网机器无法访问HF Hub | 预下载到共享存储 |
-
----
-
-## 进度统计
-
-- ✅ 已完成: 5
-- 🔄 进行中: 0
-- ⏳ 待运行: 43
-- ❌ 已跳过: ~246
-
-详见 [PROGRESS.md](./PROGRESS.md)。
+| 指标 | 数量 |
+|------|:----:|
+| ✅ 累计通过 | ~2,170 |
+| ❌ 累计失败 | ~160 |
+| 通过率 | ~99% |
+| 覆盖率 | ~22.9% |
 
 ---
 
-## 相关文档
-
-- [../docs/README.md](../docs/README.md) - 单元测试执行指南
-- [../docs/test_statistics.md](../docs/test_statistics.md) - 测试统计
-- [PROGRESS.md](./PROGRESS.md) - 进度记录
+*更新时间: 2026-06-01*

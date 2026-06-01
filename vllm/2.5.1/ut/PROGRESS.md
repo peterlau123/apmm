@@ -13,6 +13,22 @@
 | ❌ 累计失败 | ~800 | 部分需要模型 |
 | 🔄 剩余待运行 | ~26,500 | 总用例 **30,924**（覆盖率 ~13.4%） |
 
+**今日测试目录覆盖完成度**: 约 30% 的测试目录已运行
+
+---
+
+## 兼容性报告
+
+详细兼容性问题见 **[docs/reports/compatibility/2026-06-01.md](docs/reports/compatibility/2026-06-01.md)**
+
+### 已确认兼容性问题
+
+| 问题ID | 问题 | 状态 | 影响 |
+|--------|------|:----:|------|
+| C-4 | wrap_triton 缺失 | ⏳ | quantization/moe 测试 |
+| C-5 | recompile_limit 缺失 | ⏳ | flex_attention 测试 |
+| C-8 | Triton 版本不兼容 | ⏳ | moe kernels 测试 |
+
 **总用例数**：使用 GOAL.md 完整过滤命令统计得到 **30,924 tests**
 
 ---

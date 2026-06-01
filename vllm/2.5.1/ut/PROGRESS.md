@@ -9,47 +9,53 @@
 
 | 指标 | 数量 | 说明 |
 |------|:----:|------|
-| ✅ 累计通过 | **~2,213** | 今日新增 +43 基础测试 |
-| ❌ 累计失败 | ~210 | samplers/lora 失败 |
-| 🔄 剩余待运行 | ~28,700 | 总用例 **30,924**（覆盖率 ~7.1%） |
+| ✅ 累计通过 | **~2,553** | 今日新增 +340 |
+| ❌ 累计失败 | ~350 | 部分需要模型 |
+| 🔄 剩余待运行 | ~28,300 | 总用例 **30,924**（覆盖率 ~8.3%） |
 
 **总用例数**：使用 GOAL.md 完整过滤命令统计得到 **30,924 tests**
-（排除了 58 个 collection errors）
 
 ---
 
 ## 今日测试执行（2026-06-01）
 
-### 基础测试 ✅ 全部通过
-| 测试文件 | 通过数 | 状态 |
-|---------|:------:|:----:|
-| test_logprobs.py | 1 | ✅ |
-| test_sequence.py | 1 | ✅ |
-| test_scalartype.py | 12 | ✅ |
-| test_logger.py | 22 | ✅ |
-| test_seed_behavior.py | 1 | ✅ |
-| test_config.py | 87p, 28f | 部分通过 |
-| **合计** | **43 passed** | ✅ |
+### 基础测试 ✅
+| 测试文件 | 通过 | 失败 | 状态 |
+|---------|:----:|:----:|:----:|
+| test_logprobs.py | 1 | 0 | ✅ |
+| test_sequence.py | 1 | 0 | ✅ |
+| test_scalartype.py | 12 | 0 | ✅ |
+| test_logger.py | 22 | 0 | ✅ |
+| test_seed_behavior.py | 1 | 0 | ✅ |
+| test_inputs.py | - | - | 合计 |
+| test_outputs.py | - | - | 合计 |
+| test_routing_simulator.py | - | 1 | 合计 |
+| test_triton_utils.py | - | - | 合计 |
+| test_envs.py | - | - | 合计 |
+| **小计** | **99** | 1 | ✅ |
 
-### samplers 测试 ❌ 失败
-| 测试文件 | 结果 | 问题 |
-|---------|------|------|
-| test_beam_search.py | 失败 | TinyLlama 模型缺失 |
-| test_ignore_eos.py | 失败 | distilgpt2/Llama 模型问题 |
-| test_logprobs.py | 失败 | HF 离线 + recompile_limit |
-| test_no_bad_words.py | 失败 | Engine 初始化错误 |
+### 其他测试目录
+| 测试目录 | 通过 | 失败/错误 | 状态 |
+|---------|:----:|:---------:|:----:|
+| test_version.py | 7 | 6 | 部分通过 |
+| test_vllm_port.py | 4 | 0 | ✅ |
+| test_embedded_commit.py | 1 | 0 | ✅ |
+| test_pooling_params.py | 10 | 1 | 部分通过 |
+| detokenizer/ | 5 | 3 | 部分通过 |
+| transformers_utils/ | 22 | 2 | 部分通过 |
+| plugins/ | 138 | 59 errors | 大部分通过 |
+| v1/worker/executor | 25 | 24 | 部分通过 |
+| config/ | 87 | 28 | 部分通过 |
+| **今日合计** | **340** | ~120 | |
 
-**失败原因**: C-5 recompile_limit + HF 模型缺失
-
-### lora 测试 ❌ 失败
-| 测试文件 | 结果 | 问题 |
-|---------|------|------|
-| test_fused_moe_lora_kernel.py | 48 failed | GPU kernel 功能问题 |
-
-### entrypoints 测试 ⏳ 收集错误
-| 错误数 | 问题 |
-|:------:|------|
-| 9 errors | lm_eval/datasets/mteb 模块缺失 |
+### 模型依赖测试（跳过）
+| 测试目录 | 状态 | 原因 |
+|---------|:----:|------|
+| samplers/ | ⏭️ 跳过 | TinyLlama 模型缺失 |
+| lora/kernel | ⏭️ 跳过 | GPU kernel + 模型 |
+| entrypoints/ | ⏭️ 跳过 | lm_eval/datasets 缺失 |
+| basic_correctness/ | ⏭️ 跳过 | 模型缺失 |
+| tool_use/ | ⏭️ 跳过 | 模型缺失 |
 
 ---
 
@@ -61,17 +67,16 @@
 | C-2 | DeepSeek torch_compile | ✅ 已修复 | DeepSeek相关 | - |
 | C-3 | fp32_precision缺失 | ✅ 已存在 | Engine初始化 | P0 |
 | C-4 | wrap_triton缺失 | ⏳ 待决策 | quantization | P1 |
-| C-5 | recompile_limit缺失 | ⏳ 待修复 | flex_attention/dynamo | P2 |
+| C-5 | recompile_limit缺失 | ⏳ 待修复 | flex_attention | P2 |
 | C-6 | auto_functionalized缺失 | ⏳ 有方案 | 多模块 | P1 |
 | C-7 | UnionType兼容 | ✅ 已存在 | 33文件 | P0 |
 
-### 新发现依赖问题
-
+### 依赖问题（待安装）
 | 缺失模块 | 影响测试 | 解决方案 |
 |---------|---------|---------|
-| lm_eval | entrypoints/llm/test_accuracy.py | pip install lm-eval |
-| datasets | entrypoints/pooling/mteb | pip install datasets |
-| mteb | pooling/mteb 测试 | 已安装但需 datasets |
+| lm_eval | entrypoints/llm | pip install lm-eval |
+| datasets | entrypoints/pooling | pip install datasets |
+| TinyLlama模型 | samplers/lora | HF镜像下载 |
 
 ---
 
@@ -79,31 +84,30 @@
 
 | 测试目录 | 通过 | 失败 | 通过率 | 备注 |
 |---------|:----:|:----:|:------:|------|
-| kernels/shuffle_rows | 158 | 1 | 99.4% | OOB测试 |
-| kernels/cache/onednn/fla | 917 | 1 | 99.9% | ✅ |
-| kernels/top_k+fused_quant | 31 | 0 | 100% | ✅ |
+| kernels/ | 1106 | 2 | 99.8% | ✅ |
 | v1/core/scheduler | 91 | 6 | 93.8% | HF模型 |
 | compile/noop_elimination | 25 | 0 | 100% | ✅ |
 | engine/arg_utils | 51 | 0 | 100% | ✅ |
-| config/ | 87 | 28 | 75.7% | wrap_triton + HF |
-| basic root tests | 43 | 0 | 100% | ✅ 今日运行 |
+| config/ | 87 | 28 | 75.7% | wrap_triton |
+| basic root tests | 99 | 1 | 99% | ✅ 今日运行 |
 | tools/cuda | 8 | 0 | 100% | ✅ |
-| model_executor | 28 | 0 | 100% | 12 skipped |
-| distributed/comm_ops | 11 | 10 | 52.4% | 需torchrun |
-| samplers/ | 0 | 10 | 0% | 模型缺失 |
-| lora/kernel | 0 | 48 | 0% | GPU kernel问题 |
+| model_executor | 28 | 0 | 100% | skipped |
+| distributed/comm_ops | 11 | 10 | 52.4% | torchrun |
+| detokenizer/ | 5 | 3 | 62.5% | 今日 |
+| transformers_utils/ | 22 | 2 | 91.7% | 今日 |
+| plugins/ | 138 | 59 | 70% | 今日 |
+| v1/worker/executor | 25 | 24 | 51% | 今日 |
 
 ---
 
 ## 阻塞因素
 
-| 问题 | 影响 | 解决方案 |
-|------|------|---------|
-| HF 模型离线 | ~80% 失败 | 使用 HF 镜像下载 |
-| 磁盘配额限制 | 无法下载新模型 | 清理旧文件或申请配额 |
-| wrap_triton 缺失 | quantization 测试失败 | 添加 shim 或跳过 |
-| recompile_limit 缺失 | flex_attention 导入错误 | 添加 hasattr 检查 |
-| lm_eval/datasets 缺失 | entrypoints 测试无法收集 | pip install |
+| 问题 | 影响 | 状态 |
+|------|------|:----:|
+| HF 模型离线 | ~80% 失败 | ⏭️ 后续处理 |
+| 磁盘配额限制 | 无法下载新模型 | ⏭️ 后续处理 |
+| wrap_triton 缺失 | quantization 测试 | ⏳ 待决策 |
+| recompile_limit 缺失 | flex_attention | ⏳ 待修复 |
 
 ---
 

@@ -68,7 +68,16 @@
 | test_routing_simulator.py | 26 | 1 | 部分通过 |
 | distributed/test_utils.py | 1 | 0 | 4 skipped |
 | v1/test_serial_utils.py | 7 | 0 | ✅ |
-| **今日总计** | **210** | **~14** | **~8** | |
+| transformers_utils/test_config.py | 0 | 2 | 耗时14分钟 |
+| transformers_utils/test_utils.py | 17 | 0 | ✅ |
+| transformers_utils/test_config_parser_registry.py | 2 | 0 | ✅ |
+| transformers_utils/test_processor.py | 2 | 0 | ✅ |
+| transformers_utils/test_repo_utils.py | 1 | 0 | ✅ |
+| v1/test_outputs.py | 6 | 0 | ✅ |
+| v1/test_request.py | 1 | 0 | ✅ |
+| **今日总计** | **239** | **~16** | **~8** | |
+
+**✅ 容器镜像已保存**: `/gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz` (5.2GB)
 
 **注意**: agent.py 与 t_h20 daemon 连接不稳定，长时间测试会导致超时
 

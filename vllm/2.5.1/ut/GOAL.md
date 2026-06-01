@@ -22,14 +22,17 @@
 
 ### 容器镜像备份要求
 
-完成单元测试后，需将 h20 上的测试容器镜像保存到共享存储：
+完成单元测试后，需将 h20 上的测试容器保存到共享存储：
 
 ```bash
-# 在 t_h20 上执行
-sudo docker save vllm/vllm-openai:v0.13.0 | gzip > /gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz
+# 在 t_h20 上执行 - 将容器 commit 为镜像后保存
+sudo docker commit v0.13.0_torch2.5.1_compile v0.13.0_torch2.5.1_compile_backup:latest
+sudo docker save v0.13.0_torch2.5.1_compile_backup:latest | gzip > /gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz
 ```
 
 **备份位置**: `/gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz`
+
+**说明**: 使用 `docker commit` 保存容器当前状态（包含可能的配置变更），而非原始 `vllm/vllm-openai:v0.13.0` 镜像
 
 ---
 

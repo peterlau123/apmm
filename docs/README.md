@@ -16,11 +16,11 @@
 
 | 模块 | 文档入口 | 说明 |
 |------|---------|------|
-| **单元测试** | [unit_test/docs/](../unit_test/docs/) | UT目标、进度、报告、指南 |
+| **vLLM验证** | [vllm/](../vllm/) | vLLM v0.13.0 + PyTorch 2.5.1 验证 |
+| **单元测试** | [vllm/2.5.1/ut/docs/](../vllm/2.5.1/ut/docs/) | UT目标、进度、报告、指南 |
 | **精度测试** | [accuracy/](../accuracy/) | GPQA-Diamond, Multi-SWE-bench |
 | **功能测试** | [feature/](../feature/) | API兼容性、多卡并行 |
 | **性能测试** | [performance/](../performance/) | 吞吐量、延迟基准 |
-| **PyTorch验证** | [pytorch/](../pytorch/) | PyTorch兼容性验证 |
 
 ---
 
@@ -54,14 +54,15 @@ apmm/
 │   ├── guides/          # 环境配置、堡垒机、问题排查
 │   └── reference/       # 工作流程、架构说明
 │
-├── unit_test/           # 【单元测试模块】
-│   ├── PROGRESS.md      # UT详细进度
-│   ├── GOAL.md          # UT目标
-│   ├── WORKLOG.md       # UT工作日志
-│   └── docs/            # UT专用文档
-│       ├── guides/      # 测试执行指南
-│       ├── reports/     # 测试报告、周报、兼容性分析
-│       └── reference/   # UT参考文档
+├── vllm/                # 【vLLM验证模块】
+│   ├── README.md        # vLLM验证说明
+│   └── 2.5.1/           # vLLM v0.13.0 + PyTorch 2.5.1
+│       ├── PROGRESS.md  # PyTorch 2.5.1 进度
+│       └── ut/          # 单元测试
+│           ├── PROGRESS.md  # UT详细进度
+│           ├── GOAL.md      # UT目标
+│           ├── WORKLOG.md   # UT工作日志
+│           └── docs/        # UT专用文档
 │
 ├── accuracy/            # 【精度测试模块】
 ├── feature/             # 【功能测试模块】

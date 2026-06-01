@@ -23,11 +23,11 @@
 
 | 模块 | 进度入口 | 通过数 | 失败数 | 状态 |
 |------|---------|:------:|:------:|:----:|
-| **单元测试** | [unit_test/PROGRESS.md](unit_test/PROGRESS.md) | ~2,170 | ~160 | 🔄 |
+| **单元测试** | [vllm/2.5.1/ut/PROGRESS.md](vllm/2.5.1/ut/PROGRESS.md) | ~2,170 | ~160 | 🔄 |
 | **精度测试** | [accuracy/PROGRESS.md](accuracy/PROGRESS.md) | - | - | ✅ |
 | **功能测试** | [feature/PROGRESS.md](feature/PROGRESS.md) | - | - | ⏳ |
 | **性能测试** | [performance/PROGRESS.md](performance/PROGRESS.md) | - | - | ⏳ |
-| **PyTorch验证** | [pytorch/2.5.1/ut/PROGRESS.md](pytorch/2.5.1/ut/PROGRESS.md) | - | - | 🔄 |
+| **vLLM验证** | [vllm/README.md](vllm/README.md) | - | - | 🔄 |
 
 ---
 

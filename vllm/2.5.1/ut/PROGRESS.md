@@ -75,7 +75,8 @@
 | transformers_utils/test_repo_utils.py | 1 | 0 | ✅ |
 | v1/test_outputs.py | 6 | 0 | ✅ |
 | v1/test_request.py | 1 | 0 | ✅ |
-| **今日总计** | **239** | **~16** | **~8** | |
+| v1/test_oracle + determinism | 110 | 1 | 运行111个用例 |
+| **今日总计** | **349** | **~17** | **~8** | |
 
 **✅ 容器镜像已保存**: `/gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz` (5.2GB)
 

@@ -26,6 +26,8 @@ import re
 
 _ANSI_ESCAPE = re.compile(r'\x1b\[[0-9;]*[A-Za-z]|\x1b[()][AB012]|\r')
 
+DEBUG = True  # Set to True for debugging output issues
+
 CREDS_FILE        = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".bastion_creds")
 DAEMON_HOST       = "127.0.0.1"
 DAEMON_PORT       = 19922
@@ -242,6 +244,10 @@ class BastionSession:
         with self.lock:
             self.channel.send(f"echo {start} ; {cmd} ; echo {end}\n")
             raw = recv_until(self.channel, [end_line], timeout=timeout)
+            # DEBUG: log raw output for diagnosis
+            if DEBUG:
+                print(f"[DEBUG] Raw output length: {len(raw)}")
+                print(f"[DEBUG] Raw output (last 500 chars): {raw[-500:]}")
 
         if end not in raw:
             preview = raw.replace("\r", "").strip()[-400:]
@@ -391,7 +397,11 @@ class Handler(socketserver.BaseRequestHandler):
             self._send({"status": "error", "output": str(e)})
 
     def _send(self, obj):
-        self.request.sendall((json.dumps(obj) + "\n").encode())
+        try:
+            self.request.sendall((json.dumps(obj) + "\n").encode())
+        except (ConnectionResetError, BrokenPipeError, OSError) as e:
+            # Client already disconnected, ignore send errors
+            pass
 
     def _handle_shell(self):
         self._send({"status": "ok", "output": "shell"})

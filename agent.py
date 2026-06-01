@@ -137,7 +137,7 @@ def _make_sentinel():
     return f"AGENT_{uuid.uuid4().hex}"
 
 
-def recv_until(channel, patterns, timeout=20):
+def recv_until(channel, patterns, timeout=60):
     buf = ""
     deadline = time.time() + timeout
     while True:
@@ -174,6 +174,7 @@ class BastionSession:
 
     def connect(self):
         self.transport = paramiko.Transport((self.host, self.port))
+        self.transport.set_keepalive(30)  # 30秒心跳
         self.transport.connect()
 
         def handler(title, instructions, fields):
@@ -495,19 +496,35 @@ def serve(creds, p2, profile=DEFAULT_PROFILE):
 
 # ── Client helpers ─────────────────────────────────────────────────────────────
 
-def daemon_req(req, timeout=180, profile=DEFAULT_PROFILE):
+def daemon_req(req, timeout=300, profile=DEFAULT_PROFILE, retries=2):
+    """Send request to daemon with retry logic."""
     creds = get_profile(profile)
     daemon_port = daemon_port_for(creds)
-    with socket.create_connection((DAEMON_HOST, daemon_port), timeout=10) as s:
-        s.sendall((json.dumps(req) + "\n").encode())
-        s.settimeout(timeout)
-        buf = b""
-        while b"\n" not in buf:
-            chunk = s.recv(65535)
-            if not chunk:
-                break
-            buf += chunk
-        return json.loads(buf.split(b"\n")[0].decode())
+
+    for attempt in range(retries + 1):
+        try:
+            with socket.create_connection((DAEMON_HOST, daemon_port), timeout=15) as s:
+                s.sendall((json.dumps(req) + "\n").encode())
+                s.settimeout(timeout)
+                buf = b""
+                while b"\n" not in buf:
+                    chunk = s.recv(65535)
+                    if not chunk:
+                        break
+                    buf += chunk
+                return json.loads(buf.split(b"\n")[0].decode())
+        except socket.timeout:
+            if attempt < retries:
+                print(f"[!] Timeout, retrying ({attempt + 1}/{retries})...", flush=True)
+                time.sleep(2)
+                continue
+            raise
+        except ConnectionRefusedError:
+            if attempt < retries:
+                print(f"[!] Connection refused, retrying ({attempt + 1}/{retries})...", flush=True)
+                time.sleep(2)
+                continue
+            raise
 
 
 def daemon_shell(profile=DEFAULT_PROFILE):
@@ -626,8 +643,8 @@ def _build_parser():
 
     # ── Operations ──
     p_run = subs.add_parser("run", help="Execute a command on the remote host")
-    p_run.add_argument("--timeout", "-t", type=int, default=120, metavar="N",
-                       help="Seconds to wait for the command to finish (default: 120)")
+    p_run.add_argument("--timeout", "-t", type=int, default=300, metavar="N",
+                       help="Seconds to wait for the command to finish (default: 300)")
     p_run.add_argument("cmd", nargs=argparse.REMAINDER,
                        help="Command to execute (quote if it contains spaces)")
 

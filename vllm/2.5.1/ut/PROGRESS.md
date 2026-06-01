@@ -9,61 +9,46 @@
 
 | 指标 | 数量 | 说明 |
 |------|:----:|------|
-| ✅ 累计通过 | **~2,170** | 通过率 ~99% |
-| ❌ 累计失败 | ~160 | HF模型离线 + 环境问题 |
-| 🔄 剩余待运行 | ~7,300 | 总用例 9,542（覆盖率 ~22.9%） |
+| ✅ 累计通过 | **~2,213** | 今日新增 +43 基础测试 |
+| ❌ 累计失败 | ~210 | samplers/lora 失败 |
+| 🔄 剩余待运行 | ~28,700 | 总用例 30,934（覆盖率 ~7.2%） |
+
+**注意**：总用例数更新为 30,934（之前统计 9,542 为部分过滤）
 
 ---
 
-## 工期计划（5月30日 - 6月5日）
+## 今日测试执行（2026-06-01）
 
-### Day 1: 2026-05-30（兼容性验证）✅ 完成
-| 任务 | 状态 | 结果 |
-|------|:----:|------|
-| 验证 C-3: fp32_precision | ✅ | 已存在于 `gpu_worker.py:85` |
-| 验证 C-7: UnionType兼容 | ✅ | 已存在于 LoRA 文件 |
-| v1基础测试 | ✅ | 14 passed |
+### 基础测试 ✅ 全部通过
+| 测试文件 | 通过数 | 状态 |
+|---------|:------:|:----:|
+| test_logprobs.py | 1 | ✅ |
+| test_sequence.py | 1 | ✅ |
+| test_scalartype.py | 12 | ✅ |
+| test_logger.py | 22 | ✅ |
+| test_seed_behavior.py | 1 | ✅ |
+| test_config.py | 87p, 28f | 部分通过 |
+| **合计** | **43 passed** | ✅ |
 
-### Day 2: 2026-05-31（v1目录测试）✅ 完成
-| 任务 | 状态 | 结果 |
-|------|:----:|------|
-| tests/v1/core/scheduler | ✅ | 91p, 6f (HF模型阻塞) |
+### samplers 测试 ❌ 失败
+| 测试文件 | 结果 | 问题 |
+|---------|------|------|
+| test_beam_search.py | 失败 | TinyLlama 模型缺失 |
+| test_ignore_eos.py | 失败 | distilgpt2/Llama 模型问题 |
+| test_logprobs.py | 失败 | HF 离线 + recompile_limit |
+| test_no_bad_words.py | 失败 | Engine 初始化错误 |
 
-### Day 3: 2026-06-01（kernels目录测试）✅ 完成
-| 任务 | 状态 | 结果 |
-|------|:----:|------|
-| shuffle_rows | ✅ | 158p, 1f |
-| top_k+fused_quant | ✅ | 31p |
-| cache/onednn/fla | ✅ | 917p, 1f, 1s |
-| **kernels累计** | ✅ | **1106 passed** |
+**失败原因**: C-5 recompile_limit + HF 模型缺失
 
-### Day 4: 2026-06-02（HF模型准备）⏳ 待执行
-| 任务 | 状态 |
-|------|:----:|
-| 配置 HF 镜像 (hf-mirror.com) | ⏳ |
-| 下载 TinyLlama (磁盘配额阻塞) | ⏳ |
-| 安装 mteb, multiprocess, grpc | ⏳ |
+### lora 测试 ❌ 失败
+| 测试文件 | 结果 | 问题 |
+|---------|------|------|
+| test_fused_moe_lora_kernel.py | 48 failed | GPU kernel 功能问题 |
 
-### Day 5: 2026-06-03（entrypoints测试）✅ 完成
-| 任务 | 状态 | 结果 |
-|------|:----:|------|
-| compile/noop_elimination | ✅ | 25p |
-| engine/arg_utils | ✅ | 51p |
-| basic root tests | ✅ | 54p, 2s |
-| tools/cuda | ✅ | 8p |
-| config/ | ✅ | 22p, 3f |
-
-### Day 6: 2026-06-04（distributed/quantization）✅ 完成
-| 任务 | 状态 | 结果 |
-|------|:----:|------|
-| model_executor | ✅ | 28p, 12s |
-| distributed/comm_ops | ✅ | 11p, 10f (需torchrun) |
-
-### Day 7: 2026-06-05（周报汇总）✅ 完成
-| 任务 | 状态 |
-|------|:----:|
-| 统计本周测试结果 | ✅ |
-| 生成周报 | ✅ |
+### entrypoints 测试 ⏳ 收集错误
+| 错误数 | 问题 |
+|:------:|------|
+| 9 errors | lm_eval/datasets/mteb 模块缺失 |
 
 ---
 
@@ -75,9 +60,17 @@
 | C-2 | DeepSeek torch_compile | ✅ 已修复 | DeepSeek相关 | - |
 | C-3 | fp32_precision缺失 | ✅ 已存在 | Engine初始化 | P0 |
 | C-4 | wrap_triton缺失 | ⏳ 待决策 | quantization | P1 |
-| C-5 | recompile_limit缺失 | ⏳ 待修复 | dynamo测试 | P2 |
+| C-5 | recompile_limit缺失 | ⏳ 待修复 | flex_attention/dynamo | P2 |
 | C-6 | auto_functionalized缺失 | ⏳ 有方案 | 多模块 | P1 |
 | C-7 | UnionType兼容 | ✅ 已存在 | 33文件 | P0 |
+
+### 新发现依赖问题
+
+| 缺失模块 | 影响测试 | 解决方案 |
+|---------|---------|---------|
+| lm_eval | entrypoints/llm/test_accuracy.py | pip install lm-eval |
+| datasets | entrypoints/pooling/mteb | pip install datasets |
+| mteb | pooling/mteb 测试 | 已安装但需 datasets |
 
 ---
 
@@ -91,11 +84,13 @@
 | v1/core/scheduler | 91 | 6 | 93.8% | HF模型 |
 | compile/noop_elimination | 25 | 0 | 100% | ✅ |
 | engine/arg_utils | 51 | 0 | 100% | ✅ |
-| config/ | 22 | 3 | 88% | cuda/ray/mp |
-| basic root tests | 54 | 0 | 100% | 2 skipped |
+| config/ | 87 | 28 | 75.7% | wrap_triton + HF |
+| basic root tests | 43 | 0 | 100% | ✅ 今日运行 |
 | tools/cuda | 8 | 0 | 100% | ✅ |
 | model_executor | 28 | 0 | 100% | 12 skipped |
 | distributed/comm_ops | 11 | 10 | 52.4% | 需torchrun |
+| samplers/ | 0 | 10 | 0% | 模型缺失 |
+| lora/kernel | 0 | 48 | 0% | GPU kernel问题 |
 
 ---
 
@@ -106,6 +101,8 @@
 | HF 模型离线 | ~80% 失败 | 使用 HF 镜像下载 |
 | 磁盘配额限制 | 无法下载新模型 | 清理旧文件或申请配额 |
 | wrap_triton 缺失 | quantization 测试失败 | 添加 shim 或跳过 |
+| recompile_limit 缺失 | flex_attention 导入错误 | 添加 hasattr 检查 |
+| lm_eval/datasets 缺失 | entrypoints 测试无法收集 | pip install |
 
 ---
 

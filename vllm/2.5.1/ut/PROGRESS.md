@@ -88,12 +88,12 @@
 
 **连接问题**: agent.py 与 t_h20 daemon 连接不稳定，建议直接在容器内运行剩余测试
 
-**完成剩余测试命令**（按照 GOAL.md 过滤规则）:
+**完成剩余测试命令**（与 GOAL.md 完全一致）:
 ```bash
 sudo docker exec -it v0.13.0_torch2.5.1_compile bash
 cd /gpfs/gcsp/M2.7_verify/vllm
 
-# 使用完整的过滤命令运行测试
+# 使用完整的过滤命令运行测试（与 GOAL.md 一致）
 pytest tests/ -v --tb=no \
     --ignore-glob="tests/**/rocm*" \
     --ignore-glob="tests/**/tpu*" \
@@ -110,10 +110,24 @@ pytest tests/ -v --tb=no \
     --ignore-glob="tests/models/language/generation/test_hybrid.py" \
     --ignore-glob="tests/models/language/generation/test_mistral.py" \
     --ignore-glob="tests/models/language/generation/test_phimoe.py" \
-    --ignore-glob="tests/models/language/generation_ppl_test/*" \
+    --ignore-glob="tests/models/language/generation_ppl_test/test_gemma.py" \
+    --ignore-glob="tests/models/language/generation_ppl_test/test_gpt.py" \
+    --ignore-glob="tests/models/language/generation_ppl_test/test_qwen.py" \
     --ignore-glob="tests/models/language/pooling_mteb_test/*" \
     --ignore-glob="tests/models/language/pooling/*" \
-    --ignore-glob="tests/reasoning/test_*_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_deepseekr1_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_deepseekv3_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_ernie45_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_glm4_moe_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_gptoss_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_granite_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_holo2_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_hunyuan_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_mistral_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_olmo3_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_qwen3_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_seedoss_reasoning_parser.py" \
+    --ignore-glob="tests/reasoning/test_base_thinking_reasoning_parser.py" \
     2>&1 | tee ut_logs/full_test_$(date +%Y%m%d).log
 ```
 

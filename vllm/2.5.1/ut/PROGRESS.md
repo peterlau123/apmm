@@ -88,9 +88,21 @@
 
 **连接问题**: agent.py 与 t_h20 daemon 连接不稳定，建议直接在容器内运行剩余测试
 
-**✅ 容器镜像已保存**: `/gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz` (5.2GB)
-
-**注意**: agent.py 与 t_h20 daemon 连接不稳定，长时间测试会导致超时
+**完成剩余测试命令**:
+```bash
+sudo docker exec -it v0.13.0_torch2.5.1_compile bash
+cd /gpfs/gcsp/M2.7_verify/vllm
+pytest tests/ -v --tb=no \
+  --ignore-glob="tests/**/rocm*" \
+  --ignore-glob="tests/**/tpu*" \
+  --ignore-glob="tests/**/multimodal*" \
+  --ignore-glob="tests/**/nixl*" \
+  --ignore-glob="tests/**/ec_connector*" \
+  --ignore-glob="tests/**/*image*.py" \
+  --ignore-glob="tests/**/*video*.py" \
+  --ignore-glob="tests/**/*audio*" \
+  2>&1 | tee ut_logs/full_test_$(date +%Y%m%d).log
+```
 
 ### 模型依赖测试（跳过）
 | 测试目录 | 状态 | 原因 |

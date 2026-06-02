@@ -88,20 +88,33 @@
 
 **连接问题**: agent.py 与 t_h20 daemon 连接不稳定，建议直接在容器内运行剩余测试
 
-**完成剩余测试命令**:
+**完成剩余测试命令**（按照 GOAL.md 过滤规则）:
 ```bash
 sudo docker exec -it v0.13.0_torch2.5.1_compile bash
 cd /gpfs/gcsp/M2.7_verify/vllm
+
+# 使用完整的过滤命令运行测试
 pytest tests/ -v --tb=no \
-  --ignore-glob="tests/**/rocm*" \
-  --ignore-glob="tests/**/tpu*" \
-  --ignore-glob="tests/**/multimodal*" \
-  --ignore-glob="tests/**/nixl*" \
-  --ignore-glob="tests/**/ec_connector*" \
-  --ignore-glob="tests/**/*image*.py" \
-  --ignore-glob="tests/**/*video*.py" \
-  --ignore-glob="tests/**/*audio*" \
-  2>&1 | tee ut_logs/full_test_$(date +%Y%m%d).log
+    --ignore-glob="tests/**/rocm*" \
+    --ignore-glob="tests/**/tpu*" \
+    --ignore-glob="tests/**/multimodal*" \
+    --ignore-glob="tests/**/nixl*" \
+    --ignore-glob="tests/**/ec_connector*" \
+    --ignore-glob="tests/**/*image*.py" \
+    --ignore-glob="tests/**/*video*.py" \
+    --ignore-glob="tests/**/*audio*" \
+    --ignore-glob="tests/**/encoder*" \
+    --ignore-glob="tests/**/prithvi*" \
+    --ignore-glob="tests/models/language/generation/test_gemma.py" \
+    --ignore-glob="tests/models/language/generation/test_granite.py" \
+    --ignore-glob="tests/models/language/generation/test_hybrid.py" \
+    --ignore-glob="tests/models/language/generation/test_mistral.py" \
+    --ignore-glob="tests/models/language/generation/test_phimoe.py" \
+    --ignore-glob="tests/models/language/generation_ppl_test/*" \
+    --ignore-glob="tests/models/language/pooling_mteb_test/*" \
+    --ignore-glob="tests/models/language/pooling/*" \
+    --ignore-glob="tests/reasoning/test_*_reasoning_parser.py" \
+    2>&1 | tee ut_logs/full_test_$(date +%Y%m%d).log
 ```
 
 ### 模型依赖测试（跳过）

@@ -42,8 +42,8 @@ sudo docker save v0.13.0_torch2.5.1_compile_backup:latest | gzip > /gpfs/gcsp/M2
 
 ```bash
 pytest tests/ --collect-only \
-    --ignore-glob="tests/**/rocm*" \
-    --ignore-glob="tests/**/tpu*" \
+    --ignore-glob="tests/**/*rocm*" \
+    --ignore-glob="tests/**/*tpu*" \
     --ignore-glob="tests/**/multimodal*" \
     --ignore-glob="tests/**/nixl*" \
     --ignore-glob="tests/**/ec_connector*" \

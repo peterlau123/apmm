@@ -79,7 +79,8 @@
 | compile/test_qk_norm_rope_fusion | 0 | 16 | 收集16个，部分失败 |
 | v1/engine/executor/attention | ~200+ | 4 errors | 大量测试通过 |
 | compile remaining (aot/silu/graph) | 5 | 64 | 37 skipped |
-| **今日总计** | **~550+** | **~80+** | **~45** | |
+| kernels cache/top_k/shuffle | ~190 | 1 | 大量通过 |
+| **今日总计** | **~740+** | **~85+** | **~45** | |
 
 **✅ 容器镜像已保存**: `/gpfs/gcsp/M2.7_verify/docker_images/v0.13.0_torch2.5.1_compile.tar.gz` (5.2GB)
 

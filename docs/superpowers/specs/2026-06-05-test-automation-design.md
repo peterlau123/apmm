@@ -2,6 +2,7 @@
 
 > **vLLM Unit Test Automation for APMM Project**
 > **Auto-scheduling, parallel execution, progress tracking, and reporting**
+> **Multi-phase incremental execution with disconnect recovery**
 
 ---
 
@@ -14,14 +15,105 @@ Manual test execution for vLLM unit tests is:
 - Interrupted by HF model timeouts (tests hang for hours)
 - Manual progress tracking (PROGRESS.md manually updated)
 - No resumption after network disconnects
+- **NEW: Test list expanded from 13,165 to 31,372 after fixing import errors**
+
+### Test List Evolution
+
+| List | Tests | Source | Status |
+|------|:-----:|--------|--------|
+| ut_test_list.txt | 13,165 | Original filter (GOAL.md) | Partially executed |
+| ut_test_list_full.txt | 31,372 | New filter (no "^tests" prefix) | Not executed |
+| **Difference** | ~18,207 | Tests now executable after fixes | Need incremental execution |
 
 ### Solution
 
 Extend existing scripts (`batch_test_runner.py`, `progress_tracker.py`) with:
+- **Multi-phase execution strategy** (Phase 1 → Phase 2 → Phase 3)
+- **Test list diff algorithm** (find remaining tests between lists)
 - Parallel test execution (asyncio, N workers)
 - Smart HF model handling (skip model-dependent tests)
+- **Incremental resume state** (track phase + progress, survive disconnects)
 - Auto-reconnect after network disconnects
-- Automatic progress tracking and reporting
+
+---
+
+## Multi-Phase Execution Strategy
+
+### Execution Phases
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    THREE-PHASE EXECUTION                     │
+│                                                             │
+│  Phase 1: Complete ut_test_list.txt                         │
+│  ├── Tests: 13,165                                          │
+│  ├── Goal: Finish original test list                        │
+│  ├── Priority: High (already partially executed)            │
+│  └── Output: test_manifest_phase1.json                      │
+│                                                             │
+│  Phase 2: Execute remaining from ut_test_list_full.txt      │
+│  ├── Tests: ~18,207 (diff: full - phase1)                   │
+│  ├── Goal: Run new tests that became executable             │
+│  ├── Priority: Medium                                       │
+│  └── Output: test_manifest_phase2.json                      │
+│                                                             │
+│  Phase 3: Handle error cases & collection errors            │
+│  ├── Tests: 34 collection errors + warnings                 │
+│  ├── Goal: Fix/document remaining issues                    │
+│  ├── Priority: Low (cleanup phase)                          │
+│  └── Output: error_analysis.md                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Test List Diff Algorithm
+
+```python
+def compute_remaining_tests(full_list, phase1_list):
+    """
+    Find tests in full_list that are NOT in phase1_list.
+    
+    Returns: List of test nodes to execute in Phase 2
+    """
+    phase1_set = set(phase1_list)  # 13,165 tests
+    full_set = set(full_list)       # 31,372 tests
+    
+    remaining = full_set - phase1_set  # ~18,207 tests
+    
+    # Sort by test file for organized execution
+    return sorted(remaining, key=lambda x: x.split('::')[0])
+```
+
+### Phase State Tracking
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 RESUME STATE FILE (NEW)                      │
+│                                                             │
+│  File: execution_state.json                                 │
+│                                                             │
+│  {                                                          │
+│    "current_phase": 1,          # 1, 2, or 3                │
+│    "phase1_status": {                                      │
+│      "total": 13165,                                       │
+│      "completed": 4200,                                    │
+│      "last_test_id": 4200                                  │
+│    },                                                      │
+│    "phase2_status": {                                      │
+│      "total": 18207,                                       │
+│      "completed": 0,                                       │
+│      "remaining_tests": [...]  # Diff result               │
+│    },                                                      │
+│    "phase3_status": {                                      │
+│      "errors_fixed": 0,                                    │
+│      "errors_pending": 34                                  │
+│    },                                                      │
+│    "last_update": "2026-06-05T10:30:00",                   │
+│    "disconnect_count": 2                                   │
+│  }                                                          │
+│                                                             │
+│  Key: Survives disconnects, allows quick resume             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -84,6 +176,14 @@ test_scheduler.py
 │   ├── handle_results()        # Parse pytest output, update manifest
 │   └── auto_reconnect()        # Check agent.py health, reconnect if needed
 │
+├── PhaseManager (NEW)
+│   ├── load_state()            # Read execution_state.json
+│   ├── save_state()            # Persist state after each batch
+│   ├── get_current_phase()     # Return 1, 2, or 3
+│   ├── compute_remaining()     # Diff full_list - phase1_list
+│   ├── advance_phase()         # Move to next phase when complete
+│   └── resume_from_state()     # Quick recovery after disconnect
+│
 ├── HF Detector
 │   ├── check_model_cache()     # Check if model exists in hf_hub/
 │   ├── classify_test()         # Mark test as model-dependent or not
@@ -94,6 +194,9 @@ test_scheduler.py
     ├── timeout_per_test: 120s  # Per-test timeout
     ├── hf_cache_path: /gpfs/.../hf_hub
     ├── reconnect_interval: 30s # Check agent.py health
+    ├── phase1_list: ut_test_list.txt
+    ├── phase2_list: ut_test_list_full.txt
+    └── state_file: execution_state.json
 ```
 
 ### 2.2 batch_test_runner.py (ENHANCED)
@@ -129,58 +232,90 @@ progress_tracker.py (modified)
 
 ## Data Flow & Execution Sequence
 
-### 3.1 Startup Sequence
+### 3.1 Startup Sequence (with Phase Support)
 
 ```
-User runs: python test_scheduler.py --parallel 3 --resume
+User runs: python test_scheduler.py --parallel 3
 
-1. Load test_manifest.json from remote (via agent.py download)
-2. Find last completed test ID (resume mode)
-3. Get pending tests starting from that ID
-4. Classify tests: model-dependent vs model-free
-5. Start N parallel pytest workers
+1. Load execution_state.json (or create if not exists)
+2. Determine current phase from state:
+   - Phase 1: Load ut_test_list.txt manifest
+   - Phase 2: Compute diff, load remaining tests
+   - Phase 3: Load error cases
+3. Find last completed test ID in current phase
+4. Get pending tests starting from that ID
+5. Classify tests: model-dependent vs model-free
+6. Start N parallel pytest workers
 ```
 
-### 3.2 Parallel Execution Flow
+### 3.2 Phase-Based Execution Flow
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                    Scheduler Main Loop                        │
+│                    Phase-Based Main Loop                      │
 │                                                              │
-│  while pending_tests > 0:                                    │
-│      │                                                       │
-│      ├── Select batch of N tests                             │
-│      │   (prefer model-free tests first)                     │
-│      │                                                       │
-│      ├── Check agent.py daemon health                        │
-│      │   if disconnected: reconnect()                        │
-│      │                                                       │
-│      ├── Execute N tests in parallel (asyncio)               │
-│      │   │                                                    │
-│      │   ├── pytest worker 1 ──▶ GPU 0-1                     │
-│      │   ├── pytest worker 2 ──▶ GPU 2-3                     │
-│      │   ├── pytest worker 3 ──▶ GPU 4-5                     │
-│      │   │                                                    │
-│      │   └── Each worker:                                     │
-│      │       ├── Set CUDA_VISIBLE_DEVICES                    │
-│      │       ├── Run pytest with timeout                     │
-│      │       ├── Capture output to ut_logs/                  │
-│      │       └── Parse result (pass/fail/error/skip)         │
-│      │                                                       │
-│      ├── Collect results from all workers                    │
-│      │                                                       │
-│      ├── Update test_manifest.json                           │
-│      │   (upload to remote)                                  │
-│      │                                                       │
-│      ├── Update PROGRESS.md (every 100 tests)                │
-│      │                                                       │
-│      └── Print progress to console                           │
+│  Load execution_state.json                                   │
+│  current_phase = state.current_phase                         │
 │                                                              │
-│  Loop ends when: pending_tests == 0 OR user stops            │
+│  PHASE 1 LOOP (ut_test_list.txt):                            │
+│      while phase1_pending > 0:                               │
+│          ├── Select batch, execute parallel                  │
+│          ├── Update test_manifest_phase1.json                │
+│          ├── Update execution_state.json                     │
+│          └── Check agent.py health (reconnect if needed)     │
+│                                                              │
+│      # Phase 1 complete                                      │
+│      state.current_phase = 2                                 │
+│      compute_remaining_tests()                               │
+│      save_state()                                            │
+│                                                              │
+│  PHASE 2 LOOP (remaining tests):                             │
+│      while phase2_pending > 0:                               │
+│          ├── Select batch, execute parallel                  │
+│          ├── Update test_manifest_phase2.json                │
+│          ├── Update execution_state.json                     │
+│          └── Check agent.py health (reconnect if needed)     │
+│                                                              │
+│      # Phase 2 complete                                      │
+│      state.current_phase = 3                                 │
+│      save_state()                                            │
+│                                                              │
+│  PHASE 3 (error handling):                                   │
+│      ├── Review 34 collection errors                         │
+│      ├── Attempt to fix/document each                        │
+│      └── Generate error_analysis.md                          │
+│                                                              │
+│  DONE: All phases complete                                   │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 3.3 Auto-Reconnect Flow
+### 3.3 Disconnect Recovery Flow
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    Quick Resume After Disconnect              │
+│                                                              │
+│  On reconnect (user runs scheduler again):                   │
+│      │                                                       │
+│      ├── Load execution_state.json                           │
+│      │   ├── current_phase: Know which phase to continue     │
+│      │   ├── last_test_id: Know where to resume              │
+│      │   └── disconnect_count: Track stability               │
+│      │                                                       │
+│      ├── Quick status display:                               │
+│      │   "Resuming Phase 1, test #4200, 8945 remaining"      │
+│      │                                                       │
+│      ├── Check agent.py daemon                               │
+│      │   if not running: prompt user to start                │
+│      │                                                       │
+│      └── Resume execution immediately                        │
+│          (< 30s recovery time)                               │
+│                                                              │
+│  Key: All state persisted to file, no data lost              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 3.4 Auto-Reconnect Flow (During Execution)
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -278,12 +413,18 @@ python test_scheduler.py [options]
 
 Options:
   --parallel N        Number of parallel workers (default: 3)
-  --resume            Resume from last completed test ID
-  --start-id ID       Start from specific test ID
+  --phase N           Start specific phase (1, 2, or 3)
+  --resume            Resume from last state (phase + test ID)
+  --start-id ID       Start from specific test ID (within phase)
   --skip-model-tests  Skip all model-dependent tests
   --timeout SECONDS   Per-test timeout (default: 120)
   --dry-run           Show what would run, don't execute
   --stop-on-error N   Stop after N consecutive errors
+
+# Phase management
+python test_scheduler.py --status
+python test_scheduler.py --reset-phase 1  # Reset to phase 1
+python test_scheduler.py --compute-diff   # Show remaining tests for phase 2
 
 # Progress check
 python progress_tracker.py --manifest test_manifest.json --report
@@ -297,9 +438,10 @@ python progress_tracker.py --manifest test_manifest.json --status
 ```
 # Console output during execution
 
+[Scheduler] Loading execution_state.json...
+[Scheduler] Current Phase: 1 (ut_test_list.txt)
+[Scheduler] Phase 1 Progress: 4200/13165 (31.9%)
 [Scheduler] Starting parallel execution with 3 workers
-[Scheduler] Loaded 13165 tests from manifest, 8405 pending
-[Scheduler] Resuming from test ID 4200
 
 [Worker 1] Running test_id=4200: tests/kernels/test_cache.py::test_basic
 [Worker 2] Running test_id=4201: tests/kernels/test_cache.py::test_advanced
@@ -309,11 +451,34 @@ python progress_tracker.py --manifest test_manifest.json --status
 [Worker 2] ✗ FAILED (1.8s) - assertion error
 [Worker 3] ⚠ ERROR (0.5s) - ImportError: wrap_triton
 
-Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
+Phase 1 Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
 ─────────────────────────────────────────────────────────────────────
 
-[Worker 1] Running test_id=4203: tests/kernels/test_cache.py::test_large
+# Phase transition
+
+[Scheduler] Phase 1 Complete! 13165 tests executed.
+[Scheduler] Computing remaining tests for Phase 2...
+[Scheduler] Phase 2: 18207 new tests found
+[Scheduler] Transitioning to Phase 2...
+
+[Worker 1] Running phase2_test_id=1: tests/basic_correctness/test_basic_correctness.py::test_vllm_gc_ed
 ...
+```
+
+### 5.3 Disconnect Recovery Output
+
+```
+# On reconnect after disconnect
+
+[Scheduler] === QUICK RESUME ===
+[Scheduler] Last session: 2026-06-05T10:30:00
+[Scheduler] Disconnect detected: 2 times today
+[Scheduler] Current Phase: 1
+[Scheduler] Resuming from test_id=4200
+[Scheduler] Phase 1 remaining: 8945 tests
+[Scheduler] Checking agent.py daemon...
+[Scheduler] ✓ agent.py is running
+[Scheduler] Resuming execution in 5 seconds...
 ```
 
 ---
@@ -363,33 +528,39 @@ def detect_stalled_tests():
 
 | File | Action | Description |
 |------|--------|-------------|
-| `test_scheduler.py` | **CREATE** | Main scheduler with parallel execution |
+| `test_scheduler.py` | **CREATE** | Main scheduler with parallel execution + PhaseManager |
+| `execution_state.json` | **CREATE** | Resume state tracking (phase + progress) |
 | `batch_test_runner.py` | **MODIFY** | Add asyncio parallel execution |
 | `progress_tracker.py` | **MODIFY** | Add auto-update, stalled detection |
 | `docs/guides/automation.md` | **CREATE** | User guide for automation |
 
 ### 7.2 Implementation Order
 
-1. **test_scheduler.py (NEW)**
+1. **execution_state.json (NEW)**
+   - Define state schema
+   - Create state file management functions
+
+2. **test_scheduler.py (NEW)**
+   - PhaseManager class (phase tracking + diff algorithm)
    - Basic scheduler framework
    - asyncio parallel execution
    - Agent health check + reconnect
    - HF classification
    - CLI interface
 
-2. **batch_test_runner.py (Enhancements)**
+3. **batch_test_runner.py (Enhancements)**
    - asyncio version of run_batch
    - Better error parsing
    - Smart timeout
 
-3. **progress_tracker.py (Enhancements)**
+4. **progress_tracker.py (Enhancements)**
    - Auto-update PROGRESS.md
    - Stalled test detection
    - Summary generation
 
-4. **Testing & Validation**
+5. **Testing & Validation**
    - Unit tests
-   - Integration tests
+   - Integration tests (disconnect simulation)
    - Full deployment
 
 ### 7.3 Testing Strategy
@@ -399,16 +570,21 @@ def detect_stalled_tests():
 - Test HF classification heuristics
 - Test parallel execution simulation
 - Test manifest update logic
+- **Test PhaseManager: diff algorithm, state persistence**
+- **Test disconnect recovery: simulate reconnect**
 
 **Phase 2: Integration Tests (Remote)**
 - Run 10 tests sequentially first
 - Run 10 tests in parallel (2 workers)
 - Test reconnect by killing agent.py daemon
 - Test stalled test detection
+- **Test phase transition: Phase 1 → Phase 2**
+- **Test resume after forced disconnect**
 
 **Phase 3: Full Deployment**
 - Run on subset of tests (100 tests)
 - Monitor for 1 hour, verify stability
+- **Verify disconnect recovery works in real scenario**
 - Run full test suite
 
 ---
@@ -418,10 +594,15 @@ def detect_stalled_tests():
 | Criteria | Target |
 |----------|--------|
 | Parallel execution | 3 concurrent pytest workers |
-| Resume after disconnect | < 60s recovery time |
+| Resume after disconnect | < 30s recovery time |
 | HF model handling | Skip model-dependent tests within 10s |
 | Progress tracking | Auto-update every 100 tests |
 | Stalled detection | Kill tests stuck > 10 minutes |
+| **Phase 1 completion** | 13,165 tests executed, results recorded |
+| **Phase 2 diff** | ~18,207 remaining tests identified correctly |
+| **Phase 2 completion** | All remaining tests executed |
+| **Phase 3 documentation** | 34 collection errors analyzed |
+| **State persistence** | execution_state.json survives any disconnect |
 
 ---
 

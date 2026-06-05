@@ -1,0 +1,43 @@
+{
+  "issues": [],
+  "statistics": {
+    "total_issues": 0,
+    "open": 0,
+    "known": 0,
+    "fixed": 0,
+    "by_category": {
+      "C-代码Bug": 0,
+      "E-环境问题": 0,
+      "D-依赖缺失": 0,
+      "P-平台兼容": 0,
+      "M-模型缺失": 0,
+      "S-跳过问题": 0
+    }
+  },
+  "metadata": {
+    "created_at": null,
+    "last_updated": null,
+    "version": "1.0"
+  },
+  "_schema": {
+    "issue_fields": {
+      "id": "Unique identifier (e.g., C-1, P-2)",
+      "category": "One of: C-代码Bug, E-环境问题, D-依赖缺失, P-平台兼容, M-模型缺失, S-跳过问题",
+      "description": "Brief description of the issue",
+      "affected_tests": "List of test IDs or count of affected tests",
+      "status": "open (new), known (acknowledged), fixed (resolved)",
+      "first_seen": "Date when issue was first detected (YYYY-MM-DD)",
+      "last_seen": "Date when issue was last observed (YYYY-MM-DD)",
+      "fix_commit": "Git commit hash if fixed, null otherwise",
+      "notes": "Additional notes or context"
+    },
+    "category_descriptions": {
+      "C-代码Bug": "vLLM code defects - AssertionError, TypeError in vLLM code",
+      "E-环境问题": "Environment limits - OSError, FileNotFoundError, quota errors",
+      "D-依赖缺失": "Missing dependencies - ImportError, ModuleNotFoundError",
+      "P-平台兼容": "PyTorch API compatibility - wrap_triton, fp32_precision, ABI errors",
+      "M-模型缺失": "HF models not downloaded - LocalEntryNotFoundError, config.json missing",
+      "S-跳过问题": "Reasonably skipped tests - pytest.skip(), SkipTest"
+    }
+  }
+}

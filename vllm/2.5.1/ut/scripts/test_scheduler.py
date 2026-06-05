@@ -171,10 +171,16 @@ class ExecutionState:
 
         # Phase 3 status
         p3 = data.get("phase3_status", {})
+        # Handle both int and list for errors_pending
+        errors_pending = p3.get("errors_pending", 34)
+        if isinstance(errors_pending, list):
+            pending_count = len(errors_pending)
+        else:
+            pending_count = int(errors_pending) if errors_pending else 34
         state.phase3_status = PhaseStatus(
             total=34,
             completed=p3.get("errors_fixed", 0),
-            remaining_tests=list(range(p3.get("errors_pending", 34))) if p3.get("errors_pending", 34) > 0 else [],
+            remaining_tests=list(range(pending_count)) if pending_count > 0 else [],
         )
 
         return state

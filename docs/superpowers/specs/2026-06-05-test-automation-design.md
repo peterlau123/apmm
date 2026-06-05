@@ -186,6 +186,14 @@ test_scheduler.py
 │   ├── handle_results()        # Parse pytest output, update manifest
 │   └── auto_reconnect()        # Check agent.py health, reconnect if needed
 │
+├── RemoteExecutor (NEW - 后台执行)
+│   ├── start_background_test() # nohup 启动 pytest 进程
+│   ├── check_process_status()  # 检查远程进程是否存活
+│   ├── monitor_log_growth()    # 监控日志文件增长
+│   ├── parse_completed_tests() # 从日志解析已完成测试
+│   ├── kill_stalled_process()  # 杀死超时进程
+│   └── record_pid()            # 记录进程 ID 到 state
+│
 ├── PhaseManager (NEW)
 │   ├── load_state()            # Read execution_state.json
 │   ├── save_state()            # Persist state after each batch
@@ -206,7 +214,9 @@ test_scheduler.py
     ├── reconnect_interval: 30s # Check agent.py health
     ├── phase1_list: ut_test_list.txt
     ├── phase2_list: ut_test_list_full.txt
-    └── state_file: execution_state.json
+    ├── state_file: execution_state.json
+    ├── background_mode: true   # 默认后台执行模式
+    └── log_poll_interval: 10s  # 日志监控间隔
 ```
 
 ### 2.2 batch_test_runner.py (ENHANCED)
@@ -219,9 +229,13 @@ batch_test_runner.py (modified)
 │   └── record_error_in_progress()
 │
 ├── NEW additions
+│   ├── run_tests_background()  # 后台执行 pytest (nohup)
+│   ├── monitor_batch_progress() # 监控后台批次进度
+│   ├── parse_batch_log()       # 解析批量日志提取结果
 │   ├── run_tests_parallel()    # asyncio version of run_batch
 │   ├── detect_hf_dependency()  # Check if test needs HF model
 │   └── smart_timeout()         # Adjust timeout based on test type
+│   └── append_to_progress_md() # 追加记录到 PROGRESS.md (带时间戳)
 ```
 
 ### 2.3 progress_tracker.py (ENHANCED)
@@ -233,10 +247,20 @@ progress_tracker.py (modified)
 │   ├── generate_report()
 │
 ├── NEW additions
-│   ├── auto_update_progress_md()  # Sync PROGRESS.md every N tests
+│   ├── append_to_progress_md()    # 追加记录 (不覆盖，带时间戳)
+│   ├── update_overview_table()    # 仅更新顶部概览表格
 │   ├── generate_summary_section() # Add summary to PROGRESS.md
 │   ├── sync_from_remote()         # Download manifest from remote
 │   ├── merge_progress()           # Merge local + remote progress
+│   ├── detect_stalled_tests()     # Alert if tests running > 10min
+│   └── update_issues_json()       # Track issues in issues.json
+│
+├── 追加记录格式
+│   ├── 时间戳: YYYY-MM-DD HH:MM:SS
+│   ├── 事件类型: 执行批次/问题发现/阶段切换/断连恢复
+│   ├── 详细内容: JSON 或 Markdown 格式
+│   └── 不修改历史记录
+```
 │   ├── detect_stalled_tests()     # Alert if tests running > 10min
 │   └── update_issues_json()       # Track issues in issues.json
 ```
@@ -353,28 +377,188 @@ exit_code: 0
 
 ## Progress Tracking & Issue Management
 
-### 4.1 PROGRESS.md Auto-Sync
+### 4.1 PROGRESS.md Append Mode
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │                    PROGRESS.md Update Strategy                │
 │                                                              │
-│  Trigger: Every 100 tests OR phase transition                │
+│  ⚠️ 重要：追加模式，不覆盖历史记录                            │
 │                                                              │
-│  Auto-update sections:                                       │
-│  ├── 当前状态概览表格 (statistics)                           │
-│  ├── 今日测试执行报告 (daily report)                         │
-│  ├── 兼容性问题汇总 (issue tracking)                         │
-│  └── 未完成的测试目录 (pending directories)                  │
+│  每次更新规则：                                               │
+│  ├── 追加新记录到文件末尾                                    │
+│  ├── 每条记录携带时间戳                                      │
+│  ├── 保留所有历史记录                                        │
+│  └── 仅更新顶部概览表格                                      │
 │                                                              │
-│  Manual sections (不自动修改):                               │
-│  ├── 详细错误分析                                            │
-│  ├── 修复记录                                                │
-│  └── 特殊问题说明                                            │
+│  自动追加内容：                                               │
+│  ├── 执行批次记录 (带时间戳)                                 │
+│  ├── 问题发现记录 (带时间戳)                                 │
+│  ├── 阶段切换记录 (带时间戳)                                 │
+│  └── 断连恢复记录 (带时间戳)                                 │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Issue Tracking Schema
+### 4.1.1 PROGRESS.md追加格式示例
+
+```markdown
+# 单元测试进度追踪
+
+> **vLLM v0.13.0 + PyTorch 2.5.1 pytest 测试进度**
+
+---
+
+## 当前状态概览（2026-06-05 更新）
+
+| 指标 | 数量 | 说明 |
+|------|:----:|------|
+| 测试清单 | **13,165** | ut_test_list.txt |
+... (概览表格可更新)
+
+---
+
+## 执行记录（追加模式）
+
+### 2026-06-05 10:30:15 - 批次执行
+- 执行测试: #4200-#4210 (batch_size=10)
+- 结果: 7 passed, 2 failed, 1 error
+- 耗时: 45.2s
+- 日志: ut_logs/phase1/batch_20260605_1030.log
+
+### 2026-06-05 10:35:22 - 发现新问题
+- 问题类型: P-平台兼容
+- 影响测试: test_triton_unified_attention.py::test_xxx
+- 错误信息: Triton编译器版本不兼容
+- 已添加到 issues.json
+
+### 2026-06-05 11:00:00 - 阶段切换
+- Phase 1 完成: 13,165 tests executed
+- 开始 Phase 2: 18,207 remaining tests
+- manifest 已生成: test_manifest_phase2.json
+
+### 2026-06-05 14:30:00 - 断连恢复
+- 本地断连时间: 2026-06-05 12:00:00
+- 恢复时间: 2026-06-05 14:30:00
+- 远程测试状态: 已完成 500 tests (后台运行)
+- 正在同步进度...
+
+---
+
+## 历史记录（2026-06-04）
+... (保留历史)
+```
+
+### 4.1.2 更新策略
+
+| 更新类型 | 操作 | 时间戳 |
+|----------|------|--------|
+| **概览表格** | 可更新顶部表格数据 | 表格标题携带日期 |
+| **批次执行** | 追加新记录 | 每条记录带完整时间戳 |
+| **问题发现** | 追加新记录 | 发现时间 + 记录时间 |
+| **阶段切换** | 追加新记录 | 切换时间 |
+| **断连恢复** | 追加新记录 | 断连时间 + 恢复时间 |
+| **历史记录** | 不修改 | 保持原样 |
+
+### 4.2 Remote Background Execution
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    远程后台执行模式                            │
+│                                                              │
+│  ⚠️ 重要：测试在远程服务器后台运行                            │
+│                                                              │
+│  执行方式：                                                   │
+│  ├── 使用 nohup 启动 pytest 进程                             │
+│  ├── 输出重定向到 ut_logs/ 目录                              │
+│  ├── 进程 ID 记录到 execution_state.json                     │
+│  └── 本地断连不影响远程测试执行                               │
+│                                                              │
+│  监控方式：                                                   │
+│  ├── 定期检查远程日志文件增长                                │
+│  ├── 解析日志判断测试完成状态                                │
+│  └── 检测 pytest 进程是否仍在运行                            │
+│                                                              │
+│  断连恢复：                                                   │
+│  ├── 重连后检查远程进程状态                                  │
+│  ├── 解析日志获取已完成测试                                  │
+│  ├── 更新 manifest 和 PROGRESS.md                            │
+│  └── 继续调度剩余测试                                        │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 4.2.1 后台执行命令模板
+
+```bash
+# 远程后台执行 pytest
+nohup pytest tests/kernels/test_cache.py -v \
+    --tb=short \
+    --timeout=120 \
+    > ut_logs/phase1/batch_20260605_1030.log 2>&1 &
+
+# 记录进程 ID
+echo $! > ut_logs/phase1/batch_20260605_1030.pid
+
+# 检查进程状态
+ps -p $(cat ut_logs/phase1/batch_20260605_1030.pid)
+
+# 监控日志增长
+tail -f ut_logs/phase1/batch_20260605_1030.log
+```
+
+### 4.2.2 后台执行状态追踪
+
+```json
+// execution_state.json 新增字段
+{
+  "current_phase": 1,
+  "remote_processes": [
+    {
+      "batch_id": "batch_20260605_1030",
+      "pid": 12345,
+      "test_range": "4200-4210",
+      "started_at": "2026-06-05T10:30:00",
+      "log_file": "ut_logs/phase1/batch_20260605_1030.log",
+      "status": "running",
+      "expected_tests": 10
+    }
+  ],
+  "completed_batches": [
+    {
+      "batch_id": "batch_20260605_1000",
+      "completed_at": "2026-06-05T10:15:00",
+      "results": {"passed": 8, "failed": 1, "error": 1}
+    }
+  ]
+}
+```
+
+### 4.2.3 断连后恢复流程
+
+```
+断连恢复检查流程:
+
+1. 重连后检查远程进程状态
+   ├── 检查 .pid 文件是否存在
+   ├── ps -p <pid> 检查进程是否存活
+   └── 检查日志文件是否仍在增长
+
+2. 解析已完成测试
+   ├── 从日志文件提取 pytest 输出
+   ├── 解析 PASSED/FAILED/ERROR 状态
+   └── 更新 test_manifest.json
+
+3. 同步进度
+   ├── 更新 execution_state.json
+   ├── 追加 PROGRESS.md (带时间戳)
+   └── 下载 manifest 到本地
+
+4. 继续执行
+   ├── 获取下一个待执行批次
+   ├── 启动新的后台 pytest 进程
+   └── 返回监控模式
+```
+
+### 4.5 Issue Tracking Schema
 
 ```json
 // issues.json (NEW) - 问题追踪文件
@@ -414,56 +598,116 @@ exit_code: 0
 
 ### 4.3 Progress Sync Interval
 
-| 事件 | 同步频率 |
-|------|----------|
-| **批量测试完成** | 每 100 个测试更新 PROGRESS.md |
-| **阶段切换** | Phase 1→2, Phase 2→3 立即更新 |
-| **发现新问题** | 立即添加到 issues.json |
-| **断连恢复** | 恢复后立即同步当前状态 |
-| **每日结束** | 生成完整日报 |
+| 事件 | 同步频率 | PROGRESS.md操作 |
+|------|----------|-----------------|
+| **批量测试完成** | 每 100 个测试 | 追加执行记录 (带时间戳) |
+| **阶段切换** | Phase 1→2, Phase 2→3 | 追加切换记录 + 更新概览表格 |
+| **发现新问题** | 立即 | 追加问题记录 (带时间戳) |
+| **断连恢复** | 恢复后立即 | 追加恢复记录 (带时间戳) |
+| **每日结束** | 生成完整日报 | 追加日报记录 |
 
-### 4.4 Disconnect Recovery - Progress Sync
+### 4.4 Disconnect Recovery - Background Mode
 
 ```
-断连恢复流程:
+断连恢复流程 (后台模式):
 
-1. 检查本地 execution_state.json
-   └── 确认当前阶段和进度
+1. 重连后检查远程进程状态
+   ├── 检查 .pid 文件
+   ├── ps -p <pid> 检查进程存活
+   └── 检查日志文件增长
 
-2. 从远程下载最新 test_manifest*.json
-   └── 对比本地和远程状态
+2. 解析已完成测试 (从远程日志)
+   ├── 提取 PASSED/FAILED/ERROR
+   ├── 更新 test_manifest.json
+   └── 记录到 execution_state.json
 
-3. 如果远程有更新:
-   ├── 合并远程进度到本地
-   ├── 更新 PROGRESS.md
-   └── 继续执行
+3. 同步进度 (追加模式)
+   ├── 追加 PROGRESS.md (带时间戳)
+   │   格式: "### 2026-06-05 14:30:00 - 断连恢复"
+   ├── 更新顶部概览表格
+   └── 下载 manifest 到本地
 
-4. 如果本地有未同步进度:
-   ├── 上传本地 manifest 到远程
-   └── 更新 PROGRESS.md
+4. 继续执行
+   ├── 获取下一个待执行批次
+   ├── 启动新的后台 pytest 进程
+   └── 返回监控模式
+
+关键优势: 远程测试在后台运行，断连不影响测试执行
 ```
 
 ---
 
 ## Data Flow & Execution Sequence
 
-### 3.1 Startup Sequence (with Phase Support)
+### 5.1 Startup Sequence (with Background Mode)
 
 ```
-User runs: python test_scheduler.py --parallel 3
+User runs: python test_scheduler.py --parallel 3 --background
 
 1. Load execution_state.json (or create if not exists)
 2. Determine current phase from state:
    - Phase 1: Load ut_test_list.txt manifest
    - Phase 2: Compute diff, load remaining tests
    - Phase 3: Load error cases
-3. Find last completed test ID in current phase
-4. Get pending tests starting from that ID
-5. Classify tests: model-dependent vs model-free
-6. Start N parallel pytest workers
+3. Check remote process status (if previous session)
+   - Check .pid files for running processes
+   - Parse logs for completed tests
+   - Sync progress before continuing
+4. Find last completed test ID in current phase
+5. Get pending tests starting from that ID
+6. Classify tests: model-dependent vs model-free
+7. Start N parallel pytest workers (background mode)
 ```
 
-### 3.2 Phase-Based Execution Flow
+### 5.2 Background Execution Flow
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    后台执行主循环                              │
+│                                                              │
+│  Load execution_state.json                                   │
+│  current_phase = state.current_phase                         │
+│                                                              │
+│  PHASE LOOP:                                                 │
+│      while pending_tests > 0:                                │
+│          │                                                   │
+│          ├── Select batch of N tests                         │
+│          │                                                   │
+│          ├── 启动后台 pytest 进程:                            │
+│          │   nohup pytest <tests> > log_file 2>&1 &          │
+│          │   echo $! > log_file.pid                          │
+│          │                                                   │
+│          ├── 记录到 execution_state.json:                    │
+│          │   remote_processes.append({                       │
+│          │     batch_id, pid, test_range,                    │
+│          │     started_at, log_file                          │
+│          │   })                                              │
+│          │                                                   │
+│          ├── 监控模式 (轮询日志):                             │
+│          │   every 10 seconds:                               │
+│          │   ├── 检查进程存活 (ps -p <pid>)                   │
+│          │   ├── 检查日志增长 (tail -n 50)                    │
+│          │   └── 解析已完成测试                               │
+│          │                                                   │
+│          ├── 批次完成检测:                                    │
+│          │   ├── 进程退出 (exit_code 记录)                   │
+│          │   ├── 或日志显示 "passed/failed X tests"          │
+│          │                                                   │
+│          ├── 解析结果:                                        │
+│          │   ├── 更新 test_manifest.json                     │
+│          │   ├── 追加 PROGRESS.md (带时间戳)                  │
+│          │   └── 更新 issues.json (如有新问题)               │
+│          │                                                   │
+│          └── 继续下一批次                                     │
+│                                                              │
+│  本地断连不影响远程执行:                                       │
+│  ├── pytest 进程在远程后台运行                               │
+│  ├── 日志持续写入                                             │
+│  ├── 重连后解析日志恢复进度                                   │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 5.3 Phase-Based Execution (Background Mode)
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -504,7 +748,7 @@ User runs: python test_scheduler.py --parallel 3
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 3.3 Disconnect Recovery Flow
+### 5.3 Disconnect Recovery Flow (Background Mode)
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -514,15 +758,34 @@ User runs: python test_scheduler.py --parallel 3
 │      │                                                       │
 │      ├── Load execution_state.json                           │
 │      │   ├── current_phase: Know which phase to continue     │
-│      │   ├── last_test_id: Know where to resume              │
+│      │   ├── remote_processes: Check running background jobs │
 │      │   └── disconnect_count: Track stability               │
 │      │                                                       │
-│      ├── Quick status display:                               │
-│      │   "Resuming Phase 1, test #4200, 8945 remaining"      │
+│      ├── Check remote process status:                        │
+│      │   ├── For each pid in remote_processes:               │
+│      │   │   ├── ps -p <pid> check alive                     │
+│      │   │   ├── Parse log file for completed tests          │
+│      │   │   └── Update manifest if tests completed          │
+│      │   └── Report: "远程已完成 X tests during disconnect"  │
+│      │                                                       │
+│      ├── Sync progress (追加模式):                           │
+│      │   ├── 追加 PROGRESS.md:                               │
+│      │   │   "### 2026-06-05 14:30:00 - 断连恢复"           │
+│      │   │   "- 断连时间: 2026-06-05 12:00:00"              │
+│      │   │   "- 远程完成: 500 tests"                         │
+│      │   ├── 更新顶部概览表格                                 │
+│      │   └── Upload local changes to remote                  │
 │      │                                                       │
 │      ├── Check agent.py daemon                               │
 │      │   if not running: prompt user to start                │
 │      │                                                       │
+│      └── Resume execution immediately                        │
+│          ├── Start new background batch                      │
+│          └── (< 30s recovery time)                           │
+│                                                              │
+│  Key: 远程测试在断连期间继续执行，无进度丢失                   │
+└──────────────────────────────────────────────────────────────┘
+```
 │      └── Resume execution immediately                        │
 │          (< 30s recovery time)                               │
 │                                                              │
@@ -530,11 +793,11 @@ User runs: python test_scheduler.py --parallel 3
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 3.4 Auto-Reconnect Flow (During Execution)
+### 5.4 Auto-Reconnect Flow (During Execution)
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                    Reconnect Handler                          │
+│                    Reconnect Handler (后台模式)                │
 │                                                              │
 │  every 30 seconds:                                           │
 │      │                                                       │
@@ -542,13 +805,17 @@ User runs: python test_scheduler.py --parallel 3
 │      │   (python agent.py ping)                              │
 │      │                                                       │
 │      ├── If ping fails:                                      │
-│      │   ├── Stop running workers                            │
-│      │   ├── Wait for agent.py to restart                    │
-│      │   ├── Resume from last completed test ID              │
-│      │   └── Restart parallel execution                      │
+│      │   ├── 记录断连时间到 execution_state.json             │
+│      │   ├── 不停止远程 pytest 进程 (后台继续运行)            │
+│      │   ├── 进入等待重连模式                                 │
+│      │   └── 重连后解析日志恢复进度                           │
 │      │                                                       │
 │      └── If ping succeeds:                                   │
-│          └── Continue execution                              │
+│          ├── 检查远程 pytest 进程状态                        │
+│          ├── 解析日志增长                                    │
+│          └── 继续监控                                        │
+│                                                              │
+│  关键: 本地断连不影响远程后台测试执行                         │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -556,7 +823,7 @@ User runs: python test_scheduler.py --parallel 3
 
 ## HF Model Handling
 
-### 4.1 Model Dependency Detection
+### 6.1 Model Dependency Detection
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
@@ -586,7 +853,7 @@ User runs: python test_scheduler.py --parallel 3
 └──────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Execution Priority
+### 6.2 Execution Priority
 
 ```
 Priority order for test execution:
@@ -604,7 +871,7 @@ Priority order for test execution:
        └── TIMEOUT: Try with short timeout, skip if fails
 ```
 
-### 4.3 HF Environment Setup
+### 6.3 HF Environment Setup
 
 ```bash
 # In Docker container before running pytest
@@ -620,7 +887,7 @@ export TRANSFORMERS_OFFLINE=1
 
 ## Command Interface
 
-### 5.1 CLI Commands
+### 7.1 CLI Commands
 
 ```bash
 # Main scheduler command
@@ -648,7 +915,7 @@ python progress_tracker.py --manifest test_manifest.json --report
 python progress_tracker.py --manifest test_manifest.json --status
 ```
 
-### 5.2 Output Format
+### 7.2 Output Format
 
 ```
 # Console output during execution
@@ -680,7 +947,7 @@ Phase 1 Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
 ...
 ```
 
-### 5.3 Disconnect Recovery Output
+### 7.3 Disconnect Recovery Output
 
 ```
 # On reconnect after disconnect
@@ -700,7 +967,7 @@ Phase 1 Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
 
 ## Error Handling
 
-### 6.1 Error Classification (From GOAL.md)
+### 8.1 Error Classification (From GOAL.md)
 
 | Category | Detection Pattern | Action |
 |----------|-------------------|--------|
@@ -711,7 +978,7 @@ Phase 1 Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
 | **M-模型缺失** | HF LocalEntryNotFoundError, config.json missing | Mark as skipped (model-dependent) |
 | **S-跳过问题** | pytest.skip(), SkipTest | Mark as skipped |
 
-### 6.2 Recovery Strategies
+### 8.2 Recovery Strategies
 
 | Error Type | Recovery Action |
 |------------|-----------------|
@@ -722,7 +989,7 @@ Phase 1 Progress: 4203/13165 (31.9%) | Passed: 2845 | Failed: 312 | Error: 156
 | Unknown error | Log full traceback, mark as error |
 | Timeout | Kill pytest process, mark as timeout |
 
-### 6.3 Stalled Test Detection
+### 8.3 Stalled Test Detection
 
 ```python
 def detect_stalled_tests():
@@ -739,7 +1006,7 @@ def detect_stalled_tests():
 
 ## Implementation Plan
 
-### 7.1 Files to Create/Modify
+### 9.1 Files to Create/Modify
 
 | File | Action | Description |
 |------|--------|-------------|
@@ -754,7 +1021,7 @@ def detect_stalled_tests():
 | `generate_manifest.py` | **MODIFY** | Support generating phase2 manifest with diff |
 | `docs/guides/automation.md` | **CREATE** | User guide for automation |
 
-### 7.2 Implementation Order
+### 9.2 Implementation Order
 
 1. **execution_state.json + issues.json (NEW)**
    - Define state schema
@@ -802,7 +1069,7 @@ def detect_stalled_tests():
    - Integration tests (disconnect simulation)
    - Full deployment
 
-### 7.3 Testing Strategy
+### 9.3 Testing Strategy
 
 **Phase 1: Unit Tests (Local)**
 - Test scheduler logic with mock agent.py

@@ -90,6 +90,22 @@ Thumbs.db
 # ===== 凭据文件 =====
 .bastion_creds
 
+# ===== Agent通信文件（运行时数据） =====
+.agents/feishu_config.json
+.agents/*/messages.jsonl
+.agents/*/inbox.jsonl
+.agents/supervisor/heartbeat.json
+.agents/archive/
+.agents/global_state.json
+.agents/logs/
+
+# ===== tools临时文件 =====
+tools/utilities/*.tmp
+
+# ===== tasks测试日志 =====
+tasks/tests/*/logs/
+*.log
+
 # ===== 大型二进制 =====
 *.whl
 Miniconda*.sh

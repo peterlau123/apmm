@@ -1,0 +1,14 @@
+{
+  "type": "all_agents_status",
+  "priority": "P2",
+  "timestamp": "{{timestamp}}",
+  "source": "supervisor",
+  "data": {
+    "agents": {
+      "bastion": "{{bastion_status}}",
+      "runner": "{{runner_status}}",
+      "environment": "{{environment_status}}"
+    },
+    "issues_count": "{{issues_count}}"
+  }
+}

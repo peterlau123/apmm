@@ -1,0 +1,12 @@
+{
+  "type": "agent_timeout",
+  "priority": "P0",
+  "agent_id": "{{agent_id}}",
+  "timestamp": "{{timestamp}}",
+  "source": "supervisor",
+  "data": {
+    "last_heartbeat": "{{last_heartbeat}}",
+    "elapsed_seconds": "{{elapsed}}",
+    "action": "notify_user"
+  }
+}

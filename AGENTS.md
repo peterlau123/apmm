@@ -22,33 +22,49 @@ AI Agent 工作指南 - 本项目为 **vLLM 验证框架** (M2.7_verify)
 
 ```
 apmm/
-├── accuracy/           # 精度测试模块
-│   ├── GPQA-D/         # GPQA-Diamond 评测
-│   └── Multi-SWE/      # Multi-SWE-bench 评测
-├── feature/            # 功能测试模块
-│   ├── v0.11.1/        # vLLM v0.11.1 功能验证
-│   ├── v0.13.0/        # vLLM v0.13.0 功能验证
-│   ├── v0.17.0/        # vLLM v0.17.0 功能验证
-│   ├── latest/         # 最新版本功能验证
-│   └── vllm_test/      # vLLM 通用功能测试
-├── performance/        # 性能测试模块
-│   ├── v0.13.0/        # vLLM v0.13.0 性能验证
-│   ├── latest/         # 最新版本性能验证
-│   └── monitor.py      # 性能监控脚本
-├── unit_test/          # 单元测试模块
-├── pytorch/            # PyTorch 验证模块
-│   └── 2.5.1/          # PyTorch 2.5.1 验证
-│       ├── compile/    # 编译测试
-│       ├── ut/         # 单元测试
-│       └── patches/    # 兼容性补丁
-├── scripts/            # 通用脚本
-├── utilities/          # 工具脚本
-├── docs/               # 项目文档
-├── agent.py            # SSH 堡垒机代理
-├── CLAUDE.md           # AI Agent 行为准则
-├── AGENTS.md           # 本文件
-├── README.md           # 项目总览
-└── PROGRESS.md         # 总体进度跟踪
+├── .agents/                  # Agent运行状态（统一）
+│   ├── config.json           # Agent配置
+│   ├── daemon/               # 守护进程脚本
+│   ├── supervisor/           # Supervisor状态
+│   ├── unit-test-runner/     # Runner状态
+│   ├── environment/          # Environment状态
+│   ├── bastion/              # Bastion状态
+│   ├── logs/                 # 运行日志
+│   └── archive/              # 归档
+│
+├── skills/                   # Agent技能定义
+│   └ ut/                     # 单元测试任务
+│       ├── supervisor/       # Supervisor SKILL.md
+│       ├── unit-test-runner/ # Runner SKILL.md
+│       ├── environment-agent/# Environment SKILL.md
+│       └── bastion-agent/    # Bastion SKILL.md
+│
+├── tasks/                    # 任务工作区
+│   └ tests/                  # 测试任务
+│       ├── accuracy/         # 精度测试
+│       ├── feature/          # 功能测试
+│       └ performance/        # 性能测试
+│
+├── tools/                    # 工具脚本
+│   ├── agent.py              # SSH代理
+│   ├── feishu/               # 飞书脚本
+│   └── utilities/            # 其他工具
+│
+├── vllm/                     # vLLM源码和单元测试（Git跟踪）
+│   └ 2.5.1/                  # vLLM v2.5.1
+│       ├── compile/          # 编译测试
+│       └ ut/                 # 单元测试
+│
+├── docs/                     # 项目文档
+│   ├── guides/               # 指南
+│   ├── reference/            # 参考
+│   └ archive/                # 归档
+│
+├── AGENTS.md                 # 本文件
+├── CLAUDE.md                 # AI行为准则
+├── README.md                 # 项目总览
+├── PROGRESS.md               # 总体进度
+└ .gitignore
 ```
 
 ---

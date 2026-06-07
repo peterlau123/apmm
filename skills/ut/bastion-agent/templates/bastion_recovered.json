@@ -1,0 +1,16 @@
+{
+  "type": "bastion_recovered",
+  "priority": "P2",
+  "data_template": {
+    "reconnect_time": "{reconnect_time}",
+    "method": "{method}",
+    "t_h20": {
+      "status": "connected",
+      "delay_ms": "{t_h20_delay}"
+    },
+    "t_ascend": {
+      "status": "connected",
+      "delay_ms": "{t_ascend_delay}"
+    }
+  }
+}

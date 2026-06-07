@@ -1,0 +1,21 @@
+{
+  "type": "bastion_status",
+  "priority": "P2",
+  "data_template": {
+    "t_h20": {
+      "status": "{t_h20_status}",
+      "delay_ms": "{t_h20_delay}",
+      "last_ping": "{t_h20_last_ping}"
+    },
+    "t_ascend": {
+      "status": "{t_ascend_status}",
+      "delay_ms": "{t_ascend_delay}",
+      "last_ping": "{t_ascend_last_ping}"
+    },
+    "daemon_status": {
+      "running": "{daemon_running}",
+      "pid": "{daemon_pid}"
+    },
+    "healthy": "{overall_healthy}"
+  }
+}

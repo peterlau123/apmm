@@ -1,0 +1,25 @@
+{
+  "type": "environment_status",
+  "priority": "P2",
+  "data_template": {
+    "gpu_status": {
+      "idle": "{idle_count}",
+      "occupied": "{occupied_count}",
+      "healthy": "{gpu_healthy}"
+    },
+    "container_status": {
+      "running": "{running_count}",
+      "stopped": "{stopped_count}",
+      "healthy": "{container_healthy}"
+    },
+    "disk_status": {
+      "used_percent": "{disk_percent}",
+      "available_gb": "{available_gb}"
+    },
+    "download_status": {
+      "completed": "{completed_count}",
+      "failed": "{failed_count}",
+      "in_progress": "{progress_count}"
+    }
+  }
+}

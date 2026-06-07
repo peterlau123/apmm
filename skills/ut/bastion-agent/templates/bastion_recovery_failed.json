@@ -1,0 +1,10 @@
+{
+  "type": "bastion_recovery_failed",
+  "priority": "P0",
+  "data_template": {
+    "failure_reason": "{reason}",
+    "target": "{target_machine}",
+    "need_human": true,
+    "request": "please_manually_handle_ssh_restart"
+  }
+}

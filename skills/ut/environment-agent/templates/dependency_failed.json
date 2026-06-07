@@ -1,0 +1,12 @@
+{
+  "type": "dependency_failed",
+  "priority": "P1",
+  "data_template": {
+    "failed_count": "{count}",
+    "failed_models": [
+      {"name": "{model_name}", "error": "{error_reason}"}
+    ],
+    "skip_file": "{skip_manifest_path}",
+    "request": "please_choose_skip_or_retry"
+  }
+}

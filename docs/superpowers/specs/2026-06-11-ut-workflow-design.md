@@ -283,5 +283,58 @@ tasks/ut/workflow_tests/下的4个test list用于验证workflow功能：
 
 ---
 
+## v5.0 更新（2026-06-12）
+
+### delegate_to: self 设计
+
+**变更原因**: 简化架构，利用 Agent tool 的 subagent 能力，避免外部 CLI 调用。
+
+**`delegate_to: self` 定义**:
+- Agent 收到 Stage 任务后，自主决定执行方式
+- 简单操作（文件读写）→ 当前 session 直接执行
+- 复杂操作（需要判断）→ 使用 Agent tool spawn subagent
+
+**执行方式判断逻辑**:
+
+| Stage | 执行方式 | 原因 |
+|-------|---------|------|
+| collect (Stage 1) | subagent | 需要远程 pytest collect |
+| select_batch (Stage 2) | subagent | 需要读取分析 manifest |
+| execute (Stage 3) | subagent | 远程执行 pytest，耗时长 |
+| handle_failures (Stage 4) | subagent | 需要 LLM 判断力 |
+| update_status (Stage 5) | 直接执行 | 简单文件操作 |
+
+### Agent tool 使用方式
+
+**SKILL.md 内联执行**:
+```
+Agent(
+    subagent_type="general-purpose",
+    description="Execute {stage_id} Stage",
+    prompt="加载 skill ut/{skill_id} 并执行。
+    Context: {context_json}
+    返回统一格式 JSON。"
+)
+```
+
+**Context 传递**:
+- 通过 prompt 参数传递路径和参数
+- Worker 读取 workflow_state.json 获取具体路径
+- 不硬编码路径，保持灵活性
+
+### supervisor_loop.py 简化
+
+**v5.0 变更**:
+- 主循环逻辑移至 SKILL.md
+- supervisor_loop.py 改为辅助工具
+- 保留功能：状态检查、配置校验、stats 更新
+
+**推荐执行方式**:
+- 主要：加载 ut/workflow skill
+- 辅助：`python supervisor_loop.py --check`（调试）
+
+---
+
 *创建日期: 2026-06-11*
+*更新日期: 2026-06-12*
 *作者: Claude*

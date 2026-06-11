@@ -10,7 +10,7 @@ workflow:
   description: Hierarchical Agent架构 - Supervisor调度 + Worker执行 + Kanban追踪
 
   # ============================================================
-  # 测试标识 - 用于生成运行目录
+  # ⚠️ 用户需调整：测试标识
   # ============================================================
   test_name: "ut"  # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
 
@@ -18,7 +18,7 @@ workflow:
 # Config - 路径和执行配置
 # ============================================================
 config:
-  # 核心路径定义
+  # ⚠️ 用户需调整：核心路径定义
   workspace: &workspace "D:/workspace/apmm"
   runs_dir: &runs_dir "D:/workspace/apmm/runs"  # 运行目录根目录
 
@@ -51,13 +51,13 @@ config:
   handled_tests_path: &handled_tests_path "{run_dir}/batches/{batch_id}/handled_tests.json"
   batch_logs_dir: &batch_logs_dir "{run_dir}/batches/{batch_id}/logs"
 
-  # 远程执行配置
+  # ⚠️ 用户需调整：远程执行配置
   remote_server: "t_h20"
   docker_container: "v0.13.0_torch2.5.1_compile"
   vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
   ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
 
-  # pytest 参数偏好
+  # ⚠️ 用户需调整：pytest参数和批次大小
   pytest_args: "-q --tb=long"
   batch_size: 50  # ⚠️ 控制 ≤100 避免 delegate_task 超时
 
@@ -71,6 +71,7 @@ config:
 # 3. 两者都指定 → 提示用户确认以哪个为准
 # 4. 两者都没指定 → 提示用户是否跑内置过滤后的全量清单
 input_filter:
+  # ⚠️ 用户需调整：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
   test_list_path: null  # 例如: "D:/workspace/apmm/tasks/ut/test_list.txt"
 
@@ -99,7 +100,7 @@ input_filter:
 stages:
   # Stage 1: collect（只执行一次）
   - id: collect
-    delegate_to: claude-code
+    delegate_to: opencode
     skill: ut-test-collector
     loop: false
     description: 从test_list.txt生成manifest.json
@@ -114,7 +115,7 @@ stages:
 
   # Stage 2: select_batch（循环）
   - id: select_batch
-    delegate_to: claude-code
+    delegate_to: opencode
     skill: batch-selector
     loop: true
     description: 选择下一批次测试
@@ -131,7 +132,7 @@ stages:
   # Stage 3: execute（循环）
   # v2.2: 日志提取和解析已内置为 stage 核心行为
   - id: execute
-    delegate_to: claude-code
+    delegate_to: opencode
     skill: unit-test-executor
     loop: true
     description: |
@@ -162,7 +163,7 @@ stages:
 
   # Stage 4: handle_failures（循环，Agent核心）
   - id: handle_failures
-    delegate_to: claude-code
+    delegate_to: opencode
     skill: failure-handler
     loop: true
     description: 分析失败原因，尝试修复（Agent判断）
@@ -174,7 +175,7 @@ stages:
 
   # Stage 5: update_status（循环）
   - id: update_status
-    delegate_to: claude-code
+    delegate_to: opencode
     skill: manifest-updater
     loop: true
     description: 更新manifest.json状态

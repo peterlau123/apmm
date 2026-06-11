@@ -8,10 +8,16 @@
 
 ### TODO
 
-- [ ] **UT Workflow 过滤规则汇聚** - P1 (待实施)
+- [x] **UT Workflow 过滤规则汇聚** - P1 ✅ 2026-06-11 已完成
   - 背景: 过滤规则分散在 7+ 个位置，需建立单一来源
   - 设计文档: [2026-06-11-ut-filter-rules-consolidation-design.md](../../docs/superpowers/specs/2026-06-11-ut-filter-rules-consolidation-design.md)
-  - 状态: 设计完成，**前置依赖已完成，可开始实施**
+  - 实施:
+    1. ✅ 创建 `skills/ut/shared/filter_rules.yaml`（41条规则）
+    2. ✅ 创建 `skills/ut/shared/load_filter_rules.py`（5个函数）
+    3. ✅ 精简 `pytest_config.py`（移除37条规则）
+    4. ✅ 更新 `workflow.yaml`（添加 input_filter 块）
+    5. ✅ 更新 `generate_batch.py`（使用 load_filter_rules）
+  - Commit: 8557b48
 
 - [x] **tasks/ut/ 文件清理** - P1 ✅ 2026-06-11 已完成
   - 背景: 目录中存在42个可删除的冗余/过时/已迁移文件

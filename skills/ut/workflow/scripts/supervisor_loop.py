@@ -162,13 +162,17 @@ def delegate_task(
     
     print(f"\n{'='*60}")
     print(f"[DELEGATE] Calling Worker: {skill_id}")
+    print(f"  delegate_to: {delegate_to or 'default'}")
+    print(f"  timeout: {timeout or 'none'}")
     print(f"  params: {params}")
     print(f"  input: {list(input_data.keys())}")
     print(f"{'='*60}")
-    
+
     # 创建任务上下文文件
     task_context = {
         "skill_id": skill_id,
+        "delegate_to": delegate_to,
+        "timeout": timeout,
         "params": params,
         "input": input_data,
         "timestamp": datetime.now(timezone.utc).isoformat()
@@ -178,13 +182,18 @@ def delegate_task(
     write_json(context_file, task_context)
     
     # 模拟 Worker 执行结果
-    # 实际实现中，这里会调用 Hermes 的 delegate_task API
+    # 实际实现中，这里会根据 delegate_to 调用对应的 agent API：
+    # - delegate_to == "opencode": 调用 opencode CLI
+    # - delegate_to == "claude": 调用 Claude Code Skill tool
+    # - delegate_to == None: 使用默认 agent
+    # timeout 参数用于限制执行时间
     # 目前返回模拟结果用于测试
     result = {
         "status": "success",
         "skill_id": skill_id,
+        "delegate_to": delegate_to,
         "output": {
-            "message": f"Skill {skill_id} executed successfully (mock)",
+            "message": f"Skill {skill_id} executed successfully (mock, agent: {delegate_to or 'default'})",
             "params": params
         },
         "stats": {
@@ -274,13 +283,34 @@ def execute_stage(
         resolved_input["batch_id"] = batch_id
         resolved_input["batch_dir"] = str(create_batch_dir(batch_id, workflow_state_path))
 
+    # 读取 Stage 级配置
+    delegate_to = stage_config.get("delegate_to")  # Worker agent 类型
+    timeout = stage_config.get("timeout")  # Stage 超时时间
+    agent_required = stage_config.get("agent_required", False)  # 是否需要 LLM
+    log_extraction = stage_config.get("log_extraction")  # 内置日志提取配置
+
+    # 添加 log_extraction 到 input（传递给 Worker）
+    if log_extraction:
+        resolved_input["log_extraction"] = log_extraction
+
+    # 添加 agent_required 标记
+    if agent_required:
+        resolved_input["agent_required"] = agent_required
+
     # 调用 Worker
-    result = delegate_task(skill_id, params, resolved_input)
+    result = delegate_task(
+        skill_id,
+        params,
+        resolved_input,
+        delegate_to=delegate_to,
+        timeout=timeout
+    )
 
     return {
         "status": result.get("status", "unknown"),
         "stage_id": stage_id,
         "skill_id": skill_id,
+        "delegate_to": delegate_to,
         "output": result.get("output", {}),
         "stats": result.get("stats", {}),
         "next_action": result.get("next_action", "continue"),

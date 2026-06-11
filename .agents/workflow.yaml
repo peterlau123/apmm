@@ -1,8 +1,8 @@
 # workflow.yaml - UT Test Workflow Configuration
 # Hierarchical Agent Architecture: Supervisor + Worker + Kanban
-# Version: 2.1
+# Version: 2.2
 # Created: 2026-06-10
-# Updated: 2026-06-10
+# Updated: 2026-06-11
 
 workflow:
   name: UT Test Workflow
@@ -129,16 +129,32 @@ stages:
       lane_type: running
 
   # Stage 3: execute（循环）
+  # v2.2: 日志提取和解析已内置为 stage 核心行为
   - id: execute
     delegate_to: claude-code
     skill: unit-test-executor
     loop: true
-    description: 执行pytest测试
+    description: |
+      执行pytest测试并生成batch_results.json
+      内置步骤:
+      1. 启动 pytest 执行
+      2. 从远程 ut_logs grep 提取 PASSED/FAILED/ERROR 行
+      3. 调用 parse_remote_log.py 解析并生成 batch_results.json
     input:
       batch_config_path: *batch_config_path
       pytest_args: "-q --tb=long"
+      # 远程执行配置（内置日志提取使用）
+      remote_server: "t_h20"
+      docker_container: "v0.13.0_torch2.5.1_compile"
+      ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
     output:
       batch_results_path: *batch_results_path
+    # 内置日志提取配置
+    log_extraction:
+      enabled: true
+      grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
+      grep_timeout: 60
+      parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
     timeout: 3600
     kanban:
       action: update_lane

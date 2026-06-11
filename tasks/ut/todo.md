@@ -188,6 +188,40 @@
 
 ---
 
+## 2026-06-11: 日志解析与传输设计
+
+### TODO
+
+- [x] **日志解析设计文档** - P1 ✅ 2026-06-11 已完成
+  - 背景: run_batch.py 只启动 pytest，不解析结果，Stage 3 → Stage 4 数据流断裂
+  - 设计文档: [2026-06-11-log-parse-and-transfer-design.md](../../docs/superpowers/specs/2026-06-11-log-parse-and-transfer-design.md)
+  - 核心: 远程 grep → bastion 传回 → 本地 parse_remote_log.py → batch_results.json
+  - 依赖: 无
+
+- [x] **创建 parse_remote_log.py** - P1 ✅ 2026-06-11 已完成
+  - 位置: `skills/ut/unit-test-executor/scripts/parse_remote_log.py`
+  - 功能: 解析 grep 输出，生成符合 batch_results_schema.json 的 JSON
+  - 复用: batch_test_runner.py 的 parse_batch_log(), categorize_error_type()
+  - 测试: ✅ 通过
+
+- [x] **调查 bastion 传输限制** - P1 ✅ 2026-06-11 已完成
+  - 文档: docs/guides/bastion.md, tools/agent.py
+  - 结果: recv buffer 65KB, timeout 120s, 单批次传输安全
+
+- [x] **修改 run_batch.py 集成日志提取** - P1 ✅ 2026-06-11 已完成
+  - 新增 `--with-results`, `--extract-only` 选项
+  - 新增函数: extract_remote_log(), parse_batch_results(), run_batch_with_results()
+  - 测试: syntax OK
+
+---
+
+## Session 进度追踪
+
+- Session 进度文件: [session_progress_2026-06-11.md](session_progress_2026-06-11.md)
+- 累计成本: $54.18（高）
+
+---
+
 ## 模板
 
 ```markdown

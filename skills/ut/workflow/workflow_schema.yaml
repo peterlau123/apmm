@@ -1,0 +1,436 @@
+# workflow_schema.yaml - UT Workflow YAML 配置文件格式定义
+# Version: 2.0
+# 用于校验 .agents/workflow.yaml 文件
+
+$schema: http://json-schema.org/draft-07/schema#
+title: UT Workflow YAML Schema
+description: UT Workflow 配置文件格式 - workflow.yaml
+type: object
+required:
+  - workflow
+  - config
+  - stages
+  - loop
+
+properties:
+  workflow:
+    type: object
+    description: Workflow 元信息
+    required:
+      - name
+      - version
+      - test_name
+    properties:
+      name:
+        type: string
+        description: Workflow名称
+      version:
+        type: string
+        description: Workflow版本
+        pattern: "^2\\.[0-9]+$"
+      description:
+        type: string
+        description: Workflow描述
+      test_name:
+        type: string
+        description: 测试名称标识，用于生成运行目录
+
+  config:
+    type: object
+    description: 路径和执行配置
+    required:
+      - workspace
+      - runs_dir
+    properties:
+      workspace:
+        type: string
+        description: 工作目录路径
+      runs_dir:
+        type: string
+        description: 运行目录根目录
+      run_dir:
+        type:
+          - string
+          - "null"
+        description: 动态运行目录（启动时生成）
+      test_list_source:
+        type:
+          - string
+          - "null"
+        description: 用户指定的test_list.txt原始路径
+      manifest_schema_path:
+        type: string
+        description: manifest schema文件路径
+      test_list_path:
+        type: string
+        description: test_list.txt路径模板
+      manifest_path:
+        type: string
+        description: manifest.json路径模板
+      workflow_state_path:
+        type: string
+        description: workflow_state.json路径模板
+      logs_dir:
+        type: string
+        description: 日志目录路径模板
+      reports_dir:
+        type: string
+        description: 报告目录路径模板
+      batches_dir:
+        type: string
+        description: 批次目录根路径模板
+      batch_dir_template:
+        type: string
+        description: 单批次目录模板
+      batch_config_path:
+        type: string
+        description: batch_config.json路径模板
+      batch_results_path:
+        type: string
+        description: batch_results.json路径模板
+      handled_tests_path:
+        type: string
+        description: handled_tests.json路径模板
+      batch_logs_dir:
+        type: string
+        description: 批次日志目录路径模板
+      remote_server:
+        type: string
+        description: 远程执行服务器名称
+      docker_container:
+        type: string
+        description: Docker容器名称
+      vllm_dir:
+        type: string
+        description: vLLM源码目录（远程）
+      ut_logs_dir:
+        type: string
+        description: UT日志目录（远程）
+      pytest_args:
+        type: string
+        description: pytest参数偏好
+      batch_size:
+        type: integer
+        description: 批次大小
+        minimum: 1
+        maximum: 100
+
+  stages:
+    type: array
+    description: 5个执行阶段定义
+    minItems: 5
+    maxItems: 5
+    items:
+      type: object
+      required:
+        - id
+        - delegate_to
+        - skill
+        - loop
+        - description
+        - input
+        - output
+      properties:
+        id:
+          type: string
+          description: Stage唯一标识
+          enum:
+            - collect
+            - select_batch
+            - execute
+            - handle_failures
+            - update_status
+          _enum_comments:
+            collect: "Stage 1: 收集测试列表"
+            select_batch: "Stage 2: 选择批次"
+            execute: "Stage 3: 执行测试"
+            handle_failures: "Stage 4: 处理失败"
+            update_status: "Stage 5: 更新状态"
+        delegate_to:
+          type: string
+          description: 执行Agent类型
+          enum:
+            - claude-code
+            - opencode
+            - codex
+            - self
+          _enum_comments:
+            claude-code: "Claude Code CLI Agent（Anthropic）"
+            opencode: "OpenCode Agent（OpenAI）"
+            codex: "Codex Agent（GitHub）"
+            self: "当前Agent自己执行，不委托给其他Agent"
+        skill:
+          type: string
+          description: 执行的skill名称
+        loop:
+          type: boolean
+          description: 是否在循环中执行
+        description:
+          type: string
+          description: Stage描述
+        input:
+          type: object
+          description: 输入参数
+        output:
+          type: object
+          description: 输出参数
+        timeout:
+          type: integer
+          description: 超时时间（秒）
+          minimum: 60
+        agent_required:
+          type: boolean
+          description: 是否需要Agent处理
+        kanban:
+          type: object
+          description: Kanban操作配置
+          properties:
+            action:
+              type: string
+              description: Kanban操作类型
+              enum:
+                - create_board
+                - create_lane
+                - update_lane
+                - move_lane
+              _enum_comments:
+                create_board: "创建Kanban看板"
+                create_lane: "创建泳道（批次执行时）"
+                update_lane: "更新泳道进度"
+                move_lane: "移动泳道到目标状态"
+            board_name:
+              type: string
+              description: 看板名称
+            lane_name_template:
+              type: string
+              description: 泳道名称模板
+            lane_type:
+              type: string
+              description: 泳道类型
+            progress_template:
+              type: string
+              description: 进度显示模板
+            target_lane_template:
+              type: string
+              description: 目标泳道模板
+            summary_template:
+              type: string
+              description: 汇总信息模板
+
+  loop:
+    type: object
+    description: 循环配置
+    required:
+      - stages
+      - stop_condition
+      - max_iterations
+    properties:
+      stages:
+        type: array
+        description: 循环执行的Stage列表
+        items:
+          type: string
+          enum:
+            - select_batch
+            - execute
+            - handle_failures
+            - update_status
+      stop_condition:
+        type: string
+        description: 停止条件表达式
+      max_iterations:
+        type: integer
+        description: 最大迭代次数
+        minimum: 1
+        maximum: 10000
+      break_conditions:
+        type: array
+        description: 中断条件列表
+        items:
+          type: object
+          required:
+            - condition
+            - action
+          properties:
+            condition:
+              type: string
+              description: 条件表达式
+            action:
+              type: string
+              description: 触发动作
+              enum:
+                - pause
+                - stop
+              _enum_comments:
+                pause: "暂停Workflow，发送通知"
+                stop: "停止Workflow，不再继续"
+            notify:
+              type: boolean
+              description: 是否发送通知
+            kanban_note:
+              type: string
+              description: Kanban备注信息
+
+  kanban:
+    type: object
+    description: Hermes Kanban配置
+    properties:
+      enabled:
+        type: boolean
+        description: 是否启用Kanban
+      board:
+        type: object
+        description: 看板配置
+        properties:
+          name:
+            type: string
+            description: 看板名称
+          description:
+            type: string
+            description: 看板描述
+          lanes:
+            type: array
+            description: 泳道配置列表
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 泳道名称
+                description:
+                  type: string
+                  description: 泳道描述
+                status_mapping:
+                  type: string
+                  description: 状态映射
+                  enum:
+                    - pending
+                    - running
+                    - passed
+                    - failed
+                    - error
+                    - ignored
+                  _enum_comments:
+                    pending: "待执行"
+                    running: "正在执行"
+                    passed: "测试通过"
+                    failed: "断言失败（AssertionError）"
+                    error: "执行错误（Collection/Import/Download）"
+                    ignored: "已忽略（不执行）"
+                color:
+                  type: string
+                  description: 泳道颜色
+                special:
+                  type: boolean
+                  description: 是否为特殊泳道
+          cards:
+            type: object
+            description: 卡片配置
+          workflow_card:
+            type: object
+            description: Workflow卡片配置
+      sync:
+        type: object
+        description: 同步配置
+        properties:
+          triggers:
+            type: array
+            description: 同步触发条件
+          content:
+            type: array
+            description: 同步内容
+
+  worker_output_schema:
+    type: object
+    description: Worker返回格式规范
+    properties:
+      stats:
+        type: object
+        description: 统计数据
+        properties:
+          passed:
+            type: string
+            description: 通过数类型（integer）
+          failed:
+            type: string
+            description: 失败数类型（integer）
+          error:
+            type: string
+            description: 错误数类型（integer）
+          ignored:
+            type: string
+            description: 忽略数类型（integer）
+          pending:
+            type: string
+            description: 待执行数类型（integer）
+      next_action:
+        type: string
+        description: 下一步动作类型（string）
+      error:
+        type: string
+        description: 错误信息类型（string_or_null）
+      blocked_reason:
+        type: string
+        description: 阻塞原因类型（string_or_null）
+
+  notifications:
+    type: object
+    description: 飞书通知配置
+    properties:
+      feishu_chat_id:
+        type: string
+        description: 飞书群聊ID
+      notify_on:
+        type: array
+        description: 通知触发条件列表
+        items:
+          type: object
+          properties:
+            condition:
+              type: string
+              description: 触发条件
+            template:
+              type: string
+              description: 通知消息模板
+            include_kanban_link:
+              type: boolean
+              description: 是否包含Kanban链接
+            include_kanban_snapshot:
+              type: boolean
+              description: 是否包含Kanban快照
+            trigger:
+              type: string
+              description: 触发表达式
+
+  execution:
+    type: object
+    description: 执行配置
+    properties:
+      supervisor:
+        type: object
+        description: Supervisor配置
+        properties:
+          max_context_tokens:
+            type: integer
+            description: 最大上下文tokens
+          reload_state_interval:
+            type: integer
+            description: 状态刷新间隔
+          cleanup_history:
+            type: boolean
+            description: 是否清理历史
+      worker:
+        type: object
+        description: Worker配置
+        properties:
+          timeout_per_stage:
+            type: integer
+            description: 每Stage超时时间（秒）
+          max_retries:
+            type: integer
+            description: 最大重试次数
+          delegate_task_toolsets:
+            type: array
+            description: delegate_task工具集
+            items:
+              type: string

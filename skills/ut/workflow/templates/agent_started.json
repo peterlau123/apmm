@@ -1,0 +1,12 @@
+{
+  "type": "agent_started",
+  "priority": "P2",
+  "agent_id": "supervisor",
+  "timestamp": "{{timestamp}}",
+  "source": "supervisor_loop",
+  "data": {
+    "pid": "{{pid}}",
+    "status": "monitoring",
+    10|    "agents_monitored": ["bastion", "unit-test-executor", "environment"]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "agents": {
+    "workflow": {
+      "agent_id": "workflow",
+      "agent_type": "hermes",
+      "enabled": true,
+      "status_file": ".agents/workflow/status.json",
+      "messages_file": ".agents/workflow/messages.jsonl",
+      "inbox_file": ".agents/workflow/inbox.jsonl",
+      "heartbeat_file": ".agents/workflow/heartbeat.json",
+      "spec_file": "docs/superpowers/specs.agents/workflow-agent/README.md",
+      "skill_file": null,
+      "terminal_timeout": 300,
+      "message_poll_interval": 10,
+      "heartbeat_interval": 60
+    }
+  },
+  "workflow": {
+    "enabled": true,
+    "config_file": ".agents/workflow.yaml",
+    "state_file": ".agents/workflow_state.json"
+  },
+  "feishu": {
+    "enabled": true,
+    "config_file": ".agents/feishu_config.json"
+  },
+  "daemon": {
+    "script_dir": ".agents/daemon",
+    "check_interval": 30,
+    "heartbeat_check_interval": 60
+  }
+}

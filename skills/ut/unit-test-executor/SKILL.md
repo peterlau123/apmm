@@ -375,7 +375,7 @@ return {
 ## 相关文档
 
 - [workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置
-- [supervisor/SKILL.md](../supervisor/SKILL.md) - Supervisor 调度逻辑
+- [workflow/SKILL.md](../workflow/SKILL.md) - Supervisor 调度逻辑
 - [batch-selector/SKILL.md](../batch-selector/SKILL.md) - 上游 Stage（已移除 GPU 检测）
 - [failure-handler/SKILL.md](../failure-handler/SKILL.md) - 下游 Stage
 - [parse_remote_log.py](scripts/parse_remote_log.py) - **新增**: 远程日志解析脚本

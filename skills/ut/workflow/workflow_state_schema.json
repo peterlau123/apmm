@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Workflow State Schema",
+  "description": "Workflow 状态跟踪文件格式 - workflow_state.json",
+  "version": "2.0",
+  "type": "object",
+  "required": ["workflow", "current_stage", "iteration", "paths", "stats", "current_batch", "flags", "last_update"],
+  "properties": {
+    "workflow": {
+      "type": "object",
+      "description": "Workflow 元信息",
+      "required": ["name", "version", "test_name", "started_at", "status"],
+      "properties": {
+        "name": {"type": "string", "description": "Workflow名称"},
+        "version": {"type": "string", "description": "Workflow版本"},
+        "test_name": {"type": "string", "description": "测试名称标识"},
+        "started_at": {"type": "string", "format": "date-time", "description": "启动时间"},
+        "status": {
+          "type": "string",
+          "description": "Workflow状态",
+          "enum": ["initialized", "running", "paused", "completed", "error"],
+          "_enum_comments": {
+            "initialized": "已初始化，等待执行",
+            "running": "正在执行",
+            "paused": "已暂停，等待人工介入",
+            "completed": "已完成",
+            "error": "发生错误，停止执行"
+          }
+        }
+      }
+    },
+    "current_stage": {
+      "type": "string",
+      "description": "当前执行阶段",
+      "enum": ["collect", "select_batch", "execute", "handle_failure", "update_status"],
+      "_enum_comments": {
+        "collect": "Stage 1: 收集测试列表",
+        "select_batch": "Stage 2: 选择批次",
+        "execute": "Stage 3: 执行测试",
+        "handle_failure": "Stage 4: 处理失败",
+        "update_status": "Stage 5: 更新状态"
+      }
+    },
+    "iteration": {
+      "type": "integer",
+      "description": "循环迭代次数",
+      "minimum": 0
+    },
+    "paths": {
+      "type": "object",
+      "description": "关键文件路径",
+      "required": ["run_dir", "workflow_yaml", "manifest", "batches_dir", "workflow_state"],
+      "properties": {
+        "run_dir": {"type": "string", "description": "运行目录"},
+        "workflow_yaml": {"type": "string", "description": "workflow.yaml路径"},
+        "manifest": {"type": "string", "description": "manifest.json路径"},
+        "test_list": {"type": ["string", "null"], "description": "test_list.txt路径"},
+        "manifest_schema": {"type": "string", "description": "manifest schema路径"},
+        "batches_dir": {"type": "string", "description": "批次目录"},
+        "logs_dir": {"type": "string", "description": "日志目录"},
+        "reports_dir": {"type": "string", "description": "报告目录"},
+        "workflow_state": {"type": "string", "description": "workflow_state.json路径"}
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "全局测试统计",
+      "required": ["total_tests", "passed", "failed", "error", "ignored", "pending"],
+      "properties": {
+        "total_tests": {"type": "integer", "minimum": 0, "description": "总测试数"},
+        "passed": {"type": "integer", "minimum": 0, "description": "通过数"},
+        "failed": {"type": "integer", "minimum": 0, "description": "失败数"},
+        "error": {"type": "integer", "minimum": 0, "description": "错误数"},
+        "ignored": {"type": "integer", "minimum": 0, "description": "忽略数"},
+        "pending": {"type": "integer", "minimum": 0, "description": "待执行数"},
+        "error_rate": {"type": "number", "minimum": 0, "maximum": 1, "description": "错误率"}
+      }
+    },
+    "current_batch": {
+      "type": "object",
+      "description": "当前批次信息",
+      "properties": {
+        "batch_id": {"type": ["string", "null"], "description": "批次ID"},
+        "size": {"type": "integer", "minimum": 0, "description": "批次大小"},
+        "started_at": {"type": ["string", "null"], "format": "date-time", "description": "批次开始时间"}
+      }
+    },
+    "flags": {
+      "type": "object",
+      "description": "控制标志",
+      "properties": {
+        "stop_requested": {"type": "boolean", "description": "请求停止"},
+        "pause_requested": {"type": "boolean", "description": "请求暂停"},
+        "pause_reason": {"type": ["string", "null"], "description": "暂停原因"},
+        "consecutive_failures": {"type": "integer", "minimum": 0, "description": "连续失败次数"}
+      }
+    },
+    "last_update": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最后更新时间"
+    },
+    "last_worker_result": {
+      "type": "object",
+      "description": "最后一次 Worker 返回结果",
+      "properties": {
+        "stats": {
+          "type": "object",
+          "description": "Worker返回统计",
+          "properties": {
+            "passed": {"type": "integer", "description": "通过数"},
+            "failed": {"type": "integer", "description": "失败数"},
+            "error": {"type": "integer", "description": "错误数"},
+            "ignored": {"type": "integer", "description": "忽略数"},
+            "pending": {"type": "integer", "description": "待执行数"}
+          }
+        },
+        "next_action": {
+          "type": "string",
+          "description": "Worker下一步动作",
+          "enum": ["continue", "pause", "stop", "wait"],
+          "_enum_comments": {
+            "continue": "继续执行下一Stage",
+            "pause": "暂停Workflow，等待人工介入",
+            "stop": "停止Workflow，不再继续",
+            "wait": "等待资源释放后继续"
+          }
+        },
+        "error": {"type": ["string", "null"], "description": "Worker错误信息"},
+        "blocked_reason": {"type": ["string", "null"], "description": "阻塞原因"}
+      }
+    }
+  }
+}

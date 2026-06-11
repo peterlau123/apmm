@@ -1,39 +1,122 @@
 ---
 name: ut-workflow
-description: UT Workflow - vLLM单元测试验证流程，用户说"加载 ut/workflow skill"即可启动完整测试流程
-version: 3.0.0
-when_to_use: 用户需要执行 vLLM 单元测试验证流程（启动、初始化、执行、监控）
+description: UT Workflow - vLLM单元测试验证流程，加载skill自动启动完整测试流程
+version: 4.0.0
+when_to_use: 用户需要执行 vLLM 单元测试验证流程（自动执行）
 ---
 
-# UT Workflow Skill (v3.0)
+# UT Workflow Skill (v4.0)
 
 ---
 
-## 🚀 启动 Workflow
+## 🚀 自主执行流程
 
-用户说"加载 ut/workflow skill"时，按以下步骤启动：
+### 触发方式
 
-### 前置条件
-
-- Bastion 已连接：`agent.py serve t_h20`
-- test_list.txt 或 manifest.json 已准备
-
-### 启动命令
-
-```bash
-# 1. 初始化（首次运行或重置）
-python skills/ut/workflow/scripts/init_workflow_state.py --test-list PATH
-
-# 2. 单次迭代（测试/调试）
-python skills/ut/workflow/scripts/supervisor_loop.py --single-iteration
-
-# 3. 持续运行（生产）
-python skills/ut/workflow/scripts/supervisor_loop.py
+用户加载skill：
+```
+加载 ut/workflow skill
 ```
 
-### Workflow 配置
+skill自动执行以下流程：
 
-配置文件：`.agents/workflow.yaml`
+---
+
+### 执行步骤
+
+**Step 1: 提示用户指定workflow.yaml**
+
+skill加载后，立即提示：
+> "UT Workflow已加载。请指定workflow.yaml路径（或使用默认路径：.agents/workflow.yaml）"
+
+等待用户提供路径或确认默认。
+
+---
+
+**Step 2: 检查前置条件**
+
+自动检查：
+1. Bastion连接状态（agent.py serve t_h20）
+2. workflow.yaml文件存在
+3. test_list文件存在（根据配置）
+
+如果前置条件不满足：
+- Bastion未连接 → 提示用户启动：`python agent.py serve t_h20`
+- 文件不存在 → 提示用户准备相应文件
+
+---
+
+**Step 3: 初始化workflow_state.json**
+
+调用初始化脚本：
+```bash
+python skills/ut/workflow/scripts/init_workflow_state.py \
+  --workflow-yaml WORKFLOW_YAML_PATH \
+  --test-list TEST_LIST_PATH
+```
+
+生成运行目录和初始状态文件。
+
+---
+
+**Step 4: 执行workflow循环**
+
+调用supervisor循环：
+```bash
+python skills/ut/workflow/scripts/supervisor_loop.py \
+  --workflow-yaml WORKFLOW_YAML_PATH \
+  --workflow-state WORKFLOW_STATE_PATH
+```
+
+自动执行5个Stage循环，直到pending_count == 0。
+
+---
+
+**Step 5: 验证结果并生成报告**
+
+执行完成后，调用验证脚本：
+```bash
+python tasks/ut/workflow_tests/verify_workflow_test.py \
+  --run-dir RUN_DIR \
+  --test-list TEST_LIST_NAME
+```
+
+生成验证报告，显示通过/失败状态。
+
+---
+
+**Step 6: 完成通知**
+
+通知用户：
+> "UT Workflow执行完成。验证报告已生成：{run_dir}/verification_report.json"
+
+---
+
+### 执行流程图
+
+```mermaid
+flowchart TD
+    A[加载skill] --> B[提示指定workflow.yaml]
+    B --> C[检查前置条件]
+    C -->|不满足| D[提示用户准备]
+    C -->|满足| E[初始化workflow_state]
+    E --> F[执行workflow循环]
+    F --> G[验证结果]
+    G --> H[生成报告]
+    H --> I[完成通知]
+```
+
+---
+
+### 错误处理
+
+| 错误类型 | 处理方式 |
+|---------|---------|
+| Bastion未连接 | 提示用户启动agent.py serve |
+| workflow.yaml不存在 | 提示用户检查路径 |
+| test_list不存在 | 提示用户准备文件或检查配置 |
+| workflow执行失败 | 生成失败报告，提示检查日志 |
+| 验证失败 | 显示失败详情，建议检查 |
 
 ---
 
@@ -551,21 +634,13 @@ state["stats"] = manifest.get("statistics", {...})
 
 ---
 
-## 启动方式
+## 用户配置提醒
 
-```bash
-# 方式1：脚本启动
-python skills/ut/workflow/scripts/supervisor_loop.py
-
-# 方式2：Hermes Session 中
-"你是Supervisor Agent，开始执行UT Workflow"
-
-# 初始化状态文件
-python skills/ut/workflow/scripts/init_workflow_state.py
-
-# 检查状态
-python skills/ut/workflow/scripts/check_all_agents.py
-```
+**用户需先配置workflow.yaml再加载skill**：
+1. 阅读 tasks/ut/README.md 了解概念
+2. 填写 workflow.yaml（test_list_path等）
+3. 加载 ut/workflow skill
+4. 指定workflow.yaml路径
 
 ---
 

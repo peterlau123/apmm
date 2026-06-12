@@ -251,81 +251,39 @@ loop:
 #       进度可视化通过飞书卡片完成（见 notifications 节）。
 #       kanban_manager.py 代码保留，可独立 CLI 使用。
 # ============================================================
+# ============================================================
+# Kanban - Hermes Kanban 配置（方案 A-1）
+# ============================================================
 kanban:
-  enabled: false
+  enabled: false  # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
 
+  # Board 配置
   board:
-    name: "UT Test Progress"
-    description: "vLLM M2.7 单元测试进度追踪"
+    name: "apmm-ut"
+    slug: "apmm-ut"
 
-    lanes:
-      - name: Backlog
-        description: "待执行的测试"
-        status_mapping: pending
+  # Worker Profile 配置
+  profiles:
+    orchestrator: "ut-orchestrator"
+    executor: "ut-executor"
+    fixer: "ut-fixer"
 
-      - name: Running
-        description: "正在执行的batch"
-        status_mapping: running
-        color: blue
+  # Gateway 启动配置
+  gateway:
+    auto_start: true           # Agent 自动启动 gateway
+    check_interval: 60         # 调度检查间隔（秒）
+    startup_timeout: 30        # gateway 启动超时（秒）
 
-      - name: Passed
-        description: "通过的batch"
-        status_mapping: passed
-        color: green
+  # 熔断器配置
+  circuit_breaker:
+    failure_limit: 3           # 连续失败 N 次后自动 block
+    error_rate_threshold: 0.8  # 错误率阈值
 
-      - name: Failed
-        description: "失败的batch"
-        status_mapping: failed
-        color: red
-
-      - name: Ignored
-        description: "跳过的测试"
-        status_mapping: ignored
-        color: gray
-
-      - name: Workflow Status
-        description: "Workflow整体状态"
-        special: true
-
-    cards:
-      test_cards:
-        enabled: false
-
-      batch_lanes:
-        enabled: true
-        template:
-          title: "Batch {batch_id}"
-          description: "{batch_size} tests"
-          tags:
-            - batch
-
-      workflow_card:
-        enabled: true
-        title: "UT Workflow Progress"
-        lane: Workflow Status
-        update_on:
-          - iteration_complete
-          - milestone
-        progress_template: "{passed}/{total} ({progress_rate}%)"
-
-  sync:
-    triggers:
-      - stage: update_status
-      - condition: "iteration % 10 == 0"
-      - condition: "stats.passed % 100 == 0"
-
-    content:
-      - stats:
-          - passed
-          - failed
-          - ignored
-          - pending
-      - current_batch:
-          - batch_id
-          - status
-      - workflow:
-          - iteration
-          - error_rate
+  # 任务创建配置
+  task_creation:
+    initial_assignee: "ut-orchestrator"
+    priority: 1
+    body_template: "Orchestrate UT run for {test_list_path}"
 
 # ============================================================
 # Worker Output Schema - Worker返回格式规范（统一）

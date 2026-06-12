@@ -1,13 +1,13 @@
 ---
 name: ut-workflow
 description: UT Workflow - vLLM单元测试验证流程，加载skill自动启动完整测试流程
-version: 5.1.0
+version: 5.2.0
 when_to_use: 用户需要执行 vLLM 单元测试验证流程（自动执行）
 ---
 
-# UT Workflow Skill (v5.1)
+# UT Workflow Skill (v5.2)
 
-> **v5.1 更新**: 断点续跑 + 容器环境预设 + 远程执行标准化（base64） + 路径转义修复 + 飞书通知优化。
+> **v5.2 更新**: Kanban 集成 - 根据 workflow.yaml kanban.enabled 决定执行模式（线性/Kanban）。
 
 ---
 
@@ -17,12 +17,16 @@ when_to_use: 用户需要执行 vLLM 单元测试验证流程（自动执行）
 
 ```
 用户: 加载 ut/workflow skill
-Agent: UT Workflow v5.1 已加载。
+Agent: UT Workflow v5.2 已加载。
        请提供以下信息：
-       1. test_list 路径（或 manifest.json 路径）
+       1. workflow.yaml 是否已准备好？（test_list、batch_size 等参数已填写）
        2. workflow.yaml 路径（默认: .agents/workflow.yaml）
        3. 是否断点续跑？（提供 run_dir 路径，或留空新建）
 ```
+
+Agent 检查 workflow.yaml 中 `kanban.enabled`：
+- **false** → 执行线性 workflow（现有流程）
+- **true** → 执行 Kanban workflow（新流程，见下方）
 
 ---
 

@@ -156,15 +156,14 @@ flowchart TD
 
 ```python
 import json
-import yaml
 from pathlib import Path
 
-# 从 workflow.yaml 读取路径配置（不硬编码）
-workflow_config = yaml.safe_load(Path(".agents/workflow.yaml").read_text())
-paths = workflow_config["config"]
+# 从 workflow_state.json 读取路径配置（不硬编码）
+from shared.config_loader import get_paths
+paths = get_paths(workflow_state_path)
 
 # 读取 batch_results
-batch_results_path = paths["batch_results_path"]
+batch_results_path = paths["batch_results"]
 batch_results = json.loads(Path(batch_results_path).read_text())
 
 failed_tests = [t for t in batch_results["tests"] if t["status"] in ["failed", "error"]]
@@ -377,7 +376,7 @@ handled_tests = {
 }
 
 # 写入 handled_tests.json（路径从 workflow.yaml 读取）
-handled_tests_path = paths["handled_tests_path"]
+handled_tests_path = paths["handled_tests"]
 Path(handled_tests_path).write_text(json.dumps(handled_tests, indent=2))
 ```
 

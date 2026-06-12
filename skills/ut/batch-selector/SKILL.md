@@ -95,15 +95,14 @@ flowchart TB
 
 ```python
 import json
-import yaml
 from pathlib import Path
 
-# 从 workflow.yaml 读取路径配置（不硬编码）
-workflow_config = yaml.safe_load(Path(".agents/workflow.yaml").read_text())
-paths = workflow_config["config"]
+# 从 workflow_state.json 读取路径配置（不硬编码）
+from shared.config_loader import get_paths
+paths = get_paths(workflow_state_path)
 
 # 读取 manifest
-manifest_path = paths["manifest_path"]
+manifest_path = paths["manifest"]
 manifest = json.loads(Path(manifest_path).read_text())
 
 # 过滤 pending 测试
@@ -171,13 +170,11 @@ if distributed_tests:
 
 ```python
 # 写入 batch_config.json（路径从 workflow.yaml 读取）
-batch_config_path = paths["batch_config_path"]
+batch_config_path = paths["batch_config"]
 Path(batch_config_path).write_text(json.dumps(batch_config, indent=2))
 
-# Worker 返回给 Supervisor（统一格式）
+# Worker 返回给 Supervisor（统一格式，只含 stats）
 return {
-    "batch_id": batch_id,
-    "batch_config_path": batch_config_path,
     "stats": {
         "passed": 0,
         "failed": 0,

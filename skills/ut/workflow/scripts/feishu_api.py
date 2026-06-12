@@ -102,26 +102,23 @@ class FeishuAPI:
     def send_card(self, card_data):
         """发送交互卡片"""
         token = self.get_token()
-        
-        # 构造卡片结构
+
         card = {
-            "type": "interactive",
-            "card": {
-                "header": {
-                    "title": {"tag": "plain_text", "content": card_data.get("header", {}).get("title", "")},
-                    "template": card_data.get("header", {}).get("template", "blue")
-                },
-                "elements": [
-                    {"tag": "div", "text": {"tag": "lark_md", "content": card_data.get("content", "")}},
-                    {"tag": "hr"},
-                    {"tag": "note", "elements": [
-                        {"tag": "plain_text", "content": "Supervisor Agent"},
-                        {"tag": "plain_text", "content": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-                    ]}
-                ]
-            }
+            "config": {"wide_screen_mode": True},
+            "header": {
+                "title": {"tag": "plain_text", "content": card_data.get("header", {}).get("title", "")},
+                "template": card_data.get("header", {}).get("template", "blue")
+            },
+            "elements": [
+                {"tag": "div", "text": {"tag": "lark_md", "content": card_data.get("content", "")}},
+                {"tag": "hr"},
+                {"tag": "note", "elements": [
+                    {"tag": "plain_text", "content": "Supervisor Agent"},
+                    {"tag": "plain_text", "content": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+                ]}
+            ]
         }
-        
+
         response = requests.post(
             f"{BASE_URL}/im/v1/messages?receive_id_type=chat_id",
             headers={"Authorization": f"Bearer {token}"},
@@ -132,7 +129,7 @@ class FeishuAPI:
             },
             timeout=10
         )
-        
+
         result = response.json()
         if result.get("code") != 0:
             print(f"[WARN] Failed to send card: {result}")

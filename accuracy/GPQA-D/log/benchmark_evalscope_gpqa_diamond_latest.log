@@ -1,817 +1,0 @@
-2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Args: Task config is provided with CommandLine type.[0m
-2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Running with native backend[0m
-2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Dump task config to ./outputs/20260508_153714/configs/task_config.yaml[0m
-2026-05-08 15:37:14 - evalscope - [32mINFO[0m: {
-    "model": "MiniMax-M2.7",
-    "model_id": "MiniMax-M2.7",
-    "model_args": {},
-    "model_task": "text_generation",
-    "chat_template": null,
-    "datasets": [
-        "gpqa_diamond"
-    ],
-    "dataset_args": {
-        "gpqa_diamond": {
-            "name": "gpqa_diamond",
-            "dataset_id": "AI-ModelScope/gpqa_diamond",
-            "output_types": [
-                "generation"
-            ],
-            "subset_list": [
-                "default"
-            ],
-            "default_subset": "default",
-            "few_shot_num": 0,
-            "few_shot_random": false,
-            "train_split": null,
-            "eval_split": "train",
-            "prompt_template": "Answer the following multiple choice question. The last line of your response should be of the following format: 'ANSWER: [LETTER]' (without quotes) where [LETTER] is one of {letters}. Think step by step before answering.\n\n{question}\n\n{choices}",
-            "few_shot_prompt_template": null,
-            "system_prompt": null,
-            "query_template": null,
-            "pretty_name": "GPQA-Diamond",
-            "description": "\n## Overview\n\nGPQA (Graduate-Level Google-Proof Q&A) Diamond is a challenging benchmark of 198 multiple-choice questions written by domain experts in biology, physics, and chemistry. The questions are designed to be extremely difficult, requiring PhD-level expertise to answer correctly.\n\n## Task Description\n\n- **Task Type**: Expert-Level Multiple-Choice Q&A\n- **Input**: Graduate-level science question with 4 choices\n- **Output**: Single correct answer letter (A, B, C, or D)\n- **Domains**: Biology, Physics, Chemistry\n\n## Key Features\n\n- 198 questions written and validated by domain PhD experts\n- Questions are \"Google-proof\" - cannot be easily looked up\n- Designed to test deep domain knowledge and reasoning\n- Diamond subset represents the highest quality questions\n- Average human expert accuracy ~65%, non-expert ~34%\n\n## Evaluation Notes\n\n- Default configuration uses **0-shot** or **5-shot** evaluation\n- Supports Chain-of-Thought (CoT) prompting for improved reasoning\n- Answer choices are randomly shuffled during evaluation\n- Only uses train split (validation set is private)\n- Challenging benchmark for measuring expert-level reasoning\n",
-            "paper_url": null,
-            "data_statistics": null,
-            "sample_example": null,
-            "tags": [
-                "Knowledge",
-                "MCQ"
-            ],
-            "filters": null,
-            "metric_list": [
-                "acc"
-            ],
-            "aggregation": "mean",
-            "shuffle": false,
-            "shuffle_choices": false,
-            "force_redownload": false,
-            "review_timeout": null,
-            "extra_params": {},
-            "sandbox_config": {}
-        }
-    },
-    "dataset_dir": "/root/.cache/modelscope/datasets",
-    "dataset_hub": "modelscope",
-    "repeats": 1,
-    "generation_config": {
-        "timeout": 3600.0,
-        "batch_size": 32,
-        "stream": true
-    },
-    "eval_type": "openai_api",
-    "eval_backend": "Native",
-    "eval_config": null,
-    "limit": null,
-    "eval_batch_size": 32,
-    "use_cache": null,
-    "rerun_review": false,
-    "work_dir": "./outputs/20260508_153714",
-    "no_timestamp": false,
-    "enable_progress_tracker": false,
-    "ignore_errors": false,
-    "debug": false,
-    "seed": 42,
-    "api_url": "http://127.0.0.1:9527/v1/chat/completions",
-    "timeout": null,
-    "stream": null,
-    "judge_strategy": "auto",
-    "judge_worker_num": 1,
-    "judge_model_args": {},
-    "analysis_report": false,
-    "use_sandbox": false,
-    "sandbox_type": "docker",
-    "sandbox_manager_config": {},
-    "evalscope_version": "1.5.0"
-}[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]                                                           2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Start loading benchmark dataset: gpqa_diamond[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
-Processing records:   0%|          | 0/198 [00:00<?, ?it/s][AProcessing records: 100%|██████████| 198/198 [00:00<00:00, 78695.37it/s]
-                                                           2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Start evaluating 1 subsets of gpqa_diamond: ['default'][0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]                                                           2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Unified pool: 198 items to process, 0 already fully cached (198 total across all subsets).[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]                                                           2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Loading model for prediction...[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]                                                           2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Creating model MiniMax-M2.7 with eval_type=openai_api base_url=http://127.0.0.1:9527/v1/chat/completions, config={'timeout': 3600.0, 'retries': 5, 'retry_interval': 10, 'batch_size': 32, 'stream': True}, model_args={}[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:   0%|          | 0/198 [00:00<?, ?it/s][A                                                           
-                                                                 [A2026-05-08 15:37:14 - evalscope - [32mINFO[0m: Model loaded successfully.[0m
-Running[eval]:   0%|          | 0/1 [00:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:   0%|          | 0/198 [00:00<?, ?it/s][A
-Evaluating[gpqa_diamond]:   1%|          | 1/198 [00:46<2:31:11, 46.05s/it][A
-Evaluating[gpqa_diamond]:   1%|          | 1/198 [00:46<2:31:11, 46.05s/it][A                                                           
-                                                                           [A2026-05-08 15:38:14 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]   1%| 1/198 [Elapsed: 01:00 < Remaining: 2:31:11, 46.05s/it][0m
-Running[eval]:   0%|          | 0/1 [01:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:   1%|          | 1/198 [01:00<2:31:11, 46.05s/it][A
-Evaluating[gpqa_diamond]:   1%|          | 2/198 [01:04<1:36:33, 29.56s/it][A
-Evaluating[gpqa_diamond]:   1%|          | 2/198 [01:04<1:36:33, 29.56s/it][A
-Evaluating[gpqa_diamond]:   2%|▏         | 3/198 [01:06<55:10, 16.98s/it]  [A
-Evaluating[gpqa_diamond]:   2%|▏         | 3/198 [01:06<55:10, 16.98s/it][A
-Evaluating[gpqa_diamond]:   2%|▏         | 4/198 [01:09<37:03, 11.46s/it][A
-Evaluating[gpqa_diamond]:   2%|▏         | 4/198 [01:09<37:03, 11.46s/it][A
-Evaluating[gpqa_diamond]:   3%|▎         | 5/198 [01:11<25:53,  8.05s/it][A
-Evaluating[gpqa_diamond]:   3%|▎         | 5/198 [01:11<25:53,  8.05s/it][A
-Evaluating[gpqa_diamond]:   3%|▎         | 6/198 [01:13<19:10,  5.99s/it][A
-Evaluating[gpqa_diamond]:   3%|▎         | 6/198 [01:13<19:10,  5.99s/it][A
-Evaluating[gpqa_diamond]:   4%|▎         | 7/198 [01:17<17:00,  5.34s/it][A
-Evaluating[gpqa_diamond]:   4%|▎         | 7/198 [01:17<17:00,  5.34s/it][A
-Evaluating[gpqa_diamond]:   4%|▍         | 8/198 [01:20<14:33,  4.60s/it][A
-Evaluating[gpqa_diamond]:   4%|▍         | 8/198 [01:20<14:33,  4.60s/it][A
-Evaluating[gpqa_diamond]:   5%|▍         | 9/198 [01:25<14:52,  4.72s/it][A
-Evaluating[gpqa_diamond]:   5%|▍         | 9/198 [01:25<14:52,  4.72s/it][A
-Evaluating[gpqa_diamond]:   5%|▌         | 10/198 [01:37<21:51,  6.97s/it][A
-Evaluating[gpqa_diamond]:   5%|▌         | 10/198 [01:37<21:51,  6.97s/it][A
-Evaluating[gpqa_diamond]:   6%|▌         | 11/198 [01:42<19:51,  6.37s/it][A
-Evaluating[gpqa_diamond]:   6%|▌         | 11/198 [01:42<19:51,  6.37s/it][A
-Evaluating[gpqa_diamond]:   6%|▌         | 12/198 [01:56<27:05,  8.74s/it][A
-Evaluating[gpqa_diamond]:   6%|▌         | 12/198 [01:56<27:05,  8.74s/it][A                                                           
-                                                                          [A2026-05-08 15:39:14 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]   6%| 12/198 [Elapsed: 02:00 < Remaining: 27:05,  8.74s/it][0m
-Running[eval]:   0%|          | 0/1 [02:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:   6%|▌         | 12/198 [02:00<27:05,  8.74s/it][A
-Evaluating[gpqa_diamond]:   7%|▋         | 13/198 [02:13<34:40, 11.25s/it][A
-Evaluating[gpqa_diamond]:   7%|▋         | 13/198 [02:13<34:40, 11.25s/it][A
-Evaluating[gpqa_diamond]:   7%|▋         | 14/198 [02:13<34:29, 11.25s/it][A
-Evaluating[gpqa_diamond]:   8%|▊         | 15/198 [02:19<22:38,  7.42s/it][A
-Evaluating[gpqa_diamond]:   8%|▊         | 15/198 [02:19<22:38,  7.42s/it][A
-Evaluating[gpqa_diamond]:   8%|▊         | 16/198 [02:30<25:13,  8.32s/it][A
-Evaluating[gpqa_diamond]:   8%|▊         | 16/198 [02:30<25:13,  8.32s/it][A
-Evaluating[gpqa_diamond]:   9%|▊         | 17/198 [02:50<34:20, 11.38s/it][A
-Evaluating[gpqa_diamond]:   9%|▊         | 17/198 [02:50<34:20, 11.38s/it][A
-Evaluating[gpqa_diamond]:   9%|▉         | 18/198 [02:55<28:56,  9.64s/it][A
-Evaluating[gpqa_diamond]:   9%|▉         | 18/198 [02:55<28:56,  9.64s/it][A
-Evaluating[gpqa_diamond]:  10%|▉         | 19/198 [03:00<25:03,  8.40s/it][A                                                           
-                                                                          [A2026-05-08 15:40:15 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  10%| 19/198 [Elapsed: 03:00 < Remaining: 25:03,  8.40s/it][0m
-Running[eval]:   0%|          | 0/1 [03:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  10%|▉         | 19/198 [03:00<25:03,  8.40s/it][A
-Evaluating[gpqa_diamond]:  10%|▉         | 19/198 [03:00<25:03,  8.40s/it][A
-Evaluating[gpqa_diamond]:  10%|█         | 20/198 [03:22<36:27, 12.29s/it][A
-Evaluating[gpqa_diamond]:  10%|█         | 20/198 [03:22<36:27, 12.29s/it][A
-Evaluating[gpqa_diamond]:  11%|█         | 21/198 [03:30<32:35, 11.05s/it][A
-Evaluating[gpqa_diamond]:  11%|█         | 21/198 [03:30<32:35, 11.05s/it][A
-Evaluating[gpqa_diamond]:  11%|█         | 22/198 [03:31<23:46,  8.11s/it][A
-Evaluating[gpqa_diamond]:  11%|█         | 22/198 [03:31<23:46,  8.11s/it][A
-Evaluating[gpqa_diamond]:  12%|█▏        | 23/198 [03:54<36:28, 12.50s/it][A
-Evaluating[gpqa_diamond]:  12%|█▏        | 23/198 [03:54<36:28, 12.50s/it][A                                                           
-                                                                          [A2026-05-08 15:41:15 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  12%| 23/198 [Elapsed: 04:00 < Remaining: 36:28, 12.50s/it][0m
-Running[eval]:   0%|          | 0/1 [04:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  12%|█▏        | 23/198 [04:00<36:28, 12.50s/it][A
-Evaluating[gpqa_diamond]:  12%|█▏        | 24/198 [04:21<48:44, 16.81s/it][A
-Evaluating[gpqa_diamond]:  12%|█▏        | 24/198 [04:21<48:44, 16.81s/it][A
-Evaluating[gpqa_diamond]:  13%|█▎        | 25/198 [04:26<38:20, 13.30s/it][A
-Evaluating[gpqa_diamond]:  13%|█▎        | 25/198 [04:26<38:20, 13.30s/it][A
-Evaluating[gpqa_diamond]:  13%|█▎        | 26/198 [04:48<45:34, 15.90s/it][A
-Evaluating[gpqa_diamond]:  13%|█▎        | 26/198 [04:48<45:34, 15.90s/it][A
-Evaluating[gpqa_diamond]:  14%|█▎        | 27/198 [04:48<45:18, 15.90s/it][A                                                           
-                                                                          [A2026-05-08 15:42:15 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  14%| 27/198 [Elapsed: 05:00 < Remaining: 45:18, 15.90s/it][0m
-Running[eval]:   0%|          | 0/1 [05:00<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  14%|█▎        | 27/198 [05:00<45:18, 15.90s/it][A
-Evaluating[gpqa_diamond]:  14%|█▍        | 28/198 [05:22<46:22, 16.37s/it][A
-Evaluating[gpqa_diamond]:  14%|█▍        | 28/198 [05:22<46:22, 16.37s/it][A
-Evaluating[gpqa_diamond]:  15%|█▍        | 29/198 [05:29<39:35, 14.05s/it][A
-Evaluating[gpqa_diamond]:  15%|█▍        | 29/198 [05:29<39:35, 14.05s/it][A
-Evaluating[gpqa_diamond]:  15%|█▌        | 30/198 [05:47<42:14, 15.09s/it][A
-Evaluating[gpqa_diamond]:  15%|█▌        | 30/198 [05:47<42:14, 15.09s/it][A
-Evaluating[gpqa_diamond]:  16%|█▌        | 31/198 [05:54<35:52, 12.89s/it][A
-Evaluating[gpqa_diamond]:  16%|█▌        | 31/198 [05:54<35:52, 12.89s/it][A
-Evaluating[gpqa_diamond]:  16%|█▌        | 32/198 [05:55<26:28,  9.57s/it][A
-Evaluating[gpqa_diamond]:  16%|█▌        | 32/198 [05:55<26:28,  9.57s/it][A                                                           
-                                                                          [A2026-05-08 15:43:16 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  16%| 32/198 [Elapsed: 06:01 < Remaining: 26:28,  9.57s/it][0m
-Running[eval]:   0%|          | 0/1 [06:01<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  16%|█▌        | 32/198 [06:01<26:28,  9.57s/it][A
-Evaluating[gpqa_diamond]:  17%|█▋        | 33/198 [06:05<26:39,  9.69s/it][A
-Evaluating[gpqa_diamond]:  17%|█▋        | 33/198 [06:05<26:39,  9.69s/it][A
-Evaluating[gpqa_diamond]:  17%|█▋        | 34/198 [06:16<27:31, 10.07s/it][A
-Evaluating[gpqa_diamond]:  17%|█▋        | 34/198 [06:16<27:31, 10.07s/it][A
-Evaluating[gpqa_diamond]:  18%|█▊        | 35/198 [06:56<50:51, 18.72s/it][A
-Evaluating[gpqa_diamond]:  18%|█▊        | 35/198 [06:56<50:51, 18.72s/it][A                                                           
-                                                                          [A2026-05-08 15:44:16 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  18%| 35/198 [Elapsed: 07:02 < Remaining: 50:51, 18.72s/it][0m
-Running[eval]:   0%|          | 0/1 [07:02<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  18%|█▊        | 35/198 [07:02<50:51, 18.72s/it][A
-Evaluating[gpqa_diamond]:  18%|█▊        | 36/198 [07:04<42:00, 15.56s/it][A
-Evaluating[gpqa_diamond]:  18%|█▊        | 36/198 [07:04<42:00, 15.56s/it][A
-Evaluating[gpqa_diamond]:  19%|█▊        | 37/198 [07:37<55:58, 20.86s/it][A
-Evaluating[gpqa_diamond]:  19%|█▊        | 37/198 [07:37<55:58, 20.86s/it][A                                                           
-                                                                          [A2026-05-08 15:45:17 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  19%| 37/198 [Elapsed: 08:02 < Remaining: 55:58, 20.86s/it][0m
-Running[eval]:   0%|          | 0/1 [08:02<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  19%|█▊        | 37/198 [08:02<55:58, 20.86s/it][A
-Evaluating[gpqa_diamond]:  19%|█▉        | 38/198 [08:12<1:06:55, 25.09s/it][A
-Evaluating[gpqa_diamond]:  19%|█▉        | 38/198 [08:12<1:06:55, 25.09s/it][A
-Evaluating[gpqa_diamond]:  20%|█▉        | 39/198 [08:21<53:47, 20.30s/it]  [A
-Evaluating[gpqa_diamond]:  20%|█▉        | 39/198 [08:21<53:47, 20.30s/it][A                                                           
-                                                                          [A2026-05-08 15:46:17 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  20%| 39/198 [Elapsed: 09:03 < Remaining: 53:47, 20.30s/it][0m
-Running[eval]:   0%|          | 0/1 [09:03<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  20%|█▉        | 39/198 [09:03<53:47, 20.30s/it][A
-Evaluating[gpqa_diamond]:  20%|██        | 40/198 [09:07<1:13:22, 27.86s/it][A
-Evaluating[gpqa_diamond]:  20%|██        | 40/198 [09:07<1:13:22, 27.86s/it][A
-Evaluating[gpqa_diamond]:  21%|██        | 41/198 [09:10<53:26, 20.43s/it]  [A
-Evaluating[gpqa_diamond]:  21%|██        | 41/198 [09:10<53:26, 20.43s/it][A
-Evaluating[gpqa_diamond]:  21%|██        | 42/198 [09:13<39:33, 15.21s/it][A
-Evaluating[gpqa_diamond]:  21%|██        | 42/198 [09:13<39:33, 15.21s/it][A                                                           
-                                                                          [A2026-05-08 15:47:17 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  21%| 42/198 [Elapsed: 10:03 < Remaining: 39:33, 15.21s/it][0m
-Running[eval]:   0%|          | 0/1 [10:03<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  21%|██        | 42/198 [10:03<39:33, 15.21s/it][A
-Evaluating[gpqa_diamond]:  22%|██▏       | 43/198 [10:05<1:07:47, 26.24s/it][A
-Evaluating[gpqa_diamond]:  22%|██▏       | 43/198 [10:05<1:07:47, 26.24s/it][A
-Evaluating[gpqa_diamond]:  22%|██▏       | 44/198 [10:08<49:28, 19.28s/it]  [A
-Evaluating[gpqa_diamond]:  22%|██▏       | 44/198 [10:08<49:28, 19.28s/it][A
-Evaluating[gpqa_diamond]:  23%|██▎       | 45/198 [10:36<55:50, 21.90s/it][A
-Evaluating[gpqa_diamond]:  23%|██▎       | 45/198 [10:36<55:50, 21.90s/it][A
-Evaluating[gpqa_diamond]:  23%|██▎       | 46/198 [10:50<49:32, 19.55s/it][A
-Evaluating[gpqa_diamond]:  23%|██▎       | 46/198 [10:50<49:32, 19.55s/it][A
-Evaluating[gpqa_diamond]:  24%|██▎       | 47/198 [10:51<35:12, 13.99s/it][A
-Evaluating[gpqa_diamond]:  24%|██▎       | 47/198 [10:51<35:12, 13.99s/it][A
-Evaluating[gpqa_diamond]:  24%|██▍       | 48/198 [10:52<25:14, 10.09s/it][A
-Evaluating[gpqa_diamond]:  24%|██▍       | 48/198 [10:52<25:14, 10.09s/it][A
-Evaluating[gpqa_diamond]:  25%|██▍       | 49/198 [10:55<19:47,  7.97s/it][A
-Evaluating[gpqa_diamond]:  25%|██▍       | 49/198 [10:55<19:47,  7.97s/it][A
-Evaluating[gpqa_diamond]:  25%|██▌       | 50/198 [11:02<18:56,  7.68s/it][A
-Evaluating[gpqa_diamond]:  25%|██▌       | 50/198 [11:02<18:56,  7.68s/it][A                                                           
-                                                                          [A2026-05-08 15:48:18 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  25%| 50/198 [Elapsed: 11:03 < Remaining: 18:56,  7.68s/it][0m
-Running[eval]:   0%|          | 0/1 [11:03<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  25%|██▌       | 50/198 [11:03<18:56,  7.68s/it][A
-Evaluating[gpqa_diamond]:  26%|██▌       | 51/198 [11:46<45:31, 18.58s/it][A
-Evaluating[gpqa_diamond]:  26%|██▌       | 51/198 [11:46<45:31, 18.58s/it][A
-Evaluating[gpqa_diamond]:  26%|██▋       | 52/198 [11:49<33:50, 13.91s/it][A
-Evaluating[gpqa_diamond]:  26%|██▋       | 52/198 [11:49<33:50, 13.91s/it][A                                                           
-                                                                          [A2026-05-08 15:49:18 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  26%| 52/198 [Elapsed: 12:03 < Remaining: 33:50, 13.91s/it][0m
-Running[eval]:   0%|          | 0/1 [12:03<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  26%|██▋       | 52/198 [12:03<33:50, 13.91s/it][A
-Evaluating[gpqa_diamond]:  27%|██▋       | 53/198 [12:10<38:45, 16.04s/it][A
-Evaluating[gpqa_diamond]:  27%|██▋       | 53/198 [12:10<38:45, 16.04s/it][A
-Evaluating[gpqa_diamond]:  27%|██▋       | 54/198 [12:27<39:24, 16.42s/it][A
-Evaluating[gpqa_diamond]:  27%|██▋       | 54/198 [12:27<39:24, 16.42s/it][A
-Evaluating[gpqa_diamond]:  28%|██▊       | 55/198 [12:40<36:41, 15.40s/it][A
-Evaluating[gpqa_diamond]:  28%|██▊       | 55/198 [12:40<36:41, 15.40s/it][A
-Evaluating[gpqa_diamond]:  28%|██▊       | 56/198 [12:49<31:53, 13.48s/it][A
-Evaluating[gpqa_diamond]:  28%|██▊       | 56/198 [12:49<31:53, 13.48s/it][A                                                           
-                                                                          [A2026-05-08 15:50:18 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  28%| 56/198 [Elapsed: 13:03 < Remaining: 31:53, 13.48s/it][0m
-Running[eval]:   0%|          | 0/1 [13:04<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  28%|██▊       | 56/198 [13:03<31:53, 13.48s/it][A
-Evaluating[gpqa_diamond]:  29%|██▉       | 57/198 [13:10<36:59, 15.74s/it][A
-Evaluating[gpqa_diamond]:  29%|██▉       | 57/198 [13:10<36:59, 15.74s/it][A
-Evaluating[gpqa_diamond]:  29%|██▉       | 58/198 [13:56<57:55, 24.83s/it][A
-Evaluating[gpqa_diamond]:  29%|██▉       | 58/198 [13:56<57:55, 24.83s/it][A                                                           
-                                                                          [A2026-05-08 15:51:18 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  29%| 58/198 [Elapsed: 14:03 < Remaining: 57:55, 24.83s/it][0m
-Running[eval]:   0%|          | 0/1 [14:04<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  29%|██▉       | 58/198 [14:03<57:55, 24.83s/it][A
-Evaluating[gpqa_diamond]:  30%|██▉       | 59/198 [14:05<46:31, 20.08s/it][A
-Evaluating[gpqa_diamond]:  30%|██▉       | 59/198 [14:05<46:31, 20.08s/it][A
-Evaluating[gpqa_diamond]:  30%|███       | 60/198 [14:25<46:02, 20.02s/it][A
-Evaluating[gpqa_diamond]:  30%|███       | 60/198 [14:25<46:02, 20.02s/it][A
-Evaluating[gpqa_diamond]:  31%|███       | 61/198 [14:31<36:06, 15.81s/it][A
-Evaluating[gpqa_diamond]:  31%|███       | 61/198 [14:31<36:06, 15.81s/it][A                                                           
-                                                                          [A2026-05-08 15:52:19 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  31%| 61/198 [Elapsed: 15:04 < Remaining: 36:06, 15.81s/it][0m
-Running[eval]:   0%|          | 0/1 [15:05<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  31%|███       | 61/198 [15:04<36:06, 15.81s/it][A
-Evaluating[gpqa_diamond]:  31%|███▏      | 62/198 [15:09<50:56, 22.48s/it][A
-Evaluating[gpqa_diamond]:  31%|███▏      | 62/198 [15:09<50:56, 22.48s/it][A
-Evaluating[gpqa_diamond]:  32%|███▏      | 63/198 [15:17<40:48, 18.14s/it][A
-Evaluating[gpqa_diamond]:  32%|███▏      | 63/198 [15:17<40:48, 18.14s/it][A
-Evaluating[gpqa_diamond]:  32%|███▏      | 64/198 [15:53<52:29, 23.50s/it][A
-Evaluating[gpqa_diamond]:  32%|███▏      | 64/198 [15:53<52:29, 23.50s/it][A
-Evaluating[gpqa_diamond]:  33%|███▎      | 65/198 [16:00<41:07, 18.55s/it][A
-Evaluating[gpqa_diamond]:  33%|███▎      | 65/198 [16:00<41:07, 18.55s/it][A                                                           
-                                                                          [A2026-05-08 15:53:19 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  33%| 65/198 [Elapsed: 16:04 < Remaining: 41:07, 18.55s/it][0m
-Running[eval]:   0%|          | 0/1 [16:05<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  33%|███▎      | 65/198 [16:04<41:07, 18.55s/it][A
-Evaluating[gpqa_diamond]:  33%|███▎      | 66/198 [16:47<59:22, 26.99s/it][A
-Evaluating[gpqa_diamond]:  33%|███▎      | 66/198 [16:47<59:22, 26.99s/it][A                                                           
-                                                                          [A2026-05-08 15:54:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  33%| 66/198 [Elapsed: 17:05 < Remaining: 59:22, 26.99s/it][0m
-Running[eval]:   0%|          | 0/1 [17:05<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  33%|███▎      | 66/198 [17:05<59:22, 26.99s/it][A
-Evaluating[gpqa_diamond]:  34%|███▍      | 67/198 [17:20<1:02:53, 28.81s/it][A
-Evaluating[gpqa_diamond]:  34%|███▍      | 67/198 [17:20<1:02:53, 28.81s/it][A                                                           
-                                                                            [A2026-05-08 15:55:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  34%| 67/198 [Elapsed: 18:05 < Remaining: 1:02:53, 28.81s/it][0m
-Running[eval]:   0%|          | 0/1 [18:05<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  34%|███▍      | 67/198 [18:05<1:02:53, 28.81s/it][A
-Evaluating[gpqa_diamond]:  34%|███▍      | 68/198 [18:51<1:42:52, 47.48s/it][A
-Evaluating[gpqa_diamond]:  34%|███▍      | 68/198 [18:51<1:42:52, 47.48s/it][A                                                           
-                                                                            [A2026-05-08 15:56:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  34%| 68/198 [Elapsed: 19:05 < Remaining: 1:42:52, 47.48s/it][0m
-Running[eval]:   0%|          | 0/1 [19:05<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  34%|███▍      | 68/198 [19:05<1:42:52, 47.48s/it][A
-Evaluating[gpqa_diamond]:  35%|███▍      | 69/198 [19:54<1:51:51, 52.03s/it][A
-Evaluating[gpqa_diamond]:  35%|███▍      | 69/198 [19:54<1:51:51, 52.03s/it][A                                                           
-                                                                            [A2026-05-08 15:57:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  35%| 69/198 [Elapsed: 20:06 < Remaining: 1:51:51, 52.03s/it][0m
-Running[eval]:   0%|          | 0/1 [20:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  35%|███▍      | 69/198 [20:06<1:51:51, 52.03s/it][A
-Evaluating[gpqa_diamond]:  35%|███▌      | 70/198 [20:59<1:59:19, 55.93s/it][A
-Evaluating[gpqa_diamond]:  35%|███▌      | 70/198 [20:59<1:59:19, 55.93s/it][A                                                           
-                                                                            [A2026-05-08 15:58:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  35%| 70/198 [Elapsed: 21:06 < Remaining: 1:59:19, 55.93s/it][0m
-Running[eval]:   0%|          | 0/1 [21:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  35%|███▌      | 70/198 [21:06<1:59:19, 55.93s/it][A
-Evaluating[gpqa_diamond]:  36%|███▌      | 71/198 [21:37<1:47:01, 50.56s/it][A
-Evaluating[gpqa_diamond]:  36%|███▌      | 71/198 [21:37<1:47:01, 50.56s/it][A
-Evaluating[gpqa_diamond]:  36%|███▋      | 72/198 [21:46<1:20:00, 38.10s/it][A
-Evaluating[gpqa_diamond]:  36%|███▋      | 72/198 [21:46<1:20:00, 38.10s/it][A
-Evaluating[gpqa_diamond]:  37%|███▋      | 73/198 [22:03<1:06:11, 31.77s/it][A
-Evaluating[gpqa_diamond]:  37%|███▋      | 73/198 [22:03<1:06:11, 31.77s/it][A                                                           
-                                                                            [A2026-05-08 15:59:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  37%| 73/198 [Elapsed: 22:06 < Remaining: 1:06:11, 31.77s/it][0m
-Running[eval]:   0%|          | 0/1 [22:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  37%|███▋      | 73/198 [22:06<1:06:11, 31.77s/it][A
-Evaluating[gpqa_diamond]:  37%|███▋      | 74/198 [22:22<57:48, 27.97s/it]  [A
-Evaluating[gpqa_diamond]:  37%|███▋      | 74/198 [22:22<57:48, 27.97s/it][A
-Evaluating[gpqa_diamond]:  38%|███▊      | 75/198 [22:56<1:01:03, 29.79s/it][A
-Evaluating[gpqa_diamond]:  38%|███▊      | 75/198 [22:56<1:01:03, 29.79s/it][A                                                           
-                                                                            [A2026-05-08 16:00:20 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  38%| 75/198 [Elapsed: 23:06 < Remaining: 1:01:03, 29.79s/it][0m
-Running[eval]:   0%|          | 0/1 [23:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  38%|███▊      | 75/198 [23:06<1:01:03, 29.79s/it][A                                                           
-                                                                            [A2026-05-08 16:01:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  38%| 75/198 [Elapsed: 24:06 < Remaining: 1:01:03, 29.79s/it][0m
-Running[eval]:   0%|          | 0/1 [24:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  38%|███▊      | 75/198 [24:06<1:01:03, 29.79s/it][A                                                           
-                                                                            [A2026-05-08 16:02:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  38%| 75/198 [Elapsed: 25:06 < Remaining: 1:01:03, 29.79s/it][0m
-Running[eval]:   0%|          | 0/1 [25:06<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  38%|███▊      | 75/198 [25:06<1:01:03, 29.79s/it][A
-Evaluating[gpqa_diamond]:  38%|███▊      | 76/198 [25:23<2:12:21, 65.09s/it][A
-Evaluating[gpqa_diamond]:  38%|███▊      | 76/198 [25:23<2:12:21, 65.09s/it][A
-Evaluating[gpqa_diamond]:  39%|███▉      | 77/198 [25:54<1:50:39, 54.87s/it][A
-Evaluating[gpqa_diamond]:  39%|███▉      | 77/198 [25:54<1:50:39, 54.87s/it][A                                                           
-                                                                            [A2026-05-08 16:03:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  39%| 77/198 [Elapsed: 26:06 < Remaining: 1:50:39, 54.87s/it][0m
-Running[eval]:   0%|          | 0/1 [26:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  39%|███▉      | 77/198 [26:06<1:50:39, 54.87s/it][A
-Evaluating[gpqa_diamond]:  39%|███▉      | 78/198 [27:04<1:58:50, 59.42s/it][A
-Evaluating[gpqa_diamond]:  39%|███▉      | 78/198 [27:04<1:58:50, 59.42s/it][A                                                           
-                                                                            [A2026-05-08 16:04:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  39%| 78/198 [Elapsed: 27:06 < Remaining: 1:58:50, 59.42s/it][0m
-Running[eval]:   0%|          | 0/1 [27:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  39%|███▉      | 78/198 [27:06<1:58:50, 59.42s/it][A
-Evaluating[gpqa_diamond]:  40%|███▉      | 79/198 [27:23<1:33:48, 47.30s/it][A
-Evaluating[gpqa_diamond]:  40%|███▉      | 79/198 [27:23<1:33:48, 47.30s/it][A
-Evaluating[gpqa_diamond]:  40%|████      | 80/198 [28:04<1:29:19, 45.42s/it][A
-Evaluating[gpqa_diamond]:  40%|████      | 80/198 [28:04<1:29:19, 45.42s/it][A                                                           
-                                                                            [A2026-05-08 16:05:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  40%| 80/198 [Elapsed: 28:06 < Remaining: 1:29:19, 45.42s/it][0m
-Running[eval]:   0%|          | 0/1 [28:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  40%|████      | 80/198 [28:06<1:29:19, 45.42s/it][A
-Evaluating[gpqa_diamond]:  41%|████      | 81/198 [29:06<1:37:53, 50.20s/it][A
-Evaluating[gpqa_diamond]:  41%|████      | 81/198 [29:06<1:37:53, 50.20s/it][A                                                           
-                                                                            [A2026-05-08 16:06:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  41%| 81/198 [Elapsed: 29:07 < Remaining: 1:37:53, 50.20s/it][0m
-Running[eval]:   0%|          | 0/1 [29:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  41%|████      | 81/198 [29:07<1:37:53, 50.20s/it][A
-Evaluating[gpqa_diamond]:  41%|████▏     | 82/198 [29:56<1:36:57, 50.15s/it][A
-Evaluating[gpqa_diamond]:  41%|████▏     | 82/198 [29:56<1:36:57, 50.15s/it][A
-Evaluating[gpqa_diamond]:  42%|████▏     | 83/198 [29:58<1:08:26, 35.71s/it][A
-Evaluating[gpqa_diamond]:  42%|████▏     | 83/198 [29:58<1:08:26, 35.71s/it][A
-Evaluating[gpqa_diamond]:  42%|████▏     | 84/198 [30:02<49:46, 26.20s/it]  [A
-Evaluating[gpqa_diamond]:  42%|████▏     | 84/198 [30:02<49:46, 26.20s/it][A                                                           
-                                                                          [A2026-05-08 16:07:21 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  42%| 84/198 [Elapsed: 30:07 < Remaining: 49:46, 26.20s/it][0m
-Running[eval]:   0%|          | 0/1 [30:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  42%|████▏     | 84/198 [30:07<49:46, 26.20s/it][A
-Evaluating[gpqa_diamond]:  43%|████▎     | 85/198 [30:32<51:29, 27.34s/it][A
-Evaluating[gpqa_diamond]:  43%|████▎     | 85/198 [30:32<51:29, 27.34s/it][A
-Evaluating[gpqa_diamond]:  43%|████▎     | 86/198 [30:33<36:17, 19.44s/it][A
-Evaluating[gpqa_diamond]:  43%|████▎     | 86/198 [30:33<36:17, 19.44s/it][A                                                           
-                                                                          [A2026-05-08 16:08:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  43%| 86/198 [Elapsed: 31:07 < Remaining: 36:17, 19.44s/it][0m
-Running[eval]:   0%|          | 0/1 [31:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  43%|████▎     | 86/198 [31:07<36:17, 19.44s/it][A
-Evaluating[gpqa_diamond]:  44%|████▍     | 87/198 [31:21<51:50, 28.02s/it][A
-Evaluating[gpqa_diamond]:  44%|████▍     | 87/198 [31:21<51:50, 28.02s/it][A
-Evaluating[gpqa_diamond]:  44%|████▍     | 88/198 [31:27<39:19, 21.45s/it][A
-Evaluating[gpqa_diamond]:  44%|████▍     | 88/198 [31:27<39:19, 21.45s/it][A
-Evaluating[gpqa_diamond]:  45%|████▍     | 89/198 [31:44<36:32, 20.12s/it][A
-Evaluating[gpqa_diamond]:  45%|████▍     | 89/198 [31:44<36:32, 20.12s/it][A
-Evaluating[gpqa_diamond]:  45%|████▌     | 90/198 [31:55<31:17, 17.39s/it][A
-Evaluating[gpqa_diamond]:  45%|████▌     | 90/198 [31:55<31:17, 17.39s/it][A                                                           
-                                                                          [A2026-05-08 16:09:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  45%| 90/198 [Elapsed: 32:07 < Remaining: 31:17, 17.39s/it][0m
-Running[eval]:   0%|          | 0/1 [32:07<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  45%|████▌     | 90/198 [32:07<31:17, 17.39s/it][A
-Evaluating[gpqa_diamond]:  46%|████▌     | 91/198 [32:08<28:39, 16.07s/it][A
-Evaluating[gpqa_diamond]:  46%|████▌     | 91/198 [32:08<28:39, 16.07s/it][A
-Evaluating[gpqa_diamond]:  46%|████▋     | 92/198 [32:15<23:35, 13.35s/it][A
-Evaluating[gpqa_diamond]:  46%|████▋     | 92/198 [32:15<23:35, 13.35s/it][A
-Evaluating[gpqa_diamond]:  47%|████▋     | 93/198 [32:17<17:24,  9.95s/it][A
-Evaluating[gpqa_diamond]:  47%|████▋     | 93/198 [32:17<17:24,  9.95s/it][A
-Evaluating[gpqa_diamond]:  47%|████▋     | 94/198 [32:41<24:17, 14.02s/it][A
-Evaluating[gpqa_diamond]:  47%|████▋     | 94/198 [32:41<24:17, 14.02s/it][A                                                           
-                                                                          [A2026-05-08 16:10:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  47%| 94/198 [Elapsed: 33:08 < Remaining: 24:17, 14.02s/it][0m
-Running[eval]:   0%|          | 0/1 [33:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  47%|████▋     | 94/198 [33:08<24:17, 14.02s/it][A
-Evaluating[gpqa_diamond]:  48%|████▊     | 95/198 [33:29<41:34, 24.22s/it][A
-Evaluating[gpqa_diamond]:  48%|████▊     | 95/198 [33:29<41:34, 24.22s/it][A
-Evaluating[gpqa_diamond]:  48%|████▊     | 96/198 [33:52<40:33, 23.86s/it][A
-Evaluating[gpqa_diamond]:  48%|████▊     | 96/198 [33:52<40:33, 23.86s/it][A                                                           
-                                                                          [A2026-05-08 16:11:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  48%| 96/198 [Elapsed: 34:08 < Remaining: 40:33, 23.86s/it][0m
-Running[eval]:   0%|          | 0/1 [34:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  48%|████▊     | 96/198 [34:08<40:33, 23.86s/it][A
-Evaluating[gpqa_diamond]:  49%|████▉     | 97/198 [34:15<39:44, 23.61s/it][A
-Evaluating[gpqa_diamond]:  49%|████▉     | 97/198 [34:15<39:44, 23.61s/it][A                                                           
-                                                                          [A2026-05-08 16:12:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  49%| 97/198 [Elapsed: 35:08 < Remaining: 39:44, 23.61s/it][0m
-Running[eval]:   0%|          | 0/1 [35:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  49%|████▉     | 97/198 [35:08<39:44, 23.61s/it][A
-Evaluating[gpqa_diamond]:  49%|████▉     | 98/198 [35:12<56:03, 33.64s/it][A
-Evaluating[gpqa_diamond]:  49%|████▉     | 98/198 [35:12<56:03, 33.64s/it][A                                                           
-                                                                          [A2026-05-08 16:13:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  49%| 98/198 [Elapsed: 36:08 < Remaining: 56:03, 33.64s/it][0m
-Running[eval]:   0%|          | 0/1 [36:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  49%|████▉     | 98/198 [36:08<56:03, 33.64s/it][A
-Evaluating[gpqa_diamond]:  50%|█████     | 99/198 [36:21<1:13:01, 44.26s/it][A
-Evaluating[gpqa_diamond]:  50%|█████     | 99/198 [36:21<1:13:01, 44.26s/it][A
-Evaluating[gpqa_diamond]:  51%|█████     | 100/198 [36:22<51:05, 31.28s/it] [A
-Evaluating[gpqa_diamond]:  51%|█████     | 100/198 [36:22<51:05, 31.28s/it][A
-Evaluating[gpqa_diamond]:  51%|█████     | 101/198 [36:26<37:20, 23.10s/it][A
-Evaluating[gpqa_diamond]:  51%|█████     | 101/198 [36:26<37:20, 23.10s/it][A
-Evaluating[gpqa_diamond]:  52%|█████▏    | 102/198 [36:51<37:52, 23.68s/it][A
-Evaluating[gpqa_diamond]:  52%|█████▏    | 102/198 [36:51<37:52, 23.68s/it][A                                                           
-                                                                           [A2026-05-08 16:14:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  52%| 102/198 [Elapsed: 37:08 < Remaining: 37:52, 23.68s/it][0m
-Running[eval]:   0%|          | 0/1 [37:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  52%|█████▏    | 102/198 [37:08<37:52, 23.68s/it][A
-Evaluating[gpqa_diamond]:  52%|█████▏    | 103/198 [38:05<1:01:25, 38.79s/it][A
-Evaluating[gpqa_diamond]:  52%|█████▏    | 103/198 [38:05<1:01:25, 38.79s/it][A                                                           
-                                                                             [A2026-05-08 16:15:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  52%| 103/198 [Elapsed: 38:08 < Remaining: 1:01:25, 38.79s/it][0m
-Running[eval]:   0%|          | 0/1 [38:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  52%|█████▏    | 103/198 [38:08<1:01:25, 38.79s/it][A
-Evaluating[gpqa_diamond]:  53%|█████▎    | 104/198 [38:55<1:06:03, 42.16s/it][A
-Evaluating[gpqa_diamond]:  53%|█████▎    | 104/198 [38:55<1:06:03, 42.16s/it][A                                                           
-                                                                             [A2026-05-08 16:16:22 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  53%| 104/198 [Elapsed: 39:08 < Remaining: 1:06:03, 42.16s/it][0m
-Running[eval]:   0%|          | 0/1 [39:08<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  53%|█████▎    | 104/198 [39:08<1:06:03, 42.16s/it][A                                                           
-                                                                             [A2026-05-08 16:17:23 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  53%| 104/198 [Elapsed: 40:08 < Remaining: 1:06:03, 42.16s/it][0m
-Running[eval]:   0%|          | 0/1 [40:09<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  53%|█████▎    | 104/198 [40:08<1:06:03, 42.16s/it][A
-Evaluating[gpqa_diamond]:  53%|█████▎    | 105/198 [40:14<1:22:42, 53.35s/it][A
-Evaluating[gpqa_diamond]:  53%|█████▎    | 105/198 [40:14<1:22:42, 53.35s/it][A
-Evaluating[gpqa_diamond]:  54%|█████▎    | 106/198 [40:15<57:43, 37.65s/it]  [A
-Evaluating[gpqa_diamond]:  54%|█████▎    | 106/198 [40:15<57:43, 37.65s/it][A
-Evaluating[gpqa_diamond]:  54%|█████▍    | 107/198 [41:05<1:02:44, 41.37s/it][A
-Evaluating[gpqa_diamond]:  54%|█████▍    | 107/198 [41:05<1:02:44, 41.37s/it][A                                                           
-                                                                             [A2026-05-08 16:18:23 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  54%| 107/198 [Elapsed: 41:08 < Remaining: 1:02:44, 41.37s/it][0m
-Running[eval]:   0%|          | 0/1 [41:09<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  54%|█████▍    | 107/198 [41:08<1:02:44, 41.37s/it][A
-Evaluating[gpqa_diamond]:  55%|█████▍    | 108/198 [41:23<51:32, 34.36s/it]  [A
-Evaluating[gpqa_diamond]:  55%|█████▍    | 108/198 [41:23<51:32, 34.36s/it][A
-Evaluating[gpqa_diamond]:  55%|█████▌    | 109/198 [41:26<37:00, 24.95s/it][A
-Evaluating[gpqa_diamond]:  55%|█████▌    | 109/198 [41:26<37:00, 24.95s/it][A
-Evaluating[gpqa_diamond]:  56%|█████▌    | 110/198 [41:43<33:06, 22.57s/it][A
-Evaluating[gpqa_diamond]:  56%|█████▌    | 110/198 [41:43<33:06, 22.57s/it][A
-Evaluating[gpqa_diamond]:  56%|█████▌    | 111/198 [42:03<31:36, 21.80s/it][A
-Evaluating[gpqa_diamond]:  56%|█████▌    | 111/198 [42:03<31:36, 21.80s/it][A                                                           
-                                                                           [A2026-05-08 16:19:23 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  56%| 111/198 [Elapsed: 42:08 < Remaining: 31:36, 21.80s/it][0m
-Running[eval]:   0%|          | 0/1 [42:09<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  56%|█████▌    | 111/198 [42:08<31:36, 21.80s/it][A
-Evaluating[gpqa_diamond]:  57%|█████▋    | 112/198 [42:32<34:21, 23.97s/it][A
-Evaluating[gpqa_diamond]:  57%|█████▋    | 112/198 [42:32<34:21, 23.97s/it][A
-Evaluating[gpqa_diamond]:  57%|█████▋    | 113/198 [42:37<25:53, 18.28s/it][A
-Evaluating[gpqa_diamond]:  57%|█████▋    | 113/198 [42:37<25:53, 18.28s/it][A                                                           
-                                                                           [A2026-05-08 16:20:23 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  57%| 113/198 [Elapsed: 43:08 < Remaining: 25:53, 18.28s/it][0m
-Running[eval]:   0%|          | 0/1 [43:09<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  57%|█████▋    | 113/198 [43:08<25:53, 18.28s/it][A
-Evaluating[gpqa_diamond]:  58%|█████▊    | 114/198 [43:21<36:24, 26.00s/it][A
-Evaluating[gpqa_diamond]:  58%|█████▊    | 114/198 [43:21<36:24, 26.00s/it][A                                                           
-                                                                           [A2026-05-08 16:21:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  58%| 114/198 [Elapsed: 44:09 < Remaining: 36:24, 26.00s/it][0m
-Running[eval]:   0%|          | 0/1 [44:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  58%|█████▊    | 114/198 [44:09<36:24, 26.00s/it][A                                                           
-                                                                           [A2026-05-08 16:22:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  58%| 114/198 [Elapsed: 45:09 < Remaining: 36:24, 26.00s/it][0m
-Running[eval]:   0%|          | 0/1 [45:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  58%|█████▊    | 114/198 [45:09<36:24, 26.00s/it][A
-Evaluating[gpqa_diamond]:  58%|█████▊    | 115/198 [46:09<1:34:48, 68.54s/it][A                                                           
-                                                                             [A2026-05-08 16:23:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  58%| 115/198 [Elapsed: 46:09 < Remaining: 1:34:48, 68.54s/it][0m
-Running[eval]:   0%|          | 0/1 [46:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  58%|█████▊    | 115/198 [46:09<1:34:48, 68.54s/it][A
-Evaluating[gpqa_diamond]:  58%|█████▊    | 115/198 [46:09<1:34:48, 68.54s/it][A
-Evaluating[gpqa_diamond]:  59%|█████▊    | 116/198 [46:34<1:15:49, 55.48s/it][A
-Evaluating[gpqa_diamond]:  59%|█████▊    | 116/198 [46:34<1:15:49, 55.48s/it][A                                                           
-                                                                             [A2026-05-08 16:24:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  59%| 116/198 [Elapsed: 47:09 < Remaining: 1:15:49, 55.48s/it][0m
-Running[eval]:   0%|          | 0/1 [47:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  59%|█████▊    | 116/198 [47:09<1:15:49, 55.48s/it][A
-Evaluating[gpqa_diamond]:  59%|█████▉    | 117/198 [48:01<1:27:40, 64.95s/it][A
-Evaluating[gpqa_diamond]:  59%|█████▉    | 117/198 [48:01<1:27:40, 64.95s/it][A                                                           
-                                                                             [A2026-05-08 16:25:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  59%| 117/198 [Elapsed: 48:09 < Remaining: 1:27:40, 64.95s/it][0m
-Running[eval]:   0%|          | 0/1 [48:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  59%|█████▉    | 117/198 [48:09<1:27:40, 64.95s/it][A
-Evaluating[gpqa_diamond]:  60%|█████▉    | 118/198 [48:33<1:13:25, 55.07s/it][A
-Evaluating[gpqa_diamond]:  60%|█████▉    | 118/198 [48:33<1:13:25, 55.07s/it][A
-Evaluating[gpqa_diamond]:  60%|██████    | 119/198 [48:41<53:55, 40.95s/it]  [A
-Evaluating[gpqa_diamond]:  60%|██████    | 119/198 [48:41<53:55, 40.95s/it][A                                                           
-                                                                           [A2026-05-08 16:26:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  60%| 119/198 [Elapsed: 49:10 < Remaining: 53:55, 40.95s/it][0m
-Running[eval]:   0%|          | 0/1 [49:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  60%|██████    | 119/198 [49:10<53:55, 40.95s/it][A
-Evaluating[gpqa_diamond]:  61%|██████    | 120/198 [49:41<1:00:29, 46.53s/it][A
-Evaluating[gpqa_diamond]:  61%|██████    | 120/198 [49:41<1:00:29, 46.53s/it][A
-Evaluating[gpqa_diamond]:  61%|██████    | 121/198 [49:49<44:53, 34.97s/it]  [A
-Evaluating[gpqa_diamond]:  61%|██████    | 121/198 [49:49<44:53, 34.97s/it][A
-Evaluating[gpqa_diamond]:  62%|██████▏   | 122/198 [50:03<36:20, 28.68s/it][A
-Evaluating[gpqa_diamond]:  62%|██████▏   | 122/198 [50:03<36:20, 28.68s/it][A                                                           
-                                                                           [A2026-05-08 16:27:24 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  62%| 122/198 [Elapsed: 50:10 < Remaining: 36:20, 28.68s/it][0m
-Running[eval]:   0%|          | 0/1 [50:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  62%|██████▏   | 122/198 [50:10<36:20, 28.68s/it][A
-Evaluating[gpqa_diamond]:  62%|██████▏   | 123/198 [50:40<38:58, 31.19s/it][A
-Evaluating[gpqa_diamond]:  62%|██████▏   | 123/198 [50:40<38:58, 31.19s/it][A
-Evaluating[gpqa_diamond]:  63%|██████▎   | 124/198 [51:00<34:19, 27.83s/it][A
-Evaluating[gpqa_diamond]:  63%|██████▎   | 124/198 [51:00<34:19, 27.83s/it][A                                                           
-                                                                           [A2026-05-08 16:28:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  63%| 124/198 [Elapsed: 51:10 < Remaining: 34:19, 27.83s/it][0m
-Running[eval]:   0%|          | 0/1 [51:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  63%|██████▎   | 124/198 [51:10<34:19, 27.83s/it][A
-Evaluating[gpqa_diamond]:  63%|██████▎   | 125/198 [51:41<38:40, 31.79s/it][A
-Evaluating[gpqa_diamond]:  63%|██████▎   | 125/198 [51:41<38:40, 31.79s/it][A                                                           
-                                                                           [A2026-05-08 16:29:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  63%| 125/198 [Elapsed: 52:10 < Remaining: 38:40, 31.79s/it][0m
-Running[eval]:   0%|          | 0/1 [52:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  63%|██████▎   | 125/198 [52:10<38:40, 31.79s/it][A
-Evaluating[gpqa_diamond]:  64%|██████▎   | 126/198 [52:29<43:59, 36.66s/it][A
-Evaluating[gpqa_diamond]:  64%|██████▎   | 126/198 [52:29<43:59, 36.66s/it][A
-Evaluating[gpqa_diamond]:  64%|██████▍   | 127/198 [52:30<30:43, 25.96s/it][A
-Evaluating[gpqa_diamond]:  64%|██████▍   | 127/198 [52:30<30:43, 25.96s/it][A
-Evaluating[gpqa_diamond]:  65%|██████▍   | 128/198 [52:39<24:21, 20.88s/it][A
-Evaluating[gpqa_diamond]:  65%|██████▍   | 128/198 [52:39<24:21, 20.88s/it][A
-Evaluating[gpqa_diamond]:  65%|██████▌   | 129/198 [52:47<19:33, 17.01s/it][A
-Evaluating[gpqa_diamond]:  65%|██████▌   | 129/198 [52:47<19:33, 17.01s/it][A
-Evaluating[gpqa_diamond]:  66%|██████▌   | 130/198 [53:05<19:37, 17.31s/it][A
-Evaluating[gpqa_diamond]:  66%|██████▌   | 130/198 [53:05<19:37, 17.31s/it][A                                                           
-                                                                           [A2026-05-08 16:30:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  66%| 130/198 [Elapsed: 53:10 < Remaining: 19:37, 17.31s/it][0m
-Running[eval]:   0%|          | 0/1 [53:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  66%|██████▌   | 130/198 [53:10<19:37, 17.31s/it][A
-Evaluating[gpqa_diamond]:  66%|██████▌   | 131/198 [53:28<21:14, 19.02s/it][A
-Evaluating[gpqa_diamond]:  66%|██████▌   | 131/198 [53:28<21:14, 19.02s/it][A
-Evaluating[gpqa_diamond]:  67%|██████▋   | 132/198 [53:44<19:55, 18.12s/it][A
-Evaluating[gpqa_diamond]:  67%|██████▋   | 132/198 [53:44<19:55, 18.12s/it][A
-Evaluating[gpqa_diamond]:  67%|██████▋   | 133/198 [54:04<20:14, 18.69s/it][A
-Evaluating[gpqa_diamond]:  67%|██████▋   | 133/198 [54:04<20:14, 18.69s/it][A
-Evaluating[gpqa_diamond]:  68%|██████▊   | 134/198 [54:08<15:14, 14.28s/it][A
-Evaluating[gpqa_diamond]:  68%|██████▊   | 134/198 [54:08<15:14, 14.28s/it][A                                                           
-                                                                           [A2026-05-08 16:31:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  68%| 134/198 [Elapsed: 54:10 < Remaining: 15:14, 14.28s/it][0m
-Running[eval]:   0%|          | 0/1 [54:10<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  68%|██████▊   | 134/198 [54:10<15:14, 14.28s/it][A
-Evaluating[gpqa_diamond]:  68%|██████▊   | 135/198 [54:19<13:57, 13.30s/it][A
-Evaluating[gpqa_diamond]:  68%|██████▊   | 135/198 [54:19<13:57, 13.30s/it][A                                                           
-                                                                           [A2026-05-08 16:32:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  68%| 135/198 [Elapsed: 55:11 < Remaining: 13:57, 13.30s/it][0m
-Running[eval]:   0%|          | 0/1 [55:11<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  68%|██████▊   | 135/198 [55:11<13:57, 13.30s/it][A                                                           
-                                                                           [A2026-05-08 16:33:25 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  68%| 135/198 [Elapsed: 56:11 < Remaining: 13:57, 13.30s/it][0m
-Running[eval]:   0%|          | 0/1 [56:11<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  68%|██████▊   | 135/198 [56:11<13:57, 13.30s/it][A
-Evaluating[gpqa_diamond]:  69%|██████▊   | 136/198 [56:52<57:00, 55.17s/it][A
-Evaluating[gpqa_diamond]:  69%|██████▊   | 136/198 [56:52<57:00, 55.17s/it][A
-Evaluating[gpqa_diamond]:  69%|██████▉   | 137/198 [57:00<41:42, 41.02s/it][A
-Evaluating[gpqa_diamond]:  69%|██████▉   | 137/198 [57:00<41:42, 41.02s/it][A                                                           
-                                                                           [A2026-05-08 16:34:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  69%| 137/198 [Elapsed: 57:11 < Remaining: 41:42, 41.02s/it][0m
-Running[eval]:   0%|          | 0/1 [57:11<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  69%|██████▉   | 137/198 [57:11<41:42, 41.02s/it][A
-Evaluating[gpqa_diamond]:  70%|██████▉   | 138/198 [57:19<34:24, 34.42s/it][A
-Evaluating[gpqa_diamond]:  70%|██████▉   | 138/198 [57:19<34:24, 34.42s/it][A
-Evaluating[gpqa_diamond]:  70%|███████   | 139/198 [57:20<23:59, 24.39s/it][A
-Evaluating[gpqa_diamond]:  70%|███████   | 139/198 [57:20<23:59, 24.39s/it][A
-Evaluating[gpqa_diamond]:  71%|███████   | 140/198 [57:29<19:07, 19.78s/it][A
-Evaluating[gpqa_diamond]:  71%|███████   | 140/198 [57:29<19:07, 19.78s/it][A
-Evaluating[gpqa_diamond]:  71%|███████   | 141/198 [57:37<15:26, 16.25s/it][A
-Evaluating[gpqa_diamond]:  71%|███████   | 141/198 [57:37<15:26, 16.25s/it][A                                                           
-                                                                           [A2026-05-08 16:35:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  71%| 141/198 [Elapsed: 58:11 < Remaining: 15:26, 16.25s/it][0m
-Running[eval]:   0%|          | 0/1 [58:11<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  71%|███████   | 141/198 [58:11<15:26, 16.25s/it][A
-Evaluating[gpqa_diamond]:  72%|███████▏  | 142/198 [58:13<20:41, 22.18s/it][A
-Evaluating[gpqa_diamond]:  72%|███████▏  | 142/198 [58:13<20:41, 22.18s/it][A
-Evaluating[gpqa_diamond]:  72%|███████▏  | 143/198 [58:31<19:10, 20.93s/it][A
-Evaluating[gpqa_diamond]:  72%|███████▏  | 143/198 [58:31<19:10, 20.93s/it][A
-Evaluating[gpqa_diamond]:  73%|███████▎  | 144/198 [58:32<13:27, 14.95s/it][A
-Evaluating[gpqa_diamond]:  73%|███████▎  | 144/198 [58:32<13:27, 14.95s/it][A
-Evaluating[gpqa_diamond]:  73%|███████▎  | 145/198 [58:51<14:16, 16.17s/it][A
-Evaluating[gpqa_diamond]:  73%|███████▎  | 145/198 [58:51<14:16, 16.17s/it][A
-Evaluating[gpqa_diamond]:  74%|███████▎  | 146/198 [59:10<14:51, 17.15s/it][A
-Evaluating[gpqa_diamond]:  74%|███████▎  | 146/198 [59:10<14:51, 17.15s/it][A                                                           
-                                                                           [A2026-05-08 16:36:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  74%| 146/198 [Elapsed: 59:11 < Remaining: 14:51, 17.15s/it][0m
-Running[eval]:   0%|          | 0/1 [59:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  74%|███████▎  | 146/198 [59:11<14:51, 17.15s/it][A
-Evaluating[gpqa_diamond]:  74%|███████▍  | 147/198 [59:34<16:19, 19.21s/it][A
-Evaluating[gpqa_diamond]:  74%|███████▍  | 147/198 [59:34<16:19, 19.21s/it][A
-Evaluating[gpqa_diamond]:  75%|███████▍  | 148/198 [59:39<12:27, 14.95s/it][A
-Evaluating[gpqa_diamond]:  75%|███████▍  | 148/198 [59:39<12:27, 14.95s/it][A
-Evaluating[gpqa_diamond]:  75%|███████▌  | 149/198 [1:00:06<15:09, 18.57s/it][A
-Evaluating[gpqa_diamond]:  75%|███████▌  | 149/198 [1:00:06<15:09, 18.57s/it][A
-Evaluating[gpqa_diamond]:  76%|███████▌  | 150/198 [1:00:06<14:51, 18.57s/it][A
-Evaluating[gpqa_diamond]:  76%|███████▋  | 151/198 [1:00:11<08:44, 11.15s/it][A                                                           
-                                                                             [A2026-05-08 16:37:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  76%| 151/198 [Elapsed: 1:00:11 < Remaining: 08:44, 11.15s/it][0m
-Running[eval]:   0%|          | 0/1 [1:00:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  76%|███████▋  | 151/198 [1:00:11<08:44, 11.15s/it][A
-Evaluating[gpqa_diamond]:  76%|███████▋  | 151/198 [1:00:11<08:44, 11.15s/it][A
-Evaluating[gpqa_diamond]:  77%|███████▋  | 152/198 [1:00:21<08:19, 10.87s/it][A
-Evaluating[gpqa_diamond]:  77%|███████▋  | 152/198 [1:00:21<08:19, 10.87s/it][A
-Evaluating[gpqa_diamond]:  77%|███████▋  | 153/198 [1:00:40<09:44, 13.00s/it][A
-Evaluating[gpqa_diamond]:  77%|███████▋  | 153/198 [1:00:40<09:44, 13.00s/it][A
-Evaluating[gpqa_diamond]:  78%|███████▊  | 154/198 [1:01:05<11:55, 16.26s/it][A
-Evaluating[gpqa_diamond]:  78%|███████▊  | 154/198 [1:01:05<11:55, 16.26s/it][A
-Evaluating[gpqa_diamond]:  78%|███████▊  | 155/198 [1:01:11<09:35, 13.39s/it][A                                                             
-                                                                             [A2026-05-08 16:38:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  78%| 155/198 [Elapsed: 1:01:11 < Remaining: 09:35, 13.39s/it][0m
-Running[eval]:   0%|          | 0/1 [1:01:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  78%|███████▊  | 155/198 [1:01:11<09:35, 13.39s/it][A
-Evaluating[gpqa_diamond]:  78%|███████▊  | 155/198 [1:01:11<09:35, 13.39s/it][A
-Evaluating[gpqa_diamond]:  79%|███████▉  | 156/198 [1:01:27<09:53, 14.14s/it][A
-Evaluating[gpqa_diamond]:  79%|███████▉  | 156/198 [1:01:27<09:53, 14.14s/it][A                                                             
-                                                                             [A2026-05-08 16:39:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  79%| 156/198 [Elapsed: 1:02:12 < Remaining: 09:53, 14.14s/it][0m
-Running[eval]:   0%|          | 0/1 [1:02:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  79%|███████▉  | 156/198 [1:02:12<09:53, 14.14s/it][A                                                             
-                                                                             [A2026-05-08 16:40:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  79%| 156/198 [Elapsed: 1:03:12 < Remaining: 09:53, 14.14s/it][0m
-Running[eval]:   0%|          | 0/1 [1:03:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  79%|███████▉  | 156/198 [1:03:12<09:53, 14.14s/it][A
-Evaluating[gpqa_diamond]:  79%|███████▉  | 157/198 [1:03:21<29:16, 42.85s/it][A
-Evaluating[gpqa_diamond]:  79%|███████▉  | 157/198 [1:03:21<29:16, 42.85s/it][A
-Evaluating[gpqa_diamond]:  80%|███████▉  | 158/198 [1:04:08<29:22, 44.07s/it][A
-Evaluating[gpqa_diamond]:  80%|███████▉  | 158/198 [1:04:08<29:22, 44.07s/it][A                                                             
-                                                                             [A2026-05-08 16:41:26 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  80%| 158/198 [Elapsed: 1:04:12 < Remaining: 29:22, 44.07s/it][0m
-Running[eval]:   0%|          | 0/1 [1:04:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  80%|███████▉  | 158/198 [1:04:12<29:22, 44.07s/it][A
-Evaluating[gpqa_diamond]:  80%|████████  | 159/198 [1:04:52<28:38, 44.06s/it][A
-Evaluating[gpqa_diamond]:  80%|████████  | 159/198 [1:04:52<28:38, 44.06s/it][A
-Evaluating[gpqa_diamond]:  81%|████████  | 160/198 [1:04:54<20:00, 31.59s/it][A
-Evaluating[gpqa_diamond]:  81%|████████  | 160/198 [1:04:54<20:00, 31.59s/it][A
-Evaluating[gpqa_diamond]:  81%|████████▏ | 161/198 [1:05:06<15:55, 25.82s/it][A
-Evaluating[gpqa_diamond]:  81%|████████▏ | 161/198 [1:05:06<15:55, 25.82s/it][A                                                             
-                                                                             [A2026-05-08 16:42:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  81%| 161/198 [Elapsed: 1:05:12 < Remaining: 15:55, 25.82s/it][0m
-Running[eval]:   0%|          | 0/1 [1:05:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  81%|████████▏ | 161/198 [1:05:12<15:55, 25.82s/it][A
-Evaluating[gpqa_diamond]:  82%|████████▏ | 162/198 [1:05:29<14:59, 24.98s/it][A
-Evaluating[gpqa_diamond]:  82%|████████▏ | 162/198 [1:05:29<14:59, 24.98s/it][A
-Evaluating[gpqa_diamond]:  82%|████████▏ | 163/198 [1:05:54<14:34, 24.99s/it][A
-Evaluating[gpqa_diamond]:  82%|████████▏ | 163/198 [1:05:54<14:34, 24.99s/it][A                                                             
-                                                                             [A2026-05-08 16:43:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  82%| 163/198 [Elapsed: 1:06:12 < Remaining: 14:34, 24.99s/it][0m
-Running[eval]:   0%|          | 0/1 [1:06:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  82%|████████▏ | 163/198 [1:06:12<14:34, 24.99s/it][A
-Evaluating[gpqa_diamond]:  83%|████████▎ | 164/198 [1:06:17<13:49, 24.40s/it][A
-Evaluating[gpqa_diamond]:  83%|████████▎ | 164/198 [1:06:17<13:49, 24.40s/it][A
-Evaluating[gpqa_diamond]:  83%|████████▎ | 165/198 [1:06:17<13:25, 24.40s/it][A
-Evaluating[gpqa_diamond]:  84%|████████▍ | 166/198 [1:06:23<07:45, 14.54s/it][A
-Evaluating[gpqa_diamond]:  84%|████████▍ | 166/198 [1:06:23<07:45, 14.54s/it][A
-Evaluating[gpqa_diamond]:  84%|████████▍ | 167/198 [1:06:37<07:26, 14.42s/it][A
-Evaluating[gpqa_diamond]:  84%|████████▍ | 167/198 [1:06:37<07:26, 14.42s/it][A
-Evaluating[gpqa_diamond]:  85%|████████▍ | 168/198 [1:06:54<07:32, 15.10s/it][A
-Evaluating[gpqa_diamond]:  85%|████████▍ | 168/198 [1:06:54<07:32, 15.10s/it][A
-Evaluating[gpqa_diamond]:  85%|████████▌ | 169/198 [1:07:00<06:06, 12.62s/it][A
-Evaluating[gpqa_diamond]:  85%|████████▌ | 169/198 [1:07:00<06:06, 12.62s/it][A                                                             
-                                                                             [A2026-05-08 16:44:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  85%| 169/198 [Elapsed: 1:07:12 < Remaining: 06:06, 12.62s/it][0m
-Running[eval]:   0%|          | 0/1 [1:07:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  85%|████████▌ | 169/198 [1:07:12<06:06, 12.62s/it][A
-Evaluating[gpqa_diamond]:  86%|████████▌ | 170/198 [1:07:32<08:25, 18.05s/it][A
-Evaluating[gpqa_diamond]:  86%|████████▌ | 170/198 [1:07:32<08:25, 18.05s/it][A
-Evaluating[gpqa_diamond]:  86%|████████▋ | 171/198 [1:07:32<08:07, 18.05s/it][A
-Evaluating[gpqa_diamond]:  87%|████████▋ | 172/198 [1:07:57<06:45, 15.59s/it][A
-Evaluating[gpqa_diamond]:  87%|████████▋ | 172/198 [1:07:57<06:45, 15.59s/it][A                                                             
-                                                                             [A2026-05-08 16:45:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  87%| 172/198 [Elapsed: 1:08:12 < Remaining: 06:45, 15.59s/it][0m
-Running[eval]:   0%|          | 0/1 [1:08:12<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  87%|████████▋ | 172/198 [1:08:12<06:45, 15.59s/it][A
-Evaluating[gpqa_diamond]:  87%|████████▋ | 173/198 [1:08:15<06:44, 16.17s/it][A
-Evaluating[gpqa_diamond]:  87%|████████▋ | 173/198 [1:08:15<06:44, 16.17s/it][A
-Evaluating[gpqa_diamond]:  88%|████████▊ | 174/198 [1:08:21<05:25, 13.57s/it][A
-Evaluating[gpqa_diamond]:  88%|████████▊ | 174/198 [1:08:21<05:25, 13.57s/it][A
-Evaluating[gpqa_diamond]:  88%|████████▊ | 175/198 [1:09:08<08:38, 22.53s/it][A
-Evaluating[gpqa_diamond]:  88%|████████▊ | 175/198 [1:09:08<08:38, 22.53s/it][A                                                             
-                                                                             [A2026-05-08 16:46:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  88%| 175/198 [Elapsed: 1:09:12 < Remaining: 08:38, 22.53s/it][0m
-Running[eval]:   0%|          | 0/1 [1:09:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  88%|████████▊ | 175/198 [1:09:12<08:38, 22.53s/it][A
-Evaluating[gpqa_diamond]:  89%|████████▉ | 176/198 [1:09:43<09:31, 25.98s/it][A
-Evaluating[gpqa_diamond]:  89%|████████▉ | 176/198 [1:09:43<09:31, 25.98s/it][A
-Evaluating[gpqa_diamond]:  89%|████████▉ | 177/198 [1:09:47<06:54, 19.75s/it][A
-Evaluating[gpqa_diamond]:  89%|████████▉ | 177/198 [1:09:47<06:54, 19.75s/it][A                                                             
-                                                                             [A2026-05-08 16:47:27 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  89%| 177/198 [Elapsed: 1:10:13 < Remaining: 06:54, 19.75s/it][0m
-Running[eval]:   0%|          | 0/1 [1:10:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  89%|████████▉ | 177/198 [1:10:13<06:54, 19.75s/it][A
-Evaluating[gpqa_diamond]:  90%|████████▉ | 178/198 [1:10:18<07:38, 22.93s/it][A
-Evaluating[gpqa_diamond]:  90%|████████▉ | 178/198 [1:10:18<07:38, 22.93s/it][A
-Evaluating[gpqa_diamond]:  90%|█████████ | 179/198 [1:10:33<06:31, 20.62s/it][A
-Evaluating[gpqa_diamond]:  90%|█████████ | 179/198 [1:10:33<06:31, 20.62s/it][A
-Evaluating[gpqa_diamond]:  91%|█████████ | 180/198 [1:10:56<06:23, 21.32s/it][A
-Evaluating[gpqa_diamond]:  91%|█████████ | 180/198 [1:10:56<06:23, 21.32s/it][A
-Evaluating[gpqa_diamond]:  91%|█████████▏| 181/198 [1:11:05<05:00, 17.68s/it][A
-Evaluating[gpqa_diamond]:  91%|█████████▏| 181/198 [1:11:05<05:00, 17.68s/it][A                                                             
-                                                                             [A2026-05-08 16:48:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  91%| 181/198 [Elapsed: 1:11:13 < Remaining: 05:00, 17.68s/it][0m
-Running[eval]:   0%|          | 0/1 [1:11:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  91%|█████████▏| 181/198 [1:11:13<05:00, 17.68s/it][A
-Evaluating[gpqa_diamond]:  92%|█████████▏| 182/198 [1:12:10<08:27, 31.74s/it][A
-Evaluating[gpqa_diamond]:  92%|█████████▏| 182/198 [1:12:10<08:27, 31.74s/it][A                                                             
-                                                                             [A2026-05-08 16:49:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  92%| 182/198 [Elapsed: 1:12:13 < Remaining: 08:27, 31.74s/it][0m
-Running[eval]:   0%|          | 0/1 [1:12:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  92%|█████████▏| 182/198 [1:12:13<08:27, 31.74s/it][A
-Evaluating[gpqa_diamond]:  92%|█████████▏| 183/198 [1:12:45<08:10, 32.71s/it][A
-Evaluating[gpqa_diamond]:  92%|█████████▏| 183/198 [1:12:45<08:10, 32.71s/it][A
-Evaluating[gpqa_diamond]:  93%|█████████▎| 184/198 [1:13:09<07:01, 30.12s/it][A
-Evaluating[gpqa_diamond]:  93%|█████████▎| 184/198 [1:13:09<07:01, 30.12s/it][A                                                             
-                                                                             [A2026-05-08 16:50:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  93%| 184/198 [Elapsed: 1:13:13 < Remaining: 07:01, 30.12s/it][0m
-Running[eval]:   0%|          | 0/1 [1:13:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  93%|█████████▎| 184/198 [1:13:13<07:01, 30.12s/it][A
-Evaluating[gpqa_diamond]:  93%|█████████▎| 185/198 [1:13:38<06:27, 29.79s/it][A
-Evaluating[gpqa_diamond]:  93%|█████████▎| 185/198 [1:13:38<06:27, 29.79s/it][A
-Evaluating[gpqa_diamond]:  94%|█████████▍| 186/198 [1:13:50<04:53, 24.46s/it][A
-Evaluating[gpqa_diamond]:  94%|█████████▍| 186/198 [1:13:50<04:53, 24.46s/it][A                                                             
-                                                                             [A2026-05-08 16:51:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  94%| 186/198 [Elapsed: 1:14:13 < Remaining: 04:53, 24.46s/it][0m
-Running[eval]:   0%|          | 0/1 [1:14:13<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  94%|█████████▍| 186/198 [1:14:13<04:53, 24.46s/it][A                                                             
-                                                                             [A2026-05-08 16:52:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  94%| 186/198 [Elapsed: 1:15:14 < Remaining: 04:53, 24.46s/it][0m
-Running[eval]:   0%|          | 0/1 [1:15:14<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  94%|█████████▍| 186/198 [1:15:14<04:53, 24.46s/it][A
-Evaluating[gpqa_diamond]:  94%|█████████▍| 187/198 [1:15:16<07:50, 42.82s/it][A
-Evaluating[gpqa_diamond]:  94%|█████████▍| 187/198 [1:15:16<07:50, 42.82s/it][A
-Evaluating[gpqa_diamond]:  95%|█████████▍| 188/198 [1:15:38<06:05, 36.58s/it][A
-Evaluating[gpqa_diamond]:  95%|█████████▍| 188/198 [1:15:38<06:05, 36.58s/it][A                                                             
-                                                                             [A2026-05-08 16:53:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  95%| 188/198 [Elapsed: 1:16:14 < Remaining: 06:05, 36.58s/it][0m
-Running[eval]:   0%|          | 0/1 [1:16:14<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  95%|█████████▍| 188/198 [1:16:14<06:05, 36.58s/it][A
-Evaluating[gpqa_diamond]:  95%|█████████▌| 189/198 [1:16:54<07:15, 48.40s/it][A
-Evaluating[gpqa_diamond]:  95%|█████████▌| 189/198 [1:16:54<07:15, 48.40s/it][A
-Evaluating[gpqa_diamond]:  96%|█████████▌| 190/198 [1:17:00<04:45, 35.69s/it][A
-Evaluating[gpqa_diamond]:  96%|█████████▌| 190/198 [1:17:00<04:45, 35.69s/it][A
-Evaluating[gpqa_diamond]:  96%|█████████▋| 191/198 [1:17:04<03:03, 26.19s/it][A
-Evaluating[gpqa_diamond]:  96%|█████████▋| 191/198 [1:17:04<03:03, 26.19s/it][A                                                             
-                                                                             [A2026-05-08 16:54:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  96%| 191/198 [Elapsed: 1:17:14 < Remaining: 03:03, 26.19s/it][0m
-Running[eval]:   0%|          | 0/1 [1:17:14<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  96%|█████████▋| 191/198 [1:17:14<03:03, 26.19s/it][A
-Evaluating[gpqa_diamond]:  97%|█████████▋| 192/198 [1:17:55<03:21, 33.64s/it][A
-Evaluating[gpqa_diamond]:  97%|█████████▋| 192/198 [1:17:55<03:21, 33.64s/it][A                                                             
-                                                                             [A2026-05-08 16:55:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  97%| 192/198 [Elapsed: 1:18:14 < Remaining: 03:21, 33.64s/it][0m
-Running[eval]:   0%|          | 0/1 [1:18:14<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  97%|█████████▋| 192/198 [1:18:14<03:21, 33.64s/it][A                                                             
-                                                                             [A2026-05-08 16:56:28 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  97%| 192/198 [Elapsed: 1:19:14 < Remaining: 03:21, 33.64s/it][0m
-Running[eval]:   0%|          | 0/1 [1:19:14<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  97%|█████████▋| 192/198 [1:19:14<03:21, 33.64s/it][A                                                             
-                                                                             [A2026-05-08 16:57:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  97%| 192/198 [Elapsed: 1:20:14 < Remaining: 03:21, 33.64s/it][0m
-Running[eval]:   0%|          | 0/1 [1:20:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  97%|█████████▋| 192/198 [1:20:14<03:21, 33.64s/it][A
-Evaluating[gpqa_diamond]:  97%|█████████▋| 193/198 [1:21:12<06:54, 82.84s/it][A
-Evaluating[gpqa_diamond]:  97%|█████████▋| 193/198 [1:21:12<06:54, 82.84s/it][A                                                             
-                                                                             [A2026-05-08 16:58:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  97%| 193/198 [Elapsed: 1:21:14 < Remaining: 06:54, 82.84s/it][0m
-Running[eval]:   0%|          | 0/1 [1:21:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  97%|█████████▋| 193/198 [1:21:14<06:54, 82.84s/it][A
-Evaluating[gpqa_diamond]:  98%|█████████▊| 194/198 [1:21:53<04:41, 70.29s/it][A
-Evaluating[gpqa_diamond]:  98%|█████████▊| 194/198 [1:21:53<04:41, 70.29s/it][A                                                             
-                                                                             [A2026-05-08 16:59:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  98%| 194/198 [Elapsed: 1:22:14 < Remaining: 04:41, 70.29s/it][0m
-Running[eval]:   0%|          | 0/1 [1:22:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  98%|█████████▊| 194/198 [1:22:14<04:41, 70.29s/it][A                                                             
-                                                                             [A2026-05-08 17:00:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  98%| 194/198 [Elapsed: 1:23:14 < Remaining: 04:41, 70.29s/it][0m
-Running[eval]:   0%|          | 0/1 [1:23:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  98%|█████████▊| 194/198 [1:23:14<04:41, 70.29s/it][A
-Evaluating[gpqa_diamond]:  98%|█████████▊| 195/198 [1:23:28<03:53, 77.71s/it][A
-Evaluating[gpqa_diamond]:  98%|█████████▊| 195/198 [1:23:28<03:53, 77.71s/it][A                                                             
-                                                                             [A2026-05-08 17:01:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  98%| 195/198 [Elapsed: 1:24:15 < Remaining: 03:53, 77.71s/it][0m
-Running[eval]:   0%|          | 0/1 [1:24:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  98%|█████████▊| 195/198 [1:24:15<03:53, 77.71s/it][A
-Evaluating[gpqa_diamond]:  99%|█████████▉| 196/198 [1:25:14<02:51, 85.90s/it][A
-Evaluating[gpqa_diamond]:  99%|█████████▉| 196/198 [1:25:14<02:51, 85.90s/it][A                                                             
-                                                                             [A2026-05-08 17:02:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 196/198 [Elapsed: 1:25:15 < Remaining: 02:51, 85.90s/it][0m
-Running[eval]:   0%|          | 0/1 [1:25:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 196/198 [1:25:15<02:51, 85.90s/it][A                                                             
-                                                                             [A2026-05-08 17:03:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 196/198 [Elapsed: 1:26:15 < Remaining: 02:51, 85.90s/it][0m
-Running[eval]:   0%|          | 0/1 [1:26:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 196/198 [1:26:15<02:51, 85.90s/it][A                                                             
-                                                                             [A2026-05-08 17:04:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 196/198 [Elapsed: 1:27:15 < Remaining: 02:51, 85.90s/it][0m
-Running[eval]:   0%|          | 0/1 [1:27:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 196/198 [1:27:15<02:51, 85.90s/it][A
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:28:00<01:49, 109.94s/it][A
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:28:00<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:05:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:28:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:28:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:28:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:06:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:29:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:29:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:29:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:07:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:30:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:30:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:30:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:08:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:31:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:31:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:31:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:09:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:32:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:32:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:32:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:10:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:33:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:33:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:33:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:11:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:34:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:34:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:34:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:12:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:35:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:35:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:35:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:13:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:36:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:36:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:36:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:14:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:37:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:37:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:37:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:15:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:38:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:38:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:38:15<01:49, 109.94s/it][A                                                             
-                                                                              [A2026-05-08 17:16:29 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond]  99%| 197/198 [Elapsed: 1:39:15 < Remaining: 01:49, 109.94s/it][0m
-Running[eval]:   0%|          | 0/1 [1:39:15<?, ?benchmark/s]
-Evaluating[gpqa_diamond]:  99%|█████████▉| 197/198 [1:39:15<01:49, 109.94s/it][A
-Evaluating[gpqa_diamond]: 100%|██████████| 198/198 [1:39:27<00:00, 283.10s/it][A
-Evaluating[gpqa_diamond]: 100%|██████████| 198/198 [1:39:27<00:00, 283.10s/it][A                                                             
-                                                                              [A2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Evaluating[gpqa_diamond] 100%| 198/198 [Elapsed: 1:39:27 < Remaining: 00:00, 283.10s/it][0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]
-Evaluating[gpqa_diamond]: 100%|██████████| 198/198 [1:39:27<00:00, 283.10s/it][AEvaluating[gpqa_diamond]: 100%|██████████| 198/198 [1:39:27<00:00, 30.14s/it] 
-                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Unified pool finished for gpqa_diamond.[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Aggregating scores for subset: default[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Generating report...[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: 
-gpqa_diamond report table:
-+--------------+--------------+----------+----------+-------+---------+---------+
-| Model        | Dataset      | Metric   | Subset   |   Num |   Score | Cat.0   |
-+==============+==============+==========+==========+=======+=========+=========+
-| MiniMax-M2.7 | gpqa_diamond | mean_acc | default  |   198 |  0.8838 | default |
-+--------------+--------------+----------+----------+-------+---------+---------+ 
-[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Skipping report analysis (`analysis_report=False`).[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Dump report to: ./outputs/20260508_153714/reports/MiniMax-M2.7/gpqa_diamond.json 
-[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]                                                             2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Benchmark gpqa_diamond evaluation finished.[0m
-Running[eval]:   0%|          | 0/1 [1:39:27<?, ?benchmark/s]Running[eval]: 100%|██████████| 1/1 [1:39:27<00:00, 5967.69s/benchmark]                                                                       2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Running[eval] 100%| 1/1 [Elapsed: 1:39:27 < Remaining: 00:00, 5967.69s/benchmark][0m
-Running[eval]: 100%|██████████| 1/1 [1:39:27<00:00, 5967.69s/benchmark]Running[eval]: 100%|██████████| 1/1 [1:39:27<00:00, 5967.69s/benchmark]
-2026-05-08 17:16:41 - evalscope - [32mINFO[0m: Overall report table: 
-+--------------+--------------+----------+----------+-------+---------+---------+
-| Model        | Dataset      | Metric   | Subset   |   Num |   Score | Cat.0   |
-+==============+==============+==========+==========+=======+=========+=========+
-| MiniMax-M2.7 | gpqa_diamond | mean_acc | default  |   198 |  0.8838 | default |
-+--------------+--------------+----------+----------+-------+---------+---------+ 
-[0m
-2026-05-08 17:16:42 - evalscope - [32mINFO[0m: HTML report generated: /gpfs/gcsp/M2.7_verify/accuracy_test/GPQA-D/outputs/20260508_153714/reports/report.html[0m
-2026-05-08 17:16:42 - evalscope - [32mINFO[0m: HTML report generated: /gpfs/gcsp/M2.7_verify/accuracy_test/GPQA-D/outputs/20260508_153714/reports/report.html[0m
-2026-05-08 17:16:42 - evalscope - [32mINFO[0m: Finished evaluation for MiniMax-M2.7 on ['gpqa_diamond'][0m
-2026-05-08 17:16:42 - evalscope - [32mINFO[0m: Output directory: ./outputs/20260508_153714[0m

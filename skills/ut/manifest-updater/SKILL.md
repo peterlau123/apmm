@@ -1,7 +1,7 @@
 ---
 name: manifest-updater
-description: Worker Agent - Manifest 状态更新器，更新 manifest.json 状态、同步 Kanban、由 Supervisor 调用执行 Stage 5
-version: 3.0.0
+description: Worker Agent - Manifest 状态更新器，更新 manifest.json 状态，由 Supervisor 调用执行 Stage 5
+version: 3.1.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 update_status Stage
 ---
 
@@ -19,7 +19,6 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 update_status St
 │  • 读取 batch_results.json + handled_tests.json             │
 │  • 更新 manifest.json 状态                                   │
 │  • 计算统计数据                                              │
-│  • 同步 Kanban（可选）                                       │
 │  • 返回极简结果给 Supervisor                                │
 │                                                             │
 │  输入：batch_results.json + handled_tests.json               │
@@ -64,17 +63,9 @@ flowchart TB
         S3_3["更新 statistics"]
     end
     
-    Step3 --> Step4
-    
-    subgraph Step4["[Step 4] Kanban 同步"]
-        S4_1["移动 batch lane"]
-        S4_2["更新 workflow card"]
-        S4_3["添加 milestone note"]
-    end
-    
-    Step4 --> Step5
-    
-    subgraph Step5["[Step 5] 返回结果"]
+    Step3 --> Step5
+
+subgraph Step5["[Step 4] 返回结果"]
         S5_1["写入 manifest.json"]
         S5_2["返回极简 stats"]
         S5_3["Session 结束"]
@@ -99,7 +90,6 @@ flowchart TB
 | 类型 | 内容 | 说明 |
 |------|------|------|
 | **文件** | manifest.json | 更新后的状态文件 |
-| **Kanban** | lane/card 更新 | 进度同步 |
 | **返回** | stats (极简) | 给 Supervisor 的返回值 |
 
 ---
@@ -110,17 +100,16 @@ flowchart TB
 
 ```python
 import json
-import yaml
 from pathlib import Path
 
-# 从 workflow.yaml 读取路径配置（不硬编码）
-workflow_config = yaml.safe_load(Path(".agents/workflow.yaml").read_text())
-paths = workflow_config["config"]
+# 从 workflow_state.json 读取路径配置（不硬编码）
+from shared.config_loader import get_paths
+paths = get_paths(workflow_state_path)
 
-# 读取输入文件（路径从 workflow.yaml 读取）
-batch_results_path = paths["batch_results_path"]
-handled_tests_path = paths["handled_tests_path"]
-manifest_path = paths["manifest_path"]
+# 读取输入文件
+batch_results_path = paths["batch_results"]
+handled_tests_path = paths["handled_tests"]
+manifest_path = paths["manifest"]
 
 batch_results = json.loads(Path(batch_results_path).read_text())
 handled_tests = json.loads(Path(handled_tests_path).read_text()) if Path(handled_tests_path).exists() else None
@@ -183,44 +172,7 @@ manifest["statistics"] = {
 }
 ```
 
-### Step 4: Kanban 同步（可选）
-
-```python
-from hermes import kanban
-
-batch_id = batch_results["batch_id"]
-
-# 决定目标 lane
-if handled_tests["stats"]["passed"] > 0:
-    target_lane = "Passed"
-else:
-    target_lane = "Failed"
-
-# 移动 batch lane
-kanban.move_lane(
-    board="UT Test Progress",
-    from_lane=f"batch_{batch_id}",
-    to_lane=target_lane,
-    summary=f"{passed}/{batch_results['stats']['total']} passed"
-)
-
-# 更新 workflow card
-kanban.update_card(
-    board="UT Test Progress",
-    lane="Workflow Status",
-    progress=f"{passed}/{total} ({progress}%)"
-)
-
-# milestone note
-if passed % 100 == 0:
-    kanban.add_note(
-        board="UT Test Progress",
-        lane="Workflow Status",
-        note=f"Milestone: {passed} tests passed!"
-    )
-```
-
-### Step 5: 写入文件并返回
+### Step 4: 写入文件并返回
 
 ```python
 # 写入 manifest.json
@@ -284,8 +236,7 @@ return {
 | **前置** | batch_results.json 存在 | Stage 3 输出 |
 | **前置** | handled_tests.json 存在 | Stage 4 输出 |
 | **后置** | manifest.json 更新 | 输出文件 |
-| **后置** | Kanban 同步 | 进度可视化 |
-| **后置** | 返回 stats + progress | 极简返回值 |
+| **后置** | 返回 stats | 极简返回值 |
 | **后置** | Supervisor 检查 stop_condition | pending_count == 0 |
 
 ---
@@ -294,9 +245,8 @@ return {
 
 1. **必须合并 handled_tests**：Stage 4 的处理结果必须合并到 manifest
 2. **statistics 自动计算**：不手动计算，由脚本更新
-3. **Kanban 同步时机**：每批次完成后同步
-4. **极简返回**：只返回 stats 数字，不返回 manifest 内容
-5. **ignored_reason 必填**：所有 ignored 测试必须有原因
+3. **极简返回**：只返回 stats 数字，不返回 manifest 内容
+4. **ignored_reason 必填**：所有 ignored 测试必须有原因
 
 ---
 
@@ -306,7 +256,6 @@ return {
 - ❌ 不直接编辑 manifest.json（通过脚本）
 - ❌ 不返回 manifest 详细内容（只返回 stats）
 - ❌ 不发送飞书通知（让 Supervisor 发送）
-- ❌ 不跳过 Kanban 同步
 
 ---
 

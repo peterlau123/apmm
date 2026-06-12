@@ -18,13 +18,14 @@ init_workflow_state.py - 初始化 workflow_state.json
     python init_workflow_state.py --reset
 """
 
-import json
 import argparse
-import yaml
+import json
 import shutil
-from pathlib import Path
-from datetime import datetime, timezone
 import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+import yaml
 
 SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent.parent
@@ -78,7 +79,11 @@ def create_manifest_from_test_list(test_list_path: Path, manifest_path: Path) ->
     if not test_list_path.exists():
         return 0
 
-    lines = [l.strip() for l in test_list_path.read_text().splitlines() if l.strip() and not l.startswith("#")]
+    lines = [
+        l.strip()
+        for l in test_list_path.read_text().splitlines()
+        if l.strip() and not l.startswith("#")
+    ]
 
     tests = []
     for i, node in enumerate(lines, 1):
@@ -86,20 +91,22 @@ def create_manifest_from_test_list(test_list_path: Path, manifest_path: Path) ->
         parts = node.split("::")
         test_file = parts[0] if len(parts) >= 1 else node
         test_name = parts[1] if len(parts) >= 2 else ""
-        tests.append({
-            "id": i,
-            "test_node": node,
-            "test_file": test_file,
-            "test_name": test_name,
-            "status": "pending"
-        })
+        tests.append(
+            {
+                "id": i,
+                "test_node": node,
+                "test_file": test_file,
+                "test_name": test_name,
+                "status": "pending",
+            }
+        )
 
     manifest = {
         "version": "2.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "test_list_file",
         "tests": tests,
-        "statistics": {"total": len(tests), "pending": len(tests)}
+        "statistics": {"total": len(tests), "pending": len(tests)},
     }
 
     validate_and_write(manifest, "manifest", manifest_path)
@@ -111,7 +118,7 @@ def update_current_run_pointer(
     run_dir: Path,
     workflow_state_path: Path,
     test_list_path: Path = None,
-    status: str = "active"
+    status: str = "active",
 ) -> None:
     """
     更新 current_run.json 指针文件
@@ -128,7 +135,7 @@ def update_current_run_pointer(
         "run_dir": str(run_dir),
         "workflow_state_path": str(workflow_state_path),
         "started_at": datetime.now(timezone.utc).isoformat(),
-        "status": status
+        "status": status,
     }
 
     if test_list_path:
@@ -136,8 +143,7 @@ def update_current_run_pointer(
 
     agents_dir.mkdir(parents=True, exist_ok=True)
     pointer_file.write_text(
-        json.dumps(pointer_data, indent=2, ensure_ascii=False),
-        encoding="utf-8"
+        json.dumps(pointer_data, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print(f"[INFO] current_run.json 指针已更新: {pointer_file}")
 
@@ -147,7 +153,7 @@ def create_initial_state(
     run_dir: Path = None,
     manifest_path: Path = None,
     test_list_source: Path = None,
-    reset: bool = False
+    reset: bool = False,
 ) -> dict:
     """
     创建初始 workflow_state.json
@@ -156,7 +162,7 @@ def create_initial_state(
         workflow_yaml_path: workflow.yaml 路径
         run_dir: 运行目录路径（可选，如果不指定则自动创建）
         manifest_path: manifest.json 路径（可选，默认在 run_dir 下）
-        test_list_source: test_list.txt 原始路径（可选，会拷贝到 run_dir）
+        test_list_source: test_list.txt 原始路径（可选，优先级高于 workflow.yaml 配置）
         reset: 是否重置状态
 
     Returns:
@@ -173,7 +179,9 @@ def create_initial_state(
 
     # 创建或使用运行目录
     if run_dir is None:
-        run_dir = create_run_dir(test_name=test_name, workflow_yaml_path=workflow_yaml_path)
+        run_dir = create_run_dir(
+            test_name=test_name, workflow_yaml_path=workflow_yaml_path
+        )
     else:
         run_dir = Path(run_dir)
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -185,6 +193,15 @@ def create_initial_state(
     batches_dir = run_dir / "batches"
     batches_dir.mkdir(exist_ok=True)
     print(f"[INFO] 批次目录已创建: {batches_dir}")
+
+    # 确定 test_list_source：优先使用命令行参数，否则从 workflow.yaml 读取
+    if test_list_source is None:
+        # 从 workflow.yaml 的 input_filter.test_list_path 读取
+        input_filter = config.get("input_filter", {})
+        test_list_from_yaml = input_filter.get("test_list_path")
+        if test_list_from_yaml:
+            test_list_source = Path(test_list_from_yaml)
+            print(f"[INFO] 从 workflow.yaml 读取 test_list 路径: {test_list_source}")
 
     # 拷贝 test_list.txt（如果指定）
     test_list_path = None
@@ -201,7 +218,9 @@ def create_initial_state(
     if workflow_state_path.exists() and not reset:
         print(f"[INFO] workflow_state.json 已存在，跳过初始化")
         state = json.loads(workflow_state_path.read_text(encoding="utf-8"))
-        update_current_run_pointer(agents_dir, run_dir, workflow_state_path, test_list_path)
+        update_current_run_pointer(
+            agents_dir, run_dir, workflow_state_path, test_list_path
+        )
         return state
 
     now = datetime.now(timezone.utc).isoformat()
@@ -221,12 +240,10 @@ def create_initial_state(
             "version": workflow_version,
             "test_name": test_name,
             "started_at": now,
-            "status": "initialized"
+            "status": "initialized",
         },
-
         "current_stage": "collect",
         "iteration": 0,
-
         "paths": {
             "run_dir": str(run_dir),
             "workflow_yaml": str(workflow_yaml_path),
@@ -236,9 +253,8 @@ def create_initial_state(
             "batches_dir": str(batches_dir),
             "logs_dir": str(run_dir / "logs"),
             "reports_dir": str(run_dir / "reports"),
-            "workflow_state": str(workflow_state_path)
+            "workflow_state": str(workflow_state_path),
         },
-
         "stats": {
             "total_tests": total_count,
             "passed": 0,
@@ -246,35 +262,22 @@ def create_initial_state(
             "error": 0,
             "ignored": 0,
             "pending": pending_count,
-            "error_rate": 0.0
+            "error_rate": 0.0,
         },
-
-        "current_batch": {
-            "batch_id": None,
-            "size": 0,
-            "started_at": None
-        },
-
+        "current_batch": {"batch_id": None, "size": 0, "started_at": None},
         "flags": {
             "stop_requested": False,
             "pause_requested": False,
             "pause_reason": None,
-            "consecutive_failures": 0
+            "consecutive_failures": 0,
         },
-
         "last_update": now,
         "last_worker_result": {
-            "stats": {
-                "passed": 0,
-                "failed": 0,
-                "error": 0,
-                "ignored": 0,
-                "pending": 0
-            },
+            "stats": {"passed": 0, "failed": 0, "error": 0, "ignored": 0, "pending": 0},
             "next_action": "continue",
             "error": None,
-            "blocked_reason": None
-        }
+            "blocked_reason": None,
+        },
     }
 
     # 校验后写入 workflow_state.json
@@ -302,27 +305,47 @@ def reset_state(
     workflow_yaml_path: Path,
     run_dir: Path = None,
     manifest_path: Path = None,
-    test_list_source: Path = None
+    test_list_source: Path = None,
 ) -> dict:
     """重置状态文件"""
     print("[INFO] 重置 workflow_state.json...")
-    return create_initial_state(workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=True)
+    return create_initial_state(
+        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=True
+    )
 
 
 def main():
-    parser = argparse.ArgumentParser(description="初始化 workflow_state.json 并创建动态运行目录")
-    parser.add_argument("--workflow-yaml", type=str,
-                        default=str(Path(__file__).parent.parent.parent.parent.parent / ".agents" / "workflow.yaml"),
-                        help="workflow.yaml 配置文件路径")
-    parser.add_argument("--run-dir", type=str,
-                        default=None,
-                        help="指定运行目录路径（默认：自动创建 {runs_dir}/{test_name}-{timestamp}）")
-    parser.add_argument("--manifest-path", type=str,
-                        default=None,
-                        help="manifest.json 文件路径（默认：run_dir/manifest.json）")
-    parser.add_argument("--test-list", type=str,
-                        default=None,
-                        help="test_list.txt 原始文件路径（将拷贝到运行目录）")
+    parser = argparse.ArgumentParser(
+        description="初始化 workflow_state.json 并创建动态运行目录"
+    )
+    parser.add_argument(
+        "--workflow-yaml",
+        type=str,
+        default=str(
+            Path(__file__).parent.parent.parent.parent.parent
+            / ".agents"
+            / "workflow.yaml"
+        ),
+        help="workflow.yaml 配置文件路径",
+    )
+    parser.add_argument(
+        "--run-dir",
+        type=str,
+        default=None,
+        help="指定运行目录路径（默认：自动创建 {runs_dir}/{test_name}-{timestamp}）",
+    )
+    parser.add_argument(
+        "--manifest-path",
+        type=str,
+        default=None,
+        help="manifest.json 文件路径（默认：run_dir/manifest.json）",
+    )
+    parser.add_argument(
+        "--test-list",
+        type=str,
+        default=None,
+        help="test_list.txt 原始文件路径（将拷贝到运行目录）",
+    )
     parser.add_argument("--reset", action="store_true", help="重置状态文件")
 
     args = parser.parse_args()
@@ -332,7 +355,9 @@ def main():
     manifest_path = Path(args.manifest_path) if args.manifest_path else None
     test_list_source = Path(args.test_list) if args.test_list else None
 
-    create_initial_state(workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=args.reset)
+    create_initial_state(
+        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=args.reset
+    )
 
 
 if __name__ == "__main__":

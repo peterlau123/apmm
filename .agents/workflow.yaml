@@ -29,7 +29,7 @@ workflow:
   # ============================================================
   # ✍️：测试标识
   # ============================================================
-  test_name: "ut"  # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
+  test_name: "ut" # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
 
 # ============================================================
 # Config - 路径和执行配置
@@ -37,12 +37,12 @@ workflow:
 config:
   # ✍️：核心路径定义
   workspace: &workspace "D:/workspace/apmm"
-  runs_dir: &runs_dir "D:/workspace/apmm/runs"  # 运行目录根目录
+  runs_dir: &runs_dir "D:/workspace/apmm/runs" # 运行目录根目录
 
   # 动态运行目录（workflow启动时创建）
   # 格式: {runs_dir}/{test_name}-{timestamp}
   # 示例: D:/workspace/apmm/runs/ut-20260610-120000
-  run_dir: &run_dir null  # 启动时由 init_workflow_state.py 动态生成
+  run_dir: &run_dir null # 启动时由 init_workflow_state.py 动态生成
 
   # Schema 文件（固定位置）
   manifest_schema_path: &manifest_schema_path "{workspace}/skills/ut/shared/manifest_schema.json"
@@ -53,7 +53,7 @@ config:
   # 标准化路径（相对于 run_dir）
   # 注意：{run_dir} 占位符在运行时替换为实际路径
   # {batch_id} 占位符在循环执行时替换为当前批次ID
-  test_list_path: &test_list_path "{run_dir}/test_list.txt"  # 拷贝后的位置
+  test_list_path: &test_list_path "{run_dir}/test_list.txt" # 拷贝后的位置
   manifest_path: &manifest_path "{run_dir}/manifest.json"
   workflow_state_path: &workflow_state_path "{run_dir}/workflow_state.json"
   logs_dir: &logs_dir "{run_dir}/logs"
@@ -61,8 +61,8 @@ config:
 
   # 批次文件路径（使用批次子目录避免覆盖）
   # 格式: {run_dir}/batches/{batch_id}/
-  batches_dir: &batches_dir "{run_dir}/batches"  # 批次目录根
-  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}"  # 单批次目录模板
+  batches_dir: &batches_dir "{run_dir}/batches" # 批次目录根
+  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}" # 单批次目录模板
   batch_config_path: &batch_config_path "{run_dir}/batches/{batch_id}/batch_config.json"
   batch_results_path: &batch_results_path "{run_dir}/batches/{batch_id}/batch_results.json"
   handled_tests_path: &handled_tests_path "{run_dir}/batches/{batch_id}/handled_tests.json"
@@ -82,10 +82,10 @@ config:
 
   # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"
-  batch_size: 50  # ⚠️ 控制 ≤100 避免 delegate_task 超时
+  batch_size: 50 # ⚠️ 控制 ≤100 避免 delegate_task 超时
 
   # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）
-  resume_from: null  # 例如: "D:/workspace/apmm/runs/ut-20260612-101857"
+  resume_from: null # 例如: "D:/workspace/apmm/runs/ut-20260612-101857"
 
 # ============================================================
 # Input Filter - Stage 1 输入处理配置
@@ -99,26 +99,26 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_failed.txt"
+  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_error.txt"
 
   # 场景 2: 用户指定的输入 manifest.json
   manifest_source: null #"D:/workspace/apmm/tasks/ut/test_analysis/manifest.json"
 
   # 范围截取（适用于场景 1 和 2.1）
-  range: null  # 格式: "0-100" 或 "50:100"，null 表示全部
+  range: null # 格式: "0-100" 或 "50:100"，null 表示全部
 
   # 筛选条件（适用于场景 2.2）
   filter:
-    status: null      # ["pending", "failed", "error", ...] 或 null（全部）
-    error_type: null  # ["dependency", "network", "resource", "functional", ...] 或 null（全部）
-    count: null       # N: 跑多少个，null 表示筛选后全部
+    status: null # ["pending", "failed", "error", ...] 或 null（全部）
+    error_type: null # ["dependency", "network", "resource", "functional", ...] 或 null（全部）
+    count: null # N: 跑多少个，null 表示筛选后全部
 
   # 场景 4: 远程 pytest collect 配置
   remote_collect:
-    enabled: false    # 是否启用远程 pytest --collect-only
-    server: "t_h20"   # 远程服务器
-    container: "v0.13.0_torch2.5.1_compile"  # Docker 容器
-    vllm_dir: "/gpfs/gcsp/M2.7_verify/vllm"  # vLLM 目录
+    enabled: false # 是否启用远程 pytest --collect-only
+    server: "t_h20" # 远程服务器
+    container: "v0.13.0_torch2.5.1_compile" # Docker 容器
+    vllm_dir: "/gpfs/gcsp/M2.7_verify/vllm" # vLLM 目录
 
 # ============================================================
 # Stages - 5个阶段的定义
@@ -147,7 +147,7 @@ stages:
     description: 选择下一批次测试
     input:
       manifest_path: *manifest_path
-      batch_size: 50  # ⚠️ 控制 ≤100 避免 delegate_task 超时
+      batch_size: 50 # ⚠️ 控制 ≤100 避免 delegate_task 超时
     output:
       batch_config_path: *batch_config_path
     kanban:
@@ -229,18 +229,18 @@ loop:
     - update_status
   stop_condition: "pending_count == 0"
   max_iterations: 1000
-  
+
   break_conditions:
     - condition: "consecutive_failures > 50"
       action: pause
       notify: true
       kanban_note: "Paused: consecutive_failures > 50"
-      
+
     - condition: "error_rate > 0.8"
       action: pause
       notify: true
       kanban_note: "Paused: error_rate > 80%"
-      
+
     - condition: "stop_requested == true"
       action: stop
       notify: true
@@ -253,44 +253,44 @@ loop:
 # ============================================================
 kanban:
   enabled: false
-  
+
   board:
     name: "UT Test Progress"
     description: "vLLM M2.7 单元测试进度追踪"
-    
+
     lanes:
       - name: Backlog
         description: "待执行的测试"
         status_mapping: pending
-        
+
       - name: Running
         description: "正在执行的batch"
         status_mapping: running
         color: blue
-        
+
       - name: Passed
         description: "通过的batch"
         status_mapping: passed
         color: green
-        
+
       - name: Failed
         description: "失败的batch"
         status_mapping: failed
         color: red
-        
+
       - name: Ignored
         description: "跳过的测试"
         status_mapping: ignored
         color: gray
-        
+
       - name: Workflow Status
         description: "Workflow整体状态"
         special: true
-    
+
     cards:
       test_cards:
         enabled: false
-        
+
       batch_lanes:
         enabled: true
         template:
@@ -298,7 +298,7 @@ kanban:
           description: "{batch_size} tests"
           tags:
             - batch
-            
+
       workflow_card:
         enabled: true
         title: "UT Workflow Progress"
@@ -307,13 +307,13 @@ kanban:
           - iteration_complete
           - milestone
         progress_template: "{passed}/{total} ({progress_rate}%)"
-  
+
   sync:
     triggers:
       - stage: update_status
       - condition: "iteration % 10 == 0"
       - condition: "stats.passed % 100 == 0"
-    
+
     content:
       - stats:
           - passed
@@ -333,13 +333,13 @@ kanban:
 worker_output_schema:
   stats:
     passed: integer
-    failed: integer      # AssertionError 等断言失败
-    error: integer       # Collection/Import/Download 错误
+    failed: integer # AssertionError 等断言失败
+    error: integer # Collection/Import/Download 错误
     ignored: integer
     pending: integer
-  next_action: string    # continue | pause | stop | wait
-  error: string_or_null  # Worker 错误信息（需要人工介入时）
-  blocked_reason: string_or_null  # 阻塞原因（GPU不足等）
+  next_action: string # continue | pause | stop | wait
+  error: string_or_null # Worker 错误信息（需要人工介入时）
+  blocked_reason: string_or_null # 阻塞原因（GPU不足等）
 
 # 注意：不返回 batch_id、log_file、details_file、kanban_update 等额外字段
 # 所有 Worker 只返回上述统一格式
@@ -349,26 +349,26 @@ worker_output_schema:
 # ============================================================
 notifications:
   feishu_chat_id: "oc_2e75db818ac1792238037a704b4d32d3"
-  
+
   notify_on:
     - condition: "batch_completed"
       template: "Batch {batch_id}: {passed}/{total} passed"
       include_kanban_link: true
-      
+
     - condition: "workflow_completed"
       template: "Workflow完成: {passed_count} passed, {failed_count} failed, {ignored_count} ignored"
       include_kanban_snapshot: true
-      
+
     - condition: "milestone"
       trigger: "stats.passed % 100 == 0"
       template: "Milestone: {passed_count} tests passed!"
-      
+
     - condition: "error_rate > 0.5"
       template: "高错误率: {error_rate}%"
-      
+
     - condition: "paused"
       template: "Workflow暂停: {pause_reason}"
-      
+
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
 
@@ -380,7 +380,7 @@ execution:
     max_context_tokens: 10000
     reload_state_interval: 1
     cleanup_history: true
-  
+
   worker:
     timeout_per_stage: 600
     max_retries: 3

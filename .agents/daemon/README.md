@@ -40,7 +40,7 @@ python D:\workspace\apmm\.agents\daemon\check_status.py
 | Agent | 路径 | 说明 |
 |-------|------|------|
 | Supervisor | `skills/ut/supervisor/scripts/supervisor_loop.py` | 监控Agent |
-| Runner | `skills/ut/unit-test-runner/scripts/start_loop.py` | 测试执行 |
+| Runner | `skills/ut/unit-test-executor/scripts/start_loop.py` | 测试执行 |
 | Environment | 按需启动 | GPU/容器监控 |
 | Bastion | 按需启动 | SSH堡垒机 |
 
@@ -60,7 +60,7 @@ D:\workspace\apmm\.agents\config.json
 {
   "agents": {
     "supervisor": { "enabled": true },
-    "unit-test-runner": { "enabled": true },
+    "unit-test-executor": { "enabled": true },
     "environment": { "enabled": false },
     "bastion": { "enabled": false }
   }

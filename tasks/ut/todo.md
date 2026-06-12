@@ -166,8 +166,8 @@
 - batch_config_schema.json → skills/ut/batch-selector/
 - batch_results_schema.json → skills/ut/unit-test-executor/
 - handled_tests_schema.json → skills/ut/failure-handler/
-- workflow_state_schema.json → skills/ut/supervisor/
-- workflow_schema.yaml → skills/ut/supervisor/ (新建)
+- workflow_state_schema.json → skills/ut/workflow/
+- workflow_schema.yaml → skills/ut/workflow/ (新建)
 - manifest_schema.json → skills/ut/shared/ (已更新)
 
 **Phase 2**: 校验脚本创建
@@ -212,13 +212,6 @@
   - 新增 `--with-results`, `--extract-only` 选项
   - 新增函数: extract_remote_log(), parse_batch_results(), run_batch_with_results()
   - 测试: syntax OK
-
----
-
-## Session 进度追踪
-
-- Session 进度文件: [session_progress_2026-06-11.md](session_progress_2026-06-11.md)
-- 累计成本: $54.18（高）
 
 ---
 

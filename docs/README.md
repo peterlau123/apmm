@@ -4,27 +4,7 @@
 
 ---
 
-## 主要入口
-
-| 文档 | 说明 |
-|------|------|
-| **[PROGRESS.md](../PROGRESS.md)** | 项目总进度概览（各模块汇总） |
-
----
-
-## 各模块文档入口
-
-| 模块 | 文档入口 | 说明 |
-|------|---------|------|
-| **vLLM验证** | [vllm/](../vllm/) | vLLM v0.13.0 + PyTorch 2.5.1 验证 |
-| **单元测试** | [vllm/2.5.1/ut/docs/](../vllm/2.5.1/ut/docs/) | UT目标、进度、报告、指南 |
-| **精度测试** | [accuracy/](../accuracy/) | GPQA-Diamond, Multi-SWE-bench |
-| **功能测试** | [feature/](../feature/) | API兼容性、多卡并行 |
-| **性能测试** | [performance/](../performance/) | 吞吐量、延迟基准 |
-
----
-
-## 项目级指南 (guides/)
+## 项目级指南
 
 | 文档 | 说明 |
 |------|------|
@@ -34,7 +14,7 @@
 
 ---
 
-## 项目级参考文档 (reference/)
+## 项目级参考文档
 
 | 文档 | 说明 |
 |------|------|
@@ -42,34 +22,18 @@
 
 ---
 
-## 文档结构
+## 自动化设计文档
 
-```
-apmm/
-├── PROGRESS.md          # 项目总进度（各模块汇总）
-├── README.md            # 项目说明
-│
-├── docs/                # 【项目级文档】
-│   ├── README.md        # 本文件
-│   ├── guides/          # 环境配置、堡垒机、问题排查
-│   └── reference/       # 工作流程、架构说明
-│
-├── vllm/                # 【vLLM验证模块】
-│   ├── README.md        # vLLM验证说明
-│   └── 2.5.1/           # vLLM v0.13.0 + PyTorch 2.5.1
-│       ├── PROGRESS.md  # PyTorch 2.5.1 进度
-│       └── ut/          # 单元测试
-│           ├── PROGRESS.md  # UT详细进度
-│           ├── GOAL.md      # UT目标
-│           ├── WORKLOG.md   # UT工作日志
-│           └── docs/        # UT专用文档
-│
-├── accuracy/            # 【精度测试模块】
-├── feature/             # 【功能测试模块】
-├── performance/         # 【性能测试模块】
-└── pytorch/             # 【PyTorch验证模块】
-```
+| 文档 | 状态 | 说明 |
+|:----:|:----:|------|
+| [2026-06-08-agent-automation-design.md](superpowers/specs/2026-06-08-agent-automation-design.md) | ✅ Active | 双 Agent 自动化方案 |
+| [test-automation-design.md](superpowers/specs/2026-06-05-test-automation-design.md) | ✅ Active | 测试自动化详细设计 |
+| [test-execution-plan-design.md](superpowers/specs/2026-06-05-test-execution-plan-design.md) | ✅ Active | 多轮分层执行计划 |
+| [unit-test-executor-agent/README.md](superpowers/specs/agents/unit-test-executor-agent/README.md) | ✅ Active | Runner Agent 详细设计 |
+| [supervisor-agent/README.md](superpowers/specs/agents/supervisor-agent/README.md) | ✅ Active | Supervisor Agent 详细设计 |
+| [inbox-management-analysis.md](superpowers/specs/agents/inbox-management-analysis.md) | ✅ Active | Inbox 消息积压分析 |
+| [archive/](superpowers/specs/archive/) | ⚠️ Archived | 过时设计文档 |
 
 ---
 
-*更新时间: 2026-06-01*
+*更新时间: 2026-06-12*

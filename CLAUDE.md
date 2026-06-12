@@ -1,5 +1,20 @@
 # CLAUDE.md
 
+## ⚡ Superpowers Installed
+
+You have **Superpowers** — a software development methodology framework 
+
+**BEFORE responding to any request, you MUST:**
+1. Check if any superpower skill might apply (even 1% chance → use it)
+2. Read the relevant SKILL.md file from `skills/<skill>/SKILL.md` under the global storage path
+3. Follow it exactly
+
+**If multiple skills could apply, invoke them in this order:**
+1. Process skills first (brainstorming, debugging)
+2. Implementation skills second
+
+---
+
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.

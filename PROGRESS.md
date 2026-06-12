@@ -13,21 +13,21 @@
 |------|------|:----:|
 | 单元测试 | vLLM pytest 全通过 | 🔄 |
 | 精度测试 | GPQA-Diamond, Multi-SWE-bench | ✅ |
-| 功能测试 | API兼容性、多卡并行 | ⏳ |
+| 功能测试 | API 兼容性、多卡并行 | ⏳ |
 | 性能测试 | 吞吐量、延迟基准 | ⏳ |
-| PyTorch验证 | 2.5.1/2.7.0兼容性 | 🔄 |
+| PyTorch 验证 | 2.5.1/2.7.0 兼容性 | 🔄 |
 
 ---
 
-## 各模块进度概览
+## 各模块进度
 
 | 模块 | 进度入口 | 通过数 | 失败数 | 状态 |
 |------|---------|:------:|:------:|:----:|
-| **单元测试** | [vllm/2.5.1/ut/PROGRESS.md](vllm/2.5.1/ut/PROGRESS.md) | ~2,170 | ~160 | 🔄 |
-| **精度测试** | [accuracy/PROGRESS.md](accuracy/PROGRESS.md) | - | - | ✅ |
-| **功能测试** | [feature/PROGRESS.md](feature/PROGRESS.md) | - | - | ⏳ |
-| **性能测试** | [performance/PROGRESS.md](performance/PROGRESS.md) | - | - | ⏳ |
-| **vLLM验证** | [vllm/README.md](vllm/README.md) | - | - | 🔄 |
+| **单元测试** | [tasks/ut/PROGRESS.md](tasks/ut/PROGRESS.md) | 10,805 | 9,273 | 🔄 |
+| **编译测试** | [tasks/compile/PROGRESS.md](tasks/compile/PROGRESS.md) | - | - | ✅ |
+| **精度测试** | [tasks/accuracy/PROGRESS.md](tasks/accuracy/PROGRESS.md) | - | - | ✅ |
+| **功能测试** | [tasks/feature/](tasks/feature/) | - | - | ⏳ |
+| **性能测试** | [tasks/performance/](tasks/performance/) | - | - | ⏳ |
 
 ---
 
@@ -37,14 +37,20 @@
 |--------|-----|------|
 | t_h20 | 10.10.154.13 | 测试运行 (H20-3e×8) |
 | t_ascend | 10.250.121.21 | 下载资源 (联网) |
-| 堡垒机 | 10.10.192.55:22 | SSH网关 |
+| 堡垒机 | 10.10.192.55:22 | SSH 网关 |
+
+详见 [docs/guides/environment.md](docs/guides/environment.md)
 
 ---
 
-## 项目文档导航
+## 文档导航
 
-详见 **[docs/README.md](docs/README.md)** - 项目文档中心
+| 文档 | 说明 |
+|------|------|
+| [README.md](README.md) | 项目说明、快速开始 |
+| [AGENTS.md](AGENTS.md) | Agent 工作指南 |
+| [docs/README.md](docs/README.md) | 文档中心索引 |
 
 ---
 
-*更新时间: 2026-06-01*
+*更新时间: 2026-06-12*

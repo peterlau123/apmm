@@ -117,15 +117,14 @@ flowchart TB
 
 ```python
 import json
-import yaml
 from pathlib import Path
 
-# 从 workflow.yaml 读取路径配置（不硬编码）
-workflow_config = yaml.safe_load(Path(".agents/workflow.yaml").read_text())
-paths = workflow_config["config"]
+# 从 workflow_state.json 读取路径配置（不硬编码）
+from shared.config_loader import get_paths
+paths = get_paths(workflow_state_path)
 
 # 读取 batch_config
-batch_config_path = paths["batch_config_path"]
+batch_config_path = paths["batch_config"]
 batch_config = json.loads(Path(batch_config_path).read_text())
 
 tests = batch_config["tests"]
@@ -256,7 +255,7 @@ batch_results = {
 }
 
 # 写入 batch_results.json（路径从 workflow.yaml 读取）
-batch_results_path = paths["batch_results_path"]
+batch_results_path = paths["batch_results"]
 Path(batch_results_path).write_text(json.dumps(batch_results, indent=2))
 
 # 返回极简结果给 Supervisor（统一格式）

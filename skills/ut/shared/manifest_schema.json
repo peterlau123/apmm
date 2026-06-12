@@ -1,0 +1,252 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UT Test Manifest Schema",
+  "description": "vLLM单元测试清单文件格式定义",
+  "version": "2.0",
+  "type": "object",
+  "required": ["version", "generated_at", "source", "tests", "statistics"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "manifest版本号",
+      "enum": ["1.0", "2.0"],
+      "default": "2.0",
+      "_enum_comments": {
+        "1.0": "旧版本格式（已废弃）",
+        "2.0": "当前版本格式"
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "生成时间 (ISO 8601)"
+    },
+    "source": {
+      "type": "string",
+      "description": "数据来源",
+      "enum": ["pytest_collect", "test_list_file", "manual"],
+      "_enum_comments": {
+        "pytest_collect": "通过pytest --collect-only生成",
+        "test_list_file": "从用户指定的test_list.txt读取",
+        "manual": "手动创建"
+      }
+    },
+    "config": {
+      "type": "object",
+      "description": "Workflow配置引用",
+      "properties": {
+        "workflow_yaml": {
+          "type": "string",
+          "description": "workflow.yaml路径"
+        },
+        "run_dir": {
+          "type": "string",
+          "description": "运行目录路径"
+        }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "description": "测试列表",
+      "items": {
+        "type": "object",
+        "required": ["id", "test_node", "test_file", "test_name", "status"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "测试序号",
+            "minimum": 1
+          },
+          "test_node": {
+            "type": "string",
+            "description": "pytest测试节点 (tests/test_file.py::TestClass::test_method)"
+          },
+          "test_file": {
+            "type": "string",
+            "description": "测试文件路径 (tests/test_file.py)"
+          },
+          "test_name": {
+            "type": "string",
+            "description": "测试方法名 (test_method)"
+          },
+          "status": {
+            "type": "string",
+            "description": "测试状态",
+            "enum": ["pending", "running", "passed", "failed", "error", "ignored"],
+            "default": "pending",
+            "_enum_comments": {
+              "pending": "待执行",
+              "running": "正在执行",
+              "passed": "测试通过",
+              "failed": "断言失败（AssertionError）",
+              "error": "执行错误（Collection/Import/Download）",
+              "ignored": "已忽略（不执行）"
+            }
+          },
+          "priority": {
+            "type": "string",
+            "description": "优先级",
+            "enum": ["P0", "P1", "P2", "P3"],
+            "default": "P2",
+            "_enum_comments": {
+              "P0": "最高优先级（关键测试）",
+              "P1": "高优先级",
+              "P2": "普通优先级（默认）",
+              "P3": "低优先级"
+            }
+          },
+          "batch_id": {
+            "type": ["string", "null"],
+            "description": "所属批次ID"
+          },
+          "run_count": {
+            "type": "integer",
+            "description": "执行次数",
+            "default": 0,
+            "minimum": 0
+          },
+          "last_run_at": {
+            "type": ["string", "null"],
+            "format": "date-time",
+            "description": "最后执行时间"
+          },
+          "last_duration_ms": {
+            "type": ["integer", "null"],
+            "description": "最后执行耗时(毫秒)"
+          },
+          "last_exit_code": {
+            "type": ["integer", "null"],
+            "description": "最后执行退出码"
+          },
+          "error_type": {
+            "type": ["string", "null"],
+            "description": "错误类型分类",
+            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "other", null],
+            "_enum_comments": {
+              "dependency": "依赖缺失 (ImportError, ModuleNotFoundError)",
+              "network": "网络错误 (ConnectionError, HTTP 503/404)",
+              "resource": "资源不足 (CUDA OOM, GPU 不可用)",
+              "version": "版本兼容问题 (vLLM v0.13.0 + PyTorch 2.5.1 兼容性)",
+              "functional": "功能错误 (AssertionError, ValueError)",
+              "download_error": "模型下载失败 (Model not found, config.json missing)",
+              "other": "其他错误 (未分类的错误类型)",
+              "null": "无错误"
+            }
+          },
+          "error_message": {
+            "type": ["string", "null"],
+            "description": "错误信息摘要(最多500字符)"
+          },
+          "ignored_reason": {
+            "type": ["string", "null"],
+            "description": "忽略原因"
+          },
+          "fix_applied": {
+            "type": "boolean",
+            "description": "是否已应用修复",
+            "default": false
+          },
+          "fix_details": {
+            "type": ["string", "null"],
+            "description": "修复详情"
+          },
+          "log_file": {
+            "type": ["string", "null"],
+            "description": "日志文件路径"
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "统计数据",
+      "required": ["total", "pending"],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "总测试数",
+          "minimum": 0
+        },
+        "executed": {
+          "type": "integer",
+          "description": "已执行数 (passed + failed + error + ignored)",
+          "minimum": 0,
+          "default": 0
+        },
+        "progress": {
+          "type": "number",
+          "description": "进度百分比",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 0
+        },
+        "passed": {
+          "type": "integer",
+          "description": "通过数",
+          "minimum": 0,
+          "default": 0
+        },
+        "failed": {
+          "type": "integer",
+          "description": "失败数(断言错误)",
+          "minimum": 0,
+          "default": 0
+        },
+        "error": {
+          "type": "integer",
+          "description": "错误数(收集/执行错误)",
+          "minimum": 0,
+          "default": 0
+        },
+        "ignored": {
+          "type": "integer",
+          "description": "忽略数",
+          "minimum": 0,
+          "default": 0
+        },
+        "pending": {
+          "type": "integer",
+          "description": "待执行数",
+          "minimum": 0
+        },
+        "pass_rate": {
+          "type": "number",
+          "description": "通过率",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 0
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "元数据",
+      "properties": {
+        "vllm_version": {
+          "type": "string",
+          "description": "vLLM版本"
+        },
+        "torch_version": {
+          "type": "string",
+          "description": "PyTorch版本"
+        },
+        "python_version": {
+          "type": "string",
+          "description": "Python版本"
+        },
+        "platform": {
+          "type": "string",
+          "description": "平台信息"
+        },
+        "gpu_info": {
+          "type": "string",
+          "description": "GPU信息"
+        },
+        "notes": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    }
+  }
+}

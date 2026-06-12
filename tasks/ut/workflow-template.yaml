@@ -1,0 +1,146 @@
+# workflow-template.yaml - UT Workflow 配置模板
+# Hierarchical Agent Architecture: Supervisor + Worker
+# Version: 2.0
+
+workflow:
+  name: UT Test Workflow Template
+  version: "2.0"
+  description: 单元测试批量执行 Workflow 模板
+
+# ============================================================
+# Config - 路径和执行配置（根据项目修改）
+# ============================================================
+config:
+  # 本地工作目录
+  workspace: &workspace "YOUR_PROJECT_PATH"
+  state_dir: &state_dir "YOUR_PROJECT_PATH/.agents"
+  
+  # 核心文件路径
+  manifest_path: &manifest_path "YOUR_PROJECT_PATH/tasks/ut/test_analysis/manifest.json"
+  batch_config_path: &batch_config_path "YOUR_PROJECT_PATH/.agents/batch_config.json"
+  batch_results_path: &batch_results_path "YOUR_PROJECT_PATH/.agents/batch_results.json"
+  handled_tests_path: &handled_tests_path "YOUR_PROJECT_PATH/.agents/handled_tests.json"
+  workflow_state_path: &workflow_state_path "YOUR_PROJECT_PATH/.agents/workflow_state.json"
+  
+  # 远程执行配置
+  remote_server: "YOUR_REMOTE_SERVER"  # 如: t_h20
+  docker_container: "YOUR_CONTAINER_NAME"
+  vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
+  ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+  
+  # pytest 参数偏好
+  pytest_args: "-q --tb=long"
+  batch_size: 50  # ⚠️ 控制 ≤100 避免 delegate_task 超时
+
+# ============================================================
+# Stages - 5个阶段的定义
+# ============================================================
+stages:
+  # Stage 1: collect（只执行一次）
+  - id: collect
+    delegate_to: claude-code
+    skill: ut-test-collector
+    loop: false
+    description: 收集vLLM单元测试列表，生成manifest.json
+    input:
+      vllm_tests_dir: *vllm_dir
+      exclude_patterns:
+        - "**/rocm*"
+        - "**/tpu*"
+        - "**/multimodal*"
+    output:
+      manifest_path: *manifest_path
+
+  # Stage 2: select_batch（循环）
+  - id: select_batch
+    delegate_to: claude-code
+    skill: batch-selector
+    loop: true
+    description: 选择下一批次测试
+    input:
+      manifest_path: *manifest_path
+      batch_size: 50
+    output:
+      batch_config_path: *batch_config_path
+
+  # Stage 3: execute（循环）
+  - id: execute
+    delegate_to: claude-code
+    skill: unit-test-executor
+    loop: true
+    description: 执行pytest测试
+    input:
+      batch_config_path: *batch_config_path
+      pytest_args: "-q --tb=long"
+    output:
+      batch_results_path: *batch_results_path
+    timeout: 3600
+
+  # Stage 4: handle_failures（循环，Agent核心）
+  - id: handle_failures
+    delegate_to: claude-code
+    skill: failure-handler
+    loop: true
+    description: 分析失败原因，尝试修复（Agent判断）
+    input:
+      batch_results_path: *batch_results_path
+    output:
+      handled_tests_path: *handled_tests_path
+    agent_required: true
+
+  # Stage 5: update_status（循环）
+  - id: update_status
+    delegate_to: claude-code
+    skill: manifest-updater
+    loop: true
+    description: 更新manifest.json状态
+    input:
+      batch_results_path: *batch_results_path
+      handled_tests_path: *handled_tests_path
+      manifest_path: *manifest_path
+    output:
+      manifest_path: *manifest_path
+
+# ============================================================
+# Loop - 循环配置
+# ============================================================
+loop:
+  stages:
+    - select_batch
+    - execute
+    - handle_failures
+    - update_status
+  stop_condition: "pending_count == 0"
+  max_iterations: 1000
+  
+  break_conditions:
+    - condition: "consecutive_failures > 50"
+      action: pause
+      notify: true
+
+# ============================================================
+# Worker Output Schema - Worker返回格式规范
+# ============================================================
+worker_output_schema:
+  stats:
+    passed: integer
+    failed: integer
+    error: integer
+    ignored: integer
+    pending: integer
+  next_action: string    # continue | pause | stop | wait
+  error: string_or_null
+  blocked_reason: string_or_null
+
+# ============================================================
+# Notifications - 飞书通知配置
+# ============================================================
+notifications:
+  feishu_chat_id: "YOUR_FEISHU_CHAT_ID"
+  
+  notify_on:
+    - condition: "batch_completed"
+      template: "Batch {batch_id}: {passed}/{total} passed"
+    
+    - condition: "workflow_completed"
+      template: "Workflow完成: {passed_count} passed"

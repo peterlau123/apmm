@@ -78,9 +78,9 @@ class AgentDaemon:
         
         # apmm的supervisor和runner脚本位置
         if agent_id == 'supervisor':
-            return ['python', str(PROJECT_DIR / 'skills/ut/supervisor/scripts/supervisor_loop.py')]
-        elif agent_id == 'unit-test-runner':
-            return ['python', str(PROJECT_DIR / 'skills/ut/unit-test-runner/scripts/start_loop.py')]
+            return ['python', str(PROJECT_DIR / 'skills/ut/workflow/scripts/supervisor_loop.py')]
+        elif agent_id == 'unit-test-executor':
+            return ['python', str(PROJECT_DIR / 'skills/ut/unit-test-executor/scripts/start_loop.py')]
         
         return None
     

@@ -20,7 +20,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Bastion agent.py 路径
-AGENT_PY = Path(__file__).parent.parent.parent.parent / "tools" / "agent.py"
+AGENT_PY = Path(__file__).parent.parent.parent / "tools" / "agent.py"
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
@@ -472,7 +472,7 @@ def main():
     else:
         # 默认：尝试从默认 workflow_state.json 读取 batch_config_path
         # 使用相对路径（不硬编码）
-        default_workflow_state = Path(__file__).parent.parent.parent.parent / ".agents" / "workflow_state.json"
+        default_workflow_state = Path(__file__).parent.parent.parent / ".agents" / "workflow_state.json"
         if default_workflow_state.exists():
             state = load_workflow_state(default_workflow_state)
             if "error" not in state:

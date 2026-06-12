@@ -3,7 +3,30 @@
     "allow": [
       "Bash(python agent.py -p t_ascend run \"ls -la /gpfs/gcsp/M2.7_verify/vllm/\")",
       "Bash(python agent.py -p t_ascend run \"cat /gpfs/gcsp/M2.7_verify/CLAUDE.md\")",
-      "Bash(python agent.py -p t_ascend run \"ls /gpfs/gcsp/M2.7_verify/vllm/tests/\")"
+      "Bash(python agent.py -p t_ascend run \"ls /gpfs/gcsp/M2.7_verify/vllm/tests/\")",
+      "Bash(python agent.py -p t_h20 send \"ls ut_logs/*.log && wc -l ut_logs/tokenizers_ut.log\")",
+      "Bash(python *)",
+      "Bash(base64 -w0 patches/fix_lora_types.py)",
+      "Bash(python agent.py *)",
+      "Bash(git mv *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'docs: update UT progress - 47 tests passed today \\(envs+seed+compile\\) *)",
+      "Bash(git commit -m 'fix: correct container backup instructions - use docker commit *)",
+      "Bash(git commit -m 'docs: update UT progress - 203 tests passed today *)",
+      "Bash(git commit -m 'docs: update UT progress - 239 tests passed, container saved *)",
+      "Bash(git commit -m 'docs: update UT progress - 349 tests passed today *)",
+      "Bash(git commit -m 'docs: update UT progress - more compile tests run *)",
+      "Bash(git commit -m 'docs: update UT cumulative progress *)",
+      "Bash(git commit -m 'docs: major UT progress update - ~500+ tests today *)",
+      "Bash(git commit -m 'docs: kernels tests completed - ~190 passed *)",
+      "Bash(git commit -m 'docs: final UT progress update - ~800+ tests today *)",
+      "Bash(git commit -m 'docs: UT progress ~18% coverage achieved *)",
+      "Bash(git commit -m 'docs: update PROGRESS.md with complete test instructions *)",
+      "Bash(git commit -m 'fix: update test command with complete GOAL.md filters *)",
+      "Bash(git commit -m 'fix: update test command to match GOAL.md exactly *)",
+      "Read(//c/Users/admin/Downloads/**)",
+      "Bash(ssh infra@t_h20 *)"
     ]
   }
 }

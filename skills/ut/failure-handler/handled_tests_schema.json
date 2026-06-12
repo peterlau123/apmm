@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Handled Tests Schema",
+  "description": "失败测试处理结果文件格式 - handled_tests.json",
+  "version": "2.0",
+  "type": "object",
+  "required": ["batch_id", "generated_at", "tests", "stats"],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "批次唯一标识",
+      "pattern": "^batch_[0-9]{8}_[0-9]{6}$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "处理时间 (ISO 8601)"
+    },
+    "tests": {
+      "type": "array",
+      "description": "已处理的失败测试列表",
+      "items": {
+        "type": "object",
+        "required": ["test_node", "final_status", "error_type"],
+        "properties": {
+          "test_node": {
+            "type": "string",
+            "description": "pytest测试节点"
+          },
+          "final_status": {
+            "type": "string",
+            "description": "处理后最终状态",
+            "enum": ["pending", "failed", "ignored"],
+            "_enum_comments": {
+              "pending": "待重新执行",
+              "failed": "最终失败状态",
+              "ignored": "已忽略（不执行）"
+            }
+          },
+          "error_type": {
+            "type": "string",
+            "description": "错误类型分类",
+            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "other"],
+            "_enum_comments": {
+              "dependency": "依赖缺失 (ImportError, ModuleNotFoundError)",
+              "network": "网络错误 (ConnectionError, HTTP 503/404)",
+              "resource": "资源不足 (CUDA OOM, GPU 不可用)",
+              "version": "版本兼容问题 (vLLM v0.13.0 + PyTorch 2.5.1 兼容性)",
+              "functional": "功能错误 (AssertionError, ValueError)",
+              "download_error": "模型下载失败 (Model not found, config.json missing)",
+              "other": "其他错误 (未分类的错误类型)"
+            }
+          },
+          "error_message": {
+            "type": "string",
+            "description": "错误信息摘要"
+          },
+          "action": {
+            "type": ["string", "null"],
+            "description": "建议处理动作",
+            "enum": ["dependency_resolver", "wait_resource", "investigate", null],
+            "_enum_comments": {
+              "dependency_resolver": "触发依赖解析器处理",
+              "wait_resource": "等待资源释放后继续",
+              "investigate": "需要人工调查",
+              "null": "无建议动作"
+            }
+          },
+          "ignored_reason": {
+            "type": ["string", "null"],
+            "description": "忽略原因（当 final_status=ignored 时必填）",
+            "enum": ["network timeout", "version incompatible", "other error", null],
+            "_enum_comments": {
+              "network timeout": "网络超时导致无法执行",
+              "version incompatible": "版本不兼容无法执行",
+              "other error": "其他错误导致忽略",
+              "null": "无忽略原因"
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "处理统计",
+      "required": ["passed", "failed", "ignored", "error", "pending"],
+      "properties": {
+        "passed": {"type": "integer", "minimum": 0, "default": 0, "description": "通过数"},
+        "failed": {"type": "integer", "minimum": 0, "description": "失败数"},
+        "ignored": {"type": "integer", "minimum": 0, "description": "忽略数"},
+        "error": {"type": "integer", "minimum": 0, "description": "错误数"},
+        "pending": {"type": "integer", "minimum": 0, "description": "待重新执行数"}
+      }
+    },
+    "handled_tests_path": {
+      "type": "string",
+      "description": "文件路径（运行时添加）"
+    }
+  }
+}

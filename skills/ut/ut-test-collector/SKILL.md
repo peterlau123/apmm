@@ -100,21 +100,14 @@ flowchart TB
 
 ```python
 import json
-import yaml
 from pathlib import Path
 
-# 从 workflow.yaml 读取路径配置（不硬编码）
-workflow_config = yaml.safe_load(Path(".agents/workflow.yaml").read_text())
-paths = workflow_config["config"]
+# 从 workflow_state.json 读取路径配置（不硬编码）
+from shared.config_loader import get_paths
+paths = get_paths(workflow_state_path)
 
-# 从 Supervisor context 获取路径
-workflow_state_path = paths["workflow_state_path"]
-workflow_state = json.loads(Path(workflow_state_path).read_text())
-
-# 获取配置（路径从 workflow.yaml 读取）
-vllm_tests_dir = paths["vllm_dir"] + "/tests"
-exclude_patterns = workflow_config["stages"][0]["input"]["exclude_patterns"]
-manifest_path = paths["manifest_path"]
+# 获取配置
+manifest_path = paths["manifest"]
 ```
 
 ### Step 2: pytest collect（远程执行）
@@ -155,14 +148,20 @@ def parse_pytest_output(output):
                 "id": len(tests) + 1,
                 "test_node": test_node,
                 "test_file": test_file,
+                "test_name": test_node.split("::")[-1] if "::" in test_node else "",
                 "status": "pending",
-                "run_at": None,
-                "duration_ms": None,
-                "exit_code": None,
+                "priority": "P2",
+                "batch_id": None,
+                "run_count": 0,
+                "last_run_at": None,
+                "last_duration_ms": None,
+                "last_exit_code": None,
                 "error_type": None,
                 "error_message": None,
-                "log_file": None,
-                "ignored_reason": None
+                "ignored_reason": None,
+                "fix_applied": False,
+                "fix_details": None,
+                "log_file": None
             })
     return tests
 

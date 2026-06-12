@@ -2,7 +2,24 @@
 # Hierarchical Agent Architecture: Supervisor + Worker + Kanban
 # Version: 2.2
 # Created: 2026-06-10
-# Updated: 2026-06-11
+# Updated: 2026-06-12
+#
+# ============================================================
+# ✍️ Quick Config Guide — 用户通常只需修改以下参数
+# ============================================================
+#
+#   ✍️ input_filter.test_list_path    — 测试清单路径
+#   ✍️ input_filter.manifest_source   — 或使用已有 manifest.json
+#   ✍️ config.resume_from             — 断点续跑 run_dir（留空=新建）
+#   ✍️ config.batch_size              — 每批测试数量（≤100）
+#   ✍️ config.pytest_args             — pytest 参数
+#   ✍️ config.remote_server           — 远程服务器 profile
+#   ✍️ config.docker_container        — Docker 容器名
+#   ✍️ config.container_env           — 容器环境变量（HF_HOME 等）
+#   ✍️ stages.*.timeout               — 各 Stage 超时时间
+#
+#   Agent 加载 skill 后会引导用户填写以上参数。
+# ============================================================
 
 workflow:
   name: UT Test Workflow
@@ -10,7 +27,7 @@ workflow:
   description: Hierarchical Agent架构 - Supervisor调度 + Worker执行 + Kanban追踪
 
   # ============================================================
-  # ⚠️ 用户需调整：测试标识
+  # ✍️：测试标识
   # ============================================================
   test_name: "ut"  # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
 
@@ -18,7 +35,7 @@ workflow:
 # Config - 路径和执行配置
 # ============================================================
 config:
-  # ⚠️ 用户需调整：核心路径定义
+  # ✍️：核心路径定义
   workspace: &workspace "D:/workspace/apmm"
   runs_dir: &runs_dir "D:/workspace/apmm/runs"  # 运行目录根目录
 
@@ -51,15 +68,24 @@ config:
   handled_tests_path: &handled_tests_path "{run_dir}/batches/{batch_id}/handled_tests.json"
   batch_logs_dir: &batch_logs_dir "{run_dir}/batches/{batch_id}/logs"
 
-  # ⚠️ 用户需调整：远程执行配置
+  # ✍️：远程执行配置
   remote_server: "t_h20"
   docker_container: "v0.13.0_torch2.5.1_compile"
   vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
   ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
 
-  # ⚠️ 用户需调整：pytest参数和批次大小
+  # 容器环境变量（一次设置，所有测试生效）
+  container_env:
+    HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
+    HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
+
+  # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"
   batch_size: 50  # ⚠️ 控制 ≤100 避免 delegate_task 超时
+
+  # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）
+  resume_from: null  # 例如: "D:/workspace/apmm/runs/ut-20260612-101857"
 
 # ============================================================
 # Input Filter - Stage 1 输入处理配置
@@ -71,7 +97,7 @@ config:
 # 3. 两者都指定 → 提示用户确认以哪个为准
 # 4. 两者都没指定 → 提示用户是否跑内置过滤后的全量清单
 input_filter:
-  # ⚠️ 用户需调整：test_list路径（必须指定）
+  # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
   test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_failed.txt"
 
@@ -156,7 +182,7 @@ stages:
       grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
       grep_timeout: 60
       parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
-    timeout: 3600
+    timeout: 600
     kanban:
       action: update_lane
       progress_template: "{passed}/{total}"
@@ -172,6 +198,7 @@ stages:
     output:
       handled_tests_path: *handled_tests_path
     agent_required: true
+    timeout: 900
 
   # Stage 5: update_status（循环）
   - id: update_status
@@ -355,7 +382,7 @@ execution:
     cleanup_history: true
   
   worker:
-    timeout_per_stage: 3600
+    timeout_per_stage: 600
     max_retries: 3
     delegate_task_toolsets:
       - terminal

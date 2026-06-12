@@ -1,509 +1,267 @@
 ---
 name: ut-workflow
 description: UT Workflow - vLLM单元测试验证流程，加载skill自动启动完整测试流程
-version: 5.0.0
+version: 5.1.0
 when_to_use: 用户需要执行 vLLM 单元测试验证流程（自动执行）
 ---
 
-# UT Workflow Skill (v5.0)
+# UT Workflow Skill (v5.1)
 
-> **v5.0 更新**: 改为内联执行模式，使用 Agent tool spawn subagent 执行各 Stage，不再依赖 supervisor_loop.py。
+> **v5.1 更新**: 断点续跑 + 容器环境预设 + 远程执行标准化（base64） + 路径转义修复 + 飞书通知优化。
 
 ---
 
-## 🚀 自主执行流程
+## 🚀 触发方式
 
-### 触发方式
+用户加载 skill 后，Agent 自动引导用户完成配置并执行流程：
 
-用户加载skill：
 ```
-加载 ut/workflow skill
+用户: 加载 ut/workflow skill
+Agent: UT Workflow v5.1 已加载。
+       请提供以下信息：
+       1. test_list 路径（或 manifest.json 路径）
+       2. workflow.yaml 路径（默认: .agents/workflow.yaml）
+       3. 是否断点续跑？（提供 run_dir 路径，或留空新建）
 ```
 
-skill自动执行以下流程：
+---
+
+## 执行步骤
+
+### Step 0: 收集用户输入
+
+Agent 主动询问用户三个问题：
+
+| 问题 | 默认值 | 说明 |
+|------|--------|------|
+| test_list 或 manifest | 无（必填） | `test_list.txt` 或 `manifest.json` 路径 |
+| workflow.yaml 路径 | `.agents/workflow.yaml` | 配置文件路径 |
+| 断点续跑 run_dir | 无（新建） | 已有 run_dir 路径，跳过 init |
+
+Agent 将用户输入写入 workflow.yaml 的 `input_filter.test_list_path`（或 `manifest_source`）和 `config.resume_from`。
 
 ---
 
-### 执行步骤
-
-**Step 1: 提示用户指定workflow.yaml**
-
-skill加载后，立即提示：
-> "UT Workflow已加载。请指定workflow.yaml路径（或使用默认路径：.agents/workflow.yaml）"
-
-等待用户提供路径或确认默认。
-
----
-
-**Step 2: 检查前置条件**
+### Step 1: 检查前置条件
 
 自动检查：
-1. Bastion连接状态（agent.py serve t_h20）
-2. workflow.yaml文件存在
-3. test_list文件存在（根据配置）
+1. Bastion 连接状态（`python tools/agent.py -p t_h20 ping`）
+2. workflow.yaml 文件存在
+3. test_list 或 manifest 文件存在
+4. 远程容器可访问（`sudo docker exec ... nvidia-smi`）
 
 如果前置条件不满足：
-- Bastion未连接 → 提示用户启动：`python agent.py serve t_h20`
+- Bastion 未连接 → 提示：`python tools/agent.py serve t_h20`
 - 文件不存在 → 提示用户准备相应文件
+- 容器不可用 → 提示检查容器状态
 
 ---
 
-**Step 3: 初始化workflow_state.json**
+### Step 2: 初始化或恢复 workflow_state.json
 
-调用初始化脚本：
+**新建运行**（`resume_from` 为空）：
 ```bash
 python skills/ut/workflow/scripts/init_workflow_state.py \
   --workflow-yaml WORKFLOW_YAML_PATH
 ```
 
-生成运行目录 `{runs_dir}/{test_name}-{timestamp}` 和初始状态文件。
-
-读取生成的 workflow_state.json，获取 `run_dir` 和 `workflow_state_path`。
+**断点续跑**（`resume_from` 指定已有 run_dir）：
+- 跳过 `init_workflow_state.py`
+- 直接读取 `{resume_from}/workflow_state.json`
+- 从 `current_stage` 继续执行
+- 已完成 batch 自动跳过（检查 batch_results.json 是否存在）
 
 ---
 
-**Step 4: 执行 Stage 1 (collect，一次性)**
+### Step 3: 执行 Stage 1 (collect，一次性)
 
-执行方式根据 `delegate_to` 配置：
+**断点续跑时**：如果 manifest.json 已存在且 current_stage > collect，跳过。
 
-- `delegate_to: self`（默认）→ Agent 自主决定执行方式
-- 简单操作 → 当前 session 直接执行 Bash/Read/Write
-- 需要判断 → 使用 Agent tool spawn subagent
+**新建时**：init_workflow_state.py 已从 test_list.txt 生成 manifest.json，Stage 1 自动完成。
 
-**对于 Stage 1 (collect)**:
-
-使用 Agent tool 执行：
-```
-Agent(
-    subagent_type="general-purpose",
-    description="Execute collect Stage",
-    prompt="加载 skill ut/ut-test-collector 并执行。
-
-Context:
-{
-  "workflow_state_path": "{workflow_state_path}",
-  "manifest_path": "{run_dir}/manifest.json",
-  "test_list_path": "{test_list_path}"
-}
-
-返回统一格式 JSON:
-{
-  "stats": {"passed": 0, "failed": 0, "error": 0, "ignored": 0, "pending": N},
-  "next_action": "continue",
-  "error": null,
-  "blocked_reason": null
-}"
-)
-```
-
-等待 subagent 完成，解析返回结果，更新 workflow_state.json：
-
-```bash
-# 更新 pending count
-python -c "
-import json
-from pathlib import Path
-state = json.loads(Path('{workflow_state_path}').read_text())
-state['stats']['pending'] = {pending_count}
+更新 workflow_state.json：
+```python
 state['current_stage'] = 'select_batch'
-Path('{workflow_state_path}').write_text(json.dumps(state, indent=2))
-"
 ```
 
 ---
 
-**Step 5: 执行 Workflow 循环 (Stage 2-5)**
-
-读取 workflow.yaml 的 stages 配置（**注意：stages 是顶级字段**）：
-```bash
-# 正确路径：stages 是顶级字段
-cat {workflow_yaml_path} | python -c "import yaml,sys; c=yaml.safe_load(sys.stdin); print([s['id'] for s in c.get('stages',[])])"
-```
+### Step 4: 执行 Workflow 循环 (Stage 2-5)
 
 循环执行直到 `pending_count == 0`：
 
 ```
 while pending_count > 0:
     iteration += 1
-    
+
     # 检查 break_conditions
     if error_rate > 0.8 or consecutive_failures > 50:
-        发送飞书通知暂停
+        发送飞书暂停卡片
         break
-    
-    # Stage 2: select_batch
-    Agent(
-        subagent_type="general-purpose",
-        description="Execute select_batch Stage",
-        prompt="加载 skill ut/batch-selector 并执行。
-        Context: {workflow_state_path, manifest_path, batch_size}
-        返回统一格式 JSON。"
-    )
-    
-    # 解析返回，创建批次目录，更新 state
-    
-    # Stage 3: execute
-    Agent(
-        subagent_type="general-purpose",
-        description="Execute execute Stage",
-        prompt="加载 skill ut/unit-test-executor 并执行。
-        Context: {batch_config_path, remote_server, pytest_args}
-        返回统一格式 JSON。"
-    )
-    
-    # Stage 4: handle_failures
-    Agent(
-        subagent_type="general-purpose",
-        description="Execute handle_failures Stage (Agent核心)",
-        prompt="加载 skill ut/failure-handler 并执行。
-        Context: {batch_results_path, handled_tests_path}
-        这是需要 LLM 判断力的 Stage，分析错误类型，尝试修复代码。
-        返回统一格式 JSON。"
-    )
-    
-    # Stage 5: update_status
-    Agent(
-        subagent_type="general-purpose",
-        description="Execute update_status Stage",
-        prompt="加载 skill ut/manifest-updater 并执行。
-        Context: {batch_results_path, handled_tests_path, manifest_path}
-        更新 manifest.json 状态。
-        返回统一格式 JSON。"
-    )
-    
+
+    # Stage 2: select_batch（Agent 直接执行，简单逻辑）
+    1. 读取 manifest.json
+    2. 过滤 pending 测试
+    3. 按 batch_size 截取
+    4. 创建 batch_dir，写入 batch_config.json
+    5. 更新 state
+
+    # Stage 3: execute（远程执行，使用 base64 脚本避免 shell 引号问题）
+    远程执行规则：
+    - 将 pytest 命令写入 base64 编码的 Python 脚本
+    - 通过 agent.py 上传到容器执行
+    - 格式: echo <base64> | base64 -d > /tmp/run.py && python3 /tmp/run.py
+    - 容器环境变量从 workflow.yaml config.container_env 读取
+    - 超时: workflow.yaml stages.execute.timeout (600s)
+
+    # Stage 4: handle_failures（Agent 核心，LLM 判断）
+    Agent 自主分析 batch_results.json 中的失败测试：
+    1. 读取错误类型和错误消息
+    2. 判断是否可修复：
+       - 代码 bug → 尝试修改远程文件并重跑
+       - 环境问题（网络/模型下载）→ 尝试修复环境
+       - 资源问题（GPU/NCCL）→ 标记 ignored
+       - 超时 → 标记 ignored
+    3. 写入 handled_tests.json
+    4. 超时: workflow.yaml stages.handle_failures.timeout (900s)
+
+    # Stage 5: update_status（Agent 直接执行）
+    1. 读取 batch_results.json + handled_tests.json
+    2. 更新 manifest.json 中对应测试状态
+    3. 重新计算 statistics
+    4. 写入 manifest.json
+
     # 从 manifest.json 统一读取 stats（不累加）
-    Read manifest.json statistics
-    
+    manifest = json.loads(Path(manifest_path).read_text())
+    state["stats"] = manifest["statistics"]
+
     # 更新 workflow_state.json
-    Write workflow_state.json with new stats
-    
-    # 里程碑通知
-    if stats.passed % 100 == 0:
-        send_feishu("Milestone: {passed} tests passed!")
+    state['iteration'] = iteration
+    state['current_stage'] = 'select_batch'
+
+    # 推送飞书进度卡片（每个 batch 完成后）
+    python skills/ut/workflow/scripts/send_progress_card.py \
+        --manifest-path {manifest_path} \
+        --feishu-config {workspace}/.agents/feishu_config.json \
+        --event progress \
+        --batch-id {batch_id} \
+        --iteration {iteration}
+
+    # 失败率/错误率告警
+    if failure_rate > 0.3 or error_rate > 0.3:
+        python skills/ut/workflow/scripts/send_progress_card.py \
+            --manifest-path {manifest_path} \
+            --feishu-config {workspace}/.agents/feishu_config.json \
+            --event alert \
+            --batch-id {batch_id} \
+            --iteration {iteration} \
+            --reason "failure_rate > 30%"
 ```
 
 ---
 
-**Step 6: 验证结果并生成报告**
-
-执行完成后，调用验证脚本：
-```bash
-python tasks/ut/workflow_tests/verify_workflow_test.py \
-  --run-dir RUN_DIR \
-  --test-list TEST_LIST_NAME
-```
-
----
-
-**Step 7: 完成通知**
-
-发送飞书通知：
-> "UT Workflow执行完成。验证报告已生成：{run_dir}/verification_report.json"
-
----
-
-## 核心架构
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Supervisor Agent Session (当前 session)                     │
-│                                                             │
-│  执行 workflow/SKILL.md 内联流程：                            │
-│  • 读取 workflow.yaml 配置                                   │
-│  • 管理 workflow_state.json                                  │
-│  • 使用 Agent tool 执行各 Stage                               │
-│  • 判断执行方式（直接 vs subagent）                           │
-│                                                             │
-│  Context: workflow.yaml + state.json (~10K tokens)          │
-└─────────────────────────────────────────────────────────────┘
-                          │
-                          │ Agent tool (delegate_to: self)
-                          ▼
-┌─────────────────────────────────────────────────────────────┐
-│  Worker Subagent Session (临时，执行后释放)                   │
-│                                                             │
-│  • 加载 Worker SKILL.md                                      │
-│  • 执行单个 Stage                                            │
-│  • 调用脚本 + 判断逻辑 + 修复代码                             │
-│  • 返回极简结果                                              │
-│  • Session 结束，Context 释放                                │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## delegate_to 机制
-
-### 当前支持
-
-**仅支持 `delegate_to: self`**
-
-| 值 | 说明 | 支持状态 |
-|---|------|---------|
-| `self` | Agent 使用自身能力执行（可 spawn subagent） | ✅ 已支持 |
-| `opencode` | 调用 opencode CLI | ❌ TODO |
-| `claude-code` | 调用 Claude Code CLI | ❌ TODO |
-| `codex` | 调用 Codex CLI | ❌ TODO |
-
-**TODO**: 未来版本支持调用第三方 agent CLI（需配置 agent_path 和调用参数模板）。
-
-### `delegate_to: self`（默认）
-
-Agent 收到 Stage 任务后，自主决定执行方式：
-
-| 任务类型 | 执行方式 | 原因 |
-|---------|---------|------|
-| 文件读写（Stage 1, 5） | 当前 session 直接执行 Bash/Read/Write | 简单操作，无需 subagent |
-| 执行测试（Stage 3） | spawn subagent | 需要远程执行，耗时较长 |
-| 失败处理（Stage 4） | spawn subagent | 需要 LLM 判断力 |
-| 选择批次（Stage 2） | spawn subagent | 需要读取分析 manifest |
-
-### 执行流程图
-
-```mermaid
-flowchart TD
-    subgraph Supervisor["当前 Session (Supervisor)"]
-        A["读取 workflow.yaml"]
-        B["初始化 workflow_state.json"]
-        C["Stage 1: collect"]
-        
-        subgraph Decision["执行方式判断"]
-            D{"任务复杂度?"}
-            D1["简单 → 直接执行"]
-            D2["复杂 → Agent tool"]
-        end
-        
-        subgraph WorkflowLoop["Workflow 循环"]
-            E["Stage 2-5 循环"]
-            F["更新 state.json"]
-            G["检查停止条件"]
-        end
-        
-        H["完成通知"]
-    end
-    
-    subgraph Subagent["Worker Subagent"]
-        S1["加载 SKILL.md"]
-        S2["执行任务"]
-        S3["返回结果"]
-    end
-    
-    A --> B --> C --> Decision
-    D --> D1 --> F
-    D --> D2 --> Subagent --> F
-    F --> G --> E --> Decision
-    G -->|"pending=0"| H
-```
-
----
-
-## Stage 执行详解
-
-### Stage 1: collect
-
-**执行方式**: spawn subagent
-
-**Context 传递**:
-```json
-{
-  "workflow_state_path": "{run_dir}/workflow_state.json",
-  "manifest_path": "{run_dir}/manifest.json",
-  "test_list_path": "{run_dir}/test_list.txt",
-  "manifest_schema_path": "{workspace}/skills/ut/shared/manifest_schema.json"
-}
-```
-
-**返回格式**:
-```json
-{
-  "stats": {"passed": 0, "failed": 0, "error": 0, "ignored": 0, "pending": 13165},
-  "next_action": "continue",
-  "error": null,
-  "blocked_reason": null
-}
-```
-
----
-
-### Stage 2: select_batch
-
-**执行方式**: spawn subagent
-
-**Context 传递**:
-```json
-{
-  "workflow_state_path": "{workflow_state_path}",
-  "manifest_path": "{run_dir}/manifest.json",
-  "batch_size": 50,
-  "batches_dir": "{run_dir}/batches"
-}
-```
-
-**返回格式**:
-```json
-{
-  "stats": {"passed": 0, "failed": 0, "error": 0, "ignored": 0, "pending": 13115},
-  "next_action": "continue",
-  "error": null,
-  "blocked_reason": null
-}
-```
-
-**注意**: batch_id 和 batch_dir 在 subagent 执行后，通过读取 batch_config.json 获取。
-
----
-
-### Stage 3: execute
-
-**执行方式**: spawn subagent
-
-**Context 传递**:
-```json
-{
-  "workflow_state_path": "{workflow_state_path}",
-  "batch_config_path": "{run_dir}/batches/{batch_id}/batch_config.json",
-  "pytest_args": "-q --tb=long",
-  "remote_server": "t_h20",
-  "docker_container": "v0.13.0_torch2.5.1_compile",
-  "vllm_dir": "/gpfs/gcsp/M2.7_verify/vllm",
-  "log_extraction": {
-    "enabled": true,
-    "grep_pattern": "(PASSED|FAILED|ERROR|SKIPPED)",
-    "parse_script": "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
-  }
-}
-```
-
-**返回格式**:
-```json
-{
-  "stats": {"passed": 40, "failed": 8, "error": 2, "ignored": 0, "pending": 0},
-  "next_action": "continue",
-  "error": null,
-  "blocked_reason": null
-}
-```
-
----
-
-### Stage 4: handle_failures
-
-**执行方式**: spawn subagent（Agent核心，需要 LLM 判断）
-
-**Context 传递**:
-```json
-{
-  "workflow_state_path": "{workflow_state_path}",
-  "batch_results_path": "{run_dir}/batches/{batch_id}/batch_results.json",
-  "handled_tests_path": "{run_dir}/batches/{batch_id}/handled_tests.json",
-  "iteration": "{iteration}",
-  "batch_id": "{batch_id}"
-}
-```
-
-**返回格式**:
-```json
-{
-  "stats": {"passed": 3, "failed": 2, "ignored": 3, "error": 0, "pending": 0},
-  "next_action": "continue",
-  "error": null,
-  "blocked_reason": null
-}
-```
-
----
-
-### Stage 5: update_status
-
-**执行方式**: 当前 session 直接执行（简单文件操作）
-
-**操作**:
-1. 读取 batch_results.json 和 handled_tests.json
-2. 更新 manifest.json 中对应测试的状态
-3. 计算 statistics
-4. 写入 manifest.json
+### Step 5: 完成通知
 
 ```bash
-python skills/ut/manifest-updater/scripts/update_status.py \
-  --batch-results {batch_results_path} \
-  --handled-tests {handled_tests_path} \
-  --manifest {manifest_path}
+python skills/ut/workflow/scripts/send_progress_card.py \
+    --manifest-path {manifest_path} \
+    --feishu-config {workspace}/.agents/feishu_config.json \
+    --event complete \
+    --iteration {iteration}
 ```
 
 ---
 
-## Stats 更新原则
+## 远程执行标准化（base64 方式）
 
-**关键**: stats 不累加，每次循环结束后从 manifest.json 统一读取。
+**问题**：PowerShell → agent.py → SSH → bash → docker exec 五层嵌套，引号频繁出错。
+
+**方案**：将远程命令写入 base64 编码的 Python 脚本，消除引号问题。
 
 ```python
-# 错误做法 ❌
-state["stats"]["passed"] += result["stats"]["passed"]
+import subprocess, base64
 
-# 正确做法 ✅
-manifest = json.loads(Path(manifest_path).read_text())
-state["stats"] = manifest["statistics"]
+script = """import subprocess, os
+os.chdir('/gpfs/gcsp/M2.7_verify/vllm')
+env = os.environ.copy()
+env['HF_HOME'] = '/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub'
+env['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,4,5,6,7'
+cmd = ['python3', '-m', 'pytest', 'test_file.py::test_name', '-q', '--tb=long']
+r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, env=env)
+print(r.stdout)
+if r.stderr:
+    print('STDERR:', r.stderr[-2000:])
+"""
+
+encoded = base64.b64encode(script.encode()).decode()
+remote_cmd = f'echo {encoded} | base64 -d > /tmp/ut_run.py && python3 /tmp/ut_run.py'
+
+subprocess.run(['python', 'tools/agent.py', '-p', 't_h20', 'run', '--timeout', '900',
+    f'sudo docker exec {container} bash -c "{remote_cmd}"'],
+    capture_output=True, text=True, cwd=workspace)
 ```
-
-**原因**:
-- Stage 3 返回原始执行结果
-- Stage 4 会修改部分测试状态（修复后 passed/ignored）
-- 累加会导致重复计数
 
 ---
 
-## 循环控制
+## 断点续跑
 
-### 停止条件
+**触发**：用户提供 `resume_from` 路径。
 
-```yaml
-loop:
-  stop_condition: "pending_count == 0"
-  max_iterations: 1000
+**流程**：
+1. 读取 `{resume_from}/workflow_state.json`
+2. 检查 `current_stage`：
+   - `collect` → 从 Stage 1 开始
+   - `select_batch` → 从循环开始
+   - 其他 → 从对应 stage 继续
+3. 遍历已有 batch 目录，跳过 `batch_results.json` 已存在的 batch
+4. 从下一个 pending batch 继续执行
+
+**恢复示例**：
+```
+用户: 加载 ut/workflow skill
+Agent: 请提供 test_list 路径（或 manifest.json 路径）
+用户: 断点续跑 D:/workspace/apmm/runs/ut-20260612-101857
+Agent: 检测到已有运行目录，共 3 个 batch 已完成，从 batch_4 继续...
 ```
 
-### 中断条件
+---
+
+## 路径转义规则
+
+**YAML 中 Windows 路径必须使用正斜杠**：
 
 ```yaml
-break_conditions:
-  - condition: "consecutive_failures > 50"
-    action: pause
-    notify: true
-    kanban_note: "Paused: consecutive_failures > 50"
-    
-  - condition: "error_rate > 0.8"
-    action: pause
-    notify: true
+# ✅ 正确
+test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list.txt"
+
+# ❌ 错误（\t 被解释为 tab）
+test_list_path: "D:\workspace\apmm\tasks\ut\workflow_tests\test_list.txt"
 ```
 
-**检查方式**:
-
-读取 workflow_state.json 的 stats，计算：
-- `error_rate = (failed + error) / (passed + failed + error + ignored)`
-- `consecutive_failures` 从 flags 中读取
+Agent 在写入 workflow.yaml 时自动将反斜杠转换为正斜杠。
 
 ---
 
 ## 飞书通知
 
-使用 feishu-webhook-skill 发送通知：
+每个 batch 完成后自动推送一次。通知场景：
 
-```
-Skill: feishu-webhook-skill
-Args: 
-  message_type: "batch_completed"
-  content: "Batch {batch_id}: {passed}/{total} passed"
-```
+| event | 触发条件 | 卡片颜色 |
+|-------|---------|:---------:|
+| `progress` | 每个 batch 完成 | 🟦 蓝色 |
+| `complete` | `pending_count == 0` | 🟩 绿色 |
+| `alert` | `failure_rate > 0.3` 或 `error_rate > 0.3` | 🟥 红色 |
+| `paused` | `consecutive_failures > 50` 或 `error_rate > 0.8` | 🟨 黄色 |
 
-### 通知场景
+---
 
-| 类型 | 触发条件 | 模板 |
-|------|---------|------|
-| batch_completed | Stage 5 完成 | Batch {batch_id}: {passed}/{total} passed |
-| milestone | passed % 100 == 0 | Milestone: {passed} tests passed! |
-| workflow_completed | pending == 0 | Workflow完成: {passed} passed, {failed} failed |
-| paused | break_condition触发 | Workflow暂停: {reason} |
-| worker_error | Worker返回error | Worker错误 ({stage}): {error} |
+## 超时配置
+
+| 配置项 | 值 | 位置 |
+|--------|:--:|:------|
+| Stage 3 execute | 600s | `workflow.yaml stages.execute.timeout` |
+| Stage 4 failure-handler | 900s | `workflow.yaml stages.handle_failures.timeout` |
+| Worker per-stage | 600s | `workflow.yaml execution.worker.timeout_per_stage` |
 
 ---
 
@@ -512,30 +270,8 @@ Args:
 - ❌ 不执行具体测试任务（让 Worker subagent 执行）
 - ❌ 不读取 batch_results.json 详细错误内容
 - ❌ 不在 context 中累积历史状态
-- ❌ 不调用 supervisor_loop.py（已废弃）
 - ❌ 不硬编码路径（从 workflow_state.json 读取）
-
----
-
-## 辅助脚本保留
-
-以下脚本保留用于辅助操作：
-
-| 脚本 | 用途 |
-|------|------|
-| init_workflow_state.py | 初始化运行目录和状态文件 |
-| update_status.py | Stage 5 状态更新 |
-| parse_remote_log.py | Stage 3 日志解析 |
-
----
-
-## 用户配置提醒
-
-**用户需先配置 workflow.yaml 再加载 skill**：
-1. 阅读 tasks/ut/README.md 了解概念
-2. 填写 workflow.yaml（test_list_path 等）
-3. 加载 ut/workflow skill
-4. 确认 workflow.yaml 路径
+- ❌ 不在 YAML 中使用反斜杠路径
 
 ---
 
@@ -553,4 +289,4 @@ Args:
 
 *创建日期: 2026-06-06*
 *更新日期: 2026-06-12*
-*版本: 5.0.0*
+*版本: 5.1.0*

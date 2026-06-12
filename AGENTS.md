@@ -109,12 +109,20 @@ OpenCode 默认采用 **Brainstorming → Planning → Execution → Verificatio
 
 ## UT Workflow 架构
 
-UT Workflow 采用 5 阶段流水线，详见：
+UT Workflow 采用 5 阶段流水线，支持两种运行模式：
+
+| 模式 | 配置 | 说明 |
+|------|------|------|
+| **线性模式** | `kanban.enabled: false` | 单 Agent 循环执行 Stage 2-5 |
+| **Kanban 模式** | `kanban.enabled: true` | Gateway 调度 + 3 Worker Agent 协作 |
+
+详见：
 
 | 信息 | 权威源 |
 |------|--------|
 | Workflow 配置 | [.agents/workflow.yaml](.agents/workflow.yaml) |
 | 架构图 + Stages 定义 | [skills/ut/workflow/SKILL.md](skills/ut/workflow/SKILL.md) |
+| Kanban 集成指南 | [tasks/ut/docs/kanban/README.md](tasks/ut/docs/kanban/README.md) |
 | 过滤规则（单一来源） | [skills/ut/shared/filter_rules.yaml](skills/ut/shared/filter_rules.yaml) |
 | 模块总入口 | [tasks/ut/README.md](tasks/ut/README.md) |
 

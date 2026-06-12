@@ -63,11 +63,11 @@
 | Phase | 内容 | 状态 |
 |:-----:|------|:----:|
 | **1** | 基础设施：Board + 3 Profile + 依赖链验证 | ✅ |
-| **2** | 单任务验证：gateway 运行 + 真实 batch 执行 | ⬜ |
-| **3** | 方案 A 全量集成：Kanban 替代 workflow 循环 | ⬜ |
+| **2** | 方案 A-1 集成：SKILL.md v5.2 + start_gateway.py + monitor_kanban.py | ✅ |
+| **3** | Kanban 模式真实运行验证 | ⬜ |
 | **4** | 生产化：多 GPU 并行 + 断点续跑 + 性能基准 | ⬜ |
 
-### Phase 1 完成项
+### Phase 1-2 完成项
 
 - [x] Hermes Agent v0.15.1 确认安装
 - [x] 项目专用 board `apmm-ut` 创建
@@ -75,6 +75,10 @@
 - [x] SOUL.md 角色定义 + API Key 配置
 - [x] 示例任务创建 + parent→child 依赖晋升验证
 - [x] 集成文档 [docs/kanban/README.md](docs/kanban/README.md)
+- [x] SKILL.md v5.2 版本更新 + Kanban 分支逻辑
+- [x] start_gateway.py 脚本创建（启动 3 Gateway）
+- [x] monitor_kanban.py 脚本创建（监控任务完成）
+- [x] workflow.yaml kanban 配置结构更新
 
 ---
 

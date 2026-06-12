@@ -234,11 +234,20 @@ hermes kanban tasks list apmm-ut --status blocked
 
 ## Next Steps
 
-1. Complete SOUL.md for all profiles (in progress)
-2. Test single batch execution via Kanban
-3. Verify 3 gateways can run simultaneously
-4. Enable kanban.enabled: true in workflow.yaml
-5. Monitor first real batch run
+1. ✅ Phase 2 完成：方案 A-1 集成（SKILL.md v5.2 + start_gateway.py + monitor_kanban.py）
+2. 测试 Kanban 模式真实运行
+3. 验证熔断器配置（failure_limit, error_rate_threshold）
+4. 监控多 GPU 并行执行效率
+5. 性能基准测试
+
+## Kanban 模式触发入口
+
+在 `workflow.yaml` 设置 `kanban.enabled: true`，加载 `ut/workflow` skill 后 Agent 自动：
+1. 执行 `start_gateway.py` 启动 3 个 Gateway
+2. 创建初始 Orchestrator 任务
+3. 执行 `monitor_kanban.py` 监控进度
+
+详见 [skills/ut/workflow/SKILL.md](../../../skills/ut/workflow/SKILL.md) § Kanban 模式执行步骤。
 
 ## References
 

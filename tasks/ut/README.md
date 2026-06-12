@@ -108,7 +108,18 @@ tasks/ut/
 
 ## Workflow 架构
 
-### 5 阶段流水线
+### 双模式运行
+
+Workflow 支持两种运行模式，由 `workflow.yaml` 的 `kanban.enabled` 控制：
+
+| 模式 | 配置 | 执行方式 |
+|------|------|----------|
+| **线性模式** | `kanban.enabled: false` | 单 Agent 循环执行 Stage 2-5 |
+| **Kanban 模式** | `kanban.enabled: true` | Gateway 调度 + 3 Worker Agent 协作 |
+
+### 线性模式流程（kanban.enabled: false）
+
+5 阶段流水线：
 
 ```
 ┌──────────────┐    ┌──────────────┐    ┌──────────────────┐    ┌──────────────┐    ┌────────────────┐
@@ -119,6 +130,43 @@ tasks/ut/
        ↑                                                                                  │
        └─────────────────── 循环 Stage 2-5 直到 pending_count == 0 ───────────────────────┘
 ```
+
+### Kanban 模式流程（kanban.enabled: true）
+
+Agent 自动启动 Gateway + 3 Worker：
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              Gateway Process (持续运行)                               │
+│                                                                                      │
+│  ┌────────────────────────────────────────────────────────────────────────────────┐│
+│  │                          Dispatcher (60s tick)                                  ││
+│  │                                                                                 ││
+│  │  1. Query ready tasks from kanban.db                                           ││
+│  │  2. Claim task via CAS (atomic lock)                                           ││
+│  │  3. Spawn worker subprocess                                                    ││
+│  │     - Load profile SOUL.md                                                     ││
+│  │     - Read task body                                                           ││
+│  │     - Execute LLM inference                                                    ││
+│  │     - Call kanban_complete()                                                   ││
+│  │  4. Update task status                                                         ││
+│  └────────────────────────────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────────────────────────────┘
+         │                           │                           │
+         v                           v                           v
+    ut-orchestrator              ut-executor                 ut-fixer
+   (创建 batch 任务)            (执行 pytest)               (修复失败测试)
+         │                           │                           │
+         └───→ dependency ───────────┴───→ dependency ───────────┘
+```
+
+### Kanban 启动步骤
+
+1. Agent 检查 `workflow.yaml kanban.enabled = true`
+2. 执行 `start_gateway.py` 启动 3 个 Gateway
+3. 创建初始 Orchestrator 任务
+4. 执行 `monitor_kanban.py` 监控进度
+5. 完成后发送飞书通知
 
 | Stage | Skill | 执行方式 | 说明 |
 |:-----:|-------|:--------:|------|

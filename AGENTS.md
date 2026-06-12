@@ -94,7 +94,20 @@ apmm/
 
 ---
 
-## Workflow 架构
+## OpenCode 工作模式
+
+OpenCode 默认采用 **Brainstorming → Planning → Execution → Verification** 四阶段工作流，强制先思考、再计划、再实施、最后验证。
+
+**详细流程**：[docs/guides/ai-workflow.md](docs/guides/ai-workflow.md)
+
+**核心原则**：
+- ❌ 不跳过思考阶段（必须 Phase 1-3）
+- ❌ 不跳过验证阶段（完成后必须 Verification Loop）
+- ✅ 每步验证、逐步推进
+
+---
+
+## UT Workflow 架构
 
 UT Workflow 采用 5 阶段流水线，详见：
 

@@ -42,6 +42,8 @@
 
 | 日期 | 里程碑 | 状态 |
 |------|--------|:----:|
+| 2026-06-12 | Hermes Kanban 集成 Phase 1（基础设施） | ✅ |
+| 2026-06-12 | 代码提交：v5.1 重构 + Kanban 准备 | ✅ |
 | 2026-06-11 | 日志解析集成到 Stage 3 | ✅ |
 | 2026-06-11 | Skill 重命名 supervisor→workflow | ✅ |
 | 2026-06-11 | Schema 统一 Phase 1-4（校验+迁移） | ✅ |
@@ -54,12 +56,38 @@
 
 ---
 
+## Hermes Kanban 集成
+
+> 详见 [docs/kanban/README.md](docs/kanban/README.md)
+
+| Phase | 内容 | 状态 |
+|:-----:|------|:----:|
+| **1** | 基础设施：Board + 3 Profile + 依赖链验证 | ✅ |
+| **2** | 单任务验证：gateway 运行 + 真实 batch 执行 | ⬜ |
+| **3** | 方案 A 全量集成：Kanban 替代 workflow 循环 | ⬜ |
+| **4** | 生产化：多 GPU 并行 + 断点续跑 + 性能基准 | ⬜ |
+
+### Phase 1 完成项
+
+- [x] Hermes Agent v0.15.1 确认安装
+- [x] 项目专用 board `apmm-ut` 创建
+- [x] 3 个 worker profile（ut-orchestrator / ut-executor / ut-fixer）
+- [x] SOUL.md 角色定义 + API Key 配置
+- [x] 示例任务创建 + parent→child 依赖晋升验证
+- [x] 集成文档 [docs/kanban/README.md](docs/kanban/README.md)
+
+---
+
 ## 待完成工作
 
 - **Phase 6**: Workflow 集成测试
   - 运行 workflow_loop.py --init
   - 运行 workflow_loop.py --single-iteration
   - 测试 4 个 test list
+- **Kanban Phase 2**: 单任务验证
+  - 启动 3 个 gateway 同时运行
+  - 真实 batch 任务执行验证
+  - 熔断器验证
 
 ---
 
@@ -71,4 +99,4 @@
 
 ---
 
-*最后更新: 2026-06-12*
+*最后更新: 2026-06-12 (Kanban Phase 1 完成)*

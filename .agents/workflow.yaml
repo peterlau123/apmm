@@ -73,10 +73,10 @@ config:
 input_filter:
   # ⚠️ 用户需调整：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: null  # 例如: "D:/workspace/apmm/tasks/ut/test_list.txt"
+  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_passed.txt"
 
   # 场景 2: 用户指定的输入 manifest.json
-  manifest_source: null  # 例如: "D:/workspace/apmm/tasks/ut/test_analysis/manifest.json"
+  manifest_source: null #"D:/workspace/apmm/tasks/ut/test_analysis/manifest.json"
 
   # 范围截取（适用于场景 1 和 2.1）
   range: null  # 格式: "0-100" 或 "50:100"，null 表示全部
@@ -100,7 +100,7 @@ input_filter:
 stages:
   # Stage 1: collect（只执行一次）
   - id: collect
-    delegate_to: opencode
+    delegate_to: self
     skill: ut-test-collector
     loop: false
     description: 从test_list.txt生成manifest.json
@@ -115,7 +115,7 @@ stages:
 
   # Stage 2: select_batch（循环）
   - id: select_batch
-    delegate_to: opencode
+    delegate_to: self
     skill: batch-selector
     loop: true
     description: 选择下一批次测试
@@ -132,7 +132,7 @@ stages:
   # Stage 3: execute（循环）
   # v2.2: 日志提取和解析已内置为 stage 核心行为
   - id: execute
-    delegate_to: opencode
+    delegate_to: self
     skill: unit-test-executor
     loop: true
     description: |
@@ -163,7 +163,7 @@ stages:
 
   # Stage 4: handle_failures（循环，Agent核心）
   - id: handle_failures
-    delegate_to: opencode
+    delegate_to: self
     skill: failure-handler
     loop: true
     description: 分析失败原因，尝试修复（Agent判断）
@@ -175,7 +175,7 @@ stages:
 
   # Stage 5: update_status（循环）
   - id: update_status
-    delegate_to: opencode
+    delegate_to: self
     skill: manifest-updater
     loop: true
     description: 更新manifest.json状态
@@ -220,9 +220,12 @@ loop:
 
 # ============================================================
 # Kanban - Hermes Kanban配置
+# 注意：UT workflow 是线性批处理，不需要多 agent 协作，Kanban 默认关闭。
+#       进度可视化通过飞书卡片完成（见 notifications 节）。
+#       kanban_manager.py 代码保留，可独立 CLI 使用。
 # ============================================================
 kanban:
-  enabled: true
+  enabled: false
   
   board:
     name: "UT Test Progress"

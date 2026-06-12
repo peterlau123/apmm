@@ -269,6 +269,75 @@ Agent 在写入 workflow.yaml 时自动将反斜杠转换为正斜杠。
 
 ---
 
+## Kanban 模式执行步骤（kanban.enabled = true）
+
+### Step K0: 检查前置条件
+
+Agent 检查以下条件是否满足：
+
+1. Hermes Agent v0.15.1+ 已安装
+   ```bash
+   hermes version  # 检查版本
+   ```
+   不满足 → 提示用户安装 Hermes Agent
+
+2. Board `apmm-ut` 已创建
+   ```bash
+   hermes kanban boards list | grep apmm-ut
+   ```
+   不满足 → 提示用户执行:
+   ```bash
+   hermes kanban boards create apmm-ut --name "APMM UT Workflow"
+   ```
+
+3. 3 个 worker profile 已配置
+   ```bash
+   hermes profile list | grep ut-orchestrator
+   hermes profile list | grep ut-executor
+   hermes profile list | grep ut-fixer
+   ```
+   不满足 → 提示用户参考 tasks/ut/docs/kanban/README.md 创建 profile
+
+### Step K1: 启动 Gateway
+
+Agent 执行启动脚本：
+
+```bash
+python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+```
+
+脚本行为：
+1. 切换到目标 board
+2. 启动 3 个 Gateway（orchestrator/executor/fixer）后台进程
+3. 等待 gateway 就绪
+4. 返回启动状态 JSON
+
+### Step K2: 创建初始任务
+
+Agent 创建 Orchestrator 任务：
+
+```bash
+hermes kanban create "Orchestrate UT run" --assignee ut-orchestrator --priority 1
+```
+
+任务触发依赖链：Orchestrator → Executor → Fixer
+
+### Step K3: 监控进度
+
+Agent 执行监控脚本：
+
+```bash
+python skills/ut/workflow/scripts/monitor_kanban.py --workflow-yaml .agents/workflow.yaml --poll-interval 60
+```
+
+脚本轮询 `hermes kanban stats` 直到所有任务完成。
+
+### Step K4: 完成通知
+
+发送飞书通知，Gateway 保持运行（不自动关闭）。
+
+---
+
 ## 禁止操作
 
 - ❌ 不执行具体测试任务（让 Worker subagent 执行）

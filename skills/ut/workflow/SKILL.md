@@ -357,9 +357,11 @@ python skills/ut/workflow/scripts/monitor_kanban.py --workflow-yaml .agents/work
 - [unit-test-executor/SKILL.md](../unit-test-executor/SKILL.md) - Stage 3 Worker
 - [failure-handler/SKILL.md](../failure-handler/SKILL.md) - Stage 4 Worker
 - [manifest-updater/SKILL.md](../manifest-updater/SKILL.md) - Stage 5 Worker
+- [Kanban集成指南](../../../tasks/ut/docs/kanban/README.md) - Hermes Kanban × UT Workflow 集成指南
+- [Kanban集成设计](../../../docs/superpowers/specs/2026-06-12-ut-workflow-kanban-integration-design.md) - Kanban 集成设计文档
 
 ---
 
 *创建日期: 2026-06-06*
 *更新日期: 2026-06-12*
-*版本: 5.1.0*
+*版本: 5.2.0*

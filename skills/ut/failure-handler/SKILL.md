@@ -1,11 +1,11 @@
 ---
 name: failure-handler
 description: Worker Agent (核心) - 失败错误处理，分析失败原因、尝试修复代码、生成 handled_tests.json，由 Supervisor 调用执行 Stage 4（含 dependency-resolver 子 skill）
-version: 2.1.0
+version: 3.0.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures Stage（Agent 判断核心）
 ---
 
-# Failure Handler (Worker Agent v2.1)
+# Failure Handler (Worker Agent v3.0)
 
 ---
 
@@ -16,22 +16,36 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 │  Worker Agent Session (临时，执行后释放)                     │
 │                                                             │
 │  职责：                                                      │
-│  • 分析 batch_results.json 中的失败/错误测试                 │
-│  • LLM 判断错误类型和处理策略                                │
-│  • 尝试修复代码（version/functional）                       │
+│  • 分析 batch_results.json 中的 errors 和 failures          │
+│  • 脚本优先：规则提取、定位代码、统计聚合                     │
+│  • Agent 判断：问题来源分析、修复方案生成                     │
+│  • 尝试修复代码（远程容器）→ git commit                       │
 │  • 调用 dependency-resolver 处理依赖缺失                    │
-│  • 验证修复效果                                              │
+│  • 验证修复效果 → fixed_pending_verify                       │
 │  • 写入 handled_tests.json                                  │
 │  • 返回极简结果给 Supervisor                                │
 │                                                             │
-│  输入：batch_results.json                                    │
-│  输出：handled_tests.json + 极简 stats                       │
+│  输入：batch_results.json + manifest.json                    │
+│  输出：handled_tests.json + commit 号 + 极简 stats           │
 │  Session 结束后：Context 释放                                │
 │                                                             │
-│  ⚠️ 这是 Agent 判断核心 Stage                               │
-│  ⚠️ dependency-resolver 作为子 skill                        │
+│  ⚠️ 脚本优先，Agent 判断                                     │
+│  ⚠️ 所有修复在远程容器执行                                   │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 设计原则：脚本优先，Agent 判断
+
+| 层级 | 处理方式 | 适用场景 | 示例 |
+|------|----------|----------|------|
+| L1 脚本规则 | 关键词匹配、正则提取 | 确定性高 | error_type 分类、error_key/failure_key 标准化 |
+| L2 脚本调用 | 调用已有脚本 | 固定流程 | dependency-resolver、重试、GPU检测 |
+| L3 脚本定位 | traceback 解析、grep | 可规则提取 | 定位代码文件、提取上下文 |
+| L4 脚本统计 | 聚合计算 | 数学运算 | affected_tests、statistics 计算 |
+| L5 Agent 判断 | LLM 语义理解 | 需理解上下文 | 判断 test/vllm 问题来源 |
+| L6 Agent 生成 | LLM 代码修复 | 需代码理解 | 生成 patch、修复逻辑 |
 
 ---
 
@@ -40,73 +54,86 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 ```mermaid
 flowchart TD
     subgraph Input["[输入] Supervisor 调用"]
-        A1["batch_results.json 路径"]
-        A2["handled_tests.json 路径"]
+        A1["batch_results.json"]
+        A2["manifest.json（errors/failures 历史）"]
     end
     
     Input --> Step1
     
-    subgraph Step1["[Step 1] 加载失败测试"]
+    subgraph Step1["[Step 1] 加载失败测试（脚本）"]
         S1_1["读取 batch_results.json"]
         S1_2["提取 failed/error 测试"]
-        S1_3["读取远程日志（可选）"]
+        S1_3["按 max_failed_per_iteration 截取"]
     end
     
     Step1 --> Step2
     
-    subgraph Step2["[Step 2] LLM 分析错误类型"]
-        S2_1["解析 error_message"]
-        S2_2["LLM 判断错误类型"]
-        S2_3["决策处理策略"]
+    subgraph Step2["[Step 2] 两阶段分类（脚本 + Agent）"]
+        S2_1["关键词匹配 error_type"]
+        S2_2["匹配成功 → 直接处理"]
+        S2_3["匹配失败/不确定 → Agent 判断"]
     end
     
     Step2 --> Step3
     
-    subgraph Step3["[Step 3] 按类型处理（Agent 判断）"]
-        S3_1{"错误类型?"}
-        
-        S3_2["dependency<br/>尝试安装依赖"]
-        S3_3["network<br/>延时重试"]
-        S3_4["resource<br/>汇报暂停"]
-        
-        subgraph VersionFix["version 不兼容（核心）"]
-            V1["分析 API 变化"]
-            V2["尝试修改代码"]
-            V3["验证修复"]
-            V4["通过 → passed<br/>失败 → ignored"]
-        end
-        
-        subgraph FunctionalFix["functional 失败（核心）"]
-            F1["分析是否是 bug"]
-            F2["尝试修复代码"]
-            F3["验证修复"]
-            F4["通过 → passed<br/>失败 → failed"]
-        end
-        
-        S3_5["other<br/>记录信息"]
-        
-        S3_1 -->|dependency| S3_2
-        S3_1 -->|network| S3_3
-        S3_1 -->|resource| S3_4
-        S3_1 -->|version| VersionFix
-        S3_1 -->|functional| FunctionalFix
-        S3_1 -->|other| S3_5
+    subgraph Step3["[Step 3] 标准化 error_key/failure_key（脚本）"]
+        S3_1["dependency: 提取包名"]
+        S3_2["version: 提取 API 变化"]
+        S3_3["functional: LLM 生成 failure_key"]
     end
     
     Step3 --> Step4
     
-    subgraph Step4["[Step 4] 写入处理结果"]
-        S4_1["handled_tests.json"]
-        S4_2["记录 final_status"]
-        S4_3["填写 ignored_reason"]
+    subgraph Step4["[Step 4] 检查已解决问题（脚本）"]
+        S4_1["读取 manifest.resolved_errors"]
+        S4_2["读取 manifest.resolved_failures"]
+        S4_3["error_key/failure_key 在缓存中？"]
+        S4_4["→ 跳过处理，直接 fixed_pending_verify"]
     end
     
     Step4 --> Step5
     
-    subgraph Step5["[Step 5] 返回极简结果"]
-        S5_1["stats: passed/failed/ignored"]
-        S5_2["next_action: continue/pause"]
-        S5_3["Session 结束"]
+    subgraph Step5["[Step 5] 按类型处理"]
+        S5_1{"错误类型?"}
+        
+        S5_2["dependency/download<br/>脚本调用 dependency-resolver"]
+        S5_3["network<br/>脚本延时重试"]
+        S5_4["resource<br/>脚本检测 → blocked"]
+        
+        subgraph CodeFix["version/functional 修复（Agent 核心）"]
+            C1["脚本定位代码文件"]
+            C2["脚本提取代码上下文"]
+            C3["Agent 分析问题来源<br/>test vs vllm"]
+            C4["Agent 生成修复 patch"]
+            C5["脚本应用 patch → git commit"]
+            C6["脚本验证修复 → retry"]
+            C7["通过 → fixed_pending_verify<br/>失败 → 记录 attempts"]
+        end
+        
+        S5_5["other<br/>脚本记录 → ignored"]
+        
+        S5_1 -->|dependency/download| S5_2
+        S5_1 -->|network| S5_3
+        S5_1 -->|resource| S5_4
+        S5_1 -->|version/functional| CodeFix
+        S5_1 -->|other| S5_5
+    end
+    
+    Step5 --> Step6
+    
+    subgraph Step6["[Step 6] 写入处理结果"]
+        S6_1["handled_tests.json"]
+        S6_2["记录 errors[] / failures[]"]
+        S6_3["记录 commit 号"]
+        S6_4["阈值检查：attempts >= 3 → ignored"]
+    end
+    
+    Step6 --> Step7
+    
+    subgraph Step7["[Step 7] 返回极简结果"]
+        S7_1["stats: passed/failed/ignored"]
+        S7_2["next_action: continue/pause"]
+        S7_3["Session 结束"]
     end
 ```
 
@@ -120,115 +147,251 @@ flowchart TD
 |------|------|------|
 | `workflow_state_path` | Supervisor context | 状态文件路径 |
 | `batch_results_path` | workflow.yaml | 测试结果路径 |
-| `handled_tests_path` | workflow.yaml | 处理结果输出路径 |
+| `manifest_path` | workflow.yaml | manifest.json（errors/failures 历史） |
+| `max_failed_per_iteration` | workflow.yaml | 每轮最大处理数（默认 10） |
+| `max_retry_per_test` | workflow.yaml | 单测试最大重试次数（默认 3） |
 
 ### 输出
 
 | 类型 | 内容 | 说明 |
 |------|------|------|
 | **文件** | handled_tests.json | 处理结果文件 |
+| **manifest** | errors[] / failures[] | 追踪历史（Stage 5 写入） |
+| **manifest** | resolved_errors / resolved_failures | 聚合索引（Stage 5 写入） |
+| **远程** | git commit | 代码修复（远程容器） |
 | **返回** | stats (极简) | 给 Supervisor 的返回值 |
-| **代码修复** | patch 文件 | 如果修复成功 |
 
 ---
 
-## 失败分类判断规则
+## errors vs failures 定义
 
-|| 类型 | 关键词 | Agent 处理策略 |
-||------|--------|---------------|
-|| **dependency** | `ModuleNotFoundError`, `ImportError` | **调用 dependency-resolver 子 skill** |
-|| **network** | `timeout`, `ConnectionError` | 延时重试 (5s/10s/20s) |
-|| **resource** | `CUDA out of memory`, `OOM` | 汇报 Supervisor → blocked_reason |
-|| **version** | `TypeError`, `AttributeError`, API 缺失 | **尝试修复代码** → 验证 |
-|| **functional** | `AssertionError`, `ValueError` | **分析 bug → 尝试修复** |
-|| **download_error** | `Failed to download`, `Model not found` | **调用 dependency-resolver 子 skill** |
-|| **other** | 不匹配以上 | 记录信息 → 继续 |
+| 类型 | 含义 | pytest 状态 | error_type/failure_type |
+|------|------|-------------|-------------------------|
+| **Error** | 测试无法执行 | ERROR | dependency/version/download_error/network/resource |
+| **Failure** | 断言失败 | FAILED | assertion（原 functional） |
 
-**ERROR 状态测试处理**：
-- pytest ERROR 状态测试（collection error, setup error）归入 **other** 类型
-- 需要人工介入的错误设置 `error` 字段请求暂停
+---
+
+## errors[] 结构
+
+```json
+{
+  "test_node": "tests/test_load.py::test_llama",
+  "errors": [
+    {
+      "error_key": "transformers",
+      "error_type": "dependency",
+      "error_message": "ModuleNotFoundError: No module named 'transformers'",
+      "status": "resolved",
+      "occurred_at": "2026-06-12T14:00:00Z",
+      "resolved_at": "2026-06-12T15:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+## failures[] 结构
+
+```json
+{
+  "test_node": "tests/test_load.py::test_llama",
+  "failures": [
+    {
+      "failure_key": "test_load:shape_mismatch",
+      "failure_type": "assertion",
+      "failure_message": "AssertionError: expected shape (1, 10) got (1, 5)",
+      "status": "resolved",
+      "commit": "a1b2c3d",
+      "occurred_at": "2026-06-12T15:30:00Z",
+      "resolved_at": "2026-06-12T16:00:00Z"
+    }
+  ]
+}
+```
+
+---
+
+## error_key 标准化规则（脚本）
+
+| error_type | error_key 格式 | 提取方式 | 示例 |
+|------------|----------------|----------|------|
+| dependency | `{package}` | 正则提取 | `transformers` |
+| download_error | `{org}/{model}` | 正则提取 | `meta-llama/Llama-3.2-1B` |
+| version | `{module}.{function}.{change}` | 正则提取 | `torch.softmax.dim_arg` |
+| network | `{host}:{error}` | 正则提取 | `huggingface.co:timeout` |
+| resource | `{resource_type}` | 关键词匹配 | `cuda_oom` |
+
+---
+
+## failure_key 标准化规则（Agent + 校验）
+
+| failure_type | failure_key 格式 | 生成方式 | 示例 |
+|--------------|------------------|----------|------|
+| assertion | `{test_file}:{bug_type}` | Agent LLM + 格式校验 | `test_load:shape_mismatch` |
+
+**Agent prompt 示例：**
+```
+分析这个断言失败，生成 failure_key。
+格式要求：{test_file}:{bug_type}
+- test_file: 测试文件名（不含路径）
+- bug_type: 简短描述（snake_case）
+
+示例：
+- test_load:missing_import
+- test_inference:wrong_output_shape
+
+当前错误：
+{failure_message}
+
+请生成 failure_key：
+```
 
 ---
 
 ## 执行流程
 
-### Step 1: 加载失败测试
+### Step 1: 加载失败测试（脚本）
 
 ```python
 import json
 from pathlib import Path
 
-# 从 workflow_state.json 读取路径配置（不硬编码）
-from shared.config_loader import get_paths
-paths = get_paths(workflow_state_path)
+# 从 manifest 读取路径配置（单一数据源）
+manifest_path = paths["manifest"]
+manifest = json.loads(Path(manifest_path).read_text())
 
-# 读取 batch_results
 batch_results_path = paths["batch_results"]
 batch_results = json.loads(Path(batch_results_path).read_text())
 
+# 提取 failed/error 测试
 failed_tests = [t for t in batch_results["tests"] if t["status"] in ["failed", "error"]]
-batch_id = batch_results["batch_id"]
+
+# 超时控制：按阈值截取（D6）
+max_per_iteration = config.get("max_failed_per_iteration", 10)
+failed_tests = failed_tests[:max_per_iteration]
 ```
 
-### Step 2: LLM 分析错误类型
+### Step 2: 两阶段分类（脚本 + Agent）
 
 ```python
-# Agent 使用 LLM 判断错误类型
-
-for test in failed_tests:
-    error_message = test.get("error_message", "")
+def classify_error_two_stage(error_message):
+    """D1: 两阶段分类"""
     
-    # LLM 分析
-    analysis = analyze_error_with_llm(error_message)
+    # Step 1: 关键词匹配（脚本）
+    keywords_map = {
+        "dependency": ["ModuleNotFoundError", "ImportError"],
+        "download_error": ["Failed to download", "Model not found"],
+        "network": ["timeout", "ConnectionError"],
+        "resource": ["CUDA out of memory", "OOM", "NCCL"],
+        "version": ["TypeError", "AttributeError"],
+    }
     
-    # 决策处理策略
-    test["error_type"] = analysis["error_type"]
-    test["action"] = analysis["action"]
+    for error_type, keywords in keywords_map.items():
+        if any(kw in error_message for kw in keywords):
+            return {"error_type": error_type, "method": "script"}
+    
+    # Step 2: Agent 判断（不确定时）
+    return {
+        "error_type": agent_classify(error_message),
+        "method": "agent"
+    }
 ```
 
-### Step 3: 按类型处理
-
-#### dependency 缺失（调用 dependency-resolver 子 skill）
+### Step 3: 标准化 error_key/failure_key（脚本）
 
 ```python
-if error_type == "dependency":
-    # 调用 dependency-resolver 子 skill
-    from hermes import delegate_task
+def normalize_error_key(error_type, error_message):
+    """脚本规则提取"""
     
-    result = delegate_task(
-        goal=f"处理依赖缺失: {error_message}",
-        skills=["dependency-resolver"],
-        context=f"""
-        dependency_type: package
-        dependency_name: {extract_package_name(error_message)}
-        affected_tests: [{test["test_node"]}]
-        """
-    )
+    if error_type == "dependency":
+        match = re.search(r"No module named '(\w+)'", error_message)
+        return match.group(1).lower() if match else None
     
-    if result.get("status") == "resolved":
-        # 重试测试
+    if error_type == "download_error":
+        match = re.search(r"download ([\w\-]+/[\w\-\.]+)", error_message)
+        return match.group(1) if match else None
+    
+    if error_type == "version":
+        return extract_api_change_key(error_message)
+    
+    if error_type == "network":
+        match = re.search(r"(?:timeout|connection).*?(\w+\.\w+)", error_message)
+        return match.group(1).lower() if match else "network_unknown"
+    
+    if error_type == "resource":
+        if "CUDA out of memory" in error_message:
+            return "cuda_oom"
+        if "NCCL" in error_message:
+            return "nccl_error"
+        return "resource_unknown"
+
+def normalize_failure_key(failure_message, test_file, manifest):
+    """Agent 生成 + 格式校验 + 历史匹配"""
+    
+    # Agent 生成
+    proposed_key = agent_generate_failure_key(failure_message, test_file)
+    
+    # 格式校验
+    if not re.match(r^\w+:\w+$", proposed_key):
+        proposed_key = f"{test_file}:unknown"
+    
+    # 历史匹配（避免重复）
+    existing_keys = set()
+    for t in manifest["tests"]:
+        for f in t.get("failures", []):
+            existing_keys.add(f.get("failure_key"))
+    
+    # 模糊匹配
+    for existing in existing_keys:
+        if similar(proposed_key, existing):
+            return existing  # 使用已有标准 key
+    
+    return proposed_key
+```
+
+### Step 4: 检查已解决问题（脚本）
+
+```python
+# 从 manifest 读取缓存（单一数据源）
+resolved_errors = manifest.get("resolved_errors", {})
+resolved_failures = manifest.get("resolved_failures", {})
+
+# 检查是否已解决
+if error_key in resolved_errors:
+    # 跳过处理，直接标记
+    test["final_status"] = "fixed_pending_verify"
+    test["skip_reason"] = f"error_key {error_key} already resolved"
+    continue
+
+if failure_key in resolved_failures:
+    # 跳过处理，直接标记
+    test["final_status"] = "fixed_pending_verify"
+    test["skip_reason"] = f"failure_key {failure_key} already resolved"
+    continue
+```
+
+### Step 5: 按类型处理
+
+#### dependency/download_error（脚本调用子 skill）
+
+```python
+if error_type in ["dependency", "download_error"]:
+    result = call_dependency_resolver(error_key)
+    
+    if result["status"] == "resolved":
         retry_result = retry_test(test["test_node"])
         test["final_status"] = retry_result["status"]
-    elif result.get("status") == "manual_required":
-        # 需要人工决策，设置 error 字段
-        test["final_status"] = "pending"
-        return {
-            "stats": {...},
-            "next_action": "pause",
-            "error": f"dependency 需要人工决策: {result.get('options')}",
-            "blocked_reason": None
-        }
     else:
-        # 下载失败
         test["final_status"] = "ignored"
-        test["ignored_reason"] = f"dependency failed: {result.get('reason')}"
+        test["ignored_reason"] = f"{error_type} failed: {result['reason']}"
 ```
 
-#### network 超时
+#### network（脚本延时重试）
 
 ```python
 if error_type == "network":
-    # 延时重试
     for delay in [5, 10, 20]:
         sleep(delay)
         retry_result = retry_test(test["test_node"])
@@ -241,160 +404,95 @@ if error_type == "network":
         test["ignored_reason"] = "network timeout after 3 retries"
 ```
 
-#### resource 不足
+#### resource（脚本检测 → 汇报）
 
 ```python
 if error_type == "resource":
-    # 汇报 Supervisor，设置 blocked_reason
-    test["final_status"] = "pending"  # 不处理，等资源可用
+    test["final_status"] = "pending"
     return {
-        "stats": {
-            "passed": handled_tests["stats"]["passed"],
-            "failed": handled_tests["stats"]["failed"],
-            "ignored": handled_tests["stats"]["ignored"],
-            "error": handled_tests["stats"]["error"],
-            "pending": handled_tests["stats"]["pending"]
-        },
         "next_action": "wait",
-        "error": None,
-        "blocked_reason": f"resource 不足: {error_message[:200]}"
+        "blocked_reason": f"resource: {error_key}"
     }
 ```
 
-#### download_error（调用 dependency-resolver 子 skill）
+#### version/functional 修复（Agent 核心）
 
 ```python
-if error_type == "download_error":
-    # 调用 dependency-resolver 子 skill 处理模型下载
-    from hermes import delegate_task
+if error_type in ["version", "functional"]:
+    # L3: 脚本定位代码
+    traceback_info = parse_traceback(error_message)
+    code_location = locate_code_from_traceback(traceback_info)
     
-    model_id = extract_model_id(error_message)
+    # L3: 脚本提取上下文
+    code_context = read_remote_file(code_location)
     
-    result = delegate_task(
-        goal=f"处理模型下载失败: {model_id}",
-        skills=["dependency-resolver"],
-        context=f"""
-        dependency_type: model
-        dependency_name: {model_id}
-        affected_tests: [{test["test_node"]}]
-        """
-    )
+    # L5: Agent 判断问题来源
+    analysis = agent_analyze_problem(error_message, code_context)
+    # { "problem_source": "vllm", "fix_description": "...", "fix_patch": "..." }
     
-    if result.get("status") == "resolved":
-        retry_result = retry_test(test["test_node"])
-        test["final_status"] = retry_result["status"]
-    else:
+    # L4: 脚本检查阈值
+    attempts = test.get("fix_attempts", 0)
+    max_retry = config.get("max_retry_per_test", 3)
+    
+    if attempts >= max_retry:
         test["final_status"] = "ignored"
-        test["ignored_reason"] = f"model download failed: {result.get('reason')}"
+        test["ignored_reason"] = f"max retry ({max_retry}) exceeded"
+        continue
+    
+    # L6: Agent 生成修复
+    fix_patch = analysis.get("fix_patch")
+    
+    # 脚本应用修复 → git commit
+    commit_sha = apply_patch_and_commit(fix_patch, code_location)
+    
+    # 脚本验证
+    retry_result = retry_test(test["test_node"])
+    
+    if retry_result["status"] == "passed":
+        test["final_status"] = "fixed_pending_verify"
+        test["commit"] = commit_sha
+        test["fix_attempts"] = attempts + 1
+    else:
+        test["final_status"] = "failed"
+        test["fix_attempts"] = attempts + 1
+        test["fix_reason"] = "retry failed after patch"
 ```
 
-#### other 错误（包括 ERROR 状态测试）
+#### other（脚本记录）
 
 ```python
 if error_type == "other":
-    # 记录信息，不处理
     test["final_status"] = "ignored"
     test["ignored_reason"] = f"other error: {error_message[:200]}"
 ```
 
-#### version 不兼容（Agent 核心）
+### Step 6: 写入处理结果
 
 ```python
-if error_type == "version":
-    # 分析 API 变化
-    api_change = analyze_api_change(error_message)
-    
-    # 示例：torch.softmax API 变化
-    # TypeError: torch.softmax() got unexpected keyword argument 'dim'
-    
-    # 查找相关代码
-    test_file = find_test_file(test["test_node"])
-    code_location = find_code_location(test_file, "softmax")
-    
-    # 尝试修复
-    original_code = read_code(test_file, code_location)
-    # torch.softmax(x, dim=0)
-    
-    modified_code = fix_api_call(original_code, api_change)
-    # torch.softmax(x, axis=0)  # PyTorch 2.5.1
-    
-    # 写入修复
-    write_code(test_file, code_location, modified_code)
-    
-    # 验证修复
-    retry_result = retry_test(test["test_node"])
-    
-    if retry_result["status"] == "passed":
-        test["final_status"] = "passed"
-        test["fix_details"] = f"修改 {api_change['api']} 参数"
-    else:
-        test["final_status"] = "ignored"
-        test["ignored_reason"] = f"version incompatible: {api_change['api']} 无法修复"
-```
-
-#### functional 失败（Agent 核心）
-
-```python
-if error_type == "functional":
-    # 分析是否是 bug
-    bug_analysis = analyze_bug(error_message)
-    
-    if bug_analysis["is_bug"]:
-        # 尝试修复
-        fix_code = generate_fix(bug_analysis)
-        
-        # 写入修复
-        write_fix(test_file, fix_code)
-        
-        # 验证
-        retry_result = retry_test(test["test_node"])
-        
-        if retry_result["status"] == "passed":
-            test["final_status"] = "passed"
-        else:
-            test["final_status"] = "failed"
-    else:
-        # 测试本身有问题，保持 failed
-        test["final_status"] = "failed"
-```
-
-### Step 4: 写入处理结果
-
-```python
-# handled_tests 结构
 handled_tests = {
     "batch_id": batch_id,
     "processed_at": datetime.now().isoformat(),
-    "tests": failed_tests,  # 包含 final_status
+    "tests": failed_tests,
     "stats": {
         "passed": len([t for t in failed_tests if t["final_status"] == "passed"]),
+        "fixed_pending_verify": len([t for t in failed_tests if t["final_status"] == "fixed_pending_verify"]),
         "failed": len([t for t in failed_tests if t["final_status"] == "failed"]),
         "ignored": len([t for t in failed_tests if t["final_status"] == "ignored"]),
-        "error": len([t for t in failed_tests if t["final_status"] == "error"]),
         "pending": len([t for t in failed_tests if t["final_status"] == "pending"])
     }
 }
 
-# 写入 handled_tests.json（路径从 workflow.yaml 读取）
-handled_tests_path = paths["handled_tests"]
 Path(handled_tests_path).write_text(json.dumps(handled_tests, indent=2))
 ```
 
-### Step 5: 返回极简结果
+### Step 7: 返回极简结果
 
 ```python
-# 返回给 Supervisor（统一格式）
 return {
-    "stats": {
-        "passed": handled_tests["stats"]["passed"],
-        "failed": handled_tests["stats"]["failed"],
-        "ignored": handled_tests["stats"]["ignored"],
-        "error": handled_tests["stats"]["error"],
-        "pending": handled_tests["stats"]["pending"]
-    },
-    "next_action": "continue",  # 或 "wait"（resource 不足时）
-    "error": None,  # 或错误信息（需要人工介入时）
-    "blocked_reason": None  # 或阻塞原因（resource 不足时）
+    "stats": handled_tests["stats"],
+    "next_action": "continue",
+    "error": None,
+    "blocked_reason": None
 }
 ```
 
@@ -406,9 +504,9 @@ return {
 {
   "stats": {
     "passed": 3,
-    "failed": 2,
+    "fixed_pending_verify": 2,
+    "failed": 1,
     "ignored": 1,
-    "error": 0,
     "pending": 0
   },
   "next_action": "continue",
@@ -417,76 +515,128 @@ return {
 }
 ```
 
-**注意：只返回统一字段，不返回 details_file 等额外字段**
+---
+
+## 前后 Stage 影响
+
+### 对上游 Stage 的影响
+
+| Stage | 影响 | 说明 |
+|-------|------|------|
+| **batch-selector (Stage 2)** | 需选择 fixed_pending_verify | D2: 验证批次优先 |
+
+**batch-selector 新增逻辑：**
+```python
+# 选择 pending + fixed_pending_verify
+pending_tests = [t for t in manifest["tests"] if t["status"] == "pending"]
+fixed_pending = [t for t in manifest["tests"] if t["status"] == "fixed_pending_verify"]
+
+# 优先级：fixed_pending > pending > failed
+batch_tests.extend(fixed_pending[:batch_size])
+if len(batch_tests) < batch_size:
+    batch_tests.extend(pending_slots)
+```
+
+### 对下游 Stage 的影响
+
+| Stage | 影响 | 说明 |
+|-------|------|------|
+| **manifest-updater (Stage 5)** | 需更新 errors[]/failures[] | D9: 追踪历史 |
+| **manifest-updater (Stage 5)** | 需更新 resolved_errors/resolved_failures | D9: 聚合索引 |
+
+**manifest-updater 新增逻辑：**
+```python
+# 更新 errors[] 状态
+for error in handled_test.get("errors", []):
+    if error.get("status") == "resolved":
+        error["resolved_at"] = datetime.now().isoformat()
+
+# 更新 failures[] 状态 + commit
+for failure in handled_test.get("failures", []):
+    if failure.get("status") == "resolved":
+        failure["resolved_at"] = datetime.now().isoformat()
+        failure["commit"] = handled_test.get("commit")
+
+# 更新 resolved_errors/resolved_failures
+if handled_test.get("error_key") and handled_test["final_status"] == "fixed_pending_verify":
+    manifest["resolved_errors"][handled_test["error_key"]] = {
+        "type": handled_test["error_type"],
+        "resolved_at": datetime.now().isoformat()
+    }
+
+if handled_test.get("failure_key") and handled_test["final_status"] == "fixed_pending_verify":
+    manifest["resolved_failures"][handled_test["failure_key"]] = {
+        "type": "assertion",
+        "resolved_at": datetime.now().isoformat(),
+        "commit": handled_test.get("commit")
+    }
+```
+
+### 状态流转（D2）
+
+```
+pending → running → passed (正常流程)
+                 → failed → fixed_pending_verify → passed (修复成功)
+                                        → failed (验证失败)
+                 → error → resolved → fixed_pending_verify → passed
+                 → ignored (跳过)
+```
 
 ---
 
-## Agent 判断要点
+## 超时控制（D6）
 
-### version 不兼容判断
+```yaml
+# workflow.yaml
+stages:
+  handle_failures:
+    timeout: 900
+    max_failed_per_iteration: 10  # 每轮最多处理 10 个失败测试
+    max_retry_per_test: 3         # 单测试最多重试 3 次
+```
 
-1. **识别 API 变化**：分析 error_message 中的 TypeError/AttributeError
-2. **查找 API 文档**：确认新旧 API 参数差异
-3. **定位代码位置**：找到调用该 API 的代码
-4. **尝试修改**：调整参数名/调用方式
-5. **验证修复**：重新运行测试
-
-### functional 失败判断
-
-1. **分析 Assertion**：理解期望值 vs 实际值
-2. **判断是否是 bug**：是测试 bug 还是代码 bug
-3. **生成修复代码**：如果是代码 bug，尝试修复
-4. **验证修复**：重新运行测试
-
----
-
-## 前置/后置任务
-
-| 类型 | 任务 | 说明 |
-|------|------|------|
-| **前置** | Supervisor 调用 | delegate_task 触发 |
-| **前置** | batch_results.json 存在 | Stage 3 输出 |
-| **前置** | 远程容器可用 | 重试测试需要 |
-| **后置** | handled_tests.json 写入 | 输出文件 |
-| **后置** | 返回 stats + next_action | 极简返回值 |
-| **后置** | Supervisor 继续 Stage 5 | update_status |
+**剩余失败测试：**
+- 保持 failed 状态
+- 下一轮 batch-selector 自动选择（manifest-centric）
 
 ---
 
 ## 注意事项
 
-1. **尝试修复优先**：version 不兼容不直接 ignored，尝试修复
-2. **Agent 判断核心**：这是最需要 LLM 判断力的 Stage
-3. **极简返回**：只返回 stats，详细修复信息写文件
-4. **blocked_reason 处理**：resource 不足时设置 blocked_reason，不继续处理
-5. **error 处理**：需要人工介入时设置 error 字段
-6. **ignored_reason 必填**：所有 ignored 测试必须填写原因
-7. **dependency-resolver 子 skill**：dependency 和 download_error 类型调用子 skill 处理
+1. **脚本优先**：确定性处理用脚本，Agent 只处理需要理解的场景
+2. **manifest-centric**：所有数据从 manifest 读取，无额外依赖
+3. **fixed_pending_verify**：修复后需下一轮批量验证
+4. **阈值保护**：max_retry_per_test 防止无限重试
+5. **超时截取**：max_failed_per_iteration 分批处理
+6. **commit 记录**：修复成功记录 commit 号
+7. **极简返回**：只返回 stats，详细信息写文件
 
 ---
 
 ## 禁止操作
 
-- ❌ 不直接 ignored version 不兼容（先尝试修复）
+- ❌ 不用 LLM 处理确定性任务（规则提取、统计等）
+- ❌ 不在 workflow_state 存储协调数据（只用 manifest）
+- ❌ 不本地修复代码（所有修复在远程容器）
+- ❌ 不直接 ignored version/functional（先尝试修复）
 - ❌ 不返回详细修复过程（只返回 stats）
 - ❌ 不发送飞书通知（让 Supervisor 发送）
 - ❌ 不修改 manifest.json（让 Stage 5 修改）
-- ❌ 不忽略 resource 问题（必须设置 blocked_reason）
-- ❌ 不直接处理 dependency（调用 dependency-resolver 子 skill）
-- ❌ 不返回 details_file 等额外字段（只返回统一格式）
 
 ---
 
 ## 相关文档
 
-- [workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置
-- [workflow/SKILL.md](../workflow/SKILL.md) - Supervisor 调度逻辑
-- [unit-test-executor/SKILL.md](../unit-test-executor/SKILL.md) - 上游 Stage
-- [manifest-updater/SKILL.md](../manifest-updater/SKILL.md) - 下游 Stage
-- [dependency-resolver/SKILL.md](../dependency-resolver/SKILL.md) - 子 skill（处理依赖缺失）
+- [Implementation Analysis](../../docs/superpowers/specs/2026-06-12-failure-handler-review-analysis.md) — 10 决策详细分析
+- [Design Doc](../../docs/superpowers/specs/2026-06-12-failure-handler-review-design.md) — 设计决策汇总
+- [workflow.yaml](../../.agents/workflow.yaml) — Workflow 配置
+- [workflow/SKILL.md](../workflow/SKILL.md) — Supervisor 调度逻辑
+- [batch-selector/SKILL.md](../batch-selector/SKILL.md) — 上游 Stage（需选择 fixed_pending_verify）
+- [manifest-updater/SKILL.md](../manifest-updater/SKILL.md) — 下游 Stage（需更新 errors/failures）
+- [dependency-resolver/SKILL.md](../dependency-resolver/SKILL.md) — 子 skill
 
 ---
 
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-10*
-*版本: 2.1.0*
+*更新日期: 2026-06-13*
+*版本: 3.0.0*

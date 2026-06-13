@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Handled Tests Schema",
-  "description": "失败测试处理结果文件格式 - handled_tests.json",
-  "version": "2.0",
+  "description": "失败测试处理结果文件格式 - handled_tests.json (v3.0)",
+  "version": "3.0",
   "type": "object",
   "required": ["batch_id", "generated_at", "tests", "stats"],
   "properties": {
@@ -21,7 +21,7 @@
       "description": "已处理的失败测试列表",
       "items": {
         "type": "object",
-        "required": ["test_node", "final_status", "error_type"],
+        "required": ["test_node", "final_status"],
         "properties": {
           "test_node": {
             "type": "string",
@@ -30,51 +30,114 @@
           "final_status": {
             "type": "string",
             "description": "处理后最终状态",
-            "enum": ["pending", "failed", "ignored"],
+            "enum": ["passed", "fixed_pending_verify", "failed", "ignored", "pending"],
             "_enum_comments": {
-              "pending": "待重新执行",
-              "failed": "最终失败状态",
-              "ignored": "已忽略（不执行）"
+              "passed": "已通过",
+              "fixed_pending_verify": "修复后待验证（下一轮批量验证）",
+              "failed": "最终失败",
+              "ignored": "已忽略（不执行）",
+              "pending": "待处理（资源不足或依赖等待）"
             }
           },
-          "error_type": {
-            "type": "string",
-            "description": "错误类型分类",
-            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "other"],
-            "_enum_comments": {
-              "dependency": "依赖缺失 (ImportError, ModuleNotFoundError)",
-              "network": "网络错误 (ConnectionError, HTTP 503/404)",
-              "resource": "资源不足 (CUDA OOM, GPU 不可用)",
-              "version": "版本兼容问题 (vLLM v0.13.0 + PyTorch 2.5.1 兼容性)",
-              "functional": "功能错误 (AssertionError, ValueError)",
-              "download_error": "模型下载失败 (Model not found, config.json missing)",
-              "other": "其他错误 (未分类的错误类型)"
-            }
+          "fix_attempts": {
+            "type": "integer",
+            "description": "修复尝试次数",
+            "minimum": 0,
+            "default": 0
           },
-          "error_message": {
-            "type": "string",
-            "description": "错误信息摘要"
-          },
-          "action": {
+          "commit": {
             "type": ["string", "null"],
-            "description": "建议处理动作",
-            "enum": ["dependency_resolver", "wait_resource", "investigate", null],
-            "_enum_comments": {
-              "dependency_resolver": "触发依赖解析器处理",
-              "wait_resource": "等待资源释放后继续",
-              "investigate": "需要人工调查",
-              "null": "无建议动作"
-            }
+            "description": "修复的 commit 号（远程容器）"
           },
           "ignored_reason": {
             "type": ["string", "null"],
-            "description": "忽略原因（当 final_status=ignored 时必填）",
-            "enum": ["network timeout", "version incompatible", "other error", null],
-            "_enum_comments": {
-              "network timeout": "网络超时导致无法执行",
-              "version incompatible": "版本不兼容无法执行",
-              "other error": "其他错误导致忽略",
-              "null": "无忽略原因"
+            "description": "忽略原因（当 final_status=ignored 时必填）"
+          },
+          "skip_reason": {
+            "type": ["string", "null"],
+            "description": "跳过处理原因（当命中缓存时）"
+          },
+          "errors": {
+            "type": "array",
+            "description": "错误历史追踪",
+            "items": {
+              "type": "object",
+              "required": ["error_key", "error_type", "status"],
+              "properties": {
+                "error_key": {
+                  "type": "string",
+                  "description": "标准化错误标识",
+                  "_examples": ["transformers", "meta-llama/Llama-3.2-1B", "torch.softmax.dim_arg"]
+                },
+                "error_type": {
+                  "type": "string",
+                  "description": "错误类型",
+                  "enum": ["dependency", "download_error", "version", "network", "resource", "other"]
+                },
+                "error_message": {
+                  "type": "string",
+                  "description": "错误信息摘要（最多500字符）"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "错误解决状态",
+                  "enum": ["pending", "resolved"]
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "首次发生时间"
+                },
+                "resolved_at": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "解决时间（status=resolved 时）"
+                }
+              }
+            }
+          },
+          "failures": {
+            "type": "array",
+            "description": "断言失败历史追踪",
+            "items": {
+              "type": "object",
+              "required": ["failure_key", "failure_type", "status"],
+              "properties": {
+                "failure_key": {
+                  "type": "string",
+                  "description": "标准化失败标识",
+                  "pattern": "^\\w+:\\w+$",
+                  "_examples": ["test_load:shape_mismatch", "test_inference:value_tolerance"]
+                },
+                "failure_type": {
+                  "type": "string",
+                  "description": "失败类型",
+                  "enum": ["assertion"]
+                },
+                "failure_message": {
+                  "type": "string",
+                  "description": "断言信息摘要"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "失败解决状态",
+                  "enum": ["pending", "resolved"]
+                },
+                "commit": {
+                  "type": ["string", "null"],
+                  "description": "修复 commit 号"
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "首次发生时间"
+                },
+                "resolved_at": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "解决时间"
+                }
+              }
             }
           }
         }
@@ -83,13 +146,92 @@
     "stats": {
       "type": "object",
       "description": "处理统计",
-      "required": ["passed", "failed", "ignored", "error", "pending"],
+      "required": ["passed", "fixed_pending_verify", "failed", "ignored", "pending"],
       "properties": {
-        "passed": {"type": "integer", "minimum": 0, "default": 0, "description": "通过数"},
-        "failed": {"type": "integer", "minimum": 0, "description": "失败数"},
-        "ignored": {"type": "integer", "minimum": 0, "description": "忽略数"},
-        "error": {"type": "integer", "minimum": 0, "description": "错误数"},
-        "pending": {"type": "integer", "minimum": 0, "description": "待重新执行数"}
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "通过数"
+        },
+        "fixed_pending_verify": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "修复后待验证数"
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "最终失败数"
+        },
+        "ignored": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "忽略数"
+        },
+        "pending": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "待处理数"
+        }
+      }
+    },
+    "resolved_errors": {
+      "type": "object",
+      "description": "已解决错误聚合索引（供缓存查询）",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "错误类型"
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "解决时间"
+          }
+        }
+      },
+      "_examples": {
+        "transformers": {
+          "type": "dependency",
+          "resolved_at": "2026-06-12T15:00:00Z"
+        }
+      }
+    },
+    "resolved_failures": {
+      "type": "object",
+      "description": "已解决失败聚合索引（供缓存查询）",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "失败类型",
+            "enum": ["assertion"]
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "解决时间"
+          },
+          "commit": {
+            "type": "string",
+            "description": "修复 commit 号"
+          }
+        }
+      },
+      "_examples": {
+        "test_load:shape_mismatch": {
+          "type": "assertion",
+          "resolved_at": "2026-06-12T16:00:00Z",
+          "commit": "a1b2c3d"
+        }
       }
     },
     "handled_tests_path": {

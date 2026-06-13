@@ -1,11 +1,11 @@
 ---
 name: manifest-updater
 description: Worker Agent - Manifest 状态更新器，更新 manifest.json 状态，由 Supervisor 调用执行 Stage 5
-version: 3.1.0
+version: 3.2.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 update_status Stage
 ---
 
-# Manifest Updater (Worker Agent v3.0)
+# Manifest Updater (Worker Agent v3.2)
 
 ---
 
@@ -139,12 +139,17 @@ def update_manifest_test(manifest, test_result):
     # 找到对应测试
     for test in manifest["tests"]:
         if test["test_node"] == test_node:
+            # 状态更新
             test["status"] = test_result.get("final_status") or test_result.get("status")
             test["error_message"] = test_result.get("error_message")
             test["ignored_reason"] = test_result.get("ignored_reason")
-            test["run_at"] = datetime.now().isoformat()
-            test["duration_ms"] = test_result.get("duration_ms")
             test["log_file"] = test_result.get("log_file")
+            
+            # 执行追踪字段（schema 定义）
+            test["run_count"] = test.get("run_count", 0) + 1
+            test["last_run_at"] = datetime.now().isoformat()
+            test["last_duration_ms"] = test_result.get("duration_ms")
+            test["last_exit_code"] = test_result.get("exit_code")
             
             # 处理 errors[]（从 handled_tests 合并）
             if test_result.get("errors"):
@@ -210,12 +215,14 @@ pending = len([t for t in manifest["tests"] if t["status"] == "pending"])
 total = len(manifest["tests"])
 executed = passed + failed + error + ignored
 progress = round(executed / total * 100, 2)
+pass_rate = round(passed / executed * 100, 2) if executed > 0 else 0
 
 # 更新 statistics
 manifest["statistics"] = {
     "total": total,
     "executed": executed,
     "progress": progress,
+    "pass_rate": pass_rate,
     "passed": passed,
     "failed": failed,
     "error": error,
@@ -320,5 +327,6 @@ return {
 ---
 
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-10*
+*更新日期: 2026-06-13*
+*版本: 3.2.0*
 *版本: 3.0.0*

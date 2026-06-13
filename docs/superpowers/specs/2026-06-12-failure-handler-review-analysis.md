@@ -262,10 +262,10 @@ patch diff 写入 handled_tests.json
 
 **Problem:** Stage 4 timeout=900s，但 50 个失败测试可能超时
 
-**Solution:**
+**Solution (manifest-centric):**
 - 每轮最多处理 N 个失败测试（如 10 个）
-- 剩余失败测试留到下一轮
-- batch-selector 下一轮会再次选择 pending 的 failed 测试
+- 剩余失败测试保持 `failed` 状态，下一轮 batch-selector 自动选择
+- **不使用 workflow_state 记录 deferred** — 完全基于 manifest 状态
 
 **Implementation Complexity Analysis:**
 
@@ -273,8 +273,7 @@ patch diff 写入 handled_tests.json
 |-----------|-----------------|------------|
 | workflow.yaml | Add `max_failed_per_iteration: 10` | Low |
 | failure-handler | Slice failed_tests[:N] before processing | Low |
-| batch-selector | Select pending failed tests for re-processing | Medium |
-| workflow loop | Handle "partial processed" state | Medium |
+| batch-selector | Select from failed tests (retry queue) | Medium |
 
 **Detailed Implementation:**
 
@@ -288,32 +287,39 @@ stages:
 
 **6.2 failure-handler Processing:**
 ```python
-# 当前：处理全部失败测试
-failed_tests = [t for t in batch_results["tests"] if t["status"] in ["failed", "error"]]
-
-# 新：按阈值截取
+# 按阈值截取，不记录 remaining_failed
 max_per_iteration = config.get("max_failed_per_iteration", 10)
 failed_tests = failed_tests[:max_per_iteration]
 
-# 记录剩余
-remaining = len(failed_tests) - max_per_iteration
-if remaining > 0:
-    handled_tests["remaining_failed"] = remaining
-    handled_tests["note"] = f"{remaining} tests deferred to next iteration"
+# 剩余测试保持 failed 状态，下一轮 batch-selector 自动处理
+# 无需额外记录，manifest-centric design
 ```
 
-**6.3 batch-selector Behavior:**
+**6.3 batch-selector Behavior (manifest-centric):**
 ```python
-# 问题：batch-selector 如何知道上轮有 deferred tests？
-# 方案 A: workflow_state.json 记录
-# 方案 B: 直接从 manifest 读取 pending failed tests
-
-# 当前 batch-selector 只看 pending 状态
+# 从 manifest 读取所有状态（唯一数据源）
 pending_tests = [t for t in manifest["tests"] if t["status"] == "pending"]
+failed_tests = [t for t in manifest["tests"] if t["status"] == "failed"]
+fixed_pending = [t for t in manifest["tests"] if t["status"] == "fixed_pending_verify"]
 
-# 新：需要区分 "从未执行" 和 "失败后重新执行"
-# 这与 Decision 2 的 fixed_pending_verify 有重叠
-# 建议：合并处理
+# 优先级队列（完全基于 manifest）
+batch_tests = []
+batch_tests.extend(fixed_pending[:batch_size])  # 验证批次优先
+
+if len(batch_tests) < batch_size:
+    slot = batch_size - len(batch_tests)
+    batch_tests.extend(pending_tests[:slot])     # 新测试
+
+if len(batch_tests) < batch_size:
+    slot = batch_size - len(batch_tests)
+    batch_tests.extend(failed_tests[:slot])      # 重试 failed tests
+
+# batch_config 标记类型
+batch_config = {
+    "verification_tests": fixed_pending_subset,
+    "new_tests": pending_subset,
+    "retry_tests": failed_subset
+}
 ```
 
 **Critical Issue: State Coordination**
@@ -408,43 +414,80 @@ loop:
 
 ---
 
-### Decision 9: batch vs test级别处理
+### Decision 9: batch vs test级别处理（resolved_failures_errors）
 
-**Problem:** 同一 batch 多个测试可能因同一原因失败（如同一模型缺失）
+**Problem:** 同一 batch 多个测试可能因同一原因失败（如同一模型缺失、同一 API 变化）
 
-**Solution:** 保持 test 级别处理，但增加缓存机制
+**Solution (manifest-centric):**
+- 保持 test 级别处理
+- 在 manifest.json 新增 `resolved_failures_errors` 字段记录已解决的问题
+- failure-handler 检查缓存，避免重复处理
 
 **Implementation:**
-```python
-# 在 workflow_state.json 维护
-resolved_dependencies = {
-    "meta-llama/Llama-3.2-1B": {
-        "status": "resolved",
-        "resolved_at": "2026-06-12T14:30:00Z",
-        "tests_fixed": ["test_load.py::test_llama_1b", ...]
-    },
-    "transformers>=4.40.0": {
-        "status": "resolved",
-        ...
-    }
-}
 
-# 处理测试时先检查缓存
-if dependency in resolved_dependencies:
-    skip_dependency_resolver_call()
-    test["final_status"] = "passed"  # 假设依赖解决后可通过
+**9.1 manifest.json 新增字段：**
+```json
+{
+  "tests": [...],
+  "statistics": {...},
+  "resolved_failures_errors": {
+    "transformers>=4.40.0": {
+      "type": "dependency",
+      "resolved_at": "2026-06-12T14:30:00Z",
+      "affected_tests": 15
+    },
+    "torch.softmax_api_change": {
+      "type": "version",
+      "resolved_at": "2026-06-12T15:00:00Z",
+      "fix_patch": "patches/softmax_fix.patch",
+      "affected_tests": 3
+    },
+    "test_bug_001": {
+      "type": "functional",
+      "resolved_at": "2026-06-12T16:00:00Z",
+      "affected_tests": 1
+    }
+  }
+}
+```
+
+**9.2 failure-handler 缓存检查：**
+```python
+# 从 manifest 读取已解决问题（唯一数据源）
+resolved = manifest.get("resolved_failures_errors", {})
+
+# 处理测试前检查
+error_key = extract_error_key(test["error_message"])  # 如 "transformers>=4.40.0"
+if error_key in resolved:
+    # 跳过重复处理，直接标记
+    test["final_status"] = "fixed_pending_verify"
+    test["resolved_reference"] = error_key
+    # 无需再次调用 dependency-resolver 或修复代码
+```
+
+**9.3 更新 resolved_failures_errors（manifest-updater）：**
+```python
+# 当 failure-handler 成功解决问题时
+if test["final_status"] == "fixed_pending_verify" and test.get("fix_applied"):
+    error_key = test.get("error_key")
+    manifest["resolved_failures_errors"][error_key] = {
+        "type": test["error_type"],
+        "resolved_at": datetime.now().isoformat(),
+        "affected_tests": 1  # 后续可聚合
+    }
 ```
 
 **Skill Impact:**
-- `workflow_state.json`: Add `resolved_dependencies` section
-- `failure-handler/SKILL.md`: Add cache lookup before calling dependency-resolver
+- `manifest_schema.json`: Add `resolved_failures_errors` field
+- `failure-handler/SKILL.md`: Add cache lookup before processing
+- `manifest-updater/SKILL.md`: Update resolved_failures_errors when fix applied
 
 **Workflow Impact:**
-- 🟡 Medium: Cache needs invalidation logic
-- If dependency resolver fails later, cache should reflect that
+- 🟡 Medium: New manifest field, but cache reduces repeated processing
+- manifest-centric design: 无需 workflow_state 存储额外数据
 
 **Risk:**
-- 🟡 Medium: Cache staleness
+- 🟡 Medium: Cache staleness if same issue recurs
 - Mitigation: Add `last_verified_at` and re-check periodically
 
 ---
@@ -487,22 +530,43 @@ if dependency in resolved_dependencies:
 
 **New State (Solution):**
 ```python
-# workflow_state.json 不存储 stats
+# workflow_state.json 不存储 stats 或 resolved_failures_errors
+# 所有协调数据都在 manifest.json（单一数据源）
+
 # workflow skill 每次需要统计时：
 def get_current_stats(workflow_state_path):
     paths = get_paths(workflow_state_path)
     manifest = json.loads(Path(paths["manifest"]).read_text())
     return manifest["statistics"]
 
-# workflow_state.json 只存储：
+# workflow_state.json 最终只存储：
 {
   "current_stage": "select_batch",
   "iteration": 5,
   "current_batch_id": "batch_20260612_143000",
-  "resolved_dependencies": {...},  # D9
   "break_signals": {...}
+  # 不包含: stats, resolved_failures_errors
 }
 ```
+
+**manifest.json 协调数据结构：**
+```json
+{
+  "tests": [...],           // 测试状态（唯一数据源）
+  "statistics": {...},      // 统计计数（唯一数据源）
+  "resolved_failures_errors": {...}  // 已解决问题（唯一数据源）
+}
+```
+
+**Cross-Skill Coordination via manifest:**
+- batch-selector: 读取 `tests` 状态选择批次
+- failure-handler: 读取 `resolved_failures_errors` 缓存
+- manifest-updater: 更新 `tests` 状态 + `resolved_failures_errors`
+- workflow: 读取 `statistics` 显示进度
+
+**无额外依赖：**
+- workflow_state 只存运行时临时状态
+- 所有持久化数据在 manifest.json
 
 **Detailed Implementation:**
 
@@ -615,7 +679,7 @@ Phase 3: Remove stats from workflow_state.json
 **Deliverables:**
 - Updated `failure-handler/SKILL.md` (v3.0)
 - `workflow.yaml` with `max_retry_per_test: 3`
-- `workflow_state_schema.json` with `resolved_dependencies`
+- `manifest_schema.json` with `resolved_failures_errors` field
 
 ---
 
@@ -687,19 +751,24 @@ Step 7: failure-handler/SKILL.md
 
 ```
                 D1  D2  D3  D4  D5  D6  D7  D8  D9  D10
-workflow         -   ●   -   ○   -   ●   ●   -   ○   ●
+workflow         -   ●   -   ○   -   ●   ●   -   -   ●
 batch-selector   -   ●   -   -   -   ●   -   -   -   ●
 failure-handler  ●   ●   -   ●   -   ●   -   -   ●   ●
-manifest-updater -   ●   -   -   -   -   -   -   -   -
-dependency-res.  -   -   -   -   -   -   -   -   ○   -
+manifest-updater -   ●   -   -   -   -   -   -   ●   -
+dependency-res.  -   -   -   -   -   -   -   -   -   -
 ut-test-collect. -   -   -   -   -   -   -   -   -   ●
 workflow.yaml    -   ○   -   ○   -   ○   -   -   -   -
-manifest_schema  -   ●   -   ○   -   -   -   -   -   -
+manifest_schema  -   ●   -   ○   -   -   -   -   ●   -
 GOAL.md          -   -   -   -   -   -   -   ●   -   -
 
 ● = Major change (flow/logic)
 ○ = Minor change (config/doc)
 - = No change
+
+Key Changes:
+- D9: manifest_schema 新增 resolved_failures_errors
+- D6: batch-selector 从 manifest.failed 选择重试队列
+- D10: workflow_state 只存运行时状态，不存协调数据
 ```
 
 ---
@@ -733,4 +802,32 @@ GOAL.md          -   -   -   -   -   -   -   ●   -   -
 ---
 
 *Created: 2026-06-12*
-*Version: 1.0.0*
+*Updated: 2026-06-13*
+*Version: 1.1.0*
+
+---
+
+## Appendix: Manifest-Centric Coordination Principle
+
+**核心原则：manifest.json 是唯一协调数据源**
+
+| 数据类型 | 存储位置 | 用途 |
+|----------|----------|------|
+| tests 状态 | manifest.json | batch-selector 选择批次 |
+| statistics | manifest.json | workflow 显示进度 |
+| resolved_failures_errors | manifest.json | failure-handler 缓存 |
+
+**workflow_state.json 只存运行时临时状态：**
+```json
+{
+  "current_stage": "...",
+  "iteration": 5,
+  "current_batch_id": "...",
+  "break_signals": {...}
+}
+```
+
+**无额外依赖：**
+- 不使用 workflow_state 存储协调数据
+- 不引入额外的状态文件
+- 所有 skill 通过 manifest 协调

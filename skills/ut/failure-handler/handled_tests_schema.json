@@ -180,63 +180,10 @@
         }
       }
     },
-    "resolved_errors": {
-      "type": "object",
-      "description": "已解决错误聚合索引（供缓存查询）",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "错误类型"
-          },
-          "resolved_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "解决时间"
-          }
-        }
-      },
-      "_examples": {
-        "transformers": {
-          "type": "dependency",
-          "resolved_at": "2026-06-12T15:00:00Z"
-        }
-      }
-    },
-    "resolved_failures": {
-      "type": "object",
-      "description": "已解决失败聚合索引（供缓存查询）",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "失败类型",
-            "enum": ["assertion"]
-          },
-          "resolved_at": {
-            "type": "string",
-            "format": "date-time",
-            "description": "解决时间"
-          },
-          "commit": {
-            "type": "string",
-            "description": "修复 commit 号"
-          }
-        }
-      },
-      "_examples": {
-        "test_load:shape_mismatch": {
-          "type": "assertion",
-          "resolved_at": "2026-06-12T16:00:00Z",
-          "commit": "a1b2c3d"
-        }
-      }
-    },
     "handled_tests_path": {
       "type": "string",
       "description": "文件路径（运行时添加）"
     }
-  }
+  },
+  "_note": "resolved_errors 和 resolved_failures 由 manifest-updater 写入 manifest.json，不在 handled_tests.json 中"
 }

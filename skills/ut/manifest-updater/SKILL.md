@@ -128,6 +128,9 @@ if handled_tests:
     for test in handled_tests["tests"]:
         # handled_tests 包含处理后的 final_status
         update_manifest_test(manifest, test)
+    
+    # 更新 resolved 索引（errors/failures 聚合）
+    update_resolved_index(manifest, handled_tests)
 
 def update_manifest_test(manifest, test_result):
     """更新 manifest 中的单个测试"""
@@ -142,7 +145,56 @@ def update_manifest_test(manifest, test_result):
             test["run_at"] = datetime.now().isoformat()
             test["duration_ms"] = test_result.get("duration_ms")
             test["log_file"] = test_result.get("log_file")
+            
+            # 处理 errors[]（从 handled_tests 合并）
+            if test_result.get("errors"):
+                test["errors"] = test_result["errors"]
+            
+            # 处理 failures[]（从 handled_tests 合并）
+            if test_result.get("failures"):
+                test["failures"] = test_result["failures"]
+            
+            # 处理 fix_attempts（阈值追踪）
+            if test_result.get("fix_attempts"):
+                test["fix_attempts"] = test_result["fix_attempts"]
+            
+            # 处理 commit（修复记录）
+            if test_result.get("commit"):
+                test["commit"] = test_result["commit"]
+            
             break
+
+def update_resolved_index(manifest, handled_tests):
+    """更新 resolved_errors/resolved_failures 聚合索引"""
+    
+    # 确保 resolved 字段存在
+    if "resolved_errors" not in manifest:
+        manifest["resolved_errors"] = {}
+    if "resolved_failures" not in manifest:
+        manifest["resolved_failures"] = {}
+    
+    for test in handled_tests["tests"]:
+        # 只有 fixed_pending_verify 或 passed 才更新索引
+        final_status = test.get("final_status")
+        if final_status not in ["fixed_pending_verify", "passed"]:
+            continue
+        
+        # 更新 resolved_errors 索引
+        for error in test.get("errors", []):
+            if error.get("status") == "resolved" and error.get("error_key"):
+                manifest["resolved_errors"][error["error_key"]] = {
+                    "type": error.get("error_type"),
+                    "resolved_at": datetime.now().isoformat()
+                }
+        
+        # 更新 resolved_failures 索引
+        for failure in test.get("failures", []):
+            if failure.get("status") == "resolved" and failure.get("failure_key"):
+                manifest["resolved_failures"][failure["failure_key"]] = {
+                    "type": failure.get("failure_type", "assertion"),
+                    "resolved_at": datetime.now().isoformat(),
+                    "commit": test.get("commit")
+                }
 ```
 
 ### Step 3: 计算统计

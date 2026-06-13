@@ -131,7 +131,7 @@ flowchart TD
     Step6 --> Step7
     
     subgraph Step7["[Step 7] 返回极简结果"]
-        S7_1["stats: passed/failed/ignored"]
+        S7_1["stats: passed/fixed_pending_verify/failed/ignored/pending"]
         S7_2["next_action: continue/pause"]
         S7_3["Session 结束"]
     end

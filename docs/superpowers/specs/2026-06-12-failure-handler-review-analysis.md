@@ -414,16 +414,17 @@ loop:
 
 ---
 
-### Decision 9: errors[] 数组结构 + error_key 标准化【DEEP DIVE】
+### Decision 9: errors[] + failures[] 双数组结构 + error_key 标准化【DEEP DIVE】
 
 **Problem:**
-1. 同一 batch 多个测试可能因同一原因失败（如同一模型缺失）
-2. 一个 test 可能经历多次错误（dependency → version → passed）
-3. error_key 不标准化会导致统计分散
+1. 同一 batch 多个测试可能因同一原因失败
+2. 一个 test 可能经历多次 errors 和多次 failures
+3. pytest Error（无法执行）≠ Failure（断言失败），需区分
+4. error_key 不标准化会导致统计分散
 
-**Solution (manifest-centric):**
+**Solution (方案 A - errors[] + failures[] 分开):**
 
-**9.1 test.errors[] 数组结构：**
+**9.1 test 结构（双数组）：**
 ```json
 {
   "test_node": "tests/test_load.py::test_llama",
@@ -436,26 +437,38 @@ loop:
       "status": "resolved",
       "occurred_at": "2026-06-12T14:00:00Z",
       "resolved_at": "2026-06-12T15:00:00Z"
-    },
-    {
-      "error_key": "torch.softmax.dim_arg",
-      "error_type": "version",
-      "error_message": "TypeError: softmax() got unexpected kwarg 'dim'",
-      "status": "resolved",
-      "occurred_at": "2026-06-12T15:30:00Z",
-      "resolved_at": "2026-06-12T16:00:00Z"
     }
   ],
-  "run_count": 3,
-  "last_run_at": "2026-06-12T16:30:00Z"
+  "failures": [
+    {
+      "failure_key": "test_load:shape_mismatch",
+      "failure_type": "assertion",
+      "failure_message": "AssertionError: expected shape (1, 10) got (1, 5)",
+      "status": "resolved",
+      "occurred_at": "2026-06-12T15:30:00Z",
+      "resolved_at": "2026-06-12T16:00:00Z",
+      "fix_patch": "patches/shape_fix.patch"
+    },
+    {
+      "failure_key": "test_load:value_tolerance",
+      "failure_type": "assertion",
+      "failure_message": "AssertionError: value exceeds tolerance 0.01",
+      "status": "resolved",
+      "occurred_at": "2026-06-12T16:30:00Z",
+      "resolved_at": "2026-06-12T17:00:00Z",
+      "fix_patch": "patches/tolerance_fix.patch"
+    }
+  ],
+  "run_count": 4,
+  "last_run_at": "2026-06-12T17:30:00Z"
 }
 ```
 
-**字段说明：**
-| 字段 | 含义 | 取值 |
-|------|------|------|
-| test.status | 当前执行状态 | pending/running/passed/failed/error/ignored |
-| errors[].status | 错误解决状态 | pending/resolved |
+**errors vs failures 定义：**
+| 类型 | 含义 | pytest 状态 | error_type/failure_type |
+|------|------|-------------|-------------------------|
+| **Error** | 测试无法执行 | ERROR | dependency/version/download_error/network/resource |
+| **Failure** | 断言失败 | FAILED | assertion |
 
 **9.2 error_key 标准化规则：**
 
@@ -464,66 +477,115 @@ loop:
 | dependency | `{package}` | `transformers` | 规则自动提取 |
 | download_error | `{org}/{model}` | `meta-llama/Llama-3.2-1B` | 规则自动提取 |
 | version | `{module}.{function}.{change}` | `torch.softmax.dim_arg` | 规则自动提取 |
-| functional | `{file}:{bug_type}` | `test_load:import_order` | LLM生成+校验 |
+| network | `{host}:{error}` | `huggingface.co:timeout` | 规则自动提取 |
+| resource | `{resource_type}` | `cuda_oom` | 规则自动提取 |
 
-**9.3 自动提取函数（failure-handler）：**
+**9.3 failure_key 标准化规则：**
+
+| failure_type | failure_key 格式 | 示例 | 提取方式 |
+|--------------|------------------|------|----------|
+| assertion | `{test_file}:{bug_type}` | `test_load:shape_mismatch` | LLM生成+校验 |
+
+**9.4 自动提取函数（failure-handler）：**
 ```python
 def normalize_error_key(error_type, error_message):
     """从原始错误信息提取标准化 error_key"""
     
     if error_type == "dependency":
-        # ModuleNotFoundError: No module named 'transformers'
         match = re.search(r"No module named '(\w+)'", error_message)
         return match.group(1).lower() if match else None
     
     if error_type == "download_error":
-        # Failed to download meta-llama/Llama-3.2-1B
         match = re.search(r"download ([\w\-]+/[\w\-\.]+)", error_message)
         return match.group(1) if match else None
     
     if error_type == "version":
-        # TypeError: softmax() got unexpected keyword argument 'dim'
         return extract_api_change_key(error_message)
     
-    if error_type == "functional":
-        # LLM 生成，需格式校验 + 历史校验
-        return None
+    if error_type == "network":
+        match = re.search(r"(?:timeout|connection).*?(\w+\.\w+)", error_message)
+        return match.group(1).lower() if match else "network_unknown"
+    
+    if error_type == "resource":
+        if "CUDA out of memory" in error_message:
+            return "cuda_oom"
+        if "NCCL" in error_message:
+            return "nccl_error"
+        return "resource_unknown"
+
+def normalize_failure_key(failure_message, test_file):
+    """LLM 生成 failure_key，需格式校验"""
+    # 格式: {test_file}:{bug_type}
+    # LLM prompt 提供格式要求和示例
+    ...
 ```
 
-**9.4 resolved_failures_errors（聚合索引）：**
+**9.5 resolved_errors + resolved_failures（聚合索引）：**
 ```json
 {
-  "resolved_failures_errors": {
+  "resolved_errors": {
     "transformers": {
       "type": "dependency",
       "resolved_at": "2026-06-12T15:00:00Z"
-      // 不存 affected_tests，按需聚合
+    }
+  },
+  "resolved_failures": {
+    "test_load:shape_mismatch": {
+      "type": "assertion",
+      "resolved_at": "2026-06-12T16:00:00Z",
+      "fix_patch": "patches/shape_fix.patch"
     }
   }
 }
 ```
 
-**9.5 affected_tests 按需聚合：**
+**9.6 affected 统计（按需聚合）：**
 ```python
-# 统计某 error_key 影响的测试数（从 errors[] 聚合）
-affected_tests = len([
+# 统计某 error_key 影响的测试数
+affected_by_error = len([
     t for t in manifest["tests"]
     if any(e.get("error_key") == "transformers" for e in t.get("errors", []))
 ])
+
+# 统计某 failure_key 影响的测试数
+affected_by_failure = len([
+    t for t in manifest["tests"]
+    if any(f.get("failure_key") == "test_load:shape_mismatch" for f in t.get("failures", []))
+])
+```
+
+**9.7 statistics 分开统计：**
+```json
+"statistics": {
+  "total": 13000,
+  "passed": 500,
+  "failed": 50,      // 当前 status=failed 的测试数
+  "error": 16,       // 当前 status=error 的测试数
+  "ignored": 10,
+  "pending": 12434,
+  
+  // 可按需聚合（不存储）
+  // errors_count: 从 errors[] 统计
+  // failures_count: 从 failures[] 统计
+}
 ```
 
 **Skill Impact:**
-- `manifest_schema.json`: Add `errors[]` array, `resolved_failures_errors` field
-- `failure-handler/SKILL.md`: Add `normalize_error_key()` + errors[] append logic
-- `manifest-updater/SKILL.md`: Update errors[].status + resolved_failures_errors
+- `manifest_schema.json`: Add `errors[]`, `failures[]`, `resolved_errors`, `resolved_failures`
+- `failure-handler/SKILL.md`: 
+  - Split logic: error handling vs failure handling
+  - Add `normalize_error_key()` + `normalize_failure_key()`
+- `manifest-updater/SKILL.md`: 
+  - Update errors[].status / failures[].status
+  - Update resolved_errors / resolved_failures
 
 **Workflow Impact:**
-- 🟡 Medium: New errors[] structure, but enables multi-error tracking
-- manifest-centric: 无需 workflow_state 存储额外数据
+- 🟡 Medium: Two arrays but clearer separation
+- failure-handler 逻辑分离：errors（环境）→ failures（代码）
 
 **Risk:**
-- 🟡 Medium: error_key 命名一致性
-- Mitigation: 规则自动提取 + LLM校验 + 历史匹配
+- 🟡 Medium: failure_key LLM 生成一致性
+- Mitigation: 格式校验 + 历史匹配 + 规则优先
 
 ---
 
@@ -838,11 +900,11 @@ Key Changes:
 
 *Created: 2026-06-12*
 *Updated: 2026-06-13*
-*Version: 1.1.0*
+*Version: 1.2.0*
 
 ---
 
-## Appendix: Manifest-Centric Coordination Principle
+## Appendix A: Manifest-Centric Coordination Principle
 
 **核心原则：manifest.json 是唯一协调数据源**
 
@@ -850,7 +912,8 @@ Key Changes:
 |----------|----------|------|
 | tests 状态 | manifest.json | batch-selector 选择批次 |
 | statistics | manifest.json | workflow 显示进度 |
-| resolved_failures_errors | manifest.json | failure-handler 缓存 |
+| errors[] / failures[] | manifest.json | failure-handler 追踪历史 |
+| resolved_errors / resolved_failures | manifest.json | failure-handler 缓存索引 |
 
 **workflow_state.json 只存运行时临时状态：**
 ```json
@@ -865,4 +928,44 @@ Key Changes:
 **无额外依赖：**
 - 不使用 workflow_state 存储协调数据
 - 不引入额外的状态文件
+- 所有 skill 通过 manifest 协调
+
+---
+
+## Appendix B: Script-First, Agent-Judgment Principle
+
+**核心原则：确定性处理交给脚本，逻辑判断交给 Agent**
+
+| 层级 | 处理方式 | 适用场景 | 示例 |
+|------|----------|----------|------|
+| L1 脚本规则 | 关键词匹配、正则提取 | 确定性高、规则清晰 | error_type 分类、error_key 标准化 |
+| L2 脚本调用 | 调用已有脚本 | 固定流程 | dependency-resolver、重试、GPU检测 |
+| L3 脚本定位 | traceback 解析、grep | 可规则提取 | 定位代码文件、提取上下文 |
+| L4 脚本统计 | 聚合计算 | 数学运算 | affected_tests、statistics 计算 |
+| L5 Agent 判断 | LLM 语义理解 | 需理解上下文 | 判断 test/vllm 问题来源 |
+| L6 Agent 生成 | LLM 代码修复 | 需代码理解 | 生成 patch、修复逻辑 |
+
+**failure-handler 分工示例：**
+
+```python
+# L1-L4: 脚本处理
+error_type = classify_error_by_keywords(error_message)      # 脚本
+error_key = normalize_error_key(error_type, error_message)  # 脚本
+traceback_info = parse_traceback(error_message)             # 脚本
+code_location = locate_code_from_traceback(traceback_info)  # 脚本
+code_context = read_remote_file(code_location)              # 脚本
+affected_tests = count_affected_tests(error_key)            # 脚本统计
+
+# L5-L6: Agent 处理
+fix_patch = agent_analyze_and_fix(error_message, code_context)  # Agent LLM
+```
+
+**优势：**
+- 脚本部分：可靠性高、速度快、成本低、可复用
+- Agent 部分：处理真正需要理解的复杂场景
+
+**SKILL 文档要求：**
+- 明确说明脚本 vs Agent 的边界
+- 脚本部分提供具体函数名和参数
+- Agent 部分提供 prompt 示例和输出格式
 - 所有 skill 通过 manifest 协调

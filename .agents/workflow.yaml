@@ -59,14 +59,14 @@ config:
   logs_dir: &logs_dir "{run_dir}/logs"
   reports_dir: &reports_dir "{run_dir}/reports"
 
-  # 批次文件路径（使用批次子目录避免覆盖）
-  # 格式: {run_dir}/batches/{batch_id}/
-  batches_dir: &batches_dir "{run_dir}/batches" # 批次目录根
-  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}" # 单批次目录模板
-  batch_config_path: &batch_config_path "{run_dir}/batches/{batch_id}/batch_config.json"
-  batch_results_path: &batch_results_path "{run_dir}/batches/{batch_id}/batch_results.json"
-  handled_tests_path: &handled_tests_path "{run_dir}/batches/{batch_id}/handled_tests.json"
-  batch_logs_dir: &batch_logs_dir "{run_dir}/batches/{batch_id}/logs"
+  # 批次文件路径（统一使用 batch_dir_template）
+  # 文件路径规则：{batch_dir}/{filename}
+  batches_dir: &batches_dir "{run_dir}/batches"
+  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}"
+  batch_config_path: &batch_config_path "{batch_dir_template}/batch_config.json"
+  batch_results_path: &batch_results_path "{batch_dir_template}/batch_results.json"
+  handled_tests_path: &handled_tests_path "{batch_dir_template}/handled_tests.json"
+  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs"
 
   # ✍️：远程执行配置
   remote_server: "t_h20"

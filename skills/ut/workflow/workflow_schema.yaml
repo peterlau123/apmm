@@ -114,6 +114,71 @@ properties:
         description: 批次大小
         minimum: 1
         maximum: 100
+      resume_from:
+        type:
+          - string
+          - "null"
+        description: 断点续跑的运行目录路径
+      container_env:
+        type: object
+        description: 容器环境变量
+        additionalProperties:
+          type: string
+
+    input_filter:
+      type: object
+      description: 测试输入过滤配置
+      properties:
+        test_list_path:
+          type:
+            - string
+            - "null"
+          description: test_list.txt原始路径
+        manifest_source:
+          type:
+            - string
+            - "null"
+          description: 已有manifest.json路径
+        range:
+          type:
+            - string
+            - "null"
+          description: 范围截取
+        filter:
+          type: object
+          description: 篮选条件
+          properties:
+            status:
+              type:
+                - array
+                - "null"
+              items:
+                type: string
+                enum: ["pending", "passed", "failed", "error", "ignored", "fixed_pending_verify"]
+            error_type:
+              type:
+                - array
+                - "null"
+              items:
+                type: string
+                enum: ["dependency", "network", "resource", "version", "functional", "download_error", "other"]
+            count:
+              type:
+                - integer
+                - "null"
+              description: 截取数量
+        remote_collect:
+          type: object
+          description: 远程pytest collect配置
+          properties:
+            enabled:
+              type: boolean
+            server:
+              type: string
+            container:
+              type: string
+            vllm_dir:
+              type: string
 
   stages:
     type: array
@@ -181,6 +246,22 @@ properties:
         agent_required:
           type: boolean
           description: 是否需要Agent处理
+        log_extraction:
+          type: object
+          description: 内置日志提取配置
+          properties:
+            enabled:
+              type: boolean
+              description: 是否启用日志提取
+            grep_pattern:
+              type: string
+              description: grep匹配模式
+            grep_timeout:
+              type: integer
+              description: grep超时时间（秒）
+            parse_script:
+              type: string
+              description: 解析脚本路径
         kanban:
           type: object
           description: Kanban操作配置
@@ -339,6 +420,39 @@ properties:
           content:
             type: array
             description: 同步内容
+      profiles:
+        type: object
+        description: Worker Profile配置
+        additionalProperties:
+          type: string
+      gateway:
+        type: object
+        description: Gateway启动配置
+        properties:
+          auto_start:
+            type: boolean
+          check_interval:
+            type: integer
+          startup_timeout:
+            type: integer
+      circuit_breaker:
+        type: object
+        description: 熔断器配置
+        properties:
+          failure_limit:
+            type: integer
+          error_rate_threshold:
+            type: number
+      task_creation:
+        type: object
+        description: 任务创建配置
+        properties:
+          initial_assignee:
+            type: string
+          priority:
+            type: integer
+          body_template:
+            type: string
 
   worker_output_schema:
     type: object
@@ -349,29 +463,33 @@ properties:
         description: 统计数据
         properties:
           passed:
-            type: string
-            description: 通过数类型（integer）
+            type: integer
+            description: 通过数
           failed:
-            type: string
-            description: 失败数类型（integer）
+            type: integer
+            description: 失败数
           error:
-            type: string
-            description: 错误数类型（integer）
+            type: integer
+            description: 错误数
           ignored:
-            type: string
-            description: 忽略数类型（integer）
+            type: integer
+            description: 忽略数
           pending:
-            type: string
-            description: 待执行数类型（integer）
+            type: integer
+            description: 待执行数
       next_action:
         type: string
-        description: 下一步动作类型（string）
+        description: 下一步动作（continue/pause/stop/wait）
       error:
-        type: string
-        description: 错误信息类型（string_or_null）
+        type:
+          - string
+          - "null"
+        description: Worker错误信息
       blocked_reason:
-        type: string
-        description: 阻塞原因类型（string_or_null）
+        type:
+          - string
+          - "null"
+        description: 阻塞原因
 
   notifications:
     type: object

@@ -24,13 +24,13 @@
 
 ### Workflow Stages
 
-| Stage | Skill | Loop | 说明 |
-|:-----:|-------|:----:|------|
-| **1** | ut-test-collector | ❌ | 收集测试列表 |
-| **2** | batch-selector | ✅ | 选择批次 |
-| **3** | unit-test-executor | ✅ | 执行 pytest（含日志解析） |
-| **4** | failure-handler | ✅ | 失败处理 |
-| **5** | manifest-updater | ✅ | 更新状态 |
+| Stage | Skill | Version | Loop | 说明 |
+|:-----:|-------|:-------:|:----:|------|
+| **1** | ut-test-collector | v2.1 | ❌ | 收集测试列表（含 errors/failures 初始化） |
+| **2** | batch-selector | v2.2 | ✅ | 选择批次（验证批次优先） |
+| **3** | unit-test-executor | v3.2 | ✅ | 执行 pytest（含日志解析） |
+| **4** | failure-handler | v3.0 | ✅ | 失败处理（脚本优先，Agent判断） |
+| **5** | manifest-updater | v3.2 | ✅ | 更新状态（含 run_count/pass_rate） |
 
 **Loop**: Stage 2-5 until `pending_count == 0`
 
@@ -38,10 +38,24 @@
 
 ---
 
+## Skills Review 状态
+
+| 日期 | Review 内容 | 状态 |
+|------|-------------|:----:|
+| 2026-06-13 | Stage 1-5 输入输出对齐检查 | ✅ |
+| 2026-06-13 | Schema 一致性修复（manifest/batch_config/batch_results） | ✅ |
+| 2026-06-13 | 功能缺失补充（run_count/pass_rate/fixed_pending_verify） | ✅ |
+| 2026-06-13 | workflow.yaml + workflow_schema.yaml 优化 | ✅ |
+
+---
+
 ## 已完成工作
 
 | 日期 | 里程碑 | 状态 |
 |------|--------|:----:|
+| 2026-06-13 | Skills Review + P1/P2/P3 修复 | ✅ |
+| 2026-06-13 | manifest_schema.json 扩展（errors/failures/resolved） | ✅ |
+| 2026-06-13 | workflow.yaml + workflow_schema.yaml 优化 | ✅ |
 | 2026-06-12 | Hermes Kanban 集成 Phase 1（基础设施） | ✅ |
 | 2026-06-12 | 代码提交：v5.1 重构 + Kanban 准备 | ✅ |
 | 2026-06-11 | 日志解析集成到 Stage 3 | ✅ |
@@ -53,6 +67,29 @@
 | 2026-06-10 | Phase 5: 整体测试准备 | ✅ |
 | 2026-06-10 | Phase 7: 审核修复 | ✅ |
 | 2026-06-08 | Phase 1+Phase 2 清单合并 | ✅ |
+
+---
+
+## 2026-06-13 Skills Review 详情
+
+### Commit 摘要
+
+| Commit | 内容 |
+|--------|------|
+| `4b26863` | failure-handler 3 个待修复问题（schema 移除 resolved 索引、manifest-updater 添加 errors/failures 处理、flowchart stats 补充） |
+| `e9726b2` | manifest-updater v3.2（schema 一致性 + run_count/last_run_at/last_duration_ms/last_exit_code/pass_rate） |
+| `0bf40cc` | batch-selector v2.2（fixed_pending_verify 优先选择）+ ut-test-collector v2.1（errors/failures/resolved 初始化） |
+| `518e81d` | workflow.yaml + workflow_schema.yaml P1/P2/P3 优化 |
+
+### 版本更新
+
+| Skill | 旧版本 | 新版本 | 变化 |
+|-------|:------:|:------:|------|
+| ut-test-collector | 2.0.0 | 2.1.0 | +errors/failures/resolved 初始化 |
+| batch-selector | 2.1.0 | 2.2.0 | +fixed_pending_verify 优先选择 |
+| manifest-updater | 3.1.0 | 3.2.0 | +run_count/pass_rate 追踪 |
+| manifest_schema.json | 2.0 | 2.0 | +errors[]/failures[]/resolved_* 定义 |
+| workflow_schema.yaml | 2.0 | 2.0 | +input_filter/log_extraction/kanban.* 定义 |
 
 ---
 
@@ -103,4 +140,22 @@
 
 ---
 
-*最后更新: 2026-06-12 (Kanban Phase 1 完成)*
+## 更新模板
+
+> 复制以下模板添加新的里程碑
+
+```markdown
+### YYYY-MM-DD 更新
+
+| Commit | 内容 |
+|--------|------|
+| `<hash>` | <简要描述> |
+
+| Skill | 旧版本 | 新版本 | 变化 |
+|-------|:------:|:------:|------|
+| <name> | <old> | <new> | <变化描述> |
+```
+
+---
+
+*最后更新: 2026-06-13 (Skills Review + P1/P2/P3 修复完成)*

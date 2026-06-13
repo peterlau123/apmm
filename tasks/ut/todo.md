@@ -4,6 +4,33 @@
 
 ---
 
+## 2026-06-14: 端到端测试与完善
+
+### TODO
+
+- [ ] **端到端测试** - P0
+  - 测试列表: `tasks/ut/workflow_tests/test_list_combined.txt`
+  - 场景: Kanban模式 (`enabled: true`) + 线性模式 (`enabled: false`)
+  - 发现问题即时修复
+
+- [ ] **manifest-template.json 处理** - P1
+  - 选项: 删除 / 重命名 / 保留并说明
+
+- [ ] **飞书通知增强** - P1
+  - bastion 断开 → 飞书告警
+
+- [ ] **容器 python3 兼容** - P2
+  - 远程命令使用 `python3`
+
+- [ ] **workflow.yaml 完善** - P1
+  - model/python 依赖路径说明
+  - 容器环境变量完整列表
+
+- [ ] **ut-test-executor/batch-selector 审核** - P1
+  - 输入输出对齐检查
+
+---
+
 ## 2026-06-11: 文件整理与文档优化
 
 ### TODO

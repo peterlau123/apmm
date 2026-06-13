@@ -1,11 +1,11 @@
 ---
 name: batch-selector
-description: Worker Agent - 批次选择器，从 manifest.json 选择 pending 测试，生成 batch_config.json，由 Supervisor 调用执行 Stage 2
-version: 2.1.0
-when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 select_batch Stage（不含 GPU 检测）
+description: Worker Agent - 批次选择器，从 manifest.json 选择 pending + fixed_pending_verify 测试，优先验证批次，生成 batch_config.json，由 Supervisor 调用执行 Stage 2
+version: 2.2.0
+when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 select_batch Stage（验证批次优先）
 ---
 
-# Batch Selector (Worker Agent v2.1)
+# Batch Selector (Worker Agent v2.2)
 
 ---
 
@@ -16,7 +16,8 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 select_batch Sta
 │  Worker Agent Session (临时，执行后释放)                     │
 │                                                             │
 │  职责：                                                      │
-│  • 从 manifest.json 选择 pending 测试                        │
+│  • 从 manifest.json 选择 pending + fixed_pending_verify 测试 │
+│  • 优先选择验证批次（fixed_pending_verify）                  │
 │  • 分离 distributed / normal 测试                            │
 │  • 生成 batch_config.json                                   │
 │  • 返回极简结果给 Supervisor                                │
@@ -45,8 +46,9 @@ flowchart TB
     
     subgraph Step1["[Step 1] 加载 manifest"]
         S1_1["读取 manifest.json"]
-        S1_2["过滤 pending 测试"]
-        S1_3["分离 distributed / normal"]
+        S1_2["过滤 pending + fixed_pending_verify"]
+        S1_3["优先选择验证批次"]
+        S1_4["分离 distributed / normal"]
     end
     
     Step1 --> Step2
@@ -105,8 +107,15 @@ paths = get_paths(workflow_state_path)
 manifest_path = paths["manifest"]
 manifest = json.loads(Path(manifest_path).read_text())
 
-# 过滤 pending 测试
-pending_tests = [t for t in manifest["tests"] if t.get("status") == "pending"]
+# 过滤 pending + fixed_pending_verify 测试
+# 优先级：fixed_pending_verify > pending（验证批次优先）
+fixed_pending_tests = [t for t in manifest["tests"] 
+                       if t.get("status") == "fixed_pending_verify"]
+pending_tests = [t for t in manifest["tests"] 
+                 if t.get("status") == "pending"]
+
+# 合并，验证批次在前
+candidate_tests = fixed_pending_tests + pending_tests
 
 # 分离 distributed / normal
 def is_distributed(test_node):
@@ -120,8 +129,8 @@ def is_distributed(test_node):
     ]
     return any(p in test_node for p in patterns)
 
-distributed_tests = [t for t in pending_tests if is_distributed(t["test_node"])]
-normal_tests = [t for t in pending_tests if not is_distributed(t["test_node"])]
+distributed_tests = [t for t in candidate_tests if is_distributed(t["test_node"])]
+normal_tests = [t for t in candidate_tests if not is_distributed(t["test_node"])]
 ```
 
 ### Step 2: 生成批次
@@ -238,10 +247,11 @@ return {
 
 ## 注意事项
 
-1. **distributed 测试标记**：只标记 `distributed_count`，GPU 检测由 Stage 3 执行
-2. **按文件分组**：减少 pytest 启动开销，同文件测试一起执行
-3. **极简返回**：只返回 stats，不返回 tests 列表
-4. **统一返回格式**：只返回 stats + next_action + error + blocked_reason
+1. **验证批次优先**：优先选择 `fixed_pending_verify` 测试，确保修复后验证闭环
+2. **distributed 测试标记**：只标记 `distributed_count`，GPU 检测由 Stage 3 执行
+3. **按文件分组**：减少 pytest 启动开销，同文件测试一起执行
+4. **极简返回**：只返回 stats，不返回 tests 列表
+5. **统一返回格式**：只返回 stats + next_action + error + blocked_reason
 
 ---
 

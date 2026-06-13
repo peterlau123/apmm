@@ -1,11 +1,11 @@
 ---
 name: ut-test-collector
-description: Worker Agent - 测试清单收集，生成 manifest.json，由 Supervisor 调用执行 Stage 1
-version: 2.0.0
+description: Worker Agent - 测试清单收集，生成完整 manifest.json（含 errors/failures 初始化），由 Supervisor 调用执行 Stage 1
+version: 2.1.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 collect Stage
 ---
 
-# UT Test Collector (Worker Agent v2.0)
+# UT Test Collector (Worker Agent v2.1)
 
 ---
 
@@ -161,7 +161,9 @@ def parse_pytest_output(output):
                 "ignored_reason": None,
                 "fix_applied": False,
                 "fix_details": None,
-                "log_file": None
+                "log_file": None,
+                "errors": [],      # 错误历史追踪
+                "failures": []     # 断言失败历史
             })
     return tests
 
@@ -172,8 +174,13 @@ manifest = {
     "source": "pytest_collect",
     "filter_rules": exclude_patterns,
     "tests": tests,
+    "resolved_errors": {},      # 已解决错误聚合索引
+    "resolved_failures": {},    # 已解决失败聚合索引
     "statistics": {
         "total": len(tests),
+        "executed": 0,
+        "progress": 0,
+        "pass_rate": 0,
         "pending": len(tests),
         "passed": 0,
         "failed": 0,
@@ -267,5 +274,6 @@ return {
 ---
 
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-10*
+*更新日期: 2026-06-13*
+*版本: 2.1.0*
 *版本: 2.0.0*

@@ -414,81 +414,116 @@ loop:
 
 ---
 
-### Decision 9: batch vs test级别处理（resolved_failures_errors）
+### Decision 9: errors[] 数组结构 + error_key 标准化【DEEP DIVE】
 
-**Problem:** 同一 batch 多个测试可能因同一原因失败（如同一模型缺失、同一 API 变化）
+**Problem:**
+1. 同一 batch 多个测试可能因同一原因失败（如同一模型缺失）
+2. 一个 test 可能经历多次错误（dependency → version → passed）
+3. error_key 不标准化会导致统计分散
 
 **Solution (manifest-centric):**
-- 保持 test 级别处理
-- 在 manifest.json 新增 `resolved_failures_errors` 字段记录已解决的问题
-- failure-handler 检查缓存，避免重复处理
 
-**Implementation:**
-
-**9.1 manifest.json 新增字段：**
+**9.1 test.errors[] 数组结构：**
 ```json
 {
-  "tests": [...],
-  "statistics": {...},
+  "test_node": "tests/test_load.py::test_llama",
+  "status": "passed",
+  "errors": [
+    {
+      "error_key": "transformers",
+      "error_type": "dependency",
+      "error_message": "ModuleNotFoundError: No module named 'transformers'",
+      "status": "resolved",
+      "occurred_at": "2026-06-12T14:00:00Z",
+      "resolved_at": "2026-06-12T15:00:00Z"
+    },
+    {
+      "error_key": "torch.softmax.dim_arg",
+      "error_type": "version",
+      "error_message": "TypeError: softmax() got unexpected kwarg 'dim'",
+      "status": "resolved",
+      "occurred_at": "2026-06-12T15:30:00Z",
+      "resolved_at": "2026-06-12T16:00:00Z"
+    }
+  ],
+  "run_count": 3,
+  "last_run_at": "2026-06-12T16:30:00Z"
+}
+```
+
+**字段说明：**
+| 字段 | 含义 | 取值 |
+|------|------|------|
+| test.status | 当前执行状态 | pending/running/passed/failed/error/ignored |
+| errors[].status | 错误解决状态 | pending/resolved |
+
+**9.2 error_key 标准化规则：**
+
+| error_type | error_key 格式 | 示例 | 提取方式 |
+|------------|----------------|------|----------|
+| dependency | `{package}` | `transformers` | 规则自动提取 |
+| download_error | `{org}/{model}` | `meta-llama/Llama-3.2-1B` | 规则自动提取 |
+| version | `{module}.{function}.{change}` | `torch.softmax.dim_arg` | 规则自动提取 |
+| functional | `{file}:{bug_type}` | `test_load:import_order` | LLM生成+校验 |
+
+**9.3 自动提取函数（failure-handler）：**
+```python
+def normalize_error_key(error_type, error_message):
+    """从原始错误信息提取标准化 error_key"""
+    
+    if error_type == "dependency":
+        # ModuleNotFoundError: No module named 'transformers'
+        match = re.search(r"No module named '(\w+)'", error_message)
+        return match.group(1).lower() if match else None
+    
+    if error_type == "download_error":
+        # Failed to download meta-llama/Llama-3.2-1B
+        match = re.search(r"download ([\w\-]+/[\w\-\.]+)", error_message)
+        return match.group(1) if match else None
+    
+    if error_type == "version":
+        # TypeError: softmax() got unexpected keyword argument 'dim'
+        return extract_api_change_key(error_message)
+    
+    if error_type == "functional":
+        # LLM 生成，需格式校验 + 历史校验
+        return None
+```
+
+**9.4 resolved_failures_errors（聚合索引）：**
+```json
+{
   "resolved_failures_errors": {
-    "transformers>=4.40.0": {
+    "transformers": {
       "type": "dependency",
-      "resolved_at": "2026-06-12T14:30:00Z",
-      "affected_tests": 15
-    },
-    "torch.softmax_api_change": {
-      "type": "version",
-      "resolved_at": "2026-06-12T15:00:00Z",
-      "fix_patch": "patches/softmax_fix.patch",
-      "affected_tests": 3
-    },
-    "test_bug_001": {
-      "type": "functional",
-      "resolved_at": "2026-06-12T16:00:00Z",
-      "affected_tests": 1
+      "resolved_at": "2026-06-12T15:00:00Z"
+      // 不存 affected_tests，按需聚合
     }
   }
 }
 ```
 
-**9.2 failure-handler 缓存检查：**
+**9.5 affected_tests 按需聚合：**
 ```python
-# 从 manifest 读取已解决问题（唯一数据源）
-resolved = manifest.get("resolved_failures_errors", {})
-
-# 处理测试前检查
-error_key = extract_error_key(test["error_message"])  # 如 "transformers>=4.40.0"
-if error_key in resolved:
-    # 跳过重复处理，直接标记
-    test["final_status"] = "fixed_pending_verify"
-    test["resolved_reference"] = error_key
-    # 无需再次调用 dependency-resolver 或修复代码
-```
-
-**9.3 更新 resolved_failures_errors（manifest-updater）：**
-```python
-# 当 failure-handler 成功解决问题时
-if test["final_status"] == "fixed_pending_verify" and test.get("fix_applied"):
-    error_key = test.get("error_key")
-    manifest["resolved_failures_errors"][error_key] = {
-        "type": test["error_type"],
-        "resolved_at": datetime.now().isoformat(),
-        "affected_tests": 1  # 后续可聚合
-    }
+# 统计某 error_key 影响的测试数（从 errors[] 聚合）
+affected_tests = len([
+    t for t in manifest["tests"]
+    if any(e.get("error_key") == "transformers" for e in t.get("errors", []))
+])
 ```
 
 **Skill Impact:**
-- `manifest_schema.json`: Add `resolved_failures_errors` field
-- `failure-handler/SKILL.md`: Add cache lookup before processing
-- `manifest-updater/SKILL.md`: Update resolved_failures_errors when fix applied
+- `manifest_schema.json`: Add `errors[]` array, `resolved_failures_errors` field
+- `failure-handler/SKILL.md`: Add `normalize_error_key()` + errors[] append logic
+- `manifest-updater/SKILL.md`: Update errors[].status + resolved_failures_errors
 
 **Workflow Impact:**
-- 🟡 Medium: New manifest field, but cache reduces repeated processing
-- manifest-centric design: 无需 workflow_state 存储额外数据
+- 🟡 Medium: New errors[] structure, but enables multi-error tracking
+- manifest-centric: 无需 workflow_state 存储额外数据
 
 **Risk:**
-- 🟡 Medium: Cache staleness if same issue recurs
-- Mitigation: Add `last_verified_at` and re-check periodically
+- 🟡 Medium: error_key 命名一致性
+- Mitigation: 规则自动提取 + LLM校验 + 历史匹配
 
 ---
 

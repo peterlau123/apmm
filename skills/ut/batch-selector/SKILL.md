@@ -97,25 +97,26 @@ flowchart TB
 ## 批次选择逻辑示例
 
 ```python
-# 过滤 pending + fixed_pending_verify + failed
+# 过滤 pending + fixed_pending_verify + failed（含 retry_count 过滤）
 pending_tests = [t for t in manifest["tests"] if t["status"] == "pending"]
 fixed_pending_tests = [t for t in manifest["tests"] if t["status"] == "fixed_pending_verify"]
-failed_tests = [t for t in manifest["tests"] if t["status"] == "failed"]
+failed_tests = [t for t in manifest["tests"] 
+                if t["status"] == "failed" and t.get("retry_count", 0) < t.get("max_retry", 3)]
 
 # 优先级：fixed_pending > failed > pending
 # 比例：fixed_pending 30%, failed 40%, pending 30%
 batch_tests = []
-fixed_limit = batch_size // 3
-failed_limit = batch_size // 2
+fixed_limit = int(batch_size * 0.30)
+failed_limit = int(batch_size * 0.40)
 
 # 1. 验证批次优先（修复后验证）
 batch_tests.extend(fixed_pending_tests[:fixed_limit])
 
-# 2. 失败重试批次
+# 2. 失败重试批次（不超过剩余容量）
 remaining_slots = batch_size - len(batch_tests)
-batch_tests.extend(failed_tests[:failed_limit])
+batch_tests.extend(failed_tests[:min(failed_limit, remaining_slots)])
 
-# 3. 新批次
+# 3. 新批次（填充剩余）
 remaining_slots = batch_size - len(batch_tests)
 batch_tests.extend(pending_tests[:remaining_slots])
 ```

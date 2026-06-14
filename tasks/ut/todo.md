@@ -4,6 +4,74 @@
 
 ---
 
+## 2026-06-13: 全面审查发现的问题
+
+### 审查范围
+
+- Skills (Stage 1-5 + workflow)
+- 文档 (README, PROGRESS, WORKLOG, guides)
+- 执行流程 (数据流、错误处理)
+- 用户交互 (prompts, notifications)
+
+### 发现问题
+
+- [ ] **docker_container 名称不一致** - P0
+  - 位置: workflow.yaml line 73 vs README.md line 279
+  - 问题: workflow.yaml 用 `v0.13.0_torch2.5.1_compile`，README 用 `v0.13.0_torch2.5.1_ut`
+  - 影响: 远程执行失败（容器不存在）
+  - 修复: 确认正确容器名，统一所有文档
+
+- [ ] **workflow.yaml 版本号不一致** - P2
+  - 位置: workflow.yaml line 3 vs line 26
+  - 问题: 文件头 Version: 2.2，但 workflow.version: "2.1"
+  - 修复: 统一为 "2.2"
+
+- [ ] **test_list_path 默认指向错误文件** - P2
+  - 位置: workflow.yaml line 102
+  - 问题: 默认指向 `test_list_error.txt`（测试文件），而非有效测试清单
+  - 建议: 改为 null 或注释说明"仅测试用"
+
+- [ ] **manifest_source 注释路径残留** - P2
+  - 位置: workflow.yaml line 105
+  - 问题: 注释中的路径 `tasks/ut/test_analysis/manifest.json` 可能误导用户
+  - 建议: 清理或明确标注"示例"
+
+- [ ] **SKILL.md Step 0 vs 实际交互不一致** - P2
+  - 位置: skills/ut/workflow/SKILL.md line 35-45
+  - 问题: Step 0 说"Agent主动询问三个问题"，但触发方式示例显示不同格式
+  - 建议: 统一交互流程描述
+
+- [ ] **飞书通知缺少 bastion 断开告警** - P1 (已在 06-14 TODO)
+  - 问题: bastion SSH 断开时无飞书通知
+  - 需要: 添加 connectivity check + alert
+
+- [ ] **workflow.yaml 缺少 HF_HOME 等环境变量说明** - P1 (已在 06-14 TODO)
+  - 问题: container_env 设置了 HF_HOME 但文档未说明来源
+  - 需要: 在 README 或 workflow.yaml 注释说明依赖
+
+- [ ] **batch-selector 缺少验证批次闭环测试** - P1
+  - 问题: fixed_pending_verify 逻辑已添加，但未端到端测试
+  - 需要: 验证 retry workflow 是否正确闭环
+
+- [ ] **failure-handler L5/L6 agent prompts 未测试** - P1
+  - 问题: 新增 L5_collect_diagnosis.py, L6_generate_fix.py 待验证
+  - 需要: 端到端测试修复流程
+
+- [ ] **workflow_state_schema.json 未同步 errors[]** - P2
+  - 位置: skills/ut/workflow/workflow_state_schema.json
+  - 问题: manifest_schema.json 已添加 errors[]/failures[]，workflow_state 是否需要同步？
+  - 建议: 检查并确认一致性
+
+- [ ] **send_progress_card.py 参数验证** - P3
+  - 问题: 调用时 feishu_config 路径硬编码为 `{workspace}/.agents/feishu_config.json`
+  - 建议: 确认文件存在或添加 fallback
+
+- [ ] **guides/testing.md 与 workflow.yaml 参数对齐** - P3
+  - 问题: testing.md 中的 pytest 命令示例与 workflow.yaml pytest_args 可能不一致
+  - 需要: 检查并同步
+
+---
+
 ## 2026-06-14: 端到端测试与完善
 
 ### TODO

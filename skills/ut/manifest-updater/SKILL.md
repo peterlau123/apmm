@@ -159,9 +159,9 @@ def update_manifest_test(manifest, test_result):
             if test_result.get("failures"):
                 test["failures"] = test_result["failures"]
             
-            # 处理 fix_attempts（阈值追踪）
-            if test_result.get("fix_attempts"):
-                test["fix_attempts"] = test_result["fix_attempts"]
+            # 处理 retry_count（阈值追踪）
+            if test_result.get("retry_count"):
+                test["retry_count"] = test_result["retry_count"]
             
             # 处理 commit（修复记录）
             if test_result.get("commit"):

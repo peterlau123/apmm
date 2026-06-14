@@ -430,11 +430,11 @@ if error_type in ["version", "functional"]:
     analysis = agent_analyze_problem(error_message, code_context)
     # { "problem_source": "vllm", "fix_description": "...", "fix_patch": "..." }
     
-    # L4: 脚本检查阈值
-    attempts = test.get("fix_attempts", 0)
+    # L4: 脚本检查阈值（retry_count）
+    retry_count = test.get("retry_count", 0)
     max_retry = config.get("max_retry_per_test", 3)
     
-    if attempts >= max_retry:
+    if retry_count >= max_retry:
         test["final_status"] = "ignored"
         test["ignored_reason"] = f"max retry ({max_retry}) exceeded"
         continue
@@ -448,13 +448,14 @@ if error_type in ["version", "functional"]:
     # 脚本验证
     retry_result = retry_test(test["test_node"])
     
+    # 更新 retry_count
+    test["retry_count"] = retry_count + 1
+    
     if retry_result["status"] == "passed":
         test["final_status"] = "fixed_pending_verify"
         test["commit"] = commit_sha
-        test["fix_attempts"] = attempts + 1
     else:
         test["final_status"] = "failed"
-        test["fix_attempts"] = attempts + 1
         test["fix_reason"] = "retry failed after patch"
 ```
 

@@ -81,6 +81,7 @@ flowchart TB
 | `workflow_state_path` | Supervisor context | 状态文件路径 |
 | `manifest_path` | workflow.yaml | manifest.json 路径 |
 | `batch_size` | workflow.yaml | 批次大小（默认 50） |
+| `max_retry_per_test` | workflow.yaml | 单测试最大重试次数（默认 3） |
 
 ### 输出
 
@@ -107,15 +108,31 @@ paths = get_paths(workflow_state_path)
 manifest_path = paths["manifest"]
 manifest = json.loads(Path(manifest_path).read_text())
 
-# 过滤 pending + fixed_pending_verify 测试
-# 优先级：fixed_pending_verify > pending（验证批次优先）
+# 过滤 pending + fixed_pending_verify + failed 测试
+# 优先级：fixed_pending_verify > failed > pending
 fixed_pending_tests = [t for t in manifest["tests"] 
                        if t.get("status") == "fixed_pending_verify"]
+
+# failed 测试：只选 retry_count < max_retry 的（防止无限循环）
+max_retry_per_test = config.get("max_retry_per_test", 3)
+failed_tests = [t for t in manifest["tests"] 
+                if t.get("status") == "failed" 
+                and t.get("retry_count", 0) < max_retry_per_test]
+
 pending_tests = [t for t in manifest["tests"] 
                  if t.get("status") == "pending"]
 
-# 合并，验证批次在前
-candidate_tests = fixed_pending_tests + pending_tests
+# 合并，验证批次优先
+# 比例：fixed_pending 30%, failed 40%, pending 30%
+batch_size = config.get("batch_size", 50)
+candidate_tests = []
+fixed_limit = batch_size // 3
+failed_limit = batch_size // 2
+
+candidate_tests.extend(fixed_pending_tests[:fixed_limit])
+candidate_tests.extend(failed_tests[:failed_limit])
+remaining_slots = batch_size - len(candidate_tests)
+candidate_tests.extend(pending_tests[:remaining_slots])
 
 # 分离 distributed / normal
 def is_distributed(test_node):

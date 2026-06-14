@@ -598,7 +598,9 @@ stages:
 
 **剩余失败测试：**
 - 保持 failed 状态
-- 下一轮 batch-selector 自动选择（manifest-centric）
+- 下一轮 batch-selector 自动选择（包含 failed 状态）
+- 最多处理 max_failed_per_iteration 个失败测试
+- 剩余 failed 状态测试将在后续轮次依次处理
 
 ---
 

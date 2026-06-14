@@ -1,28 +1,51 @@
 ---
 name: ut-workflow
 description: UT Workflow - vLLM单元测试验证流程，加载skill自动启动完整测试流程
-version: 5.2.0
+version: 5.3.0
 when_to_use: 用户需要执行 vLLM 单元测试验证流程（自动执行）
 ---
 
-# UT Workflow Skill (v5.2)
+# UT Workflow Skill (v5.3)
 
-> **v5.2 更新**: Kanban 集成 - 根据 workflow.yaml kanban.enabled 决定执行模式（线性/Kanban）。
+> **v5.3 更新**: 明确触发流程 - Agent 识别用户意图后自动加载，用户确认后再执行。
 
 ---
 
 ## 🚀 触发方式
 
-用户加载 skill 后，Agent 自动引导用户完成配置并执行流程：
+**Agent 识别用户意图后自动加载 skill**：
 
+用户表达意图（任意一种）：
+- "跑 ut workflow"
+- "执行单元测试流程"
+- "开始 UT 验证"
+- "运行 UT workflow"
+- 或类似自然语言表达
+
+Agent 自动执行：
 ```
-用户: 加载 ut/workflow skill
+用户: 跑 ut workflow
+Agent: 识别意图 → 加载 skills/ut/workflow skill
+
 Agent: UT Workflow v5.2 已加载。
-       请提供以下信息：
-       1. workflow.yaml 是否已准备好？（test_list、batch_size 等参数已填写）
-       2. workflow.yaml 路径（默认: .agents/workflow.yaml）
-       3. 是否断点续跑？（提供 run_dir 路径，或留空新建）
+       请确认以下配置：
+       
+       1. workflow.yaml 路径：
+          - 默认: .agents/workflow.yaml
+          - 或指定其他路径
+       
+       2. 是否断点续跑：
+          - 新建运行：留空，将从 test_list 生成 manifest
+          - 续跑已有运行：提供 run_dir 路径
+          
+       请确认或提供配置信息。
+       
+用户: 确认 / 提供路径 / 提供续跑目录
+
+Agent: 开始执行 workflow...
 ```
+
+**重要**：Agent 必须在用户确认后才开始执行，不能直接开始。
 
 Agent 检查 workflow.yaml 中 `kanban.enabled`：
 - **false** → 执行线性 workflow（现有流程）
@@ -363,5 +386,5 @@ python skills/ut/workflow/scripts/monitor_kanban.py --workflow-yaml .agents/work
 ---
 
 *创建日期: 2026-06-06*
-*更新日期: 2026-06-12*
-*版本: 5.2.0*
+*更新日期: 2026-06-14*
+*版本: 5.3.0*

@@ -22,8 +22,14 @@ import argparse
 import json
 import shutil
 import sys
+
 from datetime import datetime, timezone
 from pathlib import Path
+
+# 先设置路径（确保 skills 包可被导入）
+_project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
 
 import yaml
 
@@ -31,8 +37,8 @@ SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent.parent
 sys.path.insert(0, str(SKILL_DIR))
 
-from shared.config_loader import create_run_dir, load_workflow_yaml
-from shared.validate_schema import validate_and_write
+from skills.ut.shared import create_run_dir, load_workflow_yaml
+from skills.ut.shared import validate_and_write
 
 
 def copy_test_list(test_list_source: Path, run_dir: Path) -> Path:

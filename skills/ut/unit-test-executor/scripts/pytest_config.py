@@ -6,7 +6,7 @@ pytest参数配置
 使用 load_filter_rules.py 获取排除规则
 """
 
-from shared.load_filter_rules import get_exclude_patterns
+from skills.ut.shared import get_exclude_patterns
 
 # pytest参数配置（精简版）
 PYTEST_ARGS = {

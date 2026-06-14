@@ -85,8 +85,9 @@ def run_remote_pytest(test_list, pytest_args="-q --tb=long", timeout=300):
     # 构造测试路径（列表已含 tests/ 前缀，不再重复添加）
     test_paths = " ".join([t if t.startswith("tests/") else f"tests/{t}" for t in test_list])
     
-    # pytest 命令（包含过滤规则）
-    pytest_cmd = f"""cd {REMOTE_VLLM_PATH} && pytest {test_paths} \
+    # pytest 命令（包含过滤规则，使用 python3 -m pytest 保证容器兼容）
+    # 注意：distributed 测试不再默认忽略，由 batch_config.json 的 requires_multi_gpu 标记控制
+    pytest_cmd = f"""cd {REMOTE_VLLM_PATH} && python3 -m pytest {test_paths} \
         --ignore-glob="tests/**/rocm*" \
         --ignore-glob="tests/**/tpu*" \
         --ignore-glob="tests/**/multimodal*" \
@@ -97,9 +98,6 @@ def run_remote_pytest(test_list, pytest_args="-q --tb=long", timeout=300):
         --ignore-glob="tests/**/*audio*" \
         --ignore-glob="tests/**/encoder*" \
         --ignore-glob="tests/**/prithvi*" \
-        --ignore-glob="tests/distributed/*" \
-        --ignore-glob="tests/v1/distributed/*" \
-        --ignore-glob="tests/compile/distributed/*" \
         {pytest_args} 2>&1 | tee ut_logs/batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"""
     
     # Docker 内执行

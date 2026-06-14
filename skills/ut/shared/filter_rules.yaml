@@ -165,6 +165,14 @@ filter_rules:
       type: "distributed"
       reason: "distributed 目录下的测试，需要多 GPU 执行"
 
+    - pattern: "tests/compile/distributed/"
+      type: "distributed"
+      reason: "compile distributed 目录测试，需要多 GPU"
+
+    - pattern: "tests/v1/distributed/"
+      type: "distributed"
+      reason: "v1 distributed 目录测试，需要多 GPU"
+
     - pattern: "test_pipeline_parallel"
       type: "distributed"
       reason: "Pipeline parallel 测试"
@@ -179,6 +187,6 @@ filter_rules:
 
   # === 统计 ===
   stats:
-    total_rules: 41
+    total_rules: 44
     exclude_rules: 37
-    distributed_rules: 4
+    distributed_rules: 7

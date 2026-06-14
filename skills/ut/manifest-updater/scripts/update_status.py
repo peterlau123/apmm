@@ -28,7 +28,12 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
-from shared.validate_schema import validate_and_write
+# 先设置路径（确保 skills 包可被导入）
+_project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
+from skills.ut.shared import validate_and_write
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:

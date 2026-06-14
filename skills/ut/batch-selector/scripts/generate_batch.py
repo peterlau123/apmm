@@ -19,8 +19,14 @@ from datetime import datetime
 from collections import defaultdict
 import sys
 
-from shared.validate_schema import validate_and_write
-from shared.load_filter_rules import is_distributed
+# 先设置路径（确保 skills 包可被导入）
+# scripts/ -> batch-selector/ -> ut/ -> skills/ -> apmm/ (项目根)
+_project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
+# 然后导入 shared 模块
+from skills.ut.shared import validate_and_write, is_distributed
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
@@ -70,19 +76,24 @@ def generate_batch(
     """
     manifest = load_manifest(manifest_path)
 
-    # 过滤 pending 测试
-    pending = [t for t in manifest["tests"] if t.get("status") == "pending"]
+    # 过滤 pending + fixed_pending_verify 测试（验证批次优先）
+    # 优先级：fixed_pending_verify > pending（确保修复后验证闭环）
+    fixed_pending_verify = [t for t in manifest['tests'] if t.get('status') == 'fixed_pending_verify']
+    pending_tests = [t for t in manifest['tests'] if t.get('status') == 'pending']
+
+    # 合并候选测试，验证批次在前
+    candidates = fixed_pending_verify + pending_tests
 
     # 应用文件过滤器
     if test_file_filter:
-        pending = [t for t in pending if test_file_filter in t.get("test_file", "")]
+        candidates = [t for t in candidates if test_file_filter in t.get('test_file', '')]
 
     # 分离 distributed 和 normal
     if skip_distributed:
-        pending = [t for t in pending if not is_distributed(t["test_node"])]
+        candidates = [t for t in candidates if not is_distributed(t['test_node'])]
 
-    distributed = [t for t in pending if is_distributed(t["test_node"])]
-    normal = [t for t in pending if not is_distributed(t["test_node"])]
+    distributed = [t for t in candidates if is_distributed(t['test_node'])]
+    normal = [t for t in candidates if not is_distributed(t['test_node'])]
 
     # 按文件分组
     grouped = group_by_file(normal)
@@ -135,7 +146,7 @@ def generate_batch(
             "failed": 0,
             "error": 0,
             "ignored": 0,
-            "pending": len(pending) - len(batch[:batch_size])
+            "pending": len(candidates) - len(batch[:batch_size])
         },
         "next_action": "continue",
         "error": None,

@@ -75,19 +75,9 @@ config:
   ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
 
   # 容器环境变量（一次设置，所有测试生效）
-  # 来源: tasks/ut/scripts/hf_env.sh - HuggingFace 离线环境配置
-  # 说明: 远程服务器 t_h20 无外网访问，需使用预下载的本地模型缓存
-  # 缓存位置: /gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/
-  # 已有模型: opt-125m, distilgpt2, Qwen系列等（见 testing.md line 266-270）
   container_env:
-    # HF 离线环境（核心）
     HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
     HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
-    HF_HUB_OFFLINE: "1" # 强制离线模式，禁止联网下载
-    # Transformers 缓存（与 HF_HUB_CACHE 共享）
-    TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
-    HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
-    # GPU 配置
     CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
 
   # ✍️：pytest参数和批次大小
@@ -109,7 +99,7 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_combined.txt" # ✍️: 用户指定的 test_list.txt 原始路径（必填）
+  test_list_path: null # ✍️: 用户指定的 test_list.txt 原始路径（必填）
 
   # 场景 2: 用户指定的输入 manifest.json
   manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径
@@ -139,7 +129,7 @@ stages:
     delegate_to: self
     skill: ut-test-collector
     loop: false
-    description: 从test_list.txt/manifest.json生成新的manifest.json
+    description: 从test_list.txt生成manifest.json
     input:
       test_list_path: "{run_dir}/test_list.txt"
       manifest_schema_path: "{workspace}/skills/ut/shared/manifest_schema.json"
@@ -265,7 +255,7 @@ loop:
 # Kanban - Hermes Kanban 配置（方案 A-1）
 # ============================================================
 kanban:
-  enabled: false # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
+  enabled: false  # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
 
   # Board 配置
   board:
@@ -280,14 +270,14 @@ kanban:
 
   # Gateway 启动配置
   gateway:
-    auto_start: true # Agent 自动启动 gateway
-    check_interval: 60 # 调度检查间隔（秒）
-    startup_timeout: 30 # gateway 启动超时（秒）
+    auto_start: true           # Agent 自动启动 gateway
+    check_interval: 60         # 调度检查间隔（秒）
+    startup_timeout: 30        # gateway 启动超时（秒）
 
   # 熔断器配置
   circuit_breaker:
-    failure_limit: 3 # 连续失败 N 次后自动 block
-    error_rate_threshold: 0.8 # 错误率阈值
+    failure_limit: 3           # 连续失败 N 次后自动 block
+    error_rate_threshold: 0.8  # 错误率阈值
 
   # 任务创建配置
   task_creation:
@@ -340,3 +330,19 @@ notifications:
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
 
+# ============================================================
+# Execution Config - 执行配置
+# ============================================================
+execution:
+  supervisor:
+    max_context_tokens: 10000
+    reload_state_interval: 1
+    cleanup_history: true
+
+  worker:
+    timeout_per_stage: 600
+    max_retries: 3
+    delegate_task_toolsets:
+      - terminal
+      - file
+      - web

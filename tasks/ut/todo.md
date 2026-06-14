@@ -15,26 +15,26 @@
 
 ### 发现问题
 
-- [ ] **docker_container 名称不一致** - P0
+- [x] **docker_container 名称不一致** - P0 ✅ 2026-06-13 已修复
   - 位置: workflow.yaml line 73 vs README.md line 279
   - 问题: workflow.yaml 用 `v0.13.0_torch2.5.1_compile`，README 用 `v0.13.0_torch2.5.1_ut`
   - 影响: 远程执行失败（容器不存在）
-  - 修复: 确认正确容器名，统一所有文档
+  - 修复: README.md 改为 `compile`（实际使用的容器）
 
-- [ ] **workflow.yaml 版本号不一致** - P2
+- [x] **workflow.yaml 版本号不一致** - P2 ✅ 2026-06-13 已修复
   - 位置: workflow.yaml line 3 vs line 26
   - 问题: 文件头 Version: 2.2，但 workflow.version: "2.1"
   - 修复: 统一为 "2.2"
 
-- [ ] **test_list_path 默认指向错误文件** - P2
+- [x] **test_list_path 默认指向错误文件** - P2 ✅ 2026-06-13 已修复
   - 位置: workflow.yaml line 102
   - 问题: 默认指向 `test_list_error.txt`（测试文件），而非有效测试清单
-  - 建议: 改为 null 或注释说明"仅测试用"
+  - 修复: 改为 null + 必填说明
 
-- [ ] **manifest_source 注释路径残留** - P2
+- [x] **manifest_source 注释路径残留** - P2 ✅ 2026-06-13 已修复
   - 位置: workflow.yaml line 105
   - 问题: 注释中的路径 `tasks/ut/test_analysis/manifest.json` 可能误导用户
-  - 建议: 清理或明确标注"示例"
+  - 修复: 清理残留注释
 
 - [ ] **SKILL.md Step 0 vs 实际交互不一致** - P2
   - 位置: skills/ut/workflow/SKILL.md line 35-45

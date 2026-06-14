@@ -23,7 +23,7 @@
 
 workflow:
   name: UT Test Workflow
-  version: "2.1"
+  version: "2.2"
   description: Hierarchical Agent架构 - Supervisor调度 + Worker执行 + Kanban追踪
 
   # ============================================================
@@ -99,10 +99,10 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_error.txt"
+  test_list_path: null # ✍️: 用户指定的 test_list.txt 原始路径（必填）
 
   # 场景 2: 用户指定的输入 manifest.json
-  manifest_source: null #"D:/workspace/apmm/tasks/ut/test_analysis/manifest.json"
+  manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径
 
   # 范围截取（适用于场景 1 和 2.1）
   range: null # 格式: "0-100" 或 "50:100"，null 表示全部

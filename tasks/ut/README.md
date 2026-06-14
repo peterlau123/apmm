@@ -266,7 +266,7 @@ Skill 会自动：
 ```bash
 # 通过 agent.py 远程执行
 python tools/agent.py -p t_h20 run --timeout 300 \
-  "sudo docker exec v0.13.0_torch2.5.1_ut bash -c 'cd /gpfs/gcsp/M2.7_verify/vllm && pytest -vv tests/test_seed_behavior.py'"
+  "sudo docker exec v0.13.0_torch2.5.1_compile bash -c 'cd /gpfs/gcsp/M2.7_verify/vllm && pytest -vv tests/test_seed_behavior.py'"
 ```
 
 ---
@@ -276,7 +276,7 @@ python tools/agent.py -p t_h20 run --timeout 300 \
 | 项目 | 详情 |
 |------|------|
 | 服务器 | t_h20 (10.10.154.13)，通过 Bastion (10.10.192.55) 连接 |
-| 容器 | `v0.13.0_torch2.5.1_ut` (vLLM v0.13.0 + PyTorch 2.5.1 + CUDA 12.4) |
+| 容器 | `v0.13.0_torch2.5.1_compile` (vLLM v0.13.0 + PyTorch 2.5.1 + CUDA 12.4) |
 | GPU | NVIDIA H20-3e × 8，143GB 显存/卡 |
 | 共享存储 | `/gpfs/gcsp/M2.7_verify/` (1.9PB) |
 | vLLM 源码 | `/gpfs/gcsp/M2.7_verify/vllm/` |

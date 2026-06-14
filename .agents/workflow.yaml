@@ -330,19 +330,3 @@ notifications:
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
 
-# ============================================================
-# Execution Config - 执行配置
-# ============================================================
-execution:
-  supervisor:
-    max_context_tokens: 10000
-    reload_state_interval: 1
-    cleanup_history: true
-
-  worker:
-    timeout_per_stage: 600
-    max_retries: 3
-    delegate_task_toolsets:
-      - terminal
-      - file
-      - web

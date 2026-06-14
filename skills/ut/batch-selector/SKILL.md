@@ -16,8 +16,10 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 select_batch Sta
 │  Worker Agent Session (临时，执行后释放)                     │
 │                                                             │
 │  职责：                                                      │
-│  • 从 manifest.json 选择 pending + fixed_pending_verify 测试 │
+│  • 从 manifest.json 选择 pending + fixed_pending_verify + failed 测试 │
 │  • 优先选择验证批次（fixed_pending_verify）                  │
+│  • 其次选择失败重试批次（failed）                            │
+│  • 最后选择新批次（pending）                                  │
 │  • 分离 distributed / normal 测试                            │
 │  • 生成 batch_config.json                                   │
 │  • 返回极简结果给 Supervisor                                │
@@ -89,6 +91,34 @@ flowchart TB
 |------|------|------|
 | **文件** | batch_config.json | 批次配置文件 |
 | **返回** | stats (极简) | 给 Supervisor 的返回值 |
+
+---
+
+## 批次选择逻辑示例
+
+```python
+# 过滤 pending + fixed_pending_verify + failed
+pending_tests = [t for t in manifest["tests"] if t["status"] == "pending"]
+fixed_pending_tests = [t for t in manifest["tests"] if t["status"] == "fixed_pending_verify"]
+failed_tests = [t for t in manifest["tests"] if t["status"] == "failed"]
+
+# 优先级：fixed_pending > failed > pending
+# 比例：fixed_pending 30%, failed 40%, pending 30%
+batch_tests = []
+fixed_limit = batch_size // 3
+failed_limit = batch_size // 2
+
+# 1. 验证批次优先（修复后验证）
+batch_tests.extend(fixed_pending_tests[:fixed_limit])
+
+# 2. 失败重试批次
+remaining_slots = batch_size - len(batch_tests)
+batch_tests.extend(failed_tests[:failed_limit])
+
+# 3. 新批次
+remaining_slots = batch_size - len(batch_tests)
+batch_tests.extend(pending_tests[:remaining_slots])
+```
 
 ---
 

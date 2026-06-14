@@ -246,6 +246,23 @@ loop:
       notify: true
 
 # ============================================================
+# Worker Output Schema - Worker返回格式规范（统一）
+# ============================================================
+worker_output_schema:
+  stats:
+    passed: integer
+    failed: integer # AssertionError 等断言失败
+    error: integer # Collection/Import/Download 错误
+    ignored: integer
+    pending: integer
+  next_action: string # continue | pause | stop | wait
+  error: string_or_null # Worker 错误信息（需要人工介入时）
+  blocked_reason: string_or_null # 阻塞原因（GPU不足等）
+
+# 注意：不返回 batch_id、log_file、details_file、kanban_update 等额外字段
+# 所有 Worker 只返回上述统一格式
+
+# ============================================================
 # Kanban - Hermes Kanban配置
 # 注意：UT workflow 是线性批处理，不需要多 agent 协作，Kanban 默认关闭。
 #       进度可视化通过飞书卡片完成（见 notifications 节）。
@@ -284,23 +301,6 @@ kanban:
     initial_assignee: "ut-orchestrator"
     priority: 1
     body_template: "Orchestrate UT run for {test_list_path}"
-
-# ============================================================
-# Worker Output Schema - Worker返回格式规范（统一）
-# ============================================================
-worker_output_schema:
-  stats:
-    passed: integer
-    failed: integer # AssertionError 等断言失败
-    error: integer # Collection/Import/Download 错误
-    ignored: integer
-    pending: integer
-  next_action: string # continue | pause | stop | wait
-  error: string_or_null # Worker 错误信息（需要人工介入时）
-  blocked_reason: string_or_null # 阻塞原因（GPU不足等）
-
-# 注意：不返回 batch_id、log_file、details_file、kanban_update 等额外字段
-# 所有 Worker 只返回上述统一格式
 
 # ============================================================
 # Notifications - 飞书通知配置

@@ -75,9 +75,26 @@ config:
   ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
 
   # 容器环境变量（一次设置，所有测试生效）
+  # 来源: tasks/ut/scripts/hf_env.sh - HuggingFace 离线环境配置
+  # 说明: 远程服务器 t_h20 无外网访问，需使用预下载的本地模型缓存
+  # 缓存位置: /gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/
+  # 已有模型: opt-125m, distilgpt2, Qwen系列等（见 testing.md line 266-270）
+  #
+  # 【环境配置说明】
+  # - 模型/依赖下载服务器: t_ascend (有外网访问，profile: t_ascend)
+  # - HF 模型下载镜像: https://hf-mirror.com (设置 HF_ENDPOINT)
+  # - Python 依赖下载路径: /gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/dependencies
+  # - 依赖下载脚本: skills/ut/dependency-resolver/scripts/download_model.py
+  # - 详见文档: skills/ut/dependency-resolver/SKILL.md, tasks/ut/docs/guides/testing.md
   container_env:
+    # HF 离线环境（核心）
     HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
     HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_HUB_OFFLINE: "1"  # 强制离线模式，禁止联网下载
+    # Transformers 缓存（与 HF_HUB_CACHE 共享）
+    TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
+    # GPU 配置
     CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
 
   # ✍️：pytest参数和批次大小

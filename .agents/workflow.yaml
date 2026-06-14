@@ -212,6 +212,9 @@ stages:
     description: 分析失败原因，尝试修复（Agent判断）
     input:
       batch_results_path: *batch_results_path
+      # 失败重试配置
+      max_failed_per_iteration: 10  # 每轮最多处理 10 个失败测试
+      max_retry_per_test: 3         # 单测试最多重试 3 次
     output:
       handled_tests_path: *handled_tests_path
     agent_required: true

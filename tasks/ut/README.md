@@ -41,8 +41,7 @@ tasks/ut/
 ├── PROGRESS.md                ← 实时进度统计（20.12%, 6,411/31,868）
 ├── WORKLOG.md                 ← 每日工作日志
 ├── todo.md                    ← 待办事项 & 设计决策记录
-├── workflow-template.yaml     ← Workflow 配置模板（供复制使用）
-├── manifest-template.json     ← Manifest 数据模板
+├── manifest_example.json        ← Manifest 结构示例（v2.0 格式，见 skills/ut/shared/）
 │
 ├── docs/                      ← 文档中心
 │   ├── README.md              ←   文档导航
@@ -143,6 +142,21 @@ Workflow 支持两种运行模式，由 `workflow.yaml` 的 `kanban.enabled` 控
        └─────────────────── 循环 Stage 2-5 直到 pending_count == 0 ───────────────────────┘
 ```
 
+### 循环控制机制
+
+Workflow 循环执行 Stage 2-5，以下条件触发暂停/停止：
+
+| 条件 | 阈值 | 动作 | 通知 |
+|------|------|:----:|:----:|
+| 完成 | `pending_count == 0` | ✅ 停止 | 🟩 绿色卡片 |
+| 连续失败 | `consecutive_failures > 50` | ⏸️ 暂停 | 🟨 黄色告警 |
+| 高错误率 | `error_rate > 80%` | ⏸️ 暂停 | 🟨 黄色告警 |
+| 中等错误率 | `error_rate > 30%` | ⚠️ 告警 | 🟥 红色告警 |
+
+**恢复暂停**：设置 `config.resume_from` 为已有 run_dir 路径
+
+**详细配置**: workflow.yaml `loop` section (lines 234-257)
+
 ### Kanban 模式流程（kanban.enabled: true）
 
 Agent 自动启动 Gateway + 3 Worker：
@@ -179,6 +193,25 @@ Agent 自动启动 Gateway + 3 Worker：
 3. 创建初始 Orchestrator 任务
 4. 执行 `monitor_kanban.py` 监控进度
 5. 完成后发送飞书通知
+
+### Kanban 前置条件
+
+启用 Kanban 模式 (`kanban.enabled: true`) 前，需完成以下配置：
+
+| 检查项 | 命令 |
+|--------|------|
+| Hermes Agent v0.15.1+ | `hermes version` |
+| Board 已创建 | `hermes kanban boards list | grep apmm-ut` |
+| 3 个 Worker Profile | `hermes profile list | grep ut-` |
+
+**完整配置指南**: [docs/kanban/README.md](docs/kanban/README.md) § Setup Guide (lines 128-146)
+
+**快速启动**（配置完成后）：
+
+```bash
+# workflow.yaml 设置 kanban.enabled: true
+# 加载 ut/workflow skill，Agent 自动启动 Gateway
+```
 
 | Stage | Skill | 执行方式 | 说明 |
 |:-----:|-------|:--------:|------|
@@ -223,6 +256,38 @@ manifest.json ←── manifest-updater ←── handled_tests.json ←── 
 
 ---
 
+## 飞书通知配置
+
+Workflow 使用飞书 webhook 推送进度卡片。配置步骤：
+
+**创建 `.agents/feishu_config.json`**：
+
+```json
+{
+  "webhook_url": "https://open.feishu.cn/open-apis/bot/v2/hook/<YOUR_WEBHOOK_ID>",
+  "chat_id": "oc_2e75db818ac1792238037a704b4d32d3"
+}
+```
+
+**获取 webhook_url**：
+
+1. 在飞书群中添加「自定义机器人」
+2. 复制 Webhook 地址中的 hook ID
+3. 粘贴到 `feishu_config.json`
+
+**文件位置**: `D:/workspace/apmm/.agents/feishu_config.json`
+
+**验证配置**：
+
+```bash
+python skills/ut/workflow/scripts/send_progress_card.py \
+  --manifest-path tasks/ut/test_analysis/manifest.json \
+  --feishu-config .agents/feishu_config.json \
+  --event test
+```
+
+---
+
 ## 共享基础设施
 
 | 资源 | 路径 | 说明 |
@@ -240,11 +305,40 @@ manifest.json ←── manifest-updater ←── handled_tests.json ←── 
 
 ### 1. 配置
 
-复制模板并修改路径：
+workflow.yaml 内置了参数注释，编辑前请查看 **Quick Config Guide**（文件头部 lines 9-18）：
+
+```yaml
+# ✍️ 必填参数（启动前确认）
+input_filter.test_list_path: "..."  # 测试清单路径（必须指定）
+config.remote_server: "t_h20"       # 远程服务器 profile
+config.docker_container: "..."      # Docker 容器名
+```
+
+**快速配置**：
 
 ```bash
 cp tasks/ut/workflow-template.yaml .agents/workflow.yaml
-# 编辑 .agents/workflow.yaml，修改 workspace、remote_server 等
+# 编辑 .agents/workflow.yaml，参考文件头部注释填写必填参数
+```
+
+**必填参数清单**：
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| `input_filter.test_list_path` | 测试清单路径 | **必填**（无默认） |
+| `input_filter.manifest_source` | 已有 manifest.json 路径 | 可选（与 test_list_path 二选一） |
+| `config.remote_server` | 远程服务器 profile | `"t_h20"` |
+| `config.docker_container` | Docker 容器名 | `"v0.13.0_torch2.5.1_compile"` |
+| `config.batch_size` | 每批测试数（≤100） | `50` |
+| `config.resume_from` | 断点续跑 run_dir | `null`（新建） |
+
+**验证配置**：
+
+```bash
+# 检查路径是否存在
+cat .agents/workflow.yaml | grep test_list_path
+# 检查 bastion 连接
+python tools/agent.py -p t_h20 ping
 ```
 
 ### 2. 启动 Workflow
@@ -319,4 +413,4 @@ python tools/agent.py -p t_h20 run --timeout 300 \
 
 ---
 
-*最后更新: 2026-06-12*
+*最后更新: 2026-06-14*

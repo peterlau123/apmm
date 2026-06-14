@@ -8,6 +8,7 @@
   alert      - 错误率/失败率超阈值告警（红色）
   paused     - workflow 暂停通知（黄色）
   resumed    - workflow 恢复通知（蓝色）
+  bastion_disconnect - Bastion SSH 连接断开告警（红色）
 
 用法:
   python send_progress_card.py \
@@ -36,6 +37,7 @@ EVENT_CONFIG = {
     "alert":    ("UT Workflow 告警", "red", "⚠️"),
     "paused":   ("UT Workflow 暂停", "yellow", "⏸️"),
     "resumed":  ("UT Workflow 恢复", "blue", "▶️"),
+    "bastion_disconnect": ("Bastion SSH 断开", "red", "🔌"),  # bastion SSH 连接断开告警
 }
 
 
@@ -58,7 +60,7 @@ def compute_stats(manifest_path: Path) -> dict:
     pending = stats.get("pending", 0)
     executed = stats.get("executed", passed + failed + error + ignored)
     progress = stats.get("progress", (executed / total * 100) if total else 0)
-    pass_rate = stats.get("pass_rate", 0)
+    pass_rate = (passed / executed * 100) if executed > 0 else 0.0
     error_rate = (error / executed * 100) if executed else 0
     failure_rate = (failed / executed * 100) if executed else 0
 
@@ -114,6 +116,12 @@ def build_card(
             lines.append(f"**当前 Batch**: {batch_id}  |  **Iteration**: {iteration or 'N/A'}")
     elif event == "resumed":
         lines.append(f"{emoji} **Workflow 已恢复执行**  |  Iteration: {iteration or 'N/A'}")
+    elif event == "bastion_disconnect":
+        lines.append(f"{emoji} **Bastion SSH 连接已断开**")
+        lines.append(f"**原因**: {reason or 'SSH 超时或网络中断'}")
+        lines.append(f"**建议**: 请检查 Bastion 服务状态，执行 `python tools/agent.py serve t_h20`")
+        if batch_id:
+            lines.append(f"**当前 Batch**: {batch_id}  |  **Iteration**: {iteration or 'N/A'}")
 
     # 通用统计块
     lines.extend(build_stats_block(s))

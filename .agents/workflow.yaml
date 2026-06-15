@@ -56,7 +56,7 @@ config:
   test_list_path: &test_list_path "{run_dir}/test_list.txt" # 拷贝后的位置
   manifest_path: &manifest_path "{run_dir}/manifest.json"
   workflow_state_path: &workflow_state_path "{run_dir}/workflow_state.json"
-  logs_dir: &logs_dir "{run_dir}/logs"
+  logs_dir: &logs_dir "{run_dir}/logs"  # workflow 级别日志（环境检查、workflow总结等）
   reports_dir: &reports_dir "{run_dir}/reports"
 
   # 批次文件路径（统一使用 batch_dir_template）
@@ -66,7 +66,7 @@ config:
   batch_config_path: &batch_config_path "{batch_dir_template}/batch_config.json"
   batch_results_path: &batch_results_path "{batch_dir_template}/batch_results.json"
   handled_tests_path: &handled_tests_path "{batch_dir_template}/handled_tests.json"
-  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs"
+  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs"  # batch 级别日志（pytest输出、GPU分配等）
 
   # ✍️：远程执行配置
   remote_server: "t_h20"
@@ -116,7 +116,7 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: null # ✍️: 用户指定的 test_list.txt 原始路径（必填）
+  test_list_path: "D:/workspace/apmm/tasks/ut/workflow_tests/test_list_combined.txt" # ✍️: 用户指定的 test_list.txt 原始路径（必填）
 
   # 场景 2: 用户指定的输入 manifest.json
   manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径

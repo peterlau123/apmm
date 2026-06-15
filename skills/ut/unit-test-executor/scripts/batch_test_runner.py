@@ -19,13 +19,17 @@ import argparse
 import asyncio
 import json
 import logging
+import multiprocessing
 import os
 import re
 import subprocess
 import sys
 from datetime import datetime
+from functools import partial
 from pathlib import Path
 from typing import Optional
+
+from gpu_scheduler import GPUScheduler, group_by_test_file
 
 # Configure logging
 logging.basicConfig(
@@ -99,13 +103,13 @@ def run_test_on_remote(test_node, test_id, timeout=120):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = f"{UT_LOGS_DIR}/{timestamp}_test_{test_id}.log"
 
-    # Construct pytest command
-    pytest_cmd = f"cd {VLLM_DIR} && pytest '{test_node}' -v --tb=short -x 2>&1 | tee {log_file}"
+    # Construct pytest command (use python3 -m pytest for container compatibility)
+    pytest_cmd = f"cd {VLLM_DIR} && python3 -m pytest '{test_node}' -v --tb=short -x 2>&1 | tee {log_file}"
     full_cmd = f"{CONTAINER_PREFIX} bash -c '{pytest_cmd}'"
 
     # Build remote command
     cmd_parts = REMOTE_CMD_PREFIX.copy()
-    cmd_parts.extend([f"sudo docker exec v0.13.0_torch2.5.1_compile bash -c 'cd {VLLM_DIR} && timeout {timeout} pytest \"{test_node}\" -v --tb=short 2>&1 > {log_file}; echo EXIT_CODE:$?'"])
+    cmd_parts.extend([f"sudo docker exec v0.13.0_torch2.5.1_compile bash -c 'cd {VLLM_DIR} && timeout {timeout} python3 -m pytest \"{test_node}\" -v --tb=short 2>&1 > {log_file}; echo EXIT_CODE:$?'"])
 
     start_time = datetime.now()
 
@@ -1073,7 +1077,7 @@ async def run_tests_parallel(
     return processed_results
 
 
-def run_batch_parallel(
+def run_batch_parallel_asyncio(
     manifest: dict,
     start_id: int,
     batch_size: int,
@@ -1081,7 +1085,7 @@ def run_batch_parallel(
     timeout: int = 120
 ) -> list[dict]:
     """
-    Synchronous wrapper for run_tests_parallel.
+    Synchronous wrapper for run_tests_parallel (asyncio version).
 
     Args:
         manifest: Test manifest dictionary
@@ -1229,7 +1233,7 @@ def main_enhanced():
         print(f"Running parallel batches with {args.parallel} workers")
         for batch_num in range(args.max_batches):
             start_id = args.start_id + (batch_num * args.batch_size)
-            run_batch_parallel(
+            run_batch_parallel_asyncio(
                 manifest, start_id, args.batch_size,
                 args.parallel, args.timeout
             )
@@ -1257,3 +1261,66 @@ if __name__ == "__main__":
         main_enhanced()
     else:
         main()
+
+
+# ============================================================================
+# GPU-SCHEDULED PARALLEL EXECUTION (multiprocessing version)
+# ============================================================================
+
+
+def run_batch_parallel(batch_config: dict, config: dict) -> dict:
+    """Parallel test execution with GPU assignment"""
+    tests = batch_config.get("tests", [])
+    distributed_tests = [t for t in tests if t.get("distributed")]
+    normal_tests = [t for t in tests if not t.get("distributed")]
+
+    logger.info(f"Parallel execution: {len(normal_tests)} normal tests, {len(distributed_tests)} distributed tests")
+
+    file_groups = group_by_test_file(normal_tests)
+    batch_logs_dir = config.get("batch_logs_dir", "logs")
+    scheduler = GPUScheduler(config)
+    gpu_assignments = scheduler.assign_to_gpus(file_groups, batch_logs_dir)
+
+    normal_results = []
+    max_workers = min(len(gpu_assignments), config.get("max_gpus", 8))
+
+    with multiprocessing.Pool(max_workers=max_workers) as pool:
+        runner_partial = partial(run_single_test_wrapper, config=config)
+        results_per_gpu = pool.map(runner_partial, gpu_assignments)
+        for results in results_per_gpu:
+            normal_results.extend(results)
+
+    distributed_results = []
+    for test in distributed_tests:
+        result = run_distributed_test(test, config)
+        distributed_results.append(result)
+
+    all_results = normal_results + distributed_results
+    return {
+        "results": all_results,
+        "parallel_mode": True,
+        "gpu_assignments": len(gpu_assignments)
+    }
+
+
+def run_single_test_wrapper(assignment: dict, config: dict) -> list:
+    """Wrapper for running tests on specific GPU"""
+    os.environ["CUDA_VISIBLE_DEVICES"] = assignment["cuda_devices"]
+    results = []
+    for test in assignment["tests"]:
+        result = run_single_test(test, config)
+        result["gpu_id"] = assignment["gpu_id"]
+        results.append(result)
+    return results
+
+
+def run_distributed_test(test: dict, config: dict) -> dict:
+    """Execute distributed test with multi-GPU"""
+    world_size = test.get("world_size", 2)
+    cuda_devices = ",".join(str(i) for i in range(world_size))
+    os.environ["CUDA_VISIBLE_DEVICES"] = cuda_devices
+    logger.info(f"Distributed test {test['test_node']}: using {world_size} GPUs")
+    result = run_single_test(test, config)
+    result["distributed"] = True
+    result["world_size"] = world_size
+    return result

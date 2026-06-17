@@ -82,7 +82,8 @@ def collect_tests(vllm_dir: Path) -> list:
 def generate_manifest(
     test_nodes: list,
     output_file: Path,
-    metadata: dict = None
+    metadata: dict = None,
+    max_retry_per_test: int = 3
 ) -> dict:
     """
     生成 manifest.json

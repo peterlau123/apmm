@@ -62,6 +62,29 @@ sudo su
 cd /gpfs/gcsp/M2.7_verify/vllm
 ```
 
+### vLLM UT/compile 容器启动命令
+
+`v0.13.0_torch2.5.1_compile` 使用 `--init` 启动，PID 1 为 `docker-init`，用于信号转发和 zombie 进程回收。当前容器镜像已备份到 `/gpfs/gcsp/M2.7_verify/docker_images/`。
+
+```bash
+sudo docker run -d -t --init \
+  --net=host --uts=host --ipc=host \
+  --privileged=true --group-add video \
+  --shm-size 100gb --ulimit memlock=-1 \
+  --memory=500g --memory-swap=1000g \
+  --security-opt seccomp=unconfined \
+  --security-opt apparmor=unconfined \
+  --device=/dev/dri \
+  --device=/dev/infiniband \
+  --gpus all \
+  -v /gpfs:/gpfs \
+  --name v0.13.0_torch2.5.1_compile \
+  --entrypoint /bin/bash \
+  v0.13.0_torch2.5.1_compile:backup-20260616-142616
+```
+
+`docker exec` 启动的 pytest 进程仍可能成为 session leader；对应兼容补丁见 `tasks/ut/patches/setpgrp_compat.patch`。
+
 ---
 
 ## 共享存储路径

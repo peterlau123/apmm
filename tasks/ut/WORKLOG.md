@@ -16,6 +16,14 @@ tasks/ut/worklog/
 
 ---
 
+## 2026-06-17
+
+| 任务 | 状态 | 详情 |
+|------|:----:|------|
+| setpgrp 容器执行兼容处理 | ✅ | [worklog/2026-06-17/setpgrp-container-fix.md](worklog/2026-06-17/setpgrp-container-fix.md) |
+
+---
+
 ## 2026-06-13
 
 | 任务 | 状态 | 详情 |
@@ -55,4 +63,4 @@ tasks/ut/worklog/
 
 ---
 
-*最后更新: 2026-06-13*
+*最后更新: 2026-06-17*

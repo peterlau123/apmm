@@ -138,10 +138,35 @@ output_shape: List[int],
 
 # 方法 2: 使用 patch 命令
 patch -p1 < auto_functionalized_compat.patch
+patch -p1 < setpgrp_compat.patch
 
 # 方法 3: 手动复制 torch_compat.py
 cp torch_compat.py vllm/compilation/
 ```
+
+---
+
+## 问题 4: docker exec 下 os.setpgrp 权限错误
+
+**错误信息**:
+```text
+PermissionError: [Errno 1] Operation not permitted
+```
+
+**原因**: `docker exec` 启动的 pytest 进程可能成为 session leader，Linux 内核禁止 session leader 调用 `setpgid`/`setpgrp`。
+
+### 解决方案
+
+修改 `tests/utils.py` 中 `fork_new_process_for_each_test()` 的 `os.setpgrp()` 调用：
+
+```python
+try:
+    os.setpgrp()
+except PermissionError:
+    pass
+```
+
+补丁文件：`setpgrp_compat.patch`
 
 ---
 
@@ -166,8 +191,9 @@ python -c "from vllm.compilation.backends import VllmBackend"
 
 ```
 patches/
-├── torch_compat.py               # 兼容层文件（复制到 vllm/compilation/）
+├── torch_compat.py                   # 兼容层文件（复制到 vllm/compilation/）
 ├── auto_functionalized_compat.patch  # Git patch 文件
+├── setpgrp_compat.patch              # docker exec setpgrp 兼容补丁
 ├── apply_auto_functionalized_patch.sh # Shell 脚本
-└── README.md                     # 本文档
-``
+└── README.md                         # 本文档
+```

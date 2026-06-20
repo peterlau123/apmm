@@ -114,3 +114,15 @@ def test_entry_propagates_branch_check_error(monkeypatch, tmp_path):
         analyze.analyze_failed_tests_v5(
             [{"test_id": "t1", "status": "failed"}], run_dir=tmp_path
         )
+
+
+def test_analyze_skips_branch_check_when_disabled(monkeypatch):
+    calls = {"n": 0}
+    monkeypatch.setattr(
+        analyze, "ensure_on_branch",
+        lambda *a, **k: calls.__setitem__("n", calls["n"] + 1),
+    )
+    analyze.analyze_failed_tests_v5(
+        [{"test_id": "t1", "status": "failed"}], run_dir=None, check_branch=False
+    )
+    assert calls["n"] == 0

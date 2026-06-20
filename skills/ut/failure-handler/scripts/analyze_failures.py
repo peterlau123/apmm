@@ -270,17 +270,20 @@ def analyze_failed_tests_v5(
     run_dir: Path | None = None,
     vllm_repo_path: str = "/gpfs/gcsp/M2.7_verify/vllm",
     expected_branch: str = "2.5.1_ut_verify",
+    check_branch: bool = True,
 ) -> list:
     """v5 entry: pre-flight branch check, filter to processable, attach remote_log.
 
     1. ensure_on_branch(expected_branch, vllm_repo_path) — refuses to proceed
        unless the remote vLLM repo is on the configured auto-fix branch.
+       Skipped when check_branch is False (offline/test contexts).
     2. filter_processable() — drop retriable_error / passed / other; keep
        only failed + error.
     3. For each kept test, attach 'remote_log' resolved via last_batch_id when
        run_dir is provided.
     """
-    ensure_on_branch(expected_branch, vllm_repo_path)
+    if check_branch:
+        ensure_on_branch(expected_branch, vllm_repo_path)
     processable = filter_processable(tests)
     if run_dir is not None:
         for t in processable:

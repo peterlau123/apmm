@@ -11,7 +11,7 @@
 #   ✍️ input_filter.test_list_path    — 测试清单路径
 #   ✍️ input_filter.manifest_source   — 或使用已有 manifest.json
 #   ✍️ config.resume_from             — 断点续跑 run_dir（留空=新建）
-#   ✍️ config.batch_size              — 每批测试数量（≤100）
+#   ✍️ config.batch_size              — 每批测试数量（建议 8~16，保证完整日志返回）
 #   ✍️ config.pytest_args             — pytest 参数
 #   ✍️ config.remote_server           — 远程服务器 profile
 #   ✍️ config.docker_container        — Docker 容器名
@@ -56,7 +56,7 @@ config:
   test_list_path: &test_list_path "{run_dir}/test_list.txt" # 拷贝后的位置
   manifest_path: &manifest_path "{run_dir}/manifest.json"
   workflow_state_path: &workflow_state_path "{run_dir}/workflow_state.json"
-  logs_dir: &logs_dir "{run_dir}/logs"  # workflow 级别日志（环境检查、workflow总结等）
+  logs_dir: &logs_dir "{run_dir}/logs" # workflow 级别日志（环境检查、workflow总结等）
   reports_dir: &reports_dir "{run_dir}/reports"
 
   # 批次文件路径（统一使用 batch_dir_template）
@@ -66,7 +66,7 @@ config:
   batch_config_path: &batch_config_path "{batch_dir_template}/batch_config.json"
   batch_results_path: &batch_results_path "{batch_dir_template}/batch_results.json"
   handled_tests_path: &handled_tests_path "{batch_dir_template}/handled_tests.json"
-  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs"  # batch 级别日志（pytest输出、GPU分配等）
+  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs" # batch 级别日志（pytest输出、GPU分配等）
 
   # ✍️：远程执行配置
   remote_server: "t_h20"
@@ -90,7 +90,7 @@ config:
     # HF 离线环境（核心）
     HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
     HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
-    HF_HUB_OFFLINE: "1"  # 强制离线模式，禁止联网下载
+    HF_HUB_OFFLINE: "1" # 强制离线模式，禁止联网下载
     # Transformers 缓存（与 HF_HUB_CACHE 共享）
     TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
     HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
@@ -99,7 +99,8 @@ config:
 
   # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"
-  batch_size: 50 # ⚠️ 控制 ≤100 避免 delegate_task 超时
+  batch_size: 8 # v5 default; 建议 8~16，保证完整日志通过 agent.py run 返回
+  max_retry_per_test: 3 # v5 default; failure-handler 单测试最多重试次数
 
   # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）
   resume_from: null # 例如: "D:/workspace/apmm/runs/ut-20260612-101857"
@@ -164,7 +165,7 @@ stages:
     description: 选择下一批次测试
     input:
       manifest_path: *manifest_path
-      batch_size: 50 # ⚠️ 控制 ≤100 避免 delegate_task 超时
+      batch_size: 8 # 建议 8~16，保证完整日志通过 agent.py run 返回
     output:
       batch_config_path: *batch_config_path
     kanban:
@@ -213,8 +214,8 @@ stages:
     input:
       batch_results_path: *batch_results_path
       # 失败重试配置
-      max_failed_per_iteration: 10  # 每轮最多处理 10 个失败测试
-      max_retry_per_test: 3         # 单测试最多重试 3 次
+      max_failed_per_iteration: 10 # 每轮最多处理 10 个失败测试
+      max_retry_per_test: 3 # 单测试最多重试 3 次
     output:
       handled_tests_path: *handled_tests_path
     agent_required: true
@@ -266,6 +267,17 @@ loop:
       notify: true
 
 # ============================================================
+# Bastion - SSH daemon 生命周期管理（Hermes Runner 使用）
+# ============================================================
+bastion:
+  managed_by: hermes
+  profile: "t_h20"
+  heartbeat_interval: 15
+  otp_timeout: 300
+  notify_on_disconnect: true
+  auto_restart: true
+
+# ============================================================
 # Worker Output Schema - Worker返回格式规范（统一）
 # ============================================================
 worker_output_schema:
@@ -292,7 +304,7 @@ worker_output_schema:
 # Kanban - Hermes Kanban 配置（方案 A-1）
 # ============================================================
 kanban:
-  enabled: false  # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
+  enabled: true # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
 
   # Board 配置
   board:
@@ -307,14 +319,14 @@ kanban:
 
   # Gateway 启动配置
   gateway:
-    auto_start: true           # Agent 自动启动 gateway
-    check_interval: 60         # 调度检查间隔（秒）
-    startup_timeout: 30        # gateway 启动超时（秒）
+    auto_start: true # Agent 自动启动 gateway
+    check_interval: 60 # 调度检查间隔（秒）
+    startup_timeout: 30 # gateway 启动超时（秒）
 
   # 熔断器配置
   circuit_breaker:
-    failure_limit: 3           # 连续失败 N 次后自动 block
-    error_rate_threshold: 0.8  # 错误率阈值
+    failure_limit: 3 # 连续失败 N 次后自动 block
+    error_rate_threshold: 0.8 # 错误率阈值
 
   # 任务创建配置
   task_creation:
@@ -349,4 +361,3 @@ notifications:
 
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
-

@@ -94,31 +94,41 @@ flowchart TB
 
 ---
 
-## 批次选择逻辑示例
+## Selection Logic (v5)
+
+`select_batch(manifest, batch_size)` filters tests by **selectability** then sorts by **status priority** and takes the first `batch_size`. Each returned test is annotated with a `selected_reason` field.
+
+### Status × Selected matrix
+
+| status                  | selectable?                                 | priority | next stage on non-selection      |
+|-------------------------|---------------------------------------------|----------|----------------------------------|
+| `pending`               | yes (always)                                | 1        | —                                |
+| `fixed_pending_verify`  | yes (always)                                | 2        | —                                |
+| `retriable_error`       | yes iff `retry_count < max_retry`           | 3        | becomes `ignored` once exhausted (Stage 5 manifest-updater) |
+| `failed`                | yes iff `retry_count < max_retry`           | 4        | failure-handler triage           |
+| `error`                 | **never** selected                          | —        | routed to **Stage 4** failure-handler |
+| `running` / `passed` / `ignored` | **never** selected                  | —        | terminal                         |
+
+### Key rules
+
+- **`error` is never selected by Stage 3.** It is always routed to Stage 4 (failure-handler) for triage.
+- **`retriable_error` never goes to Stage 4.** Once `retry_count >= max_retry`, Stage 5 (manifest-updater) flips it to `ignored` with `ignore_reason = "max retry exceeded for <error_type>"`.
+- Sort order is determined by `STATUS_PRIORITY = {pending: 1, fixed_pending_verify: 2, retriable_error: 3, failed: 4}` — lower number runs first.
+- `selected_reason` is `"<status> retry <retry_count>/<max_retry>"` for `retriable_error` / `failed`, otherwise the bare status name.
+
+### Reference
 
 ```python
-# 过滤 pending + fixed_pending_verify + failed（含 retry_count 过滤）
-pending_tests = [t for t in manifest["tests"] if t["status"] == "pending"]
-fixed_pending_tests = [t for t in manifest["tests"] if t["status"] == "fixed_pending_verify"]
-failed_tests = [t for t in manifest["tests"] 
-                if t["status"] == "failed" and t.get("retry_count", 0) < t.get("max_retry", 3)]
+from generate_batch import select_batch, write_batch_config
 
-# 优先级：fixed_pending > failed > pending
-# 比例：fixed_pending 30%, failed 40%, pending 30%
-batch_tests = []
-fixed_limit = int(batch_size * 0.30)
-failed_limit = int(batch_size * 0.40)
-
-# 1. 验证批次优先（修复后验证）
-batch_tests.extend(fixed_pending_tests[:fixed_limit])
-
-# 2. 失败重试批次（不超过剩余容量）
-remaining_slots = batch_size - len(batch_tests)
-batch_tests.extend(failed_tests[:min(failed_limit, remaining_slots)])
-
-# 3. 新批次（填充剩余）
-remaining_slots = batch_size - len(batch_tests)
-batch_tests.extend(pending_tests[:remaining_slots])
+selected = select_batch(manifest, batch_size=8)
+write_batch_config(
+    path=batch_dir / "batch_config.json",
+    batch_id="b001",
+    iteration=42,
+    run_id=run_id,
+    selected=selected,
+)
 ```
 
 ---

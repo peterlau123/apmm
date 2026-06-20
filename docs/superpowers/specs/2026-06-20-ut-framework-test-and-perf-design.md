@@ -20,10 +20,15 @@
 - 吞吐指标按统一定义输出（cases/min，分母含 pass+fail+error）+ per-stage 耗时拆解。
 - 发现的**我方框架 bug** 被修复；vLLM 用例自身失败仅分类记录。
 
+**范围说明：**
+- **vLLM 修复过程在范围内**：对真实失败用例，要真正跑 failure-handler 的修复尝试 + 重试闭环
+  （fail→修复→`fixed_pending_verify`→重跑→pass/fail），目的是**验证我方重试/修复功能逻辑**。
+  vLLM 源码改动本身不作为交付物（不强求 vLLM 全绿），但修复流程必须真实执行，且远程改动需可回滚。
+- **真实 Kanban 需用户接入协同**：本机无法独自起 3 Gateway，真机 Kanban 验证安排为**与用户协同的实时会话**
+  （用户参与起 Hermes/Gateway），不是推迟、也不是只用 mock。mock-gateway 仅用于本地逻辑覆盖（L1）。见 L4。
+
 **非目标（Out of Scope）：**
-- 修改 vLLM 源码或让远程 vLLM 用例“变绿”——那是另一个任务，本设计只把它们当作输入/输出信号。
-- 真实 Kanban 3-Gateway 在线吞吐（本机无 Hermes Gateway）——用 mock-gateway 模拟覆盖逻辑，真机 Kanban 标注为部署时验证。
-- 性能“调优到某个目标值”——本设计只**度量 + 定位瓶颈 + 在范围内修复**，不承诺具体吞吐 KPI。
+- 性能“调优到某个目标 KPI 值”——本设计只**度量 + 定位瓶颈 + 在范围内修复/优化**，不承诺具体吞吐数值。
 
 ---
 
@@ -33,11 +38,12 @@
 |----|--------|------|------|
 | **L1 单测套件** | 框架函数级正确性（现有 71 单测 + 覆盖缺口） | 本地 pytest | 正确性 + 套件执行吞吐 |
 | **L2 管道吞吐（mock 远程）** | 8/16/32 合成用例走 `select_batch → execute_batch(mock run_remote) → analyze_failed_tests_v5 → update_manifest` | 本地 | 框架处理吞吐（含 mock 失败）+ manifest 状态机正确性 |
-| **L3 真实远程** | 8 个不需模型下载的轻量真实用例，走 bastion→t_h20→docker→pytest | 远程（bastion 在线） | 端到端真实吞吐 + `execute_batch` 远程路径验证 |
+| **L3 真实远程(线性)** | 真实用例（含**可修复失败用例**）走 bastion→t_h20→docker→pytest；触发 failure-handler 修复 + 重试闭环 | 远程（bastion 在线） | 端到端真实吞吐 + `execute_batch` 远程路径 + **重试/修复闭环**验证 |
+| **L4 真实 Kanban** | 3 Gateway + orchestrator/executor/fixer 真机编排 | 远程 + Hermes（**需用户接入协同**） | Kanban 调度/认领/依赖链 + 端到端 |
 
 两通道覆盖：
 - **ut/workflow（线性）**：hermes_runner 线性路径、`loop_core.run` 回调契约（L1）；L2/L3 即线性管道。
-- **hermes_workflow（Kanban）**：`orchestrator_round` 多轮 reconcile+select、`parse_command`、`refresh_manifest_stats`、`otp_resend_delay/otp_should_at_user`、`check_gateways_alive`（L1，gateway/board 层 mock）。真机 Kanban 部署时验证。
+- **hermes_workflow（Kanban）**：`orchestrator_round` 多轮 reconcile+select、`parse_command`、`refresh_manifest_stats`、`otp_resend_delay/otp_should_at_user`、`check_gateways_alive`（L1，gateway/board 层 mock 做逻辑覆盖）。真机 Kanban 验证见 **L4（需用户接入协同）**。
 
 ---
 
@@ -100,7 +106,11 @@ run_pipeline_perf.py --n <8|16|32> --mode <mock|real> [--seed-from <manifest>]
 ## 5. 测试数据准备
 
 - **L2（mock）**：合成 N 条 manifest 用例（`test_id`/`test_node`/`status=pending`/`retry_count`/`max_retry`），fake `run_remote` 按比例（默认 6 pass / 1 fail / 1 error，可参数化）回报，覆盖状态机各分支（pass、fail、retriable_error、达 max_retry）。
-- **L3（real）**：从 `tasks/ut/test_analysis/manifest.json` 选 **8 个不需模型下载、历史 passed 的轻量用例**（复用已知 6,411 passed 集 + 路径启发式排除 `models/`、需权重的用例），构子集 manifest；预检 `python tools/agent.py -p t_h20 ping` + 分支。
+- **L3（real）**：两部分子集 ——
+  - **快测吞吐子集**：8 个不需模型下载、历史 passed 的轻量用例（吞吐口径干净，不被下载/GPU 排队主导）。
+  - **修复/重试子集**：2–4 个历史 fail/error 且**可被 failure-handler 处理**的用例（如 dependency/download 类），用于触发并验证“修复尝试→`fixed_pending_verify`→重跑”闭环。
+  预检 `python tools/agent.py -p t_h20 ping` + 分支。修复过程会在远程对 vLLM 施加修复尝试，**先备份/用专用分支，确保可回滚**。
+- **L4（real Kanban）**：复用 L3 子集，但经 Hermes 3 Gateway 编排；**与用户协同的实时会话**中进行（用户参与起 Hermes/Gateway/board）。
 
 ---
 
@@ -109,16 +119,15 @@ run_pipeline_perf.py --n <8|16|32> --mode <mock|real> [--seed-from <manifest>]
 1. **测试组织**：加 markers + perf harness + 指标采集器（先用单测验证指标计算）。
 2. **覆盖基线**：跑 L1 全部；补齐两通道未覆盖函数（含 Kanban mock-gateway 编排多轮测试）。
 3. **准备**：造 L2 合成 manifest；选 L3 快测子集 + 预检。
-4. **实施**：L1 套件吞吐；L2 跑 8→16→32；L3 跑 8 真实。各产出指标。
-5. **分析/修复/优化**：修我方框架 bug；定位吞吐瓶颈（如每用例一次 SSH 往返、串行批次、JSON 反复读写）；在范围内优化并复测。
+4. **实施**：L1 套件吞吐；L2 跑 8→16→32；L3 跑快测吞吐子集 + 修复/重试子集（真实执行修复闭环并验证）；**L4 真机 Kanban 另约用户协同会话执行**。各产出指标。
+5. **分析/修复/优化**：修我方框架 bug；验证重试/修复闭环正确；定位吞吐瓶颈（如每用例一次 SSH 往返、串行批次、JSON 反复读写）；在范围内优化并复测。
 
 ---
 
 ## 7. 修复边界
 
-- **修**：我方框架代码（hermes_runner / generate_batch / execute_batch / analyze_failures / update_manifest / loop_core / bastion_manager / shared/*）中暴露的 bug、契约不一致、性能热点。
-- **不修**：vLLM 源码、vLLM 用例自身的 fail/error（仅按 `error_type` 分类记录）。
-- 每个修复遵循 TDD：先写/改测试复现，再修，保持 L1 全绿。
+- **修我方框架代码**：hermes_runner / generate_batch / execute_batch / analyze_failures / update_manifest / loop_core / bastion_manager / shared/* 的 bug、契约不一致、性能热点。TDD：先复现再修，保持 L1 全绿。
+- **vLLM 修复过程要真实执行**（用于验证我方重试/修复功能）：对真实失败用例，让 failure-handler 走完“修复尝试 → `fixed_pending_verify` → 重跑”闭环；重点是验证**循环逻辑正确**，而非让 vLLM 全绿。远程对 vLLM 的改动需可回滚（备份/专用分支），不作为本任务交付物。
 
 ---
 
@@ -126,4 +135,6 @@ run_pipeline_perf.py --n <8|16|32> --mode <mock|real> [--seed-from <manifest>]
 
 - **L3 真实计时受远程波动影响**（GPU 排队、SSH 抖动）：多跑 1–2 次取稳定值；优先快测避免下载主导。
 - **mock 比例不代表生产**：L2 吞吐是“框架上限”参考，非生产预测；文档注明。
-- **成本**：全实现是大工程，实现计划应分批（建议 subagent-driven），允许只先做 L1+L2、L3 增量。
+- **真机修复会改动远程 vLLM**：先备份 / 用专用分支，确保可回滚；修复闭环验证后视情况还原。
+- **L4 真机 Kanban 依赖用户在场**：需用户协同起 Hermes/Gateway，单独约时进行，不阻塞 L1–L3。
+- **成本**：全实现是大工程，实现计划应分批（建议 subagent-driven），按 L1→L2→L3→L4 推进，每层可独立验收。

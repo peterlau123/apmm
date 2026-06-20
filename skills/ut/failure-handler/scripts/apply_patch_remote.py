@@ -16,6 +16,14 @@ from pathlib import Path
 from datetime import datetime
 
 
+def build_commit_message(body: str) -> str:
+    """v5: prefix '[auto-fix] ' unless already present (idempotent)."""
+    body = body or ""
+    if body.startswith("[auto-fix]"):
+        return body
+    return f"[auto-fix] {body}"
+
+
 def run_remote(remote_server: str, container: str, command: str, timeout: int = 120) -> dict:
     """在远程容器执行命令"""
     full_cmd = f'sudo docker exec {container} bash -c "{command}"'
@@ -53,7 +61,7 @@ def apply_patch(patch_path: Path, target: str, remote_server: str, container: st
         return {"success": False, "message": f"git apply failed: {apply_result['stderr']}", "original_hash": original_hash}
 
     # git commit
-    msg = f"fix: {target} ({datetime.now().strftime('%Y%m%d_%H%M%S')})"
+    msg = build_commit_message(f"fix: {target} ({datetime.now().strftime('%Y%m%d_%H%M%S')})")
     commit_result = run_remote(remote_server, container, f"cd {vllm_dir} && git add {target} && git commit -m '{msg}'", 60)
     if not commit_result["success"]:
         return {"success": False, "message": f"git commit failed", "original_hash": original_hash}

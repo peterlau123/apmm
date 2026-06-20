@@ -121,6 +121,30 @@ def classify_failure(error_message: str) -> dict:
     }
 
 
+def filter_processable(tests: list) -> list:
+    """v5: keep only tests in {failed, error}. Skip retriable_error and others."""
+    return [t for t in tests if t.get("status") in ("failed", "error")]
+
+
+def resolve_remote_log(test: dict, run_dir: Path) -> dict | None:
+    """v5: resolve a test's last_batch_id -> batch_results.json.remote_log.
+
+    Returns the remote_log dict, or None when last_batch_id is missing or the
+    batch_results.json file is missing / unreadable / has no remote_log.
+    """
+    bid = test.get("last_batch_id")
+    if not bid:
+        return None
+    p = Path(run_dir) / str(bid) / "batch_results.json"
+    if not p.exists():
+        return None
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return data.get("remote_log")
+
+
 def analyze_batch_results(batch_results_file: Path) -> dict:
     """
     分析批次测试结果

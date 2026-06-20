@@ -63,20 +63,90 @@ def backup_manifest():
 def calculate_statistics(tests: List[Dict]) -> Dict:
     """计算 statistics"""
     stats = defaultdict(int)
-    
+
     for test in tests:
         status = test.get("status", "pending")
         stats[status] += 1
-    
+
     total = len(tests)
     executed = total - stats.get("pending", 0)
     progress = (executed / total * 100) if total > 0 else 0.0
-    
+
     stats["total"] = total
     stats["executed"] = executed
     stats["progress"] = round(progress, 2)
-    
+
     return dict(stats)
+
+
+# v5 merge ---------------------------------------------------------------
+
+def update_manifest(manifest: Dict, batch_results: Dict, handled: Dict) -> Dict:
+    """v5 manifest merge.
+
+    For each test in batch_results["tests"]:
+      - set last_batch_id = batch_results["batch_id"]
+      - copy error_type if present
+      - if new status in {failed, retriable_error, error}: retry_count += 1
+      - if new status == retriable_error AND retry_count >= max_retry:
+            status = "ignored"
+            ignore_reason = f"max retry exceeded for {error_type}"
+        else:
+            status = new_status
+
+    For each test in handled.get("tests", []):
+      apply status override + ignore_reason if present.
+
+    Recompute statistics by counting status occurrences (and add total /
+    executed / progress derived fields).
+    """
+    tests = manifest.get("tests", [])
+    by_id = {t.get("test_id"): t for t in tests if t.get("test_id") is not None}
+    by_node = {t.get("test_node"): t for t in tests if t.get("test_node")}
+
+    def _find(result):
+        tid = result.get("test_id")
+        if tid is not None and tid in by_id:
+            return by_id[tid]
+        node = result.get("test_node")
+        if node and node in by_node:
+            return by_node[node]
+        return None
+
+    batch_id = batch_results.get("batch_id")
+    for result in batch_results.get("tests", []):
+        target = _find(result)
+        if target is None:
+            continue
+        if batch_id is not None:
+            target["last_batch_id"] = batch_id
+        new_status = result.get("status", target.get("status", "pending"))
+        error_type = result.get("error_type")
+        if error_type is not None:
+            target["error_type"] = error_type
+
+        if new_status in ("failed", "retriable_error", "error"):
+            target["retry_count"] = int(target.get("retry_count", 0)) + 1
+
+        max_retry = int(target.get("max_retry", 3))
+        if new_status == "retriable_error" and target.get("retry_count", 0) >= max_retry:
+            target["status"] = "ignored"
+            et = target.get("error_type", error_type or "unknown")
+            target["ignore_reason"] = f"max retry exceeded for {et}"
+        else:
+            target["status"] = new_status
+
+    for handled_t in (handled or {}).get("tests", []):
+        target = _find(handled_t)
+        if target is None:
+            continue
+        if "status" in handled_t:
+            target["status"] = handled_t["status"]
+        if "ignore_reason" in handled_t:
+            target["ignore_reason"] = handled_t["ignore_reason"]
+
+    manifest["statistics"] = calculate_statistics(tests)
+    return manifest
 
 
 def update_test_status(

@@ -67,3 +67,50 @@ def test_auto_fix_commit_prefix():
     assert apply_patch.build_commit_message("fix: x") == "[auto-fix] fix: x"
     # idempotent
     assert apply_patch.build_commit_message("[auto-fix] y") == "[auto-fix] y"
+
+
+def test_entry_invokes_branch_check_and_filters(monkeypatch, tmp_path):
+    calls = []
+
+    def fake_ensure(expected, repo_path):
+        calls.append((expected, repo_path))
+
+    monkeypatch.setattr(analyze, "ensure_on_branch", fake_ensure)
+
+    out = analyze.analyze_failed_tests_v5(
+        [
+            {"test_id": "t1", "status": "retriable_error"},
+            {"test_id": "t2", "status": "failed"},
+            {"test_id": "t3", "status": "error"},
+        ],
+        run_dir=tmp_path,
+    )
+
+    assert calls == [("2.5.1_ut_verify", "/gpfs/gcsp/M2.7_verify/vllm")]
+    ids = [t["test_id"] for t in out]
+    assert ids == ["t2", "t3"]
+
+
+def test_entry_attaches_remote_log(monkeypatch, tmp_path):
+    monkeypatch.setattr(analyze, "ensure_on_branch", lambda *a, **k: None)
+    bdir = tmp_path / "b9"
+    bdir.mkdir()
+    (bdir / "batch_results.json").write_text(
+        json.dumps({"remote_log": {"raw_log_path": "/r/x.log"}}), encoding="utf-8"
+    )
+    out = analyze.analyze_failed_tests_v5(
+        [{"test_id": "t1", "status": "failed", "last_batch_id": "b9"}],
+        run_dir=tmp_path,
+    )
+    assert out[0]["remote_log"] == {"raw_log_path": "/r/x.log"}
+
+
+def test_entry_propagates_branch_check_error(monkeypatch, tmp_path):
+    def boom(*a, **k):
+        raise RuntimeError("vLLM HEAD on master, expected 2.5.1_ut_verify")
+
+    monkeypatch.setattr(analyze, "ensure_on_branch", boom)
+    with pytest.raises(RuntimeError, match="HEAD on master"):
+        analyze.analyze_failed_tests_v5(
+            [{"test_id": "t1", "status": "failed"}], run_dir=tmp_path
+        )

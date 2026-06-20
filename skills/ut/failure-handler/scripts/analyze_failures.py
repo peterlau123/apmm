@@ -9,10 +9,32 @@ Failure Handler - 分析失败原因脚本
 """
 
 import argparse
+import importlib.util
 import json
 import re
+import sys
 from pathlib import Path
 from datetime import datetime
+
+
+def _load_branch_checker():
+    """Lazy-load skills/ut/workflow/scripts/check_vllm_branch.py."""
+    p = (
+        Path(__file__).resolve().parents[2]
+        / "workflow"
+        / "scripts"
+        / "check_vllm_branch.py"
+    )
+    spec = importlib.util.spec_from_file_location("ut_fh_check_vllm_branch", p)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def ensure_on_branch(expected: str, repo_path: str) -> None:
+    """Indirection so tests can patch this symbol on the analyze_failures module."""
+    _load_branch_checker().ensure_on_branch(expected, repo_path)
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
@@ -240,6 +262,32 @@ def analyze_from_workflow_state(workflow_state_path: Path, output_path: Path = N
         print(f"[OK] Analysis saved to: {output_path}")
     
     return result
+
+
+def analyze_failed_tests_v5(
+    tests: list,
+    *,
+    run_dir: Path | None = None,
+    vllm_repo_path: str = "/gpfs/gcsp/M2.7_verify/vllm",
+    expected_branch: str = "2.5.1_ut_verify",
+) -> list:
+    """v5 entry: pre-flight branch check, filter to processable, attach remote_log.
+
+    1. ensure_on_branch(expected_branch, vllm_repo_path) — refuses to proceed
+       unless the remote vLLM repo is on the configured auto-fix branch.
+    2. filter_processable() — drop retriable_error / passed / other; keep
+       only failed + error.
+    3. For each kept test, attach 'remote_log' resolved via last_batch_id when
+       run_dir is provided.
+    """
+    ensure_on_branch(expected_branch, vllm_repo_path)
+    processable = filter_processable(tests)
+    if run_dir is not None:
+        for t in processable:
+            rl = resolve_remote_log(t, run_dir)
+            if rl is not None:
+                t.setdefault("remote_log", rl)
+    return processable
 
 
 def generate_worker_output(analyzed_result: dict) -> dict:

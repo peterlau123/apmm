@@ -141,6 +141,21 @@ def test_check_stop_conditions_not_done_when_running(hr, tmp_path):
     assert done is False
 
 
+# ── 2.2 refresh_manifest_stats ────────────────────────────────────────────────
+
+def test_refresh_manifest_stats(hr, tmp_path):
+    mp = tmp_path / "manifest.json"
+    mp.write_text(json.dumps({"version": "2.0", "tests": [
+        {"test_id": "t1", "status": "passed"},
+        {"test_id": "t2", "status": "pending"},
+        {"test_id": "t3", "status": "running"}], "statistics": {}}))
+    sp = tmp_path / "state.json"
+    sp.write_text(json.dumps({"config": {}}))
+    hr.refresh_manifest_stats(sp, mp)
+    s = json.loads(sp.read_text())["manifest_stats"]
+    assert s["pending"] == 1 and s["running"] == 1 and s["passed"] == 1
+
+
 # ── 2.1 parse_command ─────────────────────────────────────────────────────────
 
 def test_parse_stop(hr):

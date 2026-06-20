@@ -321,6 +321,23 @@ def apply_pending_config(state_path) -> dict:
     return effective
 
 
+def refresh_manifest_stats(state_path, manifest_path) -> dict:
+    """Tally test statuses from the manifest into state['manifest_stats'].
+
+    Feeds check_stop_conditions. Returns the tally dict.
+    """
+    manifest = _read_json(manifest_path)
+    stats: dict = {}
+    for t in manifest.get("tests", []):
+        status = t.get("status")
+        stats[status] = stats.get(status, 0) + 1
+
+    state = _read_json(state_path)
+    state["manifest_stats"] = stats
+    _write_json(state_path, state)
+    return stats
+
+
 def check_stop_conditions(state_path) -> tuple[bool, str, str]:
     """Terminal check: (done, reason, status).
 

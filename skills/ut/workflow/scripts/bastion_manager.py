@@ -75,6 +75,19 @@ def _run(args, cwd, timeout=30):
         return -1, "", f"timeout after {timeout}s"
 
 
+_OTP_SCHEDULE = {1: 5, 2: 15, 3: 30, 4: 60}
+
+
+def otp_resend_delay(attempt: int) -> int:
+    """Delay (minutes) before the given OTP resend attempt; caps at 60."""
+    return _OTP_SCHEDULE.get(attempt, 60)
+
+
+def otp_should_at_user(attempt: int) -> bool:
+    """Whether to @-mention the user; starts from the 3rd attempt."""
+    return attempt >= 3
+
+
 # ── BastionManager ─────────────────────────────────────────────────────────────
 
 class BastionManager:

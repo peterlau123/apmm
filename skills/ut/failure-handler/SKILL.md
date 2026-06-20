@@ -9,6 +9,79 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 
 ---
 
+## Behavior (v5)
+
+This skill runs as **Stage 4** of the v5 workflow. The contract below
+**overrides** any older guidance further down this file when they conflict.
+
+### 1. Inputs that are processed
+
+Failure-handler processes **only** tests whose status in the manifest is
+`failed` or `error`. Tests with status `retriable_error` are **never**
+touched here — they are owned by Stage 3 (executor) for transient retries,
+and by Stage 5 (manifest-updater) for terminal `ignored` promotion. Use
+`analyze_failures.filter_processable(tests)` to enforce this; it is also
+applied automatically by `analyze_failed_tests_v5()`.
+
+### 2. Pre-flight branch check
+
+Before *any* auto-fix work — patch generation, `git apply`, or `git commit`
+— call `ensure_on_branch("2.5.1_ut_verify", vllm_repo_path)` from
+`skills/ut/workflow/scripts/check_vllm_branch.py`. It runs
+`git rev-parse --abbrev-ref HEAD` on the remote vLLM repo via the canonical
+`run_remote` helper. A mismatch (or non-zero rc) raises `RuntimeError`; the
+stage must abort and surface the error to the operator. Auto-fix commits
+are **only** valid on `2.5.1_ut_verify`. `analyze_failed_tests_v5()` calls
+this on entry.
+
+### 3. Log access
+
+Worker reasoning starts from the per-batch `summary.txt` (concise,
+test-keyed). When deeper context is needed (full traceback, OOM banner,
+warnings) Worker resolves the test's `last_batch_id`:
+
+```
+last_batch_id -> {run_dir}/{last_batch_id}/batch_results.json
+                 -> .remote_log.raw_log_path  (path on the remote host)
+```
+
+Use `analyze_failures.resolve_remote_log(test, run_dir)` for this lookup.
+Read fragments of the remote raw log via the bastion only when summary.txt
+is insufficient. Never copy the full raw log into local context.
+
+### 4. Commit policy
+
+- **Branch**: only `2.5.1_ut_verify`. Refuse otherwise (see §2).
+- **Message prefix**: every auto-fix commit is `[auto-fix] <body>`. Use
+  `apply_patch_remote.build_commit_message(body)` — it is idempotent, so
+  passing an already-prefixed body returns it unchanged. The function is
+  wired into the existing `git commit -m` call in
+  `apply_patch_remote.apply_patch`.
+- **Review**: humans review auto-fix commits with
+  `git log --grep='\\[auto-fix\\]' 2.5.1_ut_verify`.
+- **Completion card**: at run-end the workflow shows
+  `git log master..2.5.1_ut_verify` so the operator can audit the full set
+  of auto-fixes applied during the run.
+
+### 5. Verification cycle
+
+Per failed/error test:
+
+```
+filter_processable -> classify -> generate_patch -> apply_patch_remote
+   -> retry on remote
+        -> pass    => status: fixed_pending_verify (awaiting human review)
+        -> fail    => keep status: failed (next round may try again)
+   -> if max_retry exhausted with no fix
+        => promoted to ignored by Stage 5 (manifest-updater)
+```
+
+`fixed_pending_verify` is the terminal Stage-4 state; the test is *not*
+declared green until a human verifies the auto-fix commit on
+`2.5.1_ut_verify`.
+
+---
+
 ## Worker 角色
 
 ```

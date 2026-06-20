@@ -1,0 +1,141 @@
+"""Tests for hermes_runner v5 import-only API.
+
+Covers:
+  - validate_required_config (8.2)
+  - check_gateways_alive + _systemctl_active mocking (8.3)
+  - apply_pending_config + check_stop_conditions (8.4)
+"""
+import importlib.util
+import json
+import sys
+from pathlib import Path
+from unittest.mock import patch
+
+import pytest
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py"
+
+
+@pytest.fixture(scope="module")
+def hr():
+    """Import hermes_runner.py by file path (hyphenated parent dirs)."""
+    # Make `bastion_manager` and `feishu_api` siblings importable
+    sys.path.insert(0, str(HERMES_RUNNER.parent))
+    sys.path.insert(0, str(HERMES_RUNNER.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("hermes_runner", HERMES_RUNNER)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+# ── 8.2 validate_required_config ──────────────────────────────────────────────
+
+def test_validate_required_config_missing_test_list_and_manifest(hr):
+    cfg = {"config": {"remote_server": "t_h20"}, "input_filter": {}}
+    ok, missing = hr.validate_required_config(cfg)
+    assert ok is False
+    assert any("test_list_path" in m or "manifest_source" in m for m in missing)
+
+
+def test_validate_required_config_test_list_plus_remote_server_ok(hr):
+    cfg = {
+        "config": {"remote_server": "t_h20"},
+        "input_filter": {"test_list_path": "/tmp/x.txt"},
+    }
+    ok, missing = hr.validate_required_config(cfg)
+    assert ok is True
+    assert missing == []
+
+
+def test_validate_required_config_missing_remote_server(hr):
+    cfg = {
+        "config": {},
+        "input_filter": {"manifest_source": "/tmp/m.json"},
+    }
+    ok, missing = hr.validate_required_config(cfg)
+    assert ok is False
+    assert "config.remote_server" in missing
+
+
+# ── 8.3 check_gateways_alive ──────────────────────────────────────────────────
+
+def test_check_gateways_alive_only_orchestrator(hr):
+    def fake_active(unit: str) -> bool:
+        return unit == "hermes-gateway@ut-orchestrator"
+
+    with patch.object(hr, "_systemctl_active", side_effect=fake_active):
+        result = hr.check_gateways_alive()
+
+    assert result == {
+        "ut-orchestrator": True,
+        "ut-executor": False,
+        "ut-fixer": False,
+    }
+
+
+def test_systemctl_active_handles_missing_binary(hr):
+    """FileNotFoundError (Windows / no systemctl) should yield False, not raise."""
+    with patch("subprocess.run", side_effect=FileNotFoundError("no systemctl")):
+        assert hr._systemctl_active("anything") is False
+
+
+# ── 8.4 apply_pending_config + check_stop_conditions ──────────────────────────
+
+def test_apply_pending_config_merges_and_clears(hr, tmp_path):
+    state_path = tmp_path / "workflow_state.json"
+    state_path.write_text(json.dumps({
+        "config": {"batch_size": 8, "remote_server": "t_h20"},
+        "pending_config": {"batch_size": 16, "max_retry_per_test": 5},
+    }), encoding="utf-8")
+
+    effective = hr.apply_pending_config(state_path)
+
+    assert effective["batch_size"] == 16
+    assert effective["max_retry_per_test"] == 5
+    assert effective["remote_server"] == "t_h20"
+
+    on_disk = json.loads(state_path.read_text(encoding="utf-8"))
+    assert on_disk["pending_config"] == {}
+    assert on_disk["config"]["batch_size"] == 16
+
+
+def test_apply_pending_config_noop_when_empty(hr, tmp_path):
+    state_path = tmp_path / "workflow_state.json"
+    state_path.write_text(json.dumps({
+        "config": {"batch_size": 8},
+        "pending_config": {},
+    }), encoding="utf-8")
+    effective = hr.apply_pending_config(state_path)
+    assert effective["batch_size"] == 8
+
+
+def test_check_stop_conditions_done(hr, tmp_path):
+    state_path = tmp_path / "workflow_state.json"
+    state_path.write_text(json.dumps({
+        "manifest_stats": {"pending": 0, "running": 0, "passed": 10},
+    }), encoding="utf-8")
+    done, reason, status = hr.check_stop_conditions(state_path)
+    assert done is True
+    assert reason == "pending_count == 0"
+    assert status == "completed"
+
+
+def test_check_stop_conditions_not_done_when_pending(hr, tmp_path):
+    state_path = tmp_path / "workflow_state.json"
+    state_path.write_text(json.dumps({
+        "manifest_stats": {"pending": 3, "running": 0},
+    }), encoding="utf-8")
+    done, reason, status = hr.check_stop_conditions(state_path)
+    assert done is False
+    assert reason == ""
+    assert status == ""
+
+
+def test_check_stop_conditions_not_done_when_running(hr, tmp_path):
+    state_path = tmp_path / "workflow_state.json"
+    state_path.write_text(json.dumps({
+        "manifest_stats": {"pending": 0, "running": 2},
+    }), encoding="utf-8")
+    done, _, _ = hr.check_stop_conditions(state_path)
+    assert done is False

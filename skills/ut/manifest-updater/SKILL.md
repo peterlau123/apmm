@@ -94,6 +94,56 @@ subgraph Step5["[Step 4] 返回结果"]
 
 ---
 
+## Behavior (v5)
+
+### Inputs
+
+- **`batch_results.json`** — written by Stage 3 (executor). Shape:
+  ```json
+  {
+    "batch_id": "b001",
+    "tests": [
+      {"test_id": "t1", "status": "passed"},
+      {"test_id": "t2", "status": "retriable_error", "error_type": "oom"}
+    ]
+  }
+  ```
+- **`handled_tests.json`** — written by Stage 4 (failure-handler). Optional. Shape:
+  ```json
+  { "tests": [ {"test_id": "t9", "status": "ignored", "ignore_reason": "manual triage"} ] }
+  ```
+
+### Per-test merge rules
+
+For every test in `batch_results["tests"]`:
+
+1. Set `last_batch_id = batch_results["batch_id"]`.
+2. Copy `error_type` if present in the result.
+3. If new status ∈ {`failed`, `retriable_error`, `error`}, increment `retry_count` by 1.
+4. If new status == `retriable_error` AND `retry_count >= max_retry`:
+   - flip `status` to `"ignored"`
+   - set `ignore_reason = f"max retry exceeded for {error_type}"`
+   Otherwise set `status = new_status`.
+
+For every test in `handled["tests"]` (Stage 4 overrides):
+
+- Apply `status` override.
+- Set `ignore_reason` if present.
+
+### Statistics
+
+After all merges, recompute `manifest["statistics"]` by counting tests per status (`passed`, `failed`, `error`, `retriable_error`, `pending`, `ignored`, `fixed_pending_verify`, …) and add derived fields `total`, `executed`, `progress`.
+
+### Reference
+
+```python
+from update_manifest import update_manifest
+
+manifest = update_manifest(manifest, batch_results, handled_tests)
+```
+
+---
+
 ## 执行流程
 
 ### Step 1: 加载输入文件

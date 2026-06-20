@@ -11,6 +11,8 @@
 | [bastion.md](guides/bastion.md) | 堡垒机连接方案 |
 | [environment.md](guides/environment.md) | 环境配置说明 |
 | [troubleshooting.md](guides/troubleshooting.md) | 问题排查与修复 |
+| [hermes-supervisor-service.md](guides/hermes-supervisor-service.md) | ut-supervisor Hermes Agent systemd 部署指南 |
+| [hermes-gateway-service.md](guides/hermes-gateway-service.md) | hermes-gateway@ 3 实例（orchestrator/executor/fixer）systemd 部署指南 |
 
 ---
 
@@ -36,4 +38,4 @@
 
 ---
 
-*更新时间: 2026-06-12*
+*更新时间: 2026-06-20*

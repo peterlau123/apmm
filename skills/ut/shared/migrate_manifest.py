@@ -165,30 +165,47 @@ def migrate_statistics(stats: dict) -> dict:
 
 
 def migrate_manifest(
-    source_path: Path,
+    source_path,
     target_path: Path | None = None,
-    backup: bool = True
+    backup: bool = True,
+    default_max_retry: int = 3,
 ) -> dict:
     """
     迁移 manifest.json 到新 schema 格式
 
+    支持两种调用方式：
+    1. dict-in/dict-out（v5 backward-compat backfill）：
+       migrate_manifest(manifest_dict, default_max_retry=3) → migrated_dict
+       仅回填缺失的 max_retry 与 last_batch_id 字段，不写文件。
+    2. 文件路径 → 文件路径（旧版完整迁移）：
+       migrate_manifest(Path("manifest.json")) → 迁移结果统计 dict
+
     Args:
-        source_path: 原 manifest.json 路径
-        target_path: 目标路径（新格式），默认为source_path同目录
-        backup: 是否创建备份 (manifest_legacy.json)
+        source_path: dict 或 Path（旧 manifest.json 路径）
+        target_path: 目标路径（仅文件模式）
+        backup: 是否创建备份（仅文件模式）
+        default_max_retry: 当 max_retry 缺失时的默认值（dict 模式回填使用）
 
     Returns:
-        迁移结果统计:
-        {
-            "source": str,
-            "target": str | None,
-            "backup": str | None,
-            "tests_count": int,
-            "migrated_count": int,
-            "error_type_mappings": dict,
-            "timestamp": str
-        }
+        dict 模式：迁移后的 manifest dict
+        文件模式：迁移结果统计 dict
     """
+    # ---- v5 dict-in/dict-out backfill mode ----
+    if isinstance(source_path, dict):
+        manifest = source_path
+        migrated = dict(manifest)
+        new_tests = []
+        for test in manifest.get("tests", []):
+            t = dict(test)
+            if "max_retry" not in t:
+                t["max_retry"] = default_max_retry
+            if "last_batch_id" not in t:
+                t["last_batch_id"] = None
+            new_tests.append(t)
+        migrated["tests"] = new_tests
+        return migrated
+
+    # ---- legacy file-based full migration ----
     if target_path is None:
         target_path = source_path
 

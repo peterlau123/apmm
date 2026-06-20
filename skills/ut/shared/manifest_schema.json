@@ -100,6 +100,10 @@
             "type": ["string", "null"],
             "description": "所属批次ID"
           },
+          "last_batch_id": {
+            "type": ["string", "null"],
+            "description": "最后一次执行所属批次ID（远端日志指针）"
+          },
           "run_count": {
             "type": "integer",
             "description": "执行次数",
@@ -116,7 +120,7 @@
             "type": "integer",
             "description": "最大重试次数（从workflow.yaml读取）",
             "default": 3,
-            "minimum": 1
+            "minimum": 0
           },
           "last_run_at": {
             "type": ["string", "null"],

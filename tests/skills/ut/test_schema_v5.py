@@ -44,3 +44,19 @@ def test_error_type_timeout_is_valid():
         "retry_count": 0, "max_retry": 3,
     })
     validate_manifest(manifest)
+
+
+# --- Task 1.2 ---
+
+def test_last_batch_id_string_is_valid():
+    manifest = _base_manifest({
+        "status": "failed", "last_batch_id": "batch_20260619_001",
+        "retry_count": 1, "max_retry": 3,
+    })
+    validate_manifest(manifest)
+
+
+def test_max_retry_negative_is_invalid():
+    manifest = _base_manifest({"status": "pending", "retry_count": 0, "max_retry": -1})
+    with pytest.raises(Exception):
+        validate_manifest(manifest)

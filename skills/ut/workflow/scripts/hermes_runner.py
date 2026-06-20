@@ -338,6 +338,74 @@ def refresh_manifest_stats(state_path, manifest_path) -> dict:
     return stats
 
 
+def _load_fn(skill_dir: str, module: str, fn_name: str):
+    """Load `skills/ut/<skill_dir>/scripts/<module>.py` and return `<fn_name>`.
+
+    Skill dirs are hyphenated (e.g. manifest-updater) so they can't be imported
+    as normal packages; load them by file path via importlib.
+    """
+    import importlib.util
+
+    path = SKILL_DIR / skill_dir / "scripts" / f"{module}.py"
+    spec = importlib.util.spec_from_file_location(
+        f"_hermes_{skill_dir.replace('-', '_')}_{module}", path
+    )
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)
+
+
+def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size):
+    """Kanban ut-orchestrator round: Stage 5 (reconcile prev) then Stage 2 (select next).
+
+    Chains the REAL v5 Worker functions:
+      - manifest-updater.update_manifest(manifest, batch_results, handled) → merged manifest
+      - batch-selector.select_batch(manifest, batch_size) → list of selected tests
+      - batch-selector.write_batch_config(path, batch_id, iteration, run_id, selected) → cfg
+
+    Returns {"completed": bool, "next_batch": dict|None}.
+    """
+    update_manifest = _load_fn("manifest-updater", "update_manifest", "update_manifest")
+    select_batch = _load_fn("batch-selector", "generate_batch", "select_batch")
+    write_batch_config = _load_fn("batch-selector", "generate_batch", "write_batch_config")
+
+    run_dir = Path(run_dir)
+    manifest_path = Path(manifest_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    # Stage 5: reconcile previous batch results into the manifest.
+    if prev_batch_dir is not None:
+        br = Path(prev_batch_dir) / "batch_results.json"
+        if br.exists():
+            batch_results = json.loads(br.read_text(encoding="utf-8"))
+            hp = Path(prev_batch_dir) / "handled_tests.json"
+            handled = json.loads(hp.read_text(encoding="utf-8")) if hp.exists() else {"tests": []}
+            # update_manifest mutates manifest in place and returns it.
+            manifest = update_manifest(manifest, batch_results, handled)
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
+
+    # Stage 2: select the next batch. select_batch encapsulates v5 selectability;
+    # an empty selection means nothing is left to run → completed.
+    selected = select_batch(manifest, batch_size)
+    if not selected:
+        return {"completed": True, "next_batch": None}
+
+    nb = f"batch_{len(list(run_dir.glob('batch_*'))) + 1:04d}"
+    nd = run_dir / nb
+    nd.mkdir(exist_ok=True)
+    cfg = write_batch_config(
+        path=nd / "batch_config.json",
+        batch_id=nb,
+        iteration=0,
+        run_id=run_dir.name,
+        selected=selected,
+    )
+    return {"completed": False, "next_batch": cfg}
+
+
 def check_stop_conditions(state_path) -> tuple[bool, str, str]:
     """Terminal check: (done, reason, status).
 

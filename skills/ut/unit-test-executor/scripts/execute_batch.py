@@ -113,6 +113,12 @@ def _utc_now_iso_z() -> str:
     return datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _node(t: dict) -> str:
+    """Return a test's node id, tolerating either `test_node` (executor field)
+    or `test_id` (batch-selector field). Prefers `test_node`."""
+    return t.get("test_node") or t["test_id"]
+
+
 def _classify_for_test(summary_text: str, test_node: str):
     """Find the line(s) in summary_text mentioning test_node and classify them.
     Falls back to whole summary if not found."""
@@ -141,7 +147,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     batch_dir = batch_config_path.parent
     batch_id = batch_config["batch_id"]
     tests = batch_config["tests"]
-    test_nodes = [t["test_node"] for t in tests]
+    test_nodes = [_node(t) for t in tests]
 
     remote_server = config.get("remote_server", "t_h20")
     docker_container = config.get("docker_container", "v0.13.0_torch2.5.1_compile")
@@ -240,11 +246,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     counters = {"passed": 0, "failed": 0, "error": 0, "skipped": 0,
                 "retriable_error": 0}
     for t in tests:
-        status, error_type = _classify_for_test(summary_text, t["test_node"])
+        status, error_type = _classify_for_test(summary_text, _node(t))
         counters[status] = counters.get(status, 0) + 1
         test_entries.append({
-            "id": t["id"],
-            "test_node": t["test_node"],
+            "id": t.get("id"),
+            "test_node": _node(t),
             "status": status,
             "error_type": error_type,
             "duration_ms": 0,

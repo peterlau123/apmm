@@ -18,13 +18,14 @@
         "status": {
           "type": "string",
           "description": "Workflow状态",
-          "enum": ["initialized", "running", "paused", "completed", "error"],
+          "enum": ["running", "paused", "waiting_otp", "completed", "stopped", "failed"],
           "_enum_comments": {
-            "initialized": "已初始化，等待执行",
             "running": "正在执行",
             "paused": "已暂停，等待人工介入",
+            "waiting_otp": "等待飞书 OTP 重连 bastion",
             "completed": "已完成",
-            "error": "发生错误，停止执行"
+            "stopped": "用户主动停止",
+            "failed": "发生错误，停止执行"
           }
         }
       }
@@ -129,6 +130,32 @@
         "error": {"type": ["string", "null"], "description": "Worker错误信息"},
         "blocked_reason": {"type": ["string", "null"], "description": "阻塞原因"}
       }
+    },
+    "bastion": {
+      "type": "object",
+      "description": "Bastion daemon 状态跟踪（Hermes Runner 使用）",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Bastion daemon 当前状态",
+          "enum": ["connected", "disconnected", "waiting_for_otp", "failed"],
+          "_enum_comments": {
+            "connected": "daemon 可用",
+            "disconnected": "daemon 不可用",
+            "waiting_for_otp": "已通知用户，等待飞书 OTP",
+            "failed": "重连失败，需要人工处理"
+          }
+        },
+        "profile": {"type": "string", "description": "Bastion profile 名称"},
+        "last_heartbeat_at": {"type": "string", "format": "date-time", "description": "最后一次心跳时间"},
+        "otp_request_id": {"type": "string", "description": "当前 OTP 请求 ID（仅 waiting_for_otp 状态）"},
+        "last_disconnect_reason": {"type": "string", "description": "最近一次断联原因"}
+      }
+    },
+    "pending_config": {
+      "type": "object",
+      "description": "v5: 用户/外部请求的配置更新，下个 loop 边界由 apply_pending_config 合并入 config 后清空",
+      "additionalProperties": true
     }
   }
 }

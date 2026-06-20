@@ -252,6 +252,24 @@ def validate_manifest(manifest: dict) -> None:
     validate(instance=manifest, schema=schema)
 
 
+def validate_state(state: dict) -> None:
+    """
+    校验 workflow_state 字典是否符合 workflow_state_schema.json
+
+    Args:
+        state: workflow_state 数据字典
+
+    Raises:
+        jsonschema.ValidationError: 如果不符合 schema
+
+    用于测试和外部调用的薄封装：dict-in，校验失败抛异常。
+    镜像 validate_manifest 的设计。
+    """
+    schema_path = get_schema_path("workflow_state")
+    schema = load_json_schema(schema_path)
+    validate(instance=state, schema=schema)
+
+
 def validate_file(file_path: Path, schema_name: str) -> tuple[bool, list[str]]:
     """
     校验已存在的JSON/YAML文件

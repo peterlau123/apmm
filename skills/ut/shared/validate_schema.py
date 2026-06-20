@@ -235,6 +235,23 @@ def validate_and_write(
         return False, [f"Write error: {e}"]
 
 
+def validate_manifest(manifest: dict) -> None:
+    """
+    校验 manifest 字典是否符合 manifest_schema.json
+
+    Args:
+        manifest: manifest 数据字典
+
+    Raises:
+        jsonschema.ValidationError: 如果不符合 schema
+
+    用于测试和外部调用的薄封装：dict-in，校验失败抛异常。
+    """
+    schema_path = get_schema_path("manifest")
+    schema = load_json_schema(schema_path)
+    validate(instance=manifest, schema=schema)
+
+
 def validate_file(file_path: Path, schema_name: str) -> tuple[bool, list[str]]:
     """
     校验已存在的JSON/YAML文件

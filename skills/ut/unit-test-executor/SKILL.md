@@ -7,6 +7,88 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（
 
 # Unit Test Executor (Worker Agent v3.2)
 
+## Behavior (v5)
+
+This section describes the v5 Worker contract. v3.x sections below are kept
+for historical context and will be reconciled in a follow-up pass.
+
+### 1. Remote raw_log + local summary
+
+Stage 3 runs pytest **remotely**, redirecting **all** stdout/stderr to a single
+remote file:
+
+```
+<remote_log_dir>/<batch_id>/raw_log.txt
+```
+
+This is the **only** file the Worker writes on the remote host. After pytest
+returns, the Worker issues a second remote call
+(`grep -E '(PASSED|FAILED|ERROR|SKIPPED)' ... ; tail -50 ...`) and writes the
+captured text to a **local** `summary.txt` next to `batch_results.json`.
+
+`batch_results.json` carries a `remote_log` pointer instead of inlining the
+log:
+
+```json
+"remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/.../ut_logs/<batch_id>/raw_log.txt",
+  "size_bytes": 4242,
+  "captured_at": "2026-06-20T12:34:56Z"
+}
+```
+
+`captured_at` uses `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
+
+### 2. Error classification
+
+`classify_error.classify(summary_text, test_id) -> (status, error_type)`:
+
+| Pattern                                                | status            | error_type   |
+| ------------------------------------------------------ | ----------------- | ------------ |
+| `PASSED ...` (and no FAILED on the same fragment)      | `passed`          | `None`       |
+| `torch.cuda.OutOfMemoryError` / `CUDA out of memory`   | `retriable_error` | `oom`        |
+| pytest-timeout (`+ Timeout >Ns +` / `Failed: Timeout`) | `retriable_error` | `timeout`    |
+| `ERROR collecting` / `ImportError` / `ModuleNotFound`  | `error`           | `collection` |
+| `FAILED ...`                                           | `failed`          | `assertion`  |
+| anything else                                          | `error`           | `other`      |
+
+OOM and pytest-timeout are **transient** → re-runnable in a later batch by
+Stage 2. They are *not* treated as hard failures here.
+
+The legacy category-letter `classify_error()` API (C/E/D/P/M/S/U) is preserved
+for back-compat; the new tuple-returning `classify()` is what the executor
+wires into `batch_results.json`.
+
+### 3. No Worker self-retry
+
+The Worker runs each test **exactly once per batch**. It does NOT loop over
+test execution, does NOT re-attempt on flake, and does NOT mutate
+`retry_count`. Retries are owned by Stage 2 (batch selector), which re-selects
+tests with `status ∈ {retriable_error, error}` whose `retry_count < max_retry`.
+
+### 4. Bastion disconnect handling
+
+When the remote-call helper (`run_remote`) raises `ConnectionError` — i.e. the
+bastion daemon is unreachable / SSH connect failed — the Worker:
+
+1. Calls `BastionManager(...).mark_disconnected(reason=...)` to set
+   `bastion.status = "disconnected"` in `workflow_state.json`.
+2. Returns `{"batch_id": ..., "next_action": "wait", "reason": ...}`.
+3. **Does NOT** write `batch_results.json`.
+4. **Does NOT** mutate manifest or per-test status.
+
+The Supervisor sees `next_action=wait`, parks the batch, and resumes once
+heartbeat / OTP recovery flips `bastion.status` back to `connected`. No tests
+are billed against `retry_count` for a disconnect.
+
+`BastionManager` exposes the symmetric pair `mark_disconnected(reason=...)`
+and `mark_connected()` for any caller that needs to surface connection state.
+
+---
+
+
 ---
 
 ## Worker 角色

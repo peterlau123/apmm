@@ -138,7 +138,7 @@
           "error_type": {
             "type": ["string", "null"],
             "description": "错误类型分类",
-            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "oom", "timeout", "other", null],
+            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "oom", "timeout", "collection", "assertion", "other", null],
             "_enum_comments": {
               "dependency": "依赖缺失 (ImportError, ModuleNotFoundError)",
               "network": "网络错误 (ConnectionError, HTTP 503/404)",
@@ -146,6 +146,10 @@
               "version": "版本兼容问题 (vLLM v0.13.0 + PyTorch 2.5.1 兼容性)",
               "functional": "功能错误 (AssertionError, ValueError)",
               "download_error": "模型下载失败 (Model not found, config.json missing)",
+              "oom": "GPU 显存不足 (CUDA out of memory) — Stage 3 初步分类，retriable",
+              "timeout": "pytest 执行超时 — Stage 3 初步分类，retriable",
+              "collection": "pytest collection/import 阶段错误 — Stage 3 初步分类",
+              "assertion": "断言失败 (AssertionError) — Stage 3 初步分类，待 Stage 4 细分",
               "other": "其他错误 (未分类的错误类型)",
               "null": "无错误"
             }

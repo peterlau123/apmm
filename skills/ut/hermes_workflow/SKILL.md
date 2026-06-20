@@ -56,7 +56,7 @@ from hermes_runner import (
 )
 from bastion_manager import (
     BastionManager,
-    otp_resend_delay,        # attempt → seconds before next OTP resend
+    otp_resend_delay,        # attempt → minutes before next OTP resend
     otp_should_at_user,      # attempt → whether to @ the user
 )
 ```
@@ -224,12 +224,12 @@ exact delays and @-user decisions come from the bastion module — do not
 hardcode them:
 
 ```
-attempt 1  → otp_resend_delay(1)  (立即，约 0s)
-attempt 2  → otp_resend_delay(2)
-attempt 3+ → otp_resend_delay(n);  @user if otp_should_at_user(n)
+attempt 1  → otp_resend_delay(1)  (5 min)
+attempt 2  → otp_resend_delay(2)  (15 min)
+attempt 3+ → otp_resend_delay(n)  (30 min, 60 min 封顶);  @user if otp_should_at_user(n)
 ```
 
-Spec §7 reference cadence: 立即 → 5min → 15min(@) → 30min(@) → 60min(@, 封顶).
+Spec §7 reference cadence: attempt 1 → 5min, 2 → 15min, 3 → 30min(@user), 4+ → 60min(@user, 封顶).
 There is **no timeout → failed** path; `waiting_otp` is left only by a valid
 OTP (→ `running`) or "结束" (→ `stopped`).
 

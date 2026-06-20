@@ -8,11 +8,25 @@
 
 ```
 tasks/ut/worklog/
+├── 2026-06-20/
+│   └── hermes-plan2-and-docs.md
+├── 2026-06-17/
+│   └── setpgrp-container-fix.md
 ├── 2026-06-13/
 │   └── skills-review.md
 ├── 2026-06-12/
 └── 2026-06-11/
 ```
+
+---
+
+## 2026-06-20
+
+| 任务 | 状态 | 详情 |
+|------|:----:|------|
+| Hermes Workflow Plan 2 部署实现（已合并 master） | ✅ | [worklog/2026-06-20/hermes-plan2-and-docs.md](worklog/2026-06-20/hermes-plan2-and-docs.md) |
+| 文档一致性修复 + manifest v5 回填 | ✅ | 同上 |
+| tasks/ut README 重构 + GOAL/todo ToC | ✅ | 同上 |
 
 ---
 
@@ -63,4 +77,4 @@ tasks/ut/worklog/
 
 ---
 
-*最后更新: 2026-06-17*
+*最后更新: 2026-06-20*

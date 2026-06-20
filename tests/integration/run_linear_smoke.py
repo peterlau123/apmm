@@ -7,8 +7,9 @@ runnable script that performs real remote pytest via tools/agent.py.
 
 Pipeline:
   1. Build tiny manifest (3 tests) -> validate_manifest
-  2. select_batch -> write_batch_config (inject keys execute_batch needs)
-  3. execute_batch (REAL remote pytest) -> writes summary.txt + batch_results.json
+  2. select_batch -> write_batch_config (raw selector output, no reshaping)
+  3. get_execute_config(state) -> execute_batch(..., exec_config=) (REAL remote
+     pytest) -> writes summary.txt + batch_results.json
   4. analyze_failed_tests_v5(filter_processable on failures)
   5. update_manifest(handled={"tests":[]}) -> manifest.json
   6. Print PASS/FAIL summary
@@ -55,6 +56,10 @@ _MU = _load_module(
 _FH = _load_module(
     "smoke_analyze_failures",
     _PROJECT_ROOT / "skills" / "ut" / "failure-handler" / "scripts" / "analyze_failures.py",
+)
+_HR = _load_module(
+    "smoke_hermes_runner",
+    _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py",
 )
 
 from skills.ut.shared.validate_schema import validate_manifest  # noqa: E402
@@ -110,12 +115,11 @@ def build_manifest(test_nodes: list[str]) -> dict:
 
 
 def write_workflow_state() -> None:
-    """Write a minimal workflow_state.json that get_config can read.
+    """Write a minimal workflow_state.json that get_execute_config can read.
 
-    Note: execute_batch reads config.get("remote_server"), config.get("docker_container")
-    DIRECTLY at top level, but skills.ut.shared.config_loader.get_config nests these
-    under config["remote"]. So execute_batch falls back to its own defaults — which
-    happen to match. This is INTEGRATION GAP #1 (documented in REPORT).
+    Config is nested under state["config"]["remote"] so that
+    hermes_runner.get_execute_config(state_path) flattens it into the flat keys
+    execute_batch expects (remote_server, docker_container, timeout, ...).
     """
     state = {
         "run_id": RUN_ID,
@@ -126,10 +130,13 @@ def write_workflow_state() -> None:
             "run_dir": str(RUN_DIR),
             "batches_dir": str(RUN_DIR),
         },
-        "remote": {
-            "server": REMOTE_SERVER,
-            "docker": DOCKER_CONTAINER,
-            "vllm_dir": "/gpfs/gcsp/M2.7_verify/vllm",
+        "config": {
+            "remote": {
+                "server": REMOTE_SERVER,
+                "docker": DOCKER_CONTAINER,
+                "vllm_dir": "/gpfs/gcsp/M2.7_verify/vllm",
+            },
+            "timeout": TIMEOUT,
         },
         "stats": {},
         "flags": {},
@@ -179,18 +186,19 @@ def main() -> int:
         run_id=RUN_ID,
         selected=selected,
     )
-    # INTEGRATION GAP #2: write_batch_config does not include keys
-    # execute_batch reads from CONFIG (remote_server, docker_container, timeout,
-    # remote_log_dir) — those come from workflow_state instead.
-    # write_batch_config also doesn't carry test_node fields automatically — but
-    # select_batch passes through full test dicts, so test_node IS present.
+    # Raw selector output flows straight into execute_batch — no reshaping.
+    # execute_batch tolerates `test_id` (G4 fix), so selected dicts pass through
+    # unchanged.
     print(f"[2] batch_config.json written: {BATCH_CONFIG_PATH}")
     print(f"    keys: {sorted(cfg.keys())}")
 
     # Step 3: execute_batch — REAL remote pytest
     print("[3] execute_batch — running remote pytest (this may take minutes)...")
+    exec_cfg = _HR.get_execute_config(WORKFLOW_STATE_PATH)
     try:
-        exec_result = _EXEC.execute_batch(BATCH_CONFIG_PATH, WORKFLOW_STATE_PATH)
+        exec_result = _EXEC.execute_batch(
+            BATCH_CONFIG_PATH, WORKFLOW_STATE_PATH, exec_config=exec_cfg
+        )
     except Exception as e:
         print(f"[FAIL] execute_batch raised: {e}")
         traceback.print_exc()

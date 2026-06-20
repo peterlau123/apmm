@@ -194,6 +194,7 @@ class BastionSession:
     def connect(self):
         self.transport = paramiko.Transport((self.host, self.port))
         self.transport.connect()
+        self.transport.set_keepalive(15)
 
         def handler(title, instructions, fields):
             return [self.p1 for _ in fields]

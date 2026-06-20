@@ -29,6 +29,79 @@ if str(_project_root) not in sys.path:
 from skills.ut.shared import validate_and_write, is_distributed
 
 
+# v5 selection rules ------------------------------------------------------
+STATUS_PRIORITY = {
+    "pending": 1,
+    "fixed_pending_verify": 2,
+    "retriable_error": 3,
+    "failed": 4,
+}
+
+
+def _is_selectable(test: dict) -> bool:
+    """v5 selection rule: pending/fixed_pending_verify always selectable;
+    retriable_error/failed selectable only while retry_count < max_retry.
+    error / running / passed / ignored are NEVER selectable.
+    """
+    status = test.get("status", "pending")
+    if status in ("pending", "fixed_pending_verify"):
+        return True
+    if status in ("retriable_error", "failed"):
+        retry_count = test.get("retry_count", 0)
+        max_retry = test.get("max_retry", 3)
+        return retry_count < max_retry
+    return False
+
+
+def _selected_reason(test: dict) -> str:
+    status = test.get("status", "pending")
+    if status in ("retriable_error", "failed"):
+        retry_count = test.get("retry_count", 0)
+        max_retry = test.get("max_retry", 3)
+        return f"{status} retry {retry_count}/{max_retry}"
+    return status
+
+
+def select_batch(manifest: dict, batch_size: int) -> list:
+    """v5 batch selection: filter by selectability, sort by status priority,
+    then take the first batch_size; each test gets a `selected_reason` field.
+    """
+    tests = manifest.get("tests", [])
+    selectable = [t for t in tests if _is_selectable(t)]
+    selectable.sort(key=lambda t: STATUS_PRIORITY.get(t.get("status", "pending"), 99))
+    chosen = selectable[:batch_size]
+    out = []
+    for t in chosen:
+        nt = dict(t)
+        nt["selected_reason"] = _selected_reason(t)
+        out.append(nt)
+    return out
+
+
+def write_batch_config(
+    *,
+    path: Path,
+    batch_id: str,
+    iteration: int,
+    run_id: str,
+    selected: list,
+) -> dict:
+    """Write batch_config.json with v5 fields: batch_id, iteration, run_id,
+    selected_count, tests[{test_id, selected_reason, ...}].
+    """
+    path = Path(path)
+    cfg = {
+        "batch_id": batch_id,
+        "iteration": iteration,
+        "run_id": run_id,
+        "selected_count": len(selected),
+        "tests": selected,
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8")
+    return cfg
+
+
 def load_workflow_state(workflow_state_path: Path) -> dict:
     """从 workflow_state.json 加载配置"""
     if not workflow_state_path.exists():

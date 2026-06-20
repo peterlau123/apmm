@@ -27,7 +27,7 @@ terminal conditions.
 | `handle_checkpoint` | `callable(state, manifest)` | Called after every successful Stage 5. Channel-specific (Feishu card / kanban update / no-op). |
 | `handle_bastion_disconnect` | `callable(reason: str)` | Called when an executor returns `next_action == "wait"` due to bastion loss. Linear-mode: log + Feishu alert + poll until ping recovers. Kanban-mode: no-op (Gateway has its own daemon). |
 | `check_user_commands` | `callable() -> list[Command]` | Returns user-initiated commands (pause/resume/stop/reconfigure). Linear OpenCode: returns `[]`. Hermes channel: drains a control queue. |
-| `check_terminal_conditions` | `callable(state, manifest) -> (bool, status, reason)` | Returns `(True, "completed"|"stopped"|"failed", reason)` or `(False, "", "")`. |
+| `check_terminal_conditions` | `callable(state, manifest) -> (bool, reason, status)` | Returns `(True, reason, "completed"|"stopped"|"failed")` or `(False, "", "")`. |
 
 The callbacks are the **only** channel hooks. No global state, no
 implicit Feishu/Kanban knowledge leaks into the core.
@@ -41,7 +41,7 @@ while True:
     state, manifest = read(state_path), read(manifest_path)
 
     # Terminal check first — never start a stage if we're already done
-    done, status, reason = check_terminal_conditions(state, manifest)
+    done, reason, status = check_terminal_conditions(state, manifest)
     if done:
         finalize(state_path, status, reason)
         break
@@ -86,7 +86,7 @@ implementations bump in `handle_checkpoint`).
 while True:
     state, manifest = read(state_path), read(manifest_path)
 
-    done, status, reason = check_terminal_conditions(state, manifest)
+    done, reason, status = check_terminal_conditions(state, manifest)
     if done:
         finalize(state_path, status, reason)
         break

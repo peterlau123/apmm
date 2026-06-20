@@ -87,7 +87,7 @@ signal handled by `loop_core`'s `KeyboardInterrupt` path.
 
 ### `check_terminal_conditions(state, manifest)`
 Delegate to `hermes_runner.check_stop_conditions(state_path)`:
-- `pending == 0 and running == 0` → `(True, "completed", "pending_count == 0")`
+- `pending == 0 and running == 0` → `(True, "pending_count == 0", "completed")`
 - otherwise `(False, "", "")`
 
 ---
@@ -123,5 +123,7 @@ If the user asks for any of the following, route them to
 - OTP-driven Bastion auto-recovery.
 
 Those features live in Plan 2 and require the Hermes Agent + Gateway
-profiles documented in
-`tasks/ut/docs/guides/hermes-runner.md`.
+profiles documented in `tasks/ut/docs/guides/hermes-runner.md`, with
+systemd deployment covered by `docs/guides/hermes-supervisor-service.md`
+(ut-supervisor agent) and `docs/guides/hermes-gateway-service.md`
+(3 gateway instances).

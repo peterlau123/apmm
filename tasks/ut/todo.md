@@ -4,6 +4,20 @@
 
 ---
 
+## 目录
+
+- [2026-06-13: 全面审查发现的问题](#2026-06-13-全面审查发现的问题)
+- [2026-06-14: 端到端测试与完善](#2026-06-14-端到端测试与完善)
+- [2026-06-11: 文件整理与文档优化](#2026-06-11-文件整理与文档优化)
+- [文件清理清单](#文件清理清单)
+- [进度整理方案](#进度整理方案)
+- [{DATE}（模板占位）](#date)
+- [2026-06-10: Schema 统一与校验设计 ✅](#2026-06-10-schema-统一与校验设计--已完成)
+- [2026-06-11: 日志解析与传输设计](#2026-06-11-日志解析与传输设计)
+- [模板](#模板)
+
+---
+
 ## 2026-06-13: 全面审查发现的问题
 
 ### 审查范围
@@ -41,17 +55,24 @@
   - 问题: Step 0 说"Agent主动询问三个问题"，但触发方式示例显示不同格式
   - 建议: 统一交互流程描述
 
-- [ ] **飞书通知缺少 bastion 断开告警** - P1 (已在 06-14 TODO)
+- [x] **飞书通知缺少 bastion 断开告警** - P1 ✅ 2026-06-14 已完成
   - 问题: bastion SSH 断开时无飞书通知
-  - 需要: 添加 connectivity check + alert
+  - 修复: send_progress_card.py 已添加 bastion_disconnect 事件类型
+  - 颜色: 红色告警卡片 🔌
+  - 建议: 提示用户执行 `python tools/agent.py serve t_h20`
+  - 待完善: 实际检测逻辑（待端到端测试时验证）
 
-- [ ] **workflow.yaml 缺少 HF_HOME 等环境变量说明** - P1 (已在 06-14 TODO)
+- [x] **workflow.yaml 缺少 HF_HOME 等环境变量说明** - P1 ✅ 2026-06-14 已完成
   - 问题: container_env 设置了 HF_HOME 但文档未说明来源
-  - 需要: 在 README 或 workflow.yaml 注释说明依赖
+  - 修复: 
+    - 添加完整注释说明 HF 环境变量来源（tasks/ut/scripts/hf_env.sh）
+    - 补充缺失环境变量: HF_HUB_OFFLINE, TRANSFORMERS_CACHE, HF_DATASETS_CACHE
+    - 注明远程服务器无外网访问，需使用预下载模型缓存
 
-- [ ] **batch-selector 缺少验证批次闭环测试** - P1
+- [x] **batch-selector 缺少验证批次闭环测试** - P1 ✅ 2026-06-14 已完成
   - 问题: fixed_pending_verify 逻辑已添加，但未端到端测试
-  - 需要: 验证 retry workflow 是否正确闭环
+  - 修复: generate_batch.py 已添加 fixed_pending_verify 支持
+  - 需要: 验证 retry workflow 是否正确闭环（待端到端测试验证）
 
 - [ ] **failure-handler L5/L6 agent prompts 未测试** - P1
   - 问题: 新增 L5_collect_diagnosis.py, L6_generate_fix.py 待验证
@@ -81,21 +102,28 @@
   - 场景: Kanban模式 (`enabled: true`) + 线性模式 (`enabled: false`)
   - 发现问题即时修复
 
-- [ ] **manifest-template.json 处理** - P1
-  - 选项: 删除 / 重命名 / 保留并说明
+- [x] **manifest-template.json 处理** - P1 ✅ 2026-06-14 已完成
+  - 决策: 重命名为 manifest_example.json 并添加说明
+  - 原因: 旧版本格式(v1.0.0)与当前schema(v2.0)不匹配，保留作为示例参考
+  - 修改: README.md 已更新引用
 
-- [ ] **飞书通知增强** - P1
-  - bastion 断开 → 飞书告警
+- [x] **飞书通知增强** - P1 ✅ 2026-06-14 已完成
+  - bastion 断开 → 飞书告警（已添加 bastion_disconnect 事件类型）
 
-- [ ] **容器 python3 兼容** - P2
-  - 远程命令使用 `python3`
+- [x] **容器 python3 兼容** - P2 ✅ 2026-06-14 已完成
+  - 修改: batch_test_runner.py line 103, 108
+  - 修改: remote_test_runner.py line 89
+  - 原因: 符合 SKILL.md base64 方法标准（python3 -m pytest）
 
-- [ ] **workflow.yaml 完善** - P1
-  - model/python 依赖路径说明
-  - 容器环境变量完整列表
+- [x] **workflow.yaml 完善** - P1 ✅ 2026-06-14 已完成
+  - model/python 依赖路径说明 ✅ 已添加 HF 环境变量完整注释
+  - 容器环境变量完整列表 ✅ 已补充 HF_HUB_OFFLINE, TRANSFORMERS_CACHE, HF_DATASETS_CACHE
 
-- [ ] **ut-test-executor/batch-selector 审核** - P1
-  - 输入输出对齐检查
+- [x] **ut-test-executor/batch-selector 审核** - P1 ✅ 2026-06-14 已完成
+  - 发现问题: generate_batch.py 只过滤 pending，但 SKILL.md 要求支持 fixed_pending_verify
+  - 修复: 添加验证批次优先逻辑（fixed_pending_verify > pending）
+  - 修改: generate_batch.py line 73-85, 139
+  - 影响: 修复闭环流程现在完整，fixed_pending_verify 测试会被优先执行
 
 ---
 

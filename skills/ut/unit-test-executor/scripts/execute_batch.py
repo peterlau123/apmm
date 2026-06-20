@@ -123,7 +123,7 @@ def _classify_for_test(summary_text: str, test_node: str):
 
 # ── Main entry ────────────────────────────────────────────────────────────────
 
-def execute_batch(batch_config_path: Path, workflow_state_path: Path) -> dict:
+def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_config: dict | None = None) -> dict:
     """Execute a batch of tests remotely; return a summary dict.
 
     Side effects on success:
@@ -136,7 +136,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path) -> dict:
     workflow_state_path = Path(workflow_state_path)
 
     batch_config = json.loads(batch_config_path.read_text(encoding="utf-8"))
-    config = get_config(workflow_state_path)
+    config = exec_config if exec_config is not None else get_config(workflow_state_path)
 
     batch_dir = batch_config_path.parent
     batch_id = batch_config["batch_id"]

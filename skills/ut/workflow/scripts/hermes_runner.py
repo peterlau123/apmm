@@ -259,6 +259,20 @@ def check_gateways_alive() -> dict:
     }
 
 
+def get_execute_config(state_path) -> dict:
+    """Flatten workflow_state nested config into the flat keys execute_batch expects."""
+    c = _read_json(state_path).get("config", {})
+    remote = c.get("remote", {})
+    vllm_dir = remote.get("vllm_dir", "/gpfs/gcsp/M2.7_verify/vllm")
+    return {
+        "remote_server": remote.get("server", "t_h20"),
+        "docker_container": remote.get("docker", "v0.13.0_torch2.5.1_compile"),
+        "timeout": c.get("timeout", 600),
+        "pytest_args": c.get("pytest_args", "-v --tb=long"),
+        "remote_log_dir": c.get("remote_log_dir", f"{vllm_dir}/ut_logs"),
+    }
+
+
 def apply_pending_config(state_path) -> dict:
     """Merge state['pending_config'] into state['config'] and persist.
 

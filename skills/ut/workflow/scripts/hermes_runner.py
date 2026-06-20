@@ -25,6 +25,7 @@ Design: tasks/ut/docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -43,6 +44,33 @@ from feishu_api import FeishuAPI
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
+
+# Feishu group-message command parsing (config-change whitelist).
+_WHITELIST = {"batch_size", "pytest_args", "max_retry_per_test", "timeout"}
+_STOP = ("结束", "终止", "停止")
+_PAUSE = ("暂停",)
+_RESUME = ("继续",)
+_OTP_RE = re.compile(r"^\s*(\d{6})\s*$")
+_KV_RE = re.compile(r"(\w+)\s*=\s*(\S+)")
+
+
+def parse_command(text: str):
+    """Parse a Feishu group message into a structured command dict, or None."""
+    t = text.strip()
+    if any(k in t for k in _STOP):
+        return {"type": "stop", "payload": {}}
+    if any(k in t for k in _PAUSE):
+        return {"type": "pause", "payload": {}}
+    if any(k in t for k in _RESUME):
+        return {"type": "resume", "payload": {}}
+    m = _OTP_RE.match(t)
+    if m:
+        return {"type": "otp", "payload": {"code": m.group(1)}}
+    if t.startswith("改"):
+        return {"type": "change_config",
+                "payload": {k: v for k, v in _KV_RE.findall(t) if k in _WHITELIST}}
+    return None
+
 
 def _load_yaml(path):
     """Load a YAML file, returning {} on failure."""

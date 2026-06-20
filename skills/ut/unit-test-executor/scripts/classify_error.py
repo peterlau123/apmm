@@ -68,6 +68,61 @@ ERROR_PATTERNS = {
     },
 }
 
+# ── v5 status/error_type classifier ───────────────────────────────────────────
+# Maps a raw test summary fragment to (status, error_type) per the v5 schema.
+#   status     ∈ {passed, failed, error, retriable_error, skipped}
+#   error_type ∈ schema enum: dependency, network, resource, version,
+#                functional, download_error, oom, timeout, collection,
+#                assertion, other, None
+#
+# Order matters: OOM and timeout are checked BEFORE generic FAILED/ERROR so a
+# pytest-timeout traceback doesn't get mis-classified as a normal failure.
+
+_OOM_RE = re.compile(
+    r"(torch\.cuda\.OutOfMemoryError|CUDA out of memory|OutOfMemoryError|\bOOM\b)",
+    re.IGNORECASE,
+)
+_TIMEOUT_RE = re.compile(
+    r"(\++\s*Timeout\s*>\s*\d+(\.\d+)?\s*s\s*\++|Failed:\s*Timeout\s*>?\s*\d)",
+    re.IGNORECASE,
+)
+_COLLECTION_RE = re.compile(
+    r"(ERROR collecting|ImportError|ModuleNotFoundError|No module named)",
+    re.IGNORECASE,
+)
+_PASSED_RE = re.compile(r"\bPASSED\b")
+_FAILED_RE = re.compile(r"\bFAILED\b")
+
+
+def classify(summary_text: str, test_id: str = ""):
+    """Classify a test outcome from a fragment of pytest output.
+
+    Returns (status, error_type) where:
+      - PASSED              -> ("passed", None)
+      - OOM                 -> ("retriable_error", "oom")
+      - pytest-timeout      -> ("retriable_error", "timeout")
+      - collection/import   -> ("error", "collection")
+      - generic FAILED      -> ("failed", "assertion")
+      - anything else       -> ("error", "other")
+
+    The legacy `classify_error()` (category-letter API) below is preserved
+    untouched for back-compat.
+    """
+    text = summary_text or ""
+
+    if _OOM_RE.search(text):
+        return ("retriable_error", "oom")
+    if _TIMEOUT_RE.search(text):
+        return ("retriable_error", "timeout")
+    if _COLLECTION_RE.search(text):
+        return ("error", "collection")
+    if _PASSED_RE.search(text) and not _FAILED_RE.search(text):
+        return ("passed", None)
+    if _FAILED_RE.search(text):
+        return ("failed", "assertion")
+    return ("error", "other")
+
+
 def classify_error(error_message: str):
     """
     分类错误

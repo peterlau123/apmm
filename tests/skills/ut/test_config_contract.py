@@ -34,3 +34,15 @@ def test_get_execute_config_flattens_nested(tmp_path):
     assert cfg["timeout"] == 600
     assert cfg["pytest_args"] == "-v --tb=long"
     assert cfg["remote_log_dir"].endswith("/ut_logs")
+
+
+def test_get_execute_config_uses_defaults_when_config_empty(tmp_path):
+    state_path = tmp_path / "state.json"
+    state_path.write_text(json.dumps({"config": {}}))
+    hr = _load_hermes_runner()
+    cfg = hr.get_execute_config(state_path)
+    assert cfg["remote_server"] == "t_h20"
+    assert cfg["docker_container"] == "v0.13.0_torch2.5.1_compile"
+    assert cfg["timeout"] == 600
+    assert cfg["pytest_args"] == "-v --tb=long"
+    assert cfg["remote_log_dir"] == "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"

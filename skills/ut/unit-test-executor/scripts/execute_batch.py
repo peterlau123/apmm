@@ -145,7 +145,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path) -> dict:
 
     remote_server = config.get("remote_server", "t_h20")
     docker_container = config.get("docker_container", "v0.13.0_torch2.5.1_compile")
-    pytest_args = config.get("pytest_args", "-q --tb=long")
+    pytest_args = config.get("pytest_args", "-v --tb=long")
     timeout = config.get("timeout", 600)
     remote_log_dir = config.get(
         "remote_log_dir", "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"

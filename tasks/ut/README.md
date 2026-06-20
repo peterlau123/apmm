@@ -113,6 +113,9 @@ tasks/ut/
 | 查看历史周报 | [docs/reports/weekly/](docs/reports/weekly/) |
 | 了解架构设计讨论 | [docs/discussions/](docs/discussions/) |
 | 运行 Workflow 集成测试 | [workflow_tests/verify_workflow_test.py](workflow_tests/verify_workflow_test.py) |
+| 了解 Hermes Runner 操作 | [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md) |
+| 部署 ut-supervisor 服务 | [../../docs/guides/hermes-supervisor-service.md](../../docs/guides/hermes-supervisor-service.md) |
+| 部署 3 个 Gateway 服务 | [../../docs/guides/hermes-gateway-service.md](../../docs/guides/hermes-gateway-service.md) |
 | 浏览文档中心 | [docs/README.md](docs/README.md) |
 
 ---
@@ -156,6 +159,24 @@ Workflow 循环执行 Stage 2-5，以下条件触发暂停/停止：
 **恢复暂停**：设置 `config.resume_from` 为已有 run_dir 路径
 
 **详细配置**: workflow.yaml `loop` section (lines 234-257)
+
+### Hermes Runner 双模式（推荐用于长期运行）
+
+`hermes_runner.py` 根据 `kanban.enabled` 自动选择模式，两种模式共享 BastionManager + 飞书通知：
+
+```text
+hermes_runner.py
+  ├─ 读取 .agents/workflow.yaml（检查 kanban.enabled）
+  ├─ 初始化或恢复 workflow_state.json
+  ├─ Bastion Manager（心跳 + OTP 恢复）—— 两种模式共享
+  ├─ 飞书通知（progress/complete/alert/paused）—— 两种模式共享
+  ├─ [kanban.enabled: false] 进程内循环 Stage 2-5
+  └─ [kanban.enabled: true]  启动 Gateway + 创建任务 + 监控 board
+```
+
+**启动**: `python skills/ut/workflow/scripts/hermes_runner.py --workflow-yaml .agents/workflow.yaml`
+
+详见 [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md)。
 
 ### Kanban 模式流程（kanban.enabled: true）
 
@@ -226,6 +247,9 @@ Agent 自动启动 Gateway + 3 Worker：
 | Skill | SKILL.md | 脚本目录 |
 |-------|----------|----------|
 | workflow (调度器) | [skills/ut/workflow/SKILL.md](../../skills/ut/workflow/SKILL.md) | [skills/ut/workflow/scripts/](../../skills/ut/workflow/scripts/) |
+| hermes_workflow (Supervisor) | [skills/ut/hermes_workflow/SKILL.md](../../skills/ut/hermes_workflow/SKILL.md) | Hermes 通道 ut-supervisor 监督者技能 |
+| hermes_runner | [skills/ut/workflow/scripts/hermes_runner.py](../../skills/ut/workflow/scripts/hermes_runner.py) | 非 Kanban 长期运行主体 |
+| bastion_manager | [skills/ut/workflow/scripts/bastion_manager.py](../../skills/ut/workflow/scripts/bastion_manager.py) | Bastion daemon 生命周期管理 |
 | ut-test-collector | [skills/ut/ut-test-collector/SKILL.md](../../skills/ut/ut-test-collector/SKILL.md) | [skills/ut/ut-test-collector/scripts/](../../skills/ut/ut-test-collector/scripts/) |
 | batch-selector | [skills/ut/batch-selector/SKILL.md](../../skills/ut/batch-selector/SKILL.md) | [skills/ut/batch-selector/scripts/](../../skills/ut/batch-selector/scripts/) |
 | unit-test-executor | [skills/ut/unit-test-executor/SKILL.md](../../skills/ut/unit-test-executor/SKILL.md) | [skills/ut/unit-test-executor/scripts/](../../skills/ut/unit-test-executor/scripts/) |
@@ -413,4 +437,4 @@ python tools/agent.py -p t_h20 run --timeout 300 \
 
 ---
 
-*最后更新: 2026-06-14*
+*最后更新: 2026-06-20*

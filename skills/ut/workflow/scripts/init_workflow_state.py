@@ -180,8 +180,11 @@ def create_initial_state(
     workflow_version = config.get("workflow", {}).get("version", "2.0")
     test_name = config.get("workflow", {}).get("test_name", "ut")
 
-    # 获取 agents_dir（workflow.yaml 所在目录）
-    agents_dir = workflow_yaml_path.parent
+    # current_run.json must live at the canonical PROJECT_ROOT/.agents (where
+    # hermes_runner.init_or_resume reads it). Do NOT derive from the yaml's
+    # parent — frozen test configs live outside .agents and would otherwise
+    # write the pointer next to the yaml, leaving the canonical one stale.
+    agents_dir = _project_root / ".agents"
 
     # 创建或使用运行目录
     if run_dir is None:

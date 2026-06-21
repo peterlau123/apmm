@@ -1,0 +1,132 @@
+{
+  "metrics": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "wall_clock_s": 11.195,
+    "throughput_per_min": 0.0,
+    "stage_ms": {
+      "manifest_build": 4,
+      "batch_select": 0,
+      "execute": 11187,
+      "analyze": 0,
+      "update_manifest": 0
+    },
+    "mode": "real",
+    "n": 8
+  },
+  "batch_results": {
+    "batch_id": "batch_perf_real",
+    "batch_results_path": "D:\\workspace\\apmm\\runs\\perf-perf-test\\batch_perf_real\\batch_results.json",
+    "stats": {
+      "total": 8,
+      "passed": 8,
+      "failed": 0,
+      "error": 0,
+      "skipped": 0,
+      "retriable_error": 0
+    }
+  },
+  "manifest_final": {
+    "version": "2.0",
+    "generated_at": "2026-06-20T00:00:00Z",
+    "source": "manual",
+    "tests": [
+      {
+        "id": 1,
+        "test_id": 1,
+        "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+        "test_file": "tests/benchmarks/test_param_sweep.py",
+        "test_name": "TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 2,
+        "test_id": 2,
+        "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+        "test_file": "tests/benchmarks/test_param_sweep.py",
+        "test_name": "TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 3,
+        "test_id": 3,
+        "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+        "test_file": "tests/benchmarks/test_param_sweep.py",
+        "test_name": "TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 4,
+        "test_id": 4,
+        "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+        "test_file": "tests/benchmarks/test_param_sweep.py",
+        "test_name": "TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 5,
+        "test_id": 5,
+        "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+        "test_file": "tests/benchmarks/test_param_sweep.py",
+        "test_name": "TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 6,
+        "test_id": 6,
+        "test_node": "tests/config/test_config_utils.py::test_hash_factors_deterministic",
+        "test_file": "tests/config/test_config_utils.py",
+        "test_name": "test_hash_factors_deterministic",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 7,
+        "test_id": 7,
+        "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None]",
+        "test_file": "tests/config/test_config_utils.py",
+        "test_name": "test_normalize_value_matrix[None-None]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 8,
+        "test_id": 8,
+        "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[True-True]",
+        "test_file": "tests/config/test_config_utils.py",
+        "test_name": "test_normalize_value_matrix[True-True]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      }
+    ],
+    "statistics": {
+      "pending": 8,
+      "total": 8,
+      "executed": 0,
+      "progress": 0.0
+    }
+  }
+}

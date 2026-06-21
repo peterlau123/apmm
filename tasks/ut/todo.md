@@ -98,7 +98,7 @@
 ### TODO
 
 - [ ] **端到端测试** - P0
-  - 测试列表: `tasks/ut/workflow_tests/test_list_combined.txt`
+  - 测试列表: `tests/ut/test_lists/test_list_combined.txt`
   - 场景: Kanban模式 (`enabled: true`) + 线性模式 (`enabled: false`)
   - 发现问题即时修复
 

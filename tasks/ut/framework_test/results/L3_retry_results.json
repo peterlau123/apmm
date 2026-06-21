@@ -1,0 +1,77 @@
+{
+  "metrics": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "wall_clock_s": 601.361,
+    "throughput_per_min": 0.0,
+    "stage_ms": {
+      "manifest_build": 4,
+      "batch_select": 0,
+      "execute": 601352,
+      "analyze": 0,
+      "update_manifest": 0
+    },
+    "mode": "real",
+    "n": 3
+  },
+  "batch_results": {
+    "batch_id": "batch_perf_real",
+    "batch_results_path": "D:\\workspace\\apmm\\runs\\perf-perf-test\\batch_perf_real\\batch_results.json",
+    "stats": {
+      "total": 3,
+      "passed": 0,
+      "failed": 2,
+      "error": 1,
+      "skipped": 0,
+      "retriable_error": 0
+    }
+  },
+  "manifest_final": {
+    "version": "2.0",
+    "generated_at": "2026-06-20T00:00:00Z",
+    "source": "manual",
+    "tests": [
+      {
+        "id": 1,
+        "test_id": 1,
+        "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+        "test_file": "tests/benchmarks/test_latency_cli.py",
+        "test_name": "test_bench_latency",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 2,
+        "test_id": 2,
+        "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+        "test_file": "tests/kernels/core/test_mrope.py",
+        "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      },
+      {
+        "id": 3,
+        "test_id": 3,
+        "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+        "test_file": "tests/kernels/core/test_mrope.py",
+        "test_name": "test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+        "status": "pending",
+        "retry_count": 0,
+        "max_retry": 3,
+        "last_batch_id": null
+      }
+    ],
+    "statistics": {
+      "pending": 3,
+      "total": 3,
+      "executed": 0,
+      "progress": 0.0
+    }
+  }
+}

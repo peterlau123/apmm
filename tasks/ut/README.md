@@ -8,7 +8,7 @@
 - [必读文档](#必读文档)
 - [快速导航](#快速导航)
 - [目录结构](#目录结构)
-- [Workflow 架构](#workflow-架构)
+- [工作流架构](#工作流架构)
 - [关键数据文件](#关键数据文件)
 - [共享基础设施](#共享基础设施)
 - [快速开始](#快速开始)
@@ -54,10 +54,11 @@
 | 应用 PyTorch 兼容补丁 | [patches/README.md](patches/README.md) |
 | 查看测试数据 & 合并逻辑 | [test_analysis/README.md](test_analysis/README.md) |
 | 查看远程日志摘要 | [test_analysis/remote_log_summary/README.md](test_analysis/remote_log_summary/README.md) |
+| 查看框架测试进度 / L4 指南 | [framework_test/README.md](framework_test/README.md) |
 | 查看测试结果报告 | [docs/reports/test-summary.md](docs/reports/test-summary.md) |
 | 查看兼容性分析 / 历史周报 | [docs/reports/compatibility/](docs/reports/compatibility/) · [docs/reports/weekly/](docs/reports/weekly/) |
 | 了解架构设计讨论 | [docs/discussions/](docs/discussions/) |
-| 运行 Workflow 集成测试 | [workflow_tests/verify_workflow_test.py](workflow_tests/verify_workflow_test.py) |
+| 运行 Workflow 集成测试 | [../../tests/ut/test_lists/verify_workflow_test.py](../../tests/ut/test_lists/verify_workflow_test.py) |
 | 了解 Hermes Runner 操作 | [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md) |
 | 部署 ut-supervisor 服务 | [../../docs/guides/hermes-supervisor-service.md](../../docs/guides/hermes-supervisor-service.md) |
 | 部署 3 个 Gateway 服务 | [../../docs/guides/hermes-gateway-service.md](../../docs/guides/hermes-gateway-service.md) |
@@ -93,7 +94,10 @@ tasks/ut/
 │   ├── test_list.txt  ←   统一测试清单
 │   └── remote_log_summary/   ← 远程日志摘要
 │
-└── workflow_tests/    ← Workflow 集成测试（verify_workflow_test.py）
+└── framework_test/    ← 框架测试结果归档（结果 + 报告 + L4 指南；测试代码见 repo 根 tests/ut/）
+    ├── README.md      ←   框架测试总入口 / L4 指南
+    ├── results/       ←   L1–L3 结果数据
+    └── reports/       ←   分析报告 / L4 指南
 ```
 
 > Manifest 结构示例见 [skills/ut/shared/manifest_example.json](../../skills/ut/shared/manifest_example.json)；
@@ -101,7 +105,7 @@ tasks/ut/
 
 ---
 
-## Workflow 架构
+## 工作流架构
 
 ### 双模式运行
 

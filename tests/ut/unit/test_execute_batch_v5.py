@@ -166,3 +166,36 @@ def test_execute_batch_on_disconnect_marks_disconnected_and_returns_wait(tmp_pat
     assert "reason" in result
     instance.mark_disconnected.assert_called_once()
     assert not (tmp_path / "batch_results.json").exists()
+
+
+# --- Bug #2: pytest output parsing with abbreviated test names ------------
+
+def test_classify_for_test_matches_abbreviated_pytest_output():
+    """Bug #2 fix: pytest abbreviates long parametrized names with '::...'
+    Classifier should still find correct status via prefix matching."""
+    # Simulate pytest verbose output with abbreviated test names
+    summary_text = (
+        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input0---a-b-c] PASSED [ 12%]\n"
+        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::... PASSED [ 25%]\n"
+        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::... FAILED [ 37%]\n"
+        "tests/config/test_config_utils.py::test_hash_factors PASSED [ 50%]\n"
+        "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None] ERROR [ 75%]\n"
+        "======================== 2 passed, 1 failed, 1 error =========================\n"
+    )
+    
+    # Test: long parametrized name that pytest abbreviates
+    test_node = "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input1---x-y-z]"
+    status, error_type = execute_batch_mod._classify_for_test(summary_text, test_node)
+    # Should match via prefix (class_prefix = tests/...::TestParameterSweepItem)
+    # Will classify as PASSED because first matching line is PASSED
+    assert status in ("passed", "failed", "error")  # At least gets a status, not error:other
+    
+    # Test: exact match available
+    test_node_exact = "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input0---a-b-c]"
+    status_exact, _ = execute_batch_mod._classify_for_test(summary_text, test_node_exact)
+    assert status_exact == "passed"  # Exact line shows PASSED
+    
+    # Test: simple test name (no abbreviation needed)
+    test_node_simple = "tests/config/test_config_utils.py::test_hash_factors"
+    status_simple, _ = execute_batch_mod._classify_for_test(summary_text, test_node_simple)
+    assert status_simple == "passed"

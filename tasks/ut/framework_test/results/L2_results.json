@@ -1,0 +1,189 @@
+{
+  "runs": [
+    {
+      "n": 8,
+      "mode": "mock",
+      "metrics": {
+        "total": 8,
+        "passed": 8,
+        "failed": 0,
+        "error": 0,
+        "wall_clock_s": 0.009,
+        "throughput_per_min": 53459.0,
+        "stage_ms": {
+          "manifest_build": 4,
+          "batch_select": 1,
+          "execute": 0,
+          "analyze": 0,
+          "update_manifest": 0
+        }
+      },
+      "state_transitions": {
+        "pending_to_passed": 8,
+        "pending_to_failed": 0,
+        "pending_to_error": 0,
+        "pending_to_retriable_error": 0
+      }
+    },
+    {
+      "n": 16,
+      "mode": "mock",
+      "metrics": {
+        "total": 16,
+        "passed": 14,
+        "failed": 1,
+        "error": 1,
+        "wall_clock_s": 0.011,
+        "throughput_per_min": 90557.12,
+        "stage_ms": {
+          "manifest_build": 6,
+          "batch_select": 1,
+          "execute": 0,
+          "analyze": 0,
+          "update_manifest": 0
+        }
+      },
+      "state_transitions": {
+        "pending_to_passed": 14,
+        "pending_to_failed": 1,
+        "pending_to_error": 1,
+        "pending_to_retriable_error": 0,
+        "failed_tests_with_retry": [
+          {
+            "test_id": 12,
+            "test_node": "tests/test_file_2.py::test_func_12",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          },
+          {
+            "test_id": 15,
+            "test_node": "tests/test_file_5.py::test_func_15",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          }
+        ]
+      }
+    },
+    {
+      "n": 32,
+      "mode": "mock",
+      "metrics": {
+        "total": 32,
+        "passed": 27,
+        "failed": 4,
+        "error": 1,
+        "wall_clock_s": 0.01,
+        "throughput_per_min": 196780.95,
+        "stage_ms": {
+          "manifest_build": 5,
+          "batch_select": 1,
+          "execute": 0,
+          "analyze": 0,
+          "update_manifest": 0
+        }
+      },
+      "state_transitions": {
+        "pending_to_passed": 27,
+        "pending_to_failed": 4,
+        "pending_to_error": 1,
+        "pending_to_retriable_error": 0,
+        "failed_tests_with_retry": [
+          {
+            "test_id": 12,
+            "test_node": "tests/test_file_2.py::test_func_12",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          },
+          {
+            "test_id": 15,
+            "test_node": "tests/test_file_5.py::test_func_15",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          },
+          {
+            "test_id": 21,
+            "test_node": "tests/test_file_1.py::test_func_21",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          },
+          {
+            "test_id": 24,
+            "test_node": "tests/test_file_4.py::test_func_24",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          },
+          {
+            "test_id": 25,
+            "test_node": "tests/test_file_5.py::test_func_25",
+            "retry_count": 1,
+            "max_retry": 3,
+            "can_retry": true
+          }
+        ]
+      }
+    }
+  ],
+  "state_transitions_valid": true,
+  "verification_checks": {
+    "all_pending_started": true,
+    "all_executed_tests_updated": true,
+    "failed_tests_incremented_retry": true,
+    "retry_count_within_max_retry": true,
+    "statistics_consistent": true,
+    "last_batch_id_updated": true
+  },
+  "throughput_analysis": {
+    "avg_throughput_per_min": 113565.68,
+    "scaling": {
+      "n8_to_n16": 1.7,
+      "n16_to_n32": 2.18
+    },
+    "notes": "Mock mode shows near-linear throughput scaling with minimal overhead from batch processing"
+  },
+  "stage_timing_analysis": {
+    "manifest_build_avg_ms": 5.0,
+    "batch_select_avg_ms": 1.0,
+    "execute_avg_ms": 0.0,
+    "analyze_avg_ms": 0.0,
+    "update_manifest_avg_ms": 0.0,
+    "total_avg_ms": 6.0,
+    "notes": "Mock execute stage is ~0ms due to synthetic simulation. Real mode would show 100-10000ms per test."
+  },
+  "manifest_state_machine_observations": {
+    "correct_transitions": [
+      "pending -> passed (no retry needed)",
+      "pending -> failed (retry_count incremented, can be re-selected if < max_retry)",
+      "pending -> error (retry_count incremented, can be re-selected if < max_retry)",
+      "pending -> retriable_error (handled as error in batch_results.statistics)"
+    ],
+    "retry_logic_verification": {
+      "failed_tests_can_retry": true,
+      "max_retry_limit_enforced": true,
+      "batch_selector_would_select_again": true,
+      "notes": "All failed/error tests have retry_count=1 < max_retry=3, eligible for next batch"
+    },
+    "potential_issues_found": []
+  },
+  "notes": [
+    "All 3 runs completed successfully without any SSH calls",
+    "Mock mode completes in ~10ms total, demonstrating framework efficiency",
+    "State transitions verified: pending -> passed/failed/error with retry_count tracking",
+    "Failed tests correctly marked with retry_count=1 and can_retry=true",
+    "Statistics in manifest_final correctly reflect batch_results statistics",
+    "Throughput scales well with n, showing framework can handle larger batches efficiently",
+    "No SSH/remote I/O overhead in mock mode - useful for CI/CD testing"
+  ],
+  "test_rates_used": {
+    "pass_rate": 0.75,
+    "fail_rate": 0.125,
+    "error_rate": 0.125,
+    "retriable_rate": 0.3,
+    "seed": 42
+  }
+}

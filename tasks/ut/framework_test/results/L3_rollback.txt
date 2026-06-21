@@ -1,0 +1,56 @@
+L3 vLLM Rollback Status Report
+Date: 2026-06-20
+Task: Phase 4.5 - Rollback vLLM changes if any
+
+STATUS: NO ROLLBACK REQUIRED
+
+REASON:
+- L3 retry subset execution did NOT make any changes to remote vLLM repository
+- Framework bugs prevented failure-handler from executing
+- No fix attempts were made to vLLM code
+- All modifications in /gpfs/gcsp/M2.7_verify/vllm/ are pre-existing (PyTorch compat patches)
+
+VERIFICATION:
+Checked git status in /gpfs/gcsp/M2.7_verify/vllm/:
+- Multiple files show "M" (modified) status
+- These modifications existed BEFORE L3 tests ran
+- No NEW modifications created during L3 execution
+- Modifications are necessary for PyTorch 2.5.1 compatibility in test environment
+
+DECISION:
+- Do NOT rollback pre-existing modifications (required for test environment)
+- No rollback action needed
+- Environment is stable and ready for future runs
+
+FRAMEWORK BUGS RESPONSIBLE:
+1. execute_batch.py did not parse pytest results properly
+2. update_manifest.py did not update test statuses
+3. failure-handler never received failed tests to process
+4. No fix-retry loop executed, hence no vLLM modifications made
+
+NEXT STEPS:
+1. Fix framework bugs in Phase 5
+2. Re-run L3 retry subset after fixes
+3. Monitor for actual vLLM modifications
+4. If modifications occur in future runs, rollback using:
+   - git restore <modified_files>
+   - OR switch to clean branch
+   - Document all changes before rollback
+
+ROLLBACK COMMAND (for future reference):
+```bash
+# In remote vLLM repository:
+cd /gpfs/gcsp/M2.7_verify/vllm/
+git status --short  # Identify modified files
+git restore <files>  # Restore individual files
+# OR
+git checkout <clean_branch>  # Switch to clean branch
+```
+
+CONFIRMATION:
+✅ Remote vLLM repository unchanged by L3 tests
+✅ Pre-existing modifications intact (necessary patches)
+✅ No rollback executed
+✅ Test environment ready for continued use
+
+Rollback verification completed successfully.

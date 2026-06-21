@@ -316,7 +316,11 @@ def stop_all(workflow_yaml_path):
 
 def main():
     parser = argparse.ArgumentParser(description="L4 测试环境启动脚本（daemon 须先手动启动）")
-    parser.add_argument("--workflow-yaml", default="D:/workspace/apmm/.agents/workflow.yaml")
+    parser.add_argument(
+        "--workflow-yaml",
+        default="D:/workspace/apmm/tests/ut/integration/fixtures/workflow.l4.yaml",
+        help="L4 frozen config (default). Pass .agents/workflow.yaml to use the live prod config.",
+    )
     parser.add_argument("--status", action="store_true", help="Show status only")
     parser.add_argument("--stop", action="store_true", help="Stop all services")
     args = parser.parse_args()

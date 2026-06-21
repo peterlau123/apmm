@@ -1,0 +1,92 @@
+{
+  "_comment": "FROZEN expected-outcome baseline for the L4 real-machine Kanban test. Diff the run's L4_kanban_results.json against this to get a PASS/FAIL verdict. L4 validates the Kanban executor->fixer->executor DEPENDENCY CHAIN and timing, NOT that the tests pass (the retry subset fails by design on the offline remote). Hence: dependency_chain_invariants are HARD assertions (must hold every run); terminal_state_distribution is remote-dependent (the offline env cannot download models, so download/network errors are unfixable and end as ignored after max_retry).",
+  "metadata": {
+    "layer": "L4",
+    "mode": "kanban",
+    "test_list": "tests/ut/integration/fixtures/l3_retry_subset.txt",
+    "workflow_config": "tests/ut/integration/fixtures/workflow.l4.yaml",
+    "batch_size": 3,
+    "max_retry_per_test": 3,
+    "frozen_on": "2026-06-21",
+    "board": "apmm-ut",
+    "gateways": ["ut-orchestrator", "ut-executor", "ut-fixer"],
+    "supervisor": "ut-supervisor"
+  },
+  "dependency_chain_invariants": [
+    {
+      "id": "INV-1",
+      "rule": "fixer does not start before executor completes Round 1",
+      "check": "first ut-fixer task claim timestamp > last ut-executor Round-1 complete timestamp",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-2",
+      "rule": "fixer only receives tests that executor marked failed/error in Round 1",
+      "check": "every fixer-handled node appears in Round-1 executor results with status in [failed, error]",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-3",
+      "rule": "single-claim: each batch/fix task is claimed by exactly one gateway",
+      "check": "no node has >1 concurrent executor claim; no duplicate fixer claim",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-4",
+      "rule": "executor re-runs only fixer-produced fixed_pending_verify nodes in Round 3 (if any)",
+      "check": "Round-3 executor input set == nodes set to fixed_pending_verify by fixer in Round 2",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-5",
+      "rule": "retriable_error nodes are re-selected only while retry_count < max_retry (3); at max they become ignored, not re-run forever",
+      "check": "no node executed more than max_retry+1 times; retriable_error at max_retry -> ignored",
+      "severity": "hard"
+    }
+  ],
+  "per_test": [
+    {
+      "node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "expected_error_class": "network|download_error",
+      "expected_trajectory": "pending -> (R1 executor) error/failed -> (R2 fixer) classified unfixable-on-offline -> retriable_error -> retry until max_retry -> ignored",
+      "fixable_in_offline_env": false
+    },
+    {
+      "node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "expected_error_class": "download_error",
+      "expected_trajectory": "pending -> (R1 executor) error (model not cached) -> (R2 fixer) delegate dependency-resolver -> offline, cannot download -> retriable_error -> ignored at max_retry",
+      "fixable_in_offline_env": false
+    },
+    {
+      "node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "expected_error_class": "download_error",
+      "expected_trajectory": "pending -> (R1 executor) error (model not cached) -> (R2 fixer) delegate dependency-resolver -> offline, cannot download -> retriable_error -> ignored at max_retry",
+      "fixable_in_offline_env": false
+    }
+  ],
+  "terminal_state_distribution": {
+    "_note": "Remote-dependent (offline env). Expected for the standard offline run below. If a model happens to be pre-cached, that node may instead end 'passed' after fixer verify -- record the deviation, it is not a failure of the framework.",
+    "expected_offline": { "passed": 0, "failed": 0, "ignored": 3, "pending": 0 },
+    "tolerance": "any split across {ignored, passed} totalling 3 is acceptable; failed/pending=0 and total=3 are required"
+  },
+  "pass_criteria": {
+    "must_all_hold": [
+      "all dependency_chain_invariants (INV-1..INV-5) hold",
+      "pending == 0 at end (loop terminated cleanly)",
+      "total accounted nodes == 3",
+      "fixer round occurred AFTER executor round (timing observed in gateway logs)"
+    ],
+    "record_but_not_fail": [
+      "exact passed/ignored split (remote model-cache dependent)",
+      "wall-clock throughput vs Linear baseline (comparison metric, not pass gate)"
+    ]
+  },
+  "artifacts_to_capture": [
+    ".agents/logs/gateway_ut-orchestrator.log",
+    ".agents/logs/gateway_ut-executor.log",
+    ".agents/logs/gateway_ut-fixer.log",
+    ".agents/logs/supervisor_ut-supervisor.log",
+    "runs/ut-<timestamp>/manifest.json (final terminal states)",
+    "remote vLLM git commit hash (recorded before run; fixer edits rolled back after)"
+  ]
+}

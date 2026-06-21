@@ -171,13 +171,10 @@ def start_gateways(workflow_yaml_path):
 
 
 def check_supervisor(profile="ut-supervisor"):
-    r = run_cmd(["hermes", "agent", "status"])
-    if r.returncode != 0:
-        return False
-    for line in r.stdout.splitlines():
-        if profile in line and "running" in line.lower():
-            return True
-    return False
+    # ut-supervisor runs as a Hermes gateway (Feishu-subscribing long-running
+    # agent), same mechanism as the worker gateways. Hermes v0.16 has no
+    # `agent` subcommand, so detect it via `gateway list`.
+    return check_gateway(profile)
 
 
 def start_supervisor(workflow_yaml_path):
@@ -188,33 +185,36 @@ def start_supervisor(workflow_yaml_path):
     
     workflow_yaml = Path(workflow_yaml_path)
     config = yaml.safe_load(workflow_yaml.read_text(encoding="utf-8"))
-    bastion_profile = config.get("bastion", {}).get("profile", "ut-supervisor")
-    
-    if check_supervisor(bastion_profile):
-        print(f"[OK] Supervisor already running (profile={bastion_profile})")
+    # The supervisor is a Hermes AGENT profile (ut-supervisor), NOT the bastion
+    # SSH profile (config.bastion.profile = t_h20). Use the agent profile here,
+    # consistent with check_supervisor()/show_status()/stop_all().
+    supervisor_profile = "ut-supervisor"
+
+    if check_supervisor(supervisor_profile):
+        print(f"[OK] Supervisor already running (profile={supervisor_profile})")
         return True
-    
-    print(f"\nStarting Supervisor (profile={bastion_profile})...")
-    
+
+    print(f"\nStarting Supervisor (profile={supervisor_profile})...")
+
     workspace = Path(config.get("config", {}).get("workspace", workflow_yaml.parent.parent))
     logs_dir = workspace / ".agents" / "logs"
     logs_dir.mkdir(parents=True, exist_ok=True)
-    logfile = logs_dir / f"supervisor_{bastion_profile}.log"
-    
-    use = run_cmd(["hermes", "profile", "use", bastion_profile])
+    logfile = logs_dir / f"supervisor_{supervisor_profile}.log"
+
+    use = run_cmd(["hermes", "profile", "use", supervisor_profile])
     if use.returncode != 0:
         print(f"[X] Profile use failed: {use.stderr}")
         return False
-    
+
     out = logfile.open("a", encoding="utf-8")
     kwargs = {"stdout": out, "stderr": subprocess.STDOUT, "stdin": subprocess.DEVNULL}
     if os.name == "nt":
         kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
-    
-    proc = subprocess.Popen(["hermes", "agent", "run"], **kwargs)
-    
+
+    proc = subprocess.Popen(["hermes", "gateway", "run"], **kwargs)
+
     for _ in range(10):
-        if check_supervisor(bastion_profile):
+        if check_supervisor(supervisor_profile):
             print(f"[OK] Supervisor started (PID={proc.pid}, log={logfile})")
             return True
         if proc.poll() is not None:
@@ -308,7 +308,7 @@ def stop_all(workflow_yaml_path):
         print(f"  {r.stdout.strip() if r.returncode == 0 else r.stderr.strip()}")
     
     print(f"\nStopping Supervisor ({supervisor_profile})...")
-    r = run_cmd(["hermes", "agent", "stop", supervisor_profile])
+    r = run_cmd(["hermes", "gateway", "stop", supervisor_profile])
     print(f"  {r.stdout.strip() if r.returncode == 0 else r.stderr.strip()}")
     
     print("\n[OK] All services stopped")
@@ -365,9 +365,10 @@ def main():
     print("  1. Send '跑 ut workflow' in Feishu apmm-ut group")
     print("  2. Confirm parameters in the Feishu card")
     print("  3. Watch executor → fixer → executor dependency chain")
+    ws = config.get("config", {}).get("workspace", str(Path(args.workflow_yaml).parent.parent))
     print("\nLogs:")
-    print(f"  Gateway logs: {Path(args.workflow_yaml).parent.parent}/.agents/logs/")
-    print(f"  Supervisor log: {Path(args.workflow_yaml).parent.parent}/.agents/logs/supervisor_ut-supervisor.log")
+    print(f"  Gateway logs: {ws}/.agents/logs/")
+    print(f"  Supervisor log: {ws}/.agents/logs/supervisor_ut-supervisor.log")
 
 
 if __name__ == "__main__":

@@ -18,6 +18,34 @@ This SKILL is one of two channels that share the same loop body
 (`skills/ut/workflow_loop_core/SKILL.md`). It supplies the channel-specific
 callbacks; it does NOT re-implement the loop.
 
+> 两个通道的对照、触发与环境总览见
+> `tasks/ut/docs/guides/ut-channels-overview.md`。
+
+## Trigger flow (this channel)
+
+```mermaid
+sequenceDiagram
+    actor U as 用户
+    participant CC as Claude/OpenCode 会话
+    participant R as hermes_runner
+    participant B as Bastion(t_h20)
+    participant L as loop_core
+    U->>CC: 要求"跑/续 UT workflow"
+    CC->>CC: 加载 ut/workflow + loop_core + 4 Worker SKILL
+    CC->>R: validate_required_config(.agents/workflow.yaml)
+    CC->>R: init_or_resume(yaml, resume_from)
+    R-->>CC: (run_dir, state_path, state, iteration)
+    CC->>B: _setup_bastion → ensure_connected (单次探测)
+    alt 不可达
+        B-->>CC: 失败
+        CC->>U: 报错并停止（不进循环）
+    else 可达
+        CC->>L: loop_core.run(回调...)
+        L-->>CC: 单向飞书进度卡（可选）
+        Note over CC,U: 暂停/停止 = 用户按 Ctrl-C
+    end
+```
+
 ---
 
 ## Channel guarantees (v5 simplifications)

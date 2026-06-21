@@ -18,6 +18,58 @@ and the full workflow state machine.
 The loop body lives in `workflow_loop_core` — this skill does **not**
 re-implement stage cadence. It implements the channel-difference layer.
 
+> 两个通道的对照、触发与**环境搭建步骤**（飞书 bot / bastion / 4 gateway）见
+> `tasks/ut/docs/guides/ut-channels-overview.md`。
+
+## Trigger flow + environment topology
+
+```mermaid
+sequenceDiagram
+    actor U as 用户
+    participant F as 飞书 bot(cli_aaad…, DM oc_ed80…)
+    participant S as ut-supervisor (gateway)
+    participant R as hermes_runner
+    participant B as Bastion(t_h20)
+    participant L as loop_core
+    U->>F: "跑 ut workflow"
+    F->>S: 关键词匹配触发
+    S->>S: 加载 hermes_workflow + loop_core + 4 Worker SKILL
+    S->>F: 参数确认卡(蓝色, 5 字段)
+    U->>F: "确认" / "yaml=…" / "改 KEY=VAL"
+    F->>S: 命令
+    S->>R: validate_required_config (+kanban: check_gateways_alive)
+    S->>R: init_or_resume → (run_dir, state, …)
+    S->>B: BastionManager.ensure_connected
+    alt daemon 不可用
+        S->>F: OTP 卡片(渐进重发 5→15→30→60min)
+        U->>F: 6 位 OTP
+        F->>S: otp
+        S->>B: 同步重启 daemon → mark_connected → running
+    end
+    S->>B: start_heartbeat(on_disconnect)
+    S->>L: loop_core.run(回调...)
+    loop 每轮 Stage5 之后
+        L->>S: handle_checkpoint
+        S->>F: 进度卡 + check_user_commands
+    end
+```
+
+```mermaid
+flowchart LR
+    U[用户]
+    BOT[飞书 bot<br/>cli_aaad… / DM oc_ed80…]
+    SUP[ut-supervisor gateway<br/>唯一飞书订阅者]
+    GO[ut-orchestrator<br/>Stage5+Stage2]
+    GE[ut-executor<br/>Stage3 远程 pytest]
+    GF[ut-fixer<br/>Stage4 修复]
+    BAS[Bastion daemon<br/>profile t_h20 / OTP]
+    REMOTE[(远程 GPU<br/>Docker + pytest)]
+    U <--> BOT
+    BOT <--> SUP
+    SUP --> GO --> GE --> GF
+    GE -->|SSH 复用| BAS --> REMOTE
+```
+
 ---
 
 ## 1. Channel & role / 通道与职责

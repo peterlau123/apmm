@@ -42,6 +42,7 @@
 
 | 我想... | 看这里 |
 |---------|--------|
+| **看懂两个通道怎么跑（触发/机制/图示 + hermes 环境搭建）** | [docs/guides/ut-channels-overview.md](docs/guides/ut-channels-overview.md) |
 | 了解测试目标与完成标准 | [GOAL.md](GOAL.md) |
 | 查看当前进度统计 | [PROGRESS.md](PROGRESS.md) |
 | 查看每日工作记录 | [WORKLOG.md](WORKLOG.md) |

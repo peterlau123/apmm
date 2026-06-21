@@ -301,15 +301,14 @@ def stop_all(workflow_yaml_path):
     print(f"\nStopping Bastion daemon ({bastion_profile})...")
     r = run_cmd([sys.executable, str(agent_path), "-p", bastion_profile, "stop"])
     print(f"  {r.stdout.strip()}")
-    
-    for profile in gateway_profiles:
+
+    # `hermes gateway stop` takes no profile arg; it stops the CURRENT profile's
+    # gateway. Switch to each profile first, then stop.
+    for profile in gateway_profiles + [supervisor_profile]:
         print(f"\nStopping Gateway ({profile})...")
-        r = run_cmd(["hermes", "gateway", "stop", profile])
+        run_cmd(["hermes", "profile", "use", profile])
+        r = run_cmd(["hermes", "gateway", "stop"])
         print(f"  {r.stdout.strip() if r.returncode == 0 else r.stderr.strip()}")
-    
-    print(f"\nStopping Supervisor ({supervisor_profile})...")
-    r = run_cmd(["hermes", "gateway", "stop", supervisor_profile])
-    print(f"  {r.stdout.strip() if r.returncode == 0 else r.stderr.strip()}")
     
     print("\n[OK] All services stopped")
 

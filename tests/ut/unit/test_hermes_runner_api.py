@@ -2,14 +2,14 @@
 
 Covers:
   - validate_required_config (8.2)
-  - check_gateways_alive + _systemctl_active mocking (8.3)
+  - check_gateways_alive via `hermes gateway list` (8.3)
   - apply_pending_config + check_stop_conditions (8.4)
 """
 import importlib.util
 import json
 import sys
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 import pytest
 
@@ -61,10 +61,13 @@ def test_validate_required_config_missing_remote_server(hr):
 # ── 8.3 check_gateways_alive ──────────────────────────────────────────────────
 
 def test_check_gateways_alive_only_orchestrator(hr):
-    def fake_active(unit: str) -> bool:
-        return unit == "hermes-gateway@ut-orchestrator"
-
-    with patch.object(hr, "_systemctl_active", side_effect=fake_active):
+    stdout = (
+        "Gateways:\n"
+        "  ✓ ut-orchestrator  — PID 1\n"
+        "  ✗ ut-executor      — not running\n"
+        "  ✗ ut-fixer         — not running\n"
+    )
+    with patch("subprocess.run", return_value=MagicMock(returncode=0, stdout=stdout)):
         result = hr.check_gateways_alive()
 
     assert result == {
@@ -74,10 +77,14 @@ def test_check_gateways_alive_only_orchestrator(hr):
     }
 
 
-def test_systemctl_active_handles_missing_binary(hr):
-    """FileNotFoundError (Windows / no systemctl) should yield False, not raise."""
-    with patch("subprocess.run", side_effect=FileNotFoundError("no systemctl")):
-        assert hr._systemctl_active("anything") is False
+def test_check_gateways_alive_missing_hermes_binary(hr):
+    """FileNotFoundError (no hermes on PATH) → all False, not raise."""
+    with patch("subprocess.run", side_effect=FileNotFoundError("no hermes")):
+        assert hr.check_gateways_alive() == {
+            "ut-orchestrator": False,
+            "ut-executor": False,
+            "ut-fixer": False,
+        }
 
 
 # ── 8.4 apply_pending_config + check_stop_conditions ──────────────────────────

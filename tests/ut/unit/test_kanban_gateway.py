@@ -1,10 +1,9 @@
-"""Tests for Kanban gateway heartbeat detection.
+"""Tests for Kanban gateway liveness detection.
 
-Task 2.2: Test check_gateways_alive with mock gateway responses.
-Uses unittest.mock to simulate systemctl responses.
+check_gateways_alive() probes `hermes gateway list` (cross-platform) and marks
+a profile alive when its line carries the ✓ marker.
 """
 import importlib.util
-import json
 import sys
 from pathlib import Path
 from unittest.mock import patch, MagicMock
@@ -26,127 +25,77 @@ def hr():
     return mod
 
 
+def _list_result(stdout, returncode=0):
+    r = MagicMock()
+    r.returncode = returncode
+    r.stdout = stdout
+    return r
+
+
+# Representative `hermes gateway list` output lines.
+_ALL_ALIVE = (
+    "Gateways:\n"
+    "  ✓ ut-orchestrator          — PID 24096\n"
+    "  ✓ ut-executor              — PID 53076\n"
+    "  ✓ ut-fixer (current)       — PID 39792\n"
+    "  ✗ ut-supervisor            — not running\n"
+)
+_PARTIAL = (
+    "Gateways:\n"
+    "  ✓ ut-orchestrator          — PID 24096\n"
+    "  ✗ ut-executor              — not running\n"
+    "  ✗ ut-fixer                 — not running\n"
+)
+_ALL_DEAD = (
+    "Gateways:\n"
+    "  ✗ ut-orchestrator          — not running\n"
+    "  ✗ ut-executor              — not running\n"
+    "  ✗ ut-fixer                 — not running\n"
+)
+
+
 class TestCheckGatewaysAlive:
-    """Test gateway heartbeat detection."""
+    """Test gateway liveness detection via `hermes gateway list`."""
 
     def test_all_gateways_alive(self, hr):
-        """All three gateways are active."""
-        mock_result = MagicMock()
-        mock_result.returncode = 0
-
-        def mock_run(cmd, **kwargs):
-            return mock_result
-
-        with patch("subprocess.run", side_effect=mock_run):
+        with patch("subprocess.run", return_value=_list_result(_ALL_ALIVE)):
             result = hr.check_gateways_alive()
-
         assert result["ut-orchestrator"] is True
         assert result["ut-executor"] is True
         assert result["ut-fixer"] is True
 
     def test_all_gateways_dead(self, hr):
-        """All three gateways are inactive."""
-        mock_result = MagicMock()
-        mock_result.returncode = 1
-
-        def mock_run(cmd, **kwargs):
-            return mock_result
-
-        with patch("subprocess.run", side_effect=mock_run):
+        """Lines present but marked ✗ (not running) → all False."""
+        with patch("subprocess.run", return_value=_list_result(_ALL_DEAD)):
             result = hr.check_gateways_alive()
-
         assert result["ut-orchestrator"] is False
         assert result["ut-executor"] is False
         assert result["ut-fixer"] is False
 
     def test_partial_gateway_failure(self, hr):
-        """Only orchestrator is alive, executor and fixer are dead."""
-        def mock_run(cmd, **kwargs):
-            mock_result = MagicMock()
-            if "ut-orchestrator" in " ".join(cmd):
-                mock_result.returncode = 0
-            else:
-                mock_result.returncode = 1
-            return mock_result
-
-        with patch("subprocess.run", side_effect=mock_run):
+        """Only orchestrator carries ✓."""
+        with patch("subprocess.run", return_value=_list_result(_PARTIAL)):
             result = hr.check_gateways_alive()
-
         assert result["ut-orchestrator"] is True
         assert result["ut-executor"] is False
         assert result["ut-fixer"] is False
 
+    def test_nonzero_returncode(self, hr):
+        """`hermes gateway list` failing → all False."""
+        with patch("subprocess.run", return_value=_list_result("", returncode=1)):
+            result = hr.check_gateways_alive()
+        assert all(v is False for v in result.values())
+
     def test_gateway_timeout(self, hr):
-        """Gateway check times out → returns False."""
+        """Probe times out → all False."""
         import subprocess
 
-        def mock_run(cmd, **kwargs):
-            raise subprocess.TimeoutExpired(cmd, 5)
-
-        with patch("subprocess.run", side_effect=mock_run):
+        with patch("subprocess.run", side_effect=subprocess.TimeoutExpired(["hermes"], 15)):
             result = hr.check_gateways_alive()
+        assert all(v is False for v in result.values())
 
-        assert result["ut-orchestrator"] is False
-        assert result["ut-executor"] is False
-        assert result["ut-fixer"] is False
-
-    def test_gateway_file_not_found_no_systemctl(self, hr):
-        """systemctl binary not found (Windows) → returns False."""
-        def mock_run(cmd, **kwargs):
-            raise FileNotFoundError("systemctl not found")
-
-        with patch("subprocess.run", side_effect=mock_run):
+    def test_hermes_binary_not_found(self, hr):
+        """`hermes` not on PATH → all False."""
+        with patch("subprocess.run", side_effect=FileNotFoundError("hermes not found")):
             result = hr.check_gateways_alive()
-
-        assert result["ut-orchestrator"] is False
-        assert result["ut-executor"] is False
-        assert result["ut-fixer"] is False
-
-    def test_gateway_unexpected_exception(self, hr):
-        """Unexpected exception → returns False."""
-        def mock_run(cmd, **kwargs):
-            raise RuntimeError("unexpected error")
-
-        with patch("subprocess.run", side_effect=mock_run):
-            result = hr.check_gateways_alive()
-
-        assert result["ut-orchestrator"] is False
-        assert result["ut-executor"] is False
-        assert result["ut-fixer"] is False
-
-
-class TestSystemctlActive:
-    """Test _systemctl_active helper."""
-
-    def test_active_unit(self, hr):
-        """Active unit returns True."""
-        mock_result = MagicMock()
-        mock_result.returncode = 0
-
-        with patch("subprocess.run", return_value=mock_result):
-            assert hr._systemctl_active("hermes-gateway@ut-orchestrator") is True
-
-    def test_inactive_unit(self, hr):
-        """Inactive unit returns False."""
-        mock_result = MagicMock()
-        mock_result.returncode = 1
-
-        with patch("subprocess.run", return_value=mock_result):
-            assert hr._systemctl_active("hermes-gateway@ut-orchestrator") is False
-
-    def test_timeout_returns_false(self, hr):
-        """Timeout returns False."""
-        import subprocess
-
-        with patch("subprocess.run", side_effect=subprocess.TimeoutExpired(["systemctl"], 5)):
-            assert hr._systemctl_active("any-unit") is False
-
-    def test_file_not_found_returns_false(self, hr):
-        """FileNotFoundError returns False."""
-        with patch("subprocess.run", side_effect=FileNotFoundError()):
-            assert hr._systemctl_active("any-unit") is False
-
-    def test_generic_exception_returns_false(self, hr):
-        """Generic exception returns False."""
-        with patch("subprocess.run", side_effect=RuntimeError("oops")):
-            assert hr._systemctl_active("any-unit") is False
+        assert all(v is False for v in result.values())

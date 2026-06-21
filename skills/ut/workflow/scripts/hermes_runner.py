@@ -261,28 +261,29 @@ def validate_required_config(cfg: dict) -> tuple[bool, list[str]]:
 KANBAN_GATEWAY_PROFILES = ("ut-orchestrator", "ut-executor", "ut-fixer")
 
 
-def _systemctl_active(unit: str) -> bool:
-    """Return True if `systemctl is-active --quiet <unit>` exits 0.
+def check_gateways_alive() -> dict:
+    """Probe each Hermes Gateway profile via `hermes gateway list`.
 
-    Returns False on missing systemctl (Windows / FileNotFoundError) or timeout.
+    Uses the Hermes gateway registry (cross-platform) instead of systemd, so
+    gateways started with `hermes gateway run` are detected on Windows too
+    (no systemctl there). Returns {profile: bool}.
     """
     try:
         r = subprocess.run(
-            ["systemctl", "is-active", "--quiet", unit],
+            ["hermes", "gateway", "list"],
             capture_output=True,
-            timeout=5,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=15,
         )
-        return r.returncode == 0
     except (FileNotFoundError, subprocess.TimeoutExpired):
-        return False
-    except Exception:
-        return False
-
-
-def check_gateways_alive() -> dict:
-    """Probe each Hermes Gateway profile. Returns {profile: bool}."""
+        return {profile: False for profile in KANBAN_GATEWAY_PROFILES}
+    if r.returncode != 0:
+        return {profile: False for profile in KANBAN_GATEWAY_PROFILES}
+    lines = r.stdout.splitlines()
     return {
-        profile: _systemctl_active(f"hermes-gateway@{profile}")
+        profile: any(profile in line and "✓" in line for line in lines)
         for profile in KANBAN_GATEWAY_PROFILES
     }
 

@@ -216,7 +216,7 @@ done
 hermes gateway list        # 4 行都应有 ✓
 ```
 
-> profile 目录结构：每个 `<profile>/` 含 `profile.yaml`（描述）+ `channel_directory.json`（平台绑定）+ `SOUL.md`（角色定义）。测试 fixture 在 `tests/ut/integration/fixtures/profiles/`；生产 profile 在 Hermes 标准 profile 目录。systemd 常驻部署见 `tasks/ut/docs/guides/hermes-supervisor-service.md`（supervisor）与 `tasks/ut/docs/guides/hermes-gateway-service.md`（3 worker）。
+> profile 目录结构：每个 `<profile>/` 含 `profile.yaml`（描述）+ `channel_directory.json`（平台绑定）+ `SOUL.md`（角色定义）。测试 fixture 在 `tests/ut/integration/fixtures/profiles/`；生产 profile 在 Hermes 标准 profile 目录。**SOUL/SKILL 同步**走 hermes profile distribution：`python tasks/ut/scripts/deploy_tier.py --tier L4 [--check]`（详见 [`tests/ut/integration/fixtures/profiles/README.md`](../../../../tests/ut/integration/fixtures/profiles/README.md)；channel_directory.json 是 user-owned 不被覆盖）。systemd 常驻部署见 `tasks/ut/docs/guides/hermes-supervisor-service.md`（supervisor）与 `tasks/ut/docs/guides/hermes-gateway-service.md`（3 worker）。
 
 ### 4.4 就绪后触发
 

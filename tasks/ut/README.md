@@ -63,6 +63,7 @@
 | 了解 Hermes Runner 操作 | [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md) |
 | 部署 ut-supervisor 服务 | [../../tasks/ut/docs/guides/hermes-supervisor-service.md](../../tasks/ut/docs/guides/hermes-supervisor-service.md) |
 | 部署 3 个 Gateway 服务 | [../../tasks/ut/docs/guides/hermes-gateway-service.md](../../tasks/ut/docs/guides/hermes-gateway-service.md) |
+| **同步 Hermes profiles**（SOUL/SKILL distribution）| [../../tests/ut/integration/fixtures/profiles/README.md](../../tests/ut/integration/fixtures/profiles/README.md) — `python tasks/ut/scripts/deploy_tier.py --tier L4` |
 | Kanban 模式完整配置 | [docs/kanban/README.md](docs/kanban/README.md) |
 | 飞书通知集成细节 | [skills/ut/workflow/references/feishu-integration.md](../../skills/ut/workflow/references/feishu-integration.md) |
 | **查看 incident 复盘 / 故障归档** | [docs/incidents/README.md](docs/incidents/README.md) |

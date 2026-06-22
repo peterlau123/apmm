@@ -389,7 +389,7 @@ LLM 分类有误判风险（哪怕 conf=0.95），且"跑 L4"和"跑生产"代�
 | P1a | 新建 `l1_smoke_list.txt`、`workflow.l1.yaml`、`L1_expected.json` | 30 min |
 | P1b | 新建 `workflow.l2.yaml`、`L2_expected.json`（用现有 mini_test_list） | 20 min |
 | P1c | 新建 `workflow.l3.yaml`、`L3_expected.json`（用现有 l3_fast_subset，含 STG-1 待定） | 30 min |
-| P1d | 更新 `tests/ut/integration/deploy_l4_profiles.py` 为通用 `deploy_profiles.py --tier {L1,L2,L3,L4}` 或新增 `deploy_tier.py`；保留 `deploy_l4_profiles.py` 作 alias 一阶段 | 30 min |
+| P1d | ✅ **已完成**：新增 `tasks/ut/scripts/deploy_tier.py`（hermes profile distribution 机制，支持 `--tier L1..L4 [--check] [--profile <name>]`）；旧 `deploy_l4_profiles.py` alias 已删除。详见 `tests/ut/integration/fixtures/profiles/README.md` | 30 min |
 
 ### P2 — Layer 1（regex）意图识别
 

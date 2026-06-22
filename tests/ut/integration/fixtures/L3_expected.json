@@ -8,11 +8,13 @@
     "batch_size": 4,
     "max_retry_per_test": 2,
     "frozen_on": "2026-06-22",
-    "expected_total": 8
+    "expected_total": 9
   },
   "terminal_state_distribution": {
     "_note": "Only pending==0 is enforced — the passed/failed/ignored split depends on remote model cache. STG-1/2/3 provide the real behavioral assertions.",
-    "required": { "pending": 0 }
+    "required": {
+      "pending": 0
+    }
   },
   "stage_invariants": [
     {
@@ -40,7 +42,7 @@
   "pass_criteria": {
     "must_all_hold": [
       "pending == 0 at end",
-      "total accounted nodes == 8",
+      "total accounted nodes == 9",
       "STG-1: failure-handler triggered at least once",
       "STG-2: no test exceeds retry budget",
       "STG-3: no terminal retriable_error"

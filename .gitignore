@@ -109,3 +109,10 @@ tasks/tests/*/logs/
 # ===== 大型二进制 =====
 *.whl
 Miniconda*.sh
+# ===== UT runtime artifacts =====
+# new runs gitignored; 12 historical runs already tracked
+runs/
+# transient operator state
+.omo/
+# transient resume diagnosis notes
+.agents/_resume_comment*.txt

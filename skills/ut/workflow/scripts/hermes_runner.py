@@ -154,6 +154,103 @@ def parse_command_as_dict(text):
     return {"type": legacy_type, "payload": dict(cmd.args)}
 
 
+# ── Layer 2 — LLM intent classification ───────────────────────────────────────
+# Free-text messages that fall through Layer 1 land here. The classifier
+# returns a Command with source="llm". `start_*` results are still gated by a
+# confirmation card downstream (spec §4.5) — this layer only proposes intent.
+
+_VALID_LLM_INTENTS = frozenset({
+    "start_l1", "start_l2", "start_l3", "start_l4",
+    "start_production", "change_config", "unknown",
+})
+
+# Strip an outer ```json … ``` fence (or bare ``` … ```) if the model adds one
+# despite the SOUL.md instruction. Match the longest fenced block.
+_JSON_FENCE_RE = re.compile(r"^```(?:json)?\s*(.+?)\s*```$", re.DOTALL | re.IGNORECASE)
+
+
+def _strip_json_fence(s: str) -> str:
+    s = s.strip()
+    m = _JSON_FENCE_RE.match(s)
+    return m.group(1).strip() if m else s
+
+
+def _unknown(raw_text: str) -> "Command":
+    """Fallback Command for any malformed / off-rail LLM output."""
+    return Command(intent="unknown", confidence=0.0, args={},
+                   source="llm", raw_text=raw_text)
+
+
+def classify_intent_llm(text, *, llm_invoker=None) -> "Command":
+    """Layer 2: classify free-text via the supervisor's LLM (SOUL.md §Intent classification).
+
+    Parameters
+    ----------
+    text:
+        The Feishu message text. Layer 1 (`parse_command`) must have returned
+        None before reaching here.
+    llm_invoker:
+        Optional callable ``(text: str) -> str`` returning the raw LLM
+        response (expected to be strict JSON per SOUL.md). Injection seam for
+        unit tests; the production wire-up (Hermes Agent self-call) is bound
+        at integration time. If None, the function returns ``intent=unknown``
+        — never raises — so callers always get a Command.
+
+    Returns
+    -------
+    Command with ``source="llm"``. ``intent="unknown"`` on:
+      - no invoker bound
+      - invoker raised
+      - response not valid JSON
+      - JSON missing required keys / wrong types
+      - ``intent`` not in the SOUL.md vocabulary
+
+    The function never raises; classification is best-effort.
+    """
+    if text is None:
+        return _unknown("")
+    raw_text = text
+    stripped = text.strip()
+    if not stripped:
+        return _unknown(raw_text)
+
+    if llm_invoker is None:
+        return _unknown(raw_text)
+
+    try:
+        response = llm_invoker(stripped)
+    except Exception:
+        return _unknown(raw_text)
+
+    if not isinstance(response, str):
+        return _unknown(raw_text)
+
+    try:
+        parsed = json.loads(_strip_json_fence(response))
+    except (ValueError, json.JSONDecodeError):
+        return _unknown(raw_text)
+
+    if not isinstance(parsed, dict):
+        return _unknown(raw_text)
+
+    intent = parsed.get("intent")
+    confidence = parsed.get("confidence")
+    args = parsed.get("args", {})
+
+    if intent not in _VALID_LLM_INTENTS:
+        return _unknown(raw_text)
+    if not isinstance(confidence, (int, float)):
+        return _unknown(raw_text)
+    if not isinstance(args, dict):
+        args = {}
+
+    # Clamp confidence to [0.0, 1.0]; the LLM can in principle emit out-of-range.
+    conf = max(0.0, min(1.0, float(confidence)))
+
+    return Command(intent=intent, confidence=conf, args=args,
+                   source="llm", raw_text=raw_text)
+
+
 def _load_yaml(path):
     """Load a YAML file, returning {} on failure."""
     import yaml

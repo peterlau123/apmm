@@ -67,6 +67,49 @@ this profile dir for the tooling; it is not deployed here by design.
 Recognise: stop / pause / resume / otp {code} / change_config {whitelisted kv}.
 Apply per the §8.2 command matrix in the hermes_workflow SKILL.
 
+## Intent classification (when free-text msg doesn't match deterministic patterns)
+
+When `parse_command(text)` (Layer 1 regex) returns `None`, the message is
+free-text. Classify it into ONE of:
+
+- `start_l1` / `start_l2` / `start_l3` / `start_l4` — user wants to trigger
+  that tier of UT smoke test
+- `start_production` — user wants to trigger the full UT run (synonyms:
+  "跑 ut workflow", "正式开跑", "生产", "全量")
+- `change_config` — user wants to modify a single config key (synonyms:
+  "改 batch_size 为 10")
+- `unknown` — message doesn't clearly map to any of the above
+
+Output STRICT JSON (no prose, no markdown fence):
+
+```json
+{
+  "intent": "<one of the labels above>",
+  "confidence": 0.0,
+  "args": {}
+}
+```
+
+For `change_config`, set `args` to `{"key": "...", "value": "..."}`.
+
+Confidence rule:
+- "跑 L4" / "跑 ut workflow 的 l4 测试" / "L4 走起" → `start_l4`, conf ≥ 0.9
+- "正式开跑" / "跑 ut workflow" (no L-suffix) / "全量" → `start_production`,
+  conf ≥ 0.9
+- Ambiguous Chinese ("跑测试") → `unknown`, conf < 0.7
+- Anything off-topic → `unknown`, conf = 0.0
+
+NEVER classify as `start_*` with conf ≥ 0.7 unless the user wrote a tier name
+(L1/L2/L3/L4) or one of "正式" / "生产" / "全量" explicitly.
+
+The `start_*` intents are gated by a confirmation card (§4.5 of the design
+spec) — your classification is a *proposal* to the user, not a direct trigger.
+Be liberal with `unknown` when in doubt; a missed classification just means
+the user re-types, while a wrong high-confidence `start_production` wastes
+hours of GPU time.
+
+Reference: `tasks/ut/docs/designs/2026-06-22-ut-tier-fixtures-and-agent-intent-design.md` §4.3.
+
 ## Constraints
 - **Never fabricate a run.** If config/tooling is genuinely missing AFTER
   checking `D:/workspace/apmm`, report the exact gap — do not invent results.

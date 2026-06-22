@@ -40,8 +40,8 @@ framework_test/
 
 | 内容 | 文档 |
 |------|------|
-| 设计 spec | `docs/superpowers/specs/2026-06-20-ut-framework-test-and-perf-design.md` |
-| 实现 plan | `docs/superpowers/plans/2026-06-20-ut-framework-test-and-perf-implementation.md` |
+| 设计 spec | `tasks/ut/docs/designs/2026-06-20-ut-framework-test-and-perf-design.md` |
+| 实现 plan | `tasks/ut/docs/plans/2026-06-20-ut-framework-test-and-perf-implementation.md` |
 | **进度总结 + L4 指南** | [reports/L4_guide.md](reports/L4_guide.md) |
 | 吞吐分析 | [reports/analysis_report.md](reports/analysis_report.md) |
 | L3 bug 报告 | [reports/L3_execution_report.md](reports/L3_execution_report.md) |
@@ -85,10 +85,10 @@ python tests/ut/integration/run_linear_smoke.py
 ### L4 — 真机 Kanban（需用户在场协同）
 ```powershell
 python tools/agent.py serve t_h20                       # 1) 新窗口，输 OTP
-python tests/ut/integration/start_l4_test.py            # 2) 起 3 Gateway + Supervisor（非交互）
-python tests/ut/integration/start_l4_test.py --status   # 3) 期望 Config + Overall [OK] READY
+python tasks/ut/scripts/start_hermes_ut_runtime.py            # 2) 起 3 Gateway + Supervisor（非交互）
+python tasks/ut/scripts/start_hermes_ut_runtime.py --status   # 3) 期望 Config + Overall [OK] READY
 # 4) 飞书 apmm-ut 群发 “跑 ut workflow” → 回复 改参数 + 确认（见 L4_guide.md 5.6）
-python tests/ut/integration/start_l4_test.py --stop     # 结束，停止全部服务
+python tasks/ut/scripts/start_hermes_ut_runtime.py --stop     # 结束，停止全部服务
 ```
 完整配置准备、依赖链时序验证、Kanban vs Linear 对比见 [reports/L4_guide.md](reports/L4_guide.md) 第五节。
 

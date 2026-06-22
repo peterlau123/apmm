@@ -405,7 +405,7 @@ poll_kanban_stats(board_slug) → {pending, running, done}
 
 ### 11.4 不再启动 Gateway
 
-删除 `start_gateway` 调用——3 个 Gateway（`ut-orchestrator` / `ut-executor` / `ut-fixer`）由 systemd template unit 独立管理（详见 `docs/guides/hermes-gateway-service.md`）。
+删除 `start_gateway` 调用——3 个 Gateway（`ut-orchestrator` / `ut-executor` / `ut-fixer`）由 systemd template unit 独立管理（详见 `tasks/ut/docs/guides/hermes-gateway-service.md`）。
 
 `check_gateways_alive()` 在 workflow 启动前 + Kanban 主循环每轮都检查；任一 Gateway 挂 → 飞书发卡片 + 等 systemd 自动恢复（不需用户介入）。
 
@@ -897,8 +897,8 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
 | `skills/ut/hermes_workflow/SKILL.md` | 🆕 新建 | Hermes Agent 指令（通道差异层） |
 | `skills/ut/workflow_loop_core/SKILL.md` | 🆕 新建 | 共享循环主体（两个 Supervisor 都加载） |
 | `skills/ut/hermes_workflow/profile.yaml` | 🆕 新建 | ut-supervisor profile 配置（飞书订阅 + 加载 hermes_workflow skill） |
-| `docs/guides/hermes-supervisor-service.md` | 🆕 新建 | ut-supervisor systemd unit 部署指南（`hermes-agent@ut-supervisor`） |
-| `docs/guides/hermes-gateway-service.md` | 🆕 新建 | 3 Gateway systemd template unit 部署指南（`hermes-gateway@.service` 实例化为 ut-orchestrator/ut-executor/ut-fixer） |
+| `tasks/ut/docs/guides/hermes-supervisor-service.md` | 🆕 新建 | ut-supervisor systemd unit 部署指南（`hermes-agent@ut-supervisor`） |
+| `tasks/ut/docs/guides/hermes-gateway-service.md` | 🆕 新建 | 3 Gateway systemd template unit 部署指南（`hermes-gateway@.service` 实例化为 ut-orchestrator/ut-executor/ut-fixer） |
 | `skills/ut/workflow/SKILL.md` | ✏️ 更新 | 启动时一次性加载 4 份 Worker SKILL；引用缺失时 reload；调 `workflow_loop_core` |
 | `skills/ut/workflow/scripts/hermes_runner.py` | ✏️ 重构 | 工具模块定位，删除 stage_* 函数；删 start_gateway 加 check_gateways_alive |
 | `skills/ut/workflow/workflow_state_schema.json` | ✏️ 更新 | pending_config 字段；终态 stopped/failed/completed；删 reconnecting |

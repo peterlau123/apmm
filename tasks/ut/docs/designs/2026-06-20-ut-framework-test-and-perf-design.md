@@ -5,7 +5,7 @@
 
 - 日期：2026-06-20
 - 状态：Design（待实现计划）
-- 相关：Plan 1 (`docs/superpowers/plans/2026-06-19-hermes-workflow-foundation.md`)、Plan 2 (`docs/superpowers/plans/2026-06-20-hermes-workflow-deployment.md`)、Spec v5 (`docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`)
+- 相关：Plan 1 (`tasks/ut/docs/plans/2026-06-19-hermes-workflow-foundation.md`)、Plan 2 (`tasks/ut/docs/plans/2026-06-20-hermes-workflow-deployment.md`)、Spec v5 (`tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`)
 
 ---
 

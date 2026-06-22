@@ -52,7 +52,7 @@ profile 的具体内容（飞书绑定、skill 加载等落点）参考 [hermes-
 
 ### 2.3 Bastion 凭据/配置可用
 
-`ut-executor` 会在 `t_h20` 上跑 pytest，依赖 Bastion daemon。须先按 [bastion.md](bastion.md) 配好对应 profile 的 `.bastion_creds`，并确认 `workflow.yaml` 的 `bastion` 节指向该 profile。动态 OTP 在运行期通过飞书回复提供（由 Supervisor 通道处理），不预存。
+`ut-executor` 会在 `t_h20` 上跑 pytest，依赖 Bastion daemon。须先按 [bastion.md](../../../docs/guides/bastion.md) 配好对应 profile 的 `.bastion_creds`，并确认 `workflow.yaml` 的 `bastion` 节指向该 profile。动态 OTP 在运行期通过飞书回复提供（由 Supervisor 通道处理），不预存。
 
 > worker 远程执行必须用 `python tools/agent.py -p t_h20 run ...`，**不得**直接 `ssh` 堡垒机（见 `tasks/ut/docs/kanban/README.md` 的 Remote Execution Rule）。
 
@@ -233,7 +233,7 @@ hermes gateway status
 | Supervisor 报某 Gateway 未 active（红色错误卡片） | 该 unit 未起，或 user/system 查询级别不匹配 → 见 §5 的 DEPLOY-CONFIRM；用 §7.1 复核 |
 | 3 个都 active 但任务不流转 | 看板未对准 → 确认 `ExecStartPre` 的 `hermes kanban boards switch apmm-ut` 生效（§2.1）；`hermes kanban diagnostics` 查看阻塞 |
 | 任务被重复认领 / 争抢 | 是否同时跑了 `hermes kanban daemon` → 停掉，只保留 Gateway（§3） |
-| executor 远程执行失败 | `python tools/agent.py -p t_h20 ping`；见 [bastion.md](bastion.md) 与 `tasks/ut/docs/guides/hermes-runner.md` |
+| executor 远程执行失败 | `python tools/agent.py -p t_h20 ping`；见 [bastion.md](../../../docs/guides/bastion.md) 与 `tasks/ut/docs/guides/hermes-runner.md` |
 
 ---
 
@@ -246,7 +246,7 @@ hermes gateway status
 | `skills/ut/workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
 | `skills/ut/workflow/scripts/hermes_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
 | `skills/ut/hermes_workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
-| [bastion.md](bastion.md) | Bastion 堡垒机连接与凭据配置 |
+| [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |
 
 ---

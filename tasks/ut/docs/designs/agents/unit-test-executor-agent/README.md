@@ -16,7 +16,7 @@
 | 状态文件 | `.agents/runner/status.json` |
 | 消息文件 | `.agents/runner/messages.jsonl` |
 | 接收文件 | `.agents/runner/inbox.jsonl` |
-| Spec文件 | `docs/superpowers/specs/agents/unit-test-executor-agent/README.md` |
+| Spec文件 | `tasks/ut/docs/designs/agents/unit-test-executor-agent/README.md` |
 
 ---
 

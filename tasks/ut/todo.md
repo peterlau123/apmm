@@ -133,7 +133,7 @@
 
 - [x] **UT Workflow 过滤规则汇聚** - P1 ✅ 2026-06-11 已完成
   - 背景: 过滤规则分散在 7+ 个位置，需建立单一来源
-  - 设计文档: [2026-06-11-ut-filter-rules-consolidation-design.md](../../docs/superpowers/specs/2026-06-11-ut-filter-rules-consolidation-design.md)
+  - 设计文档: [2026-06-11-ut-filter-rules-consolidation-design.md](../../tasks/ut/docs/designs/2026-06-11-ut-filter-rules-consolidation-design.md)
   - 实施:
     1. ✅ 创建 `skills/ut/shared/filter_rules.yaml`（41条规则）
     2. ✅ 创建 `skills/ut/shared/load_filter_rules.py`（5个函数）
@@ -317,7 +317,7 @@
 
 - [x] **日志解析设计文档** - P1 ✅ 2026-06-11 已完成
   - 背景: run_batch.py 只启动 pytest，不解析结果，Stage 3 → Stage 4 数据流断裂
-  - 设计文档: [2026-06-11-log-parse-and-transfer-design.md](../../docs/superpowers/specs/2026-06-11-log-parse-and-transfer-design.md)
+  - 设计文档: [2026-06-11-log-parse-and-transfer-design.md](../../tasks/ut/docs/designs/2026-06-11-log-parse-and-transfer-design.md)
   - 核心: 远程 grep → bastion 传回 → 本地 parse_remote_log.py → batch_results.json
   - 依赖: 无
 

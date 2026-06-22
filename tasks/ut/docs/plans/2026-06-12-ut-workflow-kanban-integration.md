@@ -404,7 +404,7 @@ git commit -m "feat: add monitor_kanban.py for Kanban task monitoring"
 
 ```markdown
 - [Kanban集成指南](../../../tasks/ut/docs/kanban/README.md)
-- [Kanban集成设计](../../../docs/superpowers/specs/2026-06-12-ut-workflow-kanban-integration-design.md)
+- [Kanban集成设计](../../../tasks/ut/docs/designs/2026-06-12-ut-workflow-kanban-integration-design.md)
 ```
 
 - [ ] **Step 2: 更新日期**

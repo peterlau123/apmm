@@ -4,6 +4,8 @@
 **目标分支**: `2.5.1_ut_verify`
 **环境**: t_h20 (NVIDIA H20-3e), v0.13.0_torch2.5.1_compile容器
 
+> **相关文档**: 历史事故复盘见 [`tasks/ut/docs/incidents/`](../../tasks/ut/docs/incidents/README.md)（含 root cause / 证据链 / 防回归措施，与本指南的"操作动作"互补）。
+
 ---
 
 ## 一、DeepSeek torch_compile引号修复

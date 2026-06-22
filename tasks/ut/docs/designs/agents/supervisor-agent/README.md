@@ -16,7 +16,7 @@
 | 终端窗口 | #1 |
 | 状态文件 | `.agents/supervisor/status.json` |
 | 心跳文件 | `.agents/supervisor/heartbeat.json` |
-| Spec文件 | `docs/superpowers/specs/agents/supervisor-agent/README.md` |
+| Spec文件 | `tasks/ut/docs/designs/agents/supervisor-agent/README.md` |
 
 ---
 

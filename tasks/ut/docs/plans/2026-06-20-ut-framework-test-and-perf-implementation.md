@@ -1,6 +1,6 @@
 # Plan: UT Framework Test and Performance Implementation
 
-> Based on spec: `docs/superpowers/specs/2026-06-20-ut-framework-test-and-perf-design.md`
+> Based on spec: `tasks/ut/docs/designs/2026-06-20-ut-framework-test-and-perf-design.md`
 
 ---
 

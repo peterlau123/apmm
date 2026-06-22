@@ -25,4 +25,4 @@ Git: 805f316, 5f897d9 + 本次修复
 
 ## 恢复
 
-重启后读 docs/superpowers/specs/2026-06-12-failure-handler-review-analysis.md
+重启后读 tasks/ut/docs/designs/2026-06-12-failure-handler-review-analysis.md

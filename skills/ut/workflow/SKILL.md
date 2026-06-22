@@ -12,7 +12,7 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 > For production / unattended / multi-worker runs, use the `hermes_workflow`
 > channel (Plan 2: Hermes Agent + Kanban + 3 Worker profiles).
 >
-> Design spec: `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
+> Design spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 
 This SKILL is one of two channels that share the same loop body
 (`skills/ut/workflow_loop_core/SKILL.md`). It supplies the channel-specific
@@ -152,6 +152,6 @@ If the user asks for any of the following, route them to
 
 Those features live in Plan 2 and require the Hermes Agent + Gateway
 profiles documented in `tasks/ut/docs/guides/hermes-runner.md`, with
-systemd deployment covered by `docs/guides/hermes-supervisor-service.md`
-(ut-supervisor agent) and `docs/guides/hermes-gateway-service.md`
+systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md`
+(ut-supervisor agent) and `tasks/ut/docs/guides/hermes-gateway-service.md`
 (3 gateway instances).

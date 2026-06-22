@@ -2,8 +2,8 @@
 
 > 一份文档看清两个 UT 测试通道**怎么触发、怎么跑**，以及 hermes 通道**怎么把环境搭起来**。
 >
-> 权威设计规格：`docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
-> 运维细节：`tasks/ut/docs/guides/hermes-runner.md`、`docs/guides/hermes-supervisor-service.md`、`docs/guides/hermes-gateway-service.md`
+> 权威设计规格：`tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
+> 运维细节：`tasks/ut/docs/guides/hermes-runner.md`、`tasks/ut/docs/guides/hermes-supervisor-service.md`、`tasks/ut/docs/guides/hermes-gateway-service.md`
 
 ---
 
@@ -188,7 +188,7 @@ python tools/agent.py -p t_h20 ping
 python tools/agent.py -p t_h20 stop
 ```
 
-- daemon 必须**先于** gateway/supervisor 起来——`start_l4_test.py` 只校验它在运行，不会替你起。
+- daemon 必须**先于** gateway/supervisor 起来——`start_hermes_ut_runtime.py` 只校验它在运行，不会替你起。
 - 生产运行中断联：supervisor 进 `waiting_otp`，飞书发 OTP 卡，你回 6 位码即同步重连。
 - 报 `Socket is closed`：daemon 需要一条**活的 SSH 会话**（`serve`，不只是 `ping`），重新 `serve` 并过 OTP。
 
@@ -198,11 +198,11 @@ python tools/agent.py -p t_h20 stop
 
 ```bash
 # 一键：预检配置 → 校验 daemon → 起 3 worker gateway → 起 ut-supervisor gateway
-python tests/ut/integration/start_l4_test.py                      # 默认 L4 frozen config
-python tests/ut/integration/start_l4_test.py --workflow-yaml .agents/workflow.yaml  # 用生产 config
+python tasks/ut/scripts/start_hermes_ut_runtime.py                      # 默认 L4 frozen config
+python tasks/ut/scripts/start_hermes_ut_runtime.py --workflow-yaml .agents/workflow.yaml  # 用生产 config
 
-python tests/ut/integration/start_l4_test.py --status             # 只看配置预检 + 运行态
-python tests/ut/integration/start_l4_test.py --stop               # 停 daemon + 4 gateway
+python tasks/ut/scripts/start_hermes_ut_runtime.py --status             # 只看配置预检 + 运行态
+python tasks/ut/scripts/start_hermes_ut_runtime.py --stop               # 停 daemon + 4 gateway
 ```
 
 预检（`--status` / 启动时）会逐项检查：`.bastion_creds` 存在、`kanban.enabled: true`、`notifications.feishu_chat_id` 已设、4 个 profile（ut-orchestrator / ut-executor / ut-fixer / ut-supervisor）`hermes profile list` 里都在。
@@ -216,7 +216,7 @@ done
 hermes gateway list        # 4 行都应有 ✓
 ```
 
-> profile 目录结构：每个 `<profile>/` 含 `profile.yaml`（描述）+ `channel_directory.json`（平台绑定）+ `SOUL.md`（角色定义）。测试 fixture 在 `tests/ut/integration/fixtures/profiles/`；生产 profile 在 Hermes 标准 profile 目录。systemd 常驻部署见 `docs/guides/hermes-supervisor-service.md`（supervisor）与 `docs/guides/hermes-gateway-service.md`（3 worker）。
+> profile 目录结构：每个 `<profile>/` 含 `profile.yaml`（描述）+ `channel_directory.json`（平台绑定）+ `SOUL.md`（角色定义）。测试 fixture 在 `tests/ut/integration/fixtures/profiles/`；生产 profile 在 Hermes 标准 profile 目录。systemd 常驻部署见 `tasks/ut/docs/guides/hermes-supervisor-service.md`（supervisor）与 `tasks/ut/docs/guides/hermes-gateway-service.md`（3 worker）。
 
 ### 4.4 就绪后触发
 

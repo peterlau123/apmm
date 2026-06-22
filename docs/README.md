@@ -1,41 +1,61 @@
 # APMM 文档中心
 
 > **MiniMax-M2.7 模型验证框架 - 项目级文档导航**
+>
+> ⚠️ **本目录只放跨子系统 / 项目级文档**（bastion / environment / ai-workflow / superpowers 框架自身）。
+> 禁止接收仅服务单一 `tasks/<x>` 的详细文档（spec / plan / incident / report / 子系统运维 guide）。
+>
+> 归位规则见 [`CLAUDE.md` §5](../CLAUDE.md)。子系统文档入口：
+> - UT：[`tasks/ut/docs/`](../tasks/ut/docs/README.md)
+> - accuracy / performance / 其它：在 `tasks/<x>/docs/` 下镜像同样的目录骨架。
 
 ---
 
-## 项目级指南
+## 项目级指南 (guides/)
 
 | 文档 | 说明 |
 |------|------|
+| [ai-workflow.md](guides/ai-workflow.md) | AI 辅助开发工作流 |
 | [bastion.md](guides/bastion.md) | 堡垒机连接方案 |
 | [environment.md](guides/environment.md) | 环境配置说明 |
-| [troubleshooting.md](guides/troubleshooting.md) | 问题排查与修复 |
-| [hermes-supervisor-service.md](guides/hermes-supervisor-service.md) | ut-supervisor Hermes Agent systemd 部署指南 |
-| [hermes-gateway-service.md](guides/hermes-gateway-service.md) | hermes-gateway@ 3 实例（orchestrator/executor/fixer）systemd 部署指南 |
 
 ---
 
-## 项目级参考文档
+## 项目级参考 (reference/)
 
 | 文档 | 说明 |
 |------|------|
-| [workflow.md](reference/workflow.md) | 工作流程说明 |
+| [daily-operations.md](reference/daily-operations.md) | 日常工作流程（daemon 启动 / UT / 精度评测 / 模型下载） |
 
 ---
 
-## 自动化设计文档
+## Superpowers 框架 (superpowers/)
 
-| 文档 | 状态 | 说明 |
-|:----:|:----:|------|
-| [2026-06-08-agent-automation-design.md](superpowers/specs/2026-06-08-agent-automation-design.md) | ✅ Active | 双 Agent 自动化方案 |
-| [test-automation-design.md](superpowers/specs/2026-06-05-test-automation-design.md) | ✅ Active | 测试自动化详细设计 |
-| [test-execution-plan-design.md](superpowers/specs/2026-06-05-test-execution-plan-design.md) | ✅ Active | 多轮分层执行计划 |
-| [unit-test-executor-agent/README.md](superpowers/specs/agents/unit-test-executor-agent/README.md) | ✅ Active | Runner Agent 详细设计 |
-| [supervisor-agent/README.md](superpowers/specs/agents/supervisor-agent/README.md) | ✅ Active | Supervisor Agent 详细设计 |
-| [inbox-management-analysis.md](superpowers/specs/agents/inbox-management-analysis.md) | ✅ Active | Inbox 消息积压分析 |
-| [archive/](superpowers/specs/archive/) | ⚠️ Archived | 过时设计文档 |
+通用 spec/plan 模板（superpowers 框架自身的设计文档）。**UT 相关的 spec/plan 已迁出**至 `tasks/ut/docs/{designs,plans}/`。
+
+| 子目录 | 说明 |
+|--------|------|
+| [superpowers/specs/](superpowers/specs/) | 通用设计 spec（仅余非 UT 项：`2026-06-05-*`, `2026-06-08-agent-automation-design.md`） |
+| [superpowers/specs/archive/](superpowers/specs/archive/) | 已废弃的早期 agent 架构 spec（4-Agent 模型、bastion-agent/environment-agent） |
+| [superpowers/plans/](superpowers/plans/) | 通用实施 plan（UT plans 已迁出） |
 
 ---
 
-*更新时间: 2026-06-20*
+## UT 文档入口
+
+所有 UT-only 设计、事故、规范、报告均在 **[tasks/ut/docs/](../tasks/ut/docs/README.md)**：
+
+| 子目录 | 说明 |
+|--------|------|
+| [tasks/ut/docs/guides/](../tasks/ut/docs/guides/) | UT 操作指南（testing / hermes-runner / ut-channels-overview …） |
+| [tasks/ut/docs/designs/](../tasks/ut/docs/designs/) | UT 设计 spec（workflow / hermes / kanban / failure-handler / schema …） |
+| [tasks/ut/docs/plans/](../tasks/ut/docs/plans/) | UT 实施 plan |
+| [tasks/ut/docs/incidents/](../tasks/ut/docs/incidents/) | UT 事故复盘 |
+| [tasks/ut/docs/reports/](../tasks/ut/docs/reports/) | UT 测试报告 / 周报 / 兼容性分析 |
+| [tasks/ut/docs/discussions/](../tasks/ut/docs/discussions/) | UT 架构讨论 |
+| [tasks/ut/docs/kanban/](../tasks/ut/docs/kanban/) | Kanban 模式配置 |
+| [tasks/ut/docs/单元测试流程规范_v2.md](../tasks/ut/docs/单元测试流程规范_v2.md) | UT 流程规范 |
+
+---
+
+*更新时间: 2026-06-22*

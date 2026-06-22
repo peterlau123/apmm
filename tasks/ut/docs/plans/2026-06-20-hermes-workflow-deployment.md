@@ -8,9 +8,9 @@
 
 **Tech Stack:** Python 3.10+, pytest, Hermes Agent/Gateway, systemd, Feishu webhook + message API, JSON Schema, Markdown.
 
-**Reference Spec:** `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
+**Reference Spec:** `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
 
-**Depends on:** Plan 1 (`docs/superpowers/plans/2026-06-19-hermes-workflow-foundation.md`) — MERGED to master. All v5 Worker functions (`select_batch`, `write_batch_config`, `execute_batch`, `analyze_failed_tests_v5`, `update_manifest`) and `hermes_runner` API exist.
+**Depends on:** Plan 1 (`tasks/ut/docs/plans/2026-06-19-hermes-workflow-foundation.md`) — MERGED to master. All v5 Worker functions (`select_batch`, `write_batch_config`, `execute_batch`, `analyze_failed_tests_v5`, `update_manifest`) and `hermes_runner` API exist.
 
 ---
 
@@ -35,8 +35,8 @@ Plan 1's end-to-end smoke (`tests/integration/run_linear_smoke.py`) proved the p
 - `skills/ut/hermes_workflow/SKILL.md` — Hermes-channel supervisor skill
 - `skills/ut/hermes_workflow/profile.yaml` — ut-supervisor profile config (Feishu subscribe + auto-load skill)
 - `skills/ut/hermes_workflow/ut-orchestrator-SOUL.md` — repo-tracked SOUL template (copied to profile dir at deploy)
-- `docs/guides/hermes-supervisor-service.md` — `hermes-agent@ut-supervisor` systemd deploy guide
-- `docs/guides/hermes-gateway-service.md` — `hermes-gateway@.service` template (3 instances)
+- `tasks/ut/docs/guides/hermes-supervisor-service.md` — `hermes-agent@ut-supervisor` systemd deploy guide
+- `tasks/ut/docs/guides/hermes-gateway-service.md` — `hermes-gateway@.service` template (3 instances)
 - `tests/skills/ut/test_config_contract.py` — config shape contract tests (G1/G2)
 - `tests/skills/ut/test_field_alignment.py` — test_id/test_node alignment (G4)
 - `tests/skills/ut/test_otp_resend.py` — OTP progressive resend schedule
@@ -568,14 +568,14 @@ git commit -m "feat(hermes_workflow): ut-supervisor profile config"
 ### Task 5.1: hermes-supervisor-service.md
 
 **Files:**
-- Create: `docs/guides/hermes-supervisor-service.md`
+- Create: `tasks/ut/docs/guides/hermes-supervisor-service.md`
 
 - [ ] **Step 1: Write systemd guide**: `hermes-agent@ut-supervisor.service` unit; enable/start/status/logs; Feishu chat_id + bastion creds prerequisites; relationship to 3 Gateway services.
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/guides/hermes-supervisor-service.md
+git add tasks/ut/docs/guides/hermes-supervisor-service.md
 git commit -m "docs(deploy): hermes-agent@ut-supervisor systemd guide"
 ```
 
@@ -584,14 +584,14 @@ git commit -m "docs(deploy): hermes-agent@ut-supervisor systemd guide"
 ### Task 5.2: hermes-gateway-service.md
 
 **Files:**
-- Create: `docs/guides/hermes-gateway-service.md`
+- Create: `tasks/ut/docs/guides/hermes-gateway-service.md`
 
 - [ ] **Step 1: Write systemd template guide**: `hermes-gateway@.service` template; 3 instances (ut-orchestrator/ut-executor/ut-fixer); `systemctl enable --now hermes-gateway@ut-{orchestrator,executor,fixer}`; mapping to `check_gateways_alive()`; board `apmm-ut` prerequisite.
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add docs/guides/hermes-gateway-service.md
+git add tasks/ut/docs/guides/hermes-gateway-service.md
 git commit -m "docs(deploy): hermes-gateway@ systemd template guide (3 instances)"
 ```
 
@@ -643,7 +643,7 @@ git commit -m "docs(readme): link hermes_workflow skill + deployment guides"
 
 ## Execution Handoff
 
-Plan complete and saved to `docs/superpowers/plans/2026-06-20-hermes-workflow-deployment.md`. Two execution options:
+Plan complete and saved to `tasks/ut/docs/plans/2026-06-20-hermes-workflow-deployment.md`. Two execution options:
 
 **1. Subagent-Driven (recommended)** — Fresh subagent per task/batch; review between.
 

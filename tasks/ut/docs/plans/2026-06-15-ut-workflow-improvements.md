@@ -820,13 +820,13 @@ git commit -m "test: verify UT workflow improvements implementation"
 
 ---
 
-**Plan saved to**: `docs/superpowers/plans/2026-06-15-ut-workflow-improvements.md`
+**Plan saved to**: `tasks/ut/docs/plans/2026-06-15-ut-workflow-improvements.md`
 
 ---
 
 ## Execution Handoff
 
-**Plan complete and saved to `docs/superpowers/plans/2026-06-15-ut-workflow-improvements.md`. Two execution options:**
+**Plan complete and saved to `tasks/ut/docs/plans/2026-06-15-ut-workflow-improvements.md`. Two execution options:**
 
 **1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
 

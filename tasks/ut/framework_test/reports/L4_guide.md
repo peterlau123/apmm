@@ -1,7 +1,7 @@
 # UT Framework 测试进度总结 + L4 开展指南
 
-> 基于 spec：`docs/superpowers/specs/2026-06-20-ut-framework-test-and-perf-design.md`
-> 实现计划：`docs/superpowers/plans/2026-06-20-ut-framework-test-and-perf-implementation.md`
+> 基于 spec：`tasks/ut/docs/designs/2026-06-20-ut-framework-test-and-perf-design.md`
+> 实现计划：`tasks/ut/docs/plans/2026-06-20-ut-framework-test-and-perf-implementation.md`
 >
 > 更新日期：2026-06-20
 
@@ -110,7 +110,7 @@ tests/ut/integration/
 ├── _synthetic_manifest.py       # 合成 manifest 生成器
 ├── run_pipeline_perf.py         # 统一 perf harness（mock/real）
 ├── run_linear_smoke.py          # 3 例 smoke（薄封装）
-├── start_l4_test.py             # L4 启动脚本（gateways+supervisor，daemon 须先起）★
+├── start_hermes_ut_runtime.py             # L4 启动脚本（gateways+supervisor，daemon 须先起）★
 └── fixtures/
     ├── l3_fast_subset.txt       # 8 快测
     └── l3_retry_subset.txt      # 3 retry
@@ -181,7 +181,7 @@ Round 3: executor 重跑修复后的测试 → pass/fail
 
 一条命令校验全部前置项是否就绪（含配置预检 + 运行态）：
 ```powershell
-python tests/ut/integration/start_l4_test.py --status
+python tasks/ut/scripts/start_hermes_ut_runtime.py --status
 ```
 
 ### 5.6 开展步骤
@@ -195,13 +195,13 @@ python tools/agent.py serve t_h20
 **Step 2 — 启动 gateways + supervisor**（非交互；daemon 须已运行）
 ```powershell
 cd D:\workspace\apmm
-python tests/ut/integration/start_l4_test.py
+python tasks/ut/scripts/start_hermes_ut_runtime.py
 # 先跑配置预检 → 校验 daemon → 后台起 3 Gateway + Supervisor
 ```
 
 **Step 3 — 确认环境就绪**
 ```powershell
-python tests/ut/integration/start_l4_test.py --status
+python tasks/ut/scripts/start_hermes_ut_runtime.py --status
 # 期望 Config: [OK] READY 且全部 [OK] running，Overall: [OK] READY
 ```
 
@@ -240,7 +240,7 @@ Get-Content .agents\logs\supervisor_ut-supervisor.log -Wait
 
 **Step 7 — 停止环境**
 ```powershell
-python tests/ut/integration/start_l4_test.py --stop
+python tasks/ut/scripts/start_hermes_ut_runtime.py --stop
 ```
 
 ### 5.7 预期产出

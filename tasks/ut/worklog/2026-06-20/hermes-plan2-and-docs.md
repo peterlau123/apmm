@@ -2,7 +2,7 @@
 
 ## 1. Hermes Workflow Plan 2（部署通道）
 
-以 subagent-driven 方式执行 `docs/superpowers/plans/2026-06-20-hermes-workflow-deployment.md`，
+以 subagent-driven 方式执行 `tasks/ut/docs/plans/2026-06-20-hermes-workflow-deployment.md`，
 每个任务经 实现 → 规格审查 → 代码质量审查 三道关，全部通过。
 
 - **Phase 0（关闭 4 个集成缺口 G1–G4）**：`get_execute_config` 扁平化 + 可注入 `exec_config`；

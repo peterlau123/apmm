@@ -8,7 +8,7 @@ when_to_use: Loaded automatically by a channel SKILL (ut/workflow or hermes_work
 # workflow_loop_core (v5)
 
 > Shared loop body for the dual-channel UT workflow.
-> Spec: `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
+> Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 
 The loop body is intentionally channel-agnostic. Channel skills inject
 behaviour through callbacks; the core only drives the stage cadence and

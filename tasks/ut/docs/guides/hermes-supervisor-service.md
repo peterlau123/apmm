@@ -41,7 +41,7 @@
 
 ### 2.2 Bastion 凭据/配置可用
 
-Supervisor 启动时会拉起一条 Bastion daemon 连接（OTP 自动恢复）。需先按 [bastion.md](bastion.md) 配置好对应 profile（如 `t_h20`）的 `.bastion_creds`，并确认 `workflow.yaml` 的 `bastion` 节指向该 profile。动态 OTP 在运行期通过飞书回复提供，不预存。
+Supervisor 启动时会拉起一条 Bastion daemon 连接（OTP 自动恢复）。需先按 [bastion.md](../../../docs/guides/bastion.md) 配置好对应 profile（如 `t_h20`）的 `.bastion_creds`，并确认 `workflow.yaml` 的 `bastion` 节指向该 profile。动态 OTP 在运行期通过飞书回复提供，不预存。
 
 ### 2.3 飞书 chat_id 已设置
 
@@ -155,7 +155,7 @@ systemctl --user disable hermes-agent@ut-supervisor
 | 服务起不来 / 反复重启 | `journalctl --user -u hermes-agent@ut-supervisor -e`；多为 `ExecStart` 子命令或 `WorkingDirectory` 不对 → 核对 §3 DEPLOY-CONFIRM 项 |
 | 发关键词无回复 | 检查 `channel_directory.json` 的 chat_id 绑定（§2.1）、机器人是否在群、飞书权限（§2.3） |
 | 起了但不加载 workflow | 检查 `config.yaml` 的 `channel_skill_bindings` 与 `skills.*` 是否绑定 `ut/hermes_workflow`（§2.1 SCHEMA NOTE） |
-| Bastion 连不上 / 一直等 OTP | 见 [bastion.md](bastion.md) 与 hermes-runner.md §6.1；运行期在飞书回复 `OTP <request_id> <code>` 恢复 |
+| Bastion 连不上 / 一直等 OTP | 见 [bastion.md](../../../docs/guides/bastion.md) 与 hermes-runner.md §6.1；运行期在飞书回复 `OTP <request_id> <code>` 恢复 |
 | Kanban 模式启动校验失败 | 红色错误卡片提示某 Gateway 未 active → 见 [hermes-gateway-service.md](hermes-gateway-service.md) |
 
 ---
@@ -167,7 +167,7 @@ systemctl --user disable hermes-agent@ut-supervisor
 | `skills/ut/hermes_workflow/SKILL.md` | Supervisor 通道 skill（状态机 / 回调 / OTP） |
 | `skills/ut/hermes_workflow/profile.yaml` | ut-supervisor profile（含部署绑定 SCHEMA NOTE） |
 | [hermes-gateway-service.md](hermes-gateway-service.md) | 3 个 Kanban Gateway 的 systemd 模板部署指南 |
-| [bastion.md](bastion.md) | Bastion 堡垒机连接与凭据配置 |
+| [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |
 
 ---

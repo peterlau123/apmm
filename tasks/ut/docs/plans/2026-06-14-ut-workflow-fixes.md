@@ -588,7 +588,7 @@ git commit -m "test: verify UT workflow fixes"
 
 ---
 
-**Plan saved to**: `docs/superpowers/plans/2026-06-14-ut-workflow-fixes.md`
+**Plan saved to**: `tasks/ut/docs/plans/2026-06-14-ut-workflow-fixes.md`
 
 ---
 

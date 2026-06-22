@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.10+, pytest, JSON Schema (manifest_schema.json), Markdown (SKILL.md files), YAML (workflow.yaml).
 
-**Reference Spec:** `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
+**Reference Spec:** `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
 
 ---
 
@@ -1089,7 +1089,7 @@ If `stage_skills[name]` lookup yields stale/missing (e.g., harness auto-compact 
 
 ## See also
 
-- `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
+- `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
 - `skills/ut/workflow/SKILL.md` — linear-mode supervisor
 - `skills/ut/hermes_workflow/SKILL.md` — Hermes-mode supervisor (Plan 2)
 ```
@@ -1189,7 +1189,7 @@ If a Worker SKILL ref is missing in context (auto-compact dropped it), reload th
 
 ## See also
 
-- `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md` — full design (v5)
+- `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` — full design (v5)
 - `workflow_loop_core/SKILL.md`
 - `hermes_workflow/SKILL.md` (Plan 2)
 ```
@@ -1597,8 +1597,8 @@ git commit -m "test(integration): resume scenario placeholder"
 
 - `skills/ut/hermes_workflow/SKILL.md` (Hermes channel skill)
 - `skills/ut/hermes_workflow/profile.yaml` (ut-supervisor profile)
-- `docs/guides/hermes-supervisor-service.md`
-- `docs/guides/hermes-gateway-service.md`
+- `tasks/ut/docs/guides/hermes-supervisor-service.md`
+- `tasks/ut/docs/guides/hermes-gateway-service.md`
 - `~/AppData/Local/hermes/profiles/ut-orchestrator/SOUL.md` update
 - Feishu group subscription wiring
 - OTP progressive resend (5/15/30/60min)
@@ -1610,7 +1610,7 @@ These depend on Plan 1 foundation; details in `docs/superpowers/plans/2026-MM-DD
 
 ## Execution Handoff
 
-Plan complete and saved to `docs/superpowers/plans/2026-06-19-hermes-workflow-foundation.md`. Two execution options:
+Plan complete and saved to `tasks/ut/docs/plans/2026-06-19-hermes-workflow-foundation.md`. Two execution options:
 
 **1. Subagent-Driven (recommended)** — Dispatch a fresh subagent per task; review between tasks; fast iteration.
 

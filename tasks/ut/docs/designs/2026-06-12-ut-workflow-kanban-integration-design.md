@@ -244,7 +244,7 @@ hermes kanban boards switch apmm-ut
 - [tasks/ut/docs/kanban/README.md](../../../tasks/ut/docs/kanban/README.md) - Hermes Kanban × UT Workflow 集成指南
 - [skills/ut/workflow/SKILL.md](../SKILL.md) - Workflow Skill 文档
 - [.agents/workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置
-- [docs/superpowers/specs/2026-06-11-ut-workflow-design.md](2026-06-11-ut-workflow-design.md) - Workflow v5.1 基础设计
+- [tasks/ut/docs/designs/2026-06-11-ut-workflow-design.md](2026-06-11-ut-workflow-design.md) - Workflow v5.1 基础设计
 
 ---
 

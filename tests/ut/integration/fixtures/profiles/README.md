@@ -14,34 +14,68 @@ can drift.
 
 ## What is frozen (and what is NOT)
 
-Each `<profile>/` dir here holds **only 3 files**:
+Each `<profile>/` dir here holds **2 frozen files**:
 
 | File | Why frozen |
 |------|-----------|
 | `SOUL.md` | The agent persona/instructions — the real behavioral contract |
 | `profile.yaml` | Hermes profile description (minimal schema) |
-| `channel_directory.json` | Feishu chat binding (`platforms.feishu[].id`) |
+
+`channel_directory.json` is **not** frozen — it lives in the live profile dir
+as user-owned data (machine-specific Feishu chat binding) and is preserved
+across deploys.
 
 **Intentionally excluded** (do not snapshot these):
 
 - `auth.json`, `*.lock` — secrets / locks
+- `channel_directory.json` — Feishu chat binding, machine-specific (user-owned)
 - `config.yaml` — machine-specific provider config with `${ENV}` API-key refs and
-  Hermes defaults; **not** L4-specific behavior (its `channel_skill_bindings` is `[]`;
-  skill loading comes from repo skills + `x-deploy` wiring)
+  Hermes defaults; preserved across deploys (user-owned)
 - `state.db*`, `sessions/`, caches, logs, `gateway*` — runtime state
+
+Skills are **not** frozen here either — they are owned by the repo root
+`skills/ut/<skill>/` (the authoritative source) and assembled into each
+profile's distribution by `deploy_tier.py` per the profile's skills subset.
 
 ## Deploy / verify
 
+`deploy_tier.py` ships each profile as a Hermes **profile distribution**:
+it assembles a distribution source (`.dist/<profile>/` — gitignored build
+artifact) from the fixture files + repo skills, then runs
+`hermes profile install --force` (user data preserved, only distribution-owned
+files overwritten).
+
 ```powershell
-# diff frozen vs live (no write)
-python tests/ut/integration/deploy_l4_profiles.py --check
-# install frozen files into live Hermes profiles (preserves auth/state)
-python tests/ut/integration/deploy_l4_profiles.py
+# diff repo sources vs live Hermes profiles (no write)
+python tasks/ut/scripts/deploy_tier.py --tier L4 --check
+# install distributions into live Hermes profiles (preserves auth/state/config)
+python tasks/ut/scripts/deploy_tier.py --tier L4
+# one profile only
+python tasks/ut/scripts/deploy_tier.py --tier L4 --profile ut-supervisor
 # then confirm readiness
-python tests/ut/integration/start_l4_test.py --status
+python tasks/ut/scripts/start_hermes_ut_runtime.py --status
 ```
+
+After deploy, `hermes profile info <name>` should report the profile
+**is a distribution** (has `distribution.yaml`). To re-sync after editing repo
+sources, re-run the deploy command — or `hermes profile update <name>` (re-pulls
+from the recorded `.dist/<name>/` source, so re-run deploy first to refresh
+that directory).
 
 If a live profile dir is absent, create it first: `hermes profile create <name>`,
 then re-run the deploy script.
 
-> Source of truth captured: 2026-06-21 from the live Hermes install on this machine.
+## Profile -> skills subset
+
+Per `hermes_workflow` SKILL §3 step 3 (supervisor load list) + §6 (worker Stage
+ownership):
+
+| Profile | skills/ut/<subset> |
+|---------|--------------------|
+| `ut-supervisor` | hermes_workflow, workflow_loop_core, batch-selector, unit-test-executor, failure-handler, manifest-updater |
+| `ut-orchestrator` | batch-selector, manifest-updater |
+| `ut-executor` | unit-test-executor |
+| `ut-fixer` | failure-handler, dependency-resolver |
+
+`ut-test-collector` (Stage 1) and `workflow` (linear-channel scheduler) are NOT
+hermes profile skills — they belong to the linear channel / one-shot collection.

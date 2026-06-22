@@ -28,8 +28,10 @@ import os
 import re
 import subprocess
 import sys
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Literal
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_DIR = SCRIPT_DIR.parent.parent
@@ -45,31 +47,111 @@ from feishu_api import FeishuAPI
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
-# Feishu group-message command parsing (config-change whitelist).
+# Feishu group-message command parsing.
+# Layer 1 (regex): deterministic atomic commands.
+# Layer 2 (LLM, P3): free-text intent classification — falls through here.
+# Spec: tasks/ut/docs/designs/2026-06-22-ut-tier-fixtures-and-agent-intent-design.md §4
+
 _WHITELIST = {"batch_size", "pytest_args", "max_retry_per_test", "timeout"}
-_STOP = ("结束", "终止", "停止")
-_PAUSE = ("暂停",)
-_RESUME = ("继续",)
-_OTP_RE = re.compile(r"^\s*(\d{6})\s*$")
-_KV_RE = re.compile(r"(\w+)\s*=\s*(\S+)")
+
+# All Layer-1 patterns are STRICT anchored matches (no substring matching).
+# Substring matches in v0 caused "稍后结束这个" to fire `stop`.
+_OTP_RE          = re.compile(r"^\s*(\d{6})\s*$")
+_OTP_WITH_ID_RE  = re.compile(r"^\s*OTP\s+(\w+)\s+(\d{6})\s*$", re.IGNORECASE)
+_STOP_RE         = re.compile(r"^\s*(?:结束|取消|终止|停止|stop)\s*$", re.IGNORECASE)
+_PAUSE_RE        = re.compile(r"^\s*(?:暂停|pause)\s*$", re.IGNORECASE)
+_RESUME_RE       = re.compile(r"^\s*(?:继续|恢复|resume)\s*$", re.IGNORECASE)
+_CHANGE_RE       = re.compile(r"^\s*改\b")   # "改 KEY=VAL" prefix
+_KV_RE           = re.compile(r"(\w+)\s*=\s*(\S+)")
 
 
-def parse_command(text: str):
-    """Parse a Feishu group message into a structured command dict, or None."""
+@dataclass
+class Command:
+    """Parsed Feishu message — output of Layer 1 (regex) or Layer 2 (LLM).
+
+    intent: canonical intent label (see §4.4 of the spec).
+    confidence: 1.0 for Layer-1 regex hits; 0..1 for Layer-2 LLM classifications.
+    args: intent-specific payload (e.g. {"code": "123456"} for otp,
+          {"batch_size": "4"} for change_config).
+    source: "regex" | "llm" — which layer produced this Command.
+    raw_text: the original message text, preserved for logging/audit.
+    """
+    intent: Literal[
+        "otp", "otp_with_id", "stop", "pause", "resume", "change_config",
+        "start_l1", "start_l2", "start_l3", "start_l4",
+        "start_production", "unknown",
+    ]
+    confidence: float
+    args: dict = field(default_factory=dict)
+    source: Literal["regex", "llm"] = "regex"
+    raw_text: str = ""
+
+
+# Legacy {type, payload} → new intent mapping for the back-compat adapter.
+_LEGACY_TYPE_FOR_INTENT = {
+    "otp": "otp",
+    "otp_with_id": "otp",   # legacy callers only saw "otp"
+    "stop": "stop",
+    "pause": "pause",
+    "resume": "resume",
+    "change_config": "change_config",
+}
+
+
+def parse_command(text):
+    """Parse a Feishu group message via Layer 1 (regex). Returns Command or None.
+
+    Returns None on no Layer-1 match — caller should fall through to Layer 2
+    (LLM classification, P3). Callers that want the legacy ``{type, payload}``
+    shape should use :func:`parse_command_as_dict` instead.
+    """
+    if text is None:
+        return None
+    raw = text
     t = text.strip()
-    if any(k in t for k in _STOP):
-        return {"type": "stop", "payload": {}}
-    if any(k in t for k in _PAUSE):
-        return {"type": "pause", "payload": {}}
-    if any(k in t for k in _RESUME):
-        return {"type": "resume", "payload": {}}
+
+    if not t:
+        return None
+
+    # OTP — strict 6 digits, optionally prefixed by "OTP <request_id>".
+    m = _OTP_WITH_ID_RE.match(t)
+    if m:
+        return Command(intent="otp_with_id", confidence=1.0,
+                       args={"request_id": m.group(1), "code": m.group(2)},
+                       source="regex", raw_text=raw)
     m = _OTP_RE.match(t)
     if m:
-        return {"type": "otp", "payload": {"code": m.group(1)}}
-    if t.startswith("改"):
-        return {"type": "change_config",
-                "payload": {k: v for k, v in _KV_RE.findall(t) if k in _WHITELIST}}
+        return Command(intent="otp", confidence=1.0,
+                       args={"code": m.group(1)},
+                       source="regex", raw_text=raw)
+
+    if _STOP_RE.match(t):
+        return Command(intent="stop", confidence=1.0, source="regex", raw_text=raw)
+    if _PAUSE_RE.match(t):
+        return Command(intent="pause", confidence=1.0, source="regex", raw_text=raw)
+    if _RESUME_RE.match(t):
+        return Command(intent="resume", confidence=1.0, source="regex", raw_text=raw)
+
+    if _CHANGE_RE.match(t):
+        payload = {k: v for k, v in _KV_RE.findall(t) if k in _WHITELIST}
+        return Command(intent="change_config", confidence=1.0,
+                       args=payload, source="regex", raw_text=raw)
+
     return None
+
+
+def parse_command_as_dict(text):
+    """Back-compat adapter — returns the legacy ``{"type", "payload"}`` shape.
+
+    Maps the new ``Command`` dataclass back to the v4 ``{type, payload}``
+    dict so existing callers (archive/supervisor_feishu_listen.py, old tests)
+    keep working. New code should use :func:`parse_command` directly.
+    """
+    cmd = parse_command(text)
+    if cmd is None:
+        return None
+    legacy_type = _LEGACY_TYPE_FOR_INTENT.get(cmd.intent, cmd.intent)
+    return {"type": legacy_type, "payload": dict(cmd.args)}
 
 
 def _load_yaml(path):

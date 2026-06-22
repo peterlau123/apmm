@@ -12,6 +12,49 @@
     "gateways": ["ut-orchestrator", "ut-executor", "ut-fixer"],
     "supervisor": "ut-supervisor"
   },
+  "anti_fabrication_assertions": [
+    {
+      "id": "AF-1",
+      "rule": "every executed test (run_count > 0) must have a non-null log_file that stat-succeeds with size > 0 on remote (defeats fabricated/null log paths)",
+      "check": "for each manifest entry with run_count > 0: log_file is non-empty AND tools/agent.py -p t_h20 run 'stat -c %s <log_file>' returns size > 0; null/missing log_file on an executed entry is itself a FAIL",
+      "severity": "hard"
+    },
+    {
+      "id": "AF-2",
+      "rule": "last_duration_ms is non-null iff test was actually executed (status in [passed, failed, error, retriable_error]) — ignored without execution stays null",
+      "check": "for each manifest entry: if status in [passed, failed] then last_duration_ms must be a positive integer; if status == ignored and run_count == 0 then last_duration_ms must be null",
+      "severity": "hard"
+    },
+    {
+      "id": "AF-3",
+      "rule": "passed + failed + ignored equals total accounted nodes",
+      "check": "passed_count + failed_count + ignored_count == metadata.expected_total (3 for L4)",
+      "severity": "hard"
+    }
+  ],
+  "stage_invariants": [
+    {
+      "id": "STG-1",
+      "rule": "failure-handler fired at least once (retry path exercised)",
+      "check": "manifest.json contains >=1 entry with retry_count > 0, or batch_results.json has >=1 entry with final_status == retriable_error in a trajectory",
+      "severity": "hard",
+      "rationale": "L4 retry subset is offline-unfixable by design; failure-handler MUST run, otherwise Stage 4 is bypassed"
+    },
+    {
+      "id": "STG-2",
+      "rule": "max_retry boundary enforced — no test executed more than max_retry + 1 times",
+      "check": "for each manifest entry: retry_count <= config.max_retry_per_test (3 for L4)",
+      "severity": "hard",
+      "rationale": "Defends failure-handler.py:506-512 boundary; INV-5 covers the same property at the Kanban-chain level"
+    },
+    {
+      "id": "STG-3",
+      "rule": "retriable_error is a non-terminal transient state — must transition to ignored/passed/failed by end of run",
+      "check": "no manifest terminal entry has status == retriable_error (must be promoted to ignored at max_retry, or to passed/failed on a successful re-run)",
+      "severity": "hard",
+      "rationale": "Incident 2026-06-22: worker fabricated NCCL retriable_error and supervisor paused incorrectly; STG-3 catches 'transient state never promoted'"
+    }
+  ],
   "dependency_chain_invariants": [
     {
       "id": "INV-1",

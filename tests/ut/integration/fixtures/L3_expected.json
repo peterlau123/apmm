@@ -1,0 +1,58 @@
+{
+  "_comment": "FROZEN expected-outcome baseline for the L3 fast-subset test. L3 validates batch scheduling + failure-handler retry: Stage 4 must fire at least once (STG-1), retry budget must be enforced (STG-2), and no terminal retriable_error state (STG-3). terminal_state_distribution is a soft calibration — only pending==0 is hard; the passed/failed/ignored split depends on remote cache state. AF and INV are intentionally absent (L3 is linear, not Kanban).",
+  "metadata": {
+    "layer": "L3",
+    "mode": "linear",
+    "test_list": "tests/ut/integration/fixtures/l3_fast_subset.txt",
+    "workflow_config": "tests/ut/integration/fixtures/workflow.l3.yaml",
+    "batch_size": 4,
+    "max_retry_per_test": 2,
+    "frozen_on": "2026-06-22",
+    "expected_total": 8
+  },
+  "terminal_state_distribution": {
+    "_note": "Only pending==0 is enforced — the passed/failed/ignored split depends on remote model cache. STG-1/2/3 provide the real behavioral assertions.",
+    "required": { "pending": 0 }
+  },
+  "stage_invariants": [
+    {
+      "id": "STG-1",
+      "rule": "failure-handler fired at least once (retry path exercised)",
+      "check": "manifest.json contains >=1 entry with retry_count > 0, or batch_results.json has >=1 entry with final_status == retriable_error in a trajectory",
+      "severity": "hard",
+      "rationale": "L3 fixture uses l3_fast_subset which includes tests that may fail on the offline remote; if no test ever triggers the failure-handler, Stage 4 was bypassed and the chain is incomplete"
+    },
+    {
+      "id": "STG-2",
+      "rule": "max_retry boundary enforced — no test executed more than max_retry + 1 times",
+      "check": "for each manifest entry: retry_count <= config.max_retry_per_test (2 for L3)",
+      "severity": "hard",
+      "rationale": "Defends failure-handler.py boundary bug; retry budget must be honored"
+    },
+    {
+      "id": "STG-3",
+      "rule": "retriable_error is a non-terminal transient state — must transition to ignored/passed/failed by end of run",
+      "check": "no manifest terminal entry has status == retriable_error (must be promoted to ignored at max_retry, or to passed/failed on success)",
+      "severity": "hard",
+      "rationale": "Catch 'transient state never promoted' bugs that would leave the supervisor confused"
+    }
+  ],
+  "pass_criteria": {
+    "must_all_hold": [
+      "pending == 0 at end",
+      "total accounted nodes == 8",
+      "STG-1: failure-handler triggered at least once",
+      "STG-2: no test exceeds retry budget",
+      "STG-3: no terminal retriable_error"
+    ],
+    "record_but_not_fail": [
+      "exact passed/failed/ignored split (remote cache-dependent)",
+      "wall-clock ~15 min (informational)"
+    ]
+  },
+  "artifacts_to_capture": [
+    ".agents/logs/supervisor_ut-supervisor.log",
+    "runs/ut-<timestamp>/manifest.json",
+    "runs/ut-<timestamp>/batches/*/batch_results.json"
+  ]
+}

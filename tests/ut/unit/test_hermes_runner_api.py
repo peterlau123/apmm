@@ -163,33 +163,41 @@ def test_refresh_manifest_stats(hr, tmp_path):
     assert s["pending"] == 1 and s["running"] == 1 and s["passed"] == 1
 
 
-# ── 2.1 parse_command ─────────────────────────────────────────────────────────
+# ── 2.1 parse_command (new Command dataclass — see also test_parse_command.py) ─
 
 def test_parse_stop(hr):
-    assert hr.parse_command("结束")["type"] == "stop"
+    assert hr.parse_command("结束").intent == "stop"
 
 
 def test_parse_pause(hr):
-    assert hr.parse_command("暂停")["type"] == "pause"
+    assert hr.parse_command("暂停").intent == "pause"
 
 
 def test_parse_resume(hr):
-    assert hr.parse_command("继续")["type"] == "resume"
+    assert hr.parse_command("继续").intent == "resume"
 
 
 def test_parse_otp(hr):
     c = hr.parse_command("123456")
-    assert c["type"] == "otp" and c["payload"]["code"] == "123456"
+    assert c.intent == "otp" and c.args["code"] == "123456"
 
 
 def test_parse_change_config(hr):
     c = hr.parse_command("改 batch_size=4")
-    assert c["type"] == "change_config" and c["payload"]["batch_size"] == "4"
+    assert c.intent == "change_config" and c.args["batch_size"] == "4"
 
 
 def test_parse_change_config_whitelist_only(hr):
-    assert "unknown_key" not in hr.parse_command("改 unknown_key=9")["payload"]
+    assert "unknown_key" not in hr.parse_command("改 unknown_key=9").args
 
 
 def test_parse_non_command(hr):
     assert hr.parse_command("这个测试为什么失败") is None
+
+
+def test_parse_command_as_dict_back_compat(hr):
+    """Legacy {type, payload} adapter still works for archive callers."""
+    d = hr.parse_command_as_dict("结束")
+    assert d == {"type": "stop", "payload": {}}
+    d = hr.parse_command_as_dict("123456")
+    assert d == {"type": "otp", "payload": {"code": "123456"}}

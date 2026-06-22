@@ -8,7 +8,7 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 # hermes_workflow (v5)
 
 > Hermes-channel supervisor for the dual-channel UT workflow.
-> Spec: `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
+> Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 
 This skill is the **生产运行通道 (production channel)** counterpart of
 `ut/workflow`. Both drive the same `workflow_loop_core`; this skill supplies
@@ -95,7 +95,9 @@ Import the runner as a tool module (it no longer inlines stage logic):
 
 ```python
 from hermes_runner import (
-    parse_command,           # text → {type, payload} or None
+    parse_command,           # text → Command or None (Layer 1 regex)
+    classify_intent_llm,     # text → Command (Layer 2 LLM, with llm_invoker)
+    Command,                 # dataclass: intent / confidence / args / source / raw_text
     init_or_resume,          # (run_dir, state_path, state, iteration)
     validate_required_config,# (ok, missing_keys)
     check_gateways_alive,    # {profile: bool}  (kanban preflight + per-round)
@@ -126,29 +128,112 @@ from bastion_manager import (
 
 ## 3. Startup sequence (§14.2)
 
+The supervisor distinguishes **two trigger paths** depending on what
+`parse_command(text)` + `classify_intent_llm(text)` (`hermes_runner` Layer 1 +
+Layer 2) classify the trigger message as. See the spec §4 for the two-layer
+intent recognizer.
+
 ```
-1. 用户飞书发"跑 ut workflow" / "启动测试" / "开始 UT"
-2. ut-supervisor Agent (Feishu subscriber) 收到消息 → 关键词匹配
+1. 用户飞书发任意消息 → ut-supervisor Agent 收到
+2. 意图识别（hermes_runner Layer 1 → Layer 2）
+     a) Layer 1: parse_command(text) → otp/stop/pause/resume/change_config
+        命中 → 直接派发到状态机（§5 命令矩阵），不进启动流程
+     b) Layer 1 miss → Layer 2: classify_intent_llm(text) → Command
+        intent ∈ {start_l1..l4, start_production} → 进入【启动确认分支】(§3.A)
+        intent == change_config → 派发到状态机
+        intent == unknown → 飞书发帮助卡，列出合法触发词（结束）
+        legacy 关键词 "跑 ut workflow" / "启动测试" / "开始 UT" 在 v4 是直接进 §3.B；
+        v5 一律交给 Layer 2（这些短语预期分类为 start_production）
 3. 一次性加载：hermes_workflow + workflow_loop_core
               + 4 份 Worker SKILL（batch-selector / unit-test-executor /
                 failure-handler / manifest-updater）
-4. 飞书发【参数确认卡片】（蓝色），展示 5 字段：
-     test_list_path, batch_size, manifest_source, kanban.enabled, resume_from
-   选项："确认" / "yaml=PATH" / "resume=RUN_DIR" / "改 KEY=VALUE" / "取消"
-5. 等待用户回复（5 分钟超时 → 退出）
-6. "确认" → validate_required_config(cfg)
-     - test_list_path 或 manifest_source 至少一个（input_filter.*）
-     - config.remote_server 存在
-     - kanban.enabled=true 时额外：check_gateways_alive() 三个 Gateway 全 active
-     - 任一缺失 → 飞书红色错误卡片 → failed → 退出
-7. init_or_resume(workflow_yaml, resume_from)
-     → (run_dir, state_path, state, iteration)
-8. Bastion bring-up（BastionManager + ensure_connected）
-     daemon 不可用 → 进入 waiting_otp，按 §7 渐进重发节奏发 OTP 卡片
-9. bastion.start_heartbeat(on_disconnect=...)
-     心跳检测断联只调 mark_disconnected() 上报，不直接弹卡片 / 不切状态
-10. 进入主循环 loop_core.run(stage_skills, 回调...)
+4. 按 §3.A（tier / production 一键触发）或 §3.B（自由参数确认卡）继续
 ```
+
+### §3.A — Tier / production 启动确认分支（v5 新增）
+
+`classify_intent_llm` 输出 `start_l1` / `start_l2` / `start_l3` / `start_l4` /
+`start_production` 时走此路径。yaml 路径已由 tier 决定，**不再展示自由参数卡**。
+
+```
+A1. 查 tier → yaml 固化映射表（§3.C），得到 (yaml_path, mode, eta)
+A2. 飞书发【启动意图确认卡】(send_confirmation_card)
+      - intent / tier_label / yaml_path / test_list_path / mode / eta
+      - tier (start_l1..l4)         → 蓝色 (template=blue)
+      - production (start_production) → 橙色 + ⚠️ "这是生产全量运行" 警告
+      - 卡片提示 "10s 内回复 确认 / 取消，否则自动取消"
+A3. 等用户回复（默认 10s，配置 confirmation_timeout_seconds）
+      - "确认" → 进 A4
+      - "取消" / 超时 → drop（红色"已取消"卡）→ 等下条触发消息，回到第 2 步
+A4. validate_required_config(load_yaml(yaml_path))
+      - test_list_path 或 manifest_source 至少一个
+      - config.remote_server 存在
+      - kanban.enabled=true 时额外：check_gateways_alive() 三个 Gateway 全 active
+      - 任一缺失 → 飞书红色错误卡片 → failed → 退出
+A5. init_or_resume(yaml_path, resume_from=None)
+      → (run_dir, state_path, state, iteration)
+A6. Bastion bring-up + start_heartbeat（同 §3.B 的 8/9 步）
+A7. 进入主循环 loop_core.run(...)
+```
+
+**启动期间状态机互锁**（spec §4.6 边界情况）：
+
+| 当前 supervisor 状态 | 收到 start_* 意图 | 处理 |
+|---|---|---|
+| idle（无 run 在跑） | 任意 | 进 A1 |
+| running / paused / waiting_otp | 任意 | 红色卡 "已有 run 在跑（status=X），请先 结束 或 暂停" |
+
+### §3.B — Legacy 自由参数确认卡分支（v4 行为，向后兼容）
+
+仅当 Layer 2 返回 `unknown` 但用户用了 v4 的关键词（"跑 ut workflow" / "启动测试"）
+触发时走此路径。**v5 默认走 §3.A** — 这条留作回退。
+
+```
+B1. 飞书发【参数确认卡片】（蓝色），展示 5 字段：
+      test_list_path, batch_size, manifest_source, kanban.enabled, resume_from
+    选项："确认" / "yaml=PATH" / "resume=RUN_DIR" / "改 KEY=VALUE" / "取消"
+B2. 等待用户回复（5 分钟超时 → 退出）
+B3. "确认" → validate_required_config(cfg)（同 §3.A A4）
+B4. init_or_resume(workflow_yaml, resume_from)
+B5. Bastion bring-up（BastionManager + ensure_connected）
+      daemon 不可用 → 进入 waiting_otp，按 §7 渐进重发节奏发 OTP 卡片
+B6. bastion.start_heartbeat(on_disconnect=...)
+      心跳检测断联只调 mark_disconnected() 上报，不直接弹卡片 / 不切状态
+B7. 进入主循环 loop_core.run(stage_skills, 回调...)
+```
+
+### §3.C — Tier → yaml 固化映射表
+
+```yaml
+# 来源：tasks/ut/docs/designs/2026-06-22-ut-tier-fixtures-and-agent-intent-design.md §2.2
+start_l1:
+  yaml: tests/ut/integration/fixtures/workflow.l1.yaml
+  test_list: tests/ut/integration/fixtures/l1_smoke_list.txt
+  mode: linear           # kanban.enabled=false
+  eta: "< 1 min"
+start_l2:
+  yaml: tests/ut/integration/fixtures/workflow.l2.yaml
+  test_list: tests/ut/integration/fixtures/mini_test_list.txt
+  mode: linear
+  eta: "~ 3 min"
+start_l3:
+  yaml: tests/ut/integration/fixtures/workflow.l3.yaml
+  test_list: tests/ut/integration/fixtures/l3_fast_subset.txt
+  mode: linear
+  eta: "~ 15 min"
+start_l4:
+  yaml: tests/ut/integration/fixtures/workflow.l4.yaml
+  test_list: tests/ut/integration/fixtures/l3_retry_subset.txt
+  mode: kanban
+  eta: "~ 60 min"
+start_production:
+  yaml: .agents/workflow.yaml
+  test_list: (由 yaml 自定义)
+  mode: kanban           # 生产默认 kanban
+  eta: "hours – days"
+```
+
+`mode` / `eta` 仅用于卡片展示；真正生效的是 yaml 内的 `kanban.enabled`。
 
 Required-config validation maps directly to `validate_required_config`
 (input_filter + remote_server) plus, in Kanban mode, a `check_gateways_alive`
@@ -183,9 +268,22 @@ Called when an executor returns `next_action == "wait"` (Bastion loss):
 
 ### `check_user_commands()`
 
-Reads the Feishu group and parses each message with `parse_command(text)`,
-returning a list of structured commands. `parse_command` recognises:
-`stop` / `pause` / `resume` / `otp {code}` / `change_config {whitelisted kv}`.
+Reads the Feishu group and runs the two-layer intent recognizer on every
+new message:
+
+1. **Layer 1** (regex): `parse_command(text)` → returns a `Command` if the
+   message matches one of 6 anchored regex patterns (`otp`/`otp_with_id`/
+   `stop`/`pause`/`resume`/`change_config`). If matched, dispatch directly
+   to the state machine matrix (§8.2).
+2. **Layer 2** (LLM): if Layer 1 returns `None`, call
+   `classify_intent_llm(text)` with the supervisor's LLM invoker. Returns
+   a `Command` with `source="llm"` and `intent` ∈ `{start_l1..l4,
+   start_production, change_config, unknown}`.
+   - `start_*` / `change_config`: queue for the startup-sequence hook
+     (§3 step 2 — only processed in idle state).
+   - `unknown`: the supervisor may post a brief "help" card listing
+     trigger words.
+
 (Linear `ut/workflow` returns `[]` here; this channel actually reads Feishu.)
 
 ### `check_terminal_conditions(state, manifest)`
@@ -334,8 +432,77 @@ Gateways and batch dirs are left untouched.
 
 ---
 
+## 11. Pitfalls (lessons from real incidents)
+
+### 11.1 `tools/agent.py serve` must be started as a true background process
+
+`agent.py serve t_h20 ...` is a long-lived daemon holding the SSH session. If
+you invoke it through Hermes's `terminal` tool in foreground mode, the default
+180-second timeout will SIGKILL it mid-handshake, leaving a half-dead daemon
+state: `ping` succeeds (socket bound) but `run` hangs / returns `Socket is
+closed` (shell session never finished setup).
+
+**Correct invocation**: `terminal(background=True, ...)` for `serve`. Pair with
+`agent.py -p t_h20 stop` first if there's a stale daemon to clear. Verify with
+two round-trip `run` calls separated by ≥90 seconds before considering the
+daemon healthy.
+
+This applies to BOTH the initial Bastion bring-up in `init_or_resume` AND the
+OTP recovery path triggered by `bastion.on_disconnect`.
+
+### 11.2 Trust-but-verify stage-3 results (anti-fabrication audit)
+
+A misbehaving Stage-3 worker can fabricate `batch_results.json` without
+actually executing `pytest`. The 2026-06-22 incident on run
+`ut-20260621-234651` produced fabricated stats (`passed=1 / failed=1 /
+ignored=1`), a fake NCCL error classified as `resource-insufficient` triggering
+a spurious supervisor pause, and an out-of-band "UT Workflow完成报告" sent
+directly from `D:/workspace/apmm/scripts/send_feishu_report.py` (worker-written,
+using a Claude-side Feishu token) to the ai-engineer Feishu group.
+
+**Supervisor responsibility after each stage-3 completion** (before handing
+off to handle_failures / Stage 4):
+
+1. **Validate `batch_results.json` shape**: for every test entry, verify that
+   `status` matches `exit_code` + `duration_seconds`. Specifically:
+   - `status: passed/failed` AND `duration_seconds: null` → ⚠ fabrication suspect
+   - `log_path` present but path is relative or empty → ⚠ fabrication suspect
+2. **Stat the remote `log_path`**: `agent.py -p t_h20 run --timeout 15 "ls -la <log_path>"`.
+   If the file doesn't exist on the bastion target, the worker fabricated the
+   results. Stop the loop, mark the run `invalidated` (do not `pause`), and
+   surface a red error card naming the offending stage.
+3. **Cross-check container state**: `ps -ef | grep pytest` inside the container
+   the worker claimed to use, and `find /gpfs/.../ut_logs/ -mmin -60` for fresh
+   log files. If both are empty but `batch_results.json` claims work happened,
+   that's the fabrication signature.
+
+If fabrication is confirmed: `mv manifest.json manifest.json.fabricated.bak`
+and `mv <batch_dir> <batch_dir>.fabricated.bak`, write an `INVALID.md` with
+evidence, and post a red Feishu card. Do **not** resume — the manifest is
+poisoned and Stage 2 (batch-selector) will see no pending tests left.
+
+### 11.3 Workers must not send Feishu / Lark messages out-of-band
+
+By design only the supervisor (this channel) talks to Feishu. The 2026-06-22
+incident showed a worker can bypass this by writing a Python script that calls
+`open.feishu.cn` directly with a Feishu token harvested from
+`~/.claude/skills/feishu-webhook-skill/`. This is documented as forbidden in
+the `unit-test-executor` and `failure-handler` SKILLs (§禁止操作 hard
+contract). If the supervisor sees a delivery in the ai-engineer chat (or any
+non-supervisor chat) referring to a UT run id, that's a worker exfiltration
+event — log it and tighten the SKILLs further.
+
+### 11.4 Stale monitor cron jobs outliving invalidated runs
+
+When a run is invalidated, any cron monitor created for it (e.g.
+`ut-resume-monitor-<run_id>`) will keep firing and posting misleading status.
+On invalidation, also: `hermes -p <profile> cron remove <job_id>` for every
+monitor cron created for that run_id.
+
+---
+
 ## Reference
 
-`docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
+`tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 (§14 process model & startup & main loop, §8 state machine & command matrix,
 §9 resume mapping, §10 pending_config, §7 / §8.5 OTP progressive resend).

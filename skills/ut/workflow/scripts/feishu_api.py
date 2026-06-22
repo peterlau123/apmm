@@ -48,8 +48,8 @@ class FeishuAPI:
             f"{BASE_URL}/im/v1/messages",
             headers={"Authorization": f"Bearer {token}"},
             params={
-                "receive_id_type": "chat_id",
-                "receive_id": self.chat_id,
+                "container_id_type": "chat",
+                "container_id": self.chat_id,
                 "page_size": limit
             },
             timeout=10
@@ -175,12 +175,72 @@ class FeishuAPI:
                 "prefix": ""
             }
         }
-        
+
         tmpl = templates.get(alert_type, templates["warning"])
-        
+
         return self.send_card({
             "header": {"title": tmpl["title"], "template": tmpl["template"]},
             "content": f"{tmpl['prefix']}: {agent_id}\n{details}"
+        })
+
+    def send_confirmation_card(self, intent, yaml_path, test_list_path, mode,
+                                eta, timeout_seconds=10):
+        """发送启动意图确认卡片 (Spec §4.5 — Agent intent confirmation gate).
+
+        Display-only card; user replies with text "确认" / "取消" (matches the
+        existing 参数确认卡 reply pattern in hermes_workflow SKILL §3 step 4).
+        Real interactive buttons would require a card-action webhook + an
+        action_id→state map — deferred per surgical-changes guideline.
+
+        Parameters
+        ----------
+        intent: str
+            One of "start_l1" / "start_l2" / "start_l3" / "start_l4" /
+            "start_production". Used to pick the tier label.
+        yaml_path: str
+            The frozen workflow yaml path that will be used after confirmation.
+        test_list_path: str
+            The test_list_path that will be loaded.
+        mode: str
+            "linear" or "kanban" — derived from ``kanban.enabled`` of the yaml.
+        eta: str
+            Free-text estimated duration shown to the user (e.g. "~60 分钟",
+            "hours–days"). Lets the caller bake in the expected magnitude
+            difference between tiers and production.
+        timeout_seconds: int
+            Auto-cancel window. Displayed for transparency; the actual timer
+            is enforced by the caller, not this method.
+        """
+        tier_labels = {
+            "start_l1": "L1 烟囱测试",
+            "start_l2": "L2 mini 测试",
+            "start_l3": "L3 fast subset 测试",
+            "start_l4": "L4 Kanban distributed 测试",
+            "start_production": "生产 全量 UT 测试",
+        }
+        tier_label = tier_labels.get(intent, intent)
+
+        # Production runs get an extra warning since wrong-trigger blast radius
+        # is hours of GPU time vs tier runs' minutes.
+        emphasis = "⚠️ **这是生产全量运行** — " if intent == "start_production" else ""
+
+        content_lines = [
+            f"🤖 {emphasis}我理解你想触发 **{tier_label}**。要开始吗？",
+            "",
+            f"配置: `{yaml_path}`",
+            f"测试集: `{test_list_path}`",
+            f"模式: **{mode}**",
+            f"预计耗时: **{eta}**",
+            "",
+            f"请回复 **确认** 启动，或 **取消** 放弃。",
+            f"({timeout_seconds}s 内无回复将自动取消)",
+        ]
+
+        template = "orange" if intent == "start_production" else "blue"
+
+        return self.send_card({
+            "header": {"title": f"启动意图确认 — {tier_label}", "template": template},
+            "content": "\n".join(content_lines),
         })
 
 

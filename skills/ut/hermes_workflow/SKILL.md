@@ -275,14 +275,19 @@ new message:
    message matches one of 6 anchored regex patterns (`otp`/`otp_with_id`/
    `stop`/`pause`/`resume`/`change_config`). If matched, dispatch directly
    to the state machine matrix (§8.2).
-2. **Layer 2** (LLM): if Layer 1 returns `None`, call
-   `classify_intent_llm(text)` with the supervisor's LLM invoker. Returns
-   a `Command` with `source="llm"` and `intent` ∈ `{start_l1..l4,
-   start_production, change_config, unknown}`.
+2. **Layer 2** (Agent's own LLM): if Layer 1 returns `None`, the ut-supervisor
+   Agent itself reads SOUL.md §Intent classification and produces a JSON
+   string per that schema. Pass it to `classify_intent_llm(text, llm_output)`
+   which parses & validates the JSON into a `Command` with `source="llm"`
+   and `intent` ∈ `{start_l1..l4, start_production, change_config, unknown}`.
    - `start_*` / `change_config`: queue for the startup-sequence hook
      (§3 step 2 — only processed in idle state).
    - `unknown`: the supervisor may post a brief "help" card listing
      trigger words.
+
+There is **no external LLM invoker** — the Agent's reasoning IS the LLM.
+`classify_intent_llm` is purely a parser/validator over the JSON the Agent
+already produced.
 
 (Linear `ut/workflow` returns `[]` here; this channel actually reads Feishu.)
 

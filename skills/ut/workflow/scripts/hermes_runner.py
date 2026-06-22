@@ -181,52 +181,40 @@ def _unknown(raw_text: str) -> "Command":
                    source="llm", raw_text=raw_text)
 
 
-def classify_intent_llm(text, *, llm_invoker=None) -> "Command":
-    """Layer 2: classify free-text via the supervisor's LLM (SOUL.md §Intent classification).
+def classify_intent_llm(text, llm_output) -> "Command":
+    """Layer 2: parse & validate the Agent's self-produced intent classification.
+
+    The ut-supervisor Agent reads SOUL.md §Intent classification, uses its
+    own LLM reasoning on the free-text message, and produces a JSON string.
+    This function validates & parses that JSON into a ``Command``.
 
     Parameters
     ----------
     text:
-        The Feishu message text. Layer 1 (`parse_command`) must have returned
-        None before reaching here.
-    llm_invoker:
-        Optional callable ``(text: str) -> str`` returning the raw LLM
-        response (expected to be strict JSON per SOUL.md). Injection seam for
-        unit tests; the production wire-up (Hermes Agent self-call) is bound
-        at integration time. If None, the function returns ``intent=unknown``
-        — never raises — so callers always get a Command.
+        The Feishu message text (used only for ``raw_text`` in the result).
+    llm_output:
+        The JSON string the Agent produced (expected to conform to SOUL.md
+        schema: ``{"intent": ..., "confidence": ..., "args": {}}``).
 
     Returns
     -------
     Command with ``source="llm"``. ``intent="unknown"`` on:
-      - no invoker bound
-      - invoker raised
-      - response not valid JSON
-      - JSON missing required keys / wrong types
+      - ``llm_output`` not valid JSON or not a dict
       - ``intent`` not in the SOUL.md vocabulary
+      - ``confidence`` not numeric
+      - ``text`` is None/empty
 
     The function never raises; classification is best-effort.
     """
-    if text is None:
-        return _unknown("")
-    raw_text = text
-    stripped = text.strip()
-    if not stripped:
+    raw_text = text or ""
+    if not raw_text.strip():
         return _unknown(raw_text)
 
-    if llm_invoker is None:
+    if not isinstance(llm_output, str):
         return _unknown(raw_text)
 
     try:
-        response = llm_invoker(stripped)
-    except Exception:
-        return _unknown(raw_text)
-
-    if not isinstance(response, str):
-        return _unknown(raw_text)
-
-    try:
-        parsed = json.loads(_strip_json_fence(response))
+        parsed = json.loads(_strip_json_fence(llm_output))
     except (ValueError, json.JSONDecodeError):
         return _unknown(raw_text)
 
@@ -244,7 +232,6 @@ def classify_intent_llm(text, *, llm_invoker=None) -> "Command":
     if not isinstance(args, dict):
         args = {}
 
-    # Clamp confidence to [0.0, 1.0]; the LLM can in principle emit out-of-range.
     conf = max(0.0, min(1.0, float(confidence)))
 
     return Command(intent=intent, confidence=conf, args=args,

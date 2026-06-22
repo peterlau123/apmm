@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""start_l4_test.py - 启动 L4 测试环境（gateways + supervisor）
+"""start_hermes_ut_runtime.py - 启动 L4 测试环境（gateways + supervisor）
 
 前置：先手动启动 Bastion daemon（OTP 无法脚本化）：
     python tools/agent.py serve t_h20      # 输入静态密码 + OTP
@@ -12,13 +12,13 @@
 
 Usage:
     # 启动 gateways + supervisor（daemon 须已运行）
-    python tests/ut/integration/start_l4_test.py
+    python tasks/ut/scripts/start_hermes_ut_runtime.py
 
     # 检查配置 + 运行状态
-    python tests/ut/integration/start_l4_test.py --status
+    python tasks/ut/scripts/start_hermes_ut_runtime.py --status
 
     # 停止所有服务
-    python tests/ut/integration/start_l4_test.py --stop
+    python tasks/ut/scripts/start_hermes_ut_runtime.py --stop
 """
 
 import argparse
@@ -38,7 +38,7 @@ if hasattr(sys.stdout, "reconfigure"):
     except Exception:
         pass
 
-# tests/ut/integration/start_l4_test.py -> project root is three levels up
+# tasks/ut/scripts/start_hermes_ut_runtime.py -> project root is three levels up
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 _AGENT_PY = _PROJECT_ROOT / "tools" / "agent.py"
 _START_GATEWAY_PY = _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "start_gateway.py"
@@ -271,7 +271,7 @@ def show_status(workflow_yaml_path):
     elif not config_ok:
         print("\nAction: 先补齐上面标 [X] 的配置项。")
     else:
-        print("\nAction: 先手动起 daemon，再运行 'python tests/ut/integration/start_l4_test.py'。")
+        print("\nAction: 先手动起 daemon，再运行 'python tasks/ut/scripts/start_hermes_ut_runtime.py'。")
 
     return all_ok
 

@@ -7,7 +7,7 @@
 #      - config.batch_size           -> 3  (matches the subset; whole-batch run)
 #      - stages.select_batch.batch_size -> 3
 #      - kanban.enabled              -> true (Kanban dependency-chain test)
-#    Run via: python tests/ut/integration/start_l4_test.py  (defaults here)
+#    Run via: python tasks/ut/scripts/start_hermes_ut_runtime.py  (defaults here)
 #    Expected outcome baseline: tests/ut/integration/fixtures/L4_expected.json
 # ============================================================
 # Hierarchical Agent Architecture: Supervisor + Worker + Kanban

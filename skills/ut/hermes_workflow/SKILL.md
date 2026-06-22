@@ -424,11 +424,54 @@ silently ignored with a Feishu hint. The values are stashed under
 
 ## 10. Completion (§15)
 
-No auto-archive. On completion: write final `manifest.json` +
-`workflow_state.json` (status=completed), post a green completion card
-(attach `git log master..2.5.1_ut_verify --oneline` auto-fix summary), mark
-`current_run.json` completed. `bastion.stop_heartbeat()` on the way out;
-Gateways and batch dirs are left untouched.
+### §10.1 — Tier completion (L1/L2/L3/L4)
+
+When the run was triggered via a tier intent (`start_l1..l4` from §3.A):
+
+1. **Run `check_expected.py`**:
+   ```
+   python tasks/ut/scripts/check_expected.py \
+       --run-dir <run_dir> \
+       --expected <tier_expected_json> \
+       --output-card-json <run_dir>/check_result.json
+   ```
+   - `<tier_expected_json>` comes from the tier map (§3.C):
+     `tests/ut/integration/fixtures/L{1,2,3,4}_expected.json`
+   - exit code 0 → PASS, 1 → FAIL (headline verdict).
+   - exit code 2 → expected file parse error → treat as ERROR in the card.
+
+2. **Read the verdict** from `<run_dir>/check_result.json`.
+
+3. **Post tier completion card** via `feishu.send_tier_completion_card(verdict, tier, run_dir)`:
+   - PASS → green card with emoji ✅, assertion summary
+   - FAIL → red card with emoji ❌, failed hard assertions list (capped at 8)
+
+4. **Write final manifest** + `workflow_state.json` (status=completed).
+5. **Mark `current_run.json`** completed.
+6. **`bastion.stop_heartbeat()`** on the way out.
+
+### §10.2 — Production completion
+
+When the run was triggered via `start_production` (or legacy keyword that
+wasn't classified into a tier):
+
+1. **No `check_expected.py`** — production has no expected-outcome fixture.
+2. **Post plain completion card** via `send_feishu_card(feishu, "complete", manifest, iteration)`.
+   (Green card with progress stats: passed/failed/error/pending counts.)
+3. Attach `git log master..<branch> --oneline` auto-fix summary if applicable.
+4. Write final manifest + `workflow_state.json`, mark `current_run.json`,
+   `bastion.stop_heartbeat()` — same as tier completion.
+
+### §10.3 — How the supervisor knows which path to take
+
+The supervisor stores the trigger intent in `workflow_state.json` at startup
+(key `trigger_intent`, value `start_l1|start_l2|start_l3|start_l4|start_production`).
+On terminal state (`check_stop_conditions()` returns done=True), read
+`state["trigger_intent"]`:
+- starts with `start_l` and not `start_production` → §10.1
+- `start_production` or absent → §10.2
+
+No auto-archive. Gateways and batch dirs are left untouched.
 
 ---
 

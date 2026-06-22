@@ -243,6 +243,63 @@ class FeishuAPI:
             "content": "\n".join(content_lines),
         })
 
+    def send_tier_completion_card(self, verdict, tier, run_dir):
+        """发送 tier (L1-L4) 完成卡片 (Spec §5 P5b).
+
+        Renders the verdict from ``check_expected.py`` as a green PASS / red
+        FAIL card with the assertion summary. Distinct from the regular
+        ``send_feishu_card("complete", ...)`` which only shows progress stats
+        and is kept for production runs.
+
+        Parameters
+        ----------
+        verdict: dict
+            The JSON dict written by ``check_expected.py``:
+              {"overall": "PASS"|"FAIL",
+               "assertions": [{"id", "result", "severity", "detail"?}, ...],
+               "summary": "..."}
+        tier: str
+            "L1" / "L2" / "L3" / "L4".
+        run_dir: str
+            Run directory path for traceability in the card body.
+        """
+        overall = verdict.get("overall", "FAIL")
+        is_pass = overall == "PASS"
+        template = "green" if is_pass else "red"
+        emoji = "✅" if is_pass else "❌"
+        title = f"{tier} {overall}"
+
+        assertions = verdict.get("assertions") or []
+        failed_hard = [a for a in assertions
+                       if a.get("result") == "FAIL" and a.get("severity") == "hard"]
+        passed = sum(1 for a in assertions if a.get("result") == "PASS")
+        skipped = sum(1 for a in assertions if a.get("result") == "SKIP")
+        failed = sum(1 for a in assertions if a.get("result") == "FAIL")
+        summary = verdict.get("summary") or (
+            f"{passed} PASS / {failed} FAIL / {skipped} SKIP")
+
+        lines = [
+            f"{emoji} **{tier} 测试 {overall}**",
+            "",
+            f"Run: `{run_dir}`",
+            f"断言摘要: {summary}",
+        ]
+        if failed_hard:
+            lines.append("")
+            lines.append("**失败 hard 断言**:")
+            # Cap at 8 lines to keep the card readable; check_expected.py JSON
+            # has the full list for forensic follow-up.
+            for a in failed_hard[:8]:
+                detail = a.get("detail") or ""
+                lines.append(f"- `{a.get('id', '?')}` — {detail}".rstrip(" —"))
+            if len(failed_hard) > 8:
+                lines.append(f"… and {len(failed_hard) - 8} more (see check_result.json)")
+
+        return self.send_card({
+            "header": {"title": title, "template": template},
+            "content": "\n".join(lines),
+        })
+
 
 def test_connection():
     """测试飞书连接"""

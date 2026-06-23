@@ -298,7 +298,13 @@ def init_or_resume(workflow_yaml_path, resume_from):
         if rc != 0:
             print(f"[hermes_runner] Init failed: {stderr}")
             sys.exit(1)
-        print(stdout)
+        # Windows GBK stdout can't render non-ASCII (✓ ⚠ etc.) coming from the
+        # init subprocess — coerce to ascii-safe before printing so the runner
+        # doesn't crash on the very first I/O.
+        try:
+            sys.stdout.write(stdout + "\n")
+        except UnicodeEncodeError:
+            sys.stdout.write(stdout.encode("ascii", errors="replace").decode("ascii") + "\n")
 
         pointer = _read_json(PROJECT_ROOT / ".agents" / "current_run.json")
         run_dir = Path(pointer["run_dir"])

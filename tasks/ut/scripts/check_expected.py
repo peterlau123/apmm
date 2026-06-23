@@ -296,20 +296,50 @@ def eval_stage_invariants(
 def eval_dependency_chain(
     invariants: list[dict],
     batch_results: list[dict],
+    manifest: dict | None = None,
 ) -> list[AssertionResult]:
-    """Dependency-chain invariants (INV-1..5) require Kanban gateway timestamps
-    and round-by-round batch results. We treat these as **observed-elsewhere**
-    invariants: this comparator only flags them as SKIP unless an external
-    `kanban_audit.json` was passed in. The Kanban inspector script (TBD) is
-    responsible for the heavy lifting; we stub here so the JSON shape is stable.
+    """Dependency-chain invariants.
+
+    INV-1..5 require Kanban gateway timestamps + round-by-round batch results.
+    Without an external `kanban_audit.json`, they remain SKIP — the Kanban
+    inspector script (TBD) is responsible for the heavy lifting; we stub here
+    so the JSON shape is stable.
+
+    INV-6 (added 2026-06-23 per L4 postmortem §4): terminal `pending == 0`.
+    This is a hard contract that the fixer → dependency-resolver loop closes
+    every `pending` task (resolver promotes to `ignored` on failure). It can
+    be evaluated locally from the manifest, with no Kanban audit needed.
     """
-    return [
-        AssertionResult(
-            id=inv["id"], result="SKIP", severity=inv.get("severity", "hard"),
-            detail="dependency-chain check requires kanban_audit; not yet wired into check_expected.py",
-        )
-        for inv in invariants
-    ]
+    results = []
+    for inv in invariants:
+        iid = inv.get("id", "")
+        if iid == "INV-6":
+            if manifest is None:
+                results.append(AssertionResult(
+                    id=iid, result="SKIP", severity=inv.get("severity", "hard"),
+                    detail="INV-6 requires manifest (not provided)",
+                ))
+                continue
+            counts = _count_states(manifest.get("tests", []))
+            pending = counts.get("pending", 0)
+            if pending == 0:
+                results.append(AssertionResult(
+                    id=iid, result="PASS", severity=inv.get("severity", "hard"),
+                    detail="terminal pending == 0 (resolver loop closed)",
+                ))
+            else:
+                results.append(AssertionResult(
+                    id=iid, result="FAIL", severity=inv.get("severity", "hard"),
+                    detail=f"{pending} pending test(s) at terminal — "
+                           f"resolver may be missing or stuck "
+                           f"(check ut-dependency-resolver gateway)",
+                ))
+        else:
+            results.append(AssertionResult(
+                id=iid, result="SKIP", severity=inv.get("severity", "hard"),
+                detail="dependency-chain check requires kanban_audit; not yet wired into check_expected.py",
+            ))
+    return results
 
 
 # --- Driver ---------------------------------------------------------------
@@ -361,7 +391,7 @@ def evaluate(
         ))
     if "dependency_chain_invariants" in expected:
         verdict.assertions.extend(eval_dependency_chain(
-            expected["dependency_chain_invariants"], batch_results,
+            expected["dependency_chain_invariants"], batch_results, manifest,
         ))
     if "per_test" in expected:
         verdict.assertions.append(AssertionResult(

@@ -85,6 +85,13 @@
       "rule": "retriable_error nodes are re-selected only while retry_count < max_retry (3); at max they become ignored, not re-run forever",
       "check": "no node executed more than max_retry+1 times; retriable_error at max_retry -> ignored",
       "severity": "hard"
+    },
+    {
+      "id": "INV-6",
+      "rule": "terminal pending == 0 (fixer -> dependency-resolver loop closed cleanly)",
+      "check": "no manifest entry has status == pending at end of run; resolver must promote every pending+delegate to ready/ignored",
+      "severity": "hard",
+      "rationale": "Added 2026-06-23 per L4 postmortem §4: pre-fix, fixer flagged pending+delegate but no runner consumed; runs hung forever. INV-6 makes the resolver contract visible — distinct id, distinct failure mode (vs TSD which only counts the final distribution)."
     }
   ],
   "per_test": [

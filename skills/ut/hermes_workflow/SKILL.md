@@ -142,8 +142,10 @@ intent recognizer.
         intent ∈ {start_l1..l4, start_production} → 进入【启动确认分支】(§3.A)
         intent == change_config → 派发到状态机
         intent == unknown → 飞书发帮助卡，列出合法触发词（结束）
-        legacy 关键词 "跑 ut workflow" / "启动测试" / "开始 UT" 在 v4 是直接进 §3.B；
-        v5 一律交给 Layer 2（这些短语预期分类为 start_production）
+        legacy 关键词 "跑 ut workflow" / "启动测试" / "开始 UT" 在 v5 走 Layer 2：
+        - **无 tier 后缀**（裸短语）→ 预期分类为 `unknown` → §3.D 帮助卡
+        - 带 tier 后缀（"跑 L4"）或 "正式 / 生产 / 全量" 字眼 → 按 §3.A 走
+        （这是 v5 的保守门：避免误触发数小时生产 run；v4 直接进 §3.B 的旧行为已废弃）
 3. 一次性加载：hermes_workflow + workflow_loop_core
               + 4 份 Worker SKILL（batch-selector / unit-test-executor /
                 failure-handler / manifest-updater）
@@ -234,6 +236,33 @@ start_production:
 ```
 
 `mode` / `eta` 仅用于卡片展示；真正生效的是 yaml 内的 `kanban.enabled`。
+
+### §3.D — 帮助卡（intent=unknown 时回显）
+
+`classify_intent_llm` 返回 `intent=unknown`（含裸 "跑 ut workflow" 这种保守门
+拦截）时，supervisor 发一张帮助卡列合法触发词，结束本轮（不进任何状态机）。
+
+```markdown
+🤔 没看懂你想触发哪个 run。合法触发词：
+
+▸ tier 测试（蓝色卡）：
+    "跑 L1" / "跑 L2" / "跑 L3" / "跑 L4"
+    "L4 走起" / "跑 ut workflow 的 l4 测试"
+
+▸ 正式生产（橙色 + 警告卡）：
+    "正式开跑" / "跑全量" / "跑正式生产"
+
+▸ 改配置：
+    "改 batch_size 为 10" / "把 max_retry 改成 5"
+
+▸ 控制命令：
+    "暂停" / "继续" / "停止"
+
+裸 "跑 ut workflow" 不再自动派发（避免误触发生产）—— 请补 tier 后缀
+或写明 "正式 / 生产 / 全量"。
+```
+
+卡片模板 `template=grey`，不要求回复；用户重新发合法短语即重新进 Layer 2。
 
 Required-config validation maps directly to `validate_required_config`
 (input_filter + remote_server) plus, in Kanban mode, a `check_gateways_alive`

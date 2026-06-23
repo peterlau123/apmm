@@ -94,8 +94,9 @@ For `change_config`, set `args` to `{"key": "...", "value": "..."}`.
 
 Confidence rule:
 - "跑 L4" / "跑 ut workflow 的 l4 测试" / "L4 走起" → `start_l4`, conf ≥ 0.9
-- "正式开跑" / "跑 ut workflow" (no L-suffix) / "全量" → `start_production`,
-  conf ≥ 0.9
+- "正式开跑" / "全量" / "跑正式生产" → `start_production`, conf ≥ 0.9
+- Bare "跑 ut workflow" (no tier suffix, no "正式"/"生产"/"全量") → `unknown`,
+  conf < 0.7 → user receives the help card listing legal triggers
 - Ambiguous Chinese ("跑测试") → `unknown`, conf < 0.7
 - Anything off-topic → `unknown`, conf = 0.0
 

@@ -336,6 +336,20 @@ L4 expected fixture `tests/ut/integration/fixtures/L4_expected.json` 的 AF-2（
 
 ---
 
+## 9.1 反复确认：wall-clock 与 idle 的关系
+
+Grilling 复盘中重新审视过的方案，**已拒绝**，记录于此防止重新讨论：
+
+| 方案 | 语义 | 拒绝理由 |
+|---|---|---|
+| **复合规则**：必须 idle 且 wall 都超才杀 | wall 从独立杀手降级为"等待期" | Case B（test 30s 后死掉）会多等 450s 才杀，违背本设计「快速识别死 test」的初衷 |
+| **纯 idle，去掉 wall** | 只看 idle，理论上长 test 不打扰 | idle 检测自身出 bug（mtime 读不到、stat 缺失）时无兜底；wall 还有"释放 SSH session / bastion daemon 资源"的次要作用，不只是杀 test |
+| **wall 上调到 1800s** | 给"合法长 test"更多空间 | vLLM batch（batch_size ≤ 3）内合法 test 跑不到 600s 已经被验证；上调无收益但放宽兜底 |
+
+**最终保留**：idle=120s 主，wall=600s 兜底，**独立触发**（任一满足即 kill）。这是双值机制的初心。
+
+---
+
 ## 10. 后续
 
 实施 commit 计划（不在本文档范围）：

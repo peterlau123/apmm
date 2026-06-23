@@ -7,6 +7,38 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 
 # hermes_workflow (v5)
 
+> ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
+>
+> This 5-rule block is the **only** part of the SKILL the runtime treats as
+> non-negotiable. If a rule below conflicts with anything later in this file,
+> the rule wins.
+>
+> 1. **Output schemas are canonical for every Stage.** Stage 3 produces
+>    `batch_results.json` via `execute_batch.py` (schema:
+>    `skills/ut/unit-test-executor/batch_results_schema.json`). Stage 4
+>    produces `handled_tests.json` via `generate_handled_manifest.py`.
+>    Stage 5 mutates `manifest.json` via `update_status.py`. Each stage
+>    REJECTS hand-rolled payloads through strict jsonschema validation +
+>    (Stage 5 only) remote `stat` audit.
+> 2. **State machine values are fixed.** `workflow.status ∈ {running,
+>    paused, waiting_otp, completed, stopped, failed}`. Do NOT invent new
+>    states ("done", "succeeded", "killed", ...). Transitions are the only
+>    way to mutate status — direct writes to `workflow_state.json` are
+>    forbidden.
+> 3. **Bastion is single-tenant.** Only `BastionManager` owns the daemon
+>    lifecycle. On `ConnectionError`, the active stage MUST return
+>    `{"next_action": "wait", "reason": ...}` and let the supervisor's
+>    reconnect loop handle it. Do NOT spawn ad-hoc `agent.py login` or
+>    daemon restarts from inside a stage.
+> 4. **Stages run via the canonical scripts, period.** No inline pytest
+>    invocation, no hand-rolled remote ssh, no LLM-fabricated stage output.
+>    If a script fails, fail loud (write the error into the run log) — do
+>    NOT synthesize a plausible Stage output to keep the loop moving.
+> 5. **All durable timestamps are UTC ISO 8601 with Z suffix.** Pattern:
+>    `^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$`. Local times
+>    leak into runs/ paths and break catch-up logic — use
+>    `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
+
 > Hermes-channel supervisor for the dual-channel UT workflow.
 > Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 

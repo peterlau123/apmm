@@ -25,6 +25,8 @@
 
 import json
 import argparse
+import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -34,6 +36,90 @@ if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
 from skills.ut.shared import validate_and_write
+
+
+# ── Type-B fabrication backstop: stat audit on remote log ─────────────────────
+#
+# Even if batch_results.json passes schema validation locally, a hand-rolled
+# (LLM-fabricated) payload can still claim a remote_log.raw_log_path that
+# does NOT exist on the remote host, or whose size_bytes lies. The audit
+# below independently verifies the log exists and (where size_bytes is
+# present and non-null) matches the recorded byte count.
+#
+# Failure path: we DO NOT mutate manifest.json; we return a structured error
+# so the caller can quarantine the batch.
+
+_AGENT_PY = Path(__file__).resolve().parent.parent.parent.parent.parent / "tools" / "agent.py"
+
+
+def _stat_remote_log(profile: str, raw_log_path: str, *, timeout: int = 60):
+    """Return (size_bytes, mtime) for ``raw_log_path`` on ``profile``.
+
+    Returns (None, None) on any error (missing file, daemon unreachable, ...).
+    Never raises — caller decides what to do with a None result.
+    """
+    try:
+        r = subprocess.run(
+            [sys.executable, str(_AGENT_PY), "-p", profile, "run",
+             "--timeout", str(timeout),
+             f"stat -c '%s %Y' {raw_log_path} 2>/dev/null || echo MISSING"],
+            capture_output=True, text=True,
+            encoding="utf-8", errors="replace",
+            timeout=timeout + 30,
+        )
+    except (subprocess.TimeoutExpired, OSError):
+        return None, None
+    if r.returncode != 0:
+        return None, None
+    out = (r.stdout or "").strip().splitlines()
+    if not out:
+        return None, None
+    last = out[-1].strip()
+    if last == "MISSING" or not last:
+        return None, None
+    parts = last.split()
+    if len(parts) < 2:
+        return None, None
+    try:
+        return int(parts[0]), int(parts[1])
+    except ValueError:
+        return None, None
+
+
+def audit_batch_results(batch_results: dict, profile: str) -> tuple[bool, str]:
+    """Stat-audit the remote pytest log referenced by ``batch_results``.
+
+    Returns ``(ok, reason)`` where ``ok=False`` means the audit failed and the
+    caller MUST NOT consume ``batch_results.tests`` into the manifest.
+
+    The audit enforces three invariants:
+      1. ``remote_log.raw_log_path`` exists on the remote host.
+      2. If ``remote_log.size_bytes`` is not null, it equals the actual size
+         (a fabricated payload can claim 1234 bytes; the truth is 0 or N≠1234).
+      3. If ``remote_log.size_bytes`` IS null, the actual file must be non-empty
+         (a fabricated payload can pass schema with size_bytes=null; we still
+         need *some* signal pytest actually wrote output).
+    """
+    remote_log = (batch_results or {}).get("remote_log") or {}
+    raw_log_path = remote_log.get("raw_log_path") or ""
+    recorded = remote_log.get("size_bytes")
+    if not raw_log_path:
+        return False, "batch_results.remote_log.raw_log_path missing"
+
+    actual_size, _ = _stat_remote_log(profile, raw_log_path)
+    if actual_size is None:
+        return False, (
+            f"remote log not found or stat failed: {raw_log_path} "
+            f"(profile={profile})"
+        )
+    if isinstance(recorded, int) and recorded > 0 and actual_size != recorded:
+        return False, (
+            f"size_bytes mismatch: recorded={recorded} actual={actual_size} "
+            f"({raw_log_path})"
+        )
+    if (recorded is None or recorded == 0) and actual_size == 0:
+        return False, f"remote log exists but is empty: {raw_log_path}"
+    return True, "ok"
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
@@ -179,6 +265,19 @@ def update_from_workflow_state(
 
         if batch_results_path.exists():
             batch_results = json.loads(batch_results_path.read_text(encoding="utf-8"))
+            # P1: Type-B fabrication backstop — stat-audit the remote pytest
+            # log BEFORE consuming the per-test results into the manifest. If
+            # the log doesn't exist or its size disagrees with what
+            # batch_results.json claims, refuse to update.
+            profile = (state.get("config") or {}).get("remote_server", "t_h20")
+            ok, reason = audit_batch_results(batch_results, profile)
+            if not ok:
+                return {
+                    "error": "audit_failed",
+                    "reason": reason,
+                    "batch_id": batch_id,
+                    "raw_log_path": (batch_results.get("remote_log") or {}).get("raw_log_path"),
+                }
             all_results.extend(batch_results.get("tests", []))
 
         if handled_tests_path.exists():

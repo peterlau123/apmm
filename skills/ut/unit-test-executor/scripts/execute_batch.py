@@ -32,6 +32,11 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 
+try:
+    import jsonschema  # type: ignore
+except ImportError:  # pragma: no cover — jsonschema is a hard runtime dep but
+    jsonschema = None  # tests may patch / install on demand
+
 _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
@@ -53,6 +58,41 @@ def _load_local(name, filename):
 
 _classifier = _load_local("_v5_classify_error", "classify_error.py")
 classify = _classifier.classify
+
+# ── Schema (Type-B fabrication backstop) ──────────────────────────────────────
+#
+# We enforce that batch_results.json is shape-correct BEFORE writing it, so a
+# bug in this executor (or a future hand-rolled LLM substitute) cannot silently
+# emit drifted / fabricated payloads that look plausible but are wrong-schema.
+# The canonical schema lives next to this file.
+_SCHEMA_PATH = _SCRIPT_DIR.parent / "batch_results_schema.json"
+
+
+def _load_schema():
+    """Read the canonical batch_results_schema.json. Cached on first call."""
+    return json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
+
+
+def _validate_batch_results_or_raise(payload: dict) -> None:
+    """Validate payload against batch_results_schema.json.
+
+    Raises ValueError with a compact, readable message on the FIRST failure.
+    Type-B fabrication defense: if the executor itself drifts, we surface that
+    here rather than letting manifest-updater consume a malformed payload.
+    """
+    if jsonschema is None:  # pragma: no cover — environment misconfig
+        raise RuntimeError(
+            "jsonschema not installed; batch_results.json validation is "
+            "mandatory (Type-B fabrication backstop)"
+        )
+    schema = _load_schema()
+    try:
+        jsonschema.validate(payload, schema)
+    except jsonschema.ValidationError as e:  # type: ignore[attr-defined]
+        path = "/".join(str(p) for p in e.absolute_path) or "<root>"
+        raise ValueError(
+            f"batch_results.json violates schema at /{path}: {e.message}"
+        ) from e
 
 # BastionManager is imported lazily at the call site so tests can patch it
 # on this module before instantiation.
@@ -441,6 +481,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     }
 
     output_path = batch_dir / "batch_results.json"
+    # Type-B fabrication backstop: validate payload BEFORE writing to disk.
+    # If the executor itself drifts (or a future LLM substitute hand-writes
+    # this file), fail loud here rather than letting manifest-updater consume
+    # a malformed payload.
+    _validate_batch_results_or_raise(batch_results)
     output_path.write_text(
         json.dumps(batch_results, indent=2, ensure_ascii=False), encoding="utf-8"
     )

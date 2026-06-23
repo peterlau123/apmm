@@ -7,6 +7,35 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 update_status St
 
 # Manifest Updater (Worker Agent v3.2)
 
+> ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
+>
+> This 5-rule block is the **only** part of the SKILL the runtime treats as
+> non-negotiable. If a rule below conflicts with anything later in this file,
+> the rule wins.
+>
+> 1. **Output schema is canonical.** `manifest.json` MUST be written through
+>    `skills/ut/manifest-updater/scripts/update_status.py` (which calls
+>    `skills.ut.shared.validate_and_write`). It validates against the
+>    canonical schema before writing; manual edits bypass the safety net.
+> 2. **Run the stat audit, do not skip it.** Before consuming
+>    `batch_results.tests`, `update_from_workflow_state()` runs
+>    `audit_batch_results()` which stat-checks the remote pytest log. If
+>    the audit returns `{"error":"audit_failed", "reason": ...}`, the
+>    manifest MUST NOT be mutated — return the audit error upstream and
+>    let the Supervisor decide. This is the Type-B fabrication backstop.
+> 3. **`batch_results.json` is read-only here.** Stage 5 never re-classifies
+>    tests, never re-runs pytest, never edits `batch_results.json`. The only
+>    permitted mutation is to `manifest.json` (status + statistics +
+>    `last_batch_id` + `retry_count`).
+> 4. **`handled_tests.json` overrides `batch_results.json`.** When both
+>    files exist for a batch, `handled_tests.tests[*]` is applied AFTER the
+>    `batch_results` merge so a fixer-confirmed verdict (e.g. `ignored`
+>    with `ignore_reason`) wins.
+> 5. **Statistics are recomputed, never copied.** After the merge,
+>    `calculate_statistics()` recounts from `manifest.tests[*].status` — do
+>    NOT copy `batch_results.statistics` into `manifest.statistics`; they
+>    measure different things (one batch vs. full run).
+
 ---
 
 ## Worker 角色

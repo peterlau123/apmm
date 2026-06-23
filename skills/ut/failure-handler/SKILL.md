@@ -7,6 +7,38 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 
 # Failure Handler (Worker Agent v3.0)
 
+> ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
+>
+> This 5-rule block is the **only** part of the SKILL the runtime treats as
+> non-negotiable. If a rule below conflicts with anything later in this file,
+> the rule wins.
+>
+> 1. **Output schema is canonical.** `handled_tests.json` MUST be produced
+>    by `skills/ut/failure-handler/scripts/generate_handled_manifest.py`. Per-
+>    test rows MUST use the same `test_node` strings that appear in the
+>    upstream `batch_results.json` — those values are the join key the
+>    manifest-updater uses; mismatch silently drops the override. Never
+>    hand-write `handled_tests.json` to mimic an executor output: it is a
+>    *delta* file, not a results file.
+> 2. **Read, do not invent.** All inputs (`batch_results.json`,
+>    `summary.txt`, remote pytest log) are read-only sources of truth. If
+>    `summary.txt` is missing or empty, return `{"next_action":"wait",
+>    "reason":"no summary"}` — do NOT classify based on test names alone,
+>    and do NOT call the dependency-stall classifier on synthetic input.
+> 3. **Only `failed` and `error` are in scope.** `retriable_error` is owned
+>    by Stage 2 (batch-selector); `passed` / `skipped` / `pending` /
+>    `ignored` are never touched here. Enforced by
+>    `analyze_failures.filter_processable()`.
+> 4. **Dependency-stall classifier output is schema-validated.** The LLM
+>    helper at `skills/ut/failure-handler/scripts/classify_dependency_stall.py`
+>    validates against `skills/ut/shared/dependency_stall_schema.json`. On
+>    *any* validation failure (malformed JSON, missing field, wrong enum),
+>    the classifier returns `verdict="unknown"` — never invent a verdict.
+> 5. **Branch safety is mandatory.** Before any `git apply` / `git commit`,
+>    call `ensure_on_branch("2.5.1_ut_verify", vllm_repo_path)` from
+>    `skills/ut/workflow/scripts/check_vllm_branch.py`. Skipping this rule
+>    is what nukes a fork.
+
 ---
 
 ## Behavior (v5)

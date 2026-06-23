@@ -7,6 +7,46 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（
 
 # Unit Test Executor (Worker Agent v3.2)
 
+> ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
+>
+> This 5-rule block is the **only** part of the SKILL the runtime treats as
+> non-negotiable. If a rule below conflicts with anything later in this file,
+> the rule wins.
+>
+> 1. **Output schema is canonical.** `batch_results.json` MUST be produced by
+>    `skills/ut/unit-test-executor/scripts/execute_batch.py` and MUST validate
+>    against `skills/ut/unit-test-executor/batch_results_schema.json`
+>    (additionalProperties:false). Required top-level keys:
+>    `batch_id / started_at / finished_at / exit_code / remote_log / tests /
+>    statistics`. **Never hand-write this file.** A hand-rolled payload that
+>    drifts (e.g. `executed_at` / `total_duration_seconds` / `stats`) will be
+>    rejected by the executor's strict validator AND by the manifest-updater
+>    stat audit.
+> 2. **Run the script, do not narrate.** The only sanctioned way to run a
+>    batch is `python skills/ut/unit-test-executor/scripts/execute_batch.py
+>    --batch-config <path> --workflow-state <path>`. If you cannot run that
+>    script (sandbox blocked / agent.py error / bastion disconnected), STOP
+>    and return `{"next_action":"wait","reason":...}` — do NOT fabricate a
+>    plausible result.
+> 3. **Remote log is the single source of truth.** Every status in
+>    `batch_results.tests[*].status` must come from grepping
+>    `<remote_log_dir>/<batch_id>/pytest_<batch_id>.log` on the remote host
+>    via `agent.py`. If the log does not exist or is empty, return
+>    `{"next_action":"wait", "reason":"remote log empty"}` — do NOT guess.
+> 4. **All timestamps are UTC ISO 8601 with Z suffix.** Pattern:
+>    `^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$`. Local time,
+>    offsets (`+08:00`), microseconds, and tzname suffixes are schema
+>    violations.
+> 5. **No retry inside the Worker.** Status `retriable_error` / `error` is a
+>    signal to Stage 2 (batch-selector). Do NOT loop, do NOT re-run, do NOT
+>    mutate `retry_count`.
+>
+> Violations leave a trace: the strict schema validator in `execute_batch.py`
+> raises `ValueError("batch_results.json violates schema at /...")` BEFORE
+> writing, and the manifest-updater stat audit refuses to consume any
+> `batch_results.json` whose `remote_log.raw_log_path` is missing or whose
+> recorded `size_bytes` disagrees with `stat -c %s` on the remote.
+
 ## Behavior (v5)
 
 This section describes the v5 Worker contract. v3.x sections below are kept

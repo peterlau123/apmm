@@ -338,6 +338,30 @@ def main():
     config = yaml.safe_load(workflow_yaml.read_text(encoding="utf-8"))
     bastion_profile = config.get("bastion", {}).get("profile", "t_h20")
 
+    # Fast-path: 3 gateways + supervisor 都已存活 → 直接报状态退出，不重复 spawn。
+    # （start_profile_gateway / start_supervisor 内部已幂等，但顶层 fast-path
+    #  能省下多次 hermes profile use / gateway list 的往返调用。）
+    kanban = config.get("kanban", {})
+    gw_profiles_cfg = kanban.get("profiles", {})
+    gateway_profiles_for_check = [
+        gw_profiles_cfg.get("orchestrator", "ut-orchestrator"),
+        gw_profiles_cfg.get("executor", "ut-executor"),
+        gw_profiles_cfg.get("fixer", "ut-fixer"),
+    ]
+    all_gateways_up = all(check_gateway(p) for p in gateway_profiles_for_check)
+    supervisor_up = check_supervisor("ut-supervisor")
+    if all_gateways_up and supervisor_up:
+        print("\n" + "="*60)
+        print("[OK] All services already running — nothing to do.")
+        print("="*60)
+        for p in gateway_profiles_for_check:
+            print(f"  Gateway ({p}): [OK] running")
+        print(f"  Supervisor (ut-supervisor): [OK] running")
+        bastion_ok = check_bastion_daemon(bastion_profile)
+        print(f"  Bastion ({bastion_profile}): {'[OK] running' if bastion_ok else '[i] not running (会在 trigger 时自起)'}")
+        print("\nNext: 飞书 apmm-ut 群发触发词（'跑 L4' 等）即可。")
+        return
+
     # Preflight only — daemon is brought up by supervisor on first Feishu trigger.
     ensure_bastion_daemon(bastion_profile)
 

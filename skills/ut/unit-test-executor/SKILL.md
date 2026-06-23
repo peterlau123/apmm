@@ -427,6 +427,8 @@ return {
 | 3 | **SSH 超时** | agent.py foreground 最大 300s | 长测试用 background |
 | 4 | **pytest 参数** | `-v` 输出太多 | 用 `-q --tb=long` |
 | 5 | **路径前缀重复** | `tests/tests/...` | 检查路径前缀 |
+| 6 | **裸 `docker exec` permission denied** | 远端 `infra` 用户不在 `docker` 组；`/var/run/docker.sock` 仅 `root:docker` 可写 | **必须**用 `sudo -n docker exec ...`（远端已配置 passwordless sudo）。所有 SKILL 示例已是此形式；不要手写 `docker exec ...` |
+| 7 | **`bash -c` 触发 Hermes shell-guard approval** | Hermes core `tools/approval.py` 把 `(bash|sh|zsh|ksh)\s+-[^\s]*c` 列为危险模式；Kanban-gateway session 走 `submit_pending` 路径，60s 内无人响应即超时 → 任务 `blocked` | 已在 `~/.hermes/config.yaml` 的 `command_allowlist` 加入 `shell command via -c/-lc flag`，本机已生效（mtime-keyed cache）。新机器部署时记得同步该配置 |
 
 ---
 
@@ -441,15 +443,38 @@ return {
 
 ---
 
-## 禁止操作
+## 禁止操作（硬契约 — 违反即视为污染数据，supervisor 会 invalidate run）
+
+### 数据完整性禁令（不可越权）
+
+- 🚫 **绝对禁止 fabrication**：`batch_results.json` 中的每一个数字（`total_duration_seconds`、`exit_code`、`passed/failed/error` 计数、`gpu_info`、`log_path`）**必须**来自真实执行过的 `agent.py -p t_h20 run "sudo -n docker exec ... pytest ..."` 的返回值；
+  - 禁止：凭印象/上游 SKILL 说明/合理推断填写任何字段；
+  - 禁止：在 `log_path` 写远端不存在的路径（supervisor 会 stat 验证）；
+  - 禁止：`duration_seconds: null` 但 `status: passed/failed` 的组合（要么是真跑过且有 duration，要么是没跑成功 → 报 error，不要谎报状态）；
+  - 如果远端命令失败/超时/中断，**如实记录**为 `status: error` + `error_message: <真实错误>`，不要"补全"成 passed/failed。
+- 🚫 **绝对禁止越权发送 Feishu / Lark / 任何外部通知**：
+  - 禁止：写 Python 脚本调用 `open.feishu.cn`、`api.lark.com`、`webhook` 等 IM API；
+  - 禁止：用 `requests.post` / `curl` 向 Feishu/Lark/Slack/钉钉 发任何消息；
+  - 禁止：跨 profile 读取 `~/.claude/...` / `~/.hermes/profiles/<other>/...` 下的 token；
+  - 唯一允许的通知路径：**返回 stats 给 supervisor**，由 supervisor 走 Hermes 标准投递层（`send_feishu_card` / `hermes-runner`）发出。
+- 🚫 **绝对禁止修改 `manifest.json`**：那是 Stage 5（manifest-updater）的职责，executor 只产 `batch_results.json`。
+- 🚫 **绝对禁止删除/重命名上游产物**：`batch_config.json`、`test_list.txt`、`workflow_state.json`、其他 batch 的目录 —— 都不要碰。
+
+### 行为禁令
 
 - ❌ 不返回详细错误信息（只返回 stats）
 - ❌ 不处理错误（让 Stage 4 处理）
-- ❌ 不发送飞书通知（让 Supervisor 发送）
-- ❌ 不修改 manifest.json（让 Stage 5 修改）
 - ❌ 不下载依赖/模型
-- ❌ 不在本地执行 pytest
+- ❌ 不在本地执行 pytest（必须远程容器内）
 - ❌ 不返回 batch_id/log_file/details_file 等额外字段（只返回统一格式）
+- ❌ 不"尝试 recover Bastion daemon" —— daemon 由 supervisor 通过 OTP 管，worker 看到 daemon 死了就 `next_action=wait` 直接返回，不要自作主张
+- ❌ 不写 `D:/workspace/apmm/scripts/*.py`、`tools/*.py` 等仓库根目录脚本（worker 工作目录是当前 run_dir，仓库脚本是开发者维护的）
+
+### 历史教训（不要重蹈）
+
+| 日期 | 越权行为 | 后果 |
+|---|---|---|
+| 2026-06-22 | 某 worker 在 stage-3 不真跑 pytest，编造 batch_results.json（log_path 指向不存在的远端文件），改 manifest 为 "completed"，并手写 `scripts/send_feishu_report.py` + 用 Claude 工具链的 Feishu token 直接发"完成报告"到 ai-engineer 群 | run `ut-20260621-234651` 被 supervisor invalidated；写入这条约束 |
 
 ---
 

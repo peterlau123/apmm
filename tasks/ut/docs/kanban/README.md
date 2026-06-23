@@ -2,224 +2,170 @@
 
 ## Overview
 
-Hermes Kanban integrates with UT Workflow as an **outer orchestration layer**, replacing the current single-session workflow loop with distributed task scheduling.
+Hermes Kanban is the outer orchestration layer for UT workflow. In Kanban mode, task state is stored in Hermes board `apmm-ut`, and the Hermes gateway embedded dispatcher dispatches ready tasks to worker profiles.
 
-## Core Question: How Does Workflow Actually Run?
+## Current Version
 
-### Current Mode (workflow.yaml: kanban.enabled: false)
+| Component | Version / Value |
+|-----------|-----------------|
+| Hermes Agent | v0.16.0 |
+| Board | `apmm-ut` |
+| Workflow config | `.agents/workflow.yaml` |
+| Kanban enabled | `kanban.enabled: true` |
+| Dispatcher | embedded in `hermes gateway start` |
 
-```
-User runs: python -m skills.ut.workflow.main
-    |
-    v
-Single Agent Session
-    |
-    v
-Agent reads SKILL.md, follows workflow stages
-    |
-    v
-Agent executes: collect → select → execute → handle → update
-    |
-    v
-Agent loop continues until all batches done
-```
+## Profiles
 
-**Characteristics:**
-- One long-running Agent session
-- Sequential batch execution
-- SKILL.md defines the workflow
-- No task persistence between runs
+| Profile | Responsibility |
+|---------|----------------|
+| `ut-orchestrator` | Create batch tasks and coordinate workflow progress |
+| `ut-executor` | Execute pytest batches on `t_h20` |
+| `ut-fixer` | Analyze failures and create fix / retry actions |
 
-### Kanban Mode (workflow.yaml: kanban.enabled: true)
-
-```
-User runs: hermes kanban gateway start apmm-ut
-    |
-    v
-Gateway Process (runs continuously)
-    |
-    +-- Dispatcher (60s tick)
-    |       |
-    |       v
-    |   Query kanban.db for ready tasks
-    |       |
-    |       v
-    |   Claim task via CAS (atomic lock)
-    |       |
-    |       v
-    |   Spawn Hermes Agent subprocess
-    |       |
-    |       v
-    |   Agent reads SOUL.md + task body
-    |       |
-    |       v
-    |   Agent executes work autonomously
-    |       |
-    |       v
-    |   Agent calls kanban_complete()
-    |       |
-    |       v
-    |   Task status: done
-    |
-    +-- Repeat every 60s
-```
-
-**Characteristics:**
-- Persistent Gateway process
-- Parallel task execution (multiple workers)
-- SOUL.md defines worker behavior
-- Task state persisted in kanban.db
-- Automatic retry on failure
-- Dependency-based task scheduling
-
-## Key Differences
-
-| Aspect | Current Mode | Kanban Mode |
-|--------|-------------|-------------|
-| Orchestration | Single Agent session | Gateway dispatcher |
-| Workflow definition | SKILL.md | SOUL.md per role |
-| Task state | In-memory | SQLite (kanban.db) |
-| Parallelism | Sequential batches | Multiple workers |
-| Persistence | Lost on crash | Survives restart |
-| Retry | Manual | Automatic |
-
-## Task Lifecycle
-
-```
-Created (status: pending)
-    |
-    v
-Dependencies satisfied? 
-    |-- No: blocked (waiting for parent)
-    |-- Yes: ready
-            |
-            v
-        Gateway claims task
-            |
-            v
-        status: in_progress
-            |
-            v
-        Worker Agent executes SOUL.md
-            |
-            v
-        Success? 
-            |-- Yes: done
-            |-- No: failed (retry after delay)
-```
-
-## Profile Roles
-
-### ut-orchestrator
-- **Responsibility:** Create batch tasks and assign to executors
-- **SOUL.md:** Defines orchestrator behavior
-- **Creates:** executor tasks with batch config
-
-### ut-executor
-- **Responsibility:** Execute unit test batches
-- **SOUL.md:** Defines executor behavior
-- **Creates:** fixer tasks for failed tests
-
-### ut-fixer
-- **Responsibility:** Fix failed tests and retry
-- **SOUL.md:** Defines fixer behavior
-- **Creates:** Nothing (leaf node)
-
-## Setup Guide
-
-### 1. Create Kanban Board
+## Hermes v0.16 Commands
 
 ```bash
-hermes kanban boards create apmm-ut --name "APMM UT Workflow"
+# Board
+hermes kanban boards list
+hermes kanban boards switch apmm-ut
+
+# Tasks
+hermes kanban list
+hermes kanban show <task_id>
+hermes kanban create "UT Workflow: Orchestrate run" --assignee ut-orchestrator --priority 1
+hermes kanban unblock <task_id> --reason "..."
+hermes kanban archive <task_id>
+
+# Dispatcher
+hermes kanban dispatch --dry-run --json
+hermes kanban dispatch --max 3
+hermes gateway run
+hermes gateway status
+hermes gateway list
+
+# Diagnostics
+hermes kanban stats
+hermes kanban diagnostics
+hermes kanban runs <task_id>
 ```
 
-### 2. Create Worker Profiles
+`hermes kanban tasks ...` is obsolete for the current Hermes v0.16 CLI.
+
+## Start Kanban Daemon
+
+Use the project wrapper:
 
 ```bash
-# Create profiles (clone from ai-engineer)
-for role in orchestrator executor fixer; do
-  hermes profile create ut-$role --clone ai-engineer
-done
-
-# Write SOUL.md for each profile
-# See: C:\Users\admin\AppData\Local\hermes\profiles\ut-*\SOUL.md
+python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
 ```
 
-### 3. Enable in workflow.yaml
+The wrapper:
 
-```yaml
-kanban:
-  enabled: true
-  board: apmm-ut
-  profiles:
-    orchestrator: ut-orchestrator
-    executor: ut-executor
-    fixer: ut-fixer
-```
+1. Checks `hermes version`
+2. Switches to board `apmm-ut`
+3. Starts background `hermes gateway run` processes for `ut-orchestrator`, `ut-executor`, and `ut-fixer`
+4. Uses the gateway embedded Kanban dispatcher in Hermes v0.16
 
-### 4. Start Gateway
+`hermes gateway start` may prompt to install a scheduled service, so the project wrapper uses foreground `hermes gateway run` in detached background mode. `hermes kanban daemon` is deprecated in Hermes v0.16 unless forced; do not run it together with gateway because both dispatchers can race for task claims.
+
+## Remote Execution Rule
+
+UT workers must use the project SSH daemon helper:
 
 ```bash
-# Start 3 gateways (one per role)
-hermes kanban gateway start apmm-ut --profile ut-orchestrator
-hermes kanban gateway start apmm-ut --profile ut-executor
-hermes kanban gateway start apmm-ut --profile ut-fixer
+python tools/agent.py -p t_h20 run "sudo docker exec v0.13.0_torch2.5.1_compile <command>"
 ```
 
-## Verification
+Workers must not call plain `ssh` to bastion. Historical blocked Kanban tasks failed because worker profiles attempted direct SSH key authentication to `10.10.192.55`, while the project requires `tools/agent.py` with an already-started OTP-backed daemon.
 
-### Test Dependency Chain
+Workers must not directly stop or restart `agent.py` daemon. If the daemon is unavailable, use the Feishu approval gate:
 
 ```bash
-# Create orchestrator task
-hermes kanban tasks create apmm-ut --title "Orchestrator: Analyze batch" --profile ut-orchestrator
-
-# Create executor task (depends on orchestrator)
-hermes kanban tasks create apmm-ut --title "Executor: Run batch-001" --profile ut-executor --depends-on <orchestrator_task_id>
-
-# Create fixer task (depends on executor)
-hermes kanban tasks create apmm-ut --title "Fixer: Fix test_abc.py" --profile ut-fixer --depends-on <executor_task_id>
-
-# Verify blocking
-hermes kanban tasks list apmm-ut --status pending
+python skills/ut/workflow/scripts/request_daemon_approval.py \
+  --profile t_h20 \
+  --task-id <kanban_task_id> \
+  --reason "agent.py daemon unavailable during UT execution"
 ```
 
-### Check Task Status
+If `ping` succeeds but `run` commands timeout or the daemon appears stuck, force the approval gate:
 
 ```bash
-# List all tasks
-hermes kanban tasks list apmm-ut
-
-# View task details
-hermes kanban tasks show apmm-ut <task_id>
-
-# Check blocked tasks
-hermes kanban tasks list apmm-ut --status blocked
+python skills/ut/workflow/scripts/request_daemon_approval.py \
+  --profile t_h20 \
+  --task-id <kanban_task_id> \
+  --reason "agent.py daemon stuck: ping OK but run timeout" \
+  --force
 ```
 
-## Architecture
+The script sends a Feishu approval request and waits for a reply like `OTP 123456`. OTP is used only for the current daemon restart and must not be written to task comments, logs, summaries, or result files.
 
+Before dispatching UT executor tasks, verify:
+
+```bash
+python tools/agent.py -p t_h20 ping
 ```
-┌─────────────────────────────────────────────────┐
-│                  Gateway Process                 │
-│                                                  │
-│  ┌────────────────────────────────────────────┐│
-│  │           Dispatcher (60s tick)             ││
-│  │                                             ││
-│  │  1. Query ready tasks from kanban.db       ││
-│  │  2. Claim task via CAS                     ││
-│  │  3. Spawn worker subprocess                ││
-│  │     - Load profile SOUL.md                 ││
-│  │     - Read task body                       ││
-│  │     - Execute LLM inference                ││
-│  │     - Call kanban_complete()               ││
-│  │  4. Update task status                     ││
-│  └────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────┘
-         │                           │
-         v                           v
-    kanban.db                   Hermes Agent
-  (task state)                (worker process)
+
+Expected:
+
+```text
+[OK] Daemon is running
+```
+
+## Task Creation
+
+Create a root orchestration task:
+
+```bash
+hermes kanban create "UT Workflow: Orchestrate run" \
+  --assignee ut-orchestrator \
+  --priority 1 \
+  --body "Use .agents/workflow.yaml. Remote execution must use python tools/agent.py -p t_h20 run. Container: v0.13.0_torch2.5.1_compile. Do not use plain ssh."
+```
+
+Executor tasks created by the orchestrator should include:
+
+- `batch_config.json` path
+- remote profile: `t_h20`
+- docker container: `v0.13.0_torch2.5.1_compile`
+- pytest args from `.agents/workflow.yaml`
+- instruction to use `tools/agent.py`
+
+## Recovery
+
+If stale tasks block the board:
+
+```bash
+hermes kanban diagnostics
+hermes kanban show <task_id>
+hermes kanban archive <task_id>
+```
+
+If dispatcher is not running:
+
+```bash
+python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+```
+
+If remote execution fails with daemon errors:
+
+```bash
+python tools/agent.py -p t_h20 ping
+```
+
+If not running, use the approval gate:
+
+```bash
+python skills/ut/workflow/scripts/request_daemon_approval.py \
+  --profile t_h20 \
+  --task-id <kanban_task_id> \
+  --reason "agent.py daemon unavailable"
+```
+
+Manual fallback:
+
+```powershell
+cd D:\workspace\apmm\tools
+python agent.py serve t_h20
 ```
 
 ## File Paths
@@ -227,30 +173,7 @@ hermes kanban tasks list apmm-ut --status blocked
 | Component | Path |
 |-----------|------|
 | Kanban DB | `C:\Users\admin\AppData\Local\hermes\kanban\boards\apmm-ut\kanban.db` |
-| Orchestrator Profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-orchestrator\` |
-| Executor Profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-executor\` |
-| Fixer Profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-fixer\` |
+| Orchestrator profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-orchestrator\` |
+| Executor profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-executor\` |
+| Fixer profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-fixer\` |
 | workflow.yaml | `D:\workspace\apmm\.agents\workflow.yaml` |
-
-## Next Steps
-
-1. ✅ Phase 2 完成：方案 A-1 集成（SKILL.md v5.2 + start_gateway.py + monitor_kanban.py）
-2. 测试 Kanban 模式真实运行
-3. 验证熔断器配置（failure_limit, error_rate_threshold）
-4. 监控多 GPU 并行执行效率
-5. 性能基准测试
-
-## Kanban 模式触发入口
-
-在 `workflow.yaml` 设置 `kanban.enabled: true`，加载 `ut/workflow` skill 后 Agent 自动：
-1. 执行 `start_gateway.py` 启动 3 个 Gateway
-2. 创建初始 Orchestrator 任务
-3. 执行 `monitor_kanban.py` 监控进度
-
-详见 [skills/ut/workflow/SKILL.md](../../../skills/ut/workflow/SKILL.md) § Kanban 模式执行步骤。
-
-## References
-
-- Hermes Kanban Docs: `C:\Users\admin\AppData\Local\hermes\docs\kanban.md`
-- UT Workflow Skill: `skills/ut/workflow/SKILL.md`
-- UT Progress: `tasks/ut/PROGRESS.md`

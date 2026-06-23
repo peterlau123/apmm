@@ -1,0 +1,142 @@
+{
+  "_comment": "FROZEN expected-outcome baseline for the L4 real-machine Kanban test. Diff the run's L4_kanban_results.json against this to get a PASS/FAIL verdict. L4 validates the Kanban executor->fixer->executor DEPENDENCY CHAIN and timing, NOT that the tests pass (the retry subset fails by design on the offline remote). Hence: dependency_chain_invariants are HARD assertions (must hold every run); terminal_state_distribution is remote-dependent (the offline env cannot download models, so download/network errors are unfixable and end as ignored after max_retry).",
+  "metadata": {
+    "layer": "L4",
+    "mode": "kanban",
+    "test_list": "tests/ut/integration/fixtures/l3_retry_subset.txt",
+    "workflow_config": "tests/ut/integration/fixtures/workflow.l4.yaml",
+    "batch_size": 3,
+    "max_retry_per_test": 3,
+    "frozen_on": "2026-06-21",
+    "board": "apmm-ut",
+    "gateways": ["ut-orchestrator", "ut-executor", "ut-fixer"],
+    "supervisor": "ut-supervisor"
+  },
+  "anti_fabrication_assertions": [
+    {
+      "id": "AF-1",
+      "rule": "every executed test (run_count > 0) must have a non-null log_file that stat-succeeds with size > 0 on remote (defeats fabricated/null log paths)",
+      "check": "for each manifest entry with run_count > 0: log_file is non-empty AND tools/agent.py -p t_h20 run 'stat -c %s <log_file>' returns size > 0; null/missing log_file on an executed entry is itself a FAIL",
+      "severity": "hard"
+    },
+    {
+      "id": "AF-2",
+      "rule": "last_duration_ms is non-null iff test was actually executed (status in [passed, failed, error, retriable_error]) — ignored without execution stays null",
+      "check": "for each manifest entry: if status in [passed, failed] then last_duration_ms must be a positive integer; if status == ignored and run_count == 0 then last_duration_ms must be null",
+      "severity": "hard"
+    },
+    {
+      "id": "AF-3",
+      "rule": "passed + failed + ignored equals total accounted nodes",
+      "check": "passed_count + failed_count + ignored_count == metadata.expected_total (3 for L4)",
+      "severity": "hard"
+    }
+  ],
+  "stage_invariants": [
+    {
+      "id": "STG-1",
+      "rule": "failure-handler fired at least once (retry path exercised)",
+      "check": "manifest.json contains >=1 entry with retry_count > 0, or batch_results.json has >=1 entry with final_status == retriable_error in a trajectory",
+      "severity": "hard",
+      "rationale": "L4 retry subset is offline-unfixable by design; failure-handler MUST run, otherwise Stage 4 is bypassed"
+    },
+    {
+      "id": "STG-2",
+      "rule": "max_retry boundary enforced — no test executed more than max_retry + 1 times",
+      "check": "for each manifest entry: retry_count <= config.max_retry_per_test (3 for L4)",
+      "severity": "hard",
+      "rationale": "Defends failure-handler.py:506-512 boundary; INV-5 covers the same property at the Kanban-chain level"
+    },
+    {
+      "id": "STG-3",
+      "rule": "retriable_error is a non-terminal transient state — must transition to ignored/passed/failed by end of run",
+      "check": "no manifest terminal entry has status == retriable_error (must be promoted to ignored at max_retry, or to passed/failed on a successful re-run)",
+      "severity": "hard",
+      "rationale": "Incident 2026-06-22: worker fabricated NCCL retriable_error and supervisor paused incorrectly; STG-3 catches 'transient state never promoted'"
+    }
+  ],
+  "dependency_chain_invariants": [
+    {
+      "id": "INV-1",
+      "rule": "fixer does not start before executor completes Round 1",
+      "check": "first ut-fixer task claim timestamp > last ut-executor Round-1 complete timestamp",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-2",
+      "rule": "fixer only receives tests that executor marked failed/error in Round 1",
+      "check": "every fixer-handled node appears in Round-1 executor results with status in [failed, error]",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-3",
+      "rule": "single-claim: each batch/fix task is claimed by exactly one gateway",
+      "check": "no node has >1 concurrent executor claim; no duplicate fixer claim",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-4",
+      "rule": "executor re-runs only fixer-produced fixed_pending_verify nodes in Round 3 (if any)",
+      "check": "Round-3 executor input set == nodes set to fixed_pending_verify by fixer in Round 2",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-5",
+      "rule": "retriable_error nodes are re-selected only while retry_count < max_retry (3); at max they become ignored, not re-run forever",
+      "check": "no node executed more than max_retry+1 times; retriable_error at max_retry -> ignored",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-6",
+      "rule": "terminal pending == 0 (fixer -> dependency-resolver loop closed cleanly)",
+      "check": "no manifest entry has status == pending at end of run; resolver must promote every pending+delegate to ready/ignored",
+      "severity": "hard",
+      "rationale": "Added 2026-06-23 per L4 postmortem §4: pre-fix, fixer flagged pending+delegate but no runner consumed; runs hung forever. INV-6 makes the resolver contract visible — distinct id, distinct failure mode (vs TSD which only counts the final distribution)."
+    }
+  ],
+  "per_test": [
+    {
+      "node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "expected_error_class": "network|download_error",
+      "expected_trajectory": "pending -> (R1 executor) error/failed -> (R2 fixer) classified unfixable-on-offline -> retriable_error -> retry until max_retry -> ignored",
+      "fixable_in_offline_env": false
+    },
+    {
+      "node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "expected_error_class": "download_error",
+      "expected_trajectory": "pending -> (R1 executor) error (model not cached) -> (R2 fixer) delegate dependency-resolver -> offline, cannot download -> retriable_error -> ignored at max_retry",
+      "fixable_in_offline_env": false
+    },
+    {
+      "node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "expected_error_class": "download_error",
+      "expected_trajectory": "pending -> (R1 executor) error (model not cached) -> (R2 fixer) delegate dependency-resolver -> offline, cannot download -> retriable_error -> ignored at max_retry",
+      "fixable_in_offline_env": false
+    }
+  ],
+  "terminal_state_distribution": {
+    "_note": "Remote-dependent (offline env). Expected for the standard offline run below. If a model happens to be pre-cached, that node may instead end 'passed' after fixer verify -- record the deviation, it is not a failure of the framework.",
+    "expected_offline": { "passed": 0, "failed": 0, "ignored": 3, "pending": 0 },
+    "tolerance": "any split across {ignored, passed} totalling 3 is acceptable; failed/pending=0 and total=3 are required"
+  },
+  "pass_criteria": {
+    "must_all_hold": [
+      "all dependency_chain_invariants (INV-1..INV-5) hold",
+      "pending == 0 at end (loop terminated cleanly)",
+      "total accounted nodes == 3",
+      "fixer round occurred AFTER executor round (timing observed in gateway logs)"
+    ],
+    "record_but_not_fail": [
+      "exact passed/ignored split (remote model-cache dependent)",
+      "wall-clock throughput vs Linear baseline (comparison metric, not pass gate)"
+    ]
+  },
+  "artifacts_to_capture": [
+    ".agents/logs/gateway_ut-orchestrator.log",
+    ".agents/logs/gateway_ut-executor.log",
+    ".agents/logs/gateway_ut-fixer.log",
+    ".agents/logs/supervisor_ut-supervisor.log",
+    "runs/ut-<timestamp>/manifest.json (final terminal states)",
+    "remote vLLM git commit hash (recorded before run; fixer edits rolled back after)"
+  ]
+}

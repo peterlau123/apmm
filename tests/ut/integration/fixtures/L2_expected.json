@@ -1,0 +1,30 @@
+{
+  "_comment": "FROZEN expected-outcome baseline for the L2 linear mini test. L2 validates Stage 2-5 loop integrity — 3 stable parsed-input tests, no retry. Like L1, only terminal_state_distribution is asserted; AF/STG/INV are deliberately absent because mini_test_list has no retriable content.",
+  "metadata": {
+    "layer": "L2",
+    "mode": "linear",
+    "test_list": "tests/ut/integration/fixtures/mini_test_list.txt",
+    "workflow_config": "tests/ut/integration/fixtures/workflow.l2.yaml",
+    "batch_size": 3,
+    "max_retry_per_test": 0,
+    "frozen_on": "2026-06-22",
+    "expected_total": 3
+  },
+  "terminal_state_distribution": {
+    "_note": "All 3 tests in mini_test_list are pure-Python parse tests with no remote dependency. Every state must hit the exact expected count.",
+    "required": { "passed": 3, "failed": 0, "ignored": 0, "pending": 0 }
+  },
+  "pass_criteria": {
+    "must_all_hold": [
+      "pending == 0 at end",
+      "total accounted nodes == 3"
+    ],
+    "record_but_not_fail": [
+      "wall-clock <~3 min (informational, not a gate)"
+    ]
+  },
+  "artifacts_to_capture": [
+    ".agents/logs/supervisor_ut-supervisor.log",
+    "runs/ut-<timestamp>/manifest.json"
+  ]
+}

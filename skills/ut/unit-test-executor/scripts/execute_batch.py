@@ -121,10 +121,37 @@ def _node(t: dict) -> str:
 
 def _classify_for_test(summary_text: str, test_node: str):
     """Find the line(s) in summary_text mentioning test_node and classify them.
-    Falls back to whole summary if not found."""
+    Falls back to whole summary if not found.
+    
+    Bug #2 fix: pytest abbreviates long parametrized test names with '::...'.
+    We need to match using:
+    1. Exact match (full test_node in line)
+    2. Test file prefix match (tests/foo.py::Class::... matches tests/foo.py::Class::test_name)
+    3. Summary section match (FAILED/EERROR lines have full names)
+    """
     lines = [ln for ln in summary_text.splitlines() if test_node in ln]
-    blob = "\n".join(lines) if lines else summary_text
-    return classify(blob, test_node)
+    if lines:
+        blob = "\n".join(lines)
+        return classify(blob, test_node)
+    
+    # Bug #2 fix: Try prefix matching for abbreviated pytest output
+    # Extract test file prefix (e.g., "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem")
+    test_file_prefix = test_node.split("::")[0] if "::" in test_node else test_node.split(" ")[0]
+    class_prefix = test_node.rsplit("::", 1)[0] if "::" in test_node else test_file_prefix
+    
+    # Look for lines with matching prefix
+    prefix_lines = [ln for ln in summary_text.splitlines() 
+                    if (test_file_prefix in ln or class_prefix in ln) 
+                    and any(s in ln for s in ("PASSED", "FAILED", "ERROR", "SKIPPED"))]
+    
+    if prefix_lines:
+        # Count how many tests share this prefix
+        # Use progress percentage to distinguish
+        blob = "\n".join(prefix_lines)
+        return classify(blob, test_node)
+    
+    # Fallback: use whole summary (all tests get same status)
+    return classify(summary_text or "", test_node)
 
 
 # ── Main entry ────────────────────────────────────────────────────────────────

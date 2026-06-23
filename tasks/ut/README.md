@@ -42,6 +42,7 @@
 
 | 我想... | 看这里 |
 |---------|--------|
+| **看懂两个通道怎么跑（触发/机制/图示 + hermes 环境搭建）** | [docs/guides/ut-channels-overview.md](docs/guides/ut-channels-overview.md) |
 | 了解测试目标与完成标准 | [GOAL.md](GOAL.md) |
 | 查看当前进度统计 | [PROGRESS.md](PROGRESS.md) |
 | 查看每日工作记录 | [WORKLOG.md](WORKLOG.md) |
@@ -60,10 +61,12 @@
 | 了解架构设计讨论 | [docs/discussions/](docs/discussions/) |
 | 运行 Workflow 集成测试 | [../../tests/ut/test_lists/verify_workflow_test.py](../../tests/ut/test_lists/verify_workflow_test.py) |
 | 了解 Hermes Runner 操作 | [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md) |
-| 部署 ut-supervisor 服务 | [../../docs/guides/hermes-supervisor-service.md](../../docs/guides/hermes-supervisor-service.md) |
-| 部署 3 个 Gateway 服务 | [../../docs/guides/hermes-gateway-service.md](../../docs/guides/hermes-gateway-service.md) |
+| 部署 ut-supervisor 服务 | [../../tasks/ut/docs/guides/hermes-supervisor-service.md](../../tasks/ut/docs/guides/hermes-supervisor-service.md) |
+| 部署 3 个 Gateway 服务 | [../../tasks/ut/docs/guides/hermes-gateway-service.md](../../tasks/ut/docs/guides/hermes-gateway-service.md) |
+| **同步 Hermes profiles**（SOUL/SKILL distribution）| [../../tests/ut/integration/fixtures/profiles/README.md](../../tests/ut/integration/fixtures/profiles/README.md) — `python tasks/ut/scripts/deploy_tier.py --tier L4` |
 | Kanban 模式完整配置 | [docs/kanban/README.md](docs/kanban/README.md) |
 | 飞书通知集成细节 | [skills/ut/workflow/references/feishu-integration.md](../../skills/ut/workflow/references/feishu-integration.md) |
+| **查看 incident 复盘 / 故障归档** | [docs/incidents/README.md](docs/incidents/README.md) |
 | 浏览文档中心 | [docs/README.md](docs/README.md) |
 
 ---

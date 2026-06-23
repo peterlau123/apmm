@@ -2,14 +2,14 @@
 
 Covers:
   - validate_required_config (8.2)
-  - check_gateways_alive + _systemctl_active mocking (8.3)
+  - check_gateways_alive via `hermes gateway list` (8.3)
   - apply_pending_config + check_stop_conditions (8.4)
 """
 import importlib.util
 import json
 import sys
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 import pytest
 
@@ -61,10 +61,13 @@ def test_validate_required_config_missing_remote_server(hr):
 # ── 8.3 check_gateways_alive ──────────────────────────────────────────────────
 
 def test_check_gateways_alive_only_orchestrator(hr):
-    def fake_active(unit: str) -> bool:
-        return unit == "hermes-gateway@ut-orchestrator"
-
-    with patch.object(hr, "_systemctl_active", side_effect=fake_active):
+    stdout = (
+        "Gateways:\n"
+        "  ✓ ut-orchestrator  — PID 1\n"
+        "  ✗ ut-executor      — not running\n"
+        "  ✗ ut-fixer         — not running\n"
+    )
+    with patch("subprocess.run", return_value=MagicMock(returncode=0, stdout=stdout)):
         result = hr.check_gateways_alive()
 
     assert result == {
@@ -74,10 +77,14 @@ def test_check_gateways_alive_only_orchestrator(hr):
     }
 
 
-def test_systemctl_active_handles_missing_binary(hr):
-    """FileNotFoundError (Windows / no systemctl) should yield False, not raise."""
-    with patch("subprocess.run", side_effect=FileNotFoundError("no systemctl")):
-        assert hr._systemctl_active("anything") is False
+def test_check_gateways_alive_missing_hermes_binary(hr):
+    """FileNotFoundError (no hermes on PATH) → all False, not raise."""
+    with patch("subprocess.run", side_effect=FileNotFoundError("no hermes")):
+        assert hr.check_gateways_alive() == {
+            "ut-orchestrator": False,
+            "ut-executor": False,
+            "ut-fixer": False,
+        }
 
 
 # ── 8.4 apply_pending_config + check_stop_conditions ──────────────────────────
@@ -156,33 +163,41 @@ def test_refresh_manifest_stats(hr, tmp_path):
     assert s["pending"] == 1 and s["running"] == 1 and s["passed"] == 1
 
 
-# ── 2.1 parse_command ─────────────────────────────────────────────────────────
+# ── 2.1 parse_command (new Command dataclass — see also test_parse_command.py) ─
 
 def test_parse_stop(hr):
-    assert hr.parse_command("结束")["type"] == "stop"
+    assert hr.parse_command("结束").intent == "stop"
 
 
 def test_parse_pause(hr):
-    assert hr.parse_command("暂停")["type"] == "pause"
+    assert hr.parse_command("暂停").intent == "pause"
 
 
 def test_parse_resume(hr):
-    assert hr.parse_command("继续")["type"] == "resume"
+    assert hr.parse_command("继续").intent == "resume"
 
 
 def test_parse_otp(hr):
     c = hr.parse_command("123456")
-    assert c["type"] == "otp" and c["payload"]["code"] == "123456"
+    assert c.intent == "otp" and c.args["code"] == "123456"
 
 
 def test_parse_change_config(hr):
     c = hr.parse_command("改 batch_size=4")
-    assert c["type"] == "change_config" and c["payload"]["batch_size"] == "4"
+    assert c.intent == "change_config" and c.args["batch_size"] == "4"
 
 
 def test_parse_change_config_whitelist_only(hr):
-    assert "unknown_key" not in hr.parse_command("改 unknown_key=9")["payload"]
+    assert "unknown_key" not in hr.parse_command("改 unknown_key=9").args
 
 
 def test_parse_non_command(hr):
     assert hr.parse_command("这个测试为什么失败") is None
+
+
+def test_parse_command_as_dict_back_compat(hr):
+    """Legacy {type, payload} adapter still works for archive callers."""
+    d = hr.parse_command_as_dict("结束")
+    assert d == {"type": "stop", "payload": {}}
+    d = hr.parse_command_as_dict("123456")
+    assert d == {"type": "otp", "payload": {"code": "123456"}}

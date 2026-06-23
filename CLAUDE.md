@@ -78,3 +78,27 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+---
+
+## 5. 文档归位规则（hard rule）
+
+判断标准：文档讨论的对象**只属于哪个 `tasks/<x>` 子系统**？
+
+| 范围 | 收纳位置 | 示例 |
+|---|---|---|
+| 跨子系统 / 项目级 | `docs/` | bastion / environment / ai-workflow / superpowers 框架自身 spec |
+| 仅 UT 子系统 | `tasks/ut/docs/` | hermes_workflow / manifest / ut-supervisor 部署 / UT 周报 / UT incident |
+| 仅 accuracy 子系统 | `tasks/accuracy/docs/`（按需建） | GPQA/MMLU 评测脚本、精度报告 |
+| 仅 performance 子系统 | `tasks/performance/docs/`（按需建） | 吞吐压测、roofline、调度对比 |
+| 其它新子系统 | `tasks/<x>/docs/`（按需建） | 镜像同样的子目录骨架：`guides/`, `designs/`, `plans/`, `incidents/`, `reports/`, `discussions/` |
+
+**判定流程**：
+1. 文档主要对象命中**单个** `tasks/<x>/`（看标题、文件路径引用、SKILL 引用）→ 必须放 `tasks/<x>/docs/`。
+2. 命中**多个** `tasks/<x>` → 放项目级 `docs/`，并在每个相关 `tasks/<x>/docs/README.md` 加导引链接。
+3. 不命中任何 `tasks/<x>`（纯基础设施 / 跨项目工具）→ 项目级 `docs/`。
+
+**项目级 `docs/` 禁止规则**：禁止接收任何只服务单一 `tasks/<x>` 的详细文档（spec / plan / incident / report / 运维 guide）。新写前请按上表自检；判断不准就**问用户**，不要默认丢 `docs/`。
+
+**新建子系统时**：在 `tasks/<x>/docs/` 下复用与 `tasks/ut/docs/` 一致的子目录骨架（`README.md` + `guides/` + `designs/` + `plans/` + `incidents/` + `reports/` + `discussions/`），保持跨子系统目录结构一致。
+

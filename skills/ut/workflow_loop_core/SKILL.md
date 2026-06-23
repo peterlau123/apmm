@@ -8,11 +8,33 @@ when_to_use: Loaded automatically by a channel SKILL (ut/workflow or hermes_work
 # workflow_loop_core (v5)
 
 > Shared loop body for the dual-channel UT workflow.
-> Spec: `docs/superpowers/specs/2026-06-18-hermes-workflow-dual-channel-design.md`
+> Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 
 The loop body is intentionally channel-agnostic. Channel skills inject
 behaviour through callbacks; the core only drives the stage cadence and
 terminal conditions.
+
+> 两个通道如何调用本内核、各自如何触发，见
+> `tasks/ut/docs/guides/ut-channels-overview.md`。
+
+## Loop at a glance (linear + kanban)
+
+```mermaid
+flowchart TD
+    Start([loop_core.run]) --> Read[读取 state + manifest]
+    Read --> Term{终止判定<br/>pending==0 且 running==0?}
+    Term -->|是| Final[finalize 写终态] --> End([退出])
+    Term -->|否| Cmd[check_user_commands drain]
+    Cmd --> Flag{stop / pause requested?}
+    Flag -->|是| End
+    Flag -->|否| Mode{通道模式}
+    Mode -->|linear| S2[Stage2 batch-selector] --> S3[Stage3 executor]
+    S3 --> Wait{next_action == wait?}
+    Wait -->|是| Disc[handle_bastion_disconnect] --> Read
+    Wait -->|否| S4[Stage4 failure-handler] --> S5[Stage5 manifest-updater] --> Ckpt
+    Mode -->|kanban| Poll[check_gateways_alive + poll_kanban_stats<br/>本进程不跑 Stage2-5] --> Ckpt[handle_checkpoint]
+    Ckpt --> Read
+```
 
 ---
 

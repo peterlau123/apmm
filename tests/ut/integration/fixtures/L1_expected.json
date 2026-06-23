@@ -1,0 +1,30 @@
+{
+  "_comment": "FROZEN expected-outcome baseline for the L1 smoke test. L1 validates that the 5 workflow stages all string together — 1 stable pure-python test, no retry. terminal_state_distribution is the only assertion; AF, STG, and INV are intentionally absent (L1 is never supposed to exercise retry or the Kanban chain).",
+  "metadata": {
+    "layer": "L1",
+    "mode": "linear",
+    "test_list": "tests/ut/integration/fixtures/l1_smoke_list.txt",
+    "workflow_config": "tests/ut/integration/fixtures/workflow.l1.yaml",
+    "batch_size": 1,
+    "max_retry_per_test": 0,
+    "frozen_on": "2026-06-22",
+    "expected_total": 1
+  },
+  "terminal_state_distribution": {
+    "_note": "L1 uses a deterministic stable parsed-input test with no remote dependency. All states must hit exactly the expected count.",
+    "required": { "passed": 1, "failed": 0, "ignored": 0, "pending": 0 }
+  },
+  "pass_criteria": {
+    "must_all_hold": [
+      "pending == 0 at end (loop terminated cleanly)",
+      "total accounted nodes == 1"
+    ],
+    "record_but_not_fail": [
+      "duration shape — <1 min expected, not a pass gate"
+    ]
+  },
+  "artifacts_to_capture": [
+    ".agents/logs/supervisor_ut-supervisor.log",
+    "runs/ut-<timestamp>/manifest.json (final terminal states)"
+  ]
+}

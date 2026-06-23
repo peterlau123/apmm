@@ -1,0 +1,248 @@
+# workflow.l2.yaml - FROZEN L2 LINEAR MINI CONFIG (kanban OFF; 3-batch loop trip)
+# ============================================================
+# ⚠️ Frozen copy dedicated to the L2 tier. L2 verifies "linear batch loop"
+#    — Stage 2-5 iterate correctly, all 3 stable tests pass without
+#    failure-handler activity.
+#
+#    Tier deltas (vs production):
+#      - input_filter.test_list_path -> mini_test_list.txt (3 stable tests)
+#      - config.batch_size           -> 3 (one whole batch)
+#      - config.max_retry_per_test   -> 0
+#      - kanban.enabled              -> false
+#
+#    Spec: tasks/ut/docs/designs/2026-06-22-ut-tier-fixtures-and-agent-intent-design.md §2.5
+#    Expected baseline: tests/ut/integration/fixtures/L2_expected.json
+# ============================================================
+
+workflow:
+  name: UT Test Workflow
+  version: "2.2"
+  description: Hierarchical Agent架构 - L2 linear mini (3 stable tests)
+
+  test_name: "ut"
+
+config:
+  workspace: &workspace "D:/workspace/apmm"
+  runs_dir: &runs_dir "D:/workspace/apmm/runs"
+
+  run_dir: &run_dir null
+
+  manifest_schema_path: &manifest_schema_path "{workspace}/skills/ut/shared/manifest_schema.json"
+  filter_rules_path: &filter_rules_path "{workspace}/skills/ut/shared/filter_rules.yaml"
+
+  test_list_path: &test_list_path "{run_dir}/test_list.txt"
+  manifest_path: &manifest_path "{run_dir}/manifest.json"
+  workflow_state_path: &workflow_state_path "{run_dir}/workflow_state.json"
+  logs_dir: &logs_dir "{run_dir}/logs"
+  reports_dir: &reports_dir "{run_dir}/reports"
+
+  batches_dir: &batches_dir "{run_dir}/batches"
+  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}"
+  batch_config_path: &batch_config_path "{batch_dir_template}/batch_config.json"
+  batch_results_path: &batch_results_path "{batch_dir_template}/batch_results.json"
+  handled_tests_path: &handled_tests_path "{batch_dir_template}/handled_tests.json"
+  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs"
+
+  remote_server: "t_h20"
+  docker_container: "v0.13.0_torch2.5.1_compile"
+  vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
+  ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+
+  container_env:
+    HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
+    HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_HUB_OFFLINE: "1"
+    TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
+    CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
+
+  pytest_args: "-q --tb=long"
+  batch_size: 3                  # FROZEN(L2): 3 stable tests in one batch
+  max_retry_per_test: 0          # FROZEN(L2): all 3 must pass first try
+
+  resume_from: null
+
+input_filter:
+  test_list_path: "D:/workspace/apmm/tests/ut/integration/fixtures/mini_test_list.txt"  # FROZEN(L2)
+  manifest_source: null
+  range: null
+  filter:
+    status: null
+    error_type: null
+    count: null
+  remote_collect:
+    enabled: false
+    server: "t_h20"
+    container: "v0.13.0_torch2.5.1_compile"
+    vllm_dir: "/gpfs/gcsp/M2.7_verify/vllm"
+
+stages:
+  - id: collect
+    delegate_to: self
+    skill: ut-test-collector
+    loop: false
+    description: 从test_list.txt生成manifest.json
+    input:
+      test_list_path: "{run_dir}/test_list.txt"
+      manifest_schema_path: "{workspace}/skills/ut/shared/manifest_schema.json"
+    output:
+      manifest_path: *manifest_path
+    kanban:
+      action: create_board
+      board_name: "UT Test Progress"
+
+  - id: select_batch
+    delegate_to: self
+    skill: batch-selector
+    loop: true
+    description: 选择下一批次测试
+    input:
+      manifest_path: *manifest_path
+      batch_size: 3              # FROZEN(L2)
+    output:
+      batch_config_path: *batch_config_path
+    kanban:
+      action: create_lane
+      lane_name_template: "batch_{batch_id}"
+      lane_type: running
+
+  - id: execute
+    delegate_to: self
+    skill: unit-test-executor
+    loop: true
+    description: 执行pytest测试并生成batch_results.json
+    input:
+      batch_config_path: *batch_config_path
+      pytest_args: "-q --tb=long"
+      remote_server: "t_h20"
+      docker_container: "v0.13.0_torch2.5.1_compile"
+      ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+    output:
+      batch_results_path: *batch_results_path
+    log_extraction:
+      enabled: true
+      grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
+      grep_timeout: 60
+      parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
+    timeout: 600                 # FROZEN(L2)
+    kanban:
+      action: update_lane
+      progress_template: "{passed}/{total}"
+
+  - id: handle_failures
+    delegate_to: self
+    skill: failure-handler
+    loop: true
+    description: 分析失败原因，尝试修复（Agent判断）
+    input:
+      batch_results_path: *batch_results_path
+      max_failed_per_iteration: 10
+      max_retry_per_test: 0      # FROZEN(L2)
+    output:
+      handled_tests_path: *handled_tests_path
+    agent_required: true
+    timeout: 300
+
+  - id: update_status
+    delegate_to: self
+    skill: manifest-updater
+    loop: true
+    description: 更新manifest.json状态
+    input:
+      batch_results_path: *batch_results_path
+      handled_tests_path: *handled_tests_path
+      manifest_path: *manifest_path
+    output:
+      manifest_path: *manifest_path
+    kanban:
+      action: move_lane
+      lane_name_template: "batch_{batch_id}"
+      target_lane_template: "{result_lane}"
+      summary_template: "{passed}/{total} passed"
+
+loop:
+  stages:
+    - select_batch
+    - execute
+    - handle_failures
+    - update_status
+  stop_condition: "pending_count == 0"
+  max_iterations: 10             # FROZEN(L2)
+
+  break_conditions:
+    - condition: "consecutive_failures > 2"
+      action: pause
+      notify: true
+      kanban_note: "Paused: L2 saw >2 consecutive failures"
+
+    - condition: "error_rate > 0.8"
+      action: pause
+      notify: true
+      kanban_note: "Paused: error_rate > 80%"
+
+    - condition: "stop_requested == true"
+      action: stop
+      notify: true
+
+bastion:
+  managed_by: hermes
+  profile: "t_h20"
+  heartbeat_interval: 15
+  otp_timeout: 300
+  notify_on_disconnect: true
+  auto_restart: true
+
+worker_output_schema:
+  stats:
+    passed: integer
+    failed: integer
+    error: integer
+    ignored: integer
+    pending: integer
+  next_action: string
+  error: string_or_null
+  blocked_reason: string_or_null
+
+kanban:
+  enabled: false                 # FROZEN(L2): linear
+
+  board:
+    name: "apmm-ut"
+    slug: "apmm-ut"
+
+  profiles:
+    orchestrator: "ut-orchestrator"
+    executor: "ut-executor"
+    fixer: "ut-fixer"
+
+  gateway:
+    auto_start: true
+    check_interval: 60
+    startup_timeout: 30
+
+  circuit_breaker:
+    failure_limit: 3
+    error_rate_threshold: 0.8
+
+  task_creation:
+    initial_assignee: "ut-orchestrator"
+    priority: 1
+    body_template: "Orchestrate UT run for {test_list_path}"
+
+notifications:
+  feishu_chat_id: "oc_2e75db818ac1792238037a704b4d32d3"
+
+  notify_on:
+    - condition: "batch_completed"
+      template: "Batch {batch_id}: {passed}/{total} passed"
+      include_kanban_link: true
+
+    - condition: "workflow_completed"
+      template: "L2 mini completed: {passed_count} passed, {failed_count} failed, {ignored_count} ignored"
+      include_kanban_snapshot: false
+
+    - condition: "paused"
+      template: "L2 mini paused: {pause_reason}"
+
+    - condition: "worker_error"
+      template: "Worker错误 ({stage}): {error_message}"

@@ -1,6 +1,6 @@
 # 执行策略
 
-> 引用: docs/superpowers/specs/agents/unit-test-executor-agent/test-execution-plan.md
+> 引用: tasks/ut/docs/designs/agents/unit-test-executor-agent/test-execution-plan.md
 
 ## Phase执行策略
 

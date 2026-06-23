@@ -14,6 +14,7 @@ Failure Handler - 生成已处理 manifest
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 # 先设置路径（确保 skills 包可被导入）
@@ -93,14 +94,17 @@ def generate_handled_manifest(
 
         # 根据错误类型决定处理方式
         if error_type in ["dependency", "download_error"]:
+            # 不自动下载：模型需要人工处理（见 tasks/ut/docs/incidents/2026-06-23-l4-postmortem-and-fixes.md §4）
+            # 从 error_message 尝试提取模型名
+            dep_id = error_message.split("Model ")[-1].split(" not")[0] if "Model " in error_message else error_message[:80]
             handled_manifest["tests"].append({
                 "test_node": test_node,
-                "final_status": "pending",
+                "final_status": "ignored",
                 "error_type": error_type,
                 "error_message": error_message,
-                "action": "dependency_resolver"
+                "ignored_reason": f"模型需要下载需要人工处理: {dep_id}"
             })
-            handled_manifest["stats"]["pending"] += 1
+            handled_manifest["stats"]["ignored"] += 1
 
         elif error_type == "network":
             handled_manifest["tests"].append({

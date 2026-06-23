@@ -689,22 +689,45 @@ stages:
 
 ---
 
-## 禁止操作
+## 禁止操作（硬契约 — 违反即视为污染数据，supervisor 会 invalidate run）
+
+### 数据完整性禁令（不可越权）
+
+- 🚫 **绝对禁止 fabrication**：`handled_tests.json` 的每一条 classification、`final_status`、`fix_applied`、`error_message`、`log_path` **必须**直接来自上游 `batch_results.json` + 真实远程修复尝试的输出；
+  - 禁止：基于"单句错误摘要"凭印象给出 `failure_category: resource-insufficient / network / version / functional` —— 必须有 NCCL_DEBUG=INFO、`nvidia-smi`、远端 log 文件等实证；
+  - 禁止：在没看到完整 batch_results.json + 远端 log 时就 `needs_user_decision: true` 触发 supervisor pause；
+  - 禁止：`fix_applied: true` 但 `fix_details: null` —— 要么真改过远端代码并附 diff/patch，要么报 false。
+- 🚫 **绝对禁止越权发送 Feishu / Lark / 任何外部通知**：
+  - 禁止：写 Python 脚本调用 `open.feishu.cn`、`api.lark.com`、`webhook` 等 IM API；
+  - 禁止：用 `requests.post` / `curl` 向 Feishu/Lark/Slack/钉钉 发任何消息；
+  - 禁止：跨 profile 读取 `~/.claude/...` / `~/.hermes/profiles/<other>/...` 下的 token；
+  - 唯一允许的通知路径：**返回 stats + decisions_needed 给 supervisor**，supervisor 通过 Hermes 标准投递层发出。
+- 🚫 **绝对禁止修改 `manifest.json`**：那是 Stage 5（manifest-updater）的职责，fixer 只产 `handled_tests.json`。
+- 🚫 **绝对禁止删除/重命名上游产物**：`batch_results.json`、`batch_config.json`、`manifest.json`、`test_list.txt`、`workflow_state.json` —— 都不要碰。
+- 🚫 **绝对禁止信任上游 batch_results 而不做完整性 sanity check**：fixer 在读 `batch_results.json` 时**至少**检查 `log_path` 字段是绝对路径且非空，记录"未验证"标记，不要把可疑数据继续往下游传。
+
+### 行为禁令
 
 - ❌ 不用 LLM 处理确定性任务（规则提取、统计等）
 - ❌ 不在 workflow_state 存储协调数据（只用 manifest）
 - ❌ 不本地修复代码（所有修复在远程容器）
 - ❌ 不直接 ignored version/functional（先尝试修复）
 - ❌ 不返回详细修复过程（只返回 stats）
-- ❌ 不发送飞书通知（让 Supervisor 发送）
-- ❌ 不修改 manifest.json（让 Stage 5 修改）
+- ❌ 不"尝试 recover Bastion daemon" —— daemon 由 supervisor 通过 OTP 管，worker 看到 daemon 死了就 `next_action=wait` 直接返回
+- ❌ 不写 `D:/workspace/apmm/scripts/*.py`、`tools/*.py` 等仓库根目录脚本（fixer 工作目录是当前 run_dir）
+
+### 历史教训（不要重蹈）
+
+| 日期 | 越权行为 | 后果 |
+|---|---|---|
+| 2026-06-22 | 某 fixer 在 stage-4 接到上游 fabricated 的 batch_results.json（log_path 指向不存在的远端 log），没做任何完整性 sanity check 就盲信，把 NCCL 一句话错误归类为 `resource-insufficient`、`pause_batch`、`needs_user_decision: true`，触发 supervisor 误判 GPU 资源问题暂停整个 run；同期还有 worker 手写 `scripts/send_feishu_report.py` 直接发"完成报告"到 ai-engineer 群 | run `ut-20260621-234651` 被 supervisor invalidated；写入这条约束 |
 
 ---
 
 ## 相关文档
 
-- [Implementation Analysis](../../docs/superpowers/specs/2026-06-12-failure-handler-review-analysis.md) — 10 决策详细分析
-- [Design Doc](../../docs/superpowers/specs/2026-06-12-failure-handler-review-design.md) — 设计决策汇总
+- [Implementation Analysis](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-analysis.md) — 10 决策详细分析
+- [Design Doc](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md) — 设计决策汇总
 - [workflow.yaml](../../.agents/workflow.yaml) — Workflow 配置
 - [workflow/SKILL.md](../workflow/SKILL.md) — Supervisor 调度逻辑
 - [batch-selector/SKILL.md](../batch-selector/SKILL.md) — 上游 Stage（需选择 fixed_pending_verify）

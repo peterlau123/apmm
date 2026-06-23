@@ -347,9 +347,9 @@ while True:
 | 文档 | 位置 | 状态 |
 |------|------|------|
 | 本方案 | `docs/superpowers/specs/2026-06-08-agent-automation-design.md` | ✅ Active |
-| Runner Agent详细 | `docs/superpowers/specs/agents/unit-test-executor-agent/README.md` | ✅ Active |
-| Supervisor Agent详细 | `docs/superpowers/specs/agents/supervisor-agent/README.md` | ✅ Active |
-| 旧架构设计 | `docs/superpowers/specs/agents/README.md` | ⚠️ Deprecated |
+| Runner Agent详细 | `tasks/ut/docs/designs/agents/unit-test-executor-agent/README.md` | ✅ Active |
+| Supervisor Agent详细 | `tasks/ut/docs/designs/agents/supervisor-agent/README.md` | ✅ Active |
+| 旧架构设计 | `tasks/ut/docs/designs/agents/README.md` | ⚠️ Deprecated |
 
 ---
 

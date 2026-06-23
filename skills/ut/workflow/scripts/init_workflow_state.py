@@ -180,8 +180,11 @@ def create_initial_state(
     workflow_version = config.get("workflow", {}).get("version", "2.0")
     test_name = config.get("workflow", {}).get("test_name", "ut")
 
-    # 获取 agents_dir（workflow.yaml 所在目录）
-    agents_dir = workflow_yaml_path.parent
+    # current_run.json must live at the canonical PROJECT_ROOT/.agents (where
+    # hermes_runner.init_or_resume reads it). Do NOT derive from the yaml's
+    # parent — frozen test configs live outside .agents and would otherwise
+    # write the pointer next to the yaml, leaving the canonical one stale.
+    agents_dir = _project_root / ".agents"
 
     # 创建或使用运行目录
     if run_dir is None:
@@ -246,7 +249,9 @@ def create_initial_state(
             "version": workflow_version,
             "test_name": test_name,
             "started_at": now,
-            "status": "initialized",
+            # v5 schema dropped 'initialized'; a freshly-built run is 'running'
+            # (the channel loop drives it immediately). See workflow_state_schema.json.
+            "status": "running",
         },
         "current_stage": "collect",
         "iteration": 0,
@@ -361,9 +366,18 @@ def main():
     manifest_path = Path(args.manifest_path) if args.manifest_path else None
     test_list_source = Path(args.test_list) if args.test_list else None
 
-    create_initial_state(
+    result = create_initial_state(
         workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=args.reset
     )
+
+    # Fail loudly on a bad init: a validation failure must surface as a non-zero
+    # exit so callers (e.g. hermes_runner.init_or_resume, which gates on rc != 0)
+    # don't silently reuse a stale run_dir with an un-updated current_run.json.
+    if isinstance(result, dict) and result.get("error"):
+        print(f"[ERROR] init failed: {result['error']}", file=sys.stderr)
+        for detail in result.get("details", []):
+            print(f"  - {detail}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

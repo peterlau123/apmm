@@ -132,6 +132,7 @@ def preflight_config(workflow_yaml_path):
         profiles_cfg.get("orchestrator", "ut-orchestrator"),
         profiles_cfg.get("executor", "ut-executor"),
         profiles_cfg.get("fixer", "ut-fixer"),
+        profiles_cfg.get("dependency_resolver", "ut-dependency-resolver"),
         "ut-supervisor",
     ]
     present = _hermes_profiles_present(required)
@@ -244,6 +245,7 @@ def show_status(workflow_yaml_path):
         profiles.get("orchestrator", "ut-orchestrator"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
+        profiles.get("dependency_resolver", "ut-dependency-resolver"),
     ]
     supervisor_profile = "ut-supervisor"
 
@@ -293,9 +295,10 @@ def stop_all(workflow_yaml_path):
         profiles.get("orchestrator", "ut-orchestrator"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
+        profiles.get("dependency_resolver", "ut-dependency-resolver"),
     ]
     supervisor_profile = "ut-supervisor"
-    
+
     agent_path = _AGENT_PY
     
     print(f"\nStopping Bastion daemon ({bastion_profile})...")

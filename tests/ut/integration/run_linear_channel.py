@@ -97,8 +97,8 @@ def main() -> int:
         else Path(args.workflow_yaml)
     cfg = yaml.safe_load(wf_path.read_text(encoding="utf-8"))
 
-    # Startup §3: validate config
-    ok, missing = _HR.validate_required_config(cfg)
+    # Startup §3: validate config — linear channel disallows kanban.enabled=true
+    ok, missing = _HR.validate_required_config(cfg, channel="linear")
     if not ok:
         print(f"[linear] config invalid, missing: {missing}")
         return 1

@@ -3,12 +3,18 @@
 execute_batch.py - v5 batch executor (Worker)
 
 v5 behavior:
-- Runs pytest REMOTELY, redirecting ALL output to raw_log.txt on the remote
-  (the only file written remotely).
-- Runs a remote grep+tail on raw_log.txt, brings the text back, and writes
+- Runs pytest REMOTELY under a remote bash watchdog (idle-timeout +
+  wall-clock fallback per design 2026-06-23-pytest-timeout-redesign.md §4).
+  All output redirected to ``<remote_log_dir>/<batch_id>/pytest_<batch_id>.log``
+  on the remote (the only file written remotely).
+- The watchdog kills pytest with SIGKILL when either the idle threshold
+  (no log activity for ``pytest_idle_timeout`` seconds) or the wall-clock
+  ceiling (``timeout`` seconds) is exceeded, exits 124, and appends a
+  ``__WATCHDOG__:`` sentinel line to the log for downstream LLM analysis.
+- Runs a remote grep+tail on the log, brings the text back, and writes
   summary.txt LOCALLY.
 - batch_results.json (local) carries a `remote_log` pointer to the remote
-  raw_log path, plus per-test entries with status + error_type.
+  log path, plus per-test entries with status + error_type.
 - Worker NEVER retries internally.
 - On Bastion disconnect (ConnectionError from run_remote), the executor calls
   BastionManager.mark_disconnected() and returns {"next_action": "wait", ...}
@@ -53,6 +59,67 @@ try:
     from skills.ut.workflow.scripts.bastion_manager import BastionManager  # noqa: F401
 except Exception:  # pragma: no cover - tests patch it directly
     BastionManager = None  # type: ignore[assignment]
+
+
+# ── Watchdog template (固化 — see design §4; do NOT rewrite at call sites) ────
+#
+# Notes on shell-quoting choices:
+#   - The script is wrapped in `bash -c '<...>'` by the caller, so it must
+#     not contain ANY ASCII single quotes (`'`).
+#   - All shell variables (`$PID`, `$NOW`, `$START`, `$LAST_MTIME`) are
+#     resolved at RUNTIME on the remote host; Python f-string substitution
+#     only fills in `{log_path}`, `{wall_timeout}`, `{idle_timeout}`, and
+#     `{pytest_full_cmd}`.
+#   - `stat -c %Y` is GNU coreutils standard (vLLM test container is Ubuntu).
+#   - `kill -9` ensures hung children release the SSH session promptly.
+WATCHDOG_TEMPLATE = (
+    "mkdir -p $(dirname {log_path}) && "
+    "( {pytest_full_cmd} ) > {log_path} 2>&1 &\n"
+    "PID=$!\n"
+    "START=$(date +%s)\n"
+    "while kill -0 $PID 2>/dev/null; do\n"
+    "  sleep 10\n"
+    "  NOW=$(date +%s)\n"
+    "  if [ $((NOW - START)) -gt {wall_timeout} ]; then\n"
+    "    kill -9 $PID 2>/dev/null\n"
+    '    echo "__WATCHDOG__: wall_clock_exceeded after $((NOW-START))s" '
+    ">> {log_path}\n"
+    "    exit 124\n"
+    "  fi\n"
+    "  if [ -f {log_path} ]; then\n"
+    "    LAST_MTIME=$(stat -c %Y {log_path} 2>/dev/null || echo $NOW)\n"
+    "    if [ $((NOW - LAST_MTIME)) -gt {idle_timeout} ]; then\n"
+    "      kill -9 $PID 2>/dev/null\n"
+    '      echo "__WATCHDOG__: idle_exceeded $((NOW-LAST_MTIME))s '
+    '(no log activity)" >> {log_path}\n'
+    "      exit 124\n"
+    "    fi\n"
+    "  fi\n"
+    "done\n"
+    "wait $PID\n"
+    "exit $?\n"
+)
+
+
+def _build_watchdog_script(
+    *, log_path: str, pytest_full_cmd: str,
+    idle_timeout: int, wall_timeout: int,
+) -> str:
+    """Render the remote bash watchdog script.
+
+    Public for unit tests (see test_execute_batch_watchdog.py).
+    """
+    if "'" in pytest_full_cmd or "'" in log_path:
+        raise ValueError(
+            "pytest_full_cmd / log_path may not contain single quotes "
+            "(outer wrap uses bash -c '<...>')"
+        )
+    return WATCHDOG_TEMPLATE.format(
+        log_path=log_path,
+        pytest_full_cmd=pytest_full_cmd,
+        idle_timeout=int(idle_timeout),
+        wall_timeout=int(wall_timeout),
+    )
 
 
 # ── Remote call helper ────────────────────────────────────────────────────────
@@ -122,7 +189,7 @@ def _node(t: dict) -> str:
 def _classify_for_test(summary_text: str, test_node: str):
     """Find the line(s) in summary_text mentioning test_node and classify them.
     Falls back to whole summary if not found.
-    
+
     Bug #2 fix: pytest abbreviates long parametrized test names with '::...'.
     We need to match using:
     1. Exact match (full test_node in line)
@@ -133,23 +200,23 @@ def _classify_for_test(summary_text: str, test_node: str):
     if lines:
         blob = "\n".join(lines)
         return classify(blob, test_node)
-    
+
     # Bug #2 fix: Try prefix matching for abbreviated pytest output
     # Extract test file prefix (e.g., "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem")
     test_file_prefix = test_node.split("::")[0] if "::" in test_node else test_node.split(" ")[0]
     class_prefix = test_node.rsplit("::", 1)[0] if "::" in test_node else test_file_prefix
-    
+
     # Look for lines with matching prefix
-    prefix_lines = [ln for ln in summary_text.splitlines() 
-                    if (test_file_prefix in ln or class_prefix in ln) 
+    prefix_lines = [ln for ln in summary_text.splitlines()
+                    if (test_file_prefix in ln or class_prefix in ln)
                     and any(s in ln for s in ("PASSED", "FAILED", "ERROR", "SKIPPED"))]
-    
+
     if prefix_lines:
         # Count how many tests share this prefix
         # Use progress percentage to distinguish
         blob = "\n".join(prefix_lines)
         return classify(blob, test_node)
-    
+
     # Fallback: use whole summary (all tests get same status)
     return classify(summary_text or "", test_node)
 
@@ -179,30 +246,56 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     remote_server = config.get("remote_server", "t_h20")
     docker_container = config.get("docker_container", "v0.13.0_torch2.5.1_compile")
     pytest_args = config.get("pytest_args", "-v --tb=long")
-    timeout = config.get("timeout", 600)
+    # Two independent timeout knobs (design §3 D3):
+    #   wall_timeout — absolute ceiling on the batch (legacy field name "timeout")
+    #   idle_timeout — kill if log file shows no activity for this long
+    # Either condition triggers SIGKILL + exit 124 inside the remote watchdog.
+    wall_timeout = config.get("timeout", 600)
+    idle_timeout = config.get("pytest_idle_timeout", 120)
     remote_log_dir = config.get(
         "remote_log_dir", "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
     )
 
-    raw_log_path = f"{remote_log_dir}/{batch_id}/raw_log.txt"
+    # New filename (design §4 D5): pytest_<batch_id>.log replaces raw_log.txt.
+    # The ``remote_log.raw_log_path`` field in batch_results.json keeps its
+    # name so downstream consumers (failure-handler, analyze_failures) stay
+    # source-compatible — only the filename on disk changes.
+    raw_log_path = f"{remote_log_dir}/{batch_id}/pytest_{batch_id}.log"
     test_paths = " ".join(test_nodes)
 
-    # Remote pytest: ALL output -> raw_log.txt on remote (the only remote write).
-    pytest_cmd = (
-        f"mkdir -p {remote_log_dir}/{batch_id} && "
+    # Build the pytest invocation that the watchdog will background.
+    # NOTE: redirection lives in the watchdog template (it owns the log path),
+    # so this command does NOT include "> ... 2>&1".
+    pytest_inner_cmd = (
         f"cd /gpfs/gcsp/M2.7_verify/vllm && "
-        f"python3 -m pytest {test_paths} {pytest_args} > {raw_log_path} 2>&1"
+        f"python3 -m pytest {test_paths} {pytest_args}"
     )
+
+    watchdog_script = _build_watchdog_script(
+        log_path=raw_log_path,
+        pytest_full_cmd=pytest_inner_cmd,
+        idle_timeout=idle_timeout,
+        wall_timeout=wall_timeout,
+    )
+
+    # Wrap with docker exec; outer wrap uses single quotes around the script.
+    # The watchdog template is guaranteed (by _build_watchdog_script) not to
+    # contain ASCII single quotes, so this nesting is safe.
     pytest_docker_cmd = (
-        f"sudo docker exec {docker_container} bash -c '{pytest_cmd}'"
+        f"sudo docker exec {docker_container} bash -c '{watchdog_script}'"
     )
 
     started_at = _utc_now_iso_z()
-    print(f"[INFO] Executing {len(tests)} tests remotely → {raw_log_path}")
+    print(
+        f"[INFO] Executing {len(tests)} tests remotely → {raw_log_path} "
+        f"(idle={idle_timeout}s, wall={wall_timeout}s)"
+    )
 
+    # Local subprocess ceiling = wall_timeout + 60s (absolute backstop in case
+    # the remote watchdog itself misbehaves; design §8 #2).
     try:
         pytest_res = run_remote(
-            pytest_docker_cmd, timeout=timeout, profile=remote_server
+            pytest_docker_cmd, timeout=wall_timeout, profile=remote_server
         )
     except ConnectionError as e:
         # Bastion disconnect: do NOT write batch_results.json, do NOT mutate
@@ -225,10 +318,10 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             "reason": reason,
         }
 
-    # Second remote call: extract a summary via grep+tail on raw_log.txt.
+    # Second remote call: extract a summary via grep+tail on the pytest log.
     summary_extract_cmd = (
         f"sudo docker exec {docker_container} bash -c "
-        f"\"grep -E '(PASSED|FAILED|ERROR|SKIPPED)' {raw_log_path} ; "
+        f"\"grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' {raw_log_path} ; "
         f"echo '----'; tail -50 {raw_log_path}\""
     )
     try:
@@ -287,7 +380,8 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         "batch_id": batch_id,
         "started_at": started_at,
         "finished_at": finished_at,
-        "timeout": timeout,
+        "timeout": wall_timeout,
+        "pytest_idle_timeout": idle_timeout,
         "exit_code": pytest_res.get("exit_code", 0),
         "remote_log": {
             "host": remote_server,

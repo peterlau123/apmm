@@ -14,17 +14,19 @@ for historical context and will be reconciled in a follow-up pass.
 
 ### 1. Remote raw_log + local summary
 
-Stage 3 runs pytest **remotely**, redirecting **all** stdout/stderr to a single
-remote file:
+Stage 3 runs pytest **remotely** under a bash watchdog (idle-timeout +
+wall-clock fallback, see [2026-06-23-pytest-timeout-redesign.md](../../tasks/ut/docs/designs/2026-06-23-pytest-timeout-redesign.md)),
+redirecting **all** stdout/stderr to a single remote file:
 
 ```
-<remote_log_dir>/<batch_id>/raw_log.txt
+<remote_log_dir>/<batch_id>/pytest_<batch_id>.log
 ```
 
 This is the **only** file the Worker writes on the remote host. After pytest
 returns, the Worker issues a second remote call
-(`grep -E '(PASSED|FAILED|ERROR|SKIPPED)' ... ; tail -50 ...`) and writes the
-captured text to a **local** `summary.txt` next to `batch_results.json`.
+(`grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' ... ; tail -50 ...`)
+and writes the captured text to a **local** `summary.txt` next to
+`batch_results.json`.
 
 `batch_results.json` carries a `remote_log` pointer instead of inlining the
 log:
@@ -33,7 +35,7 @@ log:
 "remote_log": {
   "host": "t_h20",
   "container": "v0.13.0_torch2.5.1_compile",
-  "raw_log_path": "/gpfs/.../ut_logs/<batch_id>/raw_log.txt",
+  "raw_log_path": "/gpfs/.../ut_logs/<batch_id>/pytest_<batch_id>.log",
   "size_bytes": 4242,
   "captured_at": "2026-06-20T12:34:56Z"
 }

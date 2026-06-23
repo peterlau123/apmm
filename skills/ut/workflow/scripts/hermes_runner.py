@@ -410,12 +410,22 @@ def send_feishu_card(feishu, event, manifest, iteration, batch_id=None, reason=N
 
 # ── v5 API: config validation, gateway probe, reconfigure, terminal check ─────
 
-def validate_required_config(cfg: dict) -> tuple[bool, list[str]]:
+def validate_required_config(
+    cfg: dict, *, channel: str = "hermes"
+) -> tuple[bool, list[str]]:
     """Preflight a workflow.yaml dict. Returns (ok, missing_keys).
 
     A config is acceptable if:
       - input_filter.test_list_path OR input_filter.manifest_source is set, AND
-      - config.remote_server is set.
+      - config.remote_server is set, AND
+      - channel/kanban interlock (see below) is satisfied.
+
+    Channel × kanban interlock:
+      - channel="linear" (ut/workflow): kanban.enabled MUST NOT be true.
+        Linear channel runs Stage 2-5 in-process and cannot drive the 3-Gateway
+        Kanban dispatch model; mixing the two would deadlock the dispatcher.
+      - channel="hermes" (ut/hermes_workflow): kanban.enabled may be true or
+        false (linear-mode supervisor or kanban-mode supervisor both supported).
     """
     missing: list[str] = []
     input_filter = cfg.get("input_filter") or {}
@@ -425,6 +435,13 @@ def validate_required_config(cfg: dict) -> tuple[bool, list[str]]:
     config = cfg.get("config") or {}
     if not config.get("remote_server"):
         missing.append("config.remote_server")
+
+    kanban_on = (cfg.get("kanban") or {}).get("enabled") is True
+    if channel == "linear" and kanban_on:
+        missing.append(
+            "kanban.enabled=true 不允许在 ut/workflow 线性通道下运行 — "
+            "请改为 false，或改用 ut/hermes_workflow"
+        )
 
     return (len(missing) == 0), missing
 

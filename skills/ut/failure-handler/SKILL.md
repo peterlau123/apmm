@@ -82,6 +82,128 @@ declared green until a human verifies the auto-fix commit on
 
 ---
 
+## §X. Dependency-stall classifier (固化 prompt — 不可在调用时改写)
+
+设计来源：[2026-06-23-pytest-timeout-redesign.md](../../tasks/ut/docs/designs/2026-06-23-pytest-timeout-redesign.md) §5。
+
+### 触发条件
+
+batch 在 Stage 3 被 watchdog kill（remote bash watchdog 因 idle/wall-clock 超时
+发出 `kill -9` → returncode=124 → `batch_results.json` 标 `error_type="timeout"`）
+之后，Stage 4 对每个 `error_type=="timeout"` 的 test 走本分类器。
+
+### 输入
+
+- `log_tail_text`: 远端 `pytest_<batch_id>.log` 末尾约 200 行（通过 `agent.py
+  run "tail -200 <path>"` 拉回；上限 ~64KB）
+
+### 输出契约
+
+`skills/ut/shared/dependency_stall_schema.json` (JSON Schema Draft-07)：
+
+```json
+{
+  "classification": "dep_stall | not_dep_stall | unknown",
+  "evidence": "<引用 log 里一行原文作为依据>",
+  "dependency_hint": "<具体资源名 (dep_stall 时); null 否则>"
+}
+```
+
+### 固化 prompt（一字不改地发给 LLM）
+
+```
+以下是一个 pytest batch 因 idle/wall-clock timeout 被 kill 后的日志末尾内容。
+
+判断这次 timeout 的真因，分类为以下三者之一：
+
+1. "dep_stall" — 因「依赖资源未就绪」而 hang，典型证据：
+   - HuggingFace 模型下载中（"Downloading", "Fetching", URL 含 huggingface.co）
+   - pip install 中（"Collecting", "Downloading .whl"）
+   - HF cache miss / auth token 等待
+   - 任何形式的「正在等待网络资源到位」
+
+2. "not_dep_stall" — 看不到上述迹象，更像是：
+   - 测试代码本身 hang / 死锁
+   - GPU OOM / CUDA error
+   - SSH transport drop（log 末尾正常 PASSED 后无新内容）
+   - 其它非依赖资源类的卡死
+
+3. "unknown" — 看不清属于哪类；判不准时优先选这个（保守）。
+
+输出严格 JSON（无 markdown fence、无前后文）：
+{
+  "classification": "<dep_stall | not_dep_stall | unknown>",
+  "evidence": "<引用 log 里一行原文作为依据>",
+  "dependency_hint": "<具体资源名，如 'meta-llama/Llama-3.2-1B' 或 'mteb' 包名；非 dep_stall 时为 null>"
+}
+
+evidence 必填且必须来自 log；不允许编造或泛述。
+```
+
+prompt 字符串维护在 `scripts/classify_dependency_stall.py::PROMPT_TEMPLATE`；
+本 §X 与该常量必须**同步**修改。
+
+### 调用契约（Python 侧）
+
+```python
+from skills.ut.failure_handler.scripts.classify_dependency_stall import (
+    classify, ignored_reason_for, render_prompt, strip_internal_fields,
+)
+
+# 1) Worker agent 把 log 末尾喂给 LLM，得到 JSON 字符串
+prompt = render_prompt(log_tail_text)
+llm_output_str = <agent invokes LLM with prompt>
+
+# 2) 解析 + jsonschema 校验
+result = classify(log_tail_text, llm_output_str)
+# result ∈ schema; 失败任意一步 → unknown fallback (never raises)
+
+# 3) 装配 final_status / ignored_reason
+reason = ignored_reason_for(result)
+if reason is None:
+    # not_dep_stall → 走 retry 路径（不在本分类器职责内）
+    ...
+else:
+    # dep_stall 或 unknown → final_status="ignored"
+    handled_entry["final_status"] = "ignored"
+    handled_entry["ignored_reason"] = reason
+    handled_entry["resolution"] = {
+        "status": "ignored",
+        "action": "skip",
+        "dependency_classification": strip_internal_fields(result),
+    }
+```
+
+### 决策表
+
+| classification | final_status | ignored_reason 模板 |
+|---|---|---|
+| `dep_stall` | `ignored` | `依赖未就绪需人工处理: {dep_hint or evidence}` |
+| `unknown` | `ignored` | `分类不明 (LLM 未识别 / schema mismatch); 末尾日志: {evidence}` |
+| `not_dep_stall` | `retriable_error`（不变）| — (no ignored_reason, 进 retry) |
+
+unknown → ignored 是**保守**选择：宁可错杀 1 个 retry，不愿浪费 30 min 反复
+等同一个 HF 下载卡死的 batch。详见设计文档 §2 D8。
+
+### Fallback 触发条件（→ unknown）
+
+- `llm_output` is `None` / 非 str
+- JSON 解析失败
+- 不是 object / 缺 `classification` 或 `evidence`
+- `classification` 不在 enum
+- `evidence` 为空串
+
+均不抛异常，统一走 `_fallback_unknown(log_tail, reason=...)` 路径。`reason`
+存到 `_fallback_reason` 字段做调试；`strip_internal_fields()` 在落盘前剥掉
+（`_fallback_reason` 不入 handled_tests.json schema）。
+
+### 不进 manifest.json
+
+`resolution.dependency_classification` 只写 `handled_tests.json`，不进
+`manifest.json`。manifest 只看 `final_status` + `ignored_reason` 决策。
+
+---
+
 ## Worker 角色
 
 ```

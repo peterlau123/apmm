@@ -110,7 +110,7 @@ def test_classify_passed_returns_passed_none():
 
 def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
     """The executor produces:
-    - batch_results.json with remote_log.raw_log_path ending in /raw_log.txt
+    - batch_results.json with remote_log.raw_log_path naming pytest_<batch_id>.log
     - a local summary.txt next to batch_results.json
     """
     cfg = _write_batch_config(tmp_path)
@@ -123,10 +123,11 @@ def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
     )
 
     def fake_run_remote(cmd, *, timeout=None, **kwargs):
-        if "pytest" in cmd:
-            return {"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": 4242}
-        # grep + tail extraction
-        return {"exit_code": 0, "stdout": summary_text, "stderr": ""}
+        # Distinguish pytest invocation from the summary grep+tail call.
+        # The summary command uses `grep -E`; the pytest watchdog does not.
+        if "grep -E" in cmd:
+            return {"exit_code": 0, "stdout": summary_text, "stderr": ""}
+        return {"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": 4242}
 
     with mock.patch.object(execute_batch_mod, "run_remote", side_effect=fake_run_remote):
         result = execute_batch_mod.execute_batch(cfg, state)
@@ -135,7 +136,8 @@ def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
 
     assert "remote_log" in out
     rlog = out["remote_log"]
-    assert rlog["raw_log_path"].endswith("/raw_log.txt")
+    # Design 2026-06-23 §4 D5: filename is pytest_<batch_id>.log
+    assert rlog["raw_log_path"].endswith("/pytest_batch_p1_r1_w1_test.log")
     assert "host" in rlog and "container" in rlog
     assert rlog["captured_at"].endswith("Z")
 

@@ -134,7 +134,8 @@ stages:
       grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
       grep_timeout: 60
       parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
-    timeout: 120                 # FROZEN(L1): tight smoke timeout
+    timeout: 120                 # FROZEN(L1): tight smoke wall-clock (design 2026-06-23 §3)
+    pytest_idle_timeout: 60      # FROZEN(L1): idle 半 wall (smoke 不该长时间静默)
     kanban:
       action: update_lane
       progress_template: "{passed}/{total}"

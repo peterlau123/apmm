@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """start_hermes_ut_runtime.py - 启动 L4 测试环境（gateways + supervisor）
 
-前置：先手动启动 Bastion daemon（OTP 无法脚本化）：
-    python tools/agent.py serve t_h20      # 输入静态密码 + OTP
+Bastion daemon 不再是硬前置：supervisor 在收到飞书 trigger 后会通过 OTP
+bring-up（SKILL §3.A A5.5）自起 daemon，本脚本只做 preflight 提醒。
 
 启动顺序（本脚本，非交互）：
 1. 配置预检（.bastion_creds / workflow.yaml / hermes profiles）
-2. 校验 Bastion daemon 已在运行
+2. Bastion daemon 状态 preflight（告警，不 abort）
 3. 3 Kanban Gateways (后台)
 4. Supervisor Agent (后台)
 
@@ -70,20 +70,22 @@ def check_bastion_daemon(profile="t_h20"):
     return False
 
 def ensure_bastion_daemon(profile="t_h20"):
-    """校验 Bastion daemon 已在运行。daemon 须先手动启动（OTP 无法脚本化）。"""
+    """Preflight check for the Bastion daemon. NEVER abort.
+
+    M3 (postmortem 2026-06-23 issue #2): supervisor 收到飞书 trigger 后会
+    通过 OTP bring-up 自起 daemon（hermes_workflow SKILL §3.A A5.5）。
+    本脚本只做 preflight 告警，不强制 daemon 必须先在跑。
+    """
     print("\n" + "="*60)
-    print("Step 1: Bastion Daemon (check)")
+    print("Step 1: Bastion Daemon (preflight, advisory only)")
     print("="*60)
 
     if check_bastion_daemon(profile):
         print(f"[OK] Bastion daemon running (profile={profile})")
-        return True
-
-    print(f"[X] Bastion daemon not running (profile={profile})")
-    print("\n先在另一个窗口手动启动 daemon（OTP 无法脚本化）：")
-    print(f"  python {_AGENT_PY} serve {profile}")
-    print("输入静态密码 + OTP 后，重新运行本脚本。")
-    return False
+    else:
+        print(f"[i] Bastion daemon not running (profile={profile}) — supervisor 会自动通过飞书 OTP 卡索取并自起 daemon。")
+        print(f"    如需提前手动起：python {_AGENT_PY} serve {profile}")
+    return True
 
 # ── Config preflight (prerequisites, not runtime services) ──────────────────────
 
@@ -240,7 +242,8 @@ def show_status(workflow_yaml_path):
     print("\nServices:")
 
     bastion_ok = check_bastion_daemon(bastion_profile)
-    print(f"  Bastion ({bastion_profile}): {'[OK] running' if bastion_ok else '[X] not running'}")
+    bastion_marker = "[OK] running" if bastion_ok else "[i] not running (会在 trigger 时自起)"
+    print(f"  Bastion ({bastion_profile}): {bastion_marker}")
 
     for profile in gateway_profiles:
         ok = check_gateway(profile)
@@ -249,7 +252,8 @@ def show_status(workflow_yaml_path):
     supervisor_ok = check_supervisor(supervisor_profile)
     print(f"  Supervisor ({supervisor_profile}): {'[OK] running' if supervisor_ok else '[X] not running'}")
 
-    runtime_ok = bastion_ok and all(check_gateway(p) for p in gateway_profiles) and supervisor_ok
+    # Bastion daemon is no longer a hard runtime requirement (M3 postmortem #2).
+    runtime_ok = all(check_gateway(p) for p in gateway_profiles) and supervisor_ok
     all_ok = config_ok and runtime_ok
 
     print(f"\nOverall: {'[OK] READY' if all_ok else '[X] NOT READY'}")
@@ -259,7 +263,7 @@ def show_status(workflow_yaml_path):
     elif not config_ok:
         print("\nAction: 先补齐上面标 [X] 的配置项。")
     else:
-        print("\nAction: 先手动起 daemon，再运行 'python tasks/ut/scripts/start_hermes_ut_runtime.py'。")
+        print("\nAction: 用 'python tasks/ut/scripts/start_hermes_ut_runtime.py' 启动 gateways + supervisor。")
 
     return all_ok
 
@@ -334,9 +338,9 @@ def main():
     config = yaml.safe_load(workflow_yaml.read_text(encoding="utf-8"))
     bastion_profile = config.get("bastion", {}).get("profile", "t_h20")
 
-    if not ensure_bastion_daemon(bastion_profile):
-        sys.exit(1)
-    
+    # Preflight only — daemon is brought up by supervisor on first Feishu trigger.
+    ensure_bastion_daemon(bastion_profile)
+
     if not start_gateways(args.workflow_yaml):
         sys.exit(1)
     

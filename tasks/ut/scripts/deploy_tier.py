@@ -26,10 +26,16 @@ Stage mapping; the repo root skills/ut/ pool also holds ut-test-collector and
 workflow which belong to the linear channel / Stage 1 and are NOT hermes
 profile skills):
     ut-supervisor    : hermes_workflow, workflow_loop_core, batch-selector,
-                       unit-test-executor, failure-handler, manifest-updater
-    ut-orchestrator  : batch-selector, manifest-updater          # Stage5+Stage2
-    ut-executor      : unit-test-executor                        # Stage3
-    ut-fixer         : failure-handler, dependency-resolver      # Stage4
+                       unit-test-executor, failure-handler, manifest-updater,
+                       shared
+    ut-orchestrator  : batch-selector, manifest-updater, shared  # Stage5+Stage2
+    ut-executor      : unit-test-executor, shared                # Stage3
+    ut-fixer         : failure-handler, dependency-resolver, shared  # Stage4
+
+Note: `shared/` carries cross-skill schemas + validators (manifest_schema.json,
+batch_results_schema.json, handled_tests_schema.json, dependency_stall_schema.json,
+validate_schema.py). Every profile that runs Python from skills/ut/* imports
+from `skills.ut.shared`, so it must ship with the profile.
 
 Usage:
     python tasks/ut/scripts/deploy_tier.py --tier L1 --check
@@ -78,10 +84,11 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
         "unit-test-executor",
         "failure-handler",
         "manifest-updater",
+        "shared",
     ],
-    "ut-orchestrator": ["batch-selector", "manifest-updater"],
-    "ut-executor": ["unit-test-executor"],
-    "ut-fixer": ["failure-handler", "dependency-resolver"],
+    "ut-orchestrator": ["batch-selector", "manifest-updater", "shared"],
+    "ut-executor": ["unit-test-executor", "shared"],
+    "ut-fixer": ["failure-handler", "dependency-resolver", "shared"],
 }
 
 DISTRIBUTION_YAML = """\

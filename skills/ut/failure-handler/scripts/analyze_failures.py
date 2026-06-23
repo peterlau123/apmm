@@ -53,8 +53,11 @@ FAILURE_CLASSES = {
             r"ModuleNotFoundError:",
             r"No module named",
         ],
-        "handler": "dependency-resolver",
-        "retry": True
+        # 2026-06-23: dependency-resolver gateway 不存在；显式 ModuleNotFoundError
+        # 类依赖缺失走 M2 Option E 路径 → final_status=ignored，由人工处理。与
+        # tasks/ut/docs/designs/2026-06-23-pytest-timeout-redesign.md §2 D14 一致。
+        "handler": "mark_ignored",
+        "retry": False
     },
     "network": {
         "name": "网络超时",

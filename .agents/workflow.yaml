@@ -200,7 +200,8 @@ stages:
       grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
       grep_timeout: 60
       parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
-    timeout: 600
+    timeout: 600                  # wall-clock 兜底 (design 2026-06-23 §3 D3)
+    pytest_idle_timeout: 120      # 无日志活动超时 → idle kill (design §3 D3)
     kanban:
       action: update_lane
       progress_template: "{passed}/{total}"

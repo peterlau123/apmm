@@ -24,6 +24,18 @@ if str(_project_root) not in sys.path:
 from datetime import datetime
 from skills.ut.shared import validate_and_write
 
+# Dependency-stall classifier (design 2026-06-23-pytest-timeout-redesign.md §5).
+# Loaded by file path because failure-handler/ is a hyphenated dir (not a Python
+# package). Keep the import lazy-safe so unit tests that monkey-patch
+# `classify_dep_stall` work regardless of whether the schema file exists.
+import importlib.util as _ilu
+_DEP_STALL_PATH = Path(__file__).resolve().parent / "classify_dependency_stall.py"
+_spec = _ilu.spec_from_file_location(
+    "ut_failure_handler_classify_dep_stall", _DEP_STALL_PATH
+)
+classify_dep_stall = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(classify_dep_stall)
+
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
     """从 workflow_state.json 加载配置"""
@@ -59,10 +71,88 @@ def classify_error(error_message: str) -> str:
     return "other"
 
 
+def _read_log_tail_from_summary(batch_dir: Path) -> str:
+    """Read the local summary.txt next to batch_results.json.
+
+    Stage 3's executor writes grep+tail-50 of the remote pytest log to this
+    file (design §6 data flow), so it's the cheapest log-tail source for the
+    dep-stall classifier. Returns empty string if the file is missing/empty
+    — classifier will fall back to unknown.
+    """
+    if batch_dir is None:
+        return ""
+    summary_path = Path(batch_dir) / "summary.txt"
+    if not summary_path.exists():
+        return ""
+    try:
+        return summary_path.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+
+
+def _handle_timeout_test(
+    test: dict,
+    batch_dir: Path | None,
+    *,
+    log_tail_fetcher=None,
+    llm_invoker=None,
+) -> dict | None:
+    """Return a handled_tests entry for an ``error_type="timeout"`` test.
+
+    Per design 2026-06-23-pytest-timeout-redesign.md §5–§6:
+      - Pulls log tail (default: batch_dir/summary.txt).
+      - Asks an injected ``llm_invoker(prompt) -> str | None`` to classify.
+      - dep_stall | unknown → ``final_status="ignored"`` with assembled reason.
+      - not_dep_stall → returns None (caller leaves test for Stage 2 retry).
+
+    Both callables are optional so the script is unit-testable without a real
+    LLM / SSH backend. Production wiring lives on the Worker Agent side.
+    """
+    test_node = test.get("test_node")
+    error_message = (test.get("error_message") or "")[:500]
+
+    if log_tail_fetcher is not None:
+        log_tail = log_tail_fetcher(test) or ""
+    else:
+        log_tail = _read_log_tail_from_summary(batch_dir)
+
+    prompt = classify_dep_stall.render_prompt(log_tail)
+    llm_output = None
+    if llm_invoker is not None:
+        try:
+            llm_output = llm_invoker(prompt)
+        except Exception:  # noqa: BLE001 — never let the LLM call kill the stage
+            llm_output = None
+
+    result = classify_dep_stall.classify(log_tail, llm_output)
+    reason = classify_dep_stall.ignored_reason_for(result)
+
+    if reason is None:
+        # not_dep_stall → don't include in handled_tests; Stage 2 will retry.
+        return None
+
+    return {
+        "test_node": test_node,
+        "final_status": "ignored",
+        "error_type": "timeout",
+        "error_message": error_message,
+        "ignored_reason": reason,
+        "resolution": {
+            "status": "ignored",
+            "action": "skip",
+            "dependency_classification":
+                classify_dep_stall.strip_internal_fields(result),
+        },
+    }
+
+
 def generate_handled_manifest(
     batch_id: str,
     batch_results_path: Path,
-    batch_dir: Path = None
+    batch_dir: Path = None,
+    *,
+    log_tail_fetcher=None,
+    llm_invoker=None,
 ) -> dict:
     """生成 handled_tests.json"""
 
@@ -85,6 +175,23 @@ def generate_handled_manifest(
 
     for test in batch_results.get("tests", []):
         status = test.get("status", "")
+        error_type = test.get("error_type")
+
+        # Design 2026-06-23 §6: timeout-class retriable_error rows are routed
+        # through the dependency-stall classifier here (not by Stage 2). All
+        # other ``retriable_error`` flavors (oom etc.) remain owned by Stage
+        # 2's retry path and are skipped here.
+        if status == "retriable_error" and error_type == "timeout":
+            entry = _handle_timeout_test(
+                test, batch_dir,
+                log_tail_fetcher=log_tail_fetcher,
+                llm_invoker=llm_invoker,
+            )
+            if entry is not None:
+                handled_manifest["tests"].append(entry)
+                handled_manifest["stats"]["ignored"] += 1
+            continue
+
         if status not in ["failed", "error"]:
             continue
 

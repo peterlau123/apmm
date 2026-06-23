@@ -43,7 +43,6 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 _AGENT_PY = _PROJECT_ROOT / "tools" / "agent.py"
 _START_GATEWAY_PY = _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "start_gateway.py"
 
-
 def run_cmd(cmd, timeout=60, cwd=None):
     return subprocess.run(
         cmd,
@@ -55,7 +54,6 @@ def run_cmd(cmd, timeout=60, cwd=None):
         timeout=timeout,
     )
 
-
 def check_hermes():
     r = run_cmd(["hermes", "version"])
     if r.returncode != 0:
@@ -64,14 +62,12 @@ def check_hermes():
     print(f"[OK] Hermes: {r.stdout.strip()}")
     return True
 
-
 def check_bastion_daemon(profile="t_h20"):
     agent_path = _AGENT_PY
     r = run_cmd([sys.executable, str(agent_path), "-p", profile, "ping"])
     if r.returncode == 0 and "[OK]" in r.stdout:
         return True
     return False
-
 
 def ensure_bastion_daemon(profile="t_h20"):
     """校验 Bastion daemon 已在运行。daemon 须先手动启动（OTP 无法脚本化）。"""
@@ -89,20 +85,17 @@ def ensure_bastion_daemon(profile="t_h20"):
     print("输入静态密码 + OTP 后，重新运行本脚本。")
     return False
 
-
 # ── Config preflight (prerequisites, not runtime services) ──────────────────────
 
 def _bastion_creds_present():
     return (_PROJECT_ROOT / ".bastion_creds").exists() or \
         (_PROJECT_ROOT / "tools" / ".bastion_creds").exists()
 
-
 def _hermes_profiles_present(required):
     r = run_cmd(["hermes", "profile", "list"])
     if r.returncode != 0:
         return {p: False for p in required}
     return {p: (p in r.stdout) for p in required}
-
 
 def preflight_config(workflow_yaml_path):
     """校验配置前置项（非运行态服务）。返回 ok bool。"""
@@ -132,7 +125,6 @@ def preflight_config(workflow_yaml_path):
         profiles_cfg.get("orchestrator", "ut-orchestrator"),
         profiles_cfg.get("executor", "ut-executor"),
         profiles_cfg.get("fixer", "ut-fixer"),
-        profiles_cfg.get("dependency_resolver", "ut-dependency-resolver"),
         "ut-supervisor",
     ]
     present = _hermes_profiles_present(required)
@@ -143,7 +135,6 @@ def preflight_config(workflow_yaml_path):
     print(f"\nConfig: {'[OK] READY' if ok else '[X] INCOMPLETE'}")
     return ok
 
-
 def check_gateway(profile):
     r = run_cmd(["hermes", "gateway", "list"])
     if r.returncode != 0:
@@ -152,7 +143,6 @@ def check_gateway(profile):
         if profile in line and "✓" in line:
             return True
     return False
-
 
 def start_gateways(workflow_yaml_path):
     """后台启动 3 Gateway"""
@@ -170,13 +160,11 @@ def start_gateways(workflow_yaml_path):
     print(f"[OK] Gateways started: {r.stdout.strip()}")
     return True
 
-
 def check_supervisor(profile="ut-supervisor"):
     # ut-supervisor runs as a Hermes gateway (Feishu-subscribing long-running
     # agent), same mechanism as the worker gateways. Hermes v0.16 has no
     # `agent` subcommand, so detect it via `gateway list`.
     return check_gateway(profile)
-
 
 def start_supervisor(workflow_yaml_path):
     """后台启动 Supervisor"""
@@ -225,7 +213,6 @@ def start_supervisor(workflow_yaml_path):
     print(f"[X] Supervisor failed to start (PID={proc.pid})")
     return False
 
-
 def show_status(workflow_yaml_path):
     """显示配置预检 + 运行态状态"""
     config_ok = preflight_config(workflow_yaml_path)
@@ -245,7 +232,6 @@ def show_status(workflow_yaml_path):
         profiles.get("orchestrator", "ut-orchestrator"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
-        profiles.get("dependency_resolver", "ut-dependency-resolver"),
     ]
     supervisor_profile = "ut-supervisor"
 
@@ -277,7 +263,6 @@ def show_status(workflow_yaml_path):
 
     return all_ok
 
-
 def stop_all(workflow_yaml_path):
     """停止所有服务"""
     print("\n" + "="*60)
@@ -295,7 +280,6 @@ def stop_all(workflow_yaml_path):
         profiles.get("orchestrator", "ut-orchestrator"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
-        profiles.get("dependency_resolver", "ut-dependency-resolver"),
     ]
     supervisor_profile = "ut-supervisor"
 
@@ -314,7 +298,6 @@ def stop_all(workflow_yaml_path):
         print(f"  {r.stdout.strip() if r.returncode == 0 else r.stderr.strip()}")
     
     print("\n[OK] All services stopped")
-
 
 def main():
     parser = argparse.ArgumentParser(description="L4 测试环境启动脚本（daemon 须先手动启动）")
@@ -371,7 +354,6 @@ def main():
     print("\nLogs:")
     print(f"  Gateway logs: {ws}/.agents/logs/")
     print(f"  Supervisor log: {ws}/.agents/logs/supervisor_ut-supervisor.log")
-
 
 if __name__ == "__main__":
     main()

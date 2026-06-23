@@ -15,9 +15,9 @@
 |---|---|---|---|---|
 | 1 | SOUL.md intent classification 自相矛盾（`"跑 ut workflow"` 同时落在两条规则上） | bot 必须二选一，无法稳定行为；用户体验「不可预测」 | **守保守门：删除「legacy 关键词→start_production conf≥0.9」一条**；`"跑 ut workflow"`（无 tier 后缀）→ unknown → help 卡 | ~10 min |
 | 2 | Bastion daemon 必须人工 `serve t_h20` + OTP 后才能跑 run，bot 在 daemon 死时只能心跳上报、无法自起 | 每次 run 之前人工干预；OTP 体验割裂 | Supervisor 启动阶段插入 OTP 自动索取流程（飞书 OTP 卡 → 用户回 6 位码 → `serve --otp <code>` detached Popen） | ~3-4 h |
-| 3 | fixer 把 `model_missing` 类失败标 `pending` + `delegate_to_dependency_resolver`，但**没有任何 runner 接这个标签** → pending 永挂 → 用户必须 option-2 人工 ignored | L4 自然完成路径走不通；离线 + 在线环境都受影响 | 新增 **ut-dependency-resolver** 第 5 个 Hermes gateway，订阅 `pending+delegate`，**two-stage download**（t_ascend 联网下载 → t_h20 sync），失败直接 promote `ignored` | ~6-8 h |
+| 3 | fixer 把 `model_missing` 类失败标 `pending` + `delegate_to_dependency_resolver`，但**没有任何 runner 接这个标签** → pending 永挂 → 用户必须 option-2 人工 ignored | L4 自然完成路径走不通；离线 + 在线环境都受影响 | **直接 ignored**（fixer 把 dependency/download_error 改成 `final_status=ignored`, `ignored_reason="模型需要下载需要人工处理: <model_id>"`）。不在 workflow 中做下载，效率更高，实现更简单。原 ut-dependency-resolver gateway 设计被 §4.8 errata 取消 | ~10 min |
 
-**实施顺序**: #1 → #3 → #2（小→中→大；#3 风险孤立，#2 改动跨进程边界 + OTP 安全敏感放最后）
+**实施顺序**: #1 → #3 → #2（全部小改动；#3 在 user feedback 后简化为 fixer 单点修改）
 
 ---
 
@@ -356,6 +356,66 @@ tasks/ut/scripts/.dist/ut-dependency-resolver/
 | t_h20 sync 后 HF cache 损坏 | executor 重跑仍失败 → 走正常 max_retry → ignored（不再回 resolver） |
 
 ---
+
+---
+
+## §4.8 ERRATA (2026-06-23 user decision — supersedes §4.1-4.7)
+
+§4.1-4.7 原设计新增第 5 个 `ut-dependency-resolver` gateway + two-stage download + resolver_gateway_runner。
+经用户反馈：**不要在 workflow 中处理模型下载**，理由：
+
+> "对于需要下载依赖的，不要在workflow中处理，那样会拖慢workflow运行效率，
+>  建议直接标记ignored，ignored_reasn记录模型需要下载需要人工处理。
+>  这样实现也更简单，运行效率也更快。"
+
+### 采纳方案（Option E）
+
+`failure-handler/scripts/generate_handled_manifest.py`：将 `dependency` / `download_error` 分支直接标 `ignored`：
+
+```python
+if error_type in ["dependency", "download_error"]:
+    dep_id = error_message.split("Model ")[-1].split(" not")[0] if "Model " in error_message else error_message[:80]
+    handled_manifest["tests"].append({
+        "test_node": test_node,
+        "final_status": "ignored",
+        "error_type": error_type,
+        "error_message": error_message,
+        "ignored_reason": f"模型需要下载需要人工处理: {dep_id}"
+    })
+    handled_manifest["stats"]["ignored"] += 1
+```
+
+### 影响
+
+| 项 | 状态 |
+|---|---|
+| INV-6 (`pending == 0`) | ✅ 保留 — 现在更强的硬约束（fixer 不再产生 pending） |
+| L4 终态分布 `{passed:0, failed:0, ignored:3, pending:0}` | ✅ 不变 |
+| L4 wall-clock | ✅ 加快（省掉 90 min 下载/超时） |
+| 用户负担 | ⚠️ 看 `ignored_reason` 后人工预下载模型，下次 run 即可 passed |
+| 已交付的 `two_stage_sync.py` / `resolver_gateway_runner.py` / `ut-dependency-resolver` profile | ❌ 删除（commit 中 reverted） |
+
+### 取消的改动
+
+- `skills/ut/dependency-resolver/scripts/two_stage_sync.py` (DEL)
+- `skills/ut/dependency-resolver/scripts/resolver_gateway_runner.py` (DEL)
+- `tests/ut/unit/test_two_stage_sync.py` (DEL)
+- `tests/ut/unit/test_resolver_gateway_runner.py` (DEL)
+- `tests/ut/integration/fixtures/profiles/ut-dependency-resolver/` (DEL)
+- `tasks/ut/scripts/deploy_tier.py` 5th profile 接入（REVERT）
+- `tasks/ut/scripts/start_hermes_ut_runtime.py` 5th profile 接入（REVERT）
+- `skills/ut/dependency-resolver/SKILL.md` §作为 Hermes Gateway 运行 段（REVERT）
+
+### 新增的改动
+
+- `skills/ut/failure-handler/scripts/generate_handled_manifest.py`：dependency/download_error → ignored
+- `skills/ut/failure-handler/scripts/generate_handled_manifest.py`：补缺失的 `import sys`（pre-existing bug，顺手修）
+- `tests/ut/unit/test_fixer_download_error_ignored.py`（新，5 case）：回归 + 边界
+
+### 保留的改动（M2 与 §4.8 重叠部分）
+
+- `tasks/ut/scripts/check_expected.py` INV-6 评估（pending==0 硬断言）
+- `tests/ut/integration/fixtures/L4_expected.json` INV-6 条目
 
 ## 5. 影响面与变更清单（汇总）
 

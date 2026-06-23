@@ -19,18 +19,17 @@ User-owned (NEVER touched — kept by hermes profile install --force):
 
 Tier -> profile set:
     L1 / L2 / L3 (linear, kanban OFF):   [ut-supervisor]
-    L4           (kanban ON):            [ut-orchestrator, ut-executor, ut-fixer, ut-dependency-resolver, ut-supervisor]
+    L4           (kanban ON):            [ut-orchestrator, ut-executor, ut-fixer, ut-supervisor]
 
 Profile -> skills subset (per hermes_workflow SKILL §3 step 3 + §6 worker
 Stage mapping; the repo root skills/ut/ pool also holds ut-test-collector and
 workflow which belong to the linear channel / Stage 1 and are NOT hermes
 profile skills):
-    ut-supervisor            : hermes_workflow, workflow_loop_core, batch-selector,
-                               unit-test-executor, failure-handler, manifest-updater
-    ut-orchestrator          : batch-selector, manifest-updater          # Stage5+Stage2
-    ut-executor              : unit-test-executor                        # Stage3
-    ut-fixer                 : failure-handler, dependency-resolver      # Stage4
-    ut-dependency-resolver   : dependency-resolver                       # Stage4b (new gateway)
+    ut-supervisor    : hermes_workflow, workflow_loop_core, batch-selector,
+                       unit-test-executor, failure-handler, manifest-updater
+    ut-orchestrator  : batch-selector, manifest-updater          # Stage5+Stage2
+    ut-executor      : unit-test-executor                        # Stage3
+    ut-fixer         : failure-handler, dependency-resolver      # Stage4
 
 Usage:
     python tasks/ut/scripts/deploy_tier.py --tier L1 --check
@@ -59,7 +58,7 @@ _HERMES_PROFILES = Path.home() / "AppData" / "Local" / "hermes" / "profiles"
 _DIST_OWNED_FILES = ["SOUL.md", "profile.yaml"]
 
 _LINEAR_PROFILES = ["ut-supervisor"]
-_KANBAN_PROFILES = ["ut-orchestrator", "ut-executor", "ut-fixer", "ut-dependency-resolver", "ut-supervisor"]
+_KANBAN_PROFILES = ["ut-orchestrator", "ut-executor", "ut-fixer", "ut-supervisor"]
 
 _TIER_PROFILES: dict[str, list[str]] = {
     "L1": _LINEAR_PROFILES,
@@ -83,7 +82,6 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
     "ut-orchestrator": ["batch-selector", "manifest-updater"],
     "ut-executor": ["unit-test-executor"],
     "ut-fixer": ["failure-handler", "dependency-resolver"],
-    "ut-dependency-resolver": ["dependency-resolver"],
 }
 
 DISTRIBUTION_YAML = """\

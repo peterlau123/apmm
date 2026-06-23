@@ -24,6 +24,7 @@ Usage:
     python execute_batch.py --batch-config PATH --workflow-state PATH
 """
 
+import base64
 import json
 import re
 import subprocess
@@ -119,6 +120,42 @@ def _build_watchdog_script(
         pytest_full_cmd=pytest_full_cmd,
         idle_timeout=int(idle_timeout),
         wall_timeout=int(wall_timeout),
+    )
+
+
+def _wrap_with_docker_exec_b64(docker_container: str, inner_script: str) -> str:
+    """Wrap a (possibly multi-line, possibly quote-laden) bash script for
+    remote `sudo -n docker exec ... bash -c` execution, using base64 to
+    bypass ALL shell-quoting / IFS / newline pitfalls along the route
+    (local shell → agent.py → ssh → remote shell → bash -c).
+
+    Two bugs root-caused 2026-06-23 fabricated run ut-20260623-223710 motivate
+    this helper:
+
+      (1) The previous single-quote inline form (`bash -c '<script>'`) lost
+          everything after the first newline because some hop along the route
+          treated newlines as command separators, so `pytest` never ran but
+          the wrapper still exited 0/2 in <1s and the executor classified
+          the empty summary as 3 × error / duration_ms=0.
+
+      (2) `sudo` (without `-n`) on the bastion-side `infra` user — which is
+          NOT in the docker group's sudoers TTY-less list — prompts for a
+          password it can't read, producing a confusing exit code instead
+          of running docker.
+
+    The wrapper:
+      - prefixes `sudo -n` so a missing NOPASSWD entry fails LOUD (rc != 0
+        with `sudo: a password is required` in stderr) instead of hanging.
+      - base64-encodes the inner script and decodes on the remote side, so
+        no quoting / newline survives the trip needs to be reasoned about.
+    """
+    encoded = base64.b64encode(inner_script.encode("utf-8")).decode("ascii")
+    # Outer quoting uses double quotes around a pure-ASCII payload (echo +
+    # pipe + base64 chars). No single quotes, no newlines, no shell meta in
+    # the encoded chunk → no quoting risk in any hop.
+    return (
+        f"sudo -n docker exec {docker_container} bash -c "
+        f"\"echo {encoded} | base64 -d | bash\""
     )
 
 
@@ -278,11 +315,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         wall_timeout=wall_timeout,
     )
 
-    # Wrap with docker exec; outer wrap uses single quotes around the script.
-    # The watchdog template is guaranteed (by _build_watchdog_script) not to
-    # contain ASCII single quotes, so this nesting is safe.
-    pytest_docker_cmd = (
-        f"sudo docker exec {docker_container} bash -c '{watchdog_script}'"
+    # Wrap with `sudo -n docker exec ... bash -c "echo <b64> | base64 -d | bash"`
+    # — fully quote-/newline-safe (see _wrap_with_docker_exec_b64 docstring +
+    # post-mortem for run ut-20260623-223710).
+    pytest_docker_cmd = _wrap_with_docker_exec_b64(
+        docker_container, watchdog_script
     )
 
     started_at = _utc_now_iso_z()
@@ -319,10 +356,12 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         }
 
     # Second remote call: extract a summary via grep+tail on the pytest log.
-    summary_extract_cmd = (
-        f"sudo docker exec {docker_container} bash -c "
-        f"\"grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' {raw_log_path} ; "
-        f"echo '----'; tail -50 {raw_log_path}\""
+    # Same b64 wrapping (single-line cmd but consistency + safety) and same
+    # `sudo -n` so a NOPASSWD misconfig fails loud instead of hanging.
+    summary_extract_cmd = _wrap_with_docker_exec_b64(
+        docker_container,
+        f"grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' {raw_log_path} ; "
+        f"echo '----'; tail -50 {raw_log_path}",
     )
     try:
         summary_res = run_remote(

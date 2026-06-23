@@ -124,8 +124,12 @@ def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
 
     def fake_run_remote(cmd, *, timeout=None, **kwargs):
         # Distinguish pytest invocation from the summary grep+tail call.
-        # The summary command uses `grep -E`; the pytest watchdog does not.
-        if "grep -E" in cmd:
+        # Both cmds are base64-wrapped (`_wrap_with_docker_exec_b64`); decode
+        # the payload to peek inside.
+        import base64 as _b64, re as _re
+        m = _re.search(r"echo (\S+) \| base64 -d", cmd)
+        inner = _b64.b64decode(m.group(1)).decode("utf-8") if m else cmd
+        if "grep -E" in inner:
             return {"exit_code": 0, "stdout": summary_text, "stderr": ""}
         return {"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": 4242}
 

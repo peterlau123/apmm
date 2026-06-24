@@ -153,45 +153,32 @@ except Exception:  # pragma: no cover - tests patch it directly
 # §4.5). One docker exec runs ONE test node with its own watchdog; a hang kills
 # only this test (no batch-level collateral — G1/G8).
 #
-# `setsid` starts the pytest child in its own process group so the watchdog can
-# `kill -- -PGID` to reap the whole group, preventing orphaned workers from
-# holding GPU memory across batches (G17).
+# Simplified watchdog: no process group management, no timeout loop.
+# Timeout is managed by outer run_remote(timeout=wall_timeout).
+# Zombie cleanup handled by GPU zombie cleaner at batch startup (§4.1).
 #
 # Notes on shell-quoting choices:
 #   - The script is wrapped in `bash -c '<...>'` by the caller, so it must
 #     not contain ANY ASCII single quotes (`'`).
-#   - All shell variables (`$PID`, `$PGID`, `$NOW`, `$START`) are resolved at
-#     RUNTIME on the remote host; Python f-string substitution only fills in
-#     `{log_path}`, `{wall_timeout}`, and `{pytest_full_cmd}`.
+#   - All shell variables are resolved at RUNTIME on the remote host.
 #   - `--junit-xml=<path>` (built into pytest_full_cmd by the caller) makes
 #     pytest the source of truth for per-test status; XML missing after a
 #     SIGKILL = timeout signal (parsed by _parse_junit).
 WATCHDOG_TEMPLATE = (
     "mkdir -p $(dirname {log_path}) && "
-    "setsid bash -c \"{pytest_full_cmd}\" > {log_path} 2>&1 &\n"
-    "PID=$!\n"
-    "PGID=$PID\n"
-    "START=$(date +%s)\n"
-    "while kill -0 $PID 2>/dev/null; do\n"
-    "  sleep 10\n"
-    "  NOW=$(date +%s)\n"
-    "  if [ $((NOW - START)) -gt {wall_timeout} ]; then\n"
-    "    kill -- -$PGID 2>/dev/null\n"
-    "    kill -9 $PID 2>/dev/null\n"
-    '    echo \"__WATCHDOG__: wall_exceeded after $((NOW-START))s\" '
-    ">> {log_path}\n"
-    "    exit 124\n"
-    "  fi\n"
-    "done\n"
-    "wait $PID\n"
-    "exit $?\n"
+    "bash -c \"{pytest_full_cmd}\" > {log_path} 2>&1"
 )
 
 
 def _build_watchdog_script(
-    *, log_path: str, pytest_full_cmd: str, wall_timeout: int,
+    *, log_path: str, pytest_full_cmd: str,
 ) -> str:
-    """Render the per-test remote bash watchdog script.
+    """Render the per-test remote bash script.
+
+    Simplified version (no watchdog loop, no process group management):
+    - Synchronous execution of pytest
+    - Timeout managed by outer run_remote(timeout=wall_timeout)
+    - Zombie cleanup handled by GPU zombie cleaner at batch startup (§4.1)
 
     Public for unit tests (see test_execute_batch_watchdog.py).
     """
@@ -203,7 +190,6 @@ def _build_watchdog_script(
     return WATCHDOG_TEMPLATE.format(
         log_path=log_path,
         pytest_full_cmd=pytest_full_cmd,
-        wall_timeout=int(wall_timeout),
     )
 
 
@@ -820,7 +806,6 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         watchdog_script = _build_watchdog_script(
             log_path=node_log,
             pytest_full_cmd=pytest_full_cmd,
-            wall_timeout=wall_timeout,
         )
         docker_cmd = _wrap_with_docker_exec_b64(docker_container, watchdog_script)
 

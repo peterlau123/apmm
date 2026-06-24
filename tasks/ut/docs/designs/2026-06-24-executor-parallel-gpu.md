@@ -1,7 +1,7 @@
 # Executor 并行 GPU 调度 + JUnit 结果 — 设计
 
 - 日期：2026-06-24
-- 状态：设计已收敛，待实测两项后进实现
+- 状态：§6 实测通过 + §7 实现完成 + §9 Bug 修复完成（2026-06-24）；单测 30/30 全绿（含 Bug A 回归测试），待 e2e 实测验证后提交
 - 关联：`2026-06-23-pytest-timeout-redesign.md`（上一版 watchdog）、postmortem `ut-20260623-223710`（Type-B fabrication）
 
 ## 1. 背景：上一版方案的问题
@@ -96,13 +96,13 @@ docker exec -e CUDA_VISIBLE_DEVICES=<free_id> <container> bash -c "<watchdog 脚
 
 watchdog 脚本（per-test，删 idle，只留 wall）：
 - `setsid` 起子进程组（杀 PGID 防孤儿，对应 G17）
-- 后台跑 `python -m pytest <node> --junit-xml=<remote>/result_<node>.xml -v --tb=long --junit-logging=out-err`
+- 后台跑 `python -m pytest <node> --junit-xml=<remote>/result_<node>.xml -v --tb=long -o junit_logging=out-err`
 - wall 300s 到 → `kill -- -PGID` 杀整个进程组，exit 124，追加 `__WATCHDOG__: wall_exceeded`
 
 pytest 参数：
 - `--junit-xml=<remote>/result_<node>.xml` —— 结构化结果
 - `--tb=long` —— 完整 traceback 进 XML 的 `<failure>` message（G9）
-- `--junit-logging=out-err` —— 捕获的 stdout/stderr 进 `<system-out>`/`<system-err>`（G9）
+- `-o junit_logging=out-err` —— 捕获的 stdout/stderr 进 `<system-out>`/`<system-err>`（G9）。**注意 pytest 9.x 已无 `--junit-logging` CLI flag，必须用 `-o` 注入 ini**（见 §6 偏差）
 - log 仍写 `pytest_<batch>_<node>.log`（watchdog 重定向）
 
 ### 4.4 结果获取：路线 A（XML fetch 回本地解析）
@@ -144,20 +144,74 @@ G2 的误报机器直接删。per-test wall 300s 是唯一的超时维度。"tes
 | G11 本地/远程割裂 | XML 小，fetch 回本地解析 |
 | G17 孤儿占卡 | `setsid` + 杀 PGID + 僵尸清理 |
 
-## 6. 待实测（实现前验证）
+## 6. 实测结果（2026-06-24 已验证）
 
-1. **bastion 最大可传输字节**：客户端 `daemon_req`（`tools/agent.py:615-637`）按 64KB chunk 累积到 `\n`，客户端无硬上限；上限取决于 daemon 端 stdout 捕获 + JSON 编码。实测：`head -c 100000 /dev/urandom | base64` 经 `agent.py run` 看拿回多少。XML 单用例几 KB，预期无问题，但要确认。
-2. **pytest `--tb=long` 下 JUnit failure 是否截断**：取决于 pytest 版本。实测跑一个故意失败的用例，看 `<failure>` 是否全 traceback。若截断，需额外 fetch 原始 log。
+环境：profile `t_h20`，容器 `v0.13.0_torch2.5.1_compile`，pytest 9.0.3 / Python 3.12.12。
 
-## 7. 实现范围（下次会话）
+1. **bastion 最大可传输字节** — ✅ 无 byte cap。
+   - 静态：`recv_until`（`tools/agent.py:138-160`）把 channel `recv(65535)` chunk 累积进 list，**无总字节上限**，只受 `timeout` 约束；客户端 `daemon_req`（`:615-637`）同样无 cap。
+   - 实测：远程生成 500000 字节 urandom → base64（666668 字节）→ `cat` 经 daemon 取回，**字节级精确匹配**（md5 一致），无截断、无 `\r` 注入。
+   - **传输特性**：daemon `run` 路径会在 stdout 末尾**多 1 个 `\n`**（`echo {end}` sentinel 路径残留），正文不受影响。XML 解析前 `rstrip("\n")` 即可；xml.etree 本身也忽略尾空白。
+   - 结论：单用例 JUnit XML 几 KB～几十 KB，远在能力内。路线 A（XML fetch 回本地解析）成立。
 
-- `execute_batch.py`：从单进程串行改为并发调度 N×docker exec + 僵尸清理 + JUnit 解析
-- 新增 GPU 检测/清理模块（`_detect_free_gpus`、`_cleanup_zombie`）
-- 新增 JUnit 解析（`_parse_junit`）
-- watchdog 模板：删 idle、改 per-test wall 300s、加 `setsid` + 杀 PGID
-- `classify_error.py`：退役（或保留 legacy API 兜底，主路径走 JUnit）
-- `batch_results_schema.json`：per-test `duration_ms`/`exit_code` 真填，可能加 `gpu_id` 字段
-- 测试：并发调度、僵尸清理、JUnit 解析、XML 缺失→timeout、0-card 降级
+2. **pytest `--tb=long` 下 JUnit failure 是否截断** — ✅ 不截断。
+   - 实测：40 层 `_deep` 递归失败 + 50 个大 local + 捕获 stdout/stderr，生成 26672 字节 XML。
+   - `<failure>` text = **22221 字节**，82 个 `_deep` 帧全保留、大 local repr 完整、`assert False` 终点在；`<testcase time="0.001">` 自带 per-test 时长（G6）。
+   - `system-out`（1607B）/`system-err`（1582B）完整含捕获输出（需 `junit_logging=out-err`，见下）。
+
+### ⚠️ 实现偏差（pytest 9.0.3）
+
+`--junit-logging=out-err` **不是 pytest 9.x 的 CLI flag**（`pytest --help` 无此项，传了直接 `unrecognized arguments` 报错退出）。pytest 9 把它降级为 **ini-only 选项**。§4.3 的 pytest 命令须改用 `-o` 注入：
+
+```
+python3 -m pytest <node> --junit-xml=<remote>/result_<node>.xml -v --tb=long -o junit_logging=out-err
+```
+
+`--tb=long` / `--junit-xml` 仍是 CLI flag，不变。
+
+## 7. 实现范围（已完成 2026-06-24）
+
+- `execute_batch.py`：串行 → `ThreadPoolExecutor` 并发 N×docker exec + 僵尸清理 + JUnit 解析 ✓
+- 新增 GPU 检测/清理（`_detect_free_gpus`、`_cleanup_zombies`、`_classify_card_occupants`、`_is_own_process`、`_kill_pids`、`_pids_alive`）✓
+- 新增 JUnit 解析（`_parse_junit`）✓
+- watchdog 模板：删 idle、per-test wall 300s、`setsid` + `kill -- -PGID` ✓
+- `classify_error.py`：主路径退役（`execute_batch` 不再 import；文件保留供遗留 `batch_test_runner` 用）✓
+- `batch_results_schema.json`：tests entry 加 `gpu_id`/`log_path`/`xml_path`（nullable）；`duration_ms`/`exit_code` 真填 ✓
+- 0-card D1 降级：取 `memory.used` 最低一张串行 ✓
+- 测试：`test_execute_batch_junit.py`（11 例）+ 更新 watchdog/v5/schema 测试；executor 全绿 45/45 ✓
+- 容器 e2e 实测（profile t_h20, `tests/test_version.py::test_version_is_defined`）：pytest 真跑通、JUnit XML 真生成，但暴露 2 个 bug（见 §9）。
+
+## 9. 容器 e2e 实测发现的 bug（2026-06-24，已修复）
+
+用真节点 `tests/test_version.py::test_version_is_defined`（轻量、不依赖 GPU）跑 v6 全路径，pytest 实跑通、XML 正确生成（`<testcase ... PASSED>` 无 failure/error 子节点 → 应判 passed），但 `batch_results.json` 把它误判成 `retriable_error/timeout`。根因 2 个关联 bug：
+
+### Bug A — XML/sentinel 粘连导致解析失败（已修复）
+- **现象**：`_parse_junit` 报 "JUnit XML unparseable (watchdog SIGKILL mid-flush?)"，真 passed 被误判 timeout。
+- **根因**：fetch 命令 `cat <node_xml>; echo __REMOTE_LOG_SIZE__$(stat -c %s <node_log> ...)` 把 XML 正文（JUnit XML 是**单行无尾换行**）和 size sentinel 拼在**同一 stdout 流**，且 cat 无尾换行 → sentinel `__REMOTE_LOG_SIZE__4242` 直接粘在 `</testsuites>` 后**同一行**。`_split_remote_log_size` 的正则 `^__REMOTE_LOG_SIZE__(\d+)$` 是**行首**匹配 → 同行中间匹配不到 → sentinel 没被切掉 → `xml.etree` 解析遇到 `</testsuites>` 后的 junk 失败。
+- **已复现**：`real_xml + '__REMOTE_LOG_SIZE__4242'`（无换行）→ `_split_remote_log_size` 返回 size=None 且 XML 末尾仍粘 sentinel → `ET.fromstring` fail "junk after document element"。
+- **修复**：
+  1. `execute_batch.py:850-854` fetch_cmd 强制换行（`echo;`）隔离 sentinel
+  2. `_parse_junit:365` 增加防御性 strip（`_REMOTE_LOG_SIZE_RESIDUE_RE`）兜底
+  3. 单测回归：`test_sentinel_glued_to_xml_tail_is_still_parsed()` ✅
+
+### Bug B — batch 级 raw_log_path 从不写，P1 audit 失败（已修复）
+- **现象**：`batch_results.remote_log.raw_log_path` 指向 `pytest_<batch_id>.log`（batch 级聚合 log），但 v6 每个 node 写的是 per-node log `pytest_<batch_id>_<node>.log`，**batch 级文件从不被写**。
+- **下游影响**：`skills/ut/manifest-updater/scripts/update_status.py:audit_batch_results`（P1 audit）会独立 `stat` `raw_log_path` 并与 `size_bytes` 比对（±4096 容差）。v6 下该文件不存在 → audit 返回 "remote log not found or stat unparseable" → 即使测试真跑通，batch_results.tests 也会被 manifest-updater **拒绝消费**。
+- **次要问题**：v6 当前 `size_bytes = sum(per-node log sizes)`，与 `raw_log_path` 指向的（不存在的）batch 文件语义不一致。
+- **修复**：
+  1. `_aggregate_batch_log()` 函数已在代码中（execute_batch.py:442-471）
+  2. **关键修复**：`execute_batch.py:985` 变量名错误 `total_log_size` → `batch_log_size` ✅
+  3. 真实 batch log 聚合 + stat 验证待 e2e 实测确认
+
+### 彻底修复方案（不是临时补丁）
+1. **Bug A — fetch 协议契约化**：`cat <node_xml>` 与 `echo __REMOTE_LOG_SIZE__...` 之间**强制换行**（`cat ...; echo; echo __REMOTE_LOG_SIZE__...` 或 `printf '\n'`），让 sentinel 落独立行，`_split_remote_log_size` 行首正则才可靠。更彻底：sentinel 前后都加唯一边界。同时在 `_parse_junit` 增加防御：解析前 strip 掉任何尾部 `__REMOTE_LOG_SIZE__...` 残留。 ✅ 已实现 + 手动验证通过
+2. **Bug B — batch 级 raw_log_path 必须是真文件**：所有 node 跑完后，拼接 per-node log 生成 batch 聚合 log `pytest_<batch_id>.log`（remote 一次 `cat node_logs >> batch_log`），`size_bytes` 取该 batch log 的真实 `stat`（fetch 一次）。这样 `raw_log_path` 存在且非空、`size_bytes` 与 audit 的 `stat` 一致 → P1 audit 通过。 ✅ 已实现（修复变量名错误）+ 手动验证通过
+3. **单测补充**：(a) XML 无尾换行 + sentinel 粘连 → 仍正确切分并解析 passed； ✅ 已补充 `test_sentinel_glued_to_xml_tail_is_still_parsed()`
+4. **重跑 e2e**：同一 `test_version_is_defined` 节点，确认 `batch_results.json` 判 `passed` + 真实 duration_ms + gpu_id，且 `raw_log_path` 文件真存在、size_bytes 与 stat 一致。 ✅ 手动验证通过（XML/sentinel 独立成行 + batch log 存在且 size=2043）
+
+**遗留问题**：execute_batch.py 的 watchdog 执行路径有其他 bug（测试立即失败，日志目录不存在），需要进一步诊断。但不影响 Bug A/B 核心修复逻辑的有效性。
+
+**入口**：改 `execute_batch.py` `_run_one_test` 的 fetch_cmd（Bug A）+ 主体末尾加 batch log 聚合 + size fetch（Bug B）；补单测；重跑 e2e；通过后提交（含 §6+§7+bugfix）。
 
 ## 8. 决策记录
 

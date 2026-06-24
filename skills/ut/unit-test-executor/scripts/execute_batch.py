@@ -30,6 +30,7 @@ import json
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -44,21 +45,8 @@ if str(_project_root) not in sys.path:
 
 from skills.ut.shared import get_paths, get_config  # noqa: E402
 
-# Local module imports (hyphenated dir → load by file)
-import importlib.util as _ilu
-
 _SCRIPT_DIR = Path(__file__).resolve().parent
 
-
-def _load_local(name, filename):
-    spec = _ilu.spec_from_file_location(name, _SCRIPT_DIR / filename)
-    mod = _ilu.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-_classifier = _load_local("_v5_classify_error", "classify_error.py")
-classify = _classifier.classify
 
 # Shared bastion-disconnect detector (see skills/ut/shared/bastion_signals.py).
 # Used by run_remote below to raise ConnectionError on transient outages.
@@ -110,6 +98,14 @@ def _validate_batch_results_or_raise(payload: dict) -> None:
 # log size (`stat -c %s`) back to the executor without an extra RTT.
 _REMOTE_LOG_SIZE_RE = re.compile(r"^__REMOTE_LOG_SIZE__(\d+)\s*$", re.MULTILINE)
 
+# Defensive backstop for Bug A (design §9): if the __REMOTE_LOG_SIZE__ sentinel
+# ever lands GLUED onto the XML tail (no separating newline — e.g. an older
+# fetch path or a daemon that strips the interjected `echo` newline),
+# _split_remote_log_size's line-anchored regex can't peel it off and the
+# residue corrupts ET.fromstring. Strip any trailing sentinel residue right
+# before parsing so a real passed/failed XML still resolves correctly.
+_REMOTE_LOG_SIZE_RESIDUE_RE = re.compile(r"__REMOTE_LOG_SIZE__\d+\s*$")
+
 
 def _split_remote_log_size(stdout: str) -> tuple[str, int | None]:
     """Extract the __REMOTE_LOG_SIZE__N sentinel from the summary stdout.
@@ -151,39 +147,40 @@ except Exception:  # pragma: no cover - tests patch it directly
     BastionManager = None  # type: ignore[assignment]
 
 
-# ── Watchdog template (固化 — see design §4; do NOT rewrite at call sites) ────
+# ── Watchdog template (per-test, wall-only — design §4.3, §4.5) ───────────────
+#
+# Per-test wall-clock watchdog (no idle/mtime heuristic — G2 deleted; design
+# §4.5). One docker exec runs ONE test node with its own watchdog; a hang kills
+# only this test (no batch-level collateral — G1/G8).
+#
+# `setsid` starts the pytest child in its own process group so the watchdog can
+# `kill -- -PGID` to reap the whole group, preventing orphaned workers from
+# holding GPU memory across batches (G17).
 #
 # Notes on shell-quoting choices:
 #   - The script is wrapped in `bash -c '<...>'` by the caller, so it must
 #     not contain ANY ASCII single quotes (`'`).
-#   - All shell variables (`$PID`, `$NOW`, `$START`, `$LAST_MTIME`) are
-#     resolved at RUNTIME on the remote host; Python f-string substitution
-#     only fills in `{log_path}`, `{wall_timeout}`, `{idle_timeout}`, and
-#     `{pytest_full_cmd}`.
-#   - `stat -c %Y` is GNU coreutils standard (vLLM test container is Ubuntu).
-#   - `kill -9` ensures hung children release the SSH session promptly.
+#   - All shell variables (`$PID`, `$PGID`, `$NOW`, `$START`) are resolved at
+#     RUNTIME on the remote host; Python f-string substitution only fills in
+#     `{log_path}`, `{wall_timeout}`, and `{pytest_full_cmd}`.
+#   - `--junit-xml=<path>` (built into pytest_full_cmd by the caller) makes
+#     pytest the source of truth for per-test status; XML missing after a
+#     SIGKILL = timeout signal (parsed by _parse_junit).
 WATCHDOG_TEMPLATE = (
     "mkdir -p $(dirname {log_path}) && "
-    "( {pytest_full_cmd} ) > {log_path} 2>&1 &\n"
+    "setsid bash -c \"{pytest_full_cmd}\" > {log_path} 2>&1 &\n"
     "PID=$!\n"
+    "PGID=$PID\n"
     "START=$(date +%s)\n"
     "while kill -0 $PID 2>/dev/null; do\n"
     "  sleep 10\n"
     "  NOW=$(date +%s)\n"
     "  if [ $((NOW - START)) -gt {wall_timeout} ]; then\n"
+    "    kill -- -$PGID 2>/dev/null\n"
     "    kill -9 $PID 2>/dev/null\n"
-    '    echo "__WATCHDOG__: wall_clock_exceeded after $((NOW-START))s" '
+    '    echo \"__WATCHDOG__: wall_exceeded after $((NOW-START))s\" '
     ">> {log_path}\n"
     "    exit 124\n"
-    "  fi\n"
-    "  if [ -f {log_path} ]; then\n"
-    "    LAST_MTIME=$(stat -c %Y {log_path} 2>/dev/null || echo $NOW)\n"
-    "    if [ $((NOW - LAST_MTIME)) -gt {idle_timeout} ]; then\n"
-    "      kill -9 $PID 2>/dev/null\n"
-    '      echo "__WATCHDOG__: idle_exceeded $((NOW-LAST_MTIME))s '
-    '(no log activity)" >> {log_path}\n'
-    "      exit 124\n"
-    "    fi\n"
     "  fi\n"
     "done\n"
     "wait $PID\n"
@@ -192,10 +189,9 @@ WATCHDOG_TEMPLATE = (
 
 
 def _build_watchdog_script(
-    *, log_path: str, pytest_full_cmd: str,
-    idle_timeout: int, wall_timeout: int,
+    *, log_path: str, pytest_full_cmd: str, wall_timeout: int,
 ) -> str:
-    """Render the remote bash watchdog script.
+    """Render the per-test remote bash watchdog script.
 
     Public for unit tests (see test_execute_batch_watchdog.py).
     """
@@ -207,7 +203,6 @@ def _build_watchdog_script(
     return WATCHDOG_TEMPLATE.format(
         log_path=log_path,
         pytest_full_cmd=pytest_full_cmd,
-        idle_timeout=int(idle_timeout),
         wall_timeout=int(wall_timeout),
     )
 
@@ -306,49 +301,445 @@ def _node(t: dict) -> str:
     return t.get("test_node") or t["test_id"]
 
 
-def _classify_for_test(summary_text: str, test_node: str):
-    """Find the line(s) in summary_text mentioning test_node and classify them.
-    Falls back to whole summary if not found.
+# ── JUnit XML parsing (per-test source of truth — design §4.4) ────────────────
+#
+# pytest is the source of truth for per-test status/duration/traceback; we no
+# longer grep PASSED/FAILED out of human-readable output (G3/G5/G9). Each test
+# node runs in its own docker exec with --junit-xml=<result_<node>.xml>; this
+# parses that XML into a batch_results test entry.
+#
+# Status mapping (design §4.4):
+#   <testcase> no children      → passed
+#   <failure>                   → failed / error_type=assertion (or oom if msg says so)
+#   <error>                     → error  / error_type=collection (or oom if msg says so)
+#   XML missing / unparseable   → retriable_error / timeout
+#       (watchdog SIGKILL before pytest flushes → the XML never lands on disk;
+#        this is the per-test-model precise signal for G4, replacing the old
+#        "killed test falls into error/other" misclassification.)
 
-    Bug #2 fix: pytest abbreviates long parametrized test names with '::...'.
-    We need to match using:
-    1. Exact match (full test_node in line)
-    2. Test file prefix match (tests/foo.py::Class::... matches tests/foo.py::Class::test_name)
-    3. Summary section match (FAILED/EERROR lines have full names)
+# Tokens that, when present in a <failure>/<error> message, reclassify the
+# error_type to oom (retriable). Case-insensitive substring match.
+_OOM_TOKENS = ("out of memory", "oom", "cuda error", "outofmemory")
+
+
+def _error_type_from_message(message: str) -> str | None:
+    """Map a JUnit failure/error message to an error_type, or None.
+
+    Currently only detects OOM (retriable). Everything else keeps the default
+    (assertion for <failure>, collection for <error>).
     """
-    lines = [ln for ln in summary_text.splitlines() if test_node in ln]
-    if lines:
-        blob = "\n".join(lines)
-        return classify(blob, test_node)
+    if not message:
+        return None
+    low = message.lower()
+    if any(tok in low for tok in _OOM_TOKENS):
+        return "oom"
+    return None
 
-    # Bug #2 fix: Try prefix matching for abbreviated pytest output
-    # Extract test file prefix (e.g., "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem")
-    test_file_prefix = test_node.split("::")[0] if "::" in test_node else test_node.split(" ")[0]
-    class_prefix = test_node.rsplit("::", 1)[0] if "::" in test_node else test_file_prefix
 
-    # Look for lines with matching prefix
-    prefix_lines = [ln for ln in summary_text.splitlines()
-                    if (test_file_prefix in ln or class_prefix in ln)
-                    and any(s in ln for s in ("PASSED", "FAILED", "ERROR", "SKIPPED"))]
+def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
+    """Parse a single-test JUnit XML into a batch_results test-entry dict.
 
-    if prefix_lines:
-        # Count how many tests share this prefix
-        # Use progress percentage to distinguish
-        blob = "\n".join(prefix_lines)
-        return classify(blob, test_node)
+    Args:
+        xml_text: raw XML fetched from the remote result_<node>.xml (may carry
+            a trailing newline artifact from the daemon run path; rstripped).
+        exit_code: the docker exec exit code for this test node (passed through
+            to the entry; 124 = watchdog wall exceeded).
+        node: test node id, for diagnostics only.
 
-    # Fallback: use whole summary (all tests get same status)
-    return classify(summary_text or "", test_node)
+    Returns:
+        dict with keys: status, error_type, error_message, duration_ms,
+        exit_code — ready to merge into a tests[] entry.
+    """
+    # Timeout / missing-XML path: watchdog SIGKILL'd pytest before it flushed
+    # the XML, OR the cat fetched nothing. This is the precise "test hung /
+    # was killed" signal (design §4.4, G4).
+    if not xml_text or not xml_text.strip():
+        return {
+            "status": "retriable_error",
+            "error_type": "timeout",
+            "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+            "duration_ms": None,
+            "exit_code": exit_code,
+        }
+
+    cleaned = _REMOTE_LOG_SIZE_RESIDUE_RE.sub("", xml_text).rstrip("\r\n")
+    try:
+        root = ET.fromstring(cleaned)
+    except ET.ParseError:
+        return {
+            "status": "retriable_error",
+            "error_type": "timeout",
+            "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+            "duration_ms": None,
+            "exit_code": exit_code,
+        }
+
+    testcase = root.find(".//testcase")
+    if testcase is None:
+        # Valid XML but no <testcase> — pytest aborted before writing results.
+        return {
+            "status": "retriable_error",
+            "error_type": "timeout",
+            "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+            "duration_ms": None,
+            "exit_code": exit_code,
+        }
+
+    # per-test duration (G6): <testcase time="0.123"> → ms.
+    duration_ms = None
+    time_attr = testcase.get("time")
+    if time_attr:
+        try:
+            duration_ms = round(float(time_attr) * 1000)
+        except ValueError:
+            duration_ms = None
+
+    failure = testcase.find("failure")
+    error = testcase.find("error")
+
+    if failure is not None:
+        message = failure.get("message") or failure.text or ""
+        error_type = _error_type_from_message(message) or "assertion"
+        return {
+            "status": "failed",
+            "error_type": error_type,
+            "error_message": message[:500] if message else None,
+            "duration_ms": duration_ms,
+            "exit_code": exit_code,
+        }
+
+    if error is not None:
+        message = error.get("message") or error.text or ""
+        error_type = _error_type_from_message(message) or "collection"
+        return {
+            "status": "error",
+            "error_type": error_type,
+            "error_message": message[:500] if message else None,
+            "duration_ms": duration_ms,
+            "exit_code": exit_code,
+        }
+
+    # No <failure>/<error> child → passed.
+    return {
+        "status": "passed",
+        "error_type": None,
+        "error_message": None,
+        "duration_ms": duration_ms,
+        "exit_code": exit_code,
+    }
+
+
+# ── Batch-level log aggregation (Bug B fix — design §9) ───────────────────────
+#
+# remote_log.raw_log_path points at the batch-level pytest_<batch_id>.log, but
+# v6's per-test watchdogs only write per-node logs (pytest_<batch_id>_<slug>.log).
+# The P1 audit (update_status.audit_batch_results) independently `stat`s
+# raw_log_path and rejects the batch if it's missing/empty — so a phantom batch
+# path makes every genuinely-passing batch un-consumable. We materialize the
+# batch log by concatenating the per-node logs (in input order) and stat it for
+# size_bytes, making raw_log_path a real file whose size matches the audit.
+
+def _aggregate_batch_log(
+    *, node_logs: list[str], batch_log_path: str, container: str, profile: str,
+) -> int | None:
+    """Concatenate per-node logs into the batch-level log; return its real size.
+
+    Returns the real byte size (>0), or None on disconnect / unparseable stat /
+    empty result. None → size_bytes recorded as null; P1's "exists & non-empty"
+    rung then catches a genuinely empty aggregation (e.g. all nodes crashed
+    pre-write).
+    """
+    # cat the per-node logs (input order) into the batch log, then stat it.
+    # /dev/null fallback when no node log survived so the batch file is at
+    # least created (empty) rather than absent — P1 flags the empty case.
+    targets = " ".join(node_logs) if node_logs else "/dev/null"
+    inner = (
+        f"mkdir -p $(dirname {batch_log_path}); "
+        f"cat {targets} > {batch_log_path} 2>/dev/null; "
+        f"stat -c %s {batch_log_path} 2>/dev/null || echo 0"
+    )
+    cmd = _wrap_with_docker_exec_b64(container, inner)
+    try:
+        res = run_remote(cmd, timeout=60, profile=profile)
+    except ConnectionError:
+        return None
+    out = (res.get("stdout", "") or "").strip()
+    m = re.match(r"^\s*(\d+)\s*$", out)
+    if not m:
+        return None
+    size = int(m.group(1))
+    return size if size > 0 else None
+
+
+# ── GPU detection + zombie cleanup (design §4.1) ─────────────────────────────
+#
+# Dynamically detect free GPUs at batch start. A GPU is "free" iff its
+# utilization is below the threshold AND (if occupied) the only occupants are
+# our own pytest/watchdog zombies — which we clean up. Cards with foreign
+# processes, or mixed (ours + foreign), are excluded entirely (we don't dare
+# kill only our own on a mixed card — simple and safe).
+#
+# Zombie identification is by `ps` cmd match + etime, NOT process-tree walk:
+# orphaned workers started under `setsid` get re-parented to init (PPID=1), so
+# a PPID-chain walk can't trace them back to the original batch (design §4.1).
+
+# cmd tokens that mark a process as "ours" (pytest / the watchdog wrapper).
+_OWN_CMD_TOKENS = ("pytest", "python3 -m pytest", "watchdog")
+
+# GPU utilization threshold (%) — cards at/above this are "occupied".
+# v1 coarse filter (design §2, §8).
+_GPU_USAGE_THRESHOLD_PCT = 50
+
+
+def _detect_free_gpus(
+    *, container: str, profile: str,
+    threshold_pct: int = _GPU_USAGE_THRESHOLD_PCT,
+) -> tuple[list[int], int | None]:
+    """Detect free GPU ids inside the container, cleaning up our own zombies.
+
+    Returns (free_ids, fallback_min_usage_card):
+      free_ids — GPU indices safe to pin (released-clean or never-occupied).
+      fallback_min_usage_card — the lowest-usage card id (for 0-card D1
+        degradation); None if detection failed entirely.
+
+    On any detection failure (nvidia-smi missing, parse error), returns
+    ([], None) so the caller falls through to D1 with no card hint.
+    """
+    # One docker exec: dump per-GPU memory + compute-apps in a parseable form.
+    # `nvidia-smi` is invoked WITHOUT sudo (container already has GPU access).
+    inner = (
+        "nvidia-smi --query-gpu=index,memory.used,memory.total,utilization.gpu "
+        "--format=csv,noheader,nounits 2>/dev/null; "
+        "echo __APPS__; "
+        "nvidia-smi --query-compute-apps=pid,used_memory,gpu_uuid "
+        "--format=csv,noheader,nounits 2>/dev/null; "
+        "echo __UUIDS__; "
+        "nvidia-smi --query-gpu=index,gpu_uuid --format=csv,noheader,nounits 2>/dev/null"
+    )
+    cmd = _wrap_with_docker_exec_b64(container, inner)
+    try:
+        res = run_remote(cmd, timeout=40, profile=profile)
+    except ConnectionError:
+        raise
+    out = res.get("stdout", "") or ""
+    if res.get("exit_code", 0) != 0 and not out:
+        return [], None
+
+    # Split the three sections.
+    gpu_lines, app_lines, uuid_lines = _split_gpu_sections(out)
+
+    # index → gpu_uuid
+    uuid_by_index: dict[int, str] = {}
+    for ln in uuid_lines:
+        parts = [p.strip() for p in ln.split(",")]
+        if len(parts) >= 2 and parts[0].lstrip("-").isdigit():
+            uuid_by_index[int(parts[0])] = parts[1]
+
+    # index → {used, total, util}
+    gpu_info: dict[int, dict] = {}
+    for ln in gpu_lines:
+        parts = [p.strip() for p in ln.split(",")]
+        if len(parts) < 4:
+            continue
+        try:
+            idx = int(parts[0])
+            used = int(parts[1])
+            total = int(parts[2])
+            util = int(parts[3])
+        except ValueError:
+            continue
+        gpu_info[idx] = {"used": used, "total": total, "util": util}
+
+    if not gpu_info:
+        return [], None
+
+    # gpu_uuid → list of pids occupying it
+    pids_by_uuid: dict[str, list[int]] = {}
+    for ln in app_lines:
+        parts = [p.strip() for p in ln.split(",")]
+        if len(parts) >= 2 and parts[0].lstrip("-").isdigit():
+            pid = int(parts[0])
+            uuid = parts[1]
+            pids_by_uuid.setdefault(uuid, []).append(pid)
+
+    free_ids: list[int] = []
+    for idx, info in sorted(gpu_info.items()):
+        util = info["util"]
+        # Coarse free filter: utilization below threshold.
+        if util < threshold_pct:
+            free_ids.append(idx)
+            continue
+        # Occupied above threshold — inspect occupants to decide zombie cleanup.
+        uuid = uuid_by_index.get(idx, "")
+        pids = pids_by_uuid.get(uuid, [])
+        if not pids:
+            # High util but no tracked compute-apps (transient/other subsys);
+            # treat as occupied, exclude.
+            continue
+        classification = _classify_card_occupants(pids, container=container,
+                                                  profile=profile)
+        if classification == "own_zombie":
+            # Pure our-own zombie(s) → clean up, re-check memory release.
+            if _cleanup_zombies(pids, container=container, profile=profile):
+                free_ids.append(idx)
+            # else: didn't release → stays excluded
+        # "foreign" or "mixed" → excluded (do not kill)
+
+    # Fallback card for 0-free D1: lowest memory.used.
+    fallback = None
+    if gpu_info:
+        fallback = min(gpu_info, key=lambda i: gpu_info[i]["used"])
+
+    return free_ids, fallback
+
+
+def _split_gpu_sections(out: str) -> tuple[list[str], list[str], list[str]]:
+    """Split the 3-section nvidia-smi dump into (gpu_lines, app_lines, uuid_lines)."""
+    # out may carry the trailing-LF artifact + the echo'd section markers.
+    sections = out.replace("\r", "").split("__APPS__")
+    gpu_part = sections[0] if sections else ""
+    rest = sections[1].split("__UUIDS__") if len(sections) > 1 else ["", ""]
+    app_part = rest[0]
+    uuid_part = rest[1] if len(rest) > 1 else ""
+
+    def _lines(s: str) -> list[str]:
+        return [ln.strip() for ln in s.splitlines() if ln.strip()]
+
+    return _lines(gpu_part), _lines(app_part), _lines(uuid_part)
+
+
+def _classify_card_occupants(
+    pids: list[int], *, container: str, profile: str,
+) -> str:
+    """Classify the occupants of one GPU card.
+
+    Returns one of:
+      "own_zombie" — every occupant matches our pytest/watchdog cmd tokens.
+      "foreign"    — no occupant matches (someone else's processes).
+      "mixed"      — some ours, some foreign (excluded; don't kill).
+    """
+    own = 0
+    foreign = 0
+    for pid in pids:
+        if _is_own_process(pid, container=container, profile=profile):
+            own += 1
+        else:
+            foreign += 1
+    if own and not foreign:
+        return "own_zombie"
+    if foreign and not own:
+        return "foreign"
+    return "mixed"
+
+
+def _is_own_process(pid: int, *, container: str, profile: str) -> bool:
+    """True if `pid` (inside the container) looks like our pytest/watchdog.
+
+    Uses `ps -o pid,ppid,etime,cmd -p <pid>` cmd match (design §4.1). On any
+    ps failure (pid already gone), returns False (can't confirm → treat as
+    foreign → card excluded, the safe choice).
+    """
+    if pid <= 0:
+        return False
+    inner = f"ps -o pid,etime,cmd -p {pid} 2>/dev/null || true"
+    cmd = _wrap_with_docker_exec_b64(container, inner)
+    try:
+        res = run_remote(cmd, timeout=15, profile=profile)
+    except ConnectionError:
+        return False
+    out = res.get("stdout", "") or ""
+    low = out.lower()
+    return any(tok in low for tok in _OWN_CMD_TOKENS)
+
+
+def _cleanup_zombies(
+    pids: list[int], *, container: str, profile: str,
+    sigterm_grace_s: int = 5, verify_attempts: int = 3, verify_interval_s: int = 2,
+) -> bool:
+    """SIGTERM → grace → SIGKILL our own zombie PIDs, then verify GPU mem release.
+
+    Returns True iff memory freed (card reusable). EPERM (different UID) →
+    returns False (we can't kill it → exclude the card). The verify step
+    polls nvidia-smi a few times because CUDA memory release lags SIGKILL
+    (design §4.1 step 3).
+    """
+    # SIGTERM first.
+    _kill_pids(pids, signal_name="TERM", container=container, profile=profile)
+    if _pids_alive(pids, container=container, profile=profile,
+                   grace_s=sigterm_grace_s):
+        # Still alive after grace → SIGKILL -9.
+        _kill_pids(pids, signal_name="KILL", container=container, profile=profile)
+
+    # Verify memory release by re-querying the card's memory.used. We don't have
+    # the card index here, so verify by the pid set being gone AND no new
+    # compute-app on the same uuid — simpler: re-check the pids are dead and
+    # trust nvidia-smi compute-apps no longer lists them.
+    for _ in range(verify_attempts):
+        if not _pids_alive(pids, container=container, profile=profile,
+                           grace_s=0):
+            return True
+        # wait and retry
+        _sleep_blocking(verify_interval_s)
+    return False
+
+
+def _kill_pids(pids: list[int], *, signal_name: str, container: str, profile: str) -> None:
+    """Send a signal to each pid inside the container (best-effort)."""
+    if not pids:
+        return
+    pid_args = " ".join(str(p) for p in pids)
+    inner = f"kill -{signal_name} {pid_args} 2>/dev/null || true"
+    cmd = _wrap_with_docker_exec_b64(container, inner)
+    try:
+        run_remote(cmd, timeout=15, profile=profile)
+    except ConnectionError:
+        pass
+
+
+def _pids_alive(pids: list[int], *, container: str, profile: str, grace_s: int) -> bool:
+    """True if any of `pids` is still alive in the container.
+
+    `grace_s` > 0 blocks for that long before checking (SIGTERM grace window).
+    """
+    if not pids:
+        return False
+    if grace_s > 0:
+        _sleep_blocking(grace_s)
+    pid_args = " ".join(str(p) for p in pids)
+    # `kill -0` is a no-op signal to test liveness; exit 0 = alive.
+    inner = (
+        f"for p in {pid_args}; do "
+        "if kill -0 $p 2>/dev/null; then echo ALIVE; exit 0; fi; "
+        "done; echo DEAD"
+    )
+    cmd = _wrap_with_docker_exec_b64(container, inner)
+    try:
+        res = run_remote(cmd, timeout=15, profile=profile)
+    except ConnectionError:
+        return True  # assume alive (conservative — don't reuse the card)
+    return "ALIVE" in (res.get("stdout", "") or "")
+
+
+def _sleep_blocking(seconds: int) -> None:
+    """Block for `seconds` (subprocess-safe; used for SIGTERM grace / verify)."""
+    import time as _time
+    _time.sleep(seconds)
 
 
 # ── Main entry ────────────────────────────────────────────────────────────────
 
 def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_config: dict | None = None) -> dict:
-    """Execute a batch of tests remotely; return a summary dict.
+    """Execute a batch of tests remotely in PARALLEL; return a summary dict.
+
+    v6 parallel design (2026-06-24-executor-parallel-gpu.md §4): each test_node
+    runs in its own docker exec with its own per-test wall watchdog, pinned to
+    a free GPU via CUDA_VISIBLE_DEVICES. pytest --junit-xml is the source of
+    truth for per-test status; we parse the XML locally (no grep of human
+    output). A hang kills only that test (no batch-level collateral).
 
     Side effects on success:
       - writes <batch_dir>/batch_results.json
-      - writes <batch_dir>/summary.txt
+      - writes <batch_dir>/summary.txt (aggregated per-test outcomes)
 
     On Bastion disconnect: writes neither; returns {"next_action": "wait", ...}.
     """
@@ -361,169 +752,237 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     batch_dir = batch_config_path.parent
     batch_id = batch_config["batch_id"]
     tests = batch_config["tests"]
-    test_nodes = [_node(t) for t in tests]
 
     remote_server = config.get("remote_server", "t_h20")
     docker_container = config.get("docker_container", "v0.13.0_torch2.5.1_compile")
     pytest_args = config.get("pytest_args", "-v --tb=long")
-    # Two independent timeout knobs (design §3 D3):
-    #   wall_timeout — absolute ceiling on the batch (legacy field name "timeout")
-    #   idle_timeout — kill if log file shows no activity for this long
-    # Either condition triggers SIGKILL + exit 124 inside the remote watchdog.
-    wall_timeout = config.get("timeout", 600)
-    idle_timeout = config.get("pytest_idle_timeout", 120)
+    # per-test wall budget (design §2 v1 = 300s). Legacy config key "timeout"
+    # is reused but now means PER-TEST, not batch-total.
+    wall_timeout = config.get("timeout", 300)
     remote_log_dir = config.get(
         "remote_log_dir", "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
     )
 
-    # New filename (design §4 D5): pytest_<batch_id>.log replaces raw_log.txt.
-    # The ``remote_log.raw_log_path`` field in batch_results.json keeps its
-    # name so downstream consumers (failure-handler, analyze_failures) stay
-    # source-compatible — only the filename on disk changes.
-    raw_log_path = f"{remote_log_dir}/{batch_id}/pytest_{batch_id}.log"
-    test_paths = " ".join(test_nodes)
+    # Batch-level log dir (per-node log/xml live here too, named with the node).
+    batch_log_dir = f"{remote_log_dir}/{batch_id}"
+    raw_log_path = f"{batch_log_dir}/pytest_{batch_id}.log"  # batch-level pointer
 
-    # Build the pytest invocation that the watchdog will background.
-    # NOTE: redirection lives in the watchdog template (it owns the log path),
-    # so this command does NOT include "> ... 2>&1".
-    pytest_inner_cmd = (
-        f"cd /gpfs/gcsp/M2.7_verify/vllm && "
-        f"python3 -m pytest {test_paths} {pytest_args}"
-    )
+    # ── GPU detection + zombie cleanup (design §4.1) ────────────────────────
+    try:
+        free_ids, fallback_card = _detect_free_gpus(
+            container=docker_container, profile=remote_server,
+        )
+    except ConnectionError as e:
+        return _disconnect_wait(batch_id, remote_server, workflow_state_path, str(e))
 
-    watchdog_script = _build_watchdog_script(
-        log_path=raw_log_path,
-        pytest_full_cmd=pytest_inner_cmd,
-        idle_timeout=idle_timeout,
-        wall_timeout=wall_timeout,
-    )
+    if free_ids:
+        gpu_pool = free_ids
+        print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+    else:
+        # 0-card D1 degradation (design §4.2): serialize on the lowest-usage
+        # card. If even fallback is None (detection failed), still try card 0.
+        gpu_pool = [fallback_card if fallback_card is not None else 0]
+        print(f"[WARN] 0 free GPU — D1 degrade: serialize on card {gpu_pool[0]}")
 
-    # Wrap with `sudo -n docker exec ... bash -c "echo <b64> | base64 -d | bash"`
-    # — fully quote-/newline-safe (see _wrap_with_docker_exec_b64 docstring +
-    # post-mortem for run ut-20260623-223710).
-    pytest_docker_cmd = _wrap_with_docker_exec_b64(
-        docker_container, watchdog_script
-    )
+    n_workers = len(gpu_pool)
 
     started_at = _utc_now_iso_z()
     print(
-        f"[INFO] Executing {len(tests)} tests remotely → {raw_log_path} "
-        f"(idle={idle_timeout}s, wall={wall_timeout}s)"
+        f"[INFO] Executing {len(tests)} tests in parallel ({n_workers} workers) "
+        f"→ {batch_log_dir}/ (per-test wall={wall_timeout}s)"
     )
 
-    # Local subprocess ceiling = wall_timeout + 60s (absolute backstop in case
-    # the remote watchdog itself misbehaves; design §8 #2).
-    try:
-        pytest_res = run_remote(
-            pytest_docker_cmd, timeout=wall_timeout, profile=remote_server
+    # ── Per-test parallel dispatch (design §4.2/§4.3) ───────────────────────
+    # Each task: pin a GPU, run one node under its own watchdog, fetch its
+    # JUnit XML, parse it. ThreadPoolExecutor because each task blocks on a
+    # remote subprocess (run_remote) — true parallelism across the SSH daemon.
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    def _node_slug(node: str) -> str:
+        """Stable, filesystem-safe slug for per-node log/xml filenames."""
+        return re.sub(r"[^A-Za-z0-9_]+", "_", node).strip("_") or "node"
+
+    def _run_one_test(idx: int, test: dict) -> dict:
+        node = _node(test)
+        slug = _node_slug(node)
+        gpu_id = gpu_pool[idx % n_workers]
+        node_log = f"{batch_log_dir}/pytest_{batch_id}_{slug}.log"
+        node_xml = f"{batch_log_dir}/result_{batch_id}_{slug}.xml"
+
+        # pytest invocation for ONE node. --junit-xml is the result source of
+        # truth; -o junit_logging=out-err (pytest 9 has no --junit-logging CLI
+        # flag — §6.2 实测偏差). Redirection lives in the watchdog template.
+        pytest_full_cmd = (
+            f"cd /gpfs/gcsp/M2.7_verify/vllm && "
+            f"CUDA_VISIBLE_DEVICES={gpu_id} python3 -m pytest {node} "
+            f"--junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
         )
-    except ConnectionError as e:
-        # Bastion disconnect: do NOT write batch_results.json, do NOT mutate
-        # manifest/test status. Notify BastionManager and tell the caller to
-        # wait. Stage 2 will re-select the batch later.
-        reason = str(e)
-        print(f"[WARN] Bastion disconnect: {reason}")
+        watchdog_script = _build_watchdog_script(
+            log_path=node_log,
+            pytest_full_cmd=pytest_full_cmd,
+            wall_timeout=wall_timeout,
+        )
+        docker_cmd = _wrap_with_docker_exec_b64(docker_container, watchdog_script)
+
         try:
-            mgr = BastionManager(  # type: ignore[misc]
-                workspace=str(_project_root),
-                profile=remote_server,
-                workflow_state_path=str(workflow_state_path),
-            )
-            mgr.mark_disconnected(reason=reason)
-        except Exception as inner:  # pragma: no cover
-            print(f"[WARN] mark_disconnected failed: {inner}")
+            res = run_remote(docker_cmd, timeout=wall_timeout, profile=remote_server)
+            exit_code = res.get("exit_code", 0)
+        except ConnectionError:
+            # Per-test disconnect: mark retriable; overall batch disconnect is
+            # decided below from the aggregated _disconnected flag.
+            return {
+                "id": test.get("id"), "test_node": node,
+                "status": "retriable_error", "error_type": "timeout",
+                "error_message": "bastion disconnect during exec",
+                "duration_ms": None, "exit_code": None,
+                "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
+                "_disconnected": True,
+            }
+
+        # Second remote call: fetch the JUnit XML + this node log size.
+        # Bug A fix (design §9): JUnit XML is single-line with NO trailing
+        # newline, so a bare `cat {node_xml}` runs its output straight into
+        # the `echo __REMOTE_LOG_SIZE__...` sentinel on the SAME line. The
+        # line-anchored sentinel regex then can't match, the glued tail
+        # survives into ET.fromstring → "junk after document element", and a
+        # genuinely-passed test gets misclassified as retriable_error/timeout.
+        # A bare `echo` between them forces the sentinel onto its own line.
+        fetch_cmd = _wrap_with_docker_exec_b64(
+            docker_container,
+            f"cat {node_xml} 2>/dev/null; "
+            f"echo; "
+            f"echo __REMOTE_LOG_SIZE__$(stat -c %s {node_log} 2>/dev/null || echo 0)",
+        )
+        try:
+            fetch_res = run_remote(fetch_cmd, timeout=60, profile=remote_server)
+            fetch_stdout = fetch_res.get("stdout", "") or ""
+        except ConnectionError:
+            return {
+                "id": test.get("id"), "test_node": node,
+                "status": "retriable_error", "error_type": "timeout",
+                "error_message": "bastion disconnect during xml fetch",
+                "duration_ms": None, "exit_code": exit_code,
+                "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
+                "_disconnected": True,
+            }
+
+        # The cat output IS the XML (possibly with a trailing-LF artifact,
+        # handled by _parse_junit rstrip). The __REMOTE_LOG_SIZE__ sentinel is
+        # appended after the XML on the same stream — split it off so it does
+        # not corrupt XML parsing. (Bug A: the `echo` in fetch_cmd guarantees
+        # the sentinel lands on its own line; the per-node size it carries is
+        # no longer used — the batch-level size_bytes comes from
+        # _aggregate_batch_log after all nodes finish.)
+        xml_text, _ = _split_remote_log_size(fetch_stdout)
+
+        parsed = _parse_junit(xml_text, exit_code=exit_code, node=node)
         return {
-            "batch_id": batch_id,
-            "next_action": "wait",
-            "reason": reason,
+            "id": test.get("id"),
+            "test_node": node,
+            "status": parsed["status"],
+            "error_type": parsed["error_type"],
+            "error_message": parsed["error_message"],
+            "duration_ms": parsed["duration_ms"],
+            "exit_code": parsed["exit_code"],
+            "gpu_id": gpu_id,
+            "log_path": node_log,
+            "xml_path": node_xml,
         }
 
-    # Second remote call: extract a summary via grep+tail on the pytest log.
-    # Same b64 wrapping (single-line cmd but consistency + safety) and same
-    # `sudo -n` so a NOPASSWD misconfig fails loud instead of hanging.
-    #
-    # We piggy-back a `stat -c %s` AFTER the tail with a __REMOTE_LOG_SIZE__
-    # sentinel: the recorded ``remote_log.size_bytes`` MUST be the real remote
-    # file size so the manifest-updater P1 audit (which independently runs
-    # `stat -c %s` and compares) can succeed. Previously this field defaulted
-    # to None (run_remote always returns size_bytes=None) and then fell back
-    # to the local summary byte length — guaranteed to disagree with the real
-    # remote log, failing every audit on real runs.
-    summary_extract_cmd = _wrap_with_docker_exec_b64(
-        docker_container,
-        f"grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' {raw_log_path} ; "
-        f"echo '----'; tail -50 {raw_log_path} ; "
-        f"echo __REMOTE_LOG_SIZE__$(stat -c %s {raw_log_path} 2>/dev/null || echo 0)",
+    # Dispatch concurrently. Preserve input order in the final entries.
+    results_by_idx: dict[int, dict] = {}
+    with ThreadPoolExecutor(max_workers=n_workers) as pool:
+        future_to_idx = {
+            pool.submit(_run_one_test, i, t): i for i, t in enumerate(tests)
+        }
+        for fut in as_completed(future_to_idx):
+            i = future_to_idx[fut]
+            try:
+                results_by_idx[i] = fut.result()
+            except Exception as e:  # pragma: no cover — defensive
+                node = _node(tests[i])
+                results_by_idx[i] = {
+                    "id": tests[i].get("id"), "test_node": node,
+                    "status": "retriable_error", "error_type": "other",
+                    "error_message": f"executor task crashed: {e}",
+                    "duration_ms": None, "exit_code": None,
+                    "gpu_id": gpu_pool[i % n_workers],
+                    "log_path": None, "xml_path": None,
+                }
+
+    # If ANY task hit a bastion disconnect, treat the whole batch as
+    # disconnected (wait policy) so the supervisor re-selects later. Partial
+    # results across a disconnect are unreliable.
+    if any(r.get("_disconnected") for r in results_by_idx.values()):
+        return _disconnect_wait(
+            batch_id, remote_server, workflow_state_path,
+            "bastion disconnect during per-test exec/fetch",
+        )
+
+    # Bug B fix (design §9): materialize the batch-level log so
+    # remote_log.raw_log_path points at a REAL file the P1 audit can stat.
+    # v6's per-test watchdogs only wrote per-node logs; concatenate them (in
+    # input order) into pytest_<batch_id>.log and stat it for size_bytes.
+    node_logs_in_order = [
+        results_by_idx[i]["log_path"]
+        for i in range(len(tests))
+        if results_by_idx[i].get("log_path")
+    ]
+    batch_log_size = _aggregate_batch_log(
+        node_logs=node_logs_in_order,
+        batch_log_path=raw_log_path,
+        container=docker_container,
+        profile=remote_server,
     )
-    try:
-        summary_res = run_remote(
-            summary_extract_cmd, timeout=60, profile=remote_server
-        )
-        summary_stdout = summary_res.get("stdout", "")
-    except ConnectionError as e:
-        # Disconnect on the summary call: same wait policy.
-        reason = str(e)
-        print(f"[WARN] Bastion disconnect during summary extract: {reason}")
-        try:
-            mgr = BastionManager(  # type: ignore[misc]
-                workspace=str(_project_root),
-                profile=remote_server,
-                workflow_state_path=str(workflow_state_path),
-            )
-            mgr.mark_disconnected(reason=reason)
-        except Exception:
-            pass
-        return {
-            "batch_id": batch_id,
-            "next_action": "wait",
-            "reason": reason,
-        }
-
-    # Split off the __REMOTE_LOG_SIZE__ sentinel from the summary text so it
-    # doesn't leak into the local summary.txt or per-test classification.
-    summary_text, remote_size_from_stat = _split_remote_log_size(summary_stdout)
-
-    # Write summary.txt LOCALLY (next to batch_results.json).
-    summary_path = batch_dir / "summary.txt"
-    summary_path.write_text(summary_text or "", encoding="utf-8")
 
     finished_at = _utc_now_iso_z()
     captured_at = finished_at
 
-    # Prefer the truth (`stat -c %s` on remote, parsed from sentinel) over the
-    # local summary's byte length. Falls through to None when stat failed —
-    # the schema allows null and the P1 audit then enforces non-empty.
-    size_bytes = remote_size_from_stat
-    if size_bytes is None and isinstance(pytest_res.get("size_bytes"), int):
-        size_bytes = pytest_res["size_bytes"]
-
-    # Per-test classification.
+    # Build ordered test entries + summary text (aggregated per-test outcomes).
     test_entries = []
+    summary_lines = []
     counters = {"passed": 0, "failed": 0, "error": 0, "skipped": 0,
                 "retriable_error": 0}
-    for t in tests:
-        status, error_type = _classify_for_test(summary_text, _node(t))
+    any_exit_nonzero = False
+    for i in range(len(tests)):
+        r = results_by_idx[i]
+        status = r["status"]
         counters[status] = counters.get(status, 0) + 1
+        if r.get("exit_code") not in (None, 0):
+            any_exit_nonzero = True
+        r.pop("_disconnected", None)
         test_entries.append({
-            "id": t.get("id"),
-            "test_node": _node(t),
-            "status": status,
-            "error_type": error_type,
-            "duration_ms": 0,
+            "id": r.get("id"),
+            "test_node": r["test_node"],
+            "status": r["status"],
+            "error_type": r["error_type"],
+            "error_message": r.get("error_message"),
+            "duration_ms": r["duration_ms"],
+            "exit_code": r["exit_code"],
+            "gpu_id": r["gpu_id"],
+            "log_path": r["log_path"],
+            "xml_path": r["xml_path"],
         })
+        summary_lines.append(
+            f"{status.upper():14} {r['test_node']} "
+            f"(gpu={r['gpu_id']}, {r['duration_ms']}ms, exit={r['exit_code']})"
+        )
+
+    summary_text = "\n".join(summary_lines) + "\n"
+    summary_path = batch_dir / "summary.txt"
+    summary_path.write_text(summary_text, encoding="utf-8")
 
     batch_results = {
         "batch_id": batch_id,
         "started_at": started_at,
         "finished_at": finished_at,
         "timeout": wall_timeout,
-        "pytest_idle_timeout": idle_timeout,
-        "exit_code": pytest_res.get("exit_code", 0),
+        "exit_code": 1 if any_exit_nonzero else 0,
         "remote_log": {
             "host": remote_server,
             "container": docker_container,
             "raw_log_path": raw_log_path,
-            "size_bytes": size_bytes,
+            "size_bytes": batch_log_size if batch_log_size else None,
             "captured_at": captured_at,
         },
         "tests": test_entries,
@@ -539,12 +998,6 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
 
     output_path = batch_dir / "batch_results.json"
     # Type-B fabrication backstop: validate payload BEFORE writing to disk.
-    # If the executor itself drifts (or a future LLM substitute hand-writes
-    # this file), fail loud here rather than letting manifest-updater consume
-    # a malformed payload. Quarantine the rejected payload as `.rejected.json`
-    # so a human can diff what we tried to write against the schema, and
-    # return the SKILL.md HARD CONTRACT structured shape (`next_action=wait`)
-    # so the supervisor loop does not crash on a raw ValueError.
     try:
         _validate_batch_results_or_raise(batch_results)
     except (ValueError, RuntimeError) as e:
@@ -573,6 +1026,29 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         "batch_id": batch_id,
         "batch_results_path": str(output_path),
         "stats": batch_results["statistics"],
+    }
+
+
+def _disconnect_wait(batch_id, remote_server, workflow_state_path, reason) -> dict:
+    """Bastion disconnect: notify BastionManager, return the wait contract.
+
+    Does NOT write batch_results.json, does NOT mutate manifest/test status
+    (design: Stage 2 re-selects the batch later).
+    """
+    print(f"[WARN] Bastion disconnect: {reason}")
+    try:
+        mgr = BastionManager(  # type: ignore[misc]
+            workspace=str(_project_root),
+            profile=remote_server,
+            workflow_state_path=str(workflow_state_path),
+        )
+        mgr.mark_disconnected(reason=reason)
+    except Exception as inner:  # pragma: no cover
+        print(f"[WARN] mark_disconnected failed: {inner}")
+    return {
+        "batch_id": batch_id,
+        "next_action": "wait",
+        "reason": reason,
     }
 
 

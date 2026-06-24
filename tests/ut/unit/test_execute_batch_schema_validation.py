@@ -235,3 +235,47 @@ def test_remote_log_size_sentinel_absent_returns_none():
     summary, size = execute_batch_mod._split_remote_log_size(stdout_blob)
     assert size is None
     assert summary == stdout_blob
+
+
+def test_remote_log_size_sentinel_picks_last_when_multiple_present():
+    """The summary cmd APPENDS the sentinel after grep+tail. A stray earlier
+    line that matches the pattern (captured in pytest stdout, a re-run, etc.)
+    must NOT hijack the recorded size_bytes — the truthful value is always
+    the LAST sentinel."""
+    stdout_blob = (
+        "PASSED tests/test_x.py::test_a\n"
+        "__REMOTE_LOG_SIZE__999\n"            # decoy (e.g. pytest stdout)
+        "more grep output\n"
+        "----\n"
+        "tail line\n"
+        "__REMOTE_LOG_SIZE__50000\n"          # the truthful trailing one
+    )
+    summary, size = execute_batch_mod._split_remote_log_size(stdout_blob)
+    assert size == 50000, "must pick the trailing sentinel, not the first"
+    assert "__REMOTE_LOG_SIZE__" not in summary
+
+
+# ── Combined-drift regression (fix #7 from /requesting-code-review pass) ────
+
+
+def test_schema_rejects_combined_legacy_payload_from_postmortem():
+    """The real fabrication shape from ut-20260623-223710 carried the WHOLE
+    legacy set of keys (executed_at + total_duration_seconds + stats +
+    log_file) and lacked a remote_log block. The validator must reject it
+    on first drift seen; the rejection path name must point a human at a
+    legacy field."""
+    fabricated = {
+        "batch_id": "batch_p1_r1_w1_test",
+        "executed_at": "2026-06-23T22:37:10Z",         # legacy
+        "total_duration_seconds": 620,                 # legacy
+        "log_file": "/some/path/raw_log.txt",          # legacy
+        "tests": [{
+            "test_node": "tests/test_x.py::test_a",
+            "status": "passed",
+            # missing required `error_type`, `duration_ms`
+        }],
+        "stats": {"total": 1, "passed": 1, "failed": 0, "error": 0},  # legacy
+        # NO `started_at`, `finished_at`, `exit_code`, `remote_log`, `statistics`
+    }
+    with pytest.raises(ValueError, match=r"violates schema"):
+        execute_batch_mod._validate_batch_results_or_raise(fabricated)

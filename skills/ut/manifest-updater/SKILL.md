@@ -15,8 +15,12 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 update_status St
 >
 > 1. **Output schema is canonical.** `manifest.json` MUST be written through
 >    `skills/ut/manifest-updater/scripts/update_status.py` (which calls
->    `skills.ut.shared.validate_and_write`). It validates against the
->    canonical schema before writing; manual edits bypass the safety net.
+>    `skills.ut.shared.validate_and_write`) and MUST validate against
+>    `skills/ut/shared/manifest_schema.json` (additionalProperties:false on
+>    the relevant subtrees). The schema is the contract; the script is one
+>    sanctioned writer that enforces it. Manual edits, hand-rolled JSON, or
+>    LLM-generated copies that drift from `manifest_schema.json` are
+>    rejected by the writer before reaching disk.
 > 2. **Run the stat audit, do not skip it.** Before consuming
 >    `batch_results.tests`, `update_from_workflow_state()` runs
 >    `audit_batch_results()` which stat-checks the remote pytest log. If

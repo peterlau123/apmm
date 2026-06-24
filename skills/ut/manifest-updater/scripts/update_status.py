@@ -37,6 +37,7 @@ if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
 from skills.ut.shared import validate_and_write
+from skills.ut.shared.bastion_signals import is_disconnect_blob
 
 
 # ── Type-B fabrication backstop: stat audit on remote log ─────────────────────
@@ -51,18 +52,6 @@ from skills.ut.shared import validate_and_write
 # so the caller can quarantine the batch.
 
 _AGENT_PY = Path(__file__).resolve().parent.parent.parent.parent.parent / "tools" / "agent.py"
-
-# Bastion-disconnect heuristic (mirrors execute_batch.run_remote's signal list)
-# — when these tokens appear in agent.py's stderr/stdout we treat the stat
-# failure as a transient bastion outage and return `next_action=wait`, not an
-# audit_failed verdict. Otherwise a flaky daemon would loop on the same batch.
-_DISCONNECT_SIGNALS = (
-    "daemon not reachable",
-    "connection refused",
-    "no route to host",
-    "bastion disconnected",
-    "ssh: connect to host",
-)
 
 # stat -c '%s %Y' output is two non-negative integers separated by whitespace.
 # Scan all stdout lines for this shape rather than picking the last one — log
@@ -97,9 +86,10 @@ def _stat_remote_log(profile: str, raw_log_path: str, *, timeout: int = 60):
     stderr = r.stderr or ""
 
     # Disconnect heuristic — non-zero rc + any signal token in either stream.
+    # Tokens are owned by skills/ut/shared/bastion_signals.py (single source
+    # of truth shared with executor's run_remote).
     if r.returncode != 0:
-        blob = (stdout + "\n" + stderr).lower()
-        if any(sig in blob for sig in _DISCONNECT_SIGNALS):
+        if is_disconnect_blob(stdout + "\n" + stderr):
             return None, None, f"bastion disconnect: {stderr.strip()[:200]}"
         return None, None, ""
 

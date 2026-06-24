@@ -14,12 +14,14 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 > the rule wins.
 >
 > 1. **Output schema is canonical.** `handled_tests.json` MUST be produced
->    by `skills/ut/failure-handler/scripts/generate_handled_manifest.py`. Per-
->    test rows MUST use the same `test_node` strings that appear in the
->    upstream `batch_results.json` — those values are the join key the
->    manifest-updater uses; mismatch silently drops the override. Never
->    hand-write `handled_tests.json` to mimic an executor output: it is a
->    *delta* file, not a results file.
+>    by `skills/ut/failure-handler/scripts/generate_handled_manifest.py` and
+>    MUST validate against `skills/ut/failure-handler/handled_tests_schema.json`
+>    — the schema is the contract; the script is one (sanctioned) way to
+>    satisfy it. Per-test rows MUST use the same `test_node` strings that
+>    appear in the upstream `batch_results.json` — those values are the join
+>    key the manifest-updater uses; mismatch silently drops the override.
+>    Never hand-write `handled_tests.json` to mimic an executor output: it
+>    is a *delta* file, not a results file.
 > 2. **Read, do not invent.** All inputs (`batch_results.json`,
 >    `summary.txt`, remote pytest log) are read-only sources of truth. If
 >    `summary.txt` is missing or empty, return `{"next_action":"wait",

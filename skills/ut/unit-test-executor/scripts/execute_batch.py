@@ -60,6 +60,10 @@ def _load_local(name, filename):
 _classifier = _load_local("_v5_classify_error", "classify_error.py")
 classify = _classifier.classify
 
+# Shared bastion-disconnect detector (see skills/ut/shared/bastion_signals.py).
+# Used by run_remote below to raise ConnectionError on transient outages.
+from skills.ut.shared.bastion_signals import is_disconnect_blob  # noqa: E402
+
 # ── Schema (Type-B fabrication backstop) ──────────────────────────────────────
 #
 # We enforce that batch_results.json is shape-correct BEFORE writing it, so a
@@ -112,19 +116,29 @@ def _split_remote_log_size(stdout: str) -> tuple[str, int | None]:
 
     Returns (summary_text_without_sentinel, size_bytes_or_None). When the
     sentinel is absent or unparseable, returns the original stdout and None.
+
+    Picks the LAST sentinel match in the stream (not the first): the
+    summary-extract command appends ``echo __REMOTE_LOG_SIZE__$(stat ...)``
+    AFTER the grep/tail output, so the truthful sentinel is always the
+    trailing one. A stray earlier line that happens to match the pattern
+    (e.g. captured in pytest stdout) would otherwise hijack the recorded
+    ``size_bytes`` and silently break the P1 audit.
     """
     if not stdout:
         return stdout, None
-    m = _REMOTE_LOG_SIZE_RE.search(stdout)
-    if not m:
+    matches = list(_REMOTE_LOG_SIZE_RE.finditer(stdout))
+    if not matches:
         return stdout, None
     try:
-        size = int(m.group(1))
+        size = int(matches[-1].group(1))
     except ValueError:
         return stdout, None
     cleaned = _REMOTE_LOG_SIZE_RE.sub("", stdout).rstrip("\n")
     # `stat` returns 0 only when the file is missing (we OR'd `echo 0`); treat
     # 0 as "unknown" so it doesn't get recorded as a literal 0-byte size_bytes.
+    # A genuinely 0-byte remote log is rare (pytest aborted pre-open); when
+    # it happens we record size_bytes=None and P1's "exists & non-empty" rung
+    # catches it.
     if size == 0:
         return cleaned, None
     return cleaned, size
@@ -266,16 +280,10 @@ def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
     stdout = r.stdout or ""
     stderr = r.stderr or ""
 
-    # Heuristic: agent.py / bastion daemon connection failures.
-    disconnect_signals = (
-        "daemon not reachable",
-        "connection refused",
-        "no route to host",
-        "bastion disconnected",
-        "ssh: connect to host",
-    )
-    blob = (stdout + "\n" + stderr).lower()
-    if r.returncode != 0 and any(sig in blob for sig in disconnect_signals):
+    # Heuristic: agent.py / bastion daemon connection failures — see
+    # skills/ut/shared/bastion_signals.py for the token list (single source
+    # of truth shared with manifest-updater's _stat_remote_log).
+    if r.returncode != 0 and is_disconnect_blob(stdout + "\n" + stderr):
         raise ConnectionError(f"bastion daemon unreachable: {stderr.strip()[:200]}")
 
     return {

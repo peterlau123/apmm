@@ -79,7 +79,13 @@ def _build_card(run_dir: str, state: dict) -> dict:
 
 
 def _send_card(card: dict) -> tuple[bool, str]:
-    """Send via FeishuAPI. Returns (ok, message)."""
+    """Send via FeishuAPI. Returns (ok, message).
+
+    Treats a non-dict response (or a dict with non-zero ``code``) as failure.
+    The whole point of this watcher is "one card, guaranteed"; a silently-
+    missed card pinned behind a stale idempotency marker is the failure mode
+    we cannot tolerate.
+    """
     cfg = REPO_ROOT / ".agents" / "feishu_config.json"
     if not cfg.exists():
         return False, f"feishu config not found: {cfg}"
@@ -90,10 +96,17 @@ def _send_card(card: dict) -> tuple[bool, str]:
     try:
         api = FeishuAPI(str(cfg))
         resp = api.send_card(card)
-        ok = bool(resp) and (resp.get("code") == 0 if isinstance(resp, dict) else True)
-        return ok, json.dumps(resp, ensure_ascii=False) if not ok else "ok"
     except Exception as e:  # pragma: no cover
         return False, f"send_card raised: {e}"
+    # Require a dict with code==0. Anything else (None, list, error string,
+    # exception trace) is a failure — DO NOT write the idempotency marker.
+    if not isinstance(resp, dict) or resp.get("code") != 0:
+        try:
+            info = json.dumps(resp, ensure_ascii=False, default=str)[:300]
+        except (TypeError, ValueError):
+            info = repr(resp)[:300]
+        return False, info
+    return True, "ok"
 
 
 def main():

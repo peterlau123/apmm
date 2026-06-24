@@ -25,6 +25,7 @@
 
 import json
 import argparse
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -51,12 +52,34 @@ from skills.ut.shared import validate_and_write
 
 _AGENT_PY = Path(__file__).resolve().parent.parent.parent.parent.parent / "tools" / "agent.py"
 
+# Bastion-disconnect heuristic (mirrors execute_batch.run_remote's signal list)
+# — when these tokens appear in agent.py's stderr/stdout we treat the stat
+# failure as a transient bastion outage and return `next_action=wait`, not an
+# audit_failed verdict. Otherwise a flaky daemon would loop on the same batch.
+_DISCONNECT_SIGNALS = (
+    "daemon not reachable",
+    "connection refused",
+    "no route to host",
+    "bastion disconnected",
+    "ssh: connect to host",
+)
+
+# stat -c '%s %Y' output is two non-negative integers separated by whitespace.
+# Scan all stdout lines for this shape rather than picking the last one — log
+# preambles ([INFO] ..., [WARN] reconnect, ...) emitted by some agent profiles
+# can otherwise hide the real result behind log chatter.
+_STAT_LINE_RE = re.compile(r"^\s*(\d+)\s+(\d+)\s*$")
+
 
 def _stat_remote_log(profile: str, raw_log_path: str, *, timeout: int = 60):
-    """Return (size_bytes, mtime) for ``raw_log_path`` on ``profile``.
+    """Return (size_bytes, mtime, disconnect_reason) for ``raw_log_path``.
 
-    Returns (None, None) on any error (missing file, daemon unreachable, ...).
-    Never raises — caller decides what to do with a None result.
+    On a transient bastion outage, ``disconnect_reason`` is a non-empty string
+    so the caller can return `next_action=wait` upstream rather than mis-
+    classifying the situation as an audit failure.
+
+    On other errors (missing file, parse failure, ...) returns (None, None, "").
+    Never raises.
     """
     try:
         r = subprocess.run(
@@ -67,23 +90,34 @@ def _stat_remote_log(profile: str, raw_log_path: str, *, timeout: int = 60):
             encoding="utf-8", errors="replace",
             timeout=timeout + 30,
         )
-    except (subprocess.TimeoutExpired, OSError):
-        return None, None
+    except (subprocess.TimeoutExpired, OSError) as e:
+        return None, None, f"agent.py invocation failed: {e}"
+
+    stdout = r.stdout or ""
+    stderr = r.stderr or ""
+
+    # Disconnect heuristic — non-zero rc + any signal token in either stream.
     if r.returncode != 0:
-        return None, None
-    out = (r.stdout or "").strip().splitlines()
-    if not out:
-        return None, None
-    last = out[-1].strip()
-    if last == "MISSING" or not last:
-        return None, None
-    parts = last.split()
-    if len(parts) < 2:
-        return None, None
-    try:
-        return int(parts[0]), int(parts[1])
-    except ValueError:
-        return None, None
+        blob = (stdout + "\n" + stderr).lower()
+        if any(sig in blob for sig in _DISCONNECT_SIGNALS):
+            return None, None, f"bastion disconnect: {stderr.strip()[:200]}"
+        return None, None, ""
+
+    # MISSING sentinel beats parsing — the inline `|| echo MISSING` triggers
+    # only when stat itself failed (file absent / permission denied).
+    if "MISSING" in stdout:
+        return None, None, ""
+
+    # Scan all lines for a valid `<size> <mtime>` shape. Tolerates log chatter
+    # from agent.py before/after the stat output.
+    for line in stdout.splitlines():
+        m = _STAT_LINE_RE.match(line)
+        if m:
+            try:
+                return int(m.group(1)), int(m.group(2)), ""
+            except ValueError:
+                continue
+    return None, None, ""
 
 
 def audit_batch_results(batch_results: dict, profile: str) -> tuple[bool, str]:
@@ -92,13 +126,19 @@ def audit_batch_results(batch_results: dict, profile: str) -> tuple[bool, str]:
     Returns ``(ok, reason)`` where ``ok=False`` means the audit failed and the
     caller MUST NOT consume ``batch_results.tests`` into the manifest.
 
-    The audit enforces three invariants:
-      1. ``remote_log.raw_log_path`` exists on the remote host.
-      2. If ``remote_log.size_bytes`` is not null, it equals the actual size
-         (a fabricated payload can claim 1234 bytes; the truth is 0 or N≠1234).
-      3. If ``remote_log.size_bytes`` IS null, the actual file must be non-empty
-         (a fabricated payload can pass schema with size_bytes=null; we still
-         need *some* signal pytest actually wrote output).
+    Invariants enforced (in order — first matching invariant fails):
+      1. ``remote_log.raw_log_path`` is present.
+      2. The remote log exists AND is non-empty (`stat -c %s` > 0). This
+         single check catches both "file missing" and "fabricated empty
+         log" — it does not depend on ``size_bytes`` agreement.
+      3. If ``remote_log.size_bytes`` is recorded as a positive integer, it
+         equals the real `stat -c %s` size to within ±N bytes (logs can grow
+         by trailing newlines / late writes between summary capture and the
+         audit; exact equality would be too strict).
+
+    A transient bastion outage during the audit is signalled via a special
+    ``reason`` prefix ``bastion_disconnect:`` so the caller can map it to
+    ``next_action=wait`` rather than failing the batch.
     """
     remote_log = (batch_results or {}).get("remote_log") or {}
     raw_log_path = remote_log.get("raw_log_path") or ""
@@ -106,19 +146,29 @@ def audit_batch_results(batch_results: dict, profile: str) -> tuple[bool, str]:
     if not raw_log_path:
         return False, "batch_results.remote_log.raw_log_path missing"
 
-    actual_size, _ = _stat_remote_log(profile, raw_log_path)
+    actual_size, _, disconnect_reason = _stat_remote_log(profile, raw_log_path)
+    if disconnect_reason:
+        # Surface as a *disconnect* — caller is expected to map this to
+        # next_action=wait, not audit_failed.
+        return False, f"bastion_disconnect: {disconnect_reason}"
     if actual_size is None:
         return False, (
-            f"remote log not found or stat failed: {raw_log_path} "
+            f"remote log not found or stat unparseable: {raw_log_path} "
             f"(profile={profile})"
         )
-    if isinstance(recorded, int) and recorded > 0 and actual_size != recorded:
-        return False, (
-            f"size_bytes mismatch: recorded={recorded} actual={actual_size} "
-            f"({raw_log_path})"
-        )
-    if (recorded is None or recorded == 0) and actual_size == 0:
+    if actual_size == 0:
         return False, f"remote log exists but is empty: {raw_log_path}"
+
+    # Equality check: only fire when caller actually recorded a positive int.
+    # Tolerance handles a benign late append (e.g. a __WATCHDOG__ sentinel
+    # written *after* size_bytes was sampled). Anything bigger than that is
+    # a true mismatch.
+    if isinstance(recorded, int) and recorded > 0:
+        if abs(actual_size - recorded) > 4096:
+            return False, (
+                f"size_bytes mismatch: recorded={recorded} actual={actual_size} "
+                f"({raw_log_path})"
+            )
     return True, "ok"
 
 
@@ -268,10 +318,19 @@ def update_from_workflow_state(
             # P1: Type-B fabrication backstop — stat-audit the remote pytest
             # log BEFORE consuming the per-test results into the manifest. If
             # the log doesn't exist or its size disagrees with what
-            # batch_results.json claims, refuse to update.
+            # batch_results.json claims, refuse to update. A transient
+            # bastion outage is mapped to next_action=wait (NOT audit_failed)
+            # so the supervisor's reconnect loop picks it up instead of the
+            # workflow looping on the same batch.
             profile = (state.get("config") or {}).get("remote_server", "t_h20")
             ok, reason = audit_batch_results(batch_results, profile)
             if not ok:
+                if reason.startswith("bastion_disconnect:"):
+                    return {
+                        "next_action": "wait",
+                        "reason": reason,
+                        "batch_id": batch_id,
+                    }
                 return {
                     "error": "audit_failed",
                     "reason": reason,
@@ -434,11 +493,34 @@ def main():
             if not results_file.exists():
                 print(json.dumps({"error": f"文件不存在: {results_file}"}, indent=2))
                 return
-            
-            results = json.loads(results_file.read_text(encoding="utf-8"))
-            if isinstance(results, dict) and "tests" in results:
-                results = results["tests"]
-            
+
+            raw = json.loads(results_file.read_text(encoding="utf-8"))
+
+            # P1: Type-B backstop is mandatory regardless of entry point. When
+            # --from-file is given an executor-shaped payload (dict with
+            # remote_log + tests), run the same stat audit before touching
+            # the manifest. Skip only for legacy bare-list / handled-tests
+            # payloads (no remote_log → not an executor output).
+            if isinstance(raw, dict) and "tests" in raw and "remote_log" in raw:
+                profile = "t_h20"
+                if args.workflow_state:
+                    _st = load_workflow_state(Path(args.workflow_state))
+                    if "error" not in _st:
+                        profile = (_st.get("config") or {}).get("remote_server", "t_h20")
+                ok, reason = audit_batch_results(raw, profile)
+                if not ok:
+                    if reason.startswith("bastion_disconnect:"):
+                        print(json.dumps(
+                            {"next_action": "wait", "reason": reason}, indent=2,
+                        ))
+                    else:
+                        print(json.dumps(
+                            {"error": "audit_failed", "reason": reason}, indent=2,
+                        ))
+                    return
+
+            results = raw["tests"] if isinstance(raw, dict) and "tests" in raw else raw
+
             count = batch_update_status(manifest, results)
             print(f"✓ 批量更新 {count} 个测试状态")
         else:

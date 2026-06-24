@@ -126,17 +126,38 @@ def main():
         print(f"[watch] status={status!r} not terminal; skipping")
         return
 
+    # Marker idempotency is keyed on (run_dir, started_at) — NOT just the
+    # marker file's existence. Reusing a run_dir for a fresh run (manual
+    # recovery: operator deletes current_run.json and reuses the directory)
+    # would otherwise be silently swallowed by a stale marker from the
+    # previous run. The marker content holds the started_at it witnessed;
+    # if current_run.started_at differs we know we're a new run and re-fire.
     marker = Path(run_dir) / ".completion_card_sent"
+    current_started_at = current_run.get("started_at") or ""
     if marker.exists() and not args.force:
-        print(f"[watch] already notified (marker exists): {marker}")
-        return
+        try:
+            prev = marker.read_text(encoding="utf-8").strip()
+        except OSError:
+            prev = ""
+        # Legacy markers (no `started_at:` prefix) are also short-circuited so
+        # the migration is loss-less for runs already notified.
+        if (
+            not current_started_at
+            or "started_at:" not in prev
+            or prev.endswith(f"started_at:{current_started_at}")
+        ):
+            print(f"[watch] already notified (marker exists): {marker}")
+            return
 
     card = _build_card(run_dir, state)
     ok, info = _send_card(card)
     if ok:
         try:
             marker.parent.mkdir(parents=True, exist_ok=True)
-            marker.write_text(_utc_now_z(), encoding="utf-8")
+            marker.write_text(
+                f"sent_at:{_utc_now_z()} started_at:{current_started_at}",
+                encoding="utf-8",
+            )
         except OSError:
             pass
         # ASCII-only print: Windows GBK terminals choke on the ✅ glyph.

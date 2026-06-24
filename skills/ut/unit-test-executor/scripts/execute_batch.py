@@ -25,6 +25,7 @@ Usage:
 """
 
 import base64
+import functools
 import json
 import re
 import subprocess
@@ -68,8 +69,14 @@ classify = _classifier.classify
 _SCHEMA_PATH = _SCRIPT_DIR.parent / "batch_results_schema.json"
 
 
+@functools.lru_cache(maxsize=1)
 def _load_schema():
-    """Read the canonical batch_results_schema.json. Cached on first call."""
+    """Read the canonical batch_results_schema.json. Cached on first call.
+
+    Cached for the lifetime of the Python process: the schema is shipped with
+    the SKILL and never edited mid-run; the validator may be called hundreds of
+    times per workflow loop.
+    """
     return json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
 
 
@@ -93,6 +100,34 @@ def _validate_batch_results_or_raise(payload: dict) -> None:
         raise ValueError(
             f"batch_results.json violates schema at /{path}: {e.message}"
         ) from e
+
+
+# Sentinel used by the summary-extract command to ship the real remote pytest
+# log size (`stat -c %s`) back to the executor without an extra RTT.
+_REMOTE_LOG_SIZE_RE = re.compile(r"^__REMOTE_LOG_SIZE__(\d+)\s*$", re.MULTILINE)
+
+
+def _split_remote_log_size(stdout: str) -> tuple[str, int | None]:
+    """Extract the __REMOTE_LOG_SIZE__N sentinel from the summary stdout.
+
+    Returns (summary_text_without_sentinel, size_bytes_or_None). When the
+    sentinel is absent or unparseable, returns the original stdout and None.
+    """
+    if not stdout:
+        return stdout, None
+    m = _REMOTE_LOG_SIZE_RE.search(stdout)
+    if not m:
+        return stdout, None
+    try:
+        size = int(m.group(1))
+    except ValueError:
+        return stdout, None
+    cleaned = _REMOTE_LOG_SIZE_RE.sub("", stdout).rstrip("\n")
+    # `stat` returns 0 only when the file is missing (we OR'd `echo 0`); treat
+    # 0 as "unknown" so it doesn't get recorded as a literal 0-byte size_bytes.
+    if size == 0:
+        return cleaned, None
+    return cleaned, size
 
 # BastionManager is imported lazily at the call site so tests can patch it
 # on this module before instantiation.
@@ -398,16 +433,25 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Second remote call: extract a summary via grep+tail on the pytest log.
     # Same b64 wrapping (single-line cmd but consistency + safety) and same
     # `sudo -n` so a NOPASSWD misconfig fails loud instead of hanging.
+    #
+    # We piggy-back a `stat -c %s` AFTER the tail with a __REMOTE_LOG_SIZE__
+    # sentinel: the recorded ``remote_log.size_bytes`` MUST be the real remote
+    # file size so the manifest-updater P1 audit (which independently runs
+    # `stat -c %s` and compares) can succeed. Previously this field defaulted
+    # to None (run_remote always returns size_bytes=None) and then fell back
+    # to the local summary byte length — guaranteed to disagree with the real
+    # remote log, failing every audit on real runs.
     summary_extract_cmd = _wrap_with_docker_exec_b64(
         docker_container,
         f"grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' {raw_log_path} ; "
-        f"echo '----'; tail -50 {raw_log_path}",
+        f"echo '----'; tail -50 {raw_log_path} ; "
+        f"echo __REMOTE_LOG_SIZE__$(stat -c %s {raw_log_path} 2>/dev/null || echo 0)",
     )
     try:
         summary_res = run_remote(
             summary_extract_cmd, timeout=60, profile=remote_server
         )
-        summary_text = summary_res.get("stdout", "")
+        summary_stdout = summary_res.get("stdout", "")
     except ConnectionError as e:
         # Disconnect on the summary call: same wait policy.
         reason = str(e)
@@ -427,6 +471,10 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             "reason": reason,
         }
 
+    # Split off the __REMOTE_LOG_SIZE__ sentinel from the summary text so it
+    # doesn't leak into the local summary.txt or per-test classification.
+    summary_text, remote_size_from_stat = _split_remote_log_size(summary_stdout)
+
     # Write summary.txt LOCALLY (next to batch_results.json).
     summary_path = batch_dir / "summary.txt"
     summary_path.write_text(summary_text or "", encoding="utf-8")
@@ -434,11 +482,12 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     finished_at = _utc_now_iso_z()
     captured_at = finished_at
 
-    size_bytes = pytest_res.get("size_bytes")
-    if not isinstance(size_bytes, int):
-        # Fall back to the local summary length as a coarse signal; the real
-        # value is written by parse-side tooling that may stat the remote file.
-        size_bytes = len((summary_text or "").encode("utf-8"))
+    # Prefer the truth (`stat -c %s` on remote, parsed from sentinel) over the
+    # local summary's byte length. Falls through to None when stat failed —
+    # the schema allows null and the P1 audit then enforces non-empty.
+    size_bytes = remote_size_from_stat
+    if size_bytes is None and isinstance(pytest_res.get("size_bytes"), int):
+        size_bytes = pytest_res["size_bytes"]
 
     # Per-test classification.
     test_entries = []
@@ -484,8 +533,29 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Type-B fabrication backstop: validate payload BEFORE writing to disk.
     # If the executor itself drifts (or a future LLM substitute hand-writes
     # this file), fail loud here rather than letting manifest-updater consume
-    # a malformed payload.
-    _validate_batch_results_or_raise(batch_results)
+    # a malformed payload. Quarantine the rejected payload as `.rejected.json`
+    # so a human can diff what we tried to write against the schema, and
+    # return the SKILL.md HARD CONTRACT structured shape (`next_action=wait`)
+    # so the supervisor loop does not crash on a raw ValueError.
+    try:
+        _validate_batch_results_or_raise(batch_results)
+    except (ValueError, RuntimeError) as e:
+        rejected_path = batch_dir / "batch_results.rejected.json"
+        try:
+            rejected_path.write_text(
+                json.dumps(batch_results, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        except OSError:
+            pass
+        reason = f"schema_validation_failed: {e}"
+        print(f"[ERROR] {reason}; quarantined → {rejected_path}")
+        return {
+            "batch_id": batch_id,
+            "next_action": "wait",
+            "reason": reason,
+            "rejected_path": str(rejected_path),
+        }
     output_path.write_text(
         json.dumps(batch_results, indent=2, ensure_ascii=False), encoding="utf-8"
     )

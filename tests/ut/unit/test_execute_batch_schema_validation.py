@@ -151,7 +151,9 @@ def test_additional_top_level_field_rejected():
 
 def test_execute_batch_blocks_write_on_schema_violation(tmp_path):
     """If we corrupt the payload at the last moment, output_path must NOT be
-    written. This guards against future code paths that bypass validation."""
+    written. Instead the executor returns a structured wait verdict and
+    quarantines the rejected payload (P2 SKILL.md HARD CONTRACT — never raise
+    a bare ValueError out of execute_batch; always return next_action shape)."""
     from unittest import mock
 
     cfg = tmp_path / "batch_config.json"
@@ -170,7 +172,9 @@ def test_execute_batch_blocks_write_on_schema_violation(tmp_path):
     }), encoding="utf-8")
 
     def fake_run_remote(cmd, *, timeout=None, **kwargs):
-        return {"exit_code": 0, "stdout": "PASSED tests/test_x.py::test_a\n",
+        return {"exit_code": 0,
+                "stdout": ("PASSED tests/test_x.py::test_a\n"
+                           "__REMOTE_LOG_SIZE__4242\n"),
                 "stderr": "", "size_bytes": 100}
 
     orig_validate = execute_batch_mod._validate_batch_results_or_raise
@@ -184,9 +188,50 @@ def test_execute_batch_blocks_write_on_schema_violation(tmp_path):
          mock.patch.object(execute_batch_mod,
                            "_validate_batch_results_or_raise",
                            side_effect=corrupting_validate):
-        with pytest.raises(ValueError, match=r"violates schema"):
-            execute_batch_mod.execute_batch(cfg, state)
+        result = execute_batch_mod.execute_batch(cfg, state)
 
-    # Critical: no batch_results.json written on validation failure.
+    # Structured wait verdict, no bare ValueError.
+    assert result.get("next_action") == "wait"
+    assert "schema_validation_failed" in (result.get("reason") or "")
+    # batch_results.json NOT written (the canonical path).
     assert not (tmp_path / "batch_results.json").exists(), \
         "execute_batch wrote batch_results.json despite schema validation failure"
+    # Quarantine artefact IS written so a human can diff it.
+    assert (tmp_path / "batch_results.rejected.json").exists()
+
+
+# ── Real-remote-size sentinel parsing (fix #1 from code review) ─────────────
+
+
+def test_remote_log_size_sentinel_is_parsed_and_excluded_from_summary():
+    """The executor piggy-backs `stat -c %s` on the summary call via a
+    __REMOTE_LOG_SIZE__N sentinel line. The sentinel MUST be stripped from
+    the local summary.txt and become the recorded remote_log.size_bytes."""
+    stdout_blob = (
+        "PASSED tests/test_x.py::test_a\n"
+        "PASSED tests/test_x.py::test_b\n"
+        "----\n"
+        "tail line 1\n"
+        "tail line 2\n"
+        "__REMOTE_LOG_SIZE__50000\n"
+    )
+    summary, size = execute_batch_mod._split_remote_log_size(stdout_blob)
+    assert size == 50000
+    assert "__REMOTE_LOG_SIZE__" not in summary
+    assert "PASSED tests/test_x.py::test_a" in summary
+
+
+def test_remote_log_size_sentinel_zero_treated_as_unknown():
+    """`stat -c %s` returns 0 only when the OR'd `echo 0` fallback triggered
+    (file missing). Zero must NOT be recorded as a literal size_bytes=0."""
+    stdout_blob = "PASSED tests/test_x.py::test_a\n__REMOTE_LOG_SIZE__0\n"
+    summary, size = execute_batch_mod._split_remote_log_size(stdout_blob)
+    assert size is None
+    assert "__REMOTE_LOG_SIZE__" not in summary
+
+
+def test_remote_log_size_sentinel_absent_returns_none():
+    stdout_blob = "PASSED tests/test_x.py::test_a\n"
+    summary, size = execute_batch_mod._split_remote_log_size(stdout_blob)
+    assert size is None
+    assert summary == stdout_blob

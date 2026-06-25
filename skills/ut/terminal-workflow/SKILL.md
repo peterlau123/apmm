@@ -1,5 +1,5 @@
 ---
-name: ut-workflow
+name: terminal-workflow
 description: UT Workflow - OpenCode/Claude Code linear-mode supervisor for vLLM unit tests. One-way Feishu progress, manual Bastion handling, no state machine.
 version: 5.0.0
 when_to_use: User asks to run / resume / supervise the UT workflow interactively in this Claude session.
@@ -31,7 +31,7 @@ sequenceDiagram
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>CC: 要求"跑/续 UT workflow"
-    CC->>CC: 加载 ut/workflow + loop_core + 4 Worker SKILL
+    CC->>CC: 加载 ut/terminal-workflow + loop_core + 4 Worker SKILL
     CC->>R: validate_required_config(.agents/workflow.yaml)
     CC->>R: init_or_resume(yaml, resume_from)
     R-->>CC: (run_dir, state_path, state, iteration)
@@ -65,7 +65,7 @@ sequenceDiagram
 ## Startup (Agent runs these in order, once)
 
 1. **Load SKILLs (once per session):**
-   - this SKILL (`skills/ut/workflow/SKILL.md`)
+   - this SKILL (`skills/ut/terminal-workflow/SKILL.md`)
    - `skills/ut/workflow_loop_core/SKILL.md`
    - the 4 Worker SKILLs:
      - `skills/ut/batch-selector/SKILL.md`

@@ -64,7 +64,15 @@ def start_profile_gateway(profile, logs_dir):
     logs_dir.mkdir(parents=True, exist_ok=True)
     logfile = logs_dir / f"gateway_{profile}.log"
     out = logfile.open("a", encoding="utf-8")
-    kwargs = {"stdout": out, "stderr": subprocess.STDOUT, "stdin": subprocess.DEVNULL}
+
+    # Clear PYTHONPATH to prevent Hermes venv environment leak into Gateway workers.
+    # Workers inherit Gateway's env and may fail to import jsonschema if PYTHONPATH
+    # points to Hermes venv instead of the project's anaconda environment.
+    # See incident: tasks/ut/docs/incidents/2026-06-24-pythonpath-leak-incident.md
+    env = os.environ.copy()
+    env.pop('PYTHONPATH', None)
+
+    kwargs = {"stdout": out, "stderr": subprocess.STDOUT, "stdin": subprocess.DEVNULL, "env": env}
     if os.name == "nt":
         kwargs["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS
     else:

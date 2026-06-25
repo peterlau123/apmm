@@ -444,6 +444,36 @@ class BastionManager:
         except Exception as e:
             print(f"[bastion_manager] Failed to write workflow state: {e}")
 
+    def graceful_shutdown(self, stop_daemon=False):
+        """Clean shutdown: stop heartbeat, clear OTP, update state.
+
+        Called when agent.py exits, daemon terminates, or workflow stops.
+        Ensures workflow_state.json reflects the final state.
+
+        Args:
+            stop_daemon: If True, also stop the daemon process (default: False)
+        """
+        # Stop heartbeat thread
+        self.stop_heartbeat()
+
+        # Clear active OTP request
+        with self._lock:
+            self._active_otp_request = None
+
+        # Update workflow state
+        self.mark_disconnected(reason="graceful_shutdown")
+
+        # Optionally stop daemon
+        if stop_daemon:
+            self.stop_daemon()
+
+    def stop_heartbeat(self):
+        """Stop the heartbeat thread and wait for it to finish."""
+        if self._heartbeat_thread and self._heartbeat_thread.is_alive():
+            self._heartbeat_stop.set()
+            self._heartbeat_thread.join(timeout=5)
+            self._heartbeat_thread = None
+
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
 

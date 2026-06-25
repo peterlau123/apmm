@@ -44,6 +44,14 @@ sys.path.insert(0, str(SCRIPT_DIR))
 from bastion_manager import BastionManager
 from feishu_api import FeishuAPI
 
+# Hermes Kanban API for task creation
+try:
+    from hermes_cli.kanban_db import connect, create_task
+except ImportError:
+    # Fallback for environments without hermes_cli
+    connect = None
+    create_task = None
+
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -546,15 +554,25 @@ def _load_fn(skill_dir: str, module: str, fn_name: str):
     return getattr(mod, fn_name)
 
 
-def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size):
+def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size, current_task_id=None):
     """Kanban ut-orchestrator round: Stage 5 (reconcile prev) then Stage 2 (select next).
 
     Chains the REAL v5 Worker functions:
       - manifest-updater.update_manifest(manifest, batch_results, handled) → merged manifest
       - batch-selector.select_batch(manifest, batch_size) → list of selected tests
       - batch-selector.write_batch_config(path, batch_id, iteration, run_id, selected) → cfg
+      - Hermes Kanban API: create_task() for executor, fixer, next orchestrator
 
-    Returns {"completed": bool, "next_batch": dict|None}.
+    Parameters
+    ----------
+    run_dir: Path-like, the workflow run directory
+    manifest_path: Path-like, the manifest JSON file
+    prev_batch_dir: Path-like or None, previous batch directory for reconciliation
+    batch_size: int, number of tests per batch
+    current_task_id: str or None, the Kanban task ID that triggered this orchestrator round
+
+    Returns {"completed": bool, "next_batch": dict|None, "executor_task_id": str|None,
+             "fixer_task_id": str|None, "next_orchestrator_task_id": str|None}.
     """
     update_manifest = _load_fn("manifest-updater", "update_manifest", "update_manifest")
     select_batch = _load_fn("batch-selector", "generate_batch", "select_batch")
@@ -593,7 +611,37 @@ def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size):
         run_id=run_dir.name,
         selected=selected,
     )
-    return {"completed": False, "next_batch": cfg}
+
+    # Hermes Kanban API: create executor, fixer, and next orchestrator tasks
+    executor_task_id = None
+    fixer_task_id = None
+    next_orchestrator_task_id = None
+
+    if connect and create_task:
+        try:
+            conn = connect()
+            executor_task_id = create_task(
+                conn, title=f"execute-{nb}", assignee="ut-executor",
+                parents=[current_task_id] if current_task_id else []
+            )
+            fixer_task_id = create_task(
+                conn, title=f"failure-handle-{nb}", assignee="ut-fixer",
+                parents=[executor_task_id]
+            )
+            next_orchestrator_task_id = create_task(
+                conn, title=f"orchestrator-{len(list(run_dir.glob('batch_*'))) + 2:04d}",
+                assignee="ut-orchestrator",
+                parents=[fixer_task_id]
+            )
+        except Exception as e:
+            print(f"[hermes_runner] Kanban task creation failed: {e}")
+
+    return {
+        "completed": False, "next_batch": cfg,
+        "executor_task_id": executor_task_id,
+        "fixer_task_id": fixer_task_id,
+        "next_orchestrator_task_id": next_orchestrator_task_id
+    }
 
 
 def check_stop_conditions(state_path) -> tuple[bool, str, str]:

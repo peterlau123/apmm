@@ -1,0 +1,10 @@
+description: 'UT Workflow Stage2 Worker: batch-selector'
+
+x-deploy:
+  auto_load_skills:
+    - ut/batch-selector
+    - ut/workflow_loop_core
+    - ut/shared
+
+  # Kanban mode: 只加载 Stage2 skill
+  # Linear mode: 由 ut-supervisor 加载（不需要此profile）

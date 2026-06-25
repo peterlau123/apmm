@@ -1,5 +1,5 @@
 ---
-name: ut-test-collector
+name: unit-test-collector
 description: Worker Agent - 测试清单收集，生成完整 manifest.json（含 errors/failures 初始化），由 Supervisor 调用执行 Stage 1
 version: 2.1.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 collect Stage

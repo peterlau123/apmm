@@ -89,6 +89,8 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
     "ut-orchestrator": ["batch-selector", "manifest-updater", "shared"],
     "ut-executor": ["unit-test-executor", "shared"],
     "ut-fixer": ["failure-handler", "dependency-resolver", "shared"],
+    "ut-batch-selector": ["batch-selector", "workflow_loop_core", "shared"],  # Stage2 Worker Kanban
+    "ut-manifest-updater": ["manifest-updater", "workflow_loop_core", "shared"],  # Stage5 Worker Kanban
 }
 
 DISTRIBUTION_YAML = """\

@@ -1,3 +1,13 @@
 description: 'UT Workflow production supervisor: long-running Feishu-subscribing agent
   that runs the hermes_workflow loop with OTP auto-recovery.'
 description_auto: false
+x-deploy:
+  auto_load_skills:
+    - ut/hermes_workflow
+    - ut/workflow_loop_core
+    - ut/unit-test-collector
+    - ut/batch-selector
+    - ut/unit-test-executor
+    - ut/failure-handler
+    - ut/manifest-updater
+    - ut/shared

@@ -1,3 +1,8 @@
 description: 'UT batch executor: runs pytest batches on remote GPU servers via SSH/Docker.
   Good at: executing test commands, parsing results, detecting GPU availability.'
 description_auto: false
+x-deploy:
+  auto_load_skills:
+    - ut/unit-test-executor
+    - ut/workflow_loop_core
+    - ut/shared

@@ -73,7 +73,7 @@ def ensure_bastion_daemon(profile="t_h20"):
     """Preflight check for the Bastion daemon. NEVER abort.
 
     M3 (postmortem 2026-06-23 issue #2): supervisor 收到飞书 trigger 后会
-    通过 OTP bring-up 自起 daemon（hermes_workflow SKILL §3.A A5.5）。
+    通过 OTP bring-up 自起 daemon（hermes-workflow SKILL §3.A A5.5）。
     本脚本只做 preflight 告警，不强制 daemon 必须先在跑。
     """
     print("\n" + "="*60)

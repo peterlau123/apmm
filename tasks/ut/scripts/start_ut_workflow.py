@@ -15,7 +15,7 @@ def deploy_tier(tier: str):
 
 def start_gateway(mode: str, workflow_yaml: Path):
     if mode == "kanban":
-        cmd = [sys.executable, str(REPO_ROOT / "skills/ut/hermes_workflow/scripts/start_gateway.py"), "--workflow-yaml", str(workflow_yaml)]
+        cmd = [sys.executable, str(REPO_ROOT / "skills/ut/hermes-workflow/scripts/start_gateway.py"), "--workflow-yaml", str(workflow_yaml)]
         subprocess.run(cmd, check=True)
         print(f"[✓] Gateway started for {mode} mode")
     elif mode == "linear":

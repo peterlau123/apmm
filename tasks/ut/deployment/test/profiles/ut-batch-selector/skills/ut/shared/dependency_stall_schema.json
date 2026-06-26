@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Dependency Stall Classification",
+  "description": "LLM 判读 batch timeout 真因的输出契约 (设计: tasks/ut/docs/designs/2026-06-23-pytest-timeout-redesign.md §5.1)",
+  "type": "object",
+  "required": ["classification", "evidence"],
+  "additionalProperties": false,
+  "properties": {
+    "classification": {
+      "type": "string",
+      "enum": ["dep_stall", "not_dep_stall", "unknown"],
+      "description": "dep_stall=依赖资源未就绪 (HF/pip 卡住等); not_dep_stall=代码/资源/网络断开; unknown=看不清，保守归 ignored"
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 1,
+      "description": "log 末尾原文引用一行作为依据（不允许编造或泛述）"
+    },
+    "dependency_hint": {
+      "type": ["string", "null"],
+      "description": "dep_stall 时给出具体资源名 (model id / pip pkg)；非 dep_stall 时为 null"
+    }
+  }
+}

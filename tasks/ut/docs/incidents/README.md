@@ -14,5 +14,5 @@
 
 - 主导航：[`docs/README.md`](../README.md)
 - vLLM 远端修复操作指南：[`tasks/ut/docs/guides/troubleshooting.md`](../guides/troubleshooting.md)
-- UT supervisor 通道契约：[`skills/ut/hermes_workflow/SKILL.md`](../../skills/ut/hermes_workflow/SKILL.md)（§11 Pitfalls 是本目录事故沉淀的代码侧落点）
+- UT supervisor 通道契约：[`skills/ut/hermes-workflow/SKILL.md`](../../skills/ut/hermes-workflow/SKILL.md)（§11 Pitfalls 是本目录事故沉淀的代码侧落点）
 - UT worker 硬契约：[`skills/ut/unit-test-executor/SKILL.md`](../../skills/ut/unit-test-executor/SKILL.md) §禁止操作、[`skills/ut/failure-handler/SKILL.md`](../../skills/ut/failure-handler/SKILL.md) §禁止操作

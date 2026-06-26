@@ -88,7 +88,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 | 范围 | 收纳位置 | 示例 |
 |---|---|---|
 | 跨子系统 / 项目级 | `docs/` | bastion / environment / ai-workflow / superpowers 框架自身 spec |
-| 仅 UT 子系统 | `tasks/ut/docs/` | hermes_workflow / manifest / ut-supervisor 部署 / UT 周报 / UT incident |
+| 仅 UT 子系统 | `tasks/ut/docs/` | hermes-workflow / manifest / ut-supervisor 部署 / UT 周报 / UT incident |
 | 仅 accuracy 子系统 | `tasks/accuracy/docs/`（按需建） | GPQA/MMLU 评测脚本、精度报告 |
 | 仅 performance 子系统 | `tasks/performance/docs/`（按需建） | 吞吐压测、roofline、调度对比 |
 | 其它新子系统 | `tasks/<x>/docs/`（按需建） | 镜像同样的子目录骨架：`guides/`, `designs/`, `plans/`, `incidents/`, `reports/`, `discussions/` |

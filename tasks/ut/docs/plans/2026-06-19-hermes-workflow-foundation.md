@@ -4,7 +4,7 @@
 
 **Goal:** Refactor UT Workflow's foundation (schema + Worker SKILLs + loop core + ut/workflow + hermes_runner) so the linear-mode workflow runs end-to-end under the v5 spec, with `retriable_error` semantics, remote-only raw_log, and a shared loop core. Plan 2 (separate document) will build on this to deliver Hermes production deployment.
 
-**Architecture:** Schema extensions are backward-compatible (new optional fields). Worker SKILL behavior changes are surgical (add `retriable_error` handling, remote log strategy, vLLM branch constraint). A new `workflow_loop_core/SKILL.md` consolidates the cross-channel loop body. `hermes_runner.py` becomes a tool module (no inline Stage logic). Linear mode (`kanban.enabled: false`) is the test surface for this plan.
+**Architecture:** Schema extensions are backward-compatible (new optional fields). Worker SKILL behavior changes are surgical (add `retriable_error` handling, remote log strategy, vLLM branch constraint). A new `workflow-loop-core/SKILL.md` consolidates the cross-channel loop body. `hermes_runner.py` becomes a tool module (no inline Stage logic). Linear mode (`kanban.enabled: false`) is the test surface for this plan.
 
 **Tech Stack:** Python 3.10+, pytest, JSON Schema (manifest_schema.json), Markdown (SKILL.md files), YAML (workflow.yaml).
 
@@ -15,7 +15,7 @@
 ## File Structure (Plan 1 scope)
 
 ### Created
-- `skills/ut/workflow_loop_core/SKILL.md` — shared loop body
+- `skills/ut/workflow-loop-core/SKILL.md` — shared loop body
 - `skills/ut/workflow/scripts/check_vllm_branch.py` — pre-flight check for vLLM branch
 - `tests/skills/ut/test_loop_core_contract.py` — contract tests for loop core interface
 - `tests/skills/ut/test_execute_batch_v5.py` — TDD for new execute_batch behavior
@@ -999,26 +999,26 @@ git commit -m "docs(failure-handler): update SKILL.md to v5 behavior"
 
 ---
 
-## Phase 6: `workflow_loop_core/SKILL.md`
+## Phase 6: `workflow-loop-core/SKILL.md`
 
 ### Task 6.1: Create loop core skill
 
 **Files:**
-- Create: `skills/ut/workflow_loop_core/SKILL.md`
+- Create: `skills/ut/workflow-loop-core/SKILL.md`
 
-- [ ] **Step 1: Create directory** — `mkdir -p skills/ut/workflow_loop_core`
+- [ ] **Step 1: Create directory** — `mkdir -p skills/ut/workflow-loop-core`
 
 - [ ] **Step 2: Write SKILL.md**:
 
 ```markdown
 ---
-name: workflow_loop_core
-description: Shared loop body for ut/workflow and hermes_workflow supervisors. Hosts Stage 2-5 cycle, terminal condition checks, notification trigger points. Channel-specific differences are injected via callbacks.
+name: workflow-loop-core
+description: Shared loop body for ut/workflow and hermes-workflow supervisors. Hosts Stage 2-5 cycle, terminal condition checks, notification trigger points. Channel-specific differences are injected via callbacks.
 ---
 
 # Workflow Loop Core
 
-Both `ut/workflow` (OpenCode/Claude Code) and `hermes_workflow` (Hermes Agent) call this loop body. Channel-specific behavior (Feishu commands, OTP recovery) is provided by the supervisor via callbacks.
+Both `ut/workflow` (OpenCode/Claude Code) and `hermes-workflow` (Hermes Agent) call this loop body. Channel-specific behavior (Feishu commands, OTP recovery) is provided by the supervisor via callbacks.
 
 ## Interface
 
@@ -1091,13 +1091,13 @@ If `stage_skills[name]` lookup yields stale/missing (e.g., harness auto-compact 
 
 - `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
 - `skills/ut/workflow/SKILL.md` — linear-mode supervisor
-- `skills/ut/hermes_workflow/SKILL.md` — Hermes-mode supervisor (Plan 2)
+- `skills/ut/hermes-workflow/SKILL.md` — Hermes-mode supervisor (Plan 2)
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow_loop_core/SKILL.md
+git add skills/ut/workflow-loop-core/SKILL.md
 git commit -m "feat(loop_core): introduce shared loop body skill"
 ```
 
@@ -1142,7 +1142,7 @@ git commit -m "test(loop_core): contract test placeholders"
 ```markdown
 ---
 name: workflow
-description: Linear-mode UT workflow supervisor for OpenCode/Claude Code. Loads workflow_loop_core + 4 Worker SKILLs at startup, runs Stage 2-5 on local manifest. For Hermes production, see hermes_workflow.
+description: Linear-mode UT workflow supervisor for OpenCode/Claude Code. Loads workflow-loop-core + 4 Worker SKILLs at startup, runs Stage 2-5 on local manifest. For Hermes production, see hermes-workflow.
 ---
 
 # UT Workflow (OpenCode/Claude Code Supervisor)
@@ -1155,12 +1155,12 @@ This supervisor:
 - Does NOT auto-recover Bastion daemon (operator restarts manually)
 - No state machine (no `paused` / `waiting_otp`)
 
-For Hermes production with Feishu bidirectional + auto-recovery, use `hermes_workflow` skill (Plan 2 deliverable).
+For Hermes production with Feishu bidirectional + auto-recovery, use `hermes-workflow` skill (Plan 2 deliverable).
 
 ## Startup
 
 1. Load this SKILL
-2. Load `workflow_loop_core/SKILL.md`
+2. Load `workflow-loop-core/SKILL.md`
 3. Load all 4 Worker SKILLs once: `batch-selector`, `unit-test-executor`, `failure-handler`, `manifest-updater`
 4. Read `.agents/workflow.yaml`
 5. Initialize/resume `workflow_state.json` via `hermes_runner.init_or_resume(...)`
@@ -1190,8 +1190,8 @@ If a Worker SKILL ref is missing in context (auto-compact dropped it), reload th
 ## See also
 
 - `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` — full design (v5)
-- `workflow_loop_core/SKILL.md`
-- `hermes_workflow/SKILL.md` (Plan 2)
+- `workflow-loop-core/SKILL.md`
+- `hermes-workflow/SKILL.md` (Plan 2)
 ```
 
 - [ ] **Step 2: Commit**
@@ -1218,7 +1218,7 @@ git commit -m "feat(workflow): load loop_core + delegate channel callbacks"
 
 ```python
 def main():
-    print("[hermes_runner] Stage logic moved to ut/workflow_loop_core SKILL.")
+    print("[hermes_runner] Stage logic moved to ut/workflow-loop-core SKILL.")
     print("[hermes_runner] Use this module via `import` from supervisor skills.")
     print("[hermes_runner] CLI entry deprecated.")
     import sys; sys.exit(0)
@@ -1595,8 +1595,8 @@ git commit -m "test(integration): resume scenario placeholder"
 
 ## Out of Scope (Plan 2 deliverables)
 
-- `skills/ut/hermes_workflow/SKILL.md` (Hermes channel skill)
-- `skills/ut/hermes_workflow/profile.yaml` (ut-supervisor profile)
+- `skills/ut/hermes-workflow/SKILL.md` (Hermes channel skill)
+- `skills/ut/hermes-workflow/profile.yaml` (ut-supervisor profile)
 - `tasks/ut/docs/guides/hermes-supervisor-service.md`
 - `tasks/ut/docs/guides/hermes-gateway-service.md`
 - `~/AppData/Local/hermes/profiles/ut-orchestrator/SOUL.md` update

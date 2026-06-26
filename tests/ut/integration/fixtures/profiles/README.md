@@ -10,7 +10,7 @@ can drift.
 | `ut-orchestrator` | Stage 2 select + Stage 5 reconcile; decomposes into batches, assigns to executor, spawns fixer tasks |
 | `ut-executor` | Runs pytest batches on remote t_h20 via Bastion/Docker |
 | `ut-fixer` | Analyzes failures, classifies, attempts fixes (delegates download/network to dependency-resolver) |
-| `ut-supervisor` | Long-running Feishu-subscribing agent driving the hermes_workflow loop |
+| `ut-supervisor` | Long-running Feishu-subscribing agent driving the hermes-workflow loop |
 
 ## What is frozen (and what is NOT)
 
@@ -67,12 +67,12 @@ then re-run the deploy script.
 
 ## Profile -> skills subset
 
-Per `hermes_workflow` SKILL §3 step 3 (supervisor load list) + §6 (worker Stage
+Per `hermes-workflow` SKILL §3 step 3 (supervisor load list) + §6 (worker Stage
 ownership):
 
 | Profile | skills/ut/<subset> |
 |---------|--------------------|
-| `ut-supervisor` | hermes_workflow, workflow_loop_core, batch-selector, unit-test-executor, failure-handler, manifest-updater |
+| `ut-supervisor` | hermes-workflow, workflow-loop-core, batch-selector, unit-test-executor, failure-handler, manifest-updater |
 | `ut-orchestrator` | batch-selector, manifest-updater |
 | `ut-executor` | unit-test-executor |
 | `ut-fixer` | failure-handler, dependency-resolver |

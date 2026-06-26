@@ -22,8 +22,8 @@
 | `skills/ut/manifest-updater/SOUL.md` | Stage5 Worker身份定义（ut-manifest-updater） |
 | `tasks/ut/scripts/.dist/ut-batch-selector/profile.yaml` | Stage2 Worker profile配置 |
 | `tasks/ut/scripts/.dist/ut-manifest-updater/profile.yaml` | Stage5 Worker profile配置 |
-| `skills/ut/hermes_workflow/scripts/kanban_task_creator.py` | Kanban task创建逻辑 |
-| `skills/ut/hermes_workflow/scripts/orchestrator_round.py` | Kanban调度循环逻辑 |
+| `skills/ut/hermes-workflow/scripts/kanban_task_creator.py` | Kanban task创建逻辑 |
+| `skills/ut/hermes-workflow/scripts/orchestrator_round.py` | Kanban调度循环逻辑 |
 
 ### 重命名的文件
 
@@ -383,7 +383,7 @@ description: 'UT Workflow Stage2 Worker: batch-selector'
 x-deploy:
   auto_load_skills:
     - ut/batch-selector
-    - ut/workflow_loop_core
+    - ut/workflow-loop-core
     - ut/shared
 
   # Kanban mode: 只加载 Stage2 skill
@@ -422,7 +422,7 @@ description: 'UT Workflow Stage5 Worker: manifest-updater'
 x-deploy:
   auto_load_skills:
     - ut/manifest-updater
-    - ut/workflow_loop_core
+    - ut/workflow-loop-core
     - ut/shared
 
   # Kanban mode: 只加载 Stage5 skill
@@ -466,15 +466,15 @@ grep -A 20 "_PROFILE_SKILLS" tasks/ut/scripts/deploy_tier.py
 ```python
 _PROFILE_SKILLS = {
     "ut-supervisor": [
-        "hermes_workflow", "workflow_loop_core",
+        "hermes-workflow", "workflow-loop-core",
         "batch-selector", "unit-test-executor", "failure-handler", "manifest-updater",  # Linear mode 加载所有 Worker
         "shared"
     ],
     "ut-orchestrator": ["batch-selector", "manifest-updater"],  # 已存在，保持不变
     "ut-executor": ["unit-test-executor"],  # 已存在，保持不变
     "ut-fixer": ["failure-handler", "dependency-resolver"],  # 已存在，dependency-resolver 作为子 skill
-    "ut-batch-selector": ["batch-selector", "workflow_loop_core", "shared"],  # 新增：Stage2 Worker Kanban profile
-    "ut-manifest-updater": ["manifest-updater", "workflow_loop_core", "shared"],  # 新增：Stage5 Worker Kanban profile
+    "ut-batch-selector": ["batch-selector", "workflow-loop-core", "shared"],  # 新增：Stage2 Worker Kanban profile
+    "ut-manifest-updater": ["manifest-updater", "workflow-loop-core", "shared"],  # 新增：Stage5 Worker Kanban profile
 }
 ```
 
@@ -500,7 +500,7 @@ git commit -m "refactor(ut): update deploy_tier.py for 5 Worker profiles (Stage2
 ### Task 10: 创建 kanban_task_creator.py
 
 **Files:**
-- Create: `skills/ut/hermes_workflow/scripts/kanban_task_creator.py`
+- Create: `skills/ut/hermes-workflow/scripts/kanban_task_creator.py`
 
 - [ ] **Step 1: 创建脚本框架**
 
@@ -662,7 +662,7 @@ if __name__ == "__main__":
 - [ ] **Step 2: 验证脚本**
 
 ```bash
-python skills/ut/hermes_workflow/scripts/kanban_task_creator.py
+python skills/ut/hermes-workflow/scripts/kanban_task_creator.py
 ```
 
 预期输出：显示 initial task 和 dependency chain（需要测试fixtures）
@@ -670,7 +670,7 @@ python skills/ut/hermes_workflow/scripts/kanban_task_creator.py
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/hermes_workflow/scripts/kanban_task_creator.py
+git add skills/ut/hermes-workflow/scripts/kanban_task_creator.py
 git commit -m "feat(ut): add kanban_task_creator.py (Supervisor → batch-selector dependency chain)"
 ```
 
@@ -679,7 +679,7 @@ git commit -m "feat(ut): add kanban_task_creator.py (Supervisor → batch-select
 ### Task 11: 创建 orchestrator_round.py
 
 **Files:**
-- Create: `skills/ut/hermes_workflow/scripts/orchestrator_round.py`
+- Create: `skills/ut/hermes-workflow/scripts/orchestrator_round.py`
 
 - [ ] **Step 1: 创建脚本框架**
 
@@ -816,7 +816,7 @@ if __name__ == "__main__":
 - [ ] **Step 2: 验证脚本**
 
 ```bash
-python skills/ut/hermes_workflow/scripts/orchestrator_round.py
+python skills/ut/hermes-workflow/scripts/orchestrator_round.py
 ```
 
 预期输出：显示 orchestrator result（需要测试fixtures）
@@ -824,7 +824,7 @@ python skills/ut/hermes_workflow/scripts/orchestrator_round.py
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/hermes_workflow/scripts/orchestrator_round.py
+git add skills/ut/hermes-workflow/scripts/orchestrator_round.py
 git commit -m "feat(ut): add orchestrator_round.py (Kanban scheduling loop logic)"
 ```
 
@@ -896,7 +896,7 @@ ls tests/ut/integration/fixtures/workflow.l4.yaml
 模拟Supervisor创建第一个batch-selector task：
 
 ```bash
-python skills/ut/hermes_workflow/scripts/kanban_task_creator.py > tests/ut/integration/fixtures/kanban_tasks.jsonl
+python skills/ut/hermes-workflow/scripts/kanban_task_creator.py > tests/ut/integration/fixtures/kanban_tasks.jsonl
 ```
 
 - [ ] **Step 3: 运行 L4 测试**
@@ -925,7 +925,7 @@ cat tasks/ut/scripts/.dist/ut-manifest-updater/profile.yaml
 检查orchestrator_round.py输出：
 
 ```bash
-python skills/ut/hermes_workflow/scripts/orchestrator_round.py
+python skills/ut/hermes-workflow/scripts/orchestrator_round.py
 ```
 
 预期：显示调度循环结果，循环终止条件正确

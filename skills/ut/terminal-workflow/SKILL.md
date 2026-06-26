@@ -9,13 +9,13 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 
 > Channel: OpenCode / Claude Code, **linear mode** (one supervisor session
 > drives Stages 2–5 in-process).
-> For production / unattended / multi-worker runs, use the `hermes_workflow`
+> For production / unattended / multi-worker runs, use the `hermes-workflow`
 > channel (Plan 2: Hermes Agent + Kanban + 3 Worker profiles).
 >
 > Design spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 
 This SKILL is one of two channels that share the same loop body
-(`skills/ut/workflow_loop_core/SKILL.md`). It supplies the channel-specific
+(`skills/ut/workflow-loop-core/SKILL.md`). It supplies the channel-specific
 callbacks; it does NOT re-implement the loop.
 
 > 两个通道的对照、触发与环境总览见
@@ -66,7 +66,7 @@ sequenceDiagram
 
 1. **Load SKILLs (once per session):**
    - this SKILL (`skills/ut/terminal-workflow/SKILL.md`)
-   - `skills/ut/workflow_loop_core/SKILL.md`
+   - `skills/ut/workflow-loop-core/SKILL.md`
    - the 4 Worker SKILLs:
      - `skills/ut/batch-selector/SKILL.md`
      - `skills/ut/unit-test-executor/SKILL.md`
@@ -135,7 +135,7 @@ state mutation. The user is told only if the reload itself fails.
   / stage_update_status`. Those functions were deleted in Phase 8 — the
   Worker SKILLs (loaded above) own the per-stage logic, invoked by
   `loop_core`.
-- Does not write to the Hermes Kanban board. Kanban is `hermes_workflow`'s
+- Does not write to the Hermes Kanban board. Kanban is `hermes-workflow`'s
   responsibility.
 - Does not consume Feishu webhooks / OTP callbacks.
 
@@ -144,7 +144,7 @@ state mutation. The user is told only if the reload itself fails.
 ## When to switch channels
 
 If the user asks for any of the following, route them to
-`hermes_workflow` instead:
+`hermes-workflow` instead:
 - Unattended / overnight runs.
 - Parallel executor / fixer workers.
 - Kanban progress board.

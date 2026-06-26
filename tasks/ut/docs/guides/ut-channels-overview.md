@@ -9,9 +9,9 @@
 
 ## 0. 先选通道
 
-两个通道**共用同一套循环内核**（`workflow_loop_core`）和**同 4 个 Worker SKILL**（batch-selector / unit-test-executor / failure-handler / manifest-updater）。区别只在「谁来驱动、怎么触发、断联怎么恢复」。
+两个通道**共用同一套循环内核**（`workflow-loop-core`）和**同 4 个 Worker SKILL**（batch-selector / unit-test-executor / failure-handler / manifest-updater）。区别只在「谁来驱动、怎么触发、断联怎么恢复」。
 
-| 维度 | `ut/workflow`（终端通道） | `hermes_workflow`（生产通道） |
+| 维度 | `ut/workflow`（终端通道） | `hermes-workflow`（生产通道） |
 |---|---|---|
 | 触发方式 | 用户在 Claude / OpenCode 会话里要求 | 飞书 DM bot 发「跑 ut workflow」 |
 | 运行载体 | 当前交互会话（一个 supervisor 会话内驱动 Stage 2–5） | 长驻 `ut-supervisor` Hermes Agent（gateway） |
@@ -21,11 +21,11 @@
 | 暂停/停止 | Ctrl-C | 飞书「暂停 / 继续 / 结束」 |
 | 适用场景 | 本地调试、单跑、看日志 | 无人值守、过夜、并行 worker、Kanban 看板 |
 
-> 选不准就用 `ut/workflow` 调通，再切 `hermes_workflow` 跑生产。
+> 选不准就用 `ut/workflow` 调通，再切 `hermes-workflow` 跑生产。
 
 ---
 
-## 1. 共享内核：`workflow_loop_core`
+## 1. 共享内核：`workflow-loop-core`
 
 两个通道都调用 `loop_core.run(stage_skills, handle_checkpoint, handle_bastion_disconnect, check_user_commands, check_terminal_conditions)`。内核只负责 **stage 节奏 + 终止判定 + 命令 drain + checkpoint 节奏**；通道差异全部通过这 5 个回调注入。
 
@@ -90,7 +90,7 @@ sequenceDiagram
 
 ---
 
-## 3. 通道 B — `hermes_workflow`（生产 / 飞书驱动）
+## 3. 通道 B — `hermes-workflow`（生产 / 飞书驱动）
 
 **触发**：飞书 DM 给 bot 发「跑 ut workflow」/「启动测试」/「开始 UT」。`ut-supervisor` 是系统里**唯一**的飞书订阅者。
 
@@ -104,7 +104,7 @@ sequenceDiagram
     participant L as loop_core
     U->>F: "跑 ut workflow"
     F->>S: 关键词匹配触发
-    S->>S: 加载 hermes_workflow + loop_core + 4 Worker SKILL
+    S->>S: 加载 hermes-workflow + loop_core + 4 Worker SKILL
     S->>F: 参数确认卡(蓝色, 5 字段)
     U->>F: "确认" / "yaml=…" / "resume=…" / "改 KEY=VAL"
     F->>S: 命令
@@ -126,11 +126,11 @@ sequenceDiagram
     end
 ```
 
-状态机、命令矩阵（暂停/继续/结束/改参数/OTP）、续跑映射、OTP 渐进重发节奏，详见 `skills/ut/hermes_workflow/SKILL.md` §5–§9。
+状态机、命令矩阵（暂停/继续/结束/改参数/OTP）、续跑映射、OTP 渐进重发节奏，详见 `skills/ut/hermes-workflow/SKILL.md` §5–§9。
 
 ---
 
-## 4. hermes_workflow 环境搭建
+## 4. hermes-workflow 环境搭建
 
 生产通道跑起来需要四件东西就位：**飞书 bot 对接 → bastion profile → 4 个 gateway（3 worker + 1 supervisor）**。拓扑：
 
@@ -141,7 +141,7 @@ flowchart LR
         BOT[bot cli_aaad…<br/>DM oc_ed80…]
     end
     subgraph Host[本机 Hermes]
-        SUP[ut-supervisor gateway<br/>唯一飞书订阅者<br/>loads hermes_workflow]
+        SUP[ut-supervisor gateway<br/>唯一飞书订阅者<br/>loads hermes-workflow]
         GO[ut-orchestrator gateway<br/>Stage5+Stage2]
         GE[ut-executor gateway<br/>Stage3 远程 pytest]
         GF[ut-fixer gateway<br/>Stage4 修复]

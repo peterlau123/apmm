@@ -21,18 +21,18 @@ Tier -> profile set:
     L1 / L2 / L3 (linear, kanban OFF):   [ut-supervisor]
     L4           (kanban ON):            [ut-batch-selector, ut-executor, ut-fixer, ut-manifest-updater, ut-supervisor-kanban]
 
-Profile -> skills subset (per hermes_workflow SKILL §3 step 3 + §6 worker
+Profile -> skills subset (per hermes-workflow SKILL §3 step 3 + §6 worker
 Stage mapping; the repo root skills/ut/ pool also holds ut-test-collector and
 workflow which belong to the linear channel / Stage 1 and are NOT hermes
 profile skills):
-    ut-supervisor        : hermes_workflow, workflow_loop_core, batch-selector,
+    ut-supervisor        : hermes-workflow, workflow-loop-core, batch-selector,
                            unit-test-executor, failure-handler, manifest-updater,
                            shared  # Linear mode: complete context for reasoning
-    ut-supervisor-kanban : hermes_workflow, workflow_loop_core, shared  # Kanban mode: minimal monitoring
-    ut-batch-selector    : batch-selector, workflow_loop_core, shared  # Stage2 Worker
+    ut-supervisor-kanban : hermes-workflow, workflow-loop-core, shared  # Kanban mode: minimal monitoring
+    ut-batch-selector    : batch-selector, workflow-loop-core, shared  # Stage2 Worker
     ut-executor          : unit-test-executor, shared                # Stage3
     ut-fixer             : failure-handler, dependency-resolver, shared  # Stage4
-    ut-manifest-updater  : manifest-updater, workflow_loop_core, shared  # Stage5 Worker
+    ut-manifest-updater  : manifest-updater, workflow-loop-core, shared  # Stage5 Worker
 
 Note: `shared/` carries cross-skill schemas + validators (manifest_schema.json,
 batch_results_schema.json, handled_tests_schema.json, dependency_stall_schema.json,
@@ -58,7 +58,7 @@ from pathlib import Path
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 _FIXTURE_PROFILES = _PROJECT_ROOT / "tests" / "ut" / "integration" / "fixtures" / "profiles"
 _REPO_SKILLS = _PROJECT_ROOT / "skills" / "ut"
-_DIST_ROOT = Path(__file__).resolve().parent / ".dist"
+_DIST_ROOT = Path(__file__).resolve().parent.parent / "deployment" / "test" / "profiles"
 _HERMES_PROFILES = Path.home() / "AppData" / "Local" / "hermes" / "profiles"
 
 # distribution_owned: files hermes profile install/update will overwrite.
@@ -76,12 +76,12 @@ _TIER_PROFILES: dict[str, list[str]] = {
 }
 
 # Profile -> skills subset (names of subdirs under repo root skills/ut/).
-# Derived from hermes_workflow SKILL §3 step 3 (supervisor load list) and
+# Derived from hermes-workflow SKILL §3 step 3 (supervisor load list) and
 # §6 (worker Stage ownership). See module docstring.
 _PROFILE_SKILLS: dict[str, list[str]] = {
     "ut-supervisor": [
-        "hermes_workflow",
-        "workflow_loop_core",
+        "hermes-workflow",
+        "workflow-loop-core",
         "unit-test-collector",
         "batch-selector",
         "unit-test-executor",
@@ -89,11 +89,11 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
         "manifest-updater",
         "shared",
     ],
-    "ut-batch-selector": ["batch-selector", "workflow_loop_core", "shared"],  # Stage2 Worker Kanban
+    "ut-batch-selector": ["batch-selector", "workflow-loop-core", "shared"],  # Stage2 Worker Kanban
     "ut-executor": ["unit-test-executor", "shared"],  # Stage3
     "ut-fixer": ["failure-handler", "dependency-resolver", "shared"],  # Stage4
-    "ut-manifest-updater": ["manifest-updater", "workflow_loop_core", "shared"],  # Stage5 Worker Kanban
-    "ut-supervisor-kanban": ["hermes_workflow", "workflow_loop_core", "shared"],  # Kanban mode: minimal monitoring
+    "ut-manifest-updater": ["manifest-updater", "workflow-loop-core", "shared"],  # Stage5 Worker Kanban
+    "ut-supervisor-kanban": ["hermes-workflow", "workflow-loop-core", "shared"],  # Kanban mode: minimal monitoring
 }
 
 DISTRIBUTION_YAML = """\

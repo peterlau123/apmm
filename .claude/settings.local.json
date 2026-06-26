@@ -1,4 +1,41 @@
 {
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "sk-sp-a4fce44c82fc432fac536c0f5fc5f8e0",
+    "ANTHROPIC_BASE_URL": "https://coding.dashscope.aliyuncs.com/apps/anthropic",
+    "API_TIMEOUT_MS": "3000000",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-5"
+  },
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "lumira",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "superpowers@superpowers-marketplace": true,
+    "ecc@ecc": true
+  },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/affaan-m/ECC.git"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "autoUpdatesChannel": "latest",
+  "theme": "auto",
+  "skipAutoPermissionPrompt": true,
   "permissions": {
     "allow": [
       "Bash(python agent.py -p t_ascend run \"ls -la /gpfs/gcsp/M2.7_verify/vllm/\")",
@@ -27,7 +64,10 @@
       "Bash(git commit -m 'fix: update test command to match GOAL.md exactly *)",
       "Read(//c/Users/admin/Downloads/**)",
       "Bash(ssh infra@t_h20 *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(bash -n _wd_test.sh)",
+      "Bash(echo \"rc=$?\")",
+      "Bash(git stash *)"
     ]
   }
 }

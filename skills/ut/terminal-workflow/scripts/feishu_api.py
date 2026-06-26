@@ -188,7 +188,7 @@ class FeishuAPI:
         """发送启动意图确认卡片 (Spec §4.5 — Agent intent confirmation gate).
 
         Display-only card; user replies with text "确认" / "取消" (matches the
-        existing 参数确认卡 reply pattern in hermes_workflow SKILL §3 step 4).
+        existing 参数确认卡 reply pattern in hermes-workflow SKILL §3 step 4).
         Real interactive buttons would require a card-action webhook + an
         action_id→state map — deferred per surgical-changes guideline.
 

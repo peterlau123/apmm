@@ -1,6 +1,6 @@
 # UT Workflow 框架测试 + 性能度量设计
 
-> 测试对象：**本 repo 的 UT workflow 框架代码**（两条通道：`ut/workflow` 线性 + `hermes_workflow`），
+> 测试对象：**本 repo 的 UT workflow 框架代码**（两条通道：`ut/workflow` 线性 + `hermes-workflow`），
 > **不是**远程 vLLM 测试本身。目标是完整覆盖当前功能、度量正确性与执行吞吐，并据结果修复/优化我方框架。
 
 - 日期：2026-06-20
@@ -43,7 +43,7 @@
 
 两通道覆盖：
 - **ut/workflow（线性）**：hermes_runner 线性路径、`loop_core.run` 回调契约（L1）；L2/L3 即线性管道。
-- **hermes_workflow（Kanban）**：`orchestrator_round` 多轮 reconcile+select、`parse_command`、`refresh_manifest_stats`、`otp_resend_delay/otp_should_at_user`、`check_gateways_alive`（L1，gateway/board 层 mock 做逻辑覆盖）。真机 Kanban 验证见 **L4（需用户接入协同）**。
+- **hermes-workflow（Kanban）**：`orchestrator_round` 多轮 reconcile+select、`parse_command`、`refresh_manifest_stats`、`otp_resend_delay/otp_should_at_user`、`check_gateways_alive`（L1，gateway/board 层 mock 做逻辑覆盖）。真机 Kanban 验证见 **L4（需用户接入协同）**。
 
 ---
 

@@ -15,7 +15,7 @@
 - 当前状态：71 个单测（69 passed / 2 skipped），`run_linear_smoke.py` 存在但固定 3 例真实远程
 - 约束：L3 需 bastion 在线；L4 需用户接入协同；成本控制（避免大量远程调用）
 - 已有资产：`tests/skills/ut/`（单测）、`tests/integration/run_linear_smoke.py`（smoke）
-- 目标覆盖：两条通道（`ut/workflow` 线性 + `hermes_workflow` Kanban）
+- 目标覆盖：两条通道（`ut/workflow` 线性 + `hermes-workflow` Kanban）
 
 ---
 

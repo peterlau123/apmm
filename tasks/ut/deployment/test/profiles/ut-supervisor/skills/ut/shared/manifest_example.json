@@ -1,0 +1,147 @@
+{
+  "$schema": "./manifest_schema.json",
+  "_comment": "此文件是 manifest.json 结构示例（v2.0 格式），用于理解 schema 定义",
+  "_usage": "实际 manifest.json 由 workflow Stage 1 (ut-test-collector) 自动生成",
+
+  "version": "2.0",
+  "generated_at": "2026-06-14T10:00:00Z",
+  "source": "test_list_file",
+
+  "config": {
+    "workflow_yaml": ".agents/workflow.yaml",
+    "run_dir": "runs/ut-20260614-100000"
+  },
+
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/test_example.py::test_basic_function",
+      "test_file": "tests/test_example.py",
+      "test_name": "test_basic_function",
+      "status": "pending",
+      "priority": "P2"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/test_models/test_llama.py::test_llama_loading",
+      "test_file": "tests/test_models/test_llama.py",
+      "test_name": "test_llama_loading",
+      "status": "passed",
+      "priority": "P1",
+      "batch_id": "batch_20260614_100001",
+      "run_count": 1,
+      "last_run_at": "2026-06-14T10:30:00Z",
+      "last_duration_ms": 1250,
+      "last_exit_code": 0
+    },
+    {
+      "id": 3,
+      "test_node": "tests/test_distributed/test_tp.py::test_tensor_parallel",
+      "test_file": "tests/test_distributed/test_tp.py",
+      "test_name": "test_tensor_parallel",
+      "status": "error",
+      "priority": "P0",
+      "batch_id": "batch_20260614_100002",
+      "run_count": 1,
+      "last_run_at": "2026-06-14T11:00:00Z",
+      "last_duration_ms": 5000,
+      "last_exit_code": 1,
+      "error_type": "dependency",
+      "error_message": "ModuleNotFoundError: No module named 'transformers'",
+      "errors": [
+        {
+          "error_key": "transformers",
+          "error_type": "dependency",
+          "error_message": "ModuleNotFoundError: No module named 'transformers'",
+          "status": "pending",
+          "occurred_at": "2026-06-14T11:00:00Z",
+          "resolved_at": null
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "test_node": "tests/test_inference.py::test_batch_size",
+      "test_file": "tests/test_inference.py",
+      "test_name": "test_batch_size",
+      "status": "failed",
+      "priority": "P1",
+      "batch_id": "batch_20260614_100003",
+      "run_count": 2,
+      "last_run_at": "2026-06-14T12:00:00Z",
+      "last_duration_ms": 3000,
+      "last_exit_code": 1,
+      "fix_applied": true,
+      "fix_details": "Fixed shape mismatch in batch processing",
+      "failures": [
+        {
+          "failure_key": "test_batch_size:shape_mismatch",
+          "failure_type": "assertion",
+          "failure_message": "AssertionError: Expected shape (32, 1024) but got (32, 512)",
+          "status": "resolved",
+          "commit": "a1b2c3d",
+          "occurred_at": "2026-06-14T11:30:00Z",
+          "resolved_at": "2026-06-14T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "test_node": "tests/test_lora.py::test_lora_adapter",
+      "test_file": "tests/test_lora.py",
+      "test_name": "test_lora_adapter",
+      "status": "fixed_pending_verify",
+      "priority": "P1",
+      "batch_id": null,
+      "run_count": 1,
+      "fix_applied": true,
+      "fix_details": "Applied LoRA type signature fix",
+      "ignored_reason": null
+    },
+    {
+      "id": 6,
+      "test_node": "tests/test_gpu.py::test_cuda_memory",
+      "test_file": "tests/test_gpu.py",
+      "test_name": "test_cuda_memory",
+      "status": "ignored",
+      "priority": "P3",
+      "ignored_reason": "GPU memory test requires special hardware setup"
+    }
+  ],
+
+  "resolved_errors": {
+    "transformers": {
+      "type": "dependency",
+      "resolved_at": "2026-06-14T15:00:00Z"
+    }
+  },
+
+  "resolved_failures": {
+    "test_batch_size:shape_mismatch": {
+      "type": "assertion",
+      "resolved_at": "2026-06-14T12:00:00Z",
+      "commit": "a1b2c3d"
+    }
+  },
+
+  "statistics": {
+    "total": 6,
+    "executed": 4,
+    "progress": 66.7,
+    "passed": 1,
+    "failed": 1,
+    "error": 1,
+    "ignored": 1,
+    "pending": 1,
+    "pass_rate": 25.0
+  },
+
+  "metadata": {
+    "vllm_version": "0.13.0",
+    "torch_version": "2.5.1",
+    "python_version": "3.10.12",
+    "platform": "Linux-5.15.0-x86_64",
+    "gpu_info": "NVIDIA H20-3e × 8",
+    "notes": "示例 manifest，展示所有状态类型和字段结构"
+  }
+}

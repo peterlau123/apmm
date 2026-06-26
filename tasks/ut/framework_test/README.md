@@ -1,6 +1,6 @@
 # UT Framework 测试
 
-> 测试对象：**本 repo 的 UT workflow 框架代码**（`ut/workflow` 线性 + `hermes_workflow` Kanban），
+> 测试对象：**本 repo 的 UT workflow 框架代码**（`ut/workflow` 线性 + `hermes-workflow` Kanban），
 > 非远程 vLLM 测试本身。目标：覆盖框架功能、度量吞吐、修复框架 bug。
 
 ---

@@ -25,7 +25,7 @@
 
 | 文档 | 说明 |
 |------|------|
-| [ut-channels-overview.md](guides/ut-channels-overview.md) | **两个通道总览**（ut/workflow + hermes_workflow，含 mermaid 图） |
+| [ut-channels-overview.md](guides/ut-channels-overview.md) | **两个通道总览**（ut/workflow + hermes-workflow，含 mermaid 图） |
 | [testing.md](guides/testing.md) | 测试执行指南（环境 / 命令 / 过滤） |
 | [troubleshooting.md](guides/troubleshooting.md) | vLLM 修复操作指南（2.5.1_ut_verify 分支） |
 | [hermes-supervisor-service.md](guides/hermes-supervisor-service.md) | ut-supervisor Hermes Agent systemd 部署 |

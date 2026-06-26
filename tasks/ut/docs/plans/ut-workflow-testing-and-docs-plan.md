@@ -90,16 +90,16 @@ def test_collect_tests_extracts_test_names():
 
 ### Task 4: hermes-workflow关闭kanban测试
 
-**文件**: `tests/ut/unit/test_hermes_workflow_linear.py`
+**文件**: `tests/ut/unit/test_hermes-workflow_linear.py`
 
 **测试内容**：
 ```python
-def test_hermes_workflow_linear_mode():
+def test_hermes-workflow_linear_mode():
     """测试hermes-workflow关闭kanban模式（Linear equivalent）"""
     # 验证不使用Kanban调度
     # 验证直接调用hermes_runner
 
-def test_hermes_workflow_handles_timeout():
+def test_hermes-workflow_handles_timeout():
     """测试包含超时任务（实际需求）"""
     # 验证超时测试处理
 ```
@@ -108,9 +108,9 @@ def test_hermes_workflow_handles_timeout():
 
 ---
 
-### Task 5: workflow_loop_core wiring文档
+### Task 5: workflow-loop-core wiring文档
 
-**文件**: `skills/ut/workflow_loop_core/SKILL.md`（补充wiring章节）
+**文件**: `skills/ut/workflow-loop-core/SKILL.md`（补充wiring章节）
 
 **文档内容**：
 ```markdown
@@ -196,11 +196,11 @@ def validate_batch_results(batch_results):
 
 ### Task 8: hermes-workflow开启kanban端到端测试
 
-**文件**: `tests/ut/integration/test_hermes_workflow_kanban.py`
+**文件**: `tests/ut/integration/test_hermes-workflow_kanban.py`
 
 **测试内容**：
 ```python
-def test_hermes_workflow_kanban_full_flow():
+def test_hermes-workflow_kanban_full_flow():
     """测试完整链路：飞书→agent→Gateway→Workers"""
     # 模拟飞书webhook触发
     # 验证Kanban task创建

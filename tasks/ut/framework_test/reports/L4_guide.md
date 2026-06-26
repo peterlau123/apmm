@@ -115,7 +115,7 @@ tests/ut/integration/
     ├── l3_fast_subset.txt       # 8 快测
     └── l3_retry_subset.txt      # 3 retry
 
-skills/ut/hermes_workflow/scripts/
+skills/ut/hermes-workflow/scripts/
 └── start_supervisor.py          # Supervisor 启动脚本 ★
 
 skills/ut/workflow/scripts/

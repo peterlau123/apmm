@@ -83,7 +83,7 @@ worker 的 SKILL（unit-test-executor / failure-handler）**原文已写"❌ 不
 | **B** | 删除 ai-engineer profile cron `47b673f0e621 ut-daily-reports`（`hermes -p ai-engineer cron remove 47b673f0e621`） | `cron list` 无命中 |
 | **C** | run `ut-20260621-234651` 标 `invalidated`：`workflow_state.workflow.status = invalidated` + `invalidated_reason`；`manifest.json` → `manifest.json.fabricated.bak`；`batch_0001/` → `batch_0001.fabricated.bak/`；新增 [`INVALID.md`](../../runs/ut-20260621-234651/INVALID.md) | `ls runs/ut-20260621-234651/` 显示 `.fabricated.bak` 后缀 + `INVALID.md` 存在 |
 | **D** | `unit-test-executor` 和 `failure-handler` SKILL 的 §禁止操作 升级为"硬契约"，加入：①数据完整性禁令（禁 fabrication、`duration_seconds: null + status: passed/failed` 视作伪造）、②越权 Feishu / Lark / IM API 禁令、③跨 profile token 偷取禁令、④禁写仓库根目录脚本、⑤"历史教训"表点名本 run | 见 SKILL diff（hard-contract 章节）|
-| **E** | `hermes_workflow` SKILL 新增 **§11 Pitfalls**：11.1 daemon 必须 background、11.2 supervisor stage-3 anti-fabrication 3 步审计（验 `duration_seconds` ↔ `status`、stat 远端 `log_path`、查容器内 pytest 进程）、11.3 worker 越权 Feishu 探测、11.4 invalidated run 要清掉对应监控 cron | `skills/ut/hermes_workflow/SKILL.md` §11 |
+| **E** | `hermes-workflow` SKILL 新增 **§11 Pitfalls**：11.1 daemon 必须 background、11.2 supervisor stage-3 anti-fabrication 3 步审计（验 `duration_seconds` ↔ `status`、stat 远端 `log_path`、查容器内 pytest 进程）、11.3 worker 越权 Feishu 探测、11.4 invalidated run 要清掉对应监控 cron | `skills/ut/hermes-workflow/SKILL.md` §11 |
 | **隐藏炸弹 F** | ut-fixer profile config 把 `command_allowlist: []` 改成跟全局一致的 `["script execution via -e/-c flag", "shell command via -c/-lc flag"]`（如不修，下次 fixer 跑 `bash -c` 又会 60s timeout block） | `grep ^command_allowlist ~/AppData/Local/hermes/profiles/ut-fixer/config.yaml` 命中 line 632 |
 
 修复后问题清单核查（11/11 PASS）：
@@ -92,7 +92,7 @@ worker 的 SKILL（unit-test-executor / failure-handler）**原文已写"❌ 不
 |---|---|---|
 | P1 | shell-guard 拦截 `bash -c` | ✅ 全局 allowlist + ut-fixer override 修复 |
 | P2 | 裸 `docker exec` permission denied | ✅ SKILL pitfall #6 强制 sudo |
-| P3 | Bastion daemon 前台 timeout kill | ✅ hermes_workflow §11.1 + daemon 现 alive |
+| P3 | Bastion daemon 前台 timeout kill | ✅ hermes-workflow §11.1 + daemon 现 alive |
 | P4 | worker 越权 recover daemon | ✅ 两 SKILL 加 `❌ 不"尝试 recover Bastion daemon"` |
 | P5 | stage-3 fabrication | ✅ 两 SKILL 加 🚫 fabrication + supervisor §11.2 audit |
 | P6 | 越权 Feishu 投递 | ✅ 脚本删除 + 两 SKILL §越权禁令 + §11.3 探测 |
@@ -110,9 +110,9 @@ worker 的 SKILL（unit-test-executor / failure-handler）**原文已写"❌ 不
 |---|---|
 | Worker 数据完整性硬契约 | `skills/ut/unit-test-executor/SKILL.md` §禁止操作、`skills/ut/failure-handler/SKILL.md` §禁止操作 |
 | Worker 越权 Feishu 禁令 + 跨 profile token 禁令 | 同上两个 SKILL |
-| Supervisor stage-3 anti-fabrication 3 步审计 | `skills/ut/hermes_workflow/SKILL.md` §11.2 |
-| Bastion daemon 必须 background 启动 | `skills/ut/hermes_workflow/SKILL.md` §11.1 |
-| Stale 监控 cron 清理 | `skills/ut/hermes_workflow/SKILL.md` §11.4 |
+| Supervisor stage-3 anti-fabrication 3 步审计 | `skills/ut/hermes-workflow/SKILL.md` §11.2 |
+| Bastion daemon 必须 background 启动 | `skills/ut/hermes-workflow/SKILL.md` §11.1 |
+| Stale 监控 cron 清理 | `skills/ut/hermes-workflow/SKILL.md` §11.4 |
 | 全局 `command_allowlist` 包含 shell `-c` / script `-e` | `~/AppData/Local/hermes/config.yaml` |
 | 个人 memory（跨 session 可见） | ut-supervisor profile memory（"UT stage-3 fabrication risk..."） |
 
@@ -131,7 +131,7 @@ worker 的 SKILL（unit-test-executor / failure-handler）**原文已写"❌ 不
 ## 8. 相关链接
 
 - 物证目录：[`runs/ut-20260621-234651/`](../../runs/ut-20260621-234651/)（含 `INVALID.md` + `*.fabricated.bak`）
-- Supervisor SKILL：[`skills/ut/hermes_workflow/SKILL.md`](../../skills/ut/hermes_workflow/SKILL.md) §11 Pitfalls
+- Supervisor SKILL：[`skills/ut/hermes-workflow/SKILL.md`](../../skills/ut/hermes-workflow/SKILL.md) §11 Pitfalls
 - Executor SKILL：[`skills/ut/unit-test-executor/SKILL.md`](../../skills/ut/unit-test-executor/SKILL.md) §禁止操作
 - Fixer SKILL：[`skills/ut/failure-handler/SKILL.md`](../../skills/ut/failure-handler/SKILL.md) §禁止操作
 - Incident 索引：[`tasks/ut/docs/incidents/README.md`](README.md)

@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the Hermes production channel on top of the Plan 1 foundation: close the 4 integration gaps found in Plan 1's smoke test, wire the supervisor loop to the v5 Worker functions, add the `hermes_workflow` skill + `ut-supervisor` profile (Feishu-subscribing, OTP auto-recovery), and enable Kanban mode where `ut-orchestrator` owns Stage 2+5.
+**Goal:** Build the Hermes production channel on top of the Plan 1 foundation: close the 4 integration gaps found in Plan 1's smoke test, wire the supervisor loop to the v5 Worker functions, add the `hermes-workflow` skill + `ut-supervisor` profile (Feishu-subscribing, OTP auto-recovery), and enable Kanban mode where `ut-orchestrator` owns Stage 2+5.
 
 **Architecture:** A long-running `ut-supervisor` Hermes Agent profile subscribes to Feishu and drives `loop_core`. Three independent `hermes-gateway@<profile>` systemd units handle Kanban worker dispatch. The supervisor never runs Stage logic in Kanban mode — it monitors. In linear mode it drives Stage 2-5 through the v5 Worker functions. All remote calls reuse the Plan 1 Bastion-aware `run_remote`.
 
@@ -32,9 +32,9 @@ Plan 1's end-to-end smoke (`tests/integration/run_linear_smoke.py`) proved the p
 ## File Structure (Plan 2 scope)
 
 ### Created
-- `skills/ut/hermes_workflow/SKILL.md` — Hermes-channel supervisor skill
-- `skills/ut/hermes_workflow/profile.yaml` — ut-supervisor profile config (Feishu subscribe + auto-load skill)
-- `skills/ut/hermes_workflow/ut-orchestrator-SOUL.md` — repo-tracked SOUL template (copied to profile dir at deploy)
+- `skills/ut/hermes-workflow/SKILL.md` — Hermes-channel supervisor skill
+- `skills/ut/hermes-workflow/profile.yaml` — ut-supervisor profile config (Feishu subscribe + auto-load skill)
+- `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` — repo-tracked SOUL template (copied to profile dir at deploy)
 - `tasks/ut/docs/guides/hermes-supervisor-service.md` — `hermes-agent@ut-supervisor` systemd deploy guide
 - `tasks/ut/docs/guides/hermes-gateway-service.md` — `hermes-gateway@.service` template (3 instances)
 - `tests/skills/ut/test_config_contract.py` — config shape contract tests (G1/G2)
@@ -474,7 +474,7 @@ git commit -m "feat(kanban): orchestrator_round combines Stage 5 reconcile + Sta
 ### Task 3.2: ut-orchestrator SOUL template
 
 **Files:**
-- Create: `skills/ut/hermes_workflow/ut-orchestrator-SOUL.md` (repo-tracked; copied to profile dir at deploy)
+- Create: `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` (repo-tracked; copied to profile dir at deploy)
 
 - [ ] **Step 1: Write the SOUL content**
 
@@ -497,22 +497,22 @@ Uses hermes_runner.orchestrator_round() for reconcile+select.
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/ut/hermes_workflow/ut-orchestrator-SOUL.md
+git add skills/ut/hermes-workflow/ut-orchestrator-SOUL.md
 git commit -m "docs(kanban): ut-orchestrator SOUL template (Stage 2+5)"
 ```
 
 ---
 
-## Phase 4: hermes_workflow skill + profile
+## Phase 4: hermes-workflow skill + profile
 
-### Task 4.1: hermes_workflow/SKILL.md
+### Task 4.1: hermes-workflow/SKILL.md
 
 **Files:**
-- Create: `skills/ut/hermes_workflow/SKILL.md`
+- Create: `skills/ut/hermes-workflow/SKILL.md`
 
-- [ ] **Step 1: Write the skill** (frontmatter name: hermes_workflow). Cover (from spec §14, §8, §9, §10):
+- [ ] **Step 1: Write the skill** (frontmatter name: hermes-workflow). Cover (from spec §14, §8, §9, §10):
   - Channel: Hermes Agent (ut-supervisor profile), Feishu bidirectional, auto Bastion recovery, full state machine
-  - Startup (§14.2): Feishu msg → load this + workflow_loop_core + 4 Worker SKILLs → param-confirm card → validate required config (incl 3 Gateway active when kanban.enabled) → init_or_resume → ensure_bastion (OTP progressive resend via otp_resend_delay) → start_heartbeat → loop_core.run
+  - Startup (§14.2): Feishu msg → load this + workflow-loop-core + 4 Worker SKILLs → param-confirm card → validate required config (incl 3 Gateway active when kanban.enabled) → init_or_resume → ensure_bastion (OTP progressive resend via otp_resend_delay) → start_heartbeat → loop_core.run
   - Callbacks: handle_checkpoint (refresh_manifest_stats + progress card + parse_command); handle_bastion_disconnect (waiting_otp + progressive resend); check_user_commands (read Feishu group, parse_command)
   - State machine (§8): running/paused/waiting_otp/completed/stopped/failed; command matrix; priority stop>pause>change_config>resume; daemon-restart-fail stays waiting_otp
   - Linear vs Kanban loop (§14.3): Kanban uses check_gateways_alive + orchestrator-driven rounds; supervisor never touches manifest in Kanban
@@ -522,8 +522,8 @@ git commit -m "docs(kanban): ut-orchestrator SOUL template (Stage 2+5)"
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/ut/hermes_workflow/SKILL.md
-git commit -m "feat(hermes_workflow): create Hermes-channel supervisor skill"
+git add skills/ut/hermes-workflow/SKILL.md
+git commit -m "feat(hermes-workflow): create Hermes-channel supervisor skill"
 ```
 
 ---
@@ -531,14 +531,14 @@ git commit -m "feat(hermes_workflow): create Hermes-channel supervisor skill"
 ### Task 4.2: ut-supervisor profile.yaml
 
 **Files:**
-- Create: `skills/ut/hermes_workflow/profile.yaml`
+- Create: `skills/ut/hermes-workflow/profile.yaml`
 
 - [ ] **Step 1: Inspect a real profile** under `~/AppData/Local/hermes/profiles/ut-orchestrator/` to learn the actual profile format. Adapt the keys below to match.
 
 - [ ] **Step 2: Write profile config**
 
 ```yaml
-# ut-supervisor — long-running Hermes Agent profile for hermes_workflow
+# ut-supervisor — long-running Hermes Agent profile for hermes-workflow
 name: ut-supervisor
 description: UT Workflow production supervisor (Feishu-subscribing, OTP auto-recovery)
 feishu:
@@ -546,8 +546,8 @@ feishu:
   chat_id: "<feishu_chat_id>"          # set at deploy
   trigger_keywords: ["跑 ut workflow", "启动测试", "开始 UT"]
 auto_load_skills:
-  - ut/hermes_workflow
-  - ut/workflow_loop_core
+  - ut/hermes-workflow
+  - ut/workflow-loop-core
   - ut/batch-selector
   - ut/unit-test-executor
   - ut/failure-handler
@@ -557,8 +557,8 @@ auto_load_skills:
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/hermes_workflow/profile.yaml
-git commit -m "feat(hermes_workflow): ut-supervisor profile config"
+git add skills/ut/hermes-workflow/profile.yaml
+git commit -m "feat(hermes-workflow): ut-supervisor profile config"
 ```
 
 ---
@@ -604,13 +604,13 @@ git commit -m "docs(deploy): hermes-gateway@ systemd template guide (3 instances
 **Files:**
 - Modify: `tasks/ut/README.md`
 
-- [ ] **Step 1: Add nav rows** for hermes_workflow skill, ut-supervisor service guide, gateway service guide, under existing Skills/docs tables. Keep existing rows intact.
+- [ ] **Step 1: Add nav rows** for hermes-workflow skill, ut-supervisor service guide, gateway service guide, under existing Skills/docs tables. Keep existing rows intact.
 
 - [ ] **Step 2: Commit**
 
 ```bash
 git add tasks/ut/README.md
-git commit -m "docs(readme): link hermes_workflow skill + deployment guides"
+git commit -m "docs(readme): link hermes-workflow skill + deployment guides"
 ```
 
 ---

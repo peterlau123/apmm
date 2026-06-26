@@ -6,7 +6,7 @@
 
 ## 1. 概述
 
-`ut-supervisor` 是 UT Workflow 的**生产运行主体**：一个长期运行的 Hermes **Agent**，订阅飞书 `apmm-ut` 群，识别触发关键词后加载 `ut/hermes_workflow` skill，驱动整个 workflow 状态机（running / paused / waiting_otp / completed / stopped / failed），并通过飞书 OTP 自动恢复 Bastion 连接。
+`ut-supervisor` 是 UT Workflow 的**生产运行主体**：一个长期运行的 Hermes **Agent**，订阅飞书 `apmm-ut` 群，识别触发关键词后加载 `ut/hermes-workflow` skill，驱动整个 workflow 状态机（running / paused / waiting_otp / completed / stopped / failed），并通过飞书 OTP 自动恢复 Bastion 连接。
 
 本指南将其封装为 systemd 模板实例服务 `hermes-agent@ut-supervisor.service`，实现开机自启、崩溃自动重启、统一日志。
 
@@ -27,7 +27,7 @@
 
 将 profile 目录部署到 Hermes profile 路径（如 `~/.local/share/hermes/profiles/ut-supervisor/` 或对应平台路径）：
 
-- `profile.yaml` — 参考仓库 `skills/ut/hermes_workflow/profile.yaml`。
+- `profile.yaml` — 参考仓库 `skills/ut/hermes-workflow/profile.yaml`。
 
 > **重要（见 profile.yaml 的 SCHEMA NOTE）**：真实 Hermes `profile.yaml` 只含 `description` / `description_auto` 两个键。飞书绑定与 skill 加载**不在** `profile.yaml`，而在 profile 目录的其他文件中按部署时配置：
 >
@@ -37,7 +37,7 @@
 > | 飞书 skill 绑定 | `config.yaml` → `platforms.feishu.channel_skill_bindings` |
 > | skill 加载 | `config.yaml` → `skills.*`（+ profile `skills/` 目录） |
 >
-> 部署时务必把 `<feishu_chat_id>` 占位符替换为真实群 chat_id，并绑定 `ut/hermes_workflow` 等 skill。
+> 部署时务必把 `<feishu_chat_id>` 占位符替换为真实群 chat_id，并绑定 `ut/hermes-workflow` 等 skill。
 
 ### 2.2 Bastion 凭据/配置可用
 
@@ -154,7 +154,7 @@ systemctl --user disable hermes-agent@ut-supervisor
 |------|------|
 | 服务起不来 / 反复重启 | `journalctl --user -u hermes-agent@ut-supervisor -e`；多为 `ExecStart` 子命令或 `WorkingDirectory` 不对 → 核对 §3 DEPLOY-CONFIRM 项 |
 | 发关键词无回复 | 检查 `channel_directory.json` 的 chat_id 绑定（§2.1）、机器人是否在群、飞书权限（§2.3） |
-| 起了但不加载 workflow | 检查 `config.yaml` 的 `channel_skill_bindings` 与 `skills.*` 是否绑定 `ut/hermes_workflow`（§2.1 SCHEMA NOTE） |
+| 起了但不加载 workflow | 检查 `config.yaml` 的 `channel_skill_bindings` 与 `skills.*` 是否绑定 `ut/hermes-workflow`（§2.1 SCHEMA NOTE） |
 | Bastion 连不上 / 一直等 OTP | 见 [bastion.md](../../../docs/guides/bastion.md) 与 hermes-runner.md §6.1；运行期在飞书回复 `OTP <request_id> <code>` 恢复 |
 | Kanban 模式启动校验失败 | 红色错误卡片提示某 Gateway 未 active → 见 [hermes-gateway-service.md](hermes-gateway-service.md) |
 
@@ -164,8 +164,8 @@ systemctl --user disable hermes-agent@ut-supervisor
 
 | 文档 | 说明 |
 |------|------|
-| `skills/ut/hermes_workflow/SKILL.md` | Supervisor 通道 skill（状态机 / 回调 / OTP） |
-| `skills/ut/hermes_workflow/profile.yaml` | ut-supervisor profile（含部署绑定 SCHEMA NOTE） |
+| `skills/ut/hermes-workflow/SKILL.md` | Supervisor 通道 skill（状态机 / 回调 / OTP） |
+| `skills/ut/hermes-workflow/profile.yaml` | ut-supervisor profile（含部署绑定 SCHEMA NOTE） |
 | [hermes-gateway-service.md](hermes-gateway-service.md) | 3 个 Kanban Gateway 的 systemd 模板部署指南 |
 | [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |

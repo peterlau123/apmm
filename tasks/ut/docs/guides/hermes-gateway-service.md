@@ -48,7 +48,7 @@ hermes kanban boards switch apmm-ut
 hermes profile list   # 应能看到 ut-orchestrator / ut-executor / ut-fixer
 ```
 
-profile 的具体内容（飞书绑定、skill 加载等落点）参考 [hermes-supervisor-service.md](hermes-supervisor-service.md) §2.1 的 SCHEMA NOTE。Gateway profile **不订阅飞书**，只加载 worker 行为 skill（如 `ut/hermes_workflow` 的 worker SOUL）。
+profile 的具体内容（飞书绑定、skill 加载等落点）参考 [hermes-supervisor-service.md](hermes-supervisor-service.md) §2.1 的 SCHEMA NOTE。Gateway profile **不订阅飞书**，只加载 worker 行为 skill（如 `ut/hermes-workflow` 的 worker SOUL）。
 
 ### 2.3 Bastion 凭据/配置可用
 
@@ -245,7 +245,7 @@ hermes gateway status
 | `tasks/ut/docs/kanban/README.md` | Kanban 集成、3 worker profile、`start_gateway.py` 包装器、远程执行规则 |
 | `skills/ut/workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
 | `skills/ut/workflow/scripts/hermes_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
-| `skills/ut/hermes_workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
+| `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
 | [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |
 

@@ -149,7 +149,7 @@ def init_or_resume(workflow_yaml):
 
 ---
 
-## 5. 与hermes_workflow状态对比
+## 5. 与hermes-workflow状态对比
 
 | 状态 | terminal-workflow | hermes-workflow |
 |---|---|---|---|

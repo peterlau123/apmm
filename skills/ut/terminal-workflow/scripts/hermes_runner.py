@@ -4,8 +4,8 @@ hermes_runner.py - UT Workflow runner for Hermes (v5: import-only library)
 
 v5 refactor: the in-process Stage 2-5 loop and the kanban-mode polling loop
 have moved out of this module. Stage logic now lives in the four Worker
-SKILLs, driven by `skills/ut/workflow_loop_core/SKILL.md`. Channel SKILLs
-(`skills/ut/workflow` for linear, `skills/ut/hermes_workflow` for kanban)
+SKILLs, driven by `skills/ut/workflow-loop-core/SKILL.md`. Channel SKILLs
+(`skills/ut/workflow` for linear, `skills/ut/hermes-workflow` for kanban)
 wire the loop with channel-specific callbacks.
 
 This module now provides:
@@ -432,7 +432,7 @@ def validate_required_config(
       - channel="linear" (ut/workflow): kanban.enabled MUST NOT be true.
         Linear channel runs Stage 2-5 in-process and cannot drive the 3-Gateway
         Kanban dispatch model; mixing the two would deadlock the dispatcher.
-      - channel="hermes" (ut/hermes_workflow): kanban.enabled may be true or
+      - channel="hermes" (ut/hermes-workflow): kanban.enabled may be true or
         false (linear-mode supervisor or kanban-mode supervisor both supported).
     """
     missing: list[str] = []
@@ -448,7 +448,7 @@ def validate_required_config(
     if channel == "linear" and kanban_on:
         missing.append(
             "kanban.enabled=true 不允许在 ut/workflow 线性通道下运行 — "
-            "请改为 false，或改用 ut/hermes_workflow"
+            "请改为 false，或改用 ut/hermes-workflow"
         )
 
     return (len(missing) == 0), missing
@@ -665,8 +665,8 @@ def check_stop_conditions(state_path) -> tuple[bool, str, str]:
 def main():
     """Deprecation shim. hermes_runner is now an import-only library.
 
-    Stage logic moved to skills/ut/workflow_loop_core/SKILL.md and the four
-    Worker SKILLs. Use a channel SKILL (ut/workflow or hermes_workflow) to
+    Stage logic moved to skills/ut/workflow-loop-core/SKILL.md and the four
+    Worker SKILLs. Use a channel SKILL (ut/workflow or hermes-workflow) to
     actually drive a run.
     """
     parser = argparse.ArgumentParser(
@@ -679,8 +679,8 @@ def main():
     print(
         "[hermes_runner] v5 deprecation: this module no longer runs the workflow.\n"
         "  - Linear supervisor: load skills/ut/workflow/SKILL.md\n"
-        "  - Kanban / Hermes:   load skills/ut/hermes_workflow/SKILL.md\n"
-        "  Both delegate Stage 2-5 to skills/ut/workflow_loop_core."
+        "  - Kanban / Hermes:   load skills/ut/hermes-workflow/SKILL.md\n"
+        "  Both delegate Stage 2-5 to skills/ut/workflow-loop-core."
     )
     sys.exit(0)
 

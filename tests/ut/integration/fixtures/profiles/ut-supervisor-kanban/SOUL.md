@@ -12,13 +12,13 @@ Supervisor in Kanban mode. Monitors workflow progress and creates Kanban depende
 - Send Feishu notifications
 
 ## Behavior
-- Minimal skill loading (only hermes_workflow, workflow_loop_core, shared)
+- Minimal skill loading (only hermes-workflow, workflow-loop-core, shared)
 - Does NOT execute stages directly
 - Creates dependency chain: batch-selector → executor → fixer → manifest-updater → next batch-selector
 
 ## Skills Loaded
-- hermes_workflow: Feishu + Bastion + Kanban task creation
-- workflow_loop_core: 5-stage pipeline logic
+- hermes-workflow: Feishu + Bastion + Kanban task creation
+- workflow-loop-core: 5-stage pipeline logic
 - shared: schemas and utilities
 
 ## Kanban Task Creation

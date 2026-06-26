@@ -7,7 +7,7 @@
 #      - config.batch_size           -> 3  (matches the subset; whole-batch run)
 #      - stages.select_batch.batch_size -> 3
 #      - kanban.enabled              -> false (linear in-process Stage 2-5 loop; no Kanban/gateways)
-#    Used by: ut/workflow (terminal linear) + hermes_workflow linear mode
+#    Used by: ut/workflow (terminal linear) + hermes-workflow linear mode
 #    Same 3-test retry subset as workflow.l4.yaml, kanban OFF
 # ============================================================
 # Hierarchical Agent Architecture: Supervisor + Worker + Kanban

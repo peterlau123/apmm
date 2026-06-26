@@ -25,8 +25,8 @@
 - **G2**：飞书消息进来时，用 **Agent 意图识别层** 区分"高确定性原子命令"（OTP / 暂停 / 继续 / 结束）和"启动类语义化指令"（"跑 L4"、"跑下 mini 测试"、"正式开跑"等），前者走正则、后者走 LLM 分类，**启动类指令仍需要一次确认**作为安全闸口。
 
 **不在范围内**：
-- 不改 `workflow_loop_core` 的 5 阶段算法。
-- 不改 `hermes_workflow` SKILL 的状态机定义。
+- 不改 `workflow-loop-core` 的 5 阶段算法。
+- 不改 `hermes-workflow` SKILL 的状态机定义。
 - 不改 Bastion / OTP 流程。
 - 不动 worker SKILL（不改 batch-selector / executor / fixer / manifest-updater）。
 
@@ -241,7 +241,7 @@ python tasks/ut/scripts/check_expected.py \
 
 **anti_fabrication AF-1 实现**：通过 `tools/agent.py -p t_h20 run "stat -c %s <log_path>"`（bastion 已连）检查远端 log_path 真实性。
 
-`check_expected.py` 是**纯函数**（输入 run_dir + expected → 输出 JSON），不依赖 hermes / 飞书，**可在本地 CLI 跑**，也可以被 hermes_workflow 的 completion 回调调用。
+`check_expected.py` 是**纯函数**（输入 run_dir + expected → 输出 JSON），不依赖 hermes / 飞书，**可在本地 CLI 跑**，也可以被 hermes-workflow 的 completion 回调调用。
 
 ---
 
@@ -412,14 +412,14 @@ LLM 分类有误判风险（哪怕 conf=0.95），且"跑 L4"和"跑生产"代�
 | Task | 文件 | 工作量 |
 |---|---|---|
 | P4a | 飞书 send_card 加 `confirmation_card` 模板（intent + yaml + 摘要 + 确认/取消） | 30 min |
-| P4b | hermes_workflow SKILL §3 触发流程加分支：`start_l*` / `start_production` 触发时发 confirmation_card；超时/取消 → drop；确认 → 跳过参数卡直接进 init_or_resume(yaml=固化路径) | 1.5 h |
+| P4b | hermes-workflow SKILL §3 触发流程加分支：`start_l*` / `start_production` 触发时发 confirmation_card；超时/取消 → drop；确认 → 跳过参数卡直接进 init_or_resume(yaml=固化路径) | 1.5 h |
 | P4c | 端到端验收（飞书 → 确认 → run 启动） | 30 min |
 
 ### P5 — 完成时执行 check_expected.py + PASS/FAIL 卡
 
 | Task | 文件 | 工作量 |
 |---|---|---|
-| P5a | hermes_workflow `handle_checkpoint` / 完成路径：tier run 完成后调 `check_expected.py`，结果填入完成卡 | 1 h |
+| P5a | hermes-workflow `handle_checkpoint` / 完成路径：tier run 完成后调 `check_expected.py`，结果填入完成卡 | 1 h |
 | P5b | 飞书完成卡区分 tier vs 生产：tier 发 PASS（绿）/ FAIL（红）+ 失败断言摘要；生产仍发普通完成卡 | 30 min |
 
 **总计**：~10–11 小时分布式工作量，5 个独立 commit。

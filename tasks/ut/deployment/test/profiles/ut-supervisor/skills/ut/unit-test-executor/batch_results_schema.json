@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Batch Results Schema",
+  "description": "批次测试执行结果文件格式 - batch_results.json (v5; 与 skills/ut/unit-test-executor/scripts/execute_batch.py 唯一对齐)。任何手工/LLM 写入若不通过本 schema 验证，应被下游 (manifest-updater) 拒绝。",
+  "version": "5.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch_id", "started_at", "finished_at", "exit_code", "remote_log", "tests", "statistics"],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "批次唯一标识",
+      "pattern": "^batch_[A-Za-z0-9_]+$"
+    },
+    "started_at": {
+      "type": "string",
+      "description": "pytest 启动 UTC 时间 (ISO 8601, 必须 Z 结尾)",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "finished_at": {
+      "type": "string",
+      "description": "pytest 完成 UTC 时间 (ISO 8601, 必须 Z 结尾)",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "timeout": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "wall-clock ceiling (seconds); 远程 watchdog wall 阈值"
+    },
+    "pytest_idle_timeout": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "idle-timeout (seconds); 日志无活动 → SIGKILL"
+    },
+    "exit_code": {
+      "type": "integer",
+      "description": "远程 watchdog 包装脚本退出码; 124 = wall/idle timeout"
+    },
+    "remote_log": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "container", "raw_log_path", "size_bytes", "captured_at"],
+      "properties": {
+        "host": {"type": "string", "description": "远程 profile (e.g. t_h20)"},
+        "container": {"type": "string", "description": "docker container name"},
+        "raw_log_path": {
+          "type": "string",
+          "description": "远程 pytest log 绝对路径; 文件名必须形如 pytest_<batch_id>.log",
+          "pattern": "^/.+/pytest_[A-Za-z0-9_]+\\.log$"
+        },
+        "size_bytes": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "远程 log 字节数 (null = 未探测)"
+        },
+        "captured_at": {
+          "type": "string",
+          "description": "summary 抓取时间 (ISO 8601, Z)",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "description": "执行结果详情列表; 每个 batch 中的测试节点一行",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["test_node", "status", "error_type", "duration_ms"],
+        "properties": {
+          "id": {
+            "type": ["integer", "null"],
+            "description": "batch 内序号 (1-based)"
+          },
+          "test_node": {
+            "type": "string",
+            "description": "pytest 测试节点完整 ID"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["passed", "failed", "error", "retriable_error", "skipped"],
+            "_enum_comments": {
+              "passed": "测试通过",
+              "failed": "断言失败 (AssertionError)",
+              "error": "执行错误 (Collection/Import)",
+              "retriable_error": "可重试错误 (OOM / timeout); 由 watchdog 或 classifier 标记",
+              "skipped": "pytest 跳过"
+            }
+          },
+          "error_type": {
+            "type": ["string", "null"],
+            "enum": ["dependency", "network", "resource", "version", "functional", "download_error", "oom", "timeout", "collection", "assertion", "other", null]
+          },
+          "error_message": {
+            "type": ["string", "null"],
+            "description": "错误信息摘要 (最多 500 字符)"
+          },
+          "duration_ms": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "执行耗时 (毫秒); 取自 JUnit <testcase time>，缺失=null"
+          },
+          "exit_code": {
+            "type": ["integer", "null"],
+            "description": "该用例 docker exec 退出码; 124=watchdog wall 超时"
+          },
+          "gpu_id": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "钉卡的 GPU index (CUDA_VISIBLE_DEVICES); 0-card 降级时为降级那张卡"
+          },
+          "log_path": {
+            "type": ["string", "null"],
+            "description": "该用例远程 pytest log 绝对路径 (pytest_<batch_id>_<node>.log); null=未写"
+          },
+          "xml_path": {
+            "type": ["string", "null"],
+            "description": "该用例远程 JUnit XML 绝对路径 (result_<batch_id>_<node>.xml); null=未写 (watchdog SIGKILL 未 flush)"
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "passed", "failed", "error"],
+      "properties": {
+        "total": {"type": "integer", "minimum": 0},
+        "passed": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0},
+        "error": {"type": "integer", "minimum": 0},
+        "skipped": {"type": "integer", "minimum": 0},
+        "retriable_error": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

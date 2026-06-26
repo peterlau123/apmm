@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Handled Tests Schema",
+  "description": "失败测试处理结果文件格式 - handled_tests.json (v3.0)",
+  "version": "3.0",
+  "type": "object",
+  "required": ["batch_id", "generated_at", "tests", "stats"],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "批次唯一标识",
+      "pattern": "^batch_[0-9]{8}_[0-9]{6}$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "处理时间 (ISO 8601)"
+    },
+    "tests": {
+      "type": "array",
+      "description": "已处理的失败测试列表",
+      "items": {
+        "type": "object",
+        "required": ["test_node", "final_status"],
+        "properties": {
+          "test_node": {
+            "type": "string",
+            "description": "pytest测试节点"
+          },
+          "final_status": {
+            "type": "string",
+            "description": "处理后最终状态",
+            "enum": ["passed", "fixed_pending_verify", "failed", "ignored", "pending"],
+            "_enum_comments": {
+              "passed": "已通过",
+              "fixed_pending_verify": "修复后待验证（下一轮批量验证）",
+              "failed": "最终失败",
+              "ignored": "已忽略（不执行）",
+              "pending": "待处理（资源不足或依赖等待）"
+            }
+          },
+          "fix_attempts": {
+            "type": "integer",
+            "description": "修复尝试次数",
+            "minimum": 0,
+            "default": 0
+          },
+          "commit": {
+            "type": ["string", "null"],
+            "description": "修复的 commit 号（远程容器）"
+          },
+          "ignored_reason": {
+            "type": ["string", "null"],
+            "description": "忽略原因（当 final_status=ignored 时必填）"
+          },
+          "skip_reason": {
+            "type": ["string", "null"],
+            "description": "跳过处理原因（当命中缓存时）"
+          },
+          "errors": {
+            "type": "array",
+            "description": "错误历史追踪",
+            "items": {
+              "type": "object",
+              "required": ["error_key", "error_type", "status"],
+              "properties": {
+                "error_key": {
+                  "type": "string",
+                  "description": "标准化错误标识",
+                  "_examples": ["transformers", "meta-llama/Llama-3.2-1B", "torch.softmax.dim_arg"]
+                },
+                "error_type": {
+                  "type": "string",
+                  "description": "错误类型",
+                  "enum": ["dependency", "download_error", "version", "network", "resource", "other"]
+                },
+                "error_message": {
+                  "type": "string",
+                  "description": "错误信息摘要（最多500字符）"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "错误解决状态",
+                  "enum": ["pending", "resolved"]
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "首次发生时间"
+                },
+                "resolved_at": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "解决时间（status=resolved 时）"
+                }
+              }
+            }
+          },
+          "failures": {
+            "type": "array",
+            "description": "断言失败历史追踪",
+            "items": {
+              "type": "object",
+              "required": ["failure_key", "failure_type", "status"],
+              "properties": {
+                "failure_key": {
+                  "type": "string",
+                  "description": "标准化失败标识",
+                  "pattern": "^\\w+:\\w+$",
+                  "_examples": ["test_load:shape_mismatch", "test_inference:value_tolerance"]
+                },
+                "failure_type": {
+                  "type": "string",
+                  "description": "失败类型",
+                  "enum": ["assertion"]
+                },
+                "failure_message": {
+                  "type": "string",
+                  "description": "断言信息摘要"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "失败解决状态",
+                  "enum": ["pending", "resolved"]
+                },
+                "commit": {
+                  "type": ["string", "null"],
+                  "description": "修复 commit 号"
+                },
+                "occurred_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "首次发生时间"
+                },
+                "resolved_at": {
+                  "type": ["string", "null"],
+                  "format": "date-time",
+                  "description": "解决时间"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "处理统计",
+      "required": ["passed", "fixed_pending_verify", "failed", "ignored", "pending"],
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "通过数"
+        },
+        "fixed_pending_verify": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "修复后待验证数"
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "最终失败数"
+        },
+        "ignored": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "忽略数"
+        },
+        "pending": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "待处理数"
+        }
+      }
+    },
+    "handled_tests_path": {
+      "type": "string",
+      "description": "文件路径（运行时添加）"
+    }
+  },
+  "_note": "resolved_errors 和 resolved_failures 由 manifest-updater 写入 manifest.json，不在 handled_tests.json 中"
+}

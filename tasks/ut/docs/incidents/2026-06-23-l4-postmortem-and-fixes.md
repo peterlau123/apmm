@@ -67,7 +67,7 @@
 附加上下文（L107–109）：
 > *"a wrong high-confidence start_production wastes hours of GPU time"* —— 此句倾向保守。
 
-而 `skills/ut/hermes_workflow/SKILL.md` §3 流程描述（L145–146）：
+而 `skills/ut/hermes-workflow/SKILL.md` §3 流程描述（L145–146）：
 > *"legacy 关键词「跑 ut workflow」/「启动测试」/「开始 UT」在 v4 是直接进 §3.B；v5 一律交给 Layer 2（这些短语**预期分类为 start_production**）"*
 
 —— 此句又把 legacy 关键词显式推到 start_production。两份文档同时存在，开发态 SKILL.md 和运行时 SOUL.md 期待相反。
@@ -92,8 +92,8 @@ v4 → v5 重构时，SKILL.md §3 留了「legacy 关键词预期 → start_pro
 | 文件 | 行为 |
 |---|---|
 | `tasks/ut/scripts/.dist/ut-supervisor/SOUL.md` L97–98 | 删除 `"跑 ut workflow" (no L-suffix) → start_production, conf ≥ 0.9` 一行（保留 `"正式开跑" / "全量" → start_production` 这条）|
-| `skills/ut/hermes_workflow/SKILL.md` L145–146 | 改写为：「legacy 关键词「跑 ut workflow」/「启动测试」/「开始 UT」在 v5 走 Layer 2；**无 tier 后缀**时预期分类为 `unknown` → §3.D help 卡；带 tier 后缀或正式/生产/全量字眼时按 §3.A 走」|
-| `skills/ut/hermes_workflow/SKILL.md` §3.D（新增）| 添加 help 卡内容模板（列合法触发词清单 + 示例） |
+| `skills/ut/hermes-workflow/SKILL.md` L145–146 | 改写为：「legacy 关键词「跑 ut workflow」/「启动测试」/「开始 UT」在 v5 走 Layer 2；**无 tier 后缀**时预期分类为 `unknown` → §3.D help 卡；带 tier 后缀或正式/生产/全量字眼时按 §3.A 走」|
+| `skills/ut/hermes-workflow/SKILL.md` §3.D（新增）| 添加 help 卡内容模板（列合法触发词清单 + 示例） |
 
 `§3.B legacy 自由参数确认卡分支`保留作为「unknown + v4 关键词」的回退（向后兼容现网），不变。
 
@@ -168,8 +168,8 @@ flowchart LR
 
 | 文件 | 行为 |
 |---|---|
-| `skills/ut/hermes_workflow/SKILL.md` §3.A | 在 A5 与 A6 之间插入 A5.5「Bastion OTP bring-up」子流程；附 mermaid 图 |
-| `skills/ut/workflow_loop_core/scripts/bastion_otp_bringup.py`（新建） | 实现：发 OTP 卡 → 等回复 → 解析 6 位码 → detached Popen `serve --otp` → poll ping → 成功返回 / 超时 raise |
+| `skills/ut/hermes-workflow/SKILL.md` §3.A | 在 A5 与 A6 之间插入 A5.5「Bastion OTP bring-up」子流程；附 mermaid 图 |
+| `skills/ut/workflow-loop-core/scripts/bastion_otp_bringup.py`（新建） | 实现：发 OTP 卡 → 等回复 → 解析 6 位码 → detached Popen `serve --otp` → poll ping → 成功返回 / 超时 raise |
 | `tasks/ut/scripts/.dist/ut-supervisor/SOUL.md` | 加 §「OTP recovery」段：描述 OTP 卡格式、超时策略、永不落盘约束 |
 | `tasks/ut/scripts/start_hermes_ut_runtime.py` | `ensure_bastion_daemon` 不再 abort；若 daemon 死，由 supervisor 主循环在启动卡确认后通过 A5.5 自起。本脚本仅做 preflight，不再硬要求 daemon |
 | `skills/ut/dependency-resolver/SKILL.md` | 在 §「作为 Hermes Gateway 运行」段说明 resolver 复用同一套 OTP bring-up（参数化 profile）|
@@ -224,7 +224,7 @@ flowchart LR
 - 没有 hermes profile 叫 `ut-dependency-resolver`
 - `skills/ut/failure-handler/scripts/generate_handled_manifest.py:101` 只是**写入**这个 action 标签，没人**读出**
 
-结果：3 个 test 永挂在 `pending`；workflow_loop_core 在 `pending > 0` 时不会判定终态，**自然完成路径走不通**。本次 run 是用户 option-2 人工干预 ignored 才出账。
+结果：3 个 test 永挂在 `pending`；workflow-loop-core 在 `pending > 0` 时不会判定终态，**自然完成路径走不通**。本次 run 是用户 option-2 人工干预 ignored 才出账。
 
 ### 4.2 根因
 
@@ -316,7 +316,7 @@ failed (executor)
 | `skills/ut/dependency-resolver/scripts/resolver_gateway_runner.py`（新建） | gateway 主循环：claim → resolve → release；调用现有 `download_model.py` / `install_package.py` |
 | `skills/ut/dependency-resolver/scripts/two_stage_sync.py`（新建） | t_ascend → resolver host → t_h20 三段路径的封装；30 min 超时；stage dir 清理 |
 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py:101` | **不动**（fixer 行为已正确） |
-| `skills/ut/workflow_loop_core/` | loop 判终态扩展：`final_status ∈ {passed, failed, ignored}` 才算结题；`pending` 不算 → 自动等 resolver；增加 `pending > 0` 的进度日志（不报 stuck） |
+| `skills/ut/workflow-loop-core/` | loop 判终态扩展：`final_status ∈ {passed, failed, ignored}` 才算结题；`pending` 不算 → 自动等 resolver；增加 `pending > 0` 的进度日志（不报 stuck） |
 | `tasks/ut/scripts/grade_tier.py` | 新增 INV-6 assertion：终态 `pending == 0`（与 TSD 重叠但显式声明依赖链闭环） |
 | `tests/ut/integration/fixtures/L4_expected.json` | **不动**（终态仍是 `passed=0/failed=0/ignored=3/pending=0`；resolver 走 offline 失败 → ignored 与原路径一致） |
 | `tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md` | 加 errata 段：Decision 3 实现采纳了 Kanban-style 而非同进程子 skill；指向本文档 |
@@ -426,7 +426,7 @@ if error_type in ["dependency", "download_error"]:
 | `tasks/ut/scripts/.dist/ut-dependency-resolver/` (目录) | #3 | 第 5 profile 完整 dist |
 | `skills/ut/dependency-resolver/scripts/resolver_gateway_runner.py` | #3 | resolver gateway 主循环 |
 | `skills/ut/dependency-resolver/scripts/two_stage_sync.py` | #3 | t_ascend→host→t_h20 同步 |
-| `skills/ut/workflow_loop_core/scripts/bastion_otp_bringup.py` | #2 | OTP 索取子流程 |
+| `skills/ut/workflow-loop-core/scripts/bastion_otp_bringup.py` | #2 | OTP 索取子流程 |
 | `tests/ut/unit/test_classify_intent_llm.py` | #1 | 意图分类 6 个 case |
 | `tests/ut/unit/test_bastion_otp_bringup.py` | #2 | OTP 索取 4 个 case |
 | `tests/ut/unit/test_resolver_gateway_runner.py` | #3 | runner 3 个 case |
@@ -437,12 +437,12 @@ if error_type in ["dependency", "download_error"]:
 | 文件 | Issue | 改动 |
 |---|---|---|
 | `tasks/ut/scripts/.dist/ut-supervisor/SOUL.md` | #1, #2 | 删 L97–98 一行；新增 §OTP recovery |
-| `skills/ut/hermes_workflow/SKILL.md` | #1, #2 | §3 流程修订；§3.D 新增 help 卡；§3.A 插入 A5.5 |
+| `skills/ut/hermes-workflow/SKILL.md` | #1, #2 | §3 流程修订；§3.D 新增 help 卡；§3.A 插入 A5.5 |
 | `tasks/ut/scripts/start_hermes_ut_runtime.py` | #2, #3 | 不再 abort on no-daemon；加 5th profile |
 | `tasks/ut/scripts/deploy_tier.py` | #3 | distribution 同步 resolver |
 | `tasks/ut/scripts/grade_tier.py` | #3 | INV-6 assertion |
 | `skills/ut/dependency-resolver/SKILL.md` | #3 | §作为 Hermes Gateway 运行 |
-| `skills/ut/workflow_loop_core/` | #3 | loop 终态判定 pending=0 |
+| `skills/ut/workflow-loop-core/` | #3 | loop 终态判定 pending=0 |
 
 ### 5.3 不动的文件（与直觉相反，需说明）
 
@@ -474,7 +474,7 @@ if error_type in ["dependency", "download_error"]:
 2. 写 `resolver_gateway_runner.py` + `two_stage_sync.py`
 3. 写 `SKILL.md §作为 Hermes Gateway 运行` 段
 4. 改 `start_hermes_ut_runtime.py` / `deploy_tier.py` / `grade_tier.py`
-5. workflow_loop_core 加 `pending=0` 终态判定
+5. workflow-loop-core 加 `pending=0` 终态判定
 6. 写 4 个测试文件
 7. 跑一次 L4（不干预），验证 ~30 min 内 verdict PASS
 8. 提交 commits（分 3 个：resolver gateway / start script / loop+grade）
@@ -516,6 +516,6 @@ if error_type in ["dependency", "download_error"]:
 - 上次 fabrication 事故复盘: `tasks/ut/docs/incidents/2026-06-22-l4-fabrication.md`
 - failure-handler Decision 3: `tasks/ut/docs/designs/2026-06-12-failure-handler-review-analysis.md`（采纳实现路径与本设计不同，将加 errata）
 - failure-handler review design: `tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md`
-- hermes_workflow v5 SKILL: `skills/ut/hermes_workflow/SKILL.md`
+- hermes-workflow v5 SKILL: `skills/ut/hermes-workflow/SKILL.md`
 - supervisor SOUL: `tasks/ut/scripts/.dist/ut-supervisor/SOUL.md`
 - tier 设计: `tasks/ut/docs/designs/2026-06-22-ut-tier-fixtures-and-agent-intent-design.md` §4.3

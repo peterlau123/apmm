@@ -173,7 +173,7 @@ Get-Content "$LOG\supervisor_ut-supervisor.out.log" -Wait -Tail 30
 | 改配置 | `nssm set <name> AppParameters "..."`（改完需要 `Restart-Service`） |
 | 服务面板 | `services.msc` |
 
-> 改了 `skills/ut/hermes_workflow/SKILL.md` 或任何 Python（`hermes_runner.py` 等）→ 至少 **重启 supervisor**；worker SKILL 改动也要重启对应 gateway。详见 [`ut-channels-overview.md`](ut-channels-overview.md) 关于 Hermes 不自动热升级的说明。
+> 改了 `skills/ut/hermes-workflow/SKILL.md` 或任何 Python（`hermes_runner.py` 等）→ 至少 **重启 supervisor**；worker SKILL 改动也要重启对应 gateway。详见 [`ut-channels-overview.md`](ut-channels-overview.md) 关于 Hermes 不自动热升级的说明。
 
 ---
 

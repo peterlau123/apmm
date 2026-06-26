@@ -104,7 +104,7 @@ def main() -> int:
         return 1
 
     if cfg.get("kanban", {}).get("enabled"):
-        print("[linear] ERROR: kanban.enabled=true — use the hermes_workflow channel for Kanban.")
+        print("[linear] ERROR: kanban.enabled=true — use the hermes-workflow channel for Kanban.")
         return 1
 
     # init run dir + state

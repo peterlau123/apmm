@@ -2,7 +2,7 @@
 
 **Date**: 2026-06-18 (revised 2026-06-19 after grilling session, v5)
 **Status**: Design proposal (v5 — process model clarified)
-**Scope**: `hermes_workflow` skill 新建 + `ut/workflow` skill 更新 + `ut/workflow_loop_core` skill 新建（共享循环主体）+ Worker SKILL.md 更新 + `hermes_runner.py` 重构 + ut-supervisor profile 新建 + 3 Gateway profile 部署文档
+**Scope**: `hermes-workflow` skill 新建 + `ut/workflow` skill 更新 + `ut/workflow-loop-core` skill 新建（共享循环主体）+ Worker SKILL.md 更新 + `hermes_runner.py` 重构 + ut-supervisor profile 新建 + 3 Gateway profile 部署文档
 
 ---
 
@@ -22,7 +22,7 @@
 Claude/OpenCode (开发调试)          Hermes (生产运行)
         │                                  │
         ▼                                  ▼
-  ut/workflow skill                  hermes_workflow skill
+  ut/workflow skill                  hermes-workflow skill
   （加载到 OpenCode/Claude）          （加载到 ut-supervisor profile）
         │                                  │
         ├─ Bastion 人工维护                ├─ Bastion 自动管理
@@ -30,7 +30,7 @@ Claude/OpenCode (开发调试)          Hermes (生产运行)
         └─────────── 共享 ──────────────────┘
                        │
                        ▼
-            ut/workflow_loop_core skill
+            ut/workflow-loop-core skill
             （Stage 调度循环主体 + 终止条件 +
              通知触发点；通过接口由 Supervisor
              实现通道差异）
@@ -43,13 +43,13 @@ Claude/OpenCode (开发调试)          Hermes (生产运行)
                 └─ manifest-updater/SKILL.md     (Stage 5)
 ```
 
-`ut/workflow_loop_core/SKILL.md` 承载循环主体，避免两个 Supervisor 重复维护循环逻辑。Supervisor 只实现"通道差异接口"——`ut/workflow` 实现"无指令检查 / 无 OTP"，`hermes_workflow` 实现"飞书指令 / OTP 流程"。
+`ut/workflow-loop-core/SKILL.md` 承载循环主体，避免两个 Supervisor 重复维护循环逻辑。Supervisor 只实现"通道差异接口"——`ut/workflow` 实现"无指令检查 / 无 OTP"，`hermes-workflow` 实现"飞书指令 / OTP 流程"。
 
 ---
 
 ## 3. 两个 Skill 职责边界
 
-| | `ut/workflow` | `hermes_workflow` |
+| | `ut/workflow` | `hermes-workflow` |
 |---|---|---|
 | **触发方** | Claude Code / OpenCode | ut-supervisor profile 内的 Hermes Agent |
 | **触发方式** | 终端用户输入关键词 | 飞书消息关键词匹配 / Hermes CLI |
@@ -76,7 +76,7 @@ Stage 2-5 的 Worker SKILL.md 在 workflow 启动时由 Supervisor **一次性�
 
 **跨 Stage 数据传递**：通过本地文件（manifest.json / batch_results.json / handled_tests.json），不在 Supervisor context 中累积保存。pytest stdout 等大块数据通过 §5.2 远端关键段提取，只传摘要回 Supervisor，进一步降低 context 增长速度。auto-compact 仅作为兜底机制处理超长情况。
 
-`ut/workflow_loop_core/SKILL.md` 提供给 Supervisor 调用的接口（伪签名）：
+`ut/workflow-loop-core/SKILL.md` 提供给 Supervisor 调用的接口（伪签名）：
 
 ```text
 loop_core.run(
@@ -231,7 +231,7 @@ C/E/D/P/M/S 处理细节：保留现有，详见 `failure-handler/SKILL.md`。
 | 系统故障 | failed | 🟥 红色 |
 | Gateway 任一挂 | gateway_down | 🟥 红色（等 systemd 自动恢复） |
 
-**OTP 渐进重发节奏**（`hermes_workflow` 专属）：
+**OTP 渐进重发节奏**（`hermes-workflow` 专属）：
 
 ```
 第 1 次发卡片        → 立即
@@ -249,9 +249,9 @@ C/E/D/P/M/S 处理细节：保留现有，详见 `failure-handler/SKILL.md`。
 
 ---
 
-## 8. 状态机（hermes_workflow 专属）
+## 8. 状态机（hermes-workflow 专属）
 
-`ut/workflow` 不维护状态机（终端模式没有暂停恢复）。`hermes_workflow` 完整状态机：
+`ut/workflow` 不维护状态机（终端模式没有暂停恢复）。`hermes-workflow` 完整状态机：
 
 ```
                          ┌──────────────┐
@@ -365,7 +365,7 @@ OTP 收到但 daemon 重启失败 → **维持 `waiting_otp`**，飞书改卡片
 
 ### 11.2 重构后定位
 
-**工具模块**——被 ut-supervisor profile 内的 Hermes Agent / `ut/workflow_loop_core` `import` 使用。
+**工具模块**——被 ut-supervisor profile 内的 Hermes Agent / `ut/workflow-loop-core` `import` 使用。
 
 ```python
 # 初始化
@@ -461,14 +461,14 @@ manifest.json:tests[i].retry_count++   ← per-test 计数
 
 ### 14.0 进程模型
 
-`hermes_workflow` 模式涉及 **1 个 Hermes Agent profile（ut-supervisor，长期）+ 3 个 Hermes Gateway profile（ut-orchestrator/ut-executor/ut-fixer，长期）**。两类 profile 用途不同：
+`hermes-workflow` 模式涉及 **1 个 Hermes Agent profile（ut-supervisor，长期）+ 3 个 Hermes Gateway profile（ut-orchestrator/ut-executor/ut-fixer，长期）**。两类 profile 用途不同：
 
 | | ut-supervisor（1 个） | 3 Kanban Gateway |
 |---|---|---|
 | **进程类型** | 长期 Hermes **Agent**（订阅飞书） | 长期 Hermes **Gateway**（dispatcher） |
 | **数量** | 1 | 3（每个 worker profile 一个） |
 | **systemd unit** | `hermes-agent@ut-supervisor` | `hermes-gateway@{ut-orchestrator,ut-executor,ut-fixer}` |
-| **加载内容** | hermes_workflow + workflow_loop_core + 4 Worker SKILL | 不加载 SKILL；只是派发器 |
+| **加载内容** | hermes-workflow + workflow-loop-core + 4 Worker SKILL | 不加载 SKILL；只是派发器 |
 | **响应飞书** | ✅ 是飞书订阅者 | ❌ 不订阅 |
 | **管 workflow 状态机** | ✅ Supervisor 循环 | ❌ |
 | **派发短任务** | ❌ 只创建初始 Kanban 任务 | ✅ 派发 Worker subprocess |
@@ -489,7 +489,7 @@ manifest.json:tests[i].retry_count++   ← per-test 计数
 ┌────────────────────────────────────────────────────────────────────┐
 │  ut-supervisor profile（systemctl status hermes-agent@ut-supervisor)│
 │  ├─ 订阅飞书                                                        │
-│  ├─ 加载 hermes_workflow + workflow_loop_core + 4 Worker SKILL       │
+│  ├─ 加载 hermes-workflow + workflow-loop-core + 4 Worker SKILL       │
 │  ├─ Bastion Manager                                                 │
 │  └─ Supervisor 主循环（直接跑 Stage 2-5）                            │
 └─────────────────────────────┬──────────────────────────────────────┘
@@ -582,14 +582,14 @@ ut-supervisor 在 Kanban 模式下**不碰 manifest**，只做监控 + 飞书 + 
 | 通道 | 方式 | 示例 |
 |------|------|------|
 | 飞书消息 | ut-supervisor profile 订阅飞书群，关键词匹配 | "跑 ut workflow"、"启动测试"、"开始 UT" |
-| Hermes CLI | 显式调用 | `hermes skill run hermes_workflow`（连 ut-supervisor profile） |
+| Hermes CLI | 显式调用 | `hermes skill run hermes-workflow`（连 ut-supervisor profile） |
 
 ### 14.2 启动流程
 
 ```
 1. 用户在飞书群发"跑 ut workflow"
 2. ut-supervisor profile 内的 Hermes Agent 收到消息（飞书订阅）
-3. 关键词匹配 → 加载 hermes_workflow/SKILL.md + workflow_loop_core/SKILL.md
+3. 关键词匹配 → 加载 hermes-workflow/SKILL.md + workflow-loop-core/SKILL.md
    + 一次性加载 4 份 Worker SKILL.md
 4. Agent 飞书发【参数确认卡片】（蓝色）：
      - 展示 5 字段：test_list_path, batch_size, manifest_source, kanban.enabled, resume_from
@@ -609,7 +609,7 @@ ut-supervisor 在 Kanban 模式下**不碰 manifest**，只做监控 + 飞书 + 
 
 ### 14.3 主循环
 
-通过 `ut/workflow_loop_core/SKILL.md` 提供的 `loop_core.run(...)`，Supervisor 实现回调即可。
+通过 `ut/workflow-loop-core/SKILL.md` 提供的 `loop_core.run(...)`，Supervisor 实现回调即可。
 
 **线性模式**（`kanban.enabled: false`）：
 
@@ -894,12 +894,12 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
 
 | 文件 | 操作 | 说明 |
 |------|:---:|------|
-| `skills/ut/hermes_workflow/SKILL.md` | 🆕 新建 | Hermes Agent 指令（通道差异层） |
-| `skills/ut/workflow_loop_core/SKILL.md` | 🆕 新建 | 共享循环主体（两个 Supervisor 都加载） |
-| `skills/ut/hermes_workflow/profile.yaml` | 🆕 新建 | ut-supervisor profile 配置（飞书订阅 + 加载 hermes_workflow skill） |
+| `skills/ut/hermes-workflow/SKILL.md` | 🆕 新建 | Hermes Agent 指令（通道差异层） |
+| `skills/ut/workflow-loop-core/SKILL.md` | 🆕 新建 | 共享循环主体（两个 Supervisor 都加载） |
+| `skills/ut/hermes-workflow/profile.yaml` | 🆕 新建 | ut-supervisor profile 配置（飞书订阅 + 加载 hermes-workflow skill） |
 | `tasks/ut/docs/guides/hermes-supervisor-service.md` | 🆕 新建 | ut-supervisor systemd unit 部署指南（`hermes-agent@ut-supervisor`） |
 | `tasks/ut/docs/guides/hermes-gateway-service.md` | 🆕 新建 | 3 Gateway systemd template unit 部署指南（`hermes-gateway@.service` 实例化为 ut-orchestrator/ut-executor/ut-fixer） |
-| `skills/ut/workflow/SKILL.md` | ✏️ 更新 | 启动时一次性加载 4 份 Worker SKILL；引用缺失时 reload；调 `workflow_loop_core` |
+| `skills/ut/workflow/SKILL.md` | ✏️ 更新 | 启动时一次性加载 4 份 Worker SKILL；引用缺失时 reload；调 `workflow-loop-core` |
 | `skills/ut/workflow/scripts/hermes_runner.py` | ✏️ 重构 | 工具模块定位，删除 stage_* 函数；删 start_gateway 加 check_gateways_alive |
 | `skills/ut/workflow/workflow_state_schema.json` | ✏️ 更新 | pending_config 字段；终态 stopped/failed/completed；删 reconnecting |
 | `skills/ut/unit-test-executor/SKILL.md` | ✏️ 更新 | 远端只写 raw_log，本地写 summary；Worker 不重试；retriable_error 标记；Bastion 上报 |
@@ -917,7 +917,7 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
 ## 18. 非目标
 
 - 不修改 `gpu_scheduler.py` / `retry_test.py` 等已有脚本的功能
-- 不在 `hermes_workflow/` / `workflow_loop_core/` 下新增脚本文件
+- 不在 `hermes-workflow/` / `workflow-loop-core/` 下新增脚本文件
 - 不改变 manifest.json / batch_config.json 等数据格式（只扩展枚举、加 last_batch_id 指针）
 - 不改变现有飞书通知卡片格式（除完成卡片附加 auto-fix commit 列表）
 - 不做复杂的 batch_size 动态升降档规则表
@@ -954,4 +954,4 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
     - Kanban 模式 Stage 5 归属：**ut-orchestrator 兼 Stage 2+5**（manifest 写者唯一，避免并发）
     - ut-supervisor 在 Kanban 模式下不碰 manifest，只做监控/飞书/Bastion/终止条件
     - 远端日志策略再修正：**远端只写 raw_log.txt，summary.txt 仅本地存在**（删 remote_batch_dir/summary.txt 和 summary_path 字段）
-    - 新增文件：`hermes_workflow/profile.yaml`、`hermes-supervisor-service.md`、`hermes-gateway-service.md`、`ut-orchestrator/SOUL.md` 更新（Kanban 模式加载 batch-selector + manifest-updater 两份 SKILL）
+    - 新增文件：`hermes-workflow/profile.yaml`、`hermes-supervisor-service.md`、`hermes-gateway-service.md`、`ut-orchestrator/SOUL.md` 更新（Kanban 模式加载 batch-selector + manifest-updater 两份 SKILL）

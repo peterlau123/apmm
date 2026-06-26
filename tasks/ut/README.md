@@ -50,7 +50,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 ---
 
-### 🅲️ 我要在 Hermes 后台长跑（生产 / L4，**ut/hermes_workflow 通道**）
+### 🅲️ 我要在 Hermes 后台长跑（生产 / L4，**ut/hermes-workflow 通道**）
 
 适合无人值守的长时间运行、L4 集成、生产全量。Kanban 可开可关。
 
@@ -58,7 +58,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 2. 通过飞书发触发词。
 3. supervisor 全权托管：Bastion 心跳、OTP 自动恢复、状态机（running/paused/waiting_otp/completed/stopped/failed）、参数热改。
 
-详见 [skills/ut/hermes_workflow/SKILL.md](../../skills/ut/hermes_workflow/SKILL.md)。
+详见 [skills/ut/hermes-workflow/SKILL.md](../../skills/ut/hermes-workflow/SKILL.md)。
 
 ---
 
@@ -90,10 +90,10 @@ ut/workflow            (线性通道，开发态)
   └─ 终端会话加载 SKILL → 进程内循环 Stage 2-5
   └─ kanban 强制 OFF
 
-ut/hermes_workflow     (生产通道，长期后台)
+ut/hermes-workflow     (生产通道，长期后台)
   └─ ut-supervisor 飞书订阅 → 触发后 ensure_bastion → loop_core
   └─ kanban 可选；开 kanban 时由 3 个 Gateway (orchestrator/executor/fixer) 协作
-  └─ 共用同一份 workflow_loop_core，5 阶段流水线一致
+  └─ 共用同一份 workflow-loop-core，5 阶段流水线一致
 ```
 
 5 阶段流水线（两通道共用）：

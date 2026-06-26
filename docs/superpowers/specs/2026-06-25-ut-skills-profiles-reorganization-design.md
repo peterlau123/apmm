@@ -164,7 +164,7 @@ skills/ut/
 │   │   └── collect_tests.py  ← 从 test_list.txt 生成 manifest
 │   └── references/
 │
-├── workflow_loop_core/  ← 共享引擎
+├── workflow-loop-core/  ← 共享引擎
 │   ├── SKILL.md  ← 5 阶段流水线逻辑
 │   ├── scripts/
 │   │   └── loop_core.py
@@ -243,7 +243,7 @@ description: 'UT Workflow supervisor: Feishu + Bastion + Kanban task creation + 
 x-deploy:
   auto_load_skills:
     - ut/hermes-workflow
-    - ut/workflow_loop_core
+    - ut/workflow-loop-core
     - ut/unit-test-collector  # Linear mode 需要
     - ut/batch-selector       # Linear mode 需要
     - ut/executor             # Linear mode 需要

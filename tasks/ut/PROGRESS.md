@@ -8,9 +8,9 @@
 
 | 指标 | 数值 |
 |------|:----:|
-| 总测试用例数 | 31,868 |
-| 已执行用例数 | 6,412 |
-| 进度 | 20.12% |
+| 总测试用例数 | 33,286 |
+| 已执行用例数 | 33,286 |
+| 进度 | 19.26% |
 | 通过数 | 6,411 |
 
 ---
@@ -19,7 +19,7 @@
 
 | Stage | Skill | 版本 |
 |:-----:|-------|:----:|
-| 1 | ut-test-collector | v2.1 |
+| 1 | unit-test-collector | v2.1 |
 | 2 | batch-selector | v2.2 |
 | 3 | unit-test-executor | v3.2 |
 | 4 | failure-handler | v3.0 |
@@ -31,6 +31,7 @@
 
 | 日期 | 里程碑 | 详情 |
 |------|--------|------|
+| 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
 | 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
 | 2026-06-12 | Kanban Phase 1 | docs/kanban/README.md |
 | 2026-06-11 | Schema 统一 | skills/ut/shared/ |
@@ -43,7 +44,7 @@
 |:-----:|:----:|
 | 1 基础设施 | ✅ |
 | 2 方案集成 | ✅ |
-| 3 真实验证 | ⬜ |
+| 3 真实验证 | ✅ |
 | 4 生产化 | ⬜ |
 
 ---
@@ -51,7 +52,7 @@
 ## 待完成工作
 
 - Workflow 集成测试
-- Kanban Phase 3 验证
+- Kanban Phase 4 生产化
 
 ---
 
@@ -65,4 +66,4 @@
 
 ---
 
-*最后更新: 2026-06-13*
+*最后更新: 2026-06-26*

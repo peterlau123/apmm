@@ -82,6 +82,7 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
     "ut-supervisor": [
         "hermes_workflow",
         "workflow_loop_core",
+        "unit-test-collector",
         "batch-selector",
         "unit-test-executor",
         "failure-handler",

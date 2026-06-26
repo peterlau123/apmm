@@ -25,5 +25,5 @@ Stage 3 Worker - 测试执行器
 
 ## Troubleshooting References
 - SKILL.md 内联常见问题（watchdog timeout、GPU OOM）
-- references/watchdog-timeout.md（复杂问题）
-- references/remote-execution.md（执行细节）
+- references/error-handling.md（错误处理）
+- references/execution-strategy.md（v6并行执行）

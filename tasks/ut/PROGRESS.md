@@ -21,7 +21,7 @@
 |:-----:|-------|:----:|
 | 1 | unit-test-collector | v2.1 |
 | 2 | batch-selector | v2.2 |
-| 3 | unit-test-executor | v3.2 |
+| 3 | unit-test-executor | v5.0 |
 | 4 | failure-handler | v3.0 |
 | 5 | manifest-updater | v3.2 |
 
@@ -31,6 +31,7 @@
 
 | 日期 | 里程碑 | 详情 |
 |------|--------|------|
+| 2026-06-26 | Phase 4 启动 + SKILL v5.0 | 集成测试骨架 · unit-test-executor v5.0版本统一 |
 | 2026-06-26 | Manifest Dedupe Fix | 过滤69个伪测试（pytest警告源行无::分隔符）→ 32,964 unique tests |
 | 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
 | 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
@@ -46,14 +47,14 @@
 | 1 基础设施 | ✅ |
 | 2 方案集成 | ✅ |
 | 3 真实验证 | ✅ |
-| 4 生产化 | ⬜ |
+| 4 生产化 | 🔄 进行中 |
 
 ---
 
 ## 待完成工作
 
-- Workflow 集成测试
-- Kanban Phase 4 生产化
+- Workflow 集成测试骨架（已创建）
+- Kanban Phase 4 生产化 profiles（待填充）
 
 ---
 

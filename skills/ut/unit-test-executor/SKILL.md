@@ -1,11 +1,11 @@
 ---
 name: unit-test-executor
 description: Worker Agent - 单元测试执行器，执行 pytest 测试批次（含 GPU 检测），生成 batch_results.json，由 Supervisor 调用执行 Stage 3
-version: 3.2.0
+version: 5.0.0
 when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（含 distributed 测试 GPU 检测）
 ---
 
-# Unit Test Executor (Worker Agent v3.2)
+# Unit Test Executor (Worker Agent v5)
 
 > ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
 >
@@ -28,11 +28,11 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（
 >    script (sandbox blocked / agent.py error / bastion disconnected), STOP
 >    and return `{"next_action":"wait","reason":...}` — do NOT fabricate a
 >    plausible result.
-> 3. **Remote log is the single source of truth.** Every status in
->    `batch_results.tests[*].status` must come from grepping
->    `<remote_log_dir>/<batch_id>/pytest_<batch_id>.log` on the remote host
->    via `agent.py`. If the log does not exist or is empty, return
->    `{"next_action":"wait", "reason":"remote log empty"}` — do NOT guess.
+> 3. **JUnit XML is the source of truth.** Every status in
+>    `batch_results.tests[*].status` comes from parsing
+>    `<remote_log_dir>/<batch_id>/result_<batch_id>_<node>.xml`
+>    fetched via `agent.py`. If XML is missing/unparseable, classify
+>    as `retriable_error`/`timeout` — do NOT fall back to grep.
 > 4. **All timestamps are UTC ISO 8601 with Z suffix.** Pattern:
 >    `^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$`. Local time,
 >    offsets (`+08:00`), microseconds, and tzname suffixes are schema
@@ -47,10 +47,9 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（
 > `batch_results.json` whose `remote_log.raw_log_path` is missing or whose
 > recorded `size_bytes` disagrees with `stat -c %s` on the remote.
 
-## Behavior (v5)
+## Behavior (v5/v6)
 
-This section describes the v5 Worker contract. v3.x sections below are kept
-for historical context and will be reconciled in a follow-up pass.
+This section describes the v5/v6 Worker contract (parallel execution via ThreadPoolExecutor).
 
 ### 1. Remote raw_log + local summary
 
@@ -157,61 +156,50 @@ and `mark_connected()` for any caller that needs to surface connection state.
 
 ---
 
-## 流程图
+## 流程图 (v6 Parallel)
 
 ```mermaid
 flowchart TB
     subgraph Input["[输入] Supervisor 调用"]
-        A1["batch_config.json 路径"]
-        A2["pytest_args"]
-        A3["timeout"]
+        A1["batch_config.json"]
+        A2["GPU pool detection"]
     end
     
-    Input --> Step1
+    Input --> GPU
     
-    subgraph Step1["[Step 1] 加载批次配置"]
-        S1_1["读取 batch_config.json"]
-        S1_2["获取 tests 列表"]
-        S1_3["检查 distributed 标记"]
+    subgraph GPU["[Step 1] GPU Detection + Zombie Cleanup"]
+        G1["nvidia-smi query"]
+        G2["Detect free GPUs"]
+        G3["Cleanup own zombies"]
+        G4["D1 fallback: serialize on lowest-usage card"]
     end
     
-    Step1 --> Step1b
+    GPU --> Parallel
     
-    subgraph Step1b["[Step 1b] GPU 检测（distributed 测试）"]
-        S1b_1["distributed 测试存在?"]
-        S1b_2["检查远程 GPU 可用性"]
-        S1b_3["available_gpus >= 2?"]
-        S1b_4["GPU < 2 → 返回 blocked_reason"]
+    subgraph Parallel["[Step 2] Parallel Execution (ThreadPoolExecutor)"]
+        P1["Test 1 → GPU 0 → Watchdog → JUnit XML"]
+        P2["Test 2 → GPU 1 → Watchdog → JUnit XML"]
+        P3["Test N → GPU M → Watchdog → JUnit XML"]
     end
     
-    Step1b --> Step2
+    Parallel --> Aggregate
     
-    subgraph Step2["[Step 2] 执行 pytest"]
-        S2_1["构建 pytest 命令"]
-        S2_2["设置分布式环境变量（如需要）"]
-        S2_3["远程执行（agent.py + Docker）"]
-        S2_4["监控超时"]
+    subgraph Aggregate["[Step 3] Batch Log Aggregation"]
+        A3["Concat per-node logs"]
+        A4["Stat batch log size"]
+        A5["Write batch_results.json"]
     end
     
-    Step2 --> Step3
+    Aggregate --> Output
     
-    subgraph Step3["[Step 3] 内置日志提取与解析"]
-        direction LR
-        S3_1["远程 grep 提取"] --> S3_2["Bastion 传输"]
-        S3_2 --> S3_3["parse_remote_log.py"]
-        S3_3 --> S3_4["batch_results.json"]
-    end
-    
-    Step3 --> Step4
-    
-    subgraph Step4["[Step 4] 返回结果"]
-        S4_1["batch_results.json 已生成"]
-        S4_2["返回极简 stats（统一格式）"]
-        S4_3["Session 结束"]
+    subgraph Output["[输出] 返回结果"]
+        O1["batch_results.json"]
+        O2["summary.txt"]
+        O3["stats → Supervisor"]
     end
 ```
 
-> **v3.2**: Step 3 日志提取已内置为 stage 核心行为，不再是可选的 post_action
+> **v6**: 每个test_node独立执行，pin到free GPU，JUnit XML作为结果source of truth。Hang只kill该test，无batch-level collateral。
 
 ---
 
@@ -533,5 +521,5 @@ return {
 ---
 
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-11*
-*版本: 3.2.0*
+*更新日期: 2026-06-26*
+*版本: 5.0.0*

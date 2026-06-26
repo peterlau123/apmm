@@ -257,7 +257,7 @@ start_l3:
   eta: "~ 15 min"
 start_l4:
   yaml: tests/ut/integration/fixtures/workflow.l4.yaml
-  test_list: tests/ut/integration/fixtures/l3_retry_subset.txt
+  test_list: tests/ut/integration/fixtures/l4_test_list_v2.txt
   mode: kanban
   eta: "~ 60 min"
 start_production:

@@ -21,7 +21,15 @@
     
     # 设置 ignored 状态
     python update_status.py --manifest-path PATH --single "tests/xxx.py::test_func" --status ignored --reason "版本不兼容"
+
+NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
+Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
 """
+
+import os
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 
 import json
 import argparse

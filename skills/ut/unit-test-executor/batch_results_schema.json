@@ -98,10 +98,24 @@
           "duration_ms": {
             "type": ["integer", "null"],
             "minimum": 0,
-            "description": "执行耗时 (毫秒)"
+            "description": "执行耗时 (毫秒); 取自 JUnit <testcase time>，缺失=null"
           },
           "exit_code": {
-            "type": ["integer", "null"]
+            "type": ["integer", "null"],
+            "description": "该用例 docker exec 退出码; 124=watchdog wall 超时"
+          },
+          "gpu_id": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "钉卡的 GPU index (CUDA_VISIBLE_DEVICES); 0-card 降级时为降级那张卡"
+          },
+          "log_path": {
+            "type": ["string", "null"],
+            "description": "该用例远程 pytest log 绝对路径 (pytest_<batch_id>_<node>.log); null=未写"
+          },
+          "xml_path": {
+            "type": ["string", "null"],
+            "description": "该用例远程 JUnit XML 绝对路径 (result_<batch_id>_<node>.xml); null=未写 (watchdog SIGKILL 未 flush)"
           }
         }
       }

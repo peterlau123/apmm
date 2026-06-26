@@ -18,6 +18,11 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 import sys
+import os
+
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 
 # 先设置路径（确保 skills 包可被导入）
 # scripts/ -> batch-selector/ -> ut/ -> skills/ -> apmm/ (项目根)

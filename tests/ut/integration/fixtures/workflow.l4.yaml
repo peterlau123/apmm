@@ -109,7 +109,7 @@ config:
 
   # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"
-  batch_size: 3 # FROZEN(L4): matches 3-test retry subset (whole batch in one round)
+  batch_size: 8 # Updated for l4_test_list_v2 (7 fast pass + 1 retry, whole batch in one round)
   max_retry_per_test: 3 # v5 default; failure-handler 单测试最多重试次数
 
   # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）
@@ -127,7 +127,7 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: "D:/workspace/apmm/tests/ut/integration/fixtures/l3_retry_subset.txt" # FROZEN(L4): 3-test retry subset → executor→fixer→executor chain
+  test_list_path: "D:/workspace/apmm/tests/ut/integration/fixtures/l4_test_list_v2.txt" # FROZEN(L4): 3-test retry subset → executor→fixer→executor chain
 
   # 场景 2: 用户指定的输入 manifest.json
   manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径
@@ -175,7 +175,7 @@ stages:
     description: 选择下一批次测试
     input:
       manifest_path: *manifest_path
-      batch_size: 3 # FROZEN(L4): matches 3-test retry subset
+      batch_size: 8 # Updated for l4_test_list_v2
     output:
       batch_config_path: *batch_config_path
     kanban:
@@ -210,8 +210,8 @@ stages:
       grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
       grep_timeout: 60
       parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
-    timeout: 600                  # FROZEN(L4): wall-clock 兜底 (design 2026-06-23 §3)
-    pytest_idle_timeout: 120      # FROZEN(L4): 无日志活动超时 → idle kill
+    timeout: 600 # FROZEN(L4): wall-clock 兜底 (design 2026-06-23 §3)
+    pytest_idle_timeout: 120 # FROZEN(L4): 无日志活动超时 → idle kill
     kanban:
       action: update_lane
       progress_template: "{passed}/{total}"

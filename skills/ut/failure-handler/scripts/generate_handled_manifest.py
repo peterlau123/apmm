@@ -10,12 +10,20 @@ Failure Handler - 生成已处理 manifest
 用法：
     python generate_handled_manifest.py --workflow-state PATH --batch-dir PATH
     python generate_handled_manifest.py --batch-results PATH --batch-dir PATH --batch-id ID
+
+NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
+Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
 """
 
 import argparse
 import json
 import sys
+import os
 from pathlib import Path
+
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 
 # 先设置路径（确保 skills 包可被导入）
 _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent

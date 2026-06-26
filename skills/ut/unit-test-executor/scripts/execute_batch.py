@@ -22,7 +22,15 @@ v5 behavior:
 
 Usage:
     python execute_batch.py --batch-config PATH --workflow-state PATH
+
+NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
+Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
 """
+
+import os
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 
 import base64
 import functools

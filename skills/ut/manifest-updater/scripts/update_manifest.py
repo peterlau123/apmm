@@ -12,12 +12,20 @@
     python update_manifest.py --batch result.json
     python update_manifest.py --test "tests/xxx.py::test_func" --status failed
     python update_manifest.py --report
+
+NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
+Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
 """
 
 import json
 import argparse
+import os
 from pathlib import Path
 from datetime import datetime
+
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 from collections import defaultdict
 from typing import Optional, Dict, List, Any
 

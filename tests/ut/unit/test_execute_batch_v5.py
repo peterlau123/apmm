@@ -107,51 +107,78 @@ def test_classify_passed_returns_passed_none():
 
 
 # --- Task 2.1: remote raw_log + local summary + remote_log pointer --------
+#
+# v6 (2026-06-24-executor-parallel-gpu): the executor now runs each test_node
+# in its own docker exec and parses per-node JUnit XML (no grep of pytest
+# human output). The batch-level remote_log.raw_log_path still points at
+# pytest_<batch_id>.log; per-node log/xml paths land on each test entry.
+
+_PASSING_XML_A = (
+    '<?xml version="1.0"?><testsuites><testsuite name="t">'
+    '<testcase classname="c" name="test_a" time="0.5">'
+    '</testcase></testsuite></testsuites>'
+)
+_PASSING_XML_B = (
+    '<?xml version="1.0"?><testsuites><testsuite name="t">'
+    '<testcase classname="c" name="test_b" time="0.7">'
+    '</testcase></testsuite></testsuites>'
+)
+
+
+def _decode_inner(cmd: str) -> str:
+    import base64 as _b64, re as _re
+    m = _re.search(r"echo (\S+) \| base64 -d", cmd)
+    return _b64.b64decode(m.group(1)).decode("utf-8") if m else cmd
+
 
 def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
     """The executor produces:
     - batch_results.json with remote_log.raw_log_path naming pytest_<batch_id>.log
+    - per-test entries with status parsed from JUnit XML
     - a local summary.txt next to batch_results.json
     """
     cfg = _write_batch_config(tmp_path)
     state = _write_workflow_state(tmp_path)
 
-    summary_text = (
-        "PASSED tests/test_x.py::test_a\n"
-        "PASSED tests/test_x.py::test_b\n"
-        "===== 2 passed in 1.23s =====\n"
-    )
-
     def fake_run_remote(cmd, *, timeout=None, **kwargs):
-        # Distinguish pytest invocation from the summary grep+tail call.
-        # Both cmds are base64-wrapped (`_wrap_with_docker_exec_b64`); decode
-        # the payload to peek inside.
-        import base64 as _b64, re as _re
-        m = _re.search(r"echo (\S+) \| base64 -d", cmd)
-        inner = _b64.b64decode(m.group(1)).decode("utf-8") if m else cmd
-        if "grep -E" in inner:
-            return {"exit_code": 0, "stdout": summary_text, "stderr": ""}
+        inner = _decode_inner(cmd)
+        # The XML-fetch call `cat <node_xml>` returns the parsed XML; the
+        # watchdog exec returns empty stdout.
+        if "cat " in inner:
+            xml = _PASSING_XML_B if "test_b" in inner else _PASSING_XML_A
+            return {"exit_code": 0, "stdout": xml, "stderr": ""}
         return {"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": 4242}
 
-    with mock.patch.object(execute_batch_mod, "run_remote", side_effect=fake_run_remote):
+    with mock.patch.object(execute_batch_mod, "run_remote",
+                           side_effect=fake_run_remote), \
+         mock.patch.object(execute_batch_mod, "_detect_free_gpus",
+                           return_value=([0, 1], 0)):
         result = execute_batch_mod.execute_batch(cfg, state)
 
     out = json.loads((tmp_path / "batch_results.json").read_text(encoding="utf-8"))
 
     assert "remote_log" in out
     rlog = out["remote_log"]
-    # Design 2026-06-23 §4 D5: filename is pytest_<batch_id>.log
+    # Batch-level pointer filename is pytest_<batch_id>.log
     assert rlog["raw_log_path"].endswith("/pytest_batch_p1_r1_w1_test.log")
     assert "host" in rlog and "container" in rlog
     assert rlog["captured_at"].endswith("Z")
 
     summary_path = tmp_path / "summary.txt"
     assert summary_path.exists()
-    assert "PASSED tests/test_x.py::test_a" in summary_path.read_text(encoding="utf-8")
+    summary = summary_path.read_text(encoding="utf-8")
+    # Aggregated per-test outcomes mention each node.
+    assert "tests/test_x.py::test_a" in summary
+    assert "tests/test_x.py::test_b" in summary
 
+    # Per-test entries parsed from JUnit: passed + real duration_ms.
+    assert len(out["tests"]) == 2
     for t in out["tests"]:
-        assert "status" in t
-        assert "error_type" in t
+        assert t["status"] == "passed"
+        assert t["error_type"] is None
+        assert t["duration_ms"] in (500, 700)
+        assert t["gpu_id"] in (0, 1)
+
 
 
 # --- Task 2.3: Bastion disconnect -> wait, no batch_results.json ----------
@@ -175,33 +202,11 @@ def test_execute_batch_on_disconnect_marks_disconnected_and_returns_wait(tmp_pat
 
 
 # --- Bug #2: pytest output parsing with abbreviated test names ------------
-
-def test_classify_for_test_matches_abbreviated_pytest_output():
-    """Bug #2 fix: pytest abbreviates long parametrized names with '::...'
-    Classifier should still find correct status via prefix matching."""
-    # Simulate pytest verbose output with abbreviated test names
-    summary_text = (
-        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input0---a-b-c] PASSED [ 12%]\n"
-        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::... PASSED [ 25%]\n"
-        "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::... FAILED [ 37%]\n"
-        "tests/config/test_config_utils.py::test_hash_factors PASSED [ 50%]\n"
-        "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None] ERROR [ 75%]\n"
-        "======================== 2 passed, 1 failed, 1 error =========================\n"
-    )
-    
-    # Test: long parametrized name that pytest abbreviates
-    test_node = "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input1---x-y-z]"
-    status, error_type = execute_batch_mod._classify_for_test(summary_text, test_node)
-    # Should match via prefix (class_prefix = tests/...::TestParameterSweepItem)
-    # Will classify as PASSED because first matching line is PASSED
-    assert status in ("passed", "failed", "error")  # At least gets a status, not error:other
-    
-    # Test: exact match available
-    test_node_exact = "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested[input0---a-b-c]"
-    status_exact, _ = execute_batch_mod._classify_for_test(summary_text, test_node_exact)
-    assert status_exact == "passed"  # Exact line shows PASSED
-    
-    # Test: simple test name (no abbreviation needed)
-    test_node_simple = "tests/config/test_config_utils.py::test_hash_factors"
-    status_simple, _ = execute_batch_mod._classify_for_test(summary_text, test_node_simple)
-    assert status_simple == "passed"
+#
+# RETIRED in v6 (2026-06-24-executor-parallel-gpu): Bug #2 was that pytest
+# abbreviates long parametrized node ids in human-readable `-v` output, so
+# grep-based per-test classification mis-matched. The v6 executor runs each
+# node in its own docker exec with --junit-xml, so pytest itself is the source
+# of truth — there is no human-output grep to abbreviate. The old
+# `_classify_for_test` helper was removed; JUnit parsing (test_execute_batch_junit.py)
+# covers the status mapping. Bug #2 is structurally impossible in v6.

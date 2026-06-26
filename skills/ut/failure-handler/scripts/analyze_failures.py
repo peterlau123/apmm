@@ -6,6 +6,9 @@ Failure Handler - 分析失败原因脚本
 2. 从命令行参数直接指定路径
 
 读取 batch_results.json，分类失败测试
+
+NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
+Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
 """
 
 import argparse
@@ -13,8 +16,13 @@ import importlib.util
 import json
 import re
 import sys
+import os
 from pathlib import Path
 from datetime import datetime
+
+# Clear PYTHONPATH to avoid Hermes venv leaking into apmm subprocesses
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
 
 
 def _load_branch_checker():

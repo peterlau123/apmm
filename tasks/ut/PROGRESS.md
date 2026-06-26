@@ -8,9 +8,9 @@
 
 | 指标 | 数值 |
 |------|:----:|
-| 总测试用例数 | 33,286 |
-| 已执行用例数 | 33,286 |
-| 进度 | 19.26% |
+| 总测试用例数 | 32,964 |
+| 已执行用例数 | 32,964 |
+| 进度 | 19.45% |
 | 通过数 | 6,411 |
 
 ---
@@ -31,6 +31,7 @@
 
 | 日期 | 里程碑 | 详情 |
 |------|--------|------|
+| 2026-06-26 | Manifest Dedupe Fix | 过滤69个伪测试（pytest警告源行无::分隔符）→ 32,964 unique tests |
 | 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
 | 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
 | 2026-06-12 | Kanban Phase 1 | docs/kanban/README.md |

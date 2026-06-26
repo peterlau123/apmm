@@ -30,6 +30,7 @@ def parse_test_list(test_list_path: Path) -> list[str]:
     """Parse test_list file and extract test nodes.
 
     Skip header lines (e.g., "Running N items in this shard") and empty lines.
+    Skip warning source lines (format: tests/path/file.py:lineno without ::).
     Only return lines that match pytest test node format: tests/path/test_file.py::test_name
 
     Args:
@@ -45,7 +46,8 @@ def parse_test_list(test_list_path: Path) -> list[str]:
             line = line.strip()
             # Skip header lines (don't start with tests/)
             # Skip empty lines
-            if not line or not line.startswith('tests/'):
+            # Skip warning source lines (no :: separator - not a real pytest test node)
+            if not line or not line.startswith('tests/') or '::' not in line:
                 continue
             test_nodes.append(line)
 

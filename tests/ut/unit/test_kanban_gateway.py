@@ -35,22 +35,25 @@ def _list_result(stdout, returncode=0):
 # Representative `hermes gateway list` output lines.
 _ALL_ALIVE = (
     "Gateways:\n"
-    "  ✓ ut-orchestrator          — PID 24096\n"
+    "  ✓ ut-batch-selector       — PID 24096\n"
     "  ✓ ut-executor              — PID 53076\n"
     "  ✓ ut-fixer (current)       — PID 39792\n"
+    "  ✓ ut-manifest-updater      — PID 12345\n"
     "  ✗ ut-supervisor            — not running\n"
 )
 _PARTIAL = (
     "Gateways:\n"
-    "  ✓ ut-orchestrator          — PID 24096\n"
+    "  ✓ ut-batch-selector       — PID 24096\n"
     "  ✗ ut-executor              — not running\n"
     "  ✗ ut-fixer                 — not running\n"
+    "  ✗ ut-manifest-updater      — not running\n"
 )
 _ALL_DEAD = (
     "Gateways:\n"
-    "  ✗ ut-orchestrator          — not running\n"
+    "  ✗ ut-batch-selector        — not running\n"
     "  ✗ ut-executor              — not running\n"
     "  ✗ ut-fixer                 — not running\n"
+    "  ✗ ut-manifest-updater      — not running\n"
 )
 
 
@@ -60,25 +63,28 @@ class TestCheckGatewaysAlive:
     def test_all_gateways_alive(self, hr):
         with patch("subprocess.run", return_value=_list_result(_ALL_ALIVE)):
             result = hr.check_gateways_alive()
-        assert result["ut-orchestrator"] is True
+        assert result["ut-batch-selector"] is True
         assert result["ut-executor"] is True
         assert result["ut-fixer"] is True
+        assert result["ut-manifest-updater"] is True
 
     def test_all_gateways_dead(self, hr):
         """Lines present but marked ✗ (not running) → all False."""
         with patch("subprocess.run", return_value=_list_result(_ALL_DEAD)):
             result = hr.check_gateways_alive()
-        assert result["ut-orchestrator"] is False
+        assert result["ut-batch-selector"] is False
         assert result["ut-executor"] is False
         assert result["ut-fixer"] is False
+        assert result["ut-manifest-updater"] is False
 
     def test_partial_gateway_failure(self, hr):
-        """Only orchestrator carries ✓."""
+        """Only batch-selector carries ✓."""
         with patch("subprocess.run", return_value=_list_result(_PARTIAL)):
             result = hr.check_gateways_alive()
-        assert result["ut-orchestrator"] is True
+        assert result["ut-batch-selector"] is True
         assert result["ut-executor"] is False
         assert result["ut-fixer"] is False
+        assert result["ut-manifest-updater"] is False
 
     def test_nonzero_returncode(self, hr):
         """`hermes gateway list` failing → all False."""

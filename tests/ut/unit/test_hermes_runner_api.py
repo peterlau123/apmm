@@ -63,17 +63,19 @@ def test_validate_required_config_missing_remote_server(hr):
 def test_check_gateways_alive_only_orchestrator(hr):
     stdout = (
         "Gateways:\n"
-        "  ✓ ut-orchestrator  — PID 1\n"
+        "  ✓ ut-batch-selector  — PID 1\n"
         "  ✗ ut-executor      — not running\n"
         "  ✗ ut-fixer         — not running\n"
+        "  ✗ ut-manifest-updater — not running\n"
     )
     with patch("subprocess.run", return_value=MagicMock(returncode=0, stdout=stdout)):
         result = hr.check_gateways_alive()
 
     assert result == {
-        "ut-orchestrator": True,
+        "ut-batch-selector": True,
         "ut-executor": False,
         "ut-fixer": False,
+        "ut-manifest-updater": False,
     }
 
 
@@ -81,9 +83,10 @@ def test_check_gateways_alive_missing_hermes_binary(hr):
     """FileNotFoundError (no hermes on PATH) → all False, not raise."""
     with patch("subprocess.run", side_effect=FileNotFoundError("no hermes")):
         assert hr.check_gateways_alive() == {
-            "ut-orchestrator": False,
+            "ut-batch-selector": False,
             "ut-executor": False,
             "ut-fixer": False,
+            "ut-manifest-updater": False,
         }
 
 

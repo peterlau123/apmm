@@ -114,7 +114,7 @@ def main():
 
         profiles = kanban.get("profiles", {})
         gateway_profiles = [
-            profiles.get("orchestrator", "ut-orchestrator"),
+            profiles.get("batch_selector", "ut-batch-selector"),
             profiles.get("executor", "ut-executor"),
             profiles.get("fixer", "ut-fixer"),
         ]

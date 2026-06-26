@@ -25,12 +25,13 @@ Profile -> skills subset (per hermes_workflow SKILL §3 step 3 + §6 worker
 Stage mapping; the repo root skills/ut/ pool also holds ut-test-collector and
 workflow which belong to the linear channel / Stage 1 and are NOT hermes
 profile skills):
-    ut-supervisor    : hermes_workflow, workflow_loop_core, batch-selector,
-                       unit-test-executor, failure-handler, manifest-updater,
-                       shared
-    ut-orchestrator  : batch-selector, manifest-updater, shared  # Stage5+Stage2
-    ut-executor      : unit-test-executor, shared                # Stage3
-    ut-fixer         : failure-handler, dependency-resolver, shared  # Stage4
+    ut-supervisor        : hermes_workflow, workflow_loop_core, batch-selector,
+                           unit-test-executor, failure-handler, manifest-updater,
+                           shared  # Linear mode: complete context for reasoning
+    ut-supervisor-kanban : hermes_workflow, workflow_loop_core, shared  # Kanban mode: minimal monitoring
+    ut-orchestrator      : batch-selector, manifest-updater, shared  # Stage5+Stage2
+    ut-executor          : unit-test-executor, shared                # Stage3
+    ut-fixer             : failure-handler, dependency-resolver, shared  # Stage4
 
 Note: `shared/` carries cross-skill schemas + validators (manifest_schema.json,
 batch_results_schema.json, handled_tests_schema.json, dependency_stall_schema.json,
@@ -63,8 +64,8 @@ _HERMES_PROFILES = Path.home() / "AppData" / "Local" / "hermes" / "profiles"
 # channel_directory.json is deliberately user-owned (machine-specific Feishu binding).
 _DIST_OWNED_FILES = ["SOUL.md", "profile.yaml"]
 
-_LINEAR_PROFILES = ["ut-supervisor"]
-_KANBAN_PROFILES = ["ut-orchestrator", "ut-executor", "ut-fixer", "ut-supervisor"]
+_LINEAR_PROFILES = ["ut-supervisor"]  # Linear mode: single supervisor with complete context
+_KANBAN_PROFILES = ["ut-orchestrator", "ut-executor", "ut-fixer", "ut-supervisor-kanban"]  # Kanban mode: Worker isolation + minimal supervisor
 
 _TIER_PROFILES: dict[str, list[str]] = {
     "L1": _LINEAR_PROFILES,

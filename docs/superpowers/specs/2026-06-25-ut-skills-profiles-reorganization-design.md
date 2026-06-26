@@ -65,6 +65,31 @@
 - Profile 配置单独管理
 - deploy_tier.py 部署时合并
 
+**Profile.yaml 位置策略**：
+
+Profile 配置文件采用双层管理策略，确保唯一修改入口和部署一致性：
+
+**1. Staging 目录（源位置）**：
+- `tasks/ut/scripts/.dist/<profile-name>/profile.yaml` 或子目录 skills/ut/*/profile.yaml
+- 所有 profile.yaml 在 `.dist/` staging 目录中维护
+- 修改 profile.yaml 只需在此目录操作，无需修改 tests/fixtures
+
+**2. Tests fixtures 目录（镜像位置）**：
+- `tests/ut/integration/fixtures/profiles/<profile-name>/profile.yaml`
+- 由 `deploy_tier.py` 从 .dist/ 同步到 fixtures
+- 测试运行时读取 fixtures 目录的 profile
+- 禁止手动修改 fixtures/profiles，避免不一致
+
+**3. deploy_tier.py 单一入口管理**：
+- 负责从 `.dist/` staging 目录同步 profile.yaml 到 fixtures
+- 确保 profile 配置一致性（源 → 镜像）
+- 部署流程中自动调用，无需手动同步
+
+**优势**：
+- 修改一处生效：编辑 .dist/ 后运行 deploy_tier.py 自动同步
+- 测试隔离：fixtures 目录只读，测试运行不受 .dist/ 变化影响
+- 一眼看出源头：所有 profile 源文件集中在 .dist/ 目录
+
 ---
 
 ## 3. Skills 目录结构
@@ -114,13 +139,13 @@ skills/ut/
 │       ├── watchdog-timeout.md
 │       └── remote-execution.md
 │
-├── fixer/  ← Stage4 Worker（合并 failure-handler + dependency-resolver）
+├── fixer/  ← Stage4 Worker（failure-handler 主体，dependency-resolver 作为子 skill）
 │   ├── SKILL.md  ← Stage4 执行细节 + troubleshooting + dependency 处理
 │   ├── SOUL.md  ← ut-fixer 身份定义
 │   ├── scripts/
 │   │   ├── analyze_failures.py
 │   │   ├── generate_handled_manifest.py
-│   │   └── resolve_dependencies.py  ← 合并 dependency-resolver 功能
+│   │   └── resolve_dependencies.py  ← 调用 dependency-resolver 子 skill
 │   └── references/
 │       ├── error-type-classification.md
 │       └── dependency-resolution.md
@@ -200,13 +225,14 @@ batch-selector → 创建 executor → fixer → manifest-updater → next batch
 
 ### 6.1 Profile 数量
 
-**总共 6 个 profiles**：
-- ut-supervisor（Supervisor）
-- ut-unit-test-collector（Stage1 Worker）
+**总共 5 个 Worker profiles（Stage2-5）**：
+- ut-supervisor（Supervisor，Stage1由Supervisor直接执行）
 - ut-batch-selector（Stage2 Worker）
 - ut-executor（Stage3 Worker）
-- ut-fixer（Stage4 Worker，含 dependency resolution）
+- ut-fixer（Stage4 Worker，调用 dependency-resolver 子 skill）
 - ut-manifest-updater（Stage5 Worker）
+
+**说明**：Stage1（test-collector）不在Kanban循环中，由Supervisor在启动时直接执行，不需要独立profile。Linear模式下Supervisor加载unit-test-collector skill即可。
 
 ### 6.2 Profile 配置示例
 
@@ -238,10 +264,9 @@ x-deploy:
 
 ### 7.2 Phase 2：Profile 配置调整
 
-1. 创建 ut-unit-test-collector profile（Stage1）
-2. 创建 ut-batch-selector profile（Stage2）
-3. 创建 ut-manifest-updater profile（Stage5）
-4. 更新 profile.yaml（6 个 profiles）
+1. 创建 ut-batch-selector profile（Stage2）
+2. 创建 ut-manifest-updater profile（Stage5）
+3. 更新 profile.yaml（5 个 Worker profiles + 1 Supervisor profile）
 
 ### 7.3 Phase 3：脚本调整
 
@@ -260,12 +285,12 @@ x-deploy:
 ### 8.1 关键改进
 
 1. **职责清晰**：Supervisor（hermes-workflow skill）创建依赖链 + 监控，Worker 执行
-2. **Skills 重命名**：simple-workflow / hermes-workflow / unit-test-collector（已完成改名）
-3. **Dependency 合并**：dependency-resolver 合并到 fixer（简化 skills）
+2. **Skills 重命名**：terminal-workflow / hermes-workflow / unit-test-collector（已完成改名）
+3. **Dependency 子 skill**：dependency-resolver 保持独立，fixer 通过子 skill 调用（职责分离）
 4. **加载模式差异**：Linear 完整上下文 + Kanban 职责分离
-5. **Troubleshooting 保留**：每个 Worker SKILL.md 包含 troubleshooting
-6. **修改一处生效**：SOUL.md + SKILL.md 在同一目录
-7. **Profile 明确**：6 个 profiles（Supervisor + 5 Workers）
+5. **Troubleshooting 保留**：每个 Worker SKILL.md 包含 troubleshooting（内联 + references 分离）
+6. **修改一处生效**：SOUL.md + SKILL.md 在同一 skill 目录，deploy_tier.py 同步到 profile 目录
+7. **Profile 明确**：5 个 Worker profiles（Stage2-5）+ 1 Supervisor profile，Stage1 由 Supervisor 直接执行
 
 ---
 

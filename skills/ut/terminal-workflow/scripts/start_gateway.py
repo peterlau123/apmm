@@ -105,9 +105,10 @@ def main():
     board = kanban.get("board", {}).get("slug", "apmm-ut")
     profiles = kanban.get("profiles", {})
     targets = [
-        profiles.get("orchestrator", "ut-orchestrator"),
+        profiles.get("batch_selector", "ut-batch-selector"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
+        profiles.get("manifest_updater", "ut-manifest-updater"),
     ]
     workspace = Path(config.get("config", {}).get("workspace", workflow_yaml.parent.parent))
     logs_dir = workspace / ".agents" / "logs"

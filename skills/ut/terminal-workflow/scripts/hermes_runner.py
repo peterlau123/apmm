@@ -455,7 +455,7 @@ def validate_required_config(
 
 
 # Worker gateway profiles managed by Hermes in kanban mode.
-KANBAN_GATEWAY_PROFILES = ("ut-orchestrator", "ut-executor", "ut-fixer")
+KANBAN_GATEWAY_PROFILES = ("ut-batch-selector", "ut-executor", "ut-fixer", "ut-manifest-updater")
 
 
 def check_gateways_alive() -> dict:
@@ -630,7 +630,7 @@ def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size, cu
             )
             next_orchestrator_task_id = create_task(
                 conn, title=f"orchestrator-{len(list(run_dir.glob('batch_*'))) + 2:04d}",
-                assignee="ut-orchestrator",
+                assignee="ut-batch-selector",
                 parents=[fixer_task_id]
             )
         except Exception as e:

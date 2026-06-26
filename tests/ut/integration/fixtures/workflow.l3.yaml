@@ -213,7 +213,8 @@ kanban:
     slug: "apmm-ut"
 
   profiles:
-    orchestrator: "ut-orchestrator"
+    batch_selector: "ut-batch-selector"
+    manifest_updater: "ut-manifest-updater"
     executor: "ut-executor"
     fixer: "ut-fixer"
 
@@ -227,7 +228,7 @@ kanban:
     error_rate_threshold: 0.8
 
   task_creation:
-    initial_assignee: "ut-orchestrator"
+    initial_assignee: "ut-batch-selector"
     priority: 1
     body_template: "Orchestrate UT run for {test_list_path}"
 

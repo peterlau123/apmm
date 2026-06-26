@@ -124,7 +124,7 @@ def preflight_config(workflow_yaml_path):
 
     profiles_cfg = kanban.get("profiles", {})
     required = [
-        profiles_cfg.get("orchestrator", "ut-orchestrator"),
+        profiles_cfg.get("batch_selector", "ut-batch-selector"),
         profiles_cfg.get("executor", "ut-executor"),
         profiles_cfg.get("fixer", "ut-fixer"),
         "ut-supervisor",
@@ -231,9 +231,10 @@ def show_status(workflow_yaml_path):
     profiles = kanban.get("profiles", {})
 
     gateway_profiles = [
-        profiles.get("orchestrator", "ut-orchestrator"),
+        profiles.get("batch_selector", "ut-batch-selector"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
+        profiles.get("manifest_updater", "ut-manifest-updater"),
     ]
     supervisor_profile = "ut-supervisor"
 
@@ -281,9 +282,10 @@ def stop_all(workflow_yaml_path):
     profiles = kanban.get("profiles", {})
     
     gateway_profiles = [
-        profiles.get("orchestrator", "ut-orchestrator"),
+        profiles.get("batch_selector", "ut-batch-selector"),
         profiles.get("executor", "ut-executor"),
         profiles.get("fixer", "ut-fixer"),
+        profiles.get("manifest_updater", "ut-manifest-updater"),
     ]
     supervisor_profile = "ut-supervisor"
 
@@ -344,7 +346,7 @@ def main():
     kanban = config.get("kanban", {})
     gw_profiles_cfg = kanban.get("profiles", {})
     gateway_profiles_for_check = [
-        gw_profiles_cfg.get("orchestrator", "ut-orchestrator"),
+        gw_profiles_cfg.get("batch_selector", "ut-batch-selector"),
         gw_profiles_cfg.get("executor", "ut-executor"),
         gw_profiles_cfg.get("fixer", "ut-fixer"),
     ]

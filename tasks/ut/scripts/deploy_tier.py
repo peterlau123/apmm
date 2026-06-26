@@ -19,7 +19,7 @@ User-owned (NEVER touched — kept by hermes profile install --force):
 
 Tier -> profile set:
     L1 / L2 / L3 (linear, kanban OFF):   [ut-supervisor]
-    L4           (kanban ON):            [ut-orchestrator, ut-executor, ut-fixer, ut-supervisor]
+    L4           (kanban ON):            [ut-batch-selector, ut-executor, ut-fixer, ut-manifest-updater, ut-supervisor-kanban]
 
 Profile -> skills subset (per hermes_workflow SKILL §3 step 3 + §6 worker
 Stage mapping; the repo root skills/ut/ pool also holds ut-test-collector and
@@ -29,9 +29,10 @@ profile skills):
                            unit-test-executor, failure-handler, manifest-updater,
                            shared  # Linear mode: complete context for reasoning
     ut-supervisor-kanban : hermes_workflow, workflow_loop_core, shared  # Kanban mode: minimal monitoring
-    ut-orchestrator      : batch-selector, manifest-updater, shared  # Stage5+Stage2
+    ut-batch-selector    : batch-selector, workflow_loop_core, shared  # Stage2 Worker
     ut-executor          : unit-test-executor, shared                # Stage3
     ut-fixer             : failure-handler, dependency-resolver, shared  # Stage4
+    ut-manifest-updater  : manifest-updater, workflow_loop_core, shared  # Stage5 Worker
 
 Note: `shared/` carries cross-skill schemas + validators (manifest_schema.json,
 batch_results_schema.json, handled_tests_schema.json, dependency_stall_schema.json,
@@ -65,7 +66,7 @@ _HERMES_PROFILES = Path.home() / "AppData" / "Local" / "hermes" / "profiles"
 _DIST_OWNED_FILES = ["SOUL.md", "profile.yaml"]
 
 _LINEAR_PROFILES = ["ut-supervisor"]  # Linear mode: single supervisor with complete context
-_KANBAN_PROFILES = ["ut-orchestrator", "ut-executor", "ut-fixer", "ut-supervisor-kanban"]  # Kanban mode: Worker isolation + minimal supervisor
+_KANBAN_PROFILES = ["ut-batch-selector", "ut-executor", "ut-fixer", "ut-manifest-updater", "ut-supervisor-kanban"]  # Kanban mode: Worker isolation + minimal supervisor
 
 _TIER_PROFILES: dict[str, list[str]] = {
     "L1": _LINEAR_PROFILES,
@@ -87,11 +88,11 @@ _PROFILE_SKILLS: dict[str, list[str]] = {
         "manifest-updater",
         "shared",
     ],
-    "ut-orchestrator": ["batch-selector", "manifest-updater", "shared"],
-    "ut-executor": ["unit-test-executor", "shared"],
-    "ut-fixer": ["failure-handler", "dependency-resolver", "shared"],
     "ut-batch-selector": ["batch-selector", "workflow_loop_core", "shared"],  # Stage2 Worker Kanban
+    "ut-executor": ["unit-test-executor", "shared"],  # Stage3
+    "ut-fixer": ["failure-handler", "dependency-resolver", "shared"],  # Stage4
     "ut-manifest-updater": ["manifest-updater", "workflow_loop_core", "shared"],  # Stage5 Worker Kanban
+    "ut-supervisor-kanban": ["hermes_workflow", "workflow_loop_core", "shared"],  # Kanban mode: minimal monitoring
 }
 
 DISTRIBUTION_YAML = """\

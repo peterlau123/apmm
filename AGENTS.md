@@ -121,7 +121,7 @@ UT Workflow 采用 5 阶段流水线，支持两种运行模式：
 | 信息 | 权威源 |
 |------|--------|
 | Workflow 配置 | [.agents/workflow.yaml](.agents/workflow.yaml) |
-| 架构图 + Stages 定义 | [skills/ut/workflow/SKILL.md](skills/ut/workflow/SKILL.md) |
+| 架构图 + Stages 定义 | [skills/ut/terminal-workflow/SKILL.md](skills/ut/terminal-workflow/SKILL.md) |
 | Kanban 集成指南 | [tasks/ut/docs/kanban/README.md](tasks/ut/docs/kanban/README.md) |
 | 过滤规则（单一来源） | [skills/ut/shared/filter_rules.yaml](skills/ut/shared/filter_rules.yaml) |
 | 模块总入口 | [tasks/ut/README.md](tasks/ut/README.md) |

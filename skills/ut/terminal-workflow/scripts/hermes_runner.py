@@ -678,7 +678,7 @@ def main():
 
     print(
         "[hermes_runner] v5 deprecation: this module no longer runs the workflow.\n"
-        "  - Linear supervisor: load skills/ut/workflow/SKILL.md\n"
+        "  - Linear supervisor: load skills/ut/terminal-workflow/SKILL.md\n"
         "  - Kanban / Hermes:   load skills/ut/hermes-workflow/SKILL.md\n"
         "  Both delegate Stage 2-5 to skills/ut/workflow-loop-core."
     )

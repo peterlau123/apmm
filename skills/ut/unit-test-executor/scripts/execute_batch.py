@@ -148,9 +148,14 @@ def _split_remote_log_size(stdout: str) -> tuple[str, int | None]:
     return cleaned, size
 
 # BastionManager is imported lazily at the call site so tests can patch it
-# on this module before instantiation.
+# on this module before instantiation. Use importlib for hyphenated path.
+import importlib.util
 try:
-    from skills.ut.workflow.scripts.bastion_manager import BastionManager  # noqa: F401
+    _bm_path = _project_root / "skills" / "ut" / "terminal-workflow" / "scripts" / "bastion_manager.py"
+    _bm_spec = importlib.util.spec_from_file_location("bastion_manager", _bm_path)
+    _bm_mod = importlib.util.module_from_spec(_bm_spec)
+    _bm_spec.loader.exec_module(_bm_mod)
+    BastionManager = _bm_mod.BastionManager  # noqa: F401
 except Exception:  # pragma: no cover - tests patch it directly
     BastionManager = None  # type: ignore[assignment]
 

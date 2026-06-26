@@ -11,7 +11,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py"
+HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
 
 
 @pytest.fixture(scope="module")

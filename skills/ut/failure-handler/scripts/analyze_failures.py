@@ -26,10 +26,10 @@ if 'PYTHONPATH' in os.environ:
 
 
 def _load_branch_checker():
-    """Lazy-load skills/ut/workflow/scripts/check_vllm_branch.py."""
+    """Lazy-load skills/ut/terminal-workflow/scripts/check_vllm_branch.py."""
     p = (
         Path(__file__).resolve().parents[2]
-        / "workflow"
+        / "terminal-workflow"
         / "scripts"
         / "check_vllm_branch.py"
     )

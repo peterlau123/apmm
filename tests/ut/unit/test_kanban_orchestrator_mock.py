@@ -15,7 +15,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py"
+HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
 MANIFEST_UPDATER = PROJECT_ROOT / "skills" / "ut" / "manifest-updater" / "scripts" / "update_manifest.py"
 BATCH_SELECTOR = PROJECT_ROOT / "skills" / "ut" / "batch-selector" / "scripts" / "generate_batch.py"
 

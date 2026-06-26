@@ -15,7 +15,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-BASTION_MANAGER = PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "bastion_manager.py"
+BASTION_MANAGER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "bastion_manager.py"
 
 
 def _load_bastion_manager():

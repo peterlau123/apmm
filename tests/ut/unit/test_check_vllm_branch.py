@@ -7,7 +7,7 @@ from unittest import mock
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SCRIPT_PATH = REPO_ROOT / "skills" / "ut" / "workflow" / "scripts" / "check_vllm_branch.py"
+SCRIPT_PATH = REPO_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "check_vllm_branch.py"
 
 
 def _load():

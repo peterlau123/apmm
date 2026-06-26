@@ -38,7 +38,7 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 >    the classifier returns `verdict="unknown"` — never invent a verdict.
 > 5. **Branch safety is mandatory.** Before any `git apply` / `git commit`,
 >    call `ensure_on_branch("2.5.1_ut_verify", vllm_repo_path)` from
->    `skills/ut/workflow/scripts/check_vllm_branch.py`. Skipping this rule
+>    `skills/ut/terminal-workflow/scripts/check_vllm_branch.py`. Skipping this rule
 >    is what nukes a fork.
 
 ---
@@ -61,7 +61,7 @@ applied automatically by `analyze_failed_tests_v5()`.
 
 Before *any* auto-fix work — patch generation, `git apply`, or `git commit`
 — call `ensure_on_branch("2.5.1_ut_verify", vllm_repo_path)` from
-`skills/ut/workflow/scripts/check_vllm_branch.py`. It runs
+`skills/ut/terminal-workflow/scripts/check_vllm_branch.py`. It runs
 `git rev-parse --abbrev-ref HEAD` on the remote vLLM repo via the canonical
 `run_remote` helper. A mismatch (or non-zero rc) raises `RuntimeError`; the
 stage must abort and surface the error to the operator. Auto-fix commits

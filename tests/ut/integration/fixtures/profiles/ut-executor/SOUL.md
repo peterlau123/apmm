@@ -33,9 +33,9 @@ Always include in kanban_complete metadata:
 - Do not use plain `ssh` to bastion or t_h20.
 - Do not directly run `python tools/agent.py -p t_h20 stop`.
 - If `python tools/agent.py -p t_h20 ping` fails, request user approval through:
-  `python skills/ut/workflow/scripts/request_daemon_approval.py --profile t_h20 --task-id <kanban_task_id> --reason "<short reason>"`
+  `python skills/ut/terminal-workflow/scripts/request_daemon_approval.py --profile t_h20 --task-id <kanban_task_id> --reason "<short reason>"`
 - If `ping` succeeds but `run` commands timeout or the daemon appears stuck, request approval with `--force`:
-  `python skills/ut/workflow/scripts/request_daemon_approval.py --profile t_h20 --task-id <kanban_task_id> --reason "agent.py daemon stuck: ping OK but run timeout" --force`
+  `python skills/ut/terminal-workflow/scripts/request_daemon_approval.py --profile t_h20 --task-id <kanban_task_id> --reason "agent.py daemon stuck: ping OK but run timeout" --force`
 - The approval script sends a Feishu request and waits for a reply like `OTP 123456` before stopping/restarting the daemon.
 - Never print, store, or include OTP codes in comments, logs, summaries, batch results, or kanban metadata.
 

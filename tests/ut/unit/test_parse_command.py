@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HR_PATH = PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py"
+HR_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
 
 
 @pytest.fixture(scope="module")

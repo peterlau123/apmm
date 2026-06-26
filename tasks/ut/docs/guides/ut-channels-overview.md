@@ -81,7 +81,7 @@ sequenceDiagram
     end
 ```
 
-启动顺序（SKILL 详见 `skills/ut/workflow/SKILL.md`）：
+启动顺序（SKILL 详见 `skills/ut/terminal-workflow/SKILL.md`）：
 1. 加载本通道 + loop_core + 4 Worker SKILL（每会话一次）
 2. 读 `.agents/workflow.yaml`，`validate_required_config`
 3. `init_or_resume` → run_dir/state/iteration

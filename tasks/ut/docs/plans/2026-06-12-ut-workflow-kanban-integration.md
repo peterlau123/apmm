@@ -14,10 +14,10 @@
 
 | 文件 | 操作 | 负责 |
 |------|------|------|
-| `skills/ut/workflow/SKILL.md` | 修改 | 版本更新 + 引导流程简化 + Kanban 分支逻辑 |
+| `skills/ut/terminal-workflow/SKILL.md` | 修改 | 版本更新 + 引导流程简化 + Kanban 分支逻辑 |
 | `.agents/workflow.yaml` | 修改 | 更新 kanban 节点配置结构 |
-| `skills/ut/workflow/scripts/start_gateway.py` | 创建 | Gateway 启动脚本（检测、启动、健康检查） |
-| `skills/ut/workflow/scripts/monitor_kanban.py` | 创建 | Kanban 监控脚本（轮询 stats、完成检测） |
+| `skills/ut/terminal-workflow/scripts/start_gateway.py` | 创建 | Gateway 启动脚本（检测、启动、健康检查） |
+| `skills/ut/terminal-workflow/scripts/monitor_kanban.py` | 创建 | Kanban 监控脚本（轮询 stats、完成检测） |
 
 ---
 
@@ -86,7 +86,7 @@ git commit -m "feat: update kanban config structure for A-1 integration"
 ### Task 2: 更新 SKILL.md 版本和引导流程
 
 **Files:**
-- Modify: `skills/ut/workflow/SKILL.md:1-50` (frontmatter + 触发方式部分)
+- Modify: `skills/ut/terminal-workflow/SKILL.md:1-50` (frontmatter + 触发方式部分)
 
 - [ ] **Step 1: 更新 frontmatter 版号**
 
@@ -128,7 +128,7 @@ Agent 检查 workflow.yaml 中 `kanban.enabled`：
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/SKILL.md
+git add skills/ut/terminal-workflow/SKILL.md
 git commit -m "feat: update SKILL.md v5.2 - simplify prompt flow"
 ```
 
@@ -137,7 +137,7 @@ git commit -m "feat: update SKILL.md v5.2 - simplify prompt flow"
 ### Task 3: 增加 Kanban 分支逻辑到 SKILL.md
 
 **Files:**
-- Modify: `skills/ut/workflow/SKILL.md` (在文件末尾增加 Kanban 模式部分)
+- Modify: `skills/ut/terminal-workflow/SKILL.md` (在文件末尾增加 Kanban 模式部分)
 
 - [ ] **Step 1: 在 SKILL.md 末尾增加 Kanban 模式部分**
 
@@ -180,7 +180,7 @@ Agent 检查以下条件是否满足：
 Agent 执行启动脚本：
 
 ```bash
-python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
 ```
 
 脚本行为：
@@ -204,7 +204,7 @@ hermes kanban create "Orchestrate UT run" --assignee ut-orchestrator --priority 
 Agent 执行监控脚本：
 
 ```bash
-python skills/ut/workflow/scripts/monitor_kanban.py --workflow-yaml .agents/workflow.yaml --poll-interval 60
+python skills/ut/terminal-workflow/scripts/monitor_kanban.py --workflow-yaml .agents/workflow.yaml --poll-interval 60
 ```
 
 脚本轮询 `hermes kanban stats` 直到所有任务完成。
@@ -217,7 +217,7 @@ python skills/ut/workflow/scripts/monitor_kanban.py --workflow-yaml .agents/work
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/ut/workflow/SKILL.md
+git add skills/ut/terminal-workflow/SKILL.md
 git commit -m "feat: add Kanban mode execution steps to SKILL.md"
 ```
 
@@ -226,7 +226,7 @@ git commit -m "feat: add Kanban mode execution steps to SKILL.md"
 ### Task 4: 创建 start_gateway.py 脚本
 
 **Files:**
-- Create: `skills/ut/workflow/scripts/start_gateway.py`
+- Create: `skills/ut/terminal-workflow/scripts/start_gateway.py`
 
 - [ ] **Step 1: 创建脚本文件**
 
@@ -297,13 +297,13 @@ if __name__ == "__main__":
 - [ ] **Step 2: 验证语法**
 
 ```bash
-python -m py_compile skills/ut/workflow/scripts/start_gateway.py
+python -m py_compile skills/ut/terminal-workflow/scripts/start_gateway.py
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/start_gateway.py
+git add skills/ut/terminal-workflow/scripts/start_gateway.py
 git commit -m "feat: add start_gateway.py for Kanban gateway startup"
 ```
 
@@ -312,7 +312,7 @@ git commit -m "feat: add start_gateway.py for Kanban gateway startup"
 ### Task 5: 创建 monitor_kanban.py 脚本
 
 **Files:**
-- Create: `skills/ut/workflow/scripts/monitor_kanban.py`
+- Create: `skills/ut/terminal-workflow/scripts/monitor_kanban.py`
 
 - [ ] **Step 1: 创建脚本文件**
 
@@ -381,13 +381,13 @@ if __name__ == "__main__":
 - [ ] **Step 2: 验证语法**
 
 ```bash
-python -m py_compile skills/ut/workflow/scripts/monitor_kanban.py
+python -m py_compile skills/ut/terminal-workflow/scripts/monitor_kanban.py
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/monitor_kanban.py
+git add skills/ut/terminal-workflow/scripts/monitor_kanban.py
 git commit -m "feat: add monitor_kanban.py for Kanban task monitoring"
 ```
 
@@ -396,7 +396,7 @@ git commit -m "feat: add monitor_kanban.py for Kanban task monitoring"
 ### Task 6: 更新文档链接和日期
 
 **Files:**
-- Modify: `skills/ut/workflow/SKILL.md` (相关文档部分)
+- Modify: `skills/ut/terminal-workflow/SKILL.md` (相关文档部分)
 
 - [ ] **Step 1: 增加文档链接**
 
@@ -417,7 +417,7 @@ git commit -m "feat: add monitor_kanban.py for Kanban task monitoring"
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/SKILL.md
+git add skills/ut/terminal-workflow/SKILL.md
 git commit -m "docs: add Kanban integration links and update date"
 ```
 
@@ -435,8 +435,8 @@ git status
 
 ```bash
 python -c "import yaml; yaml.safe_load(open('.agents/workflow.yaml'))"
-python -m py_compile skills/ut/workflow/scripts/start_gateway.py
-python -m py_compile skills/ut/workflow/scripts/monitor_kanban.py
+python -m py_compile skills/ut/terminal-workflow/scripts/start_gateway.py
+python -m py_compile skills/ut/terminal-workflow/scripts/monitor_kanban.py
 ```
 
 ---

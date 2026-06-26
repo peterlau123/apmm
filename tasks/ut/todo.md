@@ -51,7 +51,7 @@
   - 修复: 清理残留注释
 
 - [ ] **SKILL.md Step 0 vs 实际交互不一致** - P2
-  - 位置: skills/ut/workflow/SKILL.md line 35-45
+  - 位置: skills/ut/terminal-workflow/SKILL.md line 35-45
   - 问题: Step 0 说"Agent主动询问三个问题"，但触发方式示例显示不同格式
   - 建议: 统一交互流程描述
 
@@ -79,7 +79,7 @@
   - 需要: 端到端测试修复流程
 
 - [ ] **workflow_state_schema.json 未同步 errors[]** - P2
-  - 位置: skills/ut/workflow/workflow_state_schema.json
+  - 位置: skills/ut/terminal-workflow/workflow_state_schema.json
   - 问题: manifest_schema.json 已添加 errors[]/failures[]，workflow_state 是否需要同步？
   - 建议: 检查并确认一致性
 
@@ -289,8 +289,8 @@
 - batch_config_schema.json → skills/ut/batch-selector/
 - batch_results_schema.json → skills/ut/unit-test-executor/
 - handled_tests_schema.json → skills/ut/failure-handler/
-- workflow_state_schema.json → skills/ut/workflow/
-- workflow_schema.yaml → skills/ut/workflow/ (新建)
+- workflow_state_schema.json → skills/ut/terminal-workflow/
+- workflow_schema.yaml → skills/ut/terminal-workflow/ (新建)
 - manifest_schema.json → skills/ut/shared/ (已更新)
 
 **Phase 2**: 校验脚本创建

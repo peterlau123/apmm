@@ -6,7 +6,7 @@
 
 ## 0. 关键澄清（探索结论）
 
-- **active path 只有一个**：`skills/ut/unit-test-executor/scripts/execute_batch.py`，被 `skills/ut/workflow/scripts/hermes_runner.py` + 两个 SKILL.md 调用。
+- **active path 只有一个**：`skills/ut/unit-test-executor/scripts/execute_batch.py`，被 `skills/ut/terminal-workflow/scripts/hermes_runner.py` + 两个 SKILL.md 调用。
 - **遗留废弃模块**（不进 active path，本计划默认不动）：`batch_test_runner.py`、`gpu_scheduler.py`、`parallel_batch_executor.py`、`remote_test_runner.py`。仅被 06-05~06-15 旧 plan/design/周报引用，无 active import。§7 新增的 `_detect_free_gpus`/`_cleanup_zombie`/`_parse_junit` **直接加进 `execute_batch.py`**，不复用旧 `gpu_scheduler.py`（旧版是 round-robin + xdist 思路，与设计冲突，复用=背债）。
 - **schema**：`batch_results_schema.json` tests entry `additionalProperties:false` → 加 `gpu_id` 须同步改 schema。
 - **下游**：`skills/ut/manifest-updater/scripts/update_manifest.py` 只读 `test_node/status/error_type`，已有 `duration_ms/exit_code` 写入路径；加 `gpu_id` 对下游透明（忽略未知字段）。

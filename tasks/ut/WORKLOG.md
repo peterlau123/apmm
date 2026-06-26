@@ -53,7 +53,7 @@ tasks/ut/worklog/
 | 任务 | 状态 | 详情 |
 |------|:----:|------|
 | Kanban Phase 1 | ✅ | docs/kanban/README.md |
-| v5.1 重构 | ✅ | skills/ut/workflow/SKILL.md |
+| v5.1 重构 | ✅ | skills/ut/terminal-workflow/SKILL.md |
 
 ---
 

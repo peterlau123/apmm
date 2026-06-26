@@ -144,7 +144,7 @@ Kanban Board
 建议新增：
 
 ```text
-skills/ut/workflow/scripts/bastion_manager.py
+skills/ut/terminal-workflow/scripts/bastion_manager.py
 ```
 
 职责：
@@ -295,7 +295,7 @@ Runner 从配置读取 profile、心跳间隔、OTP 超时和自动重启策略�
 建议新增：
 
 ```text
-skills/ut/workflow/scripts/hermes_runner.py
+skills/ut/terminal-workflow/scripts/hermes_runner.py
 ```
 
 职责：
@@ -312,7 +312,7 @@ skills/ut/workflow/scripts/hermes_runner.py
 建议新增：
 
 ```text
-skills/ut/workflow/scripts/bastion_manager.py
+skills/ut/terminal-workflow/scripts/bastion_manager.py
 ```
 
 职责见第 6 节。
@@ -332,7 +332,7 @@ transport.set_keepalive(15)
 实现后更新：
 
 ```text
-skills/ut/workflow/SKILL.md
+skills/ut/terminal-workflow/SKILL.md
   增加 Hermes 非 Kanban 模式说明。
 
 tasks/ut/docs/guides/hermes-runner.md

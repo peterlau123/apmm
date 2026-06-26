@@ -149,7 +149,7 @@ while true:
 
 ## SKILL.md 修改内容
 
-在 `skills/ut/workflow/SKILL.md` 中：
+在 `skills/ut/terminal-workflow/SKILL.md` 中：
 
 1. **版本更新**: v5.1 → v5.2
 2. **引导流程简化**: 移除 test_list 路径询问，改为确认 workflow.yaml 已准备好
@@ -210,10 +210,10 @@ Agent 自动启动 3 个 Gateway（后台进程）。
 
 | 文件 | 修改内容 |
 |------|----------|
-| `skills/ut/workflow/SKILL.md` | 版本更新为 v5.2，增加 Kanban 分支逻辑 |
+| `skills/ut/terminal-workflow/SKILL.md` | 版本更新为 v5.2，增加 Kanban 分支逻辑 |
 | `.agents/workflow.yaml` | 更新 kanban 节点配置 |
-| `skills/ut/workflow/scripts/start_gateway.py` | 新增 Gateway 启动脚本 |
-| `skills/ut/workflow/scripts/monitor_kanban.py` | 新增 Kanban 监控脚本 |
+| `skills/ut/terminal-workflow/scripts/start_gateway.py` | 新增 Gateway 启动脚本 |
+| `skills/ut/terminal-workflow/scripts/monitor_kanban.py` | 新增 Kanban 监控脚本 |
 
 ---
 
@@ -242,7 +242,7 @@ hermes kanban boards switch apmm-ut
 ## 相关文档
 
 - [tasks/ut/docs/kanban/README.md](../../../tasks/ut/docs/kanban/README.md) - Hermes Kanban × UT Workflow 集成指南
-- [skills/ut/workflow/SKILL.md](../SKILL.md) - Workflow Skill 文档
+- [skills/ut/terminal-workflow/SKILL.md](../SKILL.md) - Workflow Skill 文档
 - [.agents/workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置
 - [tasks/ut/docs/designs/2026-06-11-ut-workflow-design.md](2026-06-11-ut-workflow-design.md) - Workflow v5.1 基础设计
 

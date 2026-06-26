@@ -15,8 +15,8 @@
 ## File Structure (Plan 1 scope)
 
 ### Created
-- `skills/ut/workflow-loop-core/SKILL.md` — shared loop body
-- `skills/ut/workflow/scripts/check_vllm_branch.py` — pre-flight check for vLLM branch
+- `skills/ut/terminal-workflow-loop-core/SKILL.md` — shared loop body
+- `skills/ut/terminal-workflow/scripts/check_vllm_branch.py` — pre-flight check for vLLM branch
 - `tests/skills/ut/test_loop_core_contract.py` — contract tests for loop core interface
 - `tests/skills/ut/test_execute_batch_v5.py` — TDD for new execute_batch behavior
 - `tests/skills/ut/test_generate_batch_v5.py` — TDD for new selection rules
@@ -35,9 +35,9 @@
 - `skills/ut/batch-selector/scripts/generate_batch.py` — new selection logic + selected_reason field
 - `skills/ut/manifest-updater/SKILL.md` — last_batch_id maintenance + retriable_error → ignored
 - `skills/ut/manifest-updater/scripts/update_manifest.py` — new merge logic
-- `skills/ut/workflow/SKILL.md` — load loop_core + one-shot Worker SKILL load + fallback reload
-- `skills/ut/workflow/scripts/hermes_runner.py` — delete stage_* functions, add new API surface
-- `skills/ut/workflow/workflow_state_schema.json` — add `pending_config`, remove `reconnecting`
+- `skills/ut/terminal-workflow/SKILL.md` — load loop_core + one-shot Worker SKILL load + fallback reload
+- `skills/ut/terminal-workflow/scripts/hermes_runner.py` — delete stage_* functions, add new API surface
+- `skills/ut/terminal-workflow/workflow_state_schema.json` — add `pending_config`, remove `reconnecting`
 - `.agents/workflow.yaml` — `batch_size: 8`, `max_retry_per_test: 3`
 
 ---
@@ -355,7 +355,7 @@ git commit -m "feat(executor): classify OOM/timeout as retriable_error"
 ### Task 2.3: Bastion disconnect → mark_disconnected + next_action=wait
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/bastion_manager.py` (add methods)
+- Modify: `skills/ut/terminal-workflow/scripts/bastion_manager.py` (add methods)
 - Modify: `skills/ut/unit-test-executor/scripts/execute_batch.py` (integrated in 2.1 already)
 - Test: `tests/skills/ut/test_execute_batch_v5.py` (extend)
 
@@ -404,7 +404,7 @@ class BastionManager:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/bastion_manager.py tests/skills/ut/test_execute_batch_v5.py
+git add skills/ut/terminal-workflow/scripts/bastion_manager.py tests/skills/ut/test_execute_batch_v5.py
 git commit -m "feat(bastion): add mark_disconnected/mark_connected as state mutators"
 ```
 
@@ -788,7 +788,7 @@ git commit -m "docs(updater): document v5 last_batch_id + retriable_error rules"
 ### Task 5.1: Pre-flight vLLM branch check
 
 **Files:**
-- Create: `skills/ut/workflow/scripts/check_vllm_branch.py`
+- Create: `skills/ut/terminal-workflow/scripts/check_vllm_branch.py`
 - Test: `tests/skills/ut/test_check_vllm_branch.py` (new)
 
 - [ ] **Step 1: Failing test**:
@@ -832,7 +832,7 @@ def ensure_on_branch(expected: str, repo_path: str) -> None:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/check_vllm_branch.py tests/skills/ut/test_check_vllm_branch.py
+git add skills/ut/terminal-workflow/scripts/check_vllm_branch.py tests/skills/ut/test_check_vllm_branch.py
 git commit -m "feat(failure-handler): pre-flight vLLM branch check"
 ```
 
@@ -1004,9 +1004,9 @@ git commit -m "docs(failure-handler): update SKILL.md to v5 behavior"
 ### Task 6.1: Create loop core skill
 
 **Files:**
-- Create: `skills/ut/workflow-loop-core/SKILL.md`
+- Create: `skills/ut/terminal-workflow-loop-core/SKILL.md`
 
-- [ ] **Step 1: Create directory** — `mkdir -p skills/ut/workflow-loop-core`
+- [ ] **Step 1: Create directory** — `mkdir -p skills/ut/terminal-workflow-loop-core`
 
 - [ ] **Step 2: Write SKILL.md**:
 
@@ -1090,14 +1090,14 @@ If `stage_skills[name]` lookup yields stale/missing (e.g., harness auto-compact 
 ## See also
 
 - `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md` (v5)
-- `skills/ut/workflow/SKILL.md` — linear-mode supervisor
+- `skills/ut/terminal-workflow/SKILL.md` — linear-mode supervisor
 - `skills/ut/hermes-workflow/SKILL.md` — Hermes-mode supervisor (Plan 2)
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow-loop-core/SKILL.md
+git add skills/ut/terminal-workflow-loop-core/SKILL.md
 git commit -m "feat(loop_core): introduce shared loop body skill"
 ```
 
@@ -1135,7 +1135,7 @@ git commit -m "test(loop_core): contract test placeholders"
 ### Task 7.1: Rewrite to load loop_core + one-shot Worker SKILLs
 
 **Files:**
-- Modify: `skills/ut/workflow/SKILL.md`
+- Modify: `skills/ut/terminal-workflow/SKILL.md`
 
 - [ ] **Step 1: Replace skill body**:
 
@@ -1197,7 +1197,7 @@ If a Worker SKILL ref is missing in context (auto-compact dropped it), reload th
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/ut/workflow/SKILL.md
+git add skills/ut/terminal-workflow/SKILL.md
 git commit -m "feat(workflow): load loop_core + delegate channel callbacks"
 ```
 
@@ -1208,9 +1208,9 @@ git commit -m "feat(workflow): load loop_core + delegate channel callbacks"
 ### Task 8.1: Delete inline Stage logic
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 
-- [ ] **Step 1: Identify functions** — `grep -n "^def stage_" skills/ut/workflow/scripts/hermes_runner.py`
+- [ ] **Step 1: Identify functions** — `grep -n "^def stage_" skills/ut/terminal-workflow/scripts/hermes_runner.py`
 
 - [ ] **Step 2: Delete `stage_select_batch`, `stage_execute`, `stage_handle_failures`, `stage_update_status`** (and helpers used only by them).
 
@@ -1229,7 +1229,7 @@ def main():
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py
 git commit -m "refactor(hermes_runner): delete inline stage_* functions"
 ```
 
@@ -1238,7 +1238,7 @@ git commit -m "refactor(hermes_runner): delete inline stage_* functions"
 ### Task 8.2: Add `validate_required_config(workflow_yaml)`
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_hermes_runner_api.py` (new)
 
 - [ ] **Step 1: Failing test**:
@@ -1279,7 +1279,7 @@ def validate_required_config(cfg: dict) -> tuple[bool, list[str]]:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
 git commit -m "feat(hermes_runner): add validate_required_config()"
 ```
 
@@ -1288,7 +1288,7 @@ git commit -m "feat(hermes_runner): add validate_required_config()"
 ### Task 8.3: Add `check_gateways_alive() → dict`
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_hermes_runner_api.py` (extend)
 
 - [ ] **Step 1: Failing test**:
@@ -1328,7 +1328,7 @@ def check_gateways_alive() -> dict:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
 git commit -m "feat(hermes_runner): add check_gateways_alive() per-profile"
 ```
 
@@ -1337,7 +1337,7 @@ git commit -m "feat(hermes_runner): add check_gateways_alive() per-profile"
 ### Task 8.4: Add `apply_pending_config` + `check_stop_conditions`
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_hermes_runner_api.py` (extend)
 
 - [ ] **Step 1: Failing tests**:
@@ -1396,7 +1396,7 @@ def check_stop_conditions(state_path: Path) -> tuple[bool, str, str]:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
 git commit -m "feat(hermes_runner): add apply_pending_config + check_stop_conditions"
 ```
 
@@ -1432,7 +1432,7 @@ git commit -m "config(workflow): batch_size=8, max_retry_per_test=3 (v5 defaults
 ### Task 9.2: Update `workflow_state_schema.json`
 
 **Files:**
-- Modify: `skills/ut/workflow/workflow_state_schema.json`
+- Modify: `skills/ut/terminal-workflow/workflow_state_schema.json`
 - Test: `tests/skills/ut/test_state_schema_v5.py` (new)
 
 - [ ] **Step 1: Failing tests**:
@@ -1454,7 +1454,7 @@ def test_status_reconnecting_no_longer_valid():
         validate_state(state)
 ```
 
-- [ ] **Step 2: Update schema** — In `skills/ut/workflow/workflow_state_schema.json`:
+- [ ] **Step 2: Update schema** — In `skills/ut/terminal-workflow/workflow_state_schema.json`:
 - Add to top-level properties: `"pending_config": {"type": "object", "additionalProperties": true}`
 - Update `status.enum` to `["running", "paused", "waiting_otp", "completed", "stopped", "failed"]` (remove `reconnecting` if present)
 
@@ -1463,7 +1463,7 @@ def test_status_reconnecting_no_longer_valid():
 - [ ] **Step 4: Commit**
 
 ```bash
-git add skills/ut/workflow/workflow_state_schema.json tests/skills/ut/test_state_schema_v5.py
+git add skills/ut/terminal-workflow/workflow_state_schema.json tests/skills/ut/test_state_schema_v5.py
 git commit -m "feat(state_schema): add pending_config; remove reconnecting"
 ```
 

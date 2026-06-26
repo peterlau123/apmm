@@ -105,7 +105,7 @@ WantedBy=default.target
 | `ExecStart` | **DEPLOY-CONFIRM**：`hermes profile use %i` 已验证；`hermes agent run` 为代表性 Agent 长驻命令，须以部署机 `hermes --help` 实际子命令为准 |
 | `Restart=on-failure` | 进程非零退出自动重启（OTP 等待属正常运行态，不会触发退出） |
 
-> **ExecStart 接地说明**：仓库中唯一被脚本验证过的 Hermes 长驻命令是 `hermes gateway run`（`skills/ut/workflow/scripts/start_gateway.py`、`tasks/ut/docs/kanban/README.md`）。Supervisor 是 **Agent**（飞书订阅者）而非 Gateway（派发器），其专用启动子命令未在本仓库代码中固化，故上面标注为部署时确认。请勿臆造不存在的 flag。
+> **ExecStart 接地说明**：仓库中唯一被脚本验证过的 Hermes 长驻命令是 `hermes gateway run`（`skills/ut/terminal-workflow/scripts/start_gateway.py`、`tasks/ut/docs/kanban/README.md`）。Supervisor 是 **Agent**（飞书订阅者）而非 Gateway（派发器），其专用启动子命令未在本仓库代码中固化，故上面标注为部署时确认。请勿臆造不存在的 flag。
 >
 > 另：仓库内的 `tools/agent.py` 是 **Bastion SSH daemon** 工具（`serve` / `run` / `ping`），与此处的 Hermes Agent 无关，**不要**用它作 ExecStart。
 

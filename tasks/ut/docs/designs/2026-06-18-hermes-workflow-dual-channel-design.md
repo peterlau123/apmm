@@ -895,13 +895,13 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
 | 文件 | 操作 | 说明 |
 |------|:---:|------|
 | `skills/ut/hermes-workflow/SKILL.md` | 🆕 新建 | Hermes Agent 指令（通道差异层） |
-| `skills/ut/workflow-loop-core/SKILL.md` | 🆕 新建 | 共享循环主体（两个 Supervisor 都加载） |
+| `skills/ut/terminal-workflow-loop-core/SKILL.md` | 🆕 新建 | 共享循环主体（两个 Supervisor 都加载） |
 | `skills/ut/hermes-workflow/profile.yaml` | 🆕 新建 | ut-supervisor profile 配置（飞书订阅 + 加载 hermes-workflow skill） |
 | `tasks/ut/docs/guides/hermes-supervisor-service.md` | 🆕 新建 | ut-supervisor systemd unit 部署指南（`hermes-agent@ut-supervisor`） |
 | `tasks/ut/docs/guides/hermes-gateway-service.md` | 🆕 新建 | 3 Gateway systemd template unit 部署指南（`hermes-gateway@.service` 实例化为 ut-orchestrator/ut-executor/ut-fixer） |
-| `skills/ut/workflow/SKILL.md` | ✏️ 更新 | 启动时一次性加载 4 份 Worker SKILL；引用缺失时 reload；调 `workflow-loop-core` |
-| `skills/ut/workflow/scripts/hermes_runner.py` | ✏️ 重构 | 工具模块定位，删除 stage_* 函数；删 start_gateway 加 check_gateways_alive |
-| `skills/ut/workflow/workflow_state_schema.json` | ✏️ 更新 | pending_config 字段；终态 stopped/failed/completed；删 reconnecting |
+| `skills/ut/terminal-workflow/SKILL.md` | ✏️ 更新 | 启动时一次性加载 4 份 Worker SKILL；引用缺失时 reload；调 `workflow-loop-core` |
+| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | ✏️ 重构 | 工具模块定位，删除 stage_* 函数；删 start_gateway 加 check_gateways_alive |
+| `skills/ut/terminal-workflow/workflow_state_schema.json` | ✏️ 更新 | pending_config 字段；终态 stopped/failed/completed；删 reconnecting |
 | `skills/ut/unit-test-executor/SKILL.md` | ✏️ 更新 | 远端只写 raw_log，本地写 summary；Worker 不重试；retriable_error 标记；Bastion 上报 |
 | `skills/ut/unit-test-executor/scripts/execute_batch.py` | ✏️ 更新 | 远端 raw_log 写盘 + Worker 远端 grep/tail + 本地 summary 落盘 + batch_results.remote_log 字段 |
 | `skills/ut/failure-handler/SKILL.md` | ✏️ 更新 | 删除修复限制、vLLM 分支约束、不处理 retriable_error、按需读 remote raw_log |

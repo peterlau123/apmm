@@ -110,7 +110,7 @@ def test_hermes-workflow_handles_timeout():
 
 ### Task 5: workflow-loop-core wiring文档
 
-**文件**: `skills/ut/workflow-loop-core/SKILL.md`（补充wiring章节）
+**文件**: `skills/ut/terminal-workflow-loop-core/SKILL.md`（补充wiring章节）
 
 **文档内容**：
 ```markdown

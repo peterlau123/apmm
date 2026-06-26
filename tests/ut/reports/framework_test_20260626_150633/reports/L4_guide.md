@@ -118,7 +118,7 @@ tests/ut/integration/
 skills/ut/hermes-workflow/scripts/
 └── start_supervisor.py          # Supervisor 启动脚本 ★
 
-skills/ut/workflow/scripts/
+skills/ut/terminal-workflow/scripts/
 └── start_gateway.py             # Gateway 启动（既有，共用）
 
 pytest.ini                       # markers: unit/integration/perf/remote

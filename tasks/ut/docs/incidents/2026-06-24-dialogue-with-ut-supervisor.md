@@ -16,14 +16,14 @@ cd D:/workspace/apmm && python -c " ...
 
 
  AI Assistant for CNAS 2026年6月24日 21:19
-📖 read\_file: "D:/workspace/apmm/skills/ut/workflow/\.\.\."
+📖 read\_file: "D:/workspace/apmm/skills/ut/terminal-workflow/\.\.\."
 💻 terminal
 
 ```
 cd D:/workspace/apmm && python -c " ...
 ```
 
-📖 read\_file: "D:/workspace/apmm/skills/ut/workflow/\.\.\."
+📖 read\_file: "D:/workspace/apmm/skills/ut/terminal-workflow/\.\.\."
 💻 terminal
 
 ```

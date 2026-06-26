@@ -169,7 +169,7 @@ flowchart LR
 | 文件 | 行为 |
 |---|---|
 | `skills/ut/hermes-workflow/SKILL.md` §3.A | 在 A5 与 A6 之间插入 A5.5「Bastion OTP bring-up」子流程；附 mermaid 图 |
-| `skills/ut/workflow-loop-core/scripts/bastion_otp_bringup.py`（新建） | 实现：发 OTP 卡 → 等回复 → 解析 6 位码 → detached Popen `serve --otp` → poll ping → 成功返回 / 超时 raise |
+| `skills/ut/terminal-workflow-loop-core/scripts/bastion_otp_bringup.py`（新建） | 实现：发 OTP 卡 → 等回复 → 解析 6 位码 → detached Popen `serve --otp` → poll ping → 成功返回 / 超时 raise |
 | `tasks/ut/scripts/.dist/ut-supervisor/SOUL.md` | 加 §「OTP recovery」段：描述 OTP 卡格式、超时策略、永不落盘约束 |
 | `tasks/ut/scripts/start_hermes_ut_runtime.py` | `ensure_bastion_daemon` 不再 abort；若 daemon 死，由 supervisor 主循环在启动卡确认后通过 A5.5 自起。本脚本仅做 preflight，不再硬要求 daemon |
 | `skills/ut/dependency-resolver/SKILL.md` | 在 §「作为 Hermes Gateway 运行」段说明 resolver 复用同一套 OTP bring-up（参数化 profile）|
@@ -316,7 +316,7 @@ failed (executor)
 | `skills/ut/dependency-resolver/scripts/resolver_gateway_runner.py`（新建） | gateway 主循环：claim → resolve → release；调用现有 `download_model.py` / `install_package.py` |
 | `skills/ut/dependency-resolver/scripts/two_stage_sync.py`（新建） | t_ascend → resolver host → t_h20 三段路径的封装；30 min 超时；stage dir 清理 |
 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py:101` | **不动**（fixer 行为已正确） |
-| `skills/ut/workflow-loop-core/` | loop 判终态扩展：`final_status ∈ {passed, failed, ignored}` 才算结题；`pending` 不算 → 自动等 resolver；增加 `pending > 0` 的进度日志（不报 stuck） |
+| `skills/ut/terminal-workflow-loop-core/` | loop 判终态扩展：`final_status ∈ {passed, failed, ignored}` 才算结题；`pending` 不算 → 自动等 resolver；增加 `pending > 0` 的进度日志（不报 stuck） |
 | `tasks/ut/scripts/grade_tier.py` | 新增 INV-6 assertion：终态 `pending == 0`（与 TSD 重叠但显式声明依赖链闭环） |
 | `tests/ut/integration/fixtures/L4_expected.json` | **不动**（终态仍是 `passed=0/failed=0/ignored=3/pending=0`；resolver 走 offline 失败 → ignored 与原路径一致） |
 | `tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md` | 加 errata 段：Decision 3 实现采纳了 Kanban-style 而非同进程子 skill；指向本文档 |
@@ -426,7 +426,7 @@ if error_type in ["dependency", "download_error"]:
 | `tasks/ut/scripts/.dist/ut-dependency-resolver/` (目录) | #3 | 第 5 profile 完整 dist |
 | `skills/ut/dependency-resolver/scripts/resolver_gateway_runner.py` | #3 | resolver gateway 主循环 |
 | `skills/ut/dependency-resolver/scripts/two_stage_sync.py` | #3 | t_ascend→host→t_h20 同步 |
-| `skills/ut/workflow-loop-core/scripts/bastion_otp_bringup.py` | #2 | OTP 索取子流程 |
+| `skills/ut/terminal-workflow-loop-core/scripts/bastion_otp_bringup.py` | #2 | OTP 索取子流程 |
 | `tests/ut/unit/test_classify_intent_llm.py` | #1 | 意图分类 6 个 case |
 | `tests/ut/unit/test_bastion_otp_bringup.py` | #2 | OTP 索取 4 个 case |
 | `tests/ut/unit/test_resolver_gateway_runner.py` | #3 | runner 3 个 case |
@@ -442,7 +442,7 @@ if error_type in ["dependency", "download_error"]:
 | `tasks/ut/scripts/deploy_tier.py` | #3 | distribution 同步 resolver |
 | `tasks/ut/scripts/grade_tier.py` | #3 | INV-6 assertion |
 | `skills/ut/dependency-resolver/SKILL.md` | #3 | §作为 Hermes Gateway 运行 |
-| `skills/ut/workflow-loop-core/` | #3 | loop 终态判定 pending=0 |
+| `skills/ut/terminal-workflow-loop-core/` | #3 | loop 终态判定 pending=0 |
 
 ### 5.3 不动的文件（与直觉相反，需说明）
 

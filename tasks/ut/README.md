@@ -25,7 +25,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 完成后在飞书发触发词即可，supervisor 会发参数确认卡，回 `确认` 启动。
 
-> 不在飞书群里？先拉到 apmm-ut 群里。配置 webhook 见 [skills/ut/workflow/references/feishu-integration.md](../../skills/ut/workflow/references/feishu-integration.md)。
+> 不在飞书群里？先拉到 apmm-ut 群里。配置 webhook 见 [skills/ut/terminal-workflow/references/feishu-integration.md](../../skills/ut/terminal-workflow/references/feishu-integration.md)。
 
 ---
 
@@ -46,7 +46,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
       'cd /gpfs/gcsp/M2.7_verify/vllm && pytest -vv <test_node>'"
    ```
 
-详见 [skills/ut/workflow/SKILL.md](../../skills/ut/workflow/SKILL.md)。
+详见 [skills/ut/terminal-workflow/SKILL.md](../../skills/ut/terminal-workflow/SKILL.md)。
 
 ---
 

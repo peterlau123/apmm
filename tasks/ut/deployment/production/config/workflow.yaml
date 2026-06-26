@@ -1,0 +1,365 @@
+# workflow.yaml - UT Test Workflow Configuration
+# Hierarchical Agent Architecture: Supervisor + Worker + Kanban
+# Version: 2.2
+# Created: 2026-06-10
+# Updated: 2026-06-12
+#
+# ============================================================
+# ✍️ Quick Config Guide — 用户通常只需修改以下参数
+# ============================================================
+#
+#   ✍️ input_filter.test_list_path    — 测试清单路径
+#   ✍️ input_filter.manifest_source   — 或使用已有 manifest.json
+#   ✍️ config.resume_from             — 断点续跑 run_dir（留空=新建）
+#   ✍️ config.batch_size              — 每批测试数量（建议 8~16，保证完整日志返回）
+#   ✍️ config.pytest_args             — pytest 参数
+#   ✍️ config.remote_server           — 远程服务器 profile
+#   ✍️ config.docker_container        — Docker 容器名
+#   ✍️ config.container_env           — 容器环境变量（HF_HOME 等）
+#   ✍️ stages.*.timeout               — 各 Stage 超时时间
+#
+#   Agent 加载 skill 后会引导用户填写以上参数。
+# ============================================================
+
+workflow:
+  name: UT Test Workflow
+  version: "2.2"
+  description: Hierarchical Agent架构 - Supervisor调度 + Worker执行 + Kanban追踪
+
+  # ============================================================
+  # ✍️：测试标识
+  # ============================================================
+  test_name: "ut" # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
+
+# ============================================================
+# Config - 路径和执行配置
+# ============================================================
+config:
+  # ✍️：核心路径定义
+  workspace: &workspace "D:/workspace/apmm"
+  runs_dir: &runs_dir "D:/workspace/apmm/runs" # 运行目录根目录
+
+  # 动态运行目录（workflow启动时创建）
+  # 格式: {runs_dir}/{test_name}-{timestamp}
+  # 示例: D:/workspace/apmm/runs/ut-20260610-120000
+  run_dir: &run_dir null # 启动时由 init_workflow_state.py 动态生成
+
+  # Schema 文件（固定位置）
+  manifest_schema_path: &manifest_schema_path "{workspace}/skills/ut/shared/manifest_schema.json"
+
+  # 过滤规则文件（单一来源）
+  filter_rules_path: &filter_rules_path "{workspace}/skills/ut/shared/filter_rules.yaml"
+
+  # 标准化路径（相对于 run_dir）
+  # 注意：{run_dir} 占位符在运行时替换为实际路径
+  # {batch_id} 占位符在循环执行时替换为当前批次ID
+  test_list_path: &test_list_path "{run_dir}/test_list.txt" # 拷贝后的位置
+  manifest_path: &manifest_path "{run_dir}/manifest.json"
+  workflow_state_path: &workflow_state_path "{run_dir}/workflow_state.json"
+  logs_dir: &logs_dir "{run_dir}/logs" # workflow 级别日志（环境检查、workflow总结等）
+  reports_dir: &reports_dir "{run_dir}/reports"
+
+  # 批次文件路径（统一使用 batch_dir_template）
+  # 文件路径规则：{batch_dir}/{filename}
+  batches_dir: &batches_dir "{run_dir}/batches"
+  batch_dir_template: &batch_dir_template "{run_dir}/batches/{batch_id}"
+  batch_config_path: &batch_config_path "{batch_dir_template}/batch_config.json"
+  batch_results_path: &batch_results_path "{batch_dir_template}/batch_results.json"
+  handled_tests_path: &handled_tests_path "{batch_dir_template}/handled_tests.json"
+  batch_logs_dir: &batch_logs_dir "{batch_dir_template}/logs" # batch 级别日志（pytest输出、GPU分配等）
+
+  # ✍️：远程执行配置
+  remote_server: "t_h20"
+  docker_container: "v0.13.0_torch2.5.1_compile"
+  vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
+  ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+
+  # 容器环境变量（一次设置，所有测试生效）
+  # 来源: tasks/ut/scripts/hf_env.sh - HuggingFace 离线环境配置
+  # 说明: 远程服务器 t_h20 无外网访问，需使用预下载的本地模型缓存
+  # 缓存位置: /gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/
+  # 已有模型: opt-125m, distilgpt2, Qwen系列等（见 testing.md line 266-270）
+  #
+  # 【环境配置说明】
+  # - 模型/依赖下载服务器: t_ascend (有外网访问，profile: t_ascend)
+  # - HF 模型下载镜像: https://hf-mirror.com (设置 HF_ENDPOINT)
+  # - Python 依赖下载路径: /gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/dependencies
+  # - 依赖下载脚本: skills/ut/dependency-resolver/scripts/download_model.py
+  # - 详见文档: skills/ut/dependency-resolver/SKILL.md, tasks/ut/docs/guides/testing.md
+  container_env:
+    # HF 离线环境（核心）
+    HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
+    HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_HUB_OFFLINE: "1" # 强制离线模式，禁止联网下载
+    # Transformers 缓存（与 HF_HUB_CACHE 共享）
+    TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
+    # GPU 配置
+    CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
+
+  # ✍️：pytest参数和批次大小
+  pytest_args: "-q --tb=long"
+  batch_size: 8 # v5 default; 建议 8~16，保证完整日志通过 agent.py run 返回
+  max_retry_per_test: 3 # v5 default; failure-handler 单测试最多重试次数
+
+  # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）
+  resume_from: null # 例如: "D:/workspace/apmm/runs/ut-20260612-101857"
+
+# ============================================================
+# Input Filter - Stage 1 输入处理配置
+# ============================================================
+# 四种场景：
+# 1. test_list_path 指定 + range（可选）→ 读取 → 应用 range → 生成 manifest
+# 2.1. manifest_source 指定 + range → 读取 → 截取范围 → 写入新 manifest
+# 2.2. manifest_source 指定 + filter → 读取 → 篮选 → 截取 N → 写入新 manifest
+# 3. 两者都指定 → 提示用户确认以哪个为准
+# 4. 两者都没指定 → 提示用户是否跑内置过滤后的全量清单
+input_filter:
+  # ✍️：test_list路径（必须指定）
+  # 场景 1: 用户指定的 test_list.txt 原始路径
+  test_list_path: "D:/workspace/apmm/tests/ut/test_lists/test_list_combined.txt" # ✍️: 用户指定的 test_list.txt 原始路径（必填）
+
+  # 场景 2: 用户指定的输入 manifest.json
+  manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径
+
+  # 范围截取（适用于场景 1 和 2.1）
+  range: null # 格式: "0-100" 或 "50:100"，null 表示全部
+
+  # 筛选条件（适用于场景 2.2）
+  filter:
+    status: null # ["pending", "failed", "error", ...] 或 null（全部）
+    error_type: null # ["dependency", "network", "resource", "functional", ...] 或 null（全部）
+    count: null # N: 跑多少个，null 表示筛选后全部
+
+  # 场景 4: 远程 pytest collect 配置
+  remote_collect:
+    enabled: false # 是否启用远程 pytest --collect-only
+    server: "t_h20" # 远程服务器
+    container: "v0.13.0_torch2.5.1_compile" # Docker 容器
+    vllm_dir: "/gpfs/gcsp/M2.7_verify/vllm" # vLLM 目录
+
+# ============================================================
+# Stages - 5个阶段的定义
+# ============================================================
+stages:
+  # Stage 1: collect（只执行一次）
+  - id: collect
+    delegate_to: self
+    skill: ut-test-collector
+    loop: false
+    description: 从test_list.txt生成manifest.json
+    input:
+      test_list_path: "{run_dir}/test_list.txt"
+      manifest_schema_path: "{workspace}/skills/ut/shared/manifest_schema.json"
+    output:
+      manifest_path: *manifest_path
+    kanban:
+      action: create_board
+      board_name: "UT Test Progress"
+
+  # Stage 2: select_batch（循环）
+  - id: select_batch
+    delegate_to: self
+    skill: batch-selector
+    loop: true
+    description: 选择下一批次测试
+    input:
+      manifest_path: *manifest_path
+      batch_size: 8 # 建议 8~16，保证完整日志通过 agent.py run 返回
+    output:
+      batch_config_path: *batch_config_path
+    kanban:
+      action: create_lane
+      lane_name_template: "batch_{batch_id}"
+      lane_type: running
+
+  # Stage 3: execute（循环）
+  # v2.2: 日志提取和解析已内置为 stage 核心行为
+  - id: execute
+    delegate_to: self
+    skill: unit-test-executor
+    loop: true
+    description: |
+      执行pytest测试并生成batch_results.json
+      内置步骤:
+      1. 启动 pytest 执行
+      2. 从远程 ut_logs grep 提取 PASSED/FAILED/ERROR 行
+      3. 调用 parse_remote_log.py 解析并生成 batch_results.json
+    input:
+      batch_config_path: *batch_config_path
+      pytest_args: "-q --tb=long"
+      # 远程执行配置（内置日志提取使用）
+      remote_server: "t_h20"
+      docker_container: "v0.13.0_torch2.5.1_compile"
+      ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+    output:
+      batch_results_path: *batch_results_path
+    # 内置日志提取配置
+    log_extraction:
+      enabled: true
+      grep_pattern: "(PASSED|FAILED|ERROR|SKIPPED)"
+      grep_timeout: 60
+      parse_script: "{workspace}/skills/ut/unit-test-executor/scripts/parse_remote_log.py"
+    timeout: 600                  # wall-clock 兜底 (design 2026-06-23 §3 D3)
+    pytest_idle_timeout: 120      # 无日志活动超时 → idle kill (design §3 D3)
+    kanban:
+      action: update_lane
+      progress_template: "{passed}/{total}"
+
+  # Stage 4: handle_failures（循环，Agent核心）
+  - id: handle_failures
+    delegate_to: self
+    skill: failure-handler
+    loop: true
+    description: 分析失败原因，尝试修复（Agent判断）
+    input:
+      batch_results_path: *batch_results_path
+      # 失败重试配置
+      max_failed_per_iteration: 10 # 每轮最多处理 10 个失败测试
+      max_retry_per_test: 3 # 单测试最多重试 3 次
+    output:
+      handled_tests_path: *handled_tests_path
+    agent_required: true
+    timeout: 900
+
+  # Stage 5: update_status（循环）
+  - id: update_status
+    delegate_to: self
+    skill: manifest-updater
+    loop: true
+    description: 更新manifest.json状态
+    input:
+      batch_results_path: *batch_results_path
+      handled_tests_path: *handled_tests_path
+      manifest_path: *manifest_path
+    output:
+      manifest_path: *manifest_path
+    kanban:
+      action: move_lane
+      lane_name_template: "batch_{batch_id}"
+      target_lane_template: "{result_lane}"
+      summary_template: "{passed}/{total} passed"
+
+# ============================================================
+# Loop - 循环配置
+# ============================================================
+loop:
+  stages:
+    - select_batch
+    - execute
+    - handle_failures
+    - update_status
+  stop_condition: "pending_count == 0"
+  max_iterations: 1000
+
+  break_conditions:
+    - condition: "consecutive_failures > 50"
+      action: pause
+      notify: true
+      kanban_note: "Paused: consecutive_failures > 50"
+
+    - condition: "error_rate > 0.8"
+      action: pause
+      notify: true
+      kanban_note: "Paused: error_rate > 80%"
+
+    - condition: "stop_requested == true"
+      action: stop
+      notify: true
+
+# ============================================================
+# Bastion - SSH daemon 生命周期管理（Hermes Runner 使用）
+# ============================================================
+bastion:
+  managed_by: hermes
+  profile: "t_h20"
+  heartbeat_interval: 15
+  otp_timeout: 300
+  notify_on_disconnect: true
+  auto_restart: true
+
+# ============================================================
+# Worker Output Schema - Worker返回格式规范（统一）
+# ============================================================
+worker_output_schema:
+  stats:
+    passed: integer
+    failed: integer # AssertionError 等断言失败
+    error: integer # Collection/Import/Download 错误
+    ignored: integer
+    pending: integer
+  next_action: string # continue | pause | stop | wait
+  error: string_or_null # Worker 错误信息（需要人工介入时）
+  blocked_reason: string_or_null # 阻塞原因（GPU不足等）
+
+# 注意：不返回 batch_id、log_file、details_file、kanban_update 等额外字段
+# 所有 Worker 只返回上述统一格式
+
+# ============================================================
+# Kanban - Hermes Kanban配置
+# 注意：UT workflow 是线性批处理，不需要多 agent 协作，Kanban 默认关闭。
+#       进度可视化通过飞书卡片完成（见 notifications 节）。
+#       kanban_manager.py 代码保留，可独立 CLI 使用。
+# ============================================================
+# ============================================================
+# Kanban - Hermes Kanban 配置（方案 A-1）
+# ============================================================
+kanban:
+  enabled: true # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
+
+  # Board 配置
+  board:
+    name: "apmm-ut"
+    slug: "apmm-ut"
+
+  # Worker Profile 配置
+  profiles:
+    batch_selector: "ut-batch-selector"
+    manifest_updater: "ut-manifest-updater"
+    executor: "ut-executor"
+    fixer: "ut-fixer"
+
+  # Gateway 启动配置
+  gateway:
+    auto_start: true # Agent 自动启动 gateway
+    check_interval: 60 # 调度检查间隔（秒）
+    startup_timeout: 30 # gateway 启动超时（秒）
+
+  # 熔断器配置
+  circuit_breaker:
+    failure_limit: 3 # 连续失败 N 次后自动 block
+    error_rate_threshold: 0.8 # 错误率阈值
+
+  # 任务创建配置
+  task_creation:
+    initial_assignee: "ut-batch-selector"
+    priority: 1
+    body_template: "Orchestrate UT run for {test_list_path}"
+
+# ============================================================
+# Notifications - 飞书通知配置
+# ============================================================
+notifications:
+  feishu_chat_id: "oc_2e75db818ac1792238037a704b4d32d3"
+
+  notify_on:
+    - condition: "batch_completed"
+      template: "Batch {batch_id}: {passed}/{total} passed"
+      include_kanban_link: true
+
+    - condition: "workflow_completed"
+      template: "Workflow完成: {passed_count} passed, {failed_count} failed, {ignored_count} ignored"
+      include_kanban_snapshot: true
+
+    - condition: "milestone"
+      trigger: "stats.passed % 100 == 0"
+      template: "Milestone: {passed_count} tests passed!"
+
+    - condition: "error_rate > 0.5"
+      template: "高错误率: {error_rate}%"
+
+    - condition: "paused"
+      template: "Workflow暂停: {pause_reason}"
+
+    - condition: "worker_error"
+      template: "Worker错误 ({stage}): {error_message}"

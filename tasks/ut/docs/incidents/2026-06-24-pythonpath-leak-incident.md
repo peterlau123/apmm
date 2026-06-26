@@ -61,7 +61,7 @@ ModuleNotFoundError ❌
 
 ### Layer 1: start_gateway.py（主修复）
 
-**修改位置**: `skills/ut/workflow/scripts/start_gateway.py`
+**修改位置**: `skills/ut/terminal-workflow/scripts/start_gateway.py`
 
 ```python
 def start_profile_gateway(profile, logs_dir):
@@ -188,7 +188,7 @@ def test_gateway_startup_clears_pythonpath():
 | 文档 | 用途 |
 |---|---|
 | `2026-06-24-L4-test-issues-and-fixes.md` | L4 测试所有问题综合报告 |
-| `skills/ut/workflow/scripts/start_gateway.py` | Gateway 启动脚本（主修复点） |
+| `skills/ut/terminal-workflow/scripts/start_gateway.py` | Gateway 启动脚本（主修复点） |
 | `skills/ut/*/scripts/*.py` | Worker scripts（fallback 修复点） |
 | `tasks/ut/docs/guides/hermes-gateway-service.md` | Gateway 服务运维指南 |
 

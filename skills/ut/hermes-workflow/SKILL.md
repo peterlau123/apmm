@@ -116,7 +116,7 @@ flowchart LR
 - **Owns the full state machine** (§8): running / paused / waiting_otp /
   completed / stopped / failed, plus `pending_config`.
 
-Difference from `ut/workflow` (terminal channel): that channel has no state
+Difference from `ut/terminal-workflow` (terminal channel): that channel has no state
 machine, no paused/waiting_otp, and Bastion is human-maintained.
 
 ---
@@ -350,7 +350,7 @@ There is **no external LLM invoker** — the Agent's reasoning IS the LLM.
 `classify_intent_llm` is purely a parser/validator over the JSON the Agent
 already produced.
 
-(Linear `ut/workflow` returns `[]` here; this channel actually reads Feishu.)
+(Linear `ut/terminal-workflow` returns `[]` here; this channel actually reads Feishu.)
 
 ### `check_terminal_conditions(state, manifest)`
 

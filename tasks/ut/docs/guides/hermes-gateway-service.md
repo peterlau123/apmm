@@ -38,7 +38,7 @@ hermes kanban boards list
 hermes kanban boards switch apmm-ut
 ```
 
-> `skills/ut/workflow/scripts/start_gateway.py` 在拉起 Gateway 前会先 `hermes kanban boards switch apmm-ut`。systemd 部署下，看板切换是**进程级**状态，建议把 `hermes kanban boards switch apmm-ut` 并入每个实例的 `ExecStartPre`（见 §3），确保每个 Gateway 进程都对准同一看板。
+> `skills/ut/terminal-workflow/scripts/start_gateway.py` 在拉起 Gateway 前会先 `hermes kanban boards switch apmm-ut`。systemd 部署下，看板切换是**进程级**状态，建议把 `hermes kanban boards switch apmm-ut` 并入每个实例的 `ExecStartPre`（见 §3），确保每个 Gateway 进程都对准同一看板。
 
 ### 2.2 3 个 worker profile 已部署
 
@@ -117,7 +117,7 @@ WantedBy=default.target
 | `ExecStart` | 接地于 start_gateway.py：`hermes profile use %i`（line 60）+ `hermes gateway run`（line 73），二者均为仓库已验证命令 |
 | `Restart=on-failure` | 进程非零退出自动重启 |
 
-> **ExecStart 接地说明**：`skills/ut/workflow/scripts/start_gateway.py` 对每个 profile 执行 `hermes profile use <profile>`（`start_profile_gateway`）后以后台进程启动 `hermes gateway run`，并用 `hermes gateway list` 校验是否带 `✓` 在线。本指南直接把这套命令搬进 systemd `ExecStart`，无需臆造 flag。
+> **ExecStart 接地说明**：`skills/ut/terminal-workflow/scripts/start_gateway.py` 对每个 profile 执行 `hermes profile use <profile>`（`start_profile_gateway`）后以后台进程启动 `hermes gateway run`，并用 `hermes gateway list` 校验是否带 `✓` 在线。本指南直接把这套命令搬进 systemd `ExecStart`，无需臆造 flag。
 >
 > **`run` vs `start`（DEPLOY-CONFIRM）**：`tasks/ut/docs/kanban/README.md` 指出 `hermes gateway start` 可能提示安装计划任务（scheduled service），故脚本用前台 `hermes gateway run` + 后台分离。systemd 已负责常驻与重启，因此**沿用 `hermes gateway run`**；若部署机的 `hermes gateway run` 不是前台常驻（例如某些版本 `run` 会立即返回），请以部署机 `hermes gateway --help` 为准调整为常驻形式（DEPLOY-CONFIRM）。
 >
@@ -152,7 +152,7 @@ systemctl --user enable --now \
 
 ## 5. 与 check_gateways_alive() 的对应
 
-Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `hermes_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/workflow/scripts/hermes_runner.py`）的机制是：
+Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `hermes_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/terminal-workflow/scripts/hermes_runner.py`）的机制是：
 
 ```python
 KANBAN_GATEWAY_PROFILES = ("ut-orchestrator", "ut-executor", "ut-fixer")
@@ -243,8 +243,8 @@ hermes gateway status
 |------|------|
 | [hermes-supervisor-service.md](hermes-supervisor-service.md) | Supervisor（1 个长驻 Agent）的 systemd 部署指南 |
 | `tasks/ut/docs/kanban/README.md` | Kanban 集成、3 worker profile、`start_gateway.py` 包装器、远程执行规则 |
-| `skills/ut/workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
-| `skills/ut/workflow/scripts/hermes_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
+| `skills/ut/terminal-workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
+| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
 | `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
 | [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |

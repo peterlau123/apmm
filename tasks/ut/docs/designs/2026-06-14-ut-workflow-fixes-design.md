@@ -37,7 +37,7 @@ UT Workflow 执行过程中发现3个问题：
 - `send_progress_card.py:63` 从 manifest.statistics 读取 `pass_rate`
 - manifest.json 未写入 `pass_rate` 字段，导致默认值为 0
 
-**修改位置**: `skills/ut/workflow/scripts/send_progress_card.py:63-64`
+**修改位置**: `skills/ut/terminal-workflow/scripts/send_progress_card.py:63-64`
 
 **修改内容**:
 
@@ -316,7 +316,7 @@ Round 1:
 **补充位置**:
 - `skills/ut/failure-handler/references/troubleshooting.md`
 - `skills/ut/dependency-resolver/references/troubleshooting.md`
-- `skills/ut/workflow/references/troubleshooting.md`
+- `skills/ut/terminal-workflow/references/troubleshooting.md`
 
 **核心原则**:
 - **所有错误类型都不能直接 ignored**
@@ -606,7 +606,7 @@ pip install triton==2.1.0
 
 | 文件 | 修改类型 | 修改内容 |
 |------|----------|----------|
-| `skills/ut/workflow/scripts/send_progress_card.py` | 代码修改 | 动态计算 pass_rate |
+| `skills/ut/terminal-workflow/scripts/send_progress_card.py` | 代码修改 | 动态计算 pass_rate |
 | `.agents/workflow.yaml` | 配置删除 | 删除 execution 配置块 |
 | `.agents/workflow.yaml` | 配置调整 | kanban 和 notifications 移到 worker_output_schema 后 |
 | `.agents/workflow.yaml` | 注释补充 | container_env 补充环境配置说明 |
@@ -615,7 +615,7 @@ pip install triton==2.1.0
 | `skills/ut/failure-handler/SKILL.md` | 说明修改 | 更新剩余失败测试处理说明 |
 | `skills/ut/failure-handler/references/troubleshooting.md` | **新文件** | failure-handler 问题解决手册 |
 | `skills/ut/dependency-resolver/references/troubleshooting.md` | **新文件** | dependency-resolver 问题解决手册 |
-| `skills/ut/workflow/references/troubleshooting.md` | **新文件** | workflow 问题解决手册 |
+| `skills/ut/terminal-workflow/references/troubleshooting.md` | **新文件** | workflow 问题解决手册 |
 
 ### 实施步骤
 

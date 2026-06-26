@@ -238,11 +238,11 @@ skills/ut/
   - `batch_config_schema.json` → `skills/ut/batch-selector/`
   - `batch_results_schema.json` → `skills/ut/unit-test-executor/`
   - `handled_tests_schema.json` → `skills/ut/failure-handler/`
-  - `workflow_state_schema.json` → `skills/ut/workflow/`
+  - `workflow_state_schema.json` → `skills/ut/terminal-workflow/`
   - `manifest_schema.json` → 保持在 `skills/ut/shared/`
 
 - [ ] 1.2 创建 `workflow_schema.yaml`（YAML 格式 schema）
-  - 位置: `skills/ut/workflow/workflow_schema.yaml`
+  - 位置: `skills/ut/terminal-workflow/workflow_schema.yaml`
   - 内容: 定义 workflow.yaml 的结构和约束
   - 枚举字段添加 `_enum_comments` 注释
 
@@ -322,8 +322,8 @@ SCHEMA_FILES = {
     "batch_results": "skills/ut/unit-test-executor/batch_results_schema.json",
     "handled_tests": "skills/ut/failure-handler/handled_tests_schema.json",
     "manifest": "skills/ut/shared/manifest_schema.json",
-    "workflow_state": "skills/ut/workflow/workflow_state_schema.json",
-    "workflow": "skills/ut/workflow/workflow_schema.yaml",  # YAML schema
+    "workflow_state": "skills/ut/terminal-workflow/workflow_state_schema.json",
+    "workflow": "skills/ut/terminal-workflow/workflow_schema.yaml",  # YAML schema
 }
 ```
 

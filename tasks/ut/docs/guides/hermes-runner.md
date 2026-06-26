@@ -30,7 +30,7 @@ Hermes Runner (`hermes_runner.py`) 是 UT Workflow 的后台运行器，根据 `
 python tools/agent.py profiles
 
 # 确认 workflow.yaml 配置正确
-python skills/ut/workflow/scripts/archive/supervisor_loop.py --validate
+python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --validate
 ```
 
 ### 2.2 飞书配置（OTP 收信用）
@@ -66,7 +66,7 @@ bastion:
 ### 3.1 新建运行
 
 ```bash
-python skills/ut/workflow/scripts/hermes_runner.py \
+python skills/ut/terminal-workflow/scripts/hermes_runner.py \
   --workflow-yaml .agents/workflow.yaml
 ```
 
@@ -79,7 +79,7 @@ Runner 会：
 ### 3.2 断点续跑
 
 ```bash
-python skills/ut/workflow/scripts/hermes_runner.py \
+python skills/ut/terminal-workflow/scripts/hermes_runner.py \
   --workflow-yaml .agents/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -182,7 +182,7 @@ Runner 在以下条件暂停：
 恢复命令：
 ```bash
 # 清除暂停标志后重新启动
-python skills/ut/workflow/scripts/hermes_runner.py \
+python skills/ut/terminal-workflow/scripts/hermes_runner.py \
   --workflow-yaml .agents/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -201,8 +201,8 @@ python tools/agent.py -p t_h20 ping
 python tools/agent.py serve t_h20
 
 # 使用 bastion_manager CLI 测试
-python skills/ut/workflow/scripts/bastion_manager.py ping
-python skills/ut/workflow/scripts/bastion_manager.py ensure --reason "manual test"
+python skills/ut/terminal-workflow/scripts/bastion_manager.py ping
+python skills/ut/terminal-workflow/scripts/bastion_manager.py ensure --reason "manual test"
 ```
 
 ### 6.2 飞书 OTP 收不到
@@ -212,20 +212,20 @@ python skills/ut/workflow/scripts/bastion_manager.py ensure --reason "manual tes
 3. 确认 `chat_id` 对应的群聊中已添加机器人
 4. 手动测试飞书连接：
    ```bash
-   python skills/ut/workflow/scripts/feishu_api.py
+   python skills/ut/terminal-workflow/scripts/feishu_api.py
    ```
 
 ### 6.3 Workflow 状态不一致
 
 ```bash
 # 从 manifest 重新计算 stats
-python skills/ut/workflow/scripts/archive/supervisor_loop.py --update-stats
+python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --update-stats
 ```
 
 ### 6.4 查看当前运行状态
 
 ```bash
-python skills/ut/workflow/scripts/archive/supervisor_loop.py --check
+python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 ```
 
 ### 6.5 Runner 意外退出
@@ -251,11 +251,11 @@ python skills/ut/workflow/scripts/archive/supervisor_loop.py --check
 
 | 文件 | 说明 |
 |------|------|
-| `skills/ut/workflow/scripts/hermes_runner.py` | Runner 主脚本 |
-| `skills/ut/workflow/scripts/bastion_manager.py` | Bastion 生命周期管理 |
-| `skills/ut/workflow/scripts/feishu_api.py` | 飞书 API 封装 |
+| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | Runner 主脚本 |
+| `skills/ut/terminal-workflow/scripts/bastion_manager.py` | Bastion 生命周期管理 |
+| `skills/ut/terminal-workflow/scripts/feishu_api.py` | 飞书 API 封装 |
 | `.agents/workflow.yaml` | Workflow 配置（含 bastion 节） |
-| `skills/ut/workflow/workflow_state_schema.json` | 状态文件 Schema |
+| `skills/ut/terminal-workflow/workflow_state_schema.json` | 状态文件 Schema |
 | `tasks/ut/docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md` | 设计文档 |
 
 ---

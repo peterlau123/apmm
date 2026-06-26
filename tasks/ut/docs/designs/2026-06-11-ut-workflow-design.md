@@ -73,7 +73,7 @@ UT Workflow是一个自动化单元测试验证流程，用于批量执行vLLM�
 
 ## 相关文档
 - [workflow.yaml](../../.agents/workflow.yaml) - Workflow配置（需用户调整）
-- [workflow SKILL.md](../../skills/ut/workflow/SKILL.md) - 详细执行逻辑
+- [workflow SKILL.md](../../skills/ut/terminal-workflow/SKILL.md) - 详细执行逻辑
 ```
 
 ---
@@ -113,7 +113,7 @@ input_filter:
 
 ---
 
-### 3. skills/ut/workflow/SKILL.md（自主执行）
+### 3. skills/ut/terminal-workflow/SKILL.md（自主执行）
 
 **触发方式**：
 用户加载skill：
@@ -139,14 +139,14 @@ input_filter:
 
 **Step 3: 初始化workflow_state.json**
 ```bash
-python skills/ut/workflow/scripts/init_workflow_state.py \
+python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
   --workflow-yaml WORKFLOW_YAML_PATH \
   --test-list TEST_LIST_PATH
 ```
 
 **Step 4: 执行workflow循环**
 ```bash
-python skills/ut/workflow/scripts/supervisor_loop.py \
+python skills/ut/terminal-workflow/scripts/supervisor_loop.py \
   --workflow-yaml WORKFLOW_YAML_PATH \
   --workflow-state WORKFLOW_STATE_PATH
 ```
@@ -266,7 +266,7 @@ tasks/ut/workflow_tests/下的4个test list用于验证workflow功能：
 |------|------|------|
 | tasks/ut/README.md | 创建/修改 | 最小化导引内容 |
 | .agents/workflow.yaml | 修改 | 添加用户调整标记注释 |
-| skills/ut/workflow/SKILL.md | 修改 | 自主执行逻辑 |
+| skills/ut/terminal-workflow/SKILL.md | 修改 | 自主执行逻辑 |
 | verify_workflow_test.py | 无需修改 | 验证报告status改为done/failed |
 
 ---

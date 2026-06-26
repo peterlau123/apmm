@@ -56,7 +56,7 @@ hermes kanban runs <task_id>
 Use the project wrapper:
 
 ```bash
-python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
 ```
 
 The wrapper:
@@ -81,7 +81,7 @@ Workers must not call plain `ssh` to bastion. Historical blocked Kanban tasks fa
 Workers must not directly stop or restart `agent.py` daemon. If the daemon is unavailable, use the Feishu approval gate:
 
 ```bash
-python skills/ut/workflow/scripts/request_daemon_approval.py \
+python skills/ut/terminal-workflow/scripts/request_daemon_approval.py \
   --profile t_h20 \
   --task-id <kanban_task_id> \
   --reason "agent.py daemon unavailable during UT execution"
@@ -90,7 +90,7 @@ python skills/ut/workflow/scripts/request_daemon_approval.py \
 If `ping` succeeds but `run` commands timeout or the daemon appears stuck, force the approval gate:
 
 ```bash
-python skills/ut/workflow/scripts/request_daemon_approval.py \
+python skills/ut/terminal-workflow/scripts/request_daemon_approval.py \
   --profile t_h20 \
   --task-id <kanban_task_id> \
   --reason "agent.py daemon stuck: ping OK but run timeout" \
@@ -143,7 +143,7 @@ hermes kanban archive <task_id>
 If dispatcher is not running:
 
 ```bash
-python skills/ut/workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
 ```
 
 If remote execution fails with daemon errors:
@@ -155,7 +155,7 @@ python tools/agent.py -p t_h20 ping
 If not running, use the approval gate:
 
 ```bash
-python skills/ut/workflow/scripts/request_daemon_approval.py \
+python skills/ut/terminal-workflow/scripts/request_daemon_approval.py \
   --profile t_h20 \
   --task-id <kanban_task_id> \
   --reason "agent.py daemon unavailable"

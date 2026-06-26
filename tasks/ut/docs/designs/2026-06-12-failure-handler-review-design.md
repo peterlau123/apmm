@@ -224,7 +224,7 @@ state["stats"] = manifest["statistics"]
 |------|----------|
 | `skills/ut/failure-handler/SKILL.md` | 更新决策 1-9 的描述 |
 | `tasks/ut/GOAL.md` | 增加 ignored 阈值 ≤50% |
-| `skills/ut/workflow/scripts/init_workflow_state.py` | 决策 10：stats 从 manifest 读取 |
+| `skills/ut/terminal-workflow/scripts/init_workflow_state.py` | 决策 10：stats 从 manifest 读取 |
 | `.agents/workflow.yaml` | 增加 `max_failed_per_iteration: 10`, `max_retry_per_test: 3` |
 
 ---

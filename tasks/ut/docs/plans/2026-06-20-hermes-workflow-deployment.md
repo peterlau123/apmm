@@ -45,8 +45,8 @@ Plan 1's end-to-end smoke (`tests/integration/run_linear_smoke.py`) proved the p
 ### Modified
 - `skills/ut/unit-test-executor/scripts/execute_batch.py` — injectable exec_config (G1/G2), accept test_id (G4)
 - `skills/ut/failure-handler/scripts/analyze_failures.py` — injectable ensure_on_branch (G3)
-- `skills/ut/workflow/scripts/hermes_runner.py` — get_execute_config, parse_command, refresh_manifest_stats, orchestrator_round
-- `skills/ut/workflow/scripts/bastion_manager.py` — OTP progressive resend schedule
+- `skills/ut/terminal-workflow/scripts/hermes_runner.py` — get_execute_config, parse_command, refresh_manifest_stats, orchestrator_round
+- `skills/ut/terminal-workflow/scripts/bastion_manager.py` — OTP progressive resend schedule
 - `tests/integration/run_linear_smoke.py` — remove harness shims now gaps closed
 - `tasks/ut/README.md` — link Plan 2 deliverables
 
@@ -57,7 +57,7 @@ Plan 1's end-to-end smoke (`tests/integration/run_linear_smoke.py`) proved the p
 ### Task 0.1: Single config contract (G1/G2)
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Modify: `skills/ut/unit-test-executor/scripts/execute_batch.py`
 - Test: `tests/skills/ut/test_config_contract.py` (new)
 
@@ -119,7 +119,7 @@ def execute_batch(batch_config_path, workflow_state_path, *, exec_config: dict |
 - [ ] **Step 6: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py skills/ut/unit-test-executor/scripts/execute_batch.py tests/skills/ut/test_config_contract.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py skills/ut/unit-test-executor/scripts/execute_batch.py tests/skills/ut/test_config_contract.py
 git commit -m "fix(G1/G2): get_execute_config flattener + injectable exec_config in execute_batch"
 ```
 
@@ -248,7 +248,7 @@ git commit -m "test(integration): smoke uses get_execute_config + raw selector o
 ### Task 1.1: OTP resend schedule
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/bastion_manager.py`
+- Modify: `skills/ut/terminal-workflow/scripts/bastion_manager.py`
 - Test: `tests/skills/ut/test_otp_resend.py` (new)
 
 - [ ] **Step 1: Failing test**
@@ -279,7 +279,7 @@ def otp_should_at_user(attempt: int) -> bool:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/bastion_manager.py tests/skills/ut/test_otp_resend.py
+git add skills/ut/terminal-workflow/scripts/bastion_manager.py tests/skills/ut/test_otp_resend.py
 git commit -m "feat(bastion): OTP progressive resend schedule (5/15/30/60min, @user from 3rd)"
 ```
 
@@ -290,7 +290,7 @@ git commit -m "feat(bastion): OTP progressive resend schedule (5/15/30/60min, @u
 ### Task 2.1: parse_command
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_hermes_runner_api.py` (extend)
 
 - [ ] **Step 1: Failing tests**
@@ -336,7 +336,7 @@ def parse_command(text: str):
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
 git commit -m "feat(hermes_runner): parse Feishu commands with config whitelist"
 ```
 
@@ -345,7 +345,7 @@ git commit -m "feat(hermes_runner): parse Feishu commands with config whitelist"
 ### Task 2.2: refresh_manifest_stats
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_hermes_runner_api.py` (extend)
 
 - [ ] **Step 1: Failing test**
@@ -387,7 +387,7 @@ def refresh_manifest_stats(state_path, manifest_path) -> dict:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_hermes_runner_api.py
 git commit -m "feat(hermes_runner): refresh_manifest_stats feeds check_stop_conditions"
 ```
 
@@ -398,7 +398,7 @@ git commit -m "feat(hermes_runner): refresh_manifest_stats feeds check_stop_cond
 ### Task 3.1: orchestrator_round
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/hermes_runner.py`
+- Modify: `skills/ut/terminal-workflow/scripts/hermes_runner.py`
 - Test: `tests/skills/ut/test_kanban_orchestrator.py` (new)
 
 - [ ] **Step 1: Failing test**
@@ -465,7 +465,7 @@ Add `_load_fn(skill_dir, module, fn_name)` importlib helper if absent.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/hermes_runner.py tests/skills/ut/test_kanban_orchestrator.py
+git add skills/ut/terminal-workflow/scripts/hermes_runner.py tests/skills/ut/test_kanban_orchestrator.py
 git commit -m "feat(kanban): orchestrator_round combines Stage 5 reconcile + Stage 2 select"
 ```
 

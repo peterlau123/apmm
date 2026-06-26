@@ -67,7 +67,7 @@ Pass the profile only via `-p`.
 
 ```bash
 cd /d/workspace/apmm && export PYTHONPATH= && python -c "
-import sys; sys.path.insert(0,'skills/ut/workflow/scripts'); sys.path.insert(0,'skills/ut')
+import sys; sys.path.insert(0,'skills/ut/terminal-workflow/scripts'); sys.path.insert(0,'skills/ut')
 import yaml, json
 from hermes_runner import validate_required_config, check_gateways_alive
 cfg = yaml.safe_load(open('.agents/workflow.yaml', encoding='utf-8'))
@@ -84,7 +84,7 @@ All-`True` gateways → Kanban viable. `hermes gateway status` cross-checks PIDs
 
 ```bash
 cd /d/workspace/apmm && export PYTHONPATH= && \
-  python skills/ut/workflow/scripts/init_workflow_state.py --workflow-yaml .agents/workflow.yaml
+  python skills/ut/terminal-workflow/scripts/init_workflow_state.py --workflow-yaml .agents/workflow.yaml
 # Writes runs/<test_name>-<ts>/ (manifest.json, test_list.txt, workflow_state.json)
 # and updates .agents/current_run.json. Read run_dir back from current_run.json.
 ```

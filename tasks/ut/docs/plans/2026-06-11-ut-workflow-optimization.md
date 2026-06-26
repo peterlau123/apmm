@@ -16,8 +16,8 @@
 |------|------|------|
 | tasks/ut/README.md | 创建 | 最小化导引，用户入口 |
 | .agents/workflow.yaml | 修改 | 添加用户调整标记注释 |
-| skills/ut/workflow/SKILL.md | 修改 | 自主执行逻辑（v3.0 → v4.0） |
-| skills/ut/workflow/scripts/supervisor_loop.py | ✅已完成 | 处理delegate_to/timeout/log_extraction等字段 |
+| skills/ut/terminal-workflow/SKILL.md | 修改 | 自主执行逻辑（v3.0 → v4.0） |
+| skills/ut/terminal-workflow/scripts/supervisor_loop.py | ✅已完成 | 处理delegate_to/timeout/log_extraction等字段 |
 | tasks/ut/workflow_tests/verify_workflow_test.py | 修改 | status字段改为done/failed |
 
 ---
@@ -67,7 +67,7 @@ UT Workflow是一个自动化单元测试验证流程，用于批量执行vLLM�
 ## 相关文档
 
 - [workflow.yaml](../../.agents/workflow.yaml) - Workflow配置（需用户调整）
-- [workflow SKILL.md](../../skills/ut/workflow/SKILL.md) - 详细执行逻辑
+- [workflow SKILL.md](../../skills/ut/terminal-workflow/SKILL.md) - 详细执行逻辑
 ```
 
 - [ ] **Step 3: 验证文件内容**
@@ -167,11 +167,11 @@ git commit -m "docs: add user adjustment markers to workflow.yaml"
 ### Task 3: 修改 SKILL.md 实现自主执行
 
 **Files:**
-- Modify: `skills/ut/workflow/SKILL.md` (v3.0 → v4.0)
+- Modify: `skills/ut/terminal-workflow/SKILL.md` (v3.0 → v4.0)
 
 - [ ] **Step 1: 读取当前SKILL.md头部元数据**
 
-Run: `head -10 skills/ut/workflow/SKILL.md`
+Run: `head -10 skills/ut/terminal-workflow/SKILL.md`
 Expected: 显示元数据和版本信息
 
 - [ ] **Step 2: 更新元数据和版本号**
@@ -233,7 +233,7 @@ skill加载后，立即提示：
 
 调用初始化脚本：
 ```bash
-python skills/ut/workflow/scripts/init_workflow_state.py \
+python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
   --workflow-yaml WORKFLOW_YAML_PATH \
   --test-list TEST_LIST_PATH
 ```
@@ -246,7 +246,7 @@ python skills/ut/workflow/scripts/init_workflow_state.py \
 
 调用supervisor循环：
 ```bash
-python skills/ut/workflow/scripts/supervisor_loop.py \
+python skills/ut/terminal-workflow/scripts/supervisor_loop.py \
   --workflow-yaml WORKFLOW_YAML_PATH \
   --workflow-state WORKFLOW_STATE_PATH
 ```
@@ -328,13 +328,13 @@ flowchart TD
 
 - [ ] **Step 6: 验证修改**
 
-Run: `grep "自主执行流程" skills/ut/workflow/SKILL.md`
+Run: `grep "自主执行流程" skills/ut/terminal-workflow/SKILL.md`
 Expected: 显示新增的自主执行部分
 
 - [ ] **Step 7: Commit**
 
 ```bash
-git add skills/ut/workflow/SKILL.md
+git add skills/ut/terminal-workflow/SKILL.md
 git commit -m "feat: add self-executing logic to workflow skill (v3.0 → v4.0)"
 ```
 
@@ -423,7 +423,7 @@ Expected: 输出 "4"（4处标记）
 
 - [ ] **Step 4: 检查SKILL.md自主执行逻辑**
 
-Run: `grep "自主执行流程" skills/ut/workflow/SKILL.md`
+Run: `grep "自主执行流程" skills/ut/terminal-workflow/SKILL.md`
 Expected: 显示自主执行流程标题
 
 - [ ] **Step 5: 生成最终总结**

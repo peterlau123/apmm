@@ -13,7 +13,7 @@
 ## File Structure
 
 ### Modified Files (8)
-- `skills/ut/workflow/scripts/send_progress_card.py` - 修复 pass_rate 计算
+- `skills/ut/terminal-workflow/scripts/send_progress_card.py` - 修复 pass_rate 计算
 - `.agents/workflow.yaml` - 删除 execution、调整顺序、补充配置和注释
 - `skills/ut/batch-selector/SKILL.md` - 增加 failed 选择逻辑（含 retry_count 过滤）
 - `skills/ut/failure-handler/SKILL.md` - 更新剩余失败处理说明
@@ -22,14 +22,14 @@
 ### New Files (3)
 - `skills/ut/failure-handler/references/troubleshooting.md` - failure-handler 问题解决手册
 - `skills/ut/dependency-resolver/references/troubleshooting.md` - dependency-resolver 问题解决手册
-- `skills/ut/workflow/references/troubleshooting.md` - workflow 问题解决手册
+- `skills/ut/terminal-workflow/references/troubleshooting.md` - workflow 问题解决手册
 
 ---
 
 ## Task 1: 修复飞书卡片通过率计算
 
 **Files:**
-- Modify: `skills/ut/workflow/scripts/send_progress_card.py:63-64`
+- Modify: `skills/ut/terminal-workflow/scripts/send_progress_card.py:63-64`
 
 - [ ] **Step 1: 修改 pass_rate 计算**
 
@@ -43,13 +43,13 @@ pass_rate = (passed / executed * 100) if executed > 0 else 0.0
 
 - [ ] **Step 2: 验证修改**
 
-Read: `skills/ut/workflow/scripts/send_progress_card.py:60-70`
+Read: `skills/ut/terminal-workflow/scripts/send_progress_card.py:60-70`
 Expected: `pass_rate = (passed / executed * 100) if executed > 0 else 0.0`
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/scripts/send_progress_card.py
+git add skills/ut/terminal-workflow/scripts/send_progress_card.py
 git commit -m "fix: dynamic calculation of pass_rate in send_progress_card.py"
 ```
 
@@ -460,7 +460,7 @@ git commit -m "docs: create dependency-resolver troubleshooting guide"
 ## Task 10: 创建 workflow troubleshooting 文档
 
 **Files:**
-- Create: `skills/ut/workflow/references/troubleshooting.md`
+- Create: `skills/ut/terminal-workflow/references/troubleshooting.md`
 
 - [ ] **Step 1: 创建 troubleshooting.md**
 
@@ -503,13 +503,13 @@ git commit -m "docs: create dependency-resolver troubleshooting guide"
 
 - [ ] **Step 2: 验证创建**
 
-Glob: `skills/ut/workflow/references/troubleshooting.md`
+Glob: `skills/ut/terminal-workflow/references/troubleshooting.md`
 Expected: File exists
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/ut/workflow/references/troubleshooting.md
+git add skills/ut/terminal-workflow/references/troubleshooting.md
 git commit -m "docs: create workflow troubleshooting guide"
 ```
 

@@ -377,7 +377,7 @@ loop:
 
 **Skill Impact:**
 - `workflow/SKILL.md`: Add end-of-workflow resource summary
-- `skills/ut/workflow/scripts/send_progress_card.py`: Add resource summary template
+- `skills/ut/terminal-workflow/scripts/send_progress_card.py`: Add resource summary template
 
 **Workflow Impact:**
 - 🟢 Low: Only affects end-of-workflow reporting
@@ -893,7 +893,7 @@ Key Changes:
 
 - [Design Doc](./2026-06-12-failure-handler-review-design.md) — Original 10 decisions
 - [failure-handler/SKILL.md](../../skills/ut/failure-handler/SKILL.md) — Current implementation (v2.1)
-- [workflow/SKILL.md](../../skills/ut/workflow/SKILL.md) — Supervisor orchestration
+- [workflow/SKILL.md](../../skills/ut/terminal-workflow/SKILL.md) — Supervisor orchestration
 - [workflow.yaml](../../.agents/workflow.yaml) — Configuration file
 
 ---

@@ -253,8 +253,8 @@ pytest_idle_timeout: 120  # 无日志活动超时 → idle kill
 | 文件 | 用途 |
 |---|---|
 | `tasks/ut/docs/reports/2026-06-24-L4-test-issues-and-fixes.md` | 本报告 |
-| `skills/ut/workflow/scripts/hermes_runner.py` | Workflow runner 核心库 |
-| `skills/ut/workflow/scripts/bastion_manager.py` | Bastion daemon 管理库 |
+| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | Workflow runner 核心库 |
+| `skills/ut/terminal-workflow/scripts/bastion_manager.py` | Bastion daemon 管理库 |
 | `tests/ut/integration/fixtures/workflow.l4.yaml` | L4 frozen 配置 |
 | `tests/ut/integration/fixtures/L4_expected.json` | L4 预期结果 baseline |
 

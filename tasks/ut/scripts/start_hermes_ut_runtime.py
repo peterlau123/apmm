@@ -41,7 +41,7 @@ if hasattr(sys.stdout, "reconfigure"):
 # tasks/ut/scripts/start_hermes_ut_runtime.py -> project root is three levels up
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 _AGENT_PY = _PROJECT_ROOT / "tools" / "agent.py"
-_START_GATEWAY_PY = _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "start_gateway.py"
+_START_GATEWAY_PY = _PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "start_gateway.py"
 
 def run_cmd(cmd, timeout=60, cwd=None):
     return subprocess.run(

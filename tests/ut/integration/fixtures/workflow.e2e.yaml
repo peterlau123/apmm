@@ -1,0 +1,62 @@
+# workflow.e2e.yaml - E2E validation test config (kanban.enabled=false)
+# ============================================================
+# Purpose: Minimal e2e validation with controlled test outcomes
+# Test list: e2e_validation_list.txt (4 tests: 2pass + 1fail + 1retriable)
+# Created: 2026-06-27 (保留以前的 workflow.l1/l2/l3/l4 configs)
+# ============================================================
+
+workflow:
+  name: E2E Validation Test
+  version: "2.2"
+  description: 端到端验证 - 2 pass + 1 fail + 1 retriable error
+  test_name: "e2e-val"
+
+# ============================================================
+# Config - 执行配置
+# ============================================================
+config:
+  workspace: &workspace "D:/workspace/apmm"
+  runs_dir: &runs_dir "D:/workspace/apmm/runs"
+
+  # ✍️：执行参数
+  batch_size: 4
+  timeout: 600
+  pytest_args: "-v --tb=short --no-header"
+
+  # ✍️：远程服务器配置
+  remote_server: "t_h20"
+  docker_container: "v0.13.0_torch2.5.1_compile"
+  remote_log_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+  container_env:
+    HF_HOME: "/gpfs/gcsp/.cache/huggingface"
+
+# ============================================================
+# Input Filter - 测试来源
+# ============================================================
+input_filter:
+  # ✍️：使用新的 e2e validation test list
+  test_list_path: "tests/ut/integration/fixtures/e2e_validation_list.txt"
+
+# ============================================================
+# Kanban - 禁用 Kanban (linear mode)
+# ============================================================
+kanban:
+  enabled: false  # linear in-process Stage 2-5 loop; no Kanban gateways
+
+# ============================================================
+# Stages - 各阶段超时配置
+# ============================================================
+stages:
+  select_batch:
+    batch_size: 4
+    timeout: 60
+
+  execute_batch:
+    timeout: 900  # 15 min for potential retry
+    max_retry_per_test: 3
+
+  handle_failures:
+    timeout: 120
+
+  update_manifest:
+    timeout: 60

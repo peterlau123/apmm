@@ -1,0 +1,46 @@
+# workflow.hermes.e2e.yaml - Hermes-channel E2E validation (kanban.enabled=false)
+# ============================================================
+# Purpose: Test hermes-workflow in linear mode (kanban=off)
+# Uses same test list as terminal-workflow for comparison
+# ============================================================
+
+workflow:
+  name: Hermes E2E Validation Test
+  version: "2.2"
+  description: Hermes linear mode e2e - same test list as terminal-workflow
+  test_name: "hermes-e2e-val"
+
+config:
+  workspace: &workspace "D:/workspace/apmm"
+  runs_dir: &runs_dir "D:/workspace/apmm/runs"
+
+  batch_size: 4
+  timeout: 600
+  pytest_args: "-v --tb=short --no-header"
+
+  remote_server: "t_h20"
+  docker_container: "v0.13.0_torch2.5.1_compile"
+  remote_log_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+  container_env:
+    HF_HOME: "/gpfs/gcsp/.cache/huggingface"
+
+input_filter:
+  test_list_path: "tests/ut/integration/fixtures/e2e_validation_list.txt"
+
+kanban:
+  enabled: false  # linear mode - no Kanban gateways needed
+
+stages:
+  select_batch:
+    batch_size: 4
+    timeout: 60
+
+  execute_batch:
+    timeout: 900
+    max_retry_per_test: 3
+
+  handle_failures:
+    timeout: 120
+
+  update_manifest:
+    timeout: 60

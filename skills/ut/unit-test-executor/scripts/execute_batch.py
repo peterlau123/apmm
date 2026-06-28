@@ -206,7 +206,9 @@ def _build_watchdog_script(
     )
 
 
-def _wrap_with_docker_exec_b64(docker_container: str, inner_script: str) -> str:
+def _wrap_with_docker_exec_b64(
+    docker_container: str, inner_script: str, env_vars: dict | None = None
+) -> str:
     """Wrap a (possibly multi-line, possibly quote-laden) bash script for
     remote `sudo -n docker exec ... bash -c` execution, using base64 to
     bypass ALL shell-quoting / IFS / newline pitfalls along the route
@@ -231,13 +233,23 @@ def _wrap_with_docker_exec_b64(docker_container: str, inner_script: str) -> str:
         with `sudo: a password is required` in stderr) instead of hanging.
       - base64-encodes the inner script and decodes on the remote side, so
         no quoting / newline survives the trip needs to be reasoned about.
+
+    env_vars: optional dict of environment variables to inject into the
+        container via `-e VAR=VALUE` flags. Values are NOT shell-escaped
+        (docker exec handles them as literal strings).
     """
+    # Build -e flags from env_vars (if provided)
+    env_flags = ""
+    if env_vars:
+        for key, value in env_vars.items():
+            env_flags += f" -e {key}={value}"
+
     encoded = base64.b64encode(inner_script.encode("utf-8")).decode("ascii")
     # Outer quoting uses double quotes around a pure-ASCII payload (echo +
     # pipe + base64 chars). No single quotes, no newlines, no shell meta in
     # the encoded chunk → no quoting risk in any hop.
     return (
-        f"sudo -n docker exec {docker_container} bash -c "
+        f"sudo -n docker exec{env_flags} {docker_container} bash -c "
         f"\"echo {encoded} | base64 -d | bash\""
     )
 
@@ -761,6 +773,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     remote_log_dir = config.get(
         "remote_log_dir", "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
     )
+    container_env = config.get("container_env")  # env vars for test execution
 
     # Batch-level log dir (per-node log/xml live here too, named with the node).
     batch_log_dir = f"{remote_log_dir}/{batch_id}"
@@ -820,7 +833,9 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             log_path=node_log,
             pytest_full_cmd=pytest_full_cmd,
         )
-        docker_cmd = _wrap_with_docker_exec_b64(docker_container, watchdog_script)
+        docker_cmd = _wrap_with_docker_exec_b64(
+            docker_container, watchdog_script, env_vars=container_env
+        )
 
         try:
             res = run_remote(docker_cmd, timeout=wall_timeout, profile=remote_server)
@@ -850,6 +865,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             f"cat {node_xml} 2>/dev/null; "
             f"echo; "
             f"echo __REMOTE_LOG_SIZE__$(stat -c %s {node_log} 2>/dev/null || echo 0)",
+            env_vars=container_env,
         )
         try:
             fetch_res = run_remote(fetch_cmd, timeout=60, profile=remote_server)

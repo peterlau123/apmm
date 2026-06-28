@@ -22,7 +22,10 @@ config:
   docker_container: "v0.13.0_torch2.5.1_compile"
   remote_log_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
   container_env:
-    HF_HOME: "/gpfs/gcsp/.cache/huggingface"
+    HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
+    HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
+    HF_HUB_OFFLINE: "1"
+    VLLM_ASSETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
 
 input_filter:
   test_list_path: "tests/ut/integration/fixtures/e2e_validation_list.txt"

@@ -385,6 +385,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
             "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
             "duration_ms": None,
             "exit_code": exit_code,
+            "dependency_classification": {"classification": "timeout_no_xml", "signal": "unknown"},
         }
 
     cleaned = _REMOTE_LOG_SIZE_RESIDUE_RE.sub("", xml_text).rstrip("\r\n")
@@ -397,6 +398,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
             "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
             "duration_ms": None,
             "exit_code": exit_code,
+            "dependency_classification": {"classification": "timeout_unparseable_xml", "signal": "unknown"},
         }
 
     testcase = root.find(".//testcase")
@@ -408,6 +410,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
             "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
             "duration_ms": None,
             "exit_code": exit_code,
+            "dependency_classification": {"classification": "timeout_no_testcase", "signal": "unknown"},
         }
 
     # per-test duration (G6): <testcase time="0.123"> → ms.
@@ -863,6 +866,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
                 "error_message": "bastion disconnect during exec",
                 "duration_ms": None, "exit_code": None,
                 "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
+                "dependency_classification": {"classification": "disconnect_exec", "signal": "unknown"},
                 "_disconnected": True,
             }
 
@@ -891,6 +895,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
                 "error_message": "bastion disconnect during xml fetch",
                 "duration_ms": None, "exit_code": exit_code,
                 "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
+                "dependency_classification": {"classification": "disconnect_xml_fetch", "signal": "unknown"},
                 "_disconnected": True,
             }
 

@@ -185,11 +185,10 @@ def generate_handled_manifest(
         status = test.get("status", "")
         error_type = test.get("error_type")
 
-        # Design 2026-06-23 §6: timeout-class retriable_error rows are routed
-        # through the dependency-stall classifier here (not by Stage 2). All
-        # other ``retriable_error`` flavors (oom etc.) remain owned by Stage
-        # 2's retry path and are skipped here.
-        if status == "retriable_error" and error_type == "timeout":
+        # Design 2026-06-23 §6: executor returns status="ignored" for timeout
+        # (not retriable_error). We still route through the dependency-stall
+        # classifier for audit trail preservation (handled_tests.json).
+        if status == "ignored" and error_type == "timeout":
             entry = _handle_timeout_test(
                 test, batch_dir,
                 log_tail_fetcher=log_tail_fetcher,

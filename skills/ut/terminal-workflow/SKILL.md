@@ -74,7 +74,7 @@ sequenceDiagram
      - `skills/ut/manifest-updater/SKILL.md`
 
 2. **Read config:** `.agents/workflow.yaml` (path may be overridden).
-   Validate with `hermes_runner.validate_required_config(cfg)`.
+   Validate with `hermes_runner.validate_required_config(cfg, channel="linear")`.
 
 3. **Init or resume the run:**
    - New run → `hermes_runner._init_or_resume(workflow_yaml, None)`

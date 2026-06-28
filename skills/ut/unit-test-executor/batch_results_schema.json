@@ -130,11 +130,18 @@
               "executor_signal": {
                 "type": "string",
                 "enum": ["timeout_no_xml", "timeout_unparseable_xml", "timeout_no_testcase", "disconnect_exec", "disconnect_xml_fetch"],
-                "description": "Executor-detected timeout signal type"
+                "_enum_comments": {
+                  "timeout_no_xml": "XML missing after watchdog SIGKILL",
+                  "timeout_unparseable_xml": "XML unparseable (ET.ParseError)",
+                  "timeout_no_testcase": "XML has no testcase element",
+                  "disconnect_exec": "Bastion disconnect during test exec",
+                  "disconnect_xml_fetch": "Bastion disconnect during xml fetch"
+                },
+                "description": "Executor-detected signal type (timeout or disconnect)"
               },
               "executor_evidence": {
                 "type": "string",
-                "description": "Executor-detected evidence for timeout"
+                "description": "Executor-detected evidence for signal"
               }
             },
             "required": ["status", "executor_signal", "executor_evidence"],

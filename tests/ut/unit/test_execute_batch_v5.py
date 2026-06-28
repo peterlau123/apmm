@@ -70,12 +70,12 @@ def test_classify_oom_returns_retriable_oom():
     assert error_type == "oom"
 
 
-def test_classify_timeout_returns_retriable_timeout():
+def test_classify_timeout_returns_ignored_timeout():
     status, error_type = classify_error.classify(
         "+++++++ Timeout >60s ++++++\nFailed: Timeout >60.0s",
         "tests/test_x.py::test_b",
     )
-    assert status == "retriable_error"
+    assert status == "ignored"
     assert error_type == "timeout"
 
 

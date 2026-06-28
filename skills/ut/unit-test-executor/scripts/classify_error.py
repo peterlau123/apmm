@@ -99,8 +99,8 @@ def classify(summary_text: str, test_id: str = ""):
 
     Returns (status, error_type) where:
       - PASSED              -> ("passed", None)
-      - OOM                 -> ("retriable_error", "oom")
-      - pytest-timeout      -> ("retriable_error", "timeout")
+      - OOM                 -> ("retriable_error", "oom")  # ONLY retriable_error
+      - pytest-timeout      -> ("ignored", "timeout")      # Manual analysis needed
       - collection/import   -> ("error", "collection")
       - generic FAILED      -> ("failed", "assertion")
       - anything else       -> ("error", "other")
@@ -113,7 +113,7 @@ def classify(summary_text: str, test_id: str = ""):
     if _OOM_RE.search(text):
         return ("retriable_error", "oom")
     if _TIMEOUT_RE.search(text):
-        return ("retriable_error", "timeout")
+        return ("ignored", "timeout")
     if _COLLECTION_RE.search(text):
         return ("error", "collection")
     if _PASSED_RE.search(text) and not _FAILED_RE.search(text):

@@ -267,4 +267,28 @@ python tests/ut/integration/run_linear_channel.py --workflow-yaml tests/ut/integ
 
 ---
 
+## §X. 优化：Executor Placeholder Schema + Agent Direct Output
+
+**优化目标：**
+减少硬编码，明确两阶段 classification 的职责分工。
+
+**两阶段 schema：**
+- **Executor placeholder**: `executor_signal + executor_evidence`（Executor 检测到的信号）
+- **Stage 4 final**: `classification + evidence + dependency_hint`（Agent 判断的真因）
+
+**去掉 llm_invoker 抽象：**
+- Worker Agent 本身就是 LLM，不需要中间层调用另一个 LLM
+- Agent 直接输出 classification JSON（遵循固化 Prompt）
+- Python 脚本只做 schema validation + fallback
+
+**向后兼容：**
+- dependency_classification 字段是 optional
+- 旧 executor 不返回该字段时，batch_results.json 仍有效
+- Stage 4 代码兼容新旧格式
+
+**实现细节见：**
+`docs/superpowers/specs/2026-06-28-dependency-classification-optimization-design.md`
+
+---
+
 *Design approved: 2026-06-28*

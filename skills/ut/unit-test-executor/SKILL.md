@@ -508,6 +508,38 @@ return {
 
 ---
 
+## §X. Executor Timeout Placeholder Schema
+
+当 Executor 检测到 timeout 时，返回 placeholder schema（而非最终 classification）：
+
+**Placeholder schema structure:**
+```json
+{
+  "status": "pending",
+  "executor_signal": "timeout_no_xml | timeout_unparseable_xml | timeout_no_testcase | disconnect_exec | disconnect_xml_fetch",
+  "executor_evidence": "Executor-detected evidence for timeout"
+}
+```
+
+**executor_signal 枚举值说明:**
+- `timeout_no_xml`: XML missing after watchdog SIGKILL
+- `timeout_unparseable_xml`: XML unparseable (ET.ParseError)
+- `timeout_no_testcase`: XML has no testcase element
+- `disconnect_exec`: Bastion disconnect during test exec
+- `disconnect_xml_fetch`: Bastion disconnect during xml fetch
+
+**executor_signal 的价值：**
+- 提供 Executor 能检测到的真实信息（XML missing vs disconnect）
+- 运维人员知道 timeout 的具体原因
+- Stage 4 可参考 executor_signal 优化分类决策（可选）
+
+**注意：**
+- Executor 只输出 placeholder，不做最终分类
+- Stage 4 Worker Agent 通过固化 Prompt 判断 log tail，输出最终 classification
+- Python 脚本验证 Agent 输出的 JSON schema，fallback to "unknown" if invalid
+
+---
+
 ## 相关文档
 
 - [workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置

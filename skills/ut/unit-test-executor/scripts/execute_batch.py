@@ -236,8 +236,22 @@ def _wrap_with_docker_exec_b64(
 
     env_vars: optional dict of environment variables to inject into the
         container via `-e VAR=VALUE` flags. Values are NOT shell-escaped
-        (docker exec handles them as literal strings).
+        (docker exec handles them as literal strings). Values CANNOT contain
+        spaces or shell metacharacters ($, ;, |, ', ") — rejected with ValueError.
     """
+    # Validate env_vars for shell-safe values (defense against injection).
+    # Docker exec -e VAR=VALUE treats the value as a literal string, but
+    # the `-e VAR=VALUE` fragment goes through shell parsing on the bastion
+    # side before reaching docker. Spaces/metacharacters could break the
+    # command structure.
+    if env_vars:
+        for key, value in env_vars.items():
+            if ' ' in str(value) or any(c in str(value) for c in '$;|\'"'):
+                raise ValueError(
+                    f"env value cannot contain spaces or shell metacharacters: "
+                    f"{key}={value}"
+                )
+
     # Build -e flags from env_vars (if provided)
     env_flags = ""
     if env_vars:

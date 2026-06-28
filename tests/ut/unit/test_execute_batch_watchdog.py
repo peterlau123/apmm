@@ -266,3 +266,82 @@ def test_docker_wrap_payload_is_pure_ascii_no_quoting_hazard():
     m = _re.search(r"echo (\S+) \| base64 -d", cmd)
     assert m
     assert _b64.b64decode(m.group(1)).decode("utf-8") == inner
+
+
+# ── env_vars injection tests (Task 2 code review fix) ─────────────────────────
+
+def test_docker_wrap_includes_env_flags():
+    """env_vars dict flows into the docker exec command as -e VAR=VALUE flags."""
+    cmd = execute_batch_mod._wrap_with_docker_exec_b64(
+        "container", "echo hi",
+        env_vars={"HF_HOME": "/path/to/cache", "HF_HUB_OFFLINE": "1"}
+    )
+    assert " -e HF_HOME=/path/to/cache" in cmd
+    assert " -e HF_HUB_OFFLINE=1" in cmd
+
+
+def test_docker_wrap_rejects_env_value_with_spaces():
+    """Values containing spaces are rejected to prevent shell injection."""
+    with pytest.raises(ValueError) as exc_info:
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"HF_HOME": "/path with spaces"}
+        )
+    assert "HF_HOME" in str(exc_info.value)
+    assert "spaces" in str(exc_info.value)
+
+
+def test_docker_wrap_rejects_env_value_with_shell_metacharacters():
+    """Values containing shell metacharacters are rejected."""
+    # Test $ metacharacter
+    with pytest.raises(ValueError) as exc_info:
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"VAR": "$HOME"}
+        )
+    assert "VAR" in str(exc_info.value)
+
+    # Test ; metacharacter
+    with pytest.raises(ValueError):
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"VAR": "value;rm -rf /"}
+        )
+
+    # Test | metacharacter
+    with pytest.raises(ValueError):
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"VAR": "a|b"}
+        )
+
+    # Test single quote
+    with pytest.raises(ValueError):
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"VAR": "val'ue"}
+        )
+
+    # Test double quote
+    with pytest.raises(ValueError):
+        execute_batch_mod._wrap_with_docker_exec_b64(
+            "container", "echo hi",
+            env_vars={"VAR": "val\"ue"}
+        )
+
+
+def test_docker_wrap_accepts_safe_env_values():
+    """Safe values (paths, numbers, flags) pass validation."""
+    cmd = execute_batch_mod._wrap_with_docker_exec_b64(
+        "container", "echo hi",
+        env_vars={
+            "HF_HOME": "/gpfs/cache/hf",
+            "CUDA_VISIBLE_DEVICES": "0,1,2",
+            "HF_HUB_OFFLINE": "1",
+            "MAX_WORKERS": "4",
+        }
+    )
+    assert " -e HF_HOME=/gpfs/cache/hf" in cmd
+    assert " -e CUDA_VISIBLE_DEVICES=0,1,2" in cmd
+    assert " -e HF_HUB_OFFLINE=1" in cmd
+    assert " -e MAX_WORKERS=4" in cmd

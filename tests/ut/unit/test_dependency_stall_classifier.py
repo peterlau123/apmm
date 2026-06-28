@@ -256,13 +256,11 @@ def test_handle_timeout_test_dep_stall_emits_resolution(tmp_path):
         encoding="utf-8",
     )
 
-    def fake_llm(prompt: str) -> str:
-        assert "Downloading model.safetensors" in prompt
-        return json.dumps({
-            "classification": "dep_stall",
-            "evidence": "Downloading model.safetensors: 12%",
-            "dependency_hint": "meta-llama/Llama-3.2-1B-Instruct",
-        })
+    agent_classification = {
+        "classification": "dep_stall",
+        "evidence": "Downloading model.safetensors: 12%",
+        "dependency_hint": "meta-llama/Llama-3.2-1B-Instruct",
+    }
 
     test = {
         "test_node": "tests/test_load.py::test_llama_3_2_1b",
@@ -271,7 +269,7 @@ def test_handle_timeout_test_dep_stall_emits_resolution(tmp_path):
         "error_message": "",
     }
     entry = gen_handled._handle_timeout_test(
-        test, batch_dir, llm_invoker=fake_llm
+        test, batch_dir, agent_classification=agent_classification
     )
     assert entry is not None
     assert entry["final_status"] == "ignored"
@@ -293,12 +291,13 @@ def test_handle_timeout_test_unknown_falls_through_to_ignored(tmp_path):
         "__WATCHDOG__: idle_exceeded 121s (no log activity)\n",
         encoding="utf-8",
     )
-    # llm_invoker returns garbage → unknown fallback path.
+    # Invalid classification (missing evidence) → unknown fallback path.
+    invalid_classification = {"classification": "dep_stall", "dependency_hint": "model"}
     entry = gen_handled._handle_timeout_test(
         {"test_node": "tests/test_x.py::test_y", "status": "retriable_error",
          "error_type": "timeout", "error_message": ""},
         batch_dir,
-        llm_invoker=lambda p: "not json at all",
+        agent_classification=invalid_classification,
     )
     assert entry is not None
     assert entry["final_status"] == "ignored"
@@ -316,35 +315,31 @@ def test_handle_timeout_test_not_dep_stall_returns_none(tmp_path):
         "AssertionError: shape mismatch\n", encoding="utf-8"
     )
 
-    def fake_llm(prompt: str) -> str:
-        return json.dumps({
-            "classification": "not_dep_stall",
-            "evidence": "AssertionError: shape mismatch",
-            "dependency_hint": None,
-        })
+    agent_classification = {
+        "classification": "not_dep_stall",
+        "evidence": "AssertionError: shape mismatch",
+        "dependency_hint": None,
+    }
 
     entry = gen_handled._handle_timeout_test(
         {"test_node": "t::x", "status": "retriable_error",
          "error_type": "timeout", "error_message": ""},
         batch_dir,
-        llm_invoker=fake_llm,
+        agent_classification=agent_classification,
     )
     assert entry is None
 
 
 def test_handle_timeout_test_llm_raises_yields_unknown(tmp_path):
-    """An exception from llm_invoker must not bubble — falls back to unknown."""
+    """No agent_classification (None) → falls back to unknown."""
     batch_dir = tmp_path
     (batch_dir / "summary.txt").write_text("idle log line\n", encoding="utf-8")
-
-    def boom(prompt: str) -> str:
-        raise RuntimeError("LLM down")
 
     entry = gen_handled._handle_timeout_test(
         {"test_node": "t::x", "status": "retriable_error",
          "error_type": "timeout", "error_message": ""},
         batch_dir,
-        llm_invoker=boom,
+        agent_classification=None,
     )
     assert entry is not None
     assert entry["final_status"] == "ignored"

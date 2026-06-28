@@ -103,15 +103,20 @@ def _handle_timeout_test(
     batch_dir: Path | None,
     *,
     log_tail_fetcher=None,
-    llm_invoker=None,
+    agent_classification: dict | None = None,
 ) -> dict | None:
     """Return a handled_tests entry for an ``error_type="timeout"`` test.
 
     Per design 2026-06-23-pytest-timeout-redesign.md §5–§6:
       - Pulls log tail (default: batch_dir/summary.txt).
-      - Asks an injected ``llm_invoker(prompt) -> str | None`` to classify.
+      - Agent provides classification JSON directly via agent_classification.
       - dep_stall | unknown → ``final_status="ignored"`` with assembled reason.
       - not_dep_stall → returns None (caller leaves test for Stage 2 retry).
+
+    Args:
+        agent_classification: Worker Agent 已输出的 classification dict.
+            格式必须匹配 dependency_stall_schema.json.
+            如果为 None 或 schema invalid → fallback to "unknown"
 
     Both callables are optional so the script is unit-testable without a real
     LLM / SSH backend. Production wiring lives on the Worker Agent side.
@@ -124,15 +129,12 @@ def _handle_timeout_test(
     else:
         log_tail = _read_log_tail_from_summary(batch_dir)
 
-    prompt = classify_dep_stall.render_prompt(log_tail)
-    llm_output = None
-    if llm_invoker is not None:
-        try:
-            llm_output = llm_invoker(prompt)
-        except Exception:  # noqa: BLE001 — never let the LLM call kill the stage
-            llm_output = None
-
-    result = classify_dep_stall.classify(log_tail, llm_output)
+    # Agent 已输出 classification，直接验证 schema
+    if agent_classification is not None:
+        result = classify_dep_stall.classify(log_tail, json.dumps(agent_classification))
+    else:
+        # Agent 未提供 → fallback to unknown
+        result = classify_dep_stall._fallback_unknown(log_tail, reason="no_agent_input")
     reason = classify_dep_stall.ignored_reason_for(result)
 
     if reason is None:
@@ -160,7 +162,7 @@ def generate_handled_manifest(
     batch_dir: Path = None,
     *,
     log_tail_fetcher=None,
-    llm_invoker=None,
+    agent_classification: dict | None = None,
 ) -> dict:
     """生成 handled_tests.json"""
 
@@ -192,7 +194,7 @@ def generate_handled_manifest(
             entry = _handle_timeout_test(
                 test, batch_dir,
                 log_tail_fetcher=log_tail_fetcher,
-                llm_invoker=llm_invoker,
+                agent_classification=agent_classification,
             )
             if entry is not None:
                 handled_manifest["tests"].append(entry)

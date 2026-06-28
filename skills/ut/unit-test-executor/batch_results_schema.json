@@ -117,6 +117,28 @@
           "xml_path": {
             "type": ["string", "null"],
             "description": "该用例远程 JUnit XML 绝对路径 (result_<batch_id>_<node>.xml); null=未写 (watchdog SIGKILL 未 flush)"
+          },
+          "dependency_classification": {
+            "type": ["object", "null"],
+            "description": "Executor placeholder schema for timeout tests. Contains executor_signal + executor_evidence. Stage 4 will replace with final schema.",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["pending"],
+                "description": "Placeholder marker — waiting for Stage 4 processing"
+              },
+              "executor_signal": {
+                "type": "string",
+                "enum": ["timeout_no_xml", "timeout_unparseable_xml", "timeout_no_testcase", "disconnect_exec", "disconnect_xml_fetch"],
+                "description": "Executor-detected timeout signal type"
+              },
+              "executor_evidence": {
+                "type": "string",
+                "description": "Executor-detected evidence for timeout"
+              }
+            },
+            "required": ["status", "executor_signal", "executor_evidence"],
+            "additionalProperties": false
           }
         }
       }

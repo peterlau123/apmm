@@ -29,14 +29,14 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 ---
 
-### 🅱️ 我要在终端线性跑（调试 / 人工监督，**ut/workflow 通道**）
+### 🅱️ 我要在终端线性跑（调试 / 人工监督，**ut/terminal-workflow 通道**）
 
 适合开发态、调试 stage 行为、单次跑验证。**禁止开 kanban**（运行时强制校验）。
 
 1. 编辑 `.agents/workflow.yaml`，确保 `kanban.enabled: false`，填好 `test_list_path` / `remote_server`。
 2. 在 Claude Code / OpenCode 会话中加载 skill：
    ```
-   加载 ut/workflow skill
+   加载 ut/terminal-workflow skill
    ```
 3. Skill 自动初始化 `workflow_state.json` 并循环 Stage 2-5 直至完成。
 4. 单独跑一个 test：
@@ -86,7 +86,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 ## 双通道速查
 
 ```
-ut/workflow            (线性通道，开发态)
+ut/terminal-workflow            (线性通道，开发态)
   └─ 终端会话加载 SKILL → 进程内循环 Stage 2-5
   └─ kanban 强制 OFF
 

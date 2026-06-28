@@ -78,13 +78,14 @@
           },
           "status": {
             "type": "string",
-            "enum": ["passed", "failed", "error", "retriable_error", "skipped"],
+            "enum": ["passed", "failed", "error", "retriable_error", "skipped", "ignored"],
             "_enum_comments": {
               "passed": "测试通过",
               "failed": "断言失败 (AssertionError)",
               "error": "执行错误 (Collection/Import)",
-              "retriable_error": "可重试错误 (OOM / timeout); 由 watchdog 或 classifier 标记",
-              "skipped": "pytest 跳过"
+              "retriable_error": "可重试错误 (OOM); 由 watchdog 或 classifier 标记",
+              "skipped": "pytest 跳过",
+              "ignored": "忽略的测试 (timeout); 不计入重试"
             }
           },
           "error_type": {
@@ -130,7 +131,8 @@
         "failed": {"type": "integer", "minimum": 0},
         "error": {"type": "integer", "minimum": 0},
         "skipped": {"type": "integer", "minimum": 0},
-        "retriable_error": {"type": "integer", "minimum": 0}
+        "retriable_error": {"type": "integer", "minimum": 0},
+        "ignored": {"type": "integer", "minimum": 0}
       }
     }
   }

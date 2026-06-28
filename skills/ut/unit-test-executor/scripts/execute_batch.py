@@ -337,7 +337,7 @@ def _node(t: dict) -> str:
 #   <testcase> no children      → passed
 #   <failure>                   → failed / error_type=assertion (or oom if msg says so)
 #   <error>                     → error  / error_type=collection (or oom if msg says so)
-#   XML missing / unparseable   → retriable_error / timeout
+#   XML missing / unparseable   → ignored / timeout
 #       (watchdog SIGKILL before pytest flushes → the XML never lands on disk;
 #        this is the per-test-model precise signal for G4, replacing the old
 #        "killed test falls into error/other" misclassification.)
@@ -380,7 +380,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
     # was killed" signal (design §4.4, G4).
     if not xml_text or not xml_text.strip():
         return {
-            "status": "retriable_error",
+            "status": "ignored",
             "error_type": "timeout",
             "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
             "duration_ms": None,
@@ -392,7 +392,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
         root = ET.fromstring(cleaned)
     except ET.ParseError:
         return {
-            "status": "retriable_error",
+            "status": "ignored",
             "error_type": "timeout",
             "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
             "duration_ms": None,
@@ -403,7 +403,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
     if testcase is None:
         # Valid XML but no <testcase> — pytest aborted before writing results.
         return {
-            "status": "retriable_error",
+            "status": "ignored",
             "error_type": "timeout",
             "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
             "duration_ms": None,
@@ -855,11 +855,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             res = run_remote(docker_cmd, timeout=wall_timeout, profile=remote_server)
             exit_code = res.get("exit_code", 0)
         except ConnectionError:
-            # Per-test disconnect: mark retriable; overall batch disconnect is
+            # Per-test disconnect: mark ignored; overall batch disconnect is
             # decided below from the aggregated _disconnected flag.
             return {
                 "id": test.get("id"), "test_node": node,
-                "status": "retriable_error", "error_type": "timeout",
+                "status": "ignored", "error_type": "timeout",
                 "error_message": "bastion disconnect during exec",
                 "duration_ms": None, "exit_code": None,
                 "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
@@ -887,7 +887,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         except ConnectionError:
             return {
                 "id": test.get("id"), "test_node": node,
-                "status": "retriable_error", "error_type": "timeout",
+                "status": "ignored", "error_type": "timeout",
                 "error_message": "bastion disconnect during xml fetch",
                 "duration_ms": None, "exit_code": exit_code,
                 "gpu_id": gpu_id, "log_path": node_log, "xml_path": node_xml,
@@ -970,7 +970,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     test_entries = []
     summary_lines = []
     counters = {"passed": 0, "failed": 0, "error": 0, "skipped": 0,
-                "retriable_error": 0}
+                "retriable_error": 0, "ignored": 0}
     any_exit_nonzero = False
     for i in range(len(tests)):
         r = results_by_idx[i]
@@ -1021,6 +1021,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             "error": counters.get("error", 0),
             "skipped": counters.get("skipped", 0),
             "retriable_error": counters.get("retriable_error", 0),
+            "ignored": counters.get("ignored", 0),
         },
     }
 

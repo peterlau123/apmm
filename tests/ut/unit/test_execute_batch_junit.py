@@ -7,7 +7,7 @@ Coverage:
   - failed: <failure> child → status=failed, error_type=assertion, duration from time=
   - error: <error> child → status=error, error_type=collection (default)
   - OOM in failure/error message → error_type=oom
-  - XML missing / unparseable (watchdog SIGKILL, no flush) → retriable_error/timeout
+  - XML missing / unparseable (watchdog SIGKILL, no flush) → ignored/timeout
   - trailing newline artifact (daemon run adds 1 LF) tolerated via rstrip
   - exit_code is passed through unchanged
   - duration_ms = round(time_seconds * 1000); missing time → None
@@ -97,7 +97,7 @@ def test_error_oom():
 
 def test_xml_empty_string_is_timeout():
     r = parse_junit("", exit_code=124, node=NODE)
-    assert r["status"] == "retriable_error"
+    assert r["status"] == "ignored"
     assert r["error_type"] == "timeout"
     assert r["exit_code"] == 124
     assert r["duration_ms"] is None
@@ -105,7 +105,7 @@ def test_xml_empty_string_is_timeout():
 
 def test_xml_unparseable_is_timeout():
     r = parse_junit("not xml at all <<<>", exit_code=124, node=NODE)
-    assert r["status"] == "retriable_error"
+    assert r["status"] == "ignored"
     assert r["error_type"] == "timeout"
 
 
@@ -113,7 +113,7 @@ def test_xml_missing_testcase_is_timeout():
     # Valid XML but no <testcase> (pytest aborted before writing results)
     xml = '<?xml version="1.0"?><testsuites><testsuite name="t"></testsuite></testsuites>'
     r = parse_junit(xml, exit_code=124, node=NODE)
-    assert r["status"] == "retriable_error"
+    assert r["status"] == "ignored"
     assert r["error_type"] == "timeout"
 
 

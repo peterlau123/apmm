@@ -27,8 +27,10 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 handle_failures 
 >    `summary.txt` is missing or empty, return `{"next_action":"wait",
 >    "reason":"no summary"}` — do NOT classify based on test names alone,
 >    and do NOT call the dependency-stall classifier on synthetic input.
-> 3. **Only `failed` and `error` are in scope.** `retriable_error` is owned
->    by Stage 2 (batch-selector); `passed` / `skipped` / `pending` /
+> 3. **Only `failed` and `version` error are in scope.** Other `error` types
+>    (timeout, resource, network, dependency, download_error, etc.) are now
+>    classified as `ignored` by Stage 5 (manifest-updater). `retriable_error` is
+>    owned by Stage 2 (batch-selector); `passed` / `skipped` / `pending` /
 >    `ignored` are never touched here. Enforced by
 >    `analyze_failures.filter_processable()`.
 > 4. **Dependency-stall classifier output is schema-validated.** The LLM
@@ -51,11 +53,13 @@ This skill runs as **Stage 4** of the v5 workflow. The contract below
 ### 1. Inputs that are processed
 
 Failure-handler processes **only** tests whose status in the manifest is
-`failed` or `error`. Tests with status `retriable_error` are **never**
-touched here — they are owned by Stage 3 (executor) for transient retries,
-and by Stage 5 (manifest-updater) for terminal `ignored` promotion. Use
-`analyze_failures.filter_processable(tests)` to enforce this; it is also
-applied automatically by `analyze_failed_tests_v5()`.
+`failed` or `error` with `error_type="version"`. Other error types (timeout,
+resource, network, dependency, download_error, etc.) are now classified as
+`ignored` by Stage 5 (manifest-updater) and are not processed here. Tests with
+status `retriable_error` are **never** touched here — they are owned by Stage 3
+(executor) for transient retries, and by Stage 5 (manifest-updater) for terminal
+`ignored` promotion. Use `analyze_failures.filter_processable(tests)` to enforce
+this; it is also applied automatically by `analyze_failed_tests_v5()`.
 
 ### 2. Pre-flight branch check
 

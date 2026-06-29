@@ -39,6 +39,37 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 >    leak into runs/ paths and break catch-up logic — use
 >    `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
 
+## 飞书命令解析 - 环境选择（新增）
+
+当用户通过飞书发起"单元测试"或"/ut start"时：
+
+**AI行为：**
+1. 解析飞书命令，识别为UT workflow触发
+
+2. 通过飞书回复提示用户选择环境：
+   ```
+   请选择运行环境：
+   - 测试环境（l1~l4）
+   - 生产环境
+   请回复："测试环境l1" 或 "生产环境"
+   ```
+
+3. 等待用户飞书回复确认环境
+
+4. 根据回复调用load_deployment_config：
+   - 飞书回复："生产环境" → load_deployment_config("production")
+   - 飞书回复："测试环境l2" → load_deployment_config("test", level=2)
+
+5. 后续流程同terminal触发（引导参数确认 → 创建run目录）
+
+**关键约束：**
+- 飞书交互必须等待回复（异步消息处理）
+- 环境选择通过飞书消息传递
+- 与terminal触发使用相同的load_deployment_config逻辑
+
+**相关文档：**
+- tasks/ut/docs/designs/2026-06-29-ut-workflow-config-management-and-merge-batch-design.md
+
 > Hermes-channel supervisor for the dual-channel UT workflow.
 > Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
 

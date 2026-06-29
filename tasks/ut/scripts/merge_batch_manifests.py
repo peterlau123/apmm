@@ -96,7 +96,7 @@ def calculate_statistics(tests: list[dict]) -> dict:
     }
 
 
-def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | None = None) -> dict:
+def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | None = None, strategy: str = "all") -> dict:
     """Merge batch_results and handled_tests into manifest.
 
     This follows the v5 merge logic from update_manifest.py:
@@ -110,6 +110,14 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | Non
         - Apply status override
         - Apply ignore_reason if present
         - Apply resolution details (errors[], failures[])
+
+    Args:
+        manifest: Input manifest dict
+        batch_results: Batch execution results
+        handled: Optional handled_tests overrides
+        strategy: "all" (default) or "passed-only"
+            - all: Update all test statuses (passed, failed, error)
+            - passed-only: Only update tests with status="passed"
     """
     tests = manifest.get("tests", [])
     by_id = {t.get("id"): t for t in tests if t.get("id") is not None}
@@ -133,12 +141,17 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | Non
         if target is None:
             continue
 
+        new_status = result.get("status", target.get("status", "pending"))
+
+        # Strategy filter: passed-only skips non-passed tests
+        if strategy == "passed-only" and new_status != "passed":
+            continue
+
         # Set last_batch_id
         if batch_id is not None:
             target["last_batch_id"] = batch_id
 
         # Copy execution details
-        new_status = result.get("status", target.get("status", "pending"))
         if result.get("error_type"):
             target["error_type"] = result["error_type"]
         if result.get("error_message"):
@@ -150,10 +163,15 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | Non
         if result.get("log_path"):
             target["log_file"] = result["log_path"]
 
-        # Increment retry_count for non-passing statuses
-        if new_status in ("failed", "retriable_error", "error"):
+        # Increment counters
+        target["run_count"] = int(target.get("run_count", 0)) + 1
+
+        prev_status = target.get("status", "pending")
+        has_failed_before = prev_status in ("failed", "retriable_error", "error")
+
+        # Increment retry_count if this is a retry (previous was failed)
+        if has_failed_before and new_status in ("failed", "retriable_error", "error"):
             target["retry_count"] = int(target.get("retry_count", 0)) + 1
-            target["run_count"] = int(target.get("run_count", 0)) + 1
 
         # Apply status with max_retry check
         max_retry = int(target.get("max_retry", 3))
@@ -198,6 +216,34 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict | Non
     # Recalculate statistics
     manifest["statistics"] = calculate_statistics(tests)
     return manifest
+
+
+def discover_run_files(run_dir: Path) -> tuple[Path, list[Path]]:
+    """Auto-discover manifest and batches in run directory.
+
+    Returns:
+        (manifest_path, batch_dirs)
+
+    Raises:
+        FileNotFoundError: No manifest.json or batches/
+    """
+    manifest_path = run_dir / "manifest.json"
+    if not manifest_path.exists():
+        raise FileNotFoundError(f"manifest.json not found: {manifest_path}")
+
+    batches_dir = run_dir / "batches"
+    if not batches_dir.exists():
+        raise FileNotFoundError(f"batches/ not found: {batches_dir}")
+
+    batch_dirs = []
+    for batch_dir in sorted(batches_dir.iterdir()):
+        if batch_dir.is_dir() and (batch_dir / "batch_results.json").exists():
+            batch_dirs.append(batch_dir)
+
+    if not batch_dirs:
+        raise FileNotFoundError(f"No batch_results.json found in: {batches_dir}")
+
+    return manifest_path, batch_dirs
 
 
 def discover_batches(run_dir: Path) -> list[Path]:
@@ -286,58 +332,90 @@ def merge_all_batches(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Merge batch execution results back into input manifest.json"
-    )
-
-    parser.add_argument(
-        "--input", "-i",
-        required=True,
-        help="Input manifest.json path (will NOT be modified)",
+        description="Merge batch execution results into manifest.json"
     )
 
     parser.add_argument(
         "--run-dir", "-r",
         required=True,
-        help="Run directory containing batch results",
+        help="Run directory containing manifest.json and batches/",
+    )
+
+    parser.add_argument(
+        "--strategy",
+        choices=["all", "passed-only"],
+        default="all",
+        help="Update strategy: 'all' (default) or 'passed-only' (只更新passed状态)",
     )
 
     parser.add_argument(
         "--output", "-o",
         default=None,
-        help="Output merged manifest path (default: run_dir/manifest_merged.json)",
+        help="Output path (default: 原地更新run_dir/manifest.json)",
     )
 
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show what would be merged without writing output",
+        help="Show what would be merged without writing",
     )
 
     args = parser.parse_args()
-
-    input_path = Path(args.input)
     run_dir = Path(args.run_dir)
-    output_path = Path(args.output) if args.output else run_dir / "manifest_merged.json"
+    strategy = args.strategy
 
-    if not input_path.exists():
-        print(f"[ERROR] Input manifest not found: {input_path}")
+    # Auto-discover
+    try:
+        manifest_path, batch_dirs = discover_run_files(run_dir)
+        print(f"[INFO] Found manifest: {manifest_path}")
+        print(f"[INFO] Found {len(batch_dirs)} batches")
+    except FileNotFoundError as e:
+        print(f"[ERROR] {e}")
         return 1
 
-    if not run_dir.exists():
-        print(f"[ERROR] Run directory not found: {run_dir}")
-        return 1
+    manifest = load_manifest(manifest_path)
+
+    merged_count = 0
+    for batch_dir in batch_dirs:
+        batch_results_path = batch_dir / "batch_results.json"
+        handled_tests_path = batch_dir / "handled_tests.json"
+
+        batch_results = json.loads(batch_results_path.read_text(encoding="utf-8"))
+        handled_tests = None
+        if handled_tests_path.exists():
+            handled_tests = json.loads(handled_tests_path.read_text(encoding="utf-8"))
+
+        batch_id = batch_results.get("batch_id", batch_dir.name)
+        test_count = len(batch_results.get("tests", []))
+
+        manifest = merge_batch_results(manifest, batch_results, handled_tests, strategy)
+        merged_count += test_count
+        print(f"[MERGE] {batch_id}: {test_count} tests (strategy={strategy})")
+
+    # Update metadata
+    manifest["merged_at"] = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    manifest["merged_from_run"] = str(run_dir)
+    manifest["merged_batches"] = len(batch_dirs)
+    manifest["merge_strategy"] = strategy
 
     if args.dry_run:
-        print("[INFO] Dry run - no output will be written")
-        manifest = merge_all_batches(input_path, run_dir, output_path=None)
-        # Just show stats, don't save
+        print("\n[DRY RUN] No output written")
         stats = manifest.get("statistics", {})
-        print(f"\n[DRY RUN RESULT]")
         print(f"  passed={stats.get('passed', 0)}, failed={stats.get('failed', 0)}, "
               f"error={stats.get('error', 0)}, ignored={stats.get('ignored', 0)}, pending={stats.get('pending', 0)}")
         return 0
 
-    merge_all_batches(input_path, run_dir, output_path)
+    output_path = Path(args.output) if args.output else manifest_path
+    save_manifest(manifest, output_path, backup=True)
+
+    stats = manifest.get("statistics", {})
+    print(f"\n[SUMMARY]")
+    print(f"  Tests updated: {merged_count}")
+    print(f"  Strategy: {strategy}")
+    print(f"  Output: {output_path}")
+    print(f"  passed={stats.get('passed', 0)}, failed={stats.get('failed', 0)}, "
+          f"error={stats.get('error', 0)}, ignored={stats.get('ignored', 0)}, pending={stats.get('pending', 0)}")
+
     return 0
 
 

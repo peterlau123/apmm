@@ -1,9 +1,9 @@
 # UT Workflow 过滤规则
 # 单一来源：所有脚本从此文件读取
-# 最后更新：2026-06-11
+# 最后更新：2026-06-29
 
 filter_rules:
-  updated_at: "2026-06-11T00:00:00"
+  updated_at: "2026-06-29T00:00:00"
   version: "1.0"
 
   rules:
@@ -160,6 +160,34 @@ filter_rules:
       type: "exclude"
       reason: "Base thinking reasoning parser"
 
+    # === Pooling/Embedding MTEB 测试（排除） ===
+    - pattern: "tests/entrypoints/pooling/embed/test_correctness_mteb.py"
+      type: "exclude"
+      reason: "Embedding MTEB 正确性测试"
+
+    - pattern: "tests/entrypoints/pooling/score/test_correctness_mteb.py"
+      type: "exclude"
+      reason: "Score MTEB 正确性测试"
+
+    # === OpenVINO 测试（排除） ===
+    - pattern: "tests/**/test_openvino*"
+      type: "exclude"
+      reason: "OpenVINO 相关测试"
+
+    - pattern: "tests/plugins/vllm_add_dummy_stat_logger/lm-evaluation-harness/tests/models/test_openvino.py"
+      type: "exclude"
+      reason: "OpenVINO 模型测试"
+
+    # === Quantization 测试（排除） ===
+    - pattern: "tests/quantization/test_quark.py"
+      type: "exclude"
+      reason: "Quark 量化测试"
+
+    # === Plugins 目录测试（排除） ===
+    - pattern: "tests/plugins/vllm_add_dummy_stat_logger/lm-evaluation-harness/tests/*"
+      type: "exclude"
+      reason: "lm-evaluation-harness 插件测试"
+
     # === Distributed（识别，不排除） ===
     - pattern: "tests/distributed/"
       type: "distributed"
@@ -187,6 +215,6 @@ filter_rules:
 
   # === 统计 ===
   stats:
-    total_rules: 44
-    exclude_rules: 37
+    total_rules: 50
+    exclude_rules: 43
     distributed_rules: 7

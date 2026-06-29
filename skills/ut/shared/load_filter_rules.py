@@ -12,7 +12,7 @@
 
     exclude_patterns = get_exclude_patterns()  # ["--ignore-glob=tests/**/*rocm*", ...]
     if is_distributed(test_node):              # True/False
-        ...
+    ...
 """
 
 import yaml
@@ -21,6 +21,9 @@ from typing import List, Dict, Any
 
 # 默认路径：skills/ut/shared/filter_rules.yaml
 DEFAULT_RULES_PATH = Path(__file__).parent / "filter_rules.yaml"
+
+# ── Cache to avoid repeated yaml loading on large manifests ──────────────────
+_rules_cache: Dict[str, Dict[str, Any]] = {}
 
 
 def load_filter_rules(rules_path: Path = None) -> Dict[str, Any]:
@@ -35,10 +38,16 @@ def load_filter_rules(rules_path: Path = None) -> Dict[str, Any]:
     if rules_path is None:
         rules_path = DEFAULT_RULES_PATH
 
+    cache_key = str(rules_path)
+    if cache_key in _rules_cache:
+        return _rules_cache[cache_key]
+
     if not rules_path.exists():
         raise FileNotFoundError(f"filter_rules.yaml not found: {rules_path}")
 
-    return yaml.safe_load(rules_path.read_text(encoding="utf-8"))
+    rules = yaml.safe_load(rules_path.read_text(encoding="utf-8"))
+    _rules_cache[cache_key] = rules
+    return rules
 
 
 def get_exclude_patterns(rules_path: Path = None) -> List[str]:

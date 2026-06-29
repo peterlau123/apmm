@@ -15,15 +15,19 @@ Workflow:
   4. Write merged manifest to output path (default: same as input with "_merged" suffix)
 
 Usage:
+    # Merge all batches from a run directory (auto-discovery):
     python tasks/ut/scripts/merge_batch_manifests.py \
-        --input tasks/ut/dataset/manifest.json \
-        --run-dir runs/ut-20260627-123456 \
-        --output runs/ut-20260627-123456/manifest_final.json
+        --run-dir runs/ut-20260627-123456
 
-    # Or merge all batches from a run directory:
+    # With custom output path:
     python tasks/ut/scripts/merge_batch_manifests.py \
         --run-dir runs/ut-20260627-123456 \
         --output tasks/ut/dataset/manifest_merged.json
+
+    # Legacy (deprecated): use --input to specify manifest path
+    python tasks/ut/scripts/merge_batch_manifests.py \
+        --input tasks/ut/dataset/manifest.json \
+        --run-dir runs/ut-20260627-123456
 
 Design: tasks/ut/docs/designs/2026-06-27-batch-manifest-merge-design.md
 """
@@ -337,8 +341,15 @@ def main() -> int:
 
     parser.add_argument(
         "--run-dir", "-r",
-        required=True,
+        required=False,  # Changed to False to allow --input backward compat
         help="Run directory containing manifest.json and batches/",
+    )
+
+    parser.add_argument(
+        "--input", "-i",
+        default=None,
+        help="(DEPRECATED: use --run-dir instead) Input manifest path. "
+             "If provided without --run-dir, extracts run_dir from manifest parent.",
     )
 
     parser.add_argument(
@@ -361,7 +372,24 @@ def main() -> int:
     )
 
     args = parser.parse_args()
-    run_dir = Path(args.run_dir)
+
+    # Backward compatibility shim for --input
+    if args.input and not args.run_dir:
+        print("[WARN] --input is deprecated, use --run-dir instead")
+        # Extract run_dir from input manifest's parent directory
+        input_manifest = Path(args.input)
+        run_dir = input_manifest.parent
+        print(f"[INFO] Auto-detected run_dir from --input: {run_dir}")
+    elif args.input and args.run_dir:
+        print("[WARN] Both --input and --run-dir provided, using --run-dir (auto-discovery)")
+        run_dir = Path(args.run_dir)
+    elif not args.run_dir and not args.input:
+        print("[ERROR] Either --run-dir or --input must be provided")
+        parser.print_help()
+        return 1
+    else:
+        run_dir = Path(args.run_dir)
+
     strategy = args.strategy
 
     # Auto-discover

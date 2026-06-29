@@ -7,6 +7,21 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 
 # UT Workflow Skill (v5 — linear supervisor channel)
 
+## Stage 0: 环境选择（新增）
+
+当用户触发"开始运行单元测试"：
+
+**AI行为：**
+1. 提示用户选择运行环境：
+   - 测试环境（l1~l4）
+   - 生产环境
+2. 等待用户确认
+3. 根据确认调用load_deployment_config
+4. 复制模板到runs/ut-{timestamp}/workflow.yaml
+
+**相关文档：**
+- tasks/ut/docs/designs/2026-06-29-ut-workflow-config-management-and-merge-batch-design.md
+
 > Channel: OpenCode / Claude Code, **linear mode** (one supervisor session
 > drives Stages 2–5 in-process).
 > For production / unattended / multi-worker runs, use the `hermes-workflow`

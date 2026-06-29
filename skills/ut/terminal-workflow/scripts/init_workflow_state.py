@@ -87,7 +87,7 @@ def create_manifest_from_test_list(test_list_path: Path, manifest_path: Path) ->
 
     lines = [
         l.strip()
-        for l in test_list_path.read_text().splitlines()
+        for l in test_list_path.read_text(encoding='utf-8').splitlines()
         if l.strip() and not l.startswith("#")
     ]
 

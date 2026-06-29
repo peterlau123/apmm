@@ -87,14 +87,18 @@ config:
   # - 依赖下载脚本: skills/ut/dependency-resolver/scripts/download_model.py
   # - 详见文档: skills/ut/dependency-resolver/SKILL.md, tasks/ut/docs/guides/testing.md
   container_env:
-    # HF 离线环境（核心）
+    # HF 离线环境（核心）— 必须同时设置三个 OFFLINE 变量
     HF_HOME: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
     HF_HUB_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
     HF_HUB_OFFLINE: "1" # 强制离线模式，禁止联网下载
+    HF_DATASETS_OFFLINE: "1" # datasets 离线
+    TRANSFORMERS_OFFLINE: "1" # transformers 离线
+    # VLLM 资源缓存
+    VLLM_ASSETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub"
     # Transformers 缓存（与 HF_HUB_CACHE 共享）
     TRANSFORMERS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub"
     HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
-    # GPU 配置
+    # GPU 配置（全局默认，per-test 会覆盖）
     CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
 
   # ✍️：pytest参数和批次大小

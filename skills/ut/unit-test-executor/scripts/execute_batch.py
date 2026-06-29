@@ -802,7 +802,22 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     remote_log_dir = config.get(
         "remote_log_dir", "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
     )
-    container_env = config.get("container_env")  # env vars for test execution
+    # Container environment variables (HF offline, cache paths etc.)
+    # Source: workflow.yaml config.container_env (NOT workflow_state.json)
+    # Note: CUDA_VISIBLE_DEVICES is excluded here and set per-test in pytest_full_cmd
+    import yaml
+    state_raw = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+    workflow_yaml_path = Path(state_raw.get("paths", {}).get("workflow_yaml", ""))
+    if workflow_yaml_path.exists():
+        wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
+        container_env_raw = wf.get("config", {}).get("container_env", {})
+    else:
+        container_env_raw = {}
+    # Exclude CUDA_VISIBLE_DEVICES (per-test GPU assignment overrides global config)
+    container_env = {
+        k: v for k, v in container_env_raw.items()
+        if k != "CUDA_VISIBLE_DEVICES"
+    }
 
     # Batch-level log dir (per-node log/xml live here too, named with the node).
     batch_log_dir = f"{remote_log_dir}/{batch_id}"

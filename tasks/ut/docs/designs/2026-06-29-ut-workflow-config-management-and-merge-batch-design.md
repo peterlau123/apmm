@@ -481,8 +481,7 @@ save_manifest(manifest, manifest_path, backup=True)
 ### 需求2部署影响
 
 1. **merge_batch_manifests.py向后兼容：**
-   - 移除 `--input` 参数（改为自动发现）
-   - 需要更新现有调用脚本
+   - 保留 `--input` 参数向后兼容（带deprecated警告），推荐使用 `--run-dir` 或自动发现
 
 2. **计数器语义变更：**
    - retry_count定义更精确

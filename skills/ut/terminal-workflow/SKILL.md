@@ -47,7 +47,7 @@ sequenceDiagram
     participant L as loop_core
     U->>CC: 要求"跑/续 UT workflow"
     CC->>CC: 加载 ut/terminal-workflow + loop_core + 4 Worker SKILL
-    CC->>R: validate_required_config(.agents/workflow.yaml)
+    CC->>R: validate_required_config(runs/ut-{timestamp}/workflow.yaml)
     CC->>R: init_or_resume(yaml, resume_from)
     R-->>CC: (run_dir, state_path, state, iteration)
     CC->>B: _setup_bastion → ensure_connected (单次探测)
@@ -88,7 +88,10 @@ sequenceDiagram
      - `skills/ut/failure-handler/SKILL.md`
      - `skills/ut/manifest-updater/SKILL.md`
 
-2. **Read config:** `.agents/workflow.yaml` (path may be overridden).
+2. **Read config:** 从Stage 0选择的环境加载配置模板
+   - Production: `tasks/ut/deployment/production/config/workflow.yaml`
+   - Test: `tests/ut/integration/fixtures/workflow.l{level}.yaml`
+   - 复制到 `runs/ut-{timestamp}/workflow.yaml`（运行副本）
    Validate with `hermes_runner.validate_required_config(cfg, channel="linear")`.
 
 3. **Init or resume the run:**

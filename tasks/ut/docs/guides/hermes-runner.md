@@ -134,7 +134,7 @@ Kanban 前置条件见 [Kanban 集成指南](../kanban/README.md)。
 6. Daemon 恢复后继续 workflow
 ```
 
-### 4.1 飞书回复格式
+### 5.1 飞书回复格式
 
 ```
 OTP otp-20260618-abc123 123456
@@ -145,7 +145,7 @@ OTP otp-20260618-abc123 123456
 - 6 位数字 OTP 码
 - 300s 内有效
 
-### 4.2 安全规则
+### 5.2 安全规则
 
 - OTP 不写入任何日志文件
 - OTP 使用后立即清除
@@ -154,9 +154,9 @@ OTP otp-20260618-abc123 123456
 
 ---
 
-## 5. 状态文件
+## 6. 状态文件
 
-### 5.1 workflow_state.json bastion 字段
+### 6.1 workflow_state.json bastion 字段
 
 ```json
 {

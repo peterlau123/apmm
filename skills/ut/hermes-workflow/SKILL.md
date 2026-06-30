@@ -39,7 +39,7 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 >    leak into runs/ paths and break catch-up logic — use
 >    `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
 
-## Stage 0: 飞书命令解析 - 环境选择（新增）
+## Stage 0: 环境选择（新增）
 
 当用户通过飞书发起"单元测试"或"/ut start"时：
 

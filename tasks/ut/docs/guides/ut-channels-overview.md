@@ -177,7 +177,7 @@ UT workflow 使用**配置模板库机制**，模板与运行时副本分离：
 - 修改模板（永久）：`tasks/ut/deployment/production/config/workflow.yaml`
 - 修改当前run（临时）：`runs/ut-{timestamp}/workflow.yaml`
 
-> 参见：`tasks/ut/docs/designs/2026-06-28-config-management-design.md`
+> 参见：`tasks/ut/docs/designs/2026-06-29-ut-workflow-config-management-and-merge-batch-design.md`
 
 ### 4.1 飞书 bot 对接（手工，一次性）
 

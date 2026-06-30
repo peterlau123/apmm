@@ -889,6 +889,11 @@ stages:
 - [Implementation Analysis](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-analysis.md) — 10 决策详细分析
 - [Design Doc](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md) — 设计决策汇总
 - [workflow.yaml](../../.agents/workflow.yaml) — Workflow 配置
+
+  > **配置路径说明：** workflow.yaml路径是动态的（`runs/ut-{timestamp}/workflow.yaml`），
+  > 由terminal-workflow或hermes-workflow在Stage 0环境选择后确定。
+  > 模板位于：`tasks/ut/deployment/production/config/workflow.yaml`（production）
+  > 或 `tests/ut/integration/fixtures/workflow.l{1-4}.yaml`（test）
 - [workflow/SKILL.md](../workflow/SKILL.md) — Supervisor 调度逻辑
 - [batch-selector/SKILL.md](../batch-selector/SKILL.md) — 上游 Stage（需选择 fixed_pending_verify）
 - [manifest-updater/SKILL.md](../manifest-updater/SKILL.md) — 下游 Stage（需更新 errors/failures）

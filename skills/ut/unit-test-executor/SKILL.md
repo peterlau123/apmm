@@ -543,6 +543,11 @@ return {
 ## 相关文档
 
 - [workflow.yaml](../../.agents/workflow.yaml) - Workflow 配置
+
+  > **配置路径说明：** workflow.yaml路径是动态的（`runs/ut-{timestamp}/workflow.yaml`），
+  > 由terminal-workflow或hermes-workflow在Stage 0环境选择后确定。
+  > 模板位于：`tasks/ut/deployment/production/config/workflow.yaml`（production）
+  > 或 `tests/ut/integration/fixtures/workflow.l{1-4}.yaml`（test）
 - [workflow/SKILL.md](../workflow/SKILL.md) - Supervisor 调度逻辑
 - [batch-selector/SKILL.md](../batch-selector/SKILL.md) - 上游 Stage（已移除 GPU 检测）
 - [failure-handler/SKILL.md](../failure-handler/SKILL.md) - 下游 Stage

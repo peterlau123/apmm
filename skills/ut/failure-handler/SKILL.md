@@ -888,9 +888,9 @@ stages:
 
 - [Implementation Analysis](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-analysis.md) — 10 决策详细分析
 - [Design Doc](../../tasks/ut/docs/designs/2026-06-12-failure-handler-review-design.md) — 设计决策汇总
-- [workflow.yaml](../../.agents/workflow.yaml) — Workflow 配置
+- **workflow.yaml** - Workflow 配置路径已迁移（见下方说明）
 
-  > **配置路径说明：** workflow.yaml路径是动态的（`runs/ut-{timestamp}/workflow.yaml`），
+  > **配置路径：** workflow.yaml路径是动态的（`runs/ut-{timestamp}/workflow.yaml`），
   > 由terminal-workflow或hermes-workflow在Stage 0环境选择后确定。
   > 模板位于：`tasks/ut/deployment/production/config/workflow.yaml`（production）
   > 或 `tests/ut/integration/fixtures/workflow.l{1-4}.yaml`（test）

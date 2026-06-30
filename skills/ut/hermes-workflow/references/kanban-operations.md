@@ -65,12 +65,20 @@ Pass the profile only via `-p`.
 
 ## 1. Preflight (matches §3 step 6)
 
+**环境选择说明：**
+Kanban operations默认使用**生产环境**配置：
+- Production: `tasks/ut/deployment/production/config/workflow.yaml`
+- Runtime: `runs/ut-{timestamp}/workflow.yaml`
+
+若需测试环境（L1~L4），请使用：
+- Test: `tests/ut/integration/fixtures/workflow.l{level}.yaml`
+
 ```bash
 cd /d/workspace/apmm && export PYTHONPATH= && python -c "
 import sys; sys.path.insert(0,'skills/ut/terminal-workflow/scripts'); sys.path.insert(0,'skills/ut')
 import yaml, json
 from hermes_runner import validate_required_config, check_gateways_alive
-cfg = yaml.safe_load(open('.agents/workflow.yaml', encoding='utf-8'))
+cfg = yaml.safe_load(open('tasks/ut/deployment/production/config/workflow.yaml', encoding='utf-8'))
 ok, missing = validate_required_config(cfg)
 g = check_gateways_alive()
 print('CONFIG_OK', ok, 'MISSING', missing)
@@ -84,7 +92,7 @@ All-`True` gateways → Kanban viable. `hermes gateway status` cross-checks PIDs
 
 ```bash
 cd /d/workspace/apmm && export PYTHONPATH= && \
-  python skills/ut/terminal-workflow/scripts/init_workflow_state.py --workflow-yaml .agents/workflow.yaml
+  python skills/ut/terminal-workflow/scripts/init_workflow_state.py --workflow-yaml tasks/ut/deployment/production/config/workflow.yaml
 # Writes runs/<test_name>-<ts>/ (manifest.json, test_list.txt, workflow_state.json)
 # and updates .agents/current_run.json. Read run_dir back from current_run.json.
 ```
@@ -107,7 +115,7 @@ hermes kanban --board apmm-ut create "UT Workflow: Orchestrate run <run_id>" \
   --priority 1 \
   --workspace "dir:D:/workspace/apmm" \
   --idempotency-key "ut-orch-<run_id>" \
-  --body "Orchestrate UT run for run_dir=<run_dir>. Use .agents/workflow.yaml.
+  --body "Orchestrate UT run for run_dir=<run_dir>. Config loaded from tasks/ut/deployment/production/config/workflow.yaml.
 Remote exec MUST use: python tools/agent.py -p t_h20 run (NOT plain ssh).
 Container v0.13.0_torch2.5.1_compile. Bastion t_h20 VERIFIED LIVE (REMOTE_OK).
 Run all workflow python with PYTHONPATH empty. distributed tests -> executor

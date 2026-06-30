@@ -21,9 +21,23 @@ Hermes Runner (`hermes_runner.py`) 是 UT Workflow 的后台运行器，根据 `
 
 ---
 
-## 2. 前置条件
+## 2. 配置文件管理
 
-### 2.1 环境检查
+UT workflow 使用配置模板库机制：
+
+- **模板库**：`tasks/ut/deployment/production/config/workflow.yaml`
+- **测试环境**：`tests/ut/integration/fixtures/workflow.l{1-4}.yaml`
+- **运行副本**：`runs/ut-{timestamp}/workflow.yaml`（每次运行独立配置实例）
+
+触发 workflow 时，AI 会引导选择环境（production 或 test），然后复制模板到 run 目录。
+
+**注意：** 旧路径 `.agents/workflow.yaml` 已于 2026-06-29 废弃，不再使用。
+
+---
+
+## 3. 前置条件
+
+### 3.1 环境检查
 
 ```bash
 # 确认 bastion profile 已配置
@@ -33,7 +47,7 @@ python tools/agent.py profiles
 python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --validate
 ```
 
-### 2.2 飞书配置（OTP 收信用）
+### 3.2 飞书配置（OTP 收信用）
 
 确保 `.agents/feishu_config.json` 存在且包含 `app_id`、`app_secret`、`chat_id`：
 
@@ -47,7 +61,7 @@ python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --validate
 
 飞书应用需要 `im:message` 和 `im:message:read` 权限。
 
-### 2.3 workflow.yaml bastion 配置
+### 3.3 workflow.yaml bastion 配置
 
 ```yaml
 bastion:
@@ -61,13 +75,13 @@ bastion:
 
 ---
 
-## 3. 启动
+## 4. 启动
 
-### 3.1 新建运行
+### 4.1 新建运行
 
 ```bash
 python skills/ut/terminal-workflow/scripts/hermes_runner.py \
-  --workflow-yaml .agents/workflow.yaml
+  --workflow-yaml runs/ut-{timestamp}/workflow.yaml  # 使用运行副本，模板位于 tasks/ut/deployment/production/config/workflow.yaml
 ```
 
 Runner 会：
@@ -76,11 +90,11 @@ Runner 会：
 3. 检查 Bastion 连接，不可用时请求飞书 OTP
 4. 启动心跳，进入 Stage 2-5 循环
 
-### 3.2 断点续跑
+### 4.2 断点续跑
 
 ```bash
 python skills/ut/terminal-workflow/scripts/hermes_runner.py \
-  --workflow-yaml .agents/workflow.yaml \
+  --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
 
@@ -89,11 +103,11 @@ Runner 会：
 2. 从 `current_stage` 继续执行
 3. 跳过已完成的 batch（检查 `batch_results.json` 是否存在）
 
-### 3.3 通过 Hermes 启动
+### 4.3 通过 Hermes 启动
 
 在 Hermes Agent 中加载 `ut/workflow` skill，Agent 识别意图后自动调用 `hermes_runner.py`。
 
-### 3.4 Kanban 模式
+### 4.4 Kanban 模式
 
 设置 `workflow.yaml` 中 `kanban.enabled: true`，Runner 自动：
 
@@ -107,7 +121,7 @@ Kanban 前置条件见 [Kanban 集成指南](../kanban/README.md)。
 
 ---
 
-## 4. OTP 交互流程
+## 5. OTP 交互流程
 
 当 Bastion daemon 不可用时，Runner 自动请求 OTP：
 
@@ -166,7 +180,7 @@ OTP otp-20260618-abc123 123456
 | `reconnecting` | 已收到 OTP，正在重启 daemon |
 | `failed` | 重连失败，需要人工处理 |
 
-### 5.2 暂停恢复
+### 6.2 暂停恢复
 
 Runner 在以下条件暂停：
 
@@ -183,15 +197,15 @@ Runner 在以下条件暂停：
 ```bash
 # 清除暂停标志后重新启动
 python skills/ut/terminal-workflow/scripts/hermes_runner.py \
-  --workflow-yaml .agents/workflow.yaml \
+  --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
 
 ---
 
-## 6. 排错
+## 7. 排错
 
-### 6.1 Bastion daemon 无法启动
+### 7.1 Bastion daemon 无法启动
 
 ```bash
 # 手动检查 daemon 状态
@@ -205,7 +219,7 @@ python skills/ut/terminal-workflow/scripts/bastion_manager.py ping
 python skills/ut/terminal-workflow/scripts/bastion_manager.py ensure --reason "manual test"
 ```
 
-### 6.2 飞书 OTP 收不到
+### 7.2 飞书 OTP 收不到
 
 1. 检查 `feishu_config.json` 是否存在且配置正确
 2. 确认飞书应用有 `im:message:read` 权限
@@ -215,20 +229,20 @@ python skills/ut/terminal-workflow/scripts/bastion_manager.py ensure --reason "m
    python skills/ut/terminal-workflow/scripts/feishu_api.py
    ```
 
-### 6.3 Workflow 状态不一致
+### 7.3 Workflow 状态不一致
 
 ```bash
 # 从 manifest 重新计算 stats
 python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --update-stats
 ```
 
-### 6.4 查看当前运行状态
+### 7.4 查看当前运行状态
 
 ```bash
 python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 ```
 
-### 6.5 Runner 意外退出
+### 7.5 Runner 意外退出
 
 1. 检查 `workflow_state.json` 中的 `current_stage` 和 `iteration`
 2. 使用 `--resume-from` 恢复
@@ -236,7 +250,7 @@ python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 
 ---
 
-## 7. 飞书通知场景
+## 8. 飞书通知场景
 
 | event | 触发条件 | 卡片颜色 |
 |-------|---------|:---------:|
@@ -247,14 +261,15 @@ python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 
 ---
 
-## 8. 相关文件
+## 9. 相关文件
 
 | 文件 | 说明 |
 |------|------|
 | `skills/ut/terminal-workflow/scripts/hermes_runner.py` | Runner 主脚本 |
 | `skills/ut/terminal-workflow/scripts/bastion_manager.py` | Bastion 生命周期管理 |
 | `skills/ut/terminal-workflow/scripts/feishu_api.py` | 飞书 API 封装 |
-| `.agents/workflow.yaml` | Workflow 配置（含 bastion 节） |
+| `tasks/ut/deployment/production/config/workflow.yaml` | Workflow 配置模板（含 bastion 节） |
+| `runs/ut-{timestamp}/workflow.yaml` | Workflow 运行副本（实际使用） |
 | `skills/ut/terminal-workflow/workflow_state_schema.json` | 状态文件 Schema |
 | `tasks/ut/docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md` | 设计文档 |
 

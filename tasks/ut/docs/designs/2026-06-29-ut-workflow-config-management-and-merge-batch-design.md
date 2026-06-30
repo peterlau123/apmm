@@ -389,7 +389,7 @@ save_manifest(manifest, manifest_path, backup=True)
 ### 需求2实现要点
 
 1. **修改merge_batch_manifests.py参数：**
-   - 移除 `--input`（改为自动发现）
+   - 保留 `--input` 向后兼容（deprecated），新增 `--run-dir` 自动发现模式
    - 新增 `--strategy`（默认all）
    - `--run-dir`变为必需参数
 

@@ -67,7 +67,7 @@ sequenceDiagram
     participant L as loop_core
     U->>CC: 要求"跑/续 UT workflow"
     CC->>CC: 加载 ut/workflow + loop_core + 4 Worker SKILL
-    CC->>R: validate_required_config(.agents/workflow.yaml)
+    CC->>R: validate_required_config(runs/ut-{timestamp}/workflow.yaml)
     CC->>R: init_or_resume(yaml, resume_from)
     R-->>CC: (run_dir, state_path, state, iteration)
     CC->>B: _setup_bastion → ensure_connected (单次探测)
@@ -83,10 +83,12 @@ sequenceDiagram
 
 启动顺序（SKILL 详见 `skills/ut/terminal-workflow/SKILL.md`）：
 1. 加载本通道 + loop_core + 4 Worker SKILL（每会话一次）
-2. 读 `.agents/workflow.yaml`，`validate_required_config`
+2. 选择环境 → 模板复制到 `runs/ut-{timestamp}/workflow.yaml`，`validate_required_config`
 3. `init_or_resume` → run_dir/state/iteration
 4. `_setup_bastion` 单次 `ensure_connected`，不可达即停、不进循环
 5. `loop_core.run(...)`
+
+> **模板路径**：production → `tasks/ut/deployment/production/config/workflow.yaml`；test → `tests/ut/integration/fixtures/workflow.l{level}.yaml`。运行时副本自动创建。
 
 ---
 
@@ -132,7 +134,7 @@ sequenceDiagram
 
 ## 4. hermes-workflow 环境搭建
 
-生产通道跑起来需要四件东西就位：**飞书 bot 对接 → bastion profile → 4 个 gateway（3 worker + 1 supervisor）**。拓扑：
+生产通道跑起来需要**五件东西就位**：**配置模板 → 飞书 bot 对接 → bastion profile → 4 个 gateway（3 worker + 1 supervisor）**。拓扑：
 
 ```mermaid
 flowchart LR
@@ -157,6 +159,26 @@ flowchart LR
     BAS -->|SSH/Docker| REMOTE
 ```
 
+### 4.0 配置准备
+
+UT workflow 使用**配置模板库机制**，模板与运行时副本分离：
+
+| 环境 | 模板路径 |
+|---|---|
+| production | `tasks/ut/deployment/production/config/workflow.yaml` |
+| test (L1-L4) | `tests/ut/integration/fixtures/workflow.l{level}.yaml` |
+
+**流程**：
+1. **选择环境**（AI交互确认）：production 或 test level
+2. **配置副本**（自动）：模板复制到 `runs/ut-{timestamp}/workflow.yaml`
+3. **运行时可修改**：修改副本不影响模板库
+
+**手动编辑路径**：
+- 修改模板（永久）：`tasks/ut/deployment/production/config/workflow.yaml`
+- 修改当前run（临时）：`runs/ut-{timestamp}/workflow.yaml`
+
+> 参见：`tasks/ut/docs/designs/2026-06-28-config-management-design.md`
+
 ### 4.1 飞书 bot 对接（手工，一次性）
 
 bot 信息分两处，**两处都要对**：
@@ -170,11 +192,11 @@ bot 信息分两处，**两处都要对**：
 - 这个 bot 是 **1:1（DM-only）**，不在任何群里。`channel_directory.json` 的 `type` 用 `dm`，`id` 用 DM chat（`oc_ed80…`），不要用群 id。
 - `feishu_config.json` 里曾误填过一个旧群 id（飞书报 `230002`）——必须是当前 DM 的 `oc_ed80…`。
 - open_id（`user_id`）是 **按 app 隔离**的；换 bot/app 必须重取，不能跨 app 复用。
-- 生产 config（`.agents/workflow.yaml`）里还有 `notifications.feishu_chat_id`，预检会校验它非空。
+- 生产模板 `tasks/ut/deployment/production/config/workflow.yaml` 里还有 `notifications.feishu_chat_id`，预检会校验它非空。
 
 ### 4.2 Bastion daemon（手工先起，OTP 无法脚本化）
 
-profile 名在 `workflow.yaml` 的 `bastion.profile`（默认 `t_h20`）。
+profile 名在 `workflow.yaml`（模板或运行时副本）的 `bastion.profile`（默认 `t_h20`）。
 
 ```bash
 # 首次：存静态凭证（一次性）
@@ -199,7 +221,7 @@ python tools/agent.py -p t_h20 stop
 ```bash
 # 一键：预检配置 → 校验 daemon → 起 3 worker gateway → 起 ut-supervisor gateway
 python tasks/ut/scripts/start_hermes_ut_runtime.py                      # 默认 L4 frozen config
-python tasks/ut/scripts/start_hermes_ut_runtime.py --workflow-yaml .agents/workflow.yaml  # 用生产 config
+python tasks/ut/scripts/start_hermes_ut_runtime.py --workflow-yaml tasks/ut/deployment/production/config/workflow.yaml  # 用生产模板
 
 python tasks/ut/scripts/start_hermes_ut_runtime.py --status             # 只看配置预检 + 运行态
 python tasks/ut/scripts/start_hermes_ut_runtime.py --stop               # 停 daemon + 4 gateway

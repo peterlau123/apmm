@@ -205,6 +205,8 @@ tasks/ut/deployment/
 
 **使用示例：**
 
+**注意：** `--input`参数已deprecated（2026-06-29），推荐使用`--run-dir`或自动发现（无需参数）。
+
 ```bash
 # 全量更新（默认）
 python tasks/ut/scripts/merge_batch_manifests.py \

@@ -169,6 +169,8 @@ rm -rf .agents/logs/
 rm -rf tasks/ut/deployment/test/
 ```
 
+> **注意：** `tasks/ut/deployment/test/`已删除（2026-06-29，commit f247185），测试环境配置已迁移至`tests/ut/integration/fixtures/workflow.l{1-4}.yaml`。
+
 **保留必要文件：**
 
 ```
@@ -386,6 +388,8 @@ save_manifest(manifest, manifest_path, backup=True)
 5. **删除test环境目录：**
    - `rm -rf tasks/ut/deployment/test/`
 
+   > **注意：** 已完成删除（2026-06-29，commit f247185）。测试环境配置已迁移至`tests/ut/integration/fixtures/workflow.l{1-4}.yaml`。
+
 ### 需求2实现要点
 
 1. **修改merge_batch_manifests.py参数：**
@@ -473,6 +477,8 @@ save_manifest(manifest, manifest_path, backup=True)
 2. **deployment目录简化：**
    - 删除 `tasks/ut/deployment/test/`
    - production目录作为唯一模板库
+
+   > **注意：** 删除已完成（2026-06-29，commit f247185）。测试环境配置已迁移至`tests/ut/integration/fixtures/workflow.l{1-4}.yaml`。
 
 3. **workflow启动流程变更：**
    - 从单路径配置 → 双路径选择

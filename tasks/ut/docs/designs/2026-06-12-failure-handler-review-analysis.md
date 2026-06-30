@@ -1,6 +1,7 @@
 # Failure-Handler Stage Review: Implementation Analysis
 
 > **Goal:** Analyze 10 design decisions for implementation difficulty, skill/workflow impact, and prioritization
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
 
 **Deep dive focus:** Decisions 2, 6, 10 (highest complexity and cross-skill coordination)
 

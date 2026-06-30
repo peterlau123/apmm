@@ -3,6 +3,7 @@
 > **日期**: 2026-06-10
 > **状态**: 设计完成，待实施
 > **背景**: UT Workflow 各 Stage 产出的 JSON 文件存在字段不一致、与 schema 不匹配的问题
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
 
 ---
 

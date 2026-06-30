@@ -2,6 +2,7 @@
 
 **Date**: 2026-06-18 (revised 2026-06-19 after grilling session, v5)
 **Status**: Design proposal (v5 — process model clarified)
+**注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
 **Scope**: `hermes-workflow` skill 新建 + `ut/workflow` skill 更新 + `ut/workflow-loop-core` skill 新建（共享循环主体）+ Worker SKILL.md 更新 + `hermes_runner.py` 重构 + ut-supervisor profile 新建 + 3 Gateway profile 部署文档
 
 ---

@@ -1,5 +1,7 @@
 # 2026-06-22 — UT 测试梯度 fixture + Agent 意图识别 设计文档
 
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
+
 > **Spec ID**: `2026-06-22-ut-tier-fixtures-and-agent-intent`
 > **Status**: Draft v1
 > **Owner**: liux

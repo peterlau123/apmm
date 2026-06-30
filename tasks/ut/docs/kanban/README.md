@@ -1,5 +1,7 @@
 # Hermes Kanban Integration
 
+> **注意：** `.agents/workflow.yaml` 已废弃（2026-06-29），配置机制已迁移至 `tasks/ut/deployment/production/config/` 模板库 + `runs/ut-{timestamp}/` 副本机制。运行时配置副本路径：`runs/ut-{timestamp}/workflow.yaml`。
+
 ## Overview
 
 Hermes Kanban is the outer orchestration layer for UT workflow. In Kanban mode, task state is stored in Hermes board `apmm-ut`, and the Hermes gateway embedded dispatcher dispatches ready tasks to worker profiles.
@@ -10,7 +12,7 @@ Hermes Kanban is the outer orchestration layer for UT workflow. In Kanban mode, 
 |-----------|-----------------|
 | Hermes Agent | v0.16.0 |
 | Board | `apmm-ut` |
-| Workflow config | `.agents/workflow.yaml` |
+| Workflow config | `runs/ut-{timestamp}/workflow.yaml`（运行时副本） |
 | Kanban enabled | `kanban.enabled: true` |
 | Dispatcher | embedded in `hermes gateway start` |
 
@@ -56,8 +58,10 @@ hermes kanban runs <task_id>
 Use the project wrapper:
 
 ```bash
-python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml runs/ut-{timestamp}/workflow.yaml
 ```
+
+> **注：** 旧命令 `--workflow-yaml .agents/workflow.yaml` 已废弃，请使用当前运行副本路径。
 
 The wrapper:
 
@@ -119,7 +123,7 @@ Create a root orchestration task:
 hermes kanban create "UT Workflow: Orchestrate run" \
   --assignee ut-orchestrator \
   --priority 1 \
-  --body "Use .agents/workflow.yaml. Remote execution must use python tools/agent.py -p t_h20 run. Container: v0.13.0_torch2.5.1_compile. Do not use plain ssh."
+  --body "Use runs/ut-{timestamp}/workflow.yaml. Remote execution must use python tools/agent.py -p t_h20 run. Container: v0.13.0_torch2.5.1_compile. Do not use plain ssh."
 ```
 
 Executor tasks created by the orchestrator should include:
@@ -127,7 +131,7 @@ Executor tasks created by the orchestrator should include:
 - `batch_config.json` path
 - remote profile: `t_h20`
 - docker container: `v0.13.0_torch2.5.1_compile`
-- pytest args from `.agents/workflow.yaml`
+- pytest args from `runs/ut-{timestamp}/workflow.yaml`
 - instruction to use `tools/agent.py`
 
 ## Recovery
@@ -143,8 +147,10 @@ hermes kanban archive <task_id>
 If dispatcher is not running:
 
 ```bash
-python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml .agents/workflow.yaml
+python skills/ut/terminal-workflow/scripts/start_gateway.py --workflow-yaml runs/ut-{timestamp}/workflow.yaml
 ```
+
+> **注：** 旧命令路径 `.agents/workflow.yaml` 已废弃。
 
 If remote execution fails with daemon errors:
 
@@ -176,4 +182,6 @@ python agent.py serve t_h20
 | Orchestrator profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-orchestrator\` |
 | Executor profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-executor\` |
 | Fixer profile | `C:\Users\admin\AppData\Local\hermes\profiles\ut-fixer\` |
-| workflow.yaml | `D:\workspace\apmm\.agents\workflow.yaml` |
+| workflow.yaml | `runs/ut-{timestamp}/workflow.yaml`（运行时副本） |
+
+> **历史路径变更：** 原 `.agents/workflow.yaml` 已废弃（2026-06-29），配置模板位于 `tasks/ut/deployment/production/config/workflow.yaml`。

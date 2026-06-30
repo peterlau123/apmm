@@ -3,6 +3,7 @@
 **Date**: 2026-06-18
 **Status**: Design proposal
 **Scope**: UT Workflow 运行主体、Bastion daemon 托管、飞书 OTP 交互
+**历史文档注：** `.agents/workflow.yaml` 已废弃（2026-06-29），配置迁移至 `tasks/ut/deployment/production/config/` + `runs/ut-{timestamp}/`副本机制。
 
 ---
 

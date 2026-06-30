@@ -1,5 +1,7 @@
 # Hermes Workflow Foundation Implementation Plan (Plan 1 of 2)
 
+> **历史路径变更：** `.agents/workflow.yaml` → `runs/ut-{timestamp}/workflow.yaml`（配置副本），原路径已废弃（2026-06-29）。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Refactor UT Workflow's foundation (schema + Worker SKILLs + loop core + ut/workflow + hermes_runner) so the linear-mode workflow runs end-to-end under the v5 spec, with `retriable_error` semantics, remote-only raw_log, and a shared loop core. Plan 2 (separate document) will build on this to deliver Hermes production deployment.

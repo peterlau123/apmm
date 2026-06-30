@@ -1,5 +1,7 @@
 # UT Workflow × Hermes Kanban 集成设计
 
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
+
 > 方案 A-1：Skill 分支模式 - 单一入口，根据 kanban.enabled 分支执行
 
 **创建日期**: 2026-06-12

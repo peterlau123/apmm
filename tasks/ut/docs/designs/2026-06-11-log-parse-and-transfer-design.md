@@ -1,5 +1,7 @@
 # 日志解析与传输设计
 
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
+
 > 从远程容器 ut_logs 中 grep 提取测试结果，传回本地生成 batch_results.json
 
 ---

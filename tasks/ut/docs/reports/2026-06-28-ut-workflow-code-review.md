@@ -1,8 +1,9 @@
 # UT Workflow 两轴代码审查报告
 
+> **历史文档注：** `.agents/workflow.yaml` 已废弃（2026-06-29），配置迁移至 `tasks/ut/deployment/production/config/` + `runs/ut-{timestamp}/`副本机制。
 > **Scope**：以 `tasks/ut/README.md` 为权威 spec，全面审查 UT workflow 系统功能代码、文档、测试，找出不一致、错误、遗漏。
 > **Standards 来源**：`AGENTS.md`、`CLAUDE.md`及用户原则「确定性操作放脚本，逻辑判断给 agent」。
-> **Review Skill**：`mattpocock/in-progress/review`（Spec 轴 + Standards 轴并行）。
+> **Review Skill**：`mattpoclock/in-progress/review`（Spec 轴 + Standards 轴并行）。
 > **Review Date**：2026-06-28
 > **Reviewer**：Sisyphus (GLM 5.2)
 

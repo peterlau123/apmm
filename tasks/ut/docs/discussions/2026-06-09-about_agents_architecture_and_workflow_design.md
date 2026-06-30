@@ -2,6 +2,7 @@
 
 **Date**: 2026-06-09
 **Discussion**: UT Test Workflow Architecture and workflow.yaml Design
+**历史文档注：** `.agents/workflow.yaml` 已废弃（2026-06-29），配置迁移至 `tasks/ut/deployment/production/config/` + `runs/ut-{timestamp}/`副本机制。
 
 ---
 

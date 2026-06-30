@@ -1,5 +1,7 @@
 # UT Workflow × Hermes Kanban 集成实现计划
 
+> **历史路径变更：** `.agents/workflow.yaml` → `runs/ut-{timestamp}/workflow.yaml`（配置副本），原路径已废弃（2026-06-29）。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 实现 UT Workflow 与 Hermes Kanban 的集成，支持双模式运行（线性 workflow / Kanban 模式）。

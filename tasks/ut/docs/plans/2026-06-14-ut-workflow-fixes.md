@@ -1,5 +1,7 @@
 # UT Workflow 问题修复实施计划
 
+> **历史路径变更：** `.agents/workflow.yaml` → `runs/ut-{timestamp}/workflow.yaml`（配置副本），原路径已废弃（2026-06-29）。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 修复 UT Workflow 的6个问题：飞书卡片通过率、删除冗余配置、调整顺序、补充说明、失败重试逻辑、troubleshooting 文档

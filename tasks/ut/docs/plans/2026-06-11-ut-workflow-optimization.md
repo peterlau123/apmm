@@ -1,5 +1,7 @@
 # UT Workflow 优化实现计划
 
+> **历史路径变更：** `.agents/workflow.yaml` → `runs/ut-{timestamp}/workflow.yaml`（配置副本），原路径已废弃（2026-06-29）。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 优化UT Workflow用户体验，使其更易理解和操作（最小化导引 + 配置标记 + 自主执行）

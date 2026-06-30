@@ -3,6 +3,7 @@
 **日期**: 2026-06-14
 **方案**: 方案 A（最小修复）
 **状态**: 已批准
+**注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
 
 ---
 

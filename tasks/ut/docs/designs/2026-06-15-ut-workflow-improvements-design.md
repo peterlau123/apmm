@@ -1,5 +1,7 @@
 # UT Workflow 改进设计规格书
 
+> **注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:writing-plans to create implementation plan from this spec.
 
 **目标:** 解决 UT Workflow 的4个问题：GPU并发执行、logs目录结构、retry机制缺失、初始环境检查效率

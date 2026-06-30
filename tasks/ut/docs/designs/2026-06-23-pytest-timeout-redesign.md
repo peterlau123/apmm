@@ -2,6 +2,7 @@
 
 **Date**: 2026-06-23
 **Status**: 📐 Design (this document); implementation pending
+**注意：** `.agents/workflow.yaml`已废弃（2026-06-29），配置机制已迁移至`tasks/ut/deployment/production/config/`模板库 + `runs/ut-{timestamp}/`副本机制。
 **Driver**: 2026-06-23 grilling session — failure-mode conflation (issue C)
 **Related**: [2026-06-23-l4-postmortem-and-fixes.md](../incidents/2026-06-23-l4-postmortem-and-fixes.md) (M3 done; not the same scope)
 **Scope**: UT 子系统单体范畴（仅 `skills/ut/unit-test-executor` + `skills/ut/failure-handler` + workflow yaml fixtures）

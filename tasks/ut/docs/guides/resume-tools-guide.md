@@ -29,10 +29,13 @@
 
 ```python
 from skills.ut.shared.workflow_state_manager import (
-    update_workflow_state,  # 更新状态（强制调用）
-    get_batch_status,       # 查询batch状态
-    get_statistics,         # 获取统计数据
-    validate_state_transition  # 验证状态转换
+    update_batch_generated,  # 更新batch为generated状态
+    update_batch_running,    # 更新batch为running状态
+    update_batch_completed,  # 更新batch为completed状态
+    load_workflow_state,     # 加载workflow_state.json
+    calculate_batch_stats,   # 计算batch统计
+    calculate_test_stats,    # 计算test统计
+    calculate_resume_info    # 计算resume信息
 )
 ```
 
@@ -40,53 +43,90 @@ from skills.ut.shared.workflow_state_manager import (
 
 ```python
 # generate_batch.py 中使用
-from workflow_state_manager import update_workflow_state
+from workflow_state_manager import update_batch_generated
+from datetime import datetime
 
-update_workflow_state(
-    state_path="runs/ut-20260630-163959/workflow_state.json",
+update_batch_generated(
+    workflow_state_path=Path("runs/ut-20260630-163959/workflow_state.json"),
     batch_id="batch_20260703_093155",
-    stage="generated",  # 新增状态：generated → running → completed
-    stats={
-        "total": 8,
-        "pending": 8
-    }
+    batch_size=8,
+    config_path="batches/batch_20260703_093155/batch_config.json",
+    created_at=datetime.now().isoformat()
 )
 
 # execute_batch.py 中使用（两阶段更新）
 # 第一阶段：启动时
-update_workflow_state(
-    state_path=state_path,
+from workflow_state_manager import update_batch_running
+
+update_batch_running(
+    workflow_state_path=workflow_state_path,
     batch_id=batch_id,
-    stage="running",
+    gpu_pool=[0, 1],  # GPU列表
     started_at=datetime.now().isoformat()
 )
 
 # 第二阶段：完成时
-update_workflow_state(
-    state_path=state_path,
+from workflow_state_manager import update_batch_completed
+
+update_batch_completed(
+    workflow_state_path=workflow_state_path,
     batch_id=batch_id,
-    stage="completed",
-    completed_at=datetime.now().isoformat(),
+    results_path="batches/batch_20260703_093155/batch_results.json",
     stats={
         "total": 8,
         "passed": 7,
         "failed": 1,
         "error": 0,
         "ignored": 0
-    }
+    },
+    completed_at=datetime.now().isoformat()
 )
 ```
 
 ### 强制输出检查
 
-每个函数调用后会输出固定格式的确认：
+**每个update函数会自动更新workflow_state.json并计算统计信息。**
 
-```
-[WORKFLOW_STATE] Updated: batch_20260703_093155 → running
-[WORKFLOW_STATE] Statistics: generated=430, running=1, completed=398
+Worker脚本执行后应自检：
+
+```python
+# 执行后自检
+from workflow_state_manager import load_workflow_state
+
+state = load_workflow_state(workflow_state_path)
+batch_status = state["batches"][batch_id]["status"]
+batch_stats = state["batch_stats"]
+
+print(f"[WORKFLOW_STATE] Updated: {batch_id} → {batch_status}")
+print(f"[WORKFLOW_STATE] Statistics: generated={batch_stats['generated']}, running={batch_stats['running']}, completed={batch_stats['completed']}")
 ```
 
 Agent **必须检查此输出**，否则视为违反硬性约束。
+
+### 查询状态和统计
+
+**workflow_state_manager.py 提供状态更新功能，但不提供查询API。**
+
+如需查询batch状态或统计数据，直接加载workflow_state.json：
+
+```python
+from pathlib import Path
+import json
+
+state_path = Path("runs/ut-20260630-163959/workflow_state.json")
+state = json.loads(state_path.read_text())
+
+# 查询batch状态
+batch_id = "batch_20260703_093155"
+batch_status = state["batches"][batch_id]["status"]  # generated/running/completed
+
+# 查询统计数据
+batch_stats = state["batch_stats"]  # {"generated": 430, "running": 0, "completed": 398}
+test_stats = state["test_stats"]    # {"passed": 7082, "failed": 341, ...}
+
+# 查询resume信息
+resume_info = state["resume_info"]  # {"last_batch_id": "...", "can_resume": true, ...}
+```
 
 ---
 

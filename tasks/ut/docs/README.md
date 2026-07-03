@@ -34,6 +34,7 @@
 | [hermes-runner.md](guides/hermes-runner.md) | Hermes Runner 操作指南 |
 | [manual_operations.md](guides/manual_operations.md) | 手动处理收集错误 |
 | [error-stats-guide.md](guides/error-stats-guide.md) | 错误统计 & 分类指南 |
+| [resume-tools-guide.md](guides/resume-tools-guide.md) | **Resume工具集使用指南**（workflow_state_manager + resume.py + loop_executor.py） |
 
 ---
 
@@ -43,6 +44,7 @@ UT 相关 spec 文档（从 `docs/superpowers/specs/` 迁入）：
 
 | 文档 | 说明 |
 |------|------|
+| [2026-07-03-resume-mechanism-design.md](designs/2026-07-03-resume-mechanism-design.md) | **Resume机制改进设计**（三重保障：强制更新+强制输出+硬性约束） |
 | [2026-06-11-ut-workflow-design.md](designs/2026-06-11-ut-workflow-design.md) | UT Workflow 原始设计 |
 | [2026-06-12-ut-workflow-kanban-integration-design.md](designs/2026-06-12-ut-workflow-kanban-integration-design.md) | Kanban 集成 |
 | [2026-06-14-ut-workflow-fixes-design.md](designs/2026-06-14-ut-workflow-fixes-design.md) | Workflow 修复设计 |

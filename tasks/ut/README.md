@@ -117,6 +117,22 @@ Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/u
 
 ---
 
+## Resume工具集（新增）
+
+> 三重保障：代码强制更新 + 强制输出检查 + SKILL硬性约束
+
+| 工具 | 用途 | 使用场景 |
+|---|---|---|
+| `workflow_state_manager.py` | 状态管理核心 | 所有Worker脚本必须调用 |
+| `resume.py` | 状态分析工具（只读） | 中断恢复、状态诊断 |
+| `loop_executor.py` | 自检补救执行器 | 执行batch + 自动验证状态 |
+
+详细使用方法见 [docs/guides/resume-tools-guide.md](docs/guides/resume-tools-guide.md)。
+
+设计文档见 [docs/designs/2026-07-03-resume-mechanism-design.md](docs/designs/2026-07-03-resume-mechanism-design.md)。
+
+---
+
 ## 问题分类体系（人读归因）
 
 `C-代码Bug` · `E-环境问题` · `D-依赖缺失` · `P-平台兼容` · `M-模型缺失` · `S-跳过问题`

@@ -29,41 +29,37 @@ if 'PYTHONPATH' in os.environ:
 from collections import defaultdict
 from typing import Optional, Dict, List, Any
 
-# 路径配置（相对于 test_analysis 目录）
-TEST_ANALYSIS_DIR = Path(__file__).parent.parent.parent.parent / "tasks" / "ut" / "test_analysis"
-MANIFEST_FILE = TEST_ANALYSIS_DIR / "manifest.json"
-BACKUP_DIR = TEST_ANALYSIS_DIR / "archive"
+
+def load_manifest(manifest_path: Path) -> Dict:
+    """加载 manifest.json（参数化路径）"""
+    if not manifest_path.exists():
+        raise FileNotFoundError(f"Manifest 文件不存在: {manifest_path}")
+    return json.loads(manifest_path.read_text(encoding="utf-8"))
 
 
-def load_manifest() -> Dict:
-    """加载 manifest.json"""
-    if not MANIFEST_FILE.exists():
-        raise FileNotFoundError(f"Manifest 文件不存在: {MANIFEST_FILE}")
-    return json.loads(MANIFEST_FILE.read_text(encoding="utf-8"))
-
-
-def save_manifest(manifest: Dict, backup: bool = True):
-    """保存 manifest.json"""
+def save_manifest(manifest: Dict, manifest_path: Path, backup: bool = True):
+    """保存 manifest.json（参数化路径）"""
     if backup:
-        backup_manifest()
-    
+        backup_manifest(manifest_path)
+
     manifest["generated_at"] = datetime.now().isoformat()
-    MANIFEST_FILE.write_text(
+    manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
 
 
-def backup_manifest():
-    """备份当前 manifest"""
-    BACKUP_DIR.mkdir(exist_ok=True)
+def backup_manifest(manifest_path: Path):
+    """备份当前 manifest（参数化路径）"""
+    backup_dir = manifest_path.parent / "archive"
+    backup_dir.mkdir(exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_file = BACKUP_DIR / f"manifest_{timestamp}.json"
-    
-    if MANIFEST_FILE.exists():
+    backup_file = backup_dir / f"manifest_{timestamp}.json"
+
+    if manifest_path.exists():
         import shutil
-        shutil.copy2(MANIFEST_FILE, backup_file)
-        backups = sorted(BACKUP_DIR.glob("manifest_*.json"))
+        shutil.copy2(manifest_path, backup_file)
+        backups = sorted(backup_dir.glob("manifest_*.json"))
         for old in backups[:-10]:
             old.unlink()
 
@@ -311,13 +307,14 @@ def generate_daily_report(manifest: Dict) -> Dict:
 
 def main():
     parser = argparse.ArgumentParser(description="更新 manifest.json 测试状态")
-    
-    parser.add_argument("--batch", type=str, help="批量更新，从 JSON 文件读取结果")
+
+    parser.add_argument("--manifest-path", required=True, help="manifest.json 文件路径")
+    parser.add_argument("--batch", type=str, help="批量更新，从 batch_results.json 读取结果")
     parser.add_argument("--test", type=str, help="更新单个测试，指定 test_node")
     parser.add_argument("--recalc-stats", action="store_true", help="重新计算统计信息")
     parser.add_argument("--report", action="store_true", help="生成统计报告")
     parser.add_argument("--daily-report", action="store_true", help="生成每日统计（JSON格式）")
-    
+
     parser.add_argument("--status", type=str, help="测试状态")
     parser.add_argument("--error-message", type=str, help="错误信息")
     parser.add_argument("--failed-message", type=str, help="失败信息")
@@ -326,51 +323,52 @@ def main():
     parser.add_argument("--duration", type=int, help="执行时长（毫秒）")
     parser.add_argument("--exit-code", type=int, help="pytest 退出码")
     parser.add_argument("--log-file", type=str, help="日志文件路径")
-    
+
     args = parser.parse_args()
-    manifest = load_manifest()
+    manifest_path = Path(args.manifest_path)
+    manifest = load_manifest(manifest_path)
     
     if args.recalc_stats:
         stats = calculate_statistics(manifest.get("tests", []))
         manifest["statistics"] = stats
-        save_manifest(manifest)
+        save_manifest(manifest, manifest_path)
         print(f"统计信息已更新: {stats}")
         return
-    
+
     if args.report:
         report = generate_report(manifest)
         print(report)
         return
-    
+
     if args.daily_report:
         report = generate_daily_report(manifest)
         print(json.dumps(report, indent=2, ensure_ascii=False))
         return
-    
+
     if args.batch:
         batch_file = Path(args.batch)
         if not batch_file.exists():
             print(f"错误: 文件不存在 - {batch_file}")
             return
-        
+
         results = json.loads(batch_file.read_text(encoding="utf-8"))
         if isinstance(results, dict) and "tests" in results:
             results = results["tests"]
-        
+
         updated = batch_update_from_results(manifest, results)
         stats = calculate_statistics(manifest.get("tests", []))
         manifest["statistics"] = stats
-        save_manifest(manifest)
-        
+        save_manifest(manifest, manifest_path)
+
         print(f"批量更新完成: {updated} 个测试")
         print(f"统计: {stats}")
         return
-    
+
     if args.test:
         if not args.status:
             print("错误: 更新单个测试需要 --status 参数")
             return
-        
+
         found = update_test_status(
             manifest, args.test, args.status,
             error_message=args.error_message,
@@ -381,17 +379,17 @@ def main():
             exit_code=args.exit_code,
             log_file=args.log_file
         )
-        
+
         if found:
             stats = calculate_statistics(manifest.get("tests", []))
             manifest["statistics"] = stats
-            save_manifest(manifest)
+            save_manifest(manifest, manifest_path)
             print(f"已更新: {args.test} -> {args.status}")
             print(f"统计: {stats}")
         else:
             print(f"未找到测试: {args.test}")
         return
-    
+
     parser.print_help()
 
 

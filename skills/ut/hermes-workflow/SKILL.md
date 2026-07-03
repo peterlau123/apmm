@@ -649,8 +649,34 @@ monitor cron created for that run_id.
 
 ---
 
-## Reference
+## 硬性约束（不可违反）
 
-`tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
-(§14 process model & startup & main loop, §8 state machine & command matrix,
-§9 resume mapping, §10 pending_config, §7 / §8.5 OTP progressive resend).
+### ⚠️ Supervisor 必须逐 stage 调度
+
+**hermes-workflow Supervisor 必须在每个 Worker 完成后检查状态，不得批量调度！**
+
+正确流程：
+1. 调度 batch-selector Worker
+2. 检查 Worker 返回的 STAGE COMPLETED 输出
+3. 检查 workflow_state.json 状态
+4. 输出状态报告
+5. 决定是否调度下一个 Worker
+
+错误流程：
+❌ 批量调度多个 Worker
+❌ 使用循环自动化整个 workflow
+❌ 跳过状态检查步骤
+
+### ⚠️ Worker 必须更新状态
+
+**每个 Worker 完成任务后，必须检查 workflow_state.json 是否正确更新！**
+
+Supervisor 应验证：
+- batch-selector：batches[batch_id].status == 'generated'
+- unit-test-executor：batches[batch_id].status == 'completed'
+
+如果未更新，Supervisor 应补救更新。
+
+---
+
+*版本: 5.1.0*

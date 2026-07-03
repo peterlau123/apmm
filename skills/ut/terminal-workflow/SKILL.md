@@ -173,3 +173,44 @@ profiles documented in `tasks/ut/docs/guides/hermes-runner.md`, with
 systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md`
 (ut-supervisor agent) and `tasks/ut/docs/guides/hermes-gateway-service.md`
 (3 gateway instances).
+
+---
+
+## 硬性约束（不可违反）
+
+### ⚠️ Agent 必须逐 stage 执行
+
+**terminal-workflow Agent 必须逐 stage 执行，不得编写批量自动化脚本！**
+
+正确流程：
+1. 执行一个 stage（如 generate_batch）
+2. 检查 STAGE COMPLETED 输出
+3. 检查 workflow_state.json 状态
+4. 输出状态报告给用户
+5. 根据状态决策下一步
+
+错误流程：
+❌ 编写 Python 脚本批量执行多个 stage
+❌ 使用循环自动化整个 workflow
+❌ 跳过状态检查步骤
+
+### ⚠️ 自检补救机制
+
+**terminal-workflow 在每个 stage 后应自检 workflow_state.json 是否更新！**
+
+如果发现未更新，应：
+1. 输出警告：[WARN] Workflow State NOT UPDATED
+2. 手动调用 update_workflow_state() 补救
+3. 输出补救后的状态
+
+**建议使用 loop_executor.py 工具**，它已内置自检补救逻辑。
+
+### ⚠️ 用户中断检查点
+
+**Agent 每执行 10 个 batch 后，必须暂停并输出检查报告！**
+
+用户可随时输入 "pause" 或 "stop" 中断执行。
+
+---
+
+*版本: 5.1.0*

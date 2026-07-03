@@ -557,6 +557,38 @@ return {
 
 ---
 
+## 硬性约束（不可违反）
+
+### ⚠️ 必须更新 workflow_state.json
+
+**unit-test-executor Worker 在执行 batch 时，必须两阶段更新 workflow_state.json！**
+
+正确流程：
+1. 执行前：自动调用 update_batch_running() 更新状态为 'running'
+2. 执行 pytest
+3. 执行后：自动调用 update_batch_completed() 更新状态为 'completed'
+4. 输出 STAGE COMPLETED 状态检查报告
+5. 返回结果给 Supervisor
+
+错误流程：
+❌ 执行后不更新 workflow_state.json
+❌ 只更新一次（缺少 running 状态）
+❌ 跳过状态检查输出
+
+### ⚠️ 禁止批量自动化执行
+
+**unit-test-executor Worker 只负责单个 batch 的执行，不得编写批量脚本！**
+
+正确执行：
+- 一次只执行一个 batch
+- 检查 STAGE COMPLETED 输出
+
+错误执行：
+❌ 编写循环批量执行多个 batch
+❌ 批量执行整个 workflow
+
+---
+
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-26*
-*版本: 5.0.0*
+*更新日期: 2026-07-03*
+*版本: 5.1.0*

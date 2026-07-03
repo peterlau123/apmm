@@ -337,6 +337,36 @@ return {
 
 ---
 
+## 硬性约束（不可违反）
+
+### ⚠️ 必须更新 workflow_state.json
+
+**batch-selector Worker 在生成 batch 后，必须调用 workflow_state_manager 更新状态！**
+
+正确流程：
+1. 执行 generate_batch.py
+2. 自动调用 update_batch_generated() 更新 workflow_state.json
+3. 输出 STAGE COMPLETED 状态检查报告
+4. 返回结果给 Supervisor
+
+错误流程：
+❌ 生成 batch 后不更新 workflow_state.json
+❌ 跳过状态检查输出
+
+### ⚠️ 禁止批量自动化执行
+
+**batch-selector Worker 只负责单个 batch 的生成，不得编写批量脚本！**
+
+正确执行：
+- 一次只生成一个 batch
+- 检查 STAGE COMPLETED 输出
+
+错误执行：
+❌ 编写循环批量生成多个 batch
+❌ 批量执行整个流程
+
+---
+
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-10*
-*版本: 2.1.0*
+*更新日期: 2026-07-03*
+*版本: 2.2.0*

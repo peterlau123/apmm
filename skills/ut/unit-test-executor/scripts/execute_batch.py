@@ -52,6 +52,11 @@ if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
 from skills.ut.shared import get_paths, get_config  # noqa: E402
+from skills.ut.shared.workflow_state_manager import (
+    update_batch_running,
+    update_batch_completed,
+    load_workflow_state as load_state_for_check
+)  # noqa: E402
 
 _SCRIPT_DIR = Path(__file__).resolve().parent
 
@@ -843,6 +848,18 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     n_workers = len(gpu_pool)
 
     started_at = _utc_now_iso_z()
+
+    # ── 更新 workflow_state.json 为 'running' 状态（两阶段更新）──────
+    try:
+        update_batch_running(
+            workflow_state_path=workflow_state_path,
+            batch_id=batch_id,
+            gpu_pool=gpu_pool,
+            started_at=started_at
+        )
+    except Exception as e:
+        print(f"[WARN] Failed to update workflow_state to running: {e}")
+
     print(
         f"[INFO] Executing {len(tests)} tests in parallel ({n_workers} workers) "
         f"→ {batch_log_dir}/ (per-test wall={wall_timeout}s)"
@@ -1090,6 +1107,39 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         json.dumps(batch_results, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print(f"[OK] {output_path}")
+
+    # ── 更新 workflow_state.json 为 'completed' 状态（两阶段更新）──────
+    finished_at = _utc_now_iso_z()
+    try:
+        update_batch_completed(
+            workflow_state_path=workflow_state_path,
+            batch_id=batch_id,
+            results_path=str(output_path),
+            stats=batch_results["statistics"],
+            completed_at=finished_at
+        )
+
+        # ── 强制输出状态检查（防止Agent批量自动化）────────────────
+        print("=" * 60)
+        print("STAGE COMPLETED: execute_batch")
+        print(f"Batch ID: {batch_id}")
+        print(f"Results: passed={batch_results['statistics']['passed']}, "
+              f"failed={batch_results['statistics']['failed']}")
+        print(f"GPU Pool: {gpu_pool}")
+
+        # 检查 workflow_state.json 是否成功更新
+        state = load_state_for_check(workflow_state_path)
+        if batch_id in state.get("batches", {}):
+            batch_state = state["batches"][batch_id]
+            print(f"Workflow State Updated: {batch_state['status']}")
+            print(f"Batch Stats: completed={state['batch_stats']['completed']}")
+        else:
+            print("[WARN] Workflow State NOT UPDATED!")
+
+        print("NEXT ACTION: update_manifest or select_next_batch")
+        print("=" * 60)
+    except Exception as e:
+        print(f"[WARN] Failed to update workflow_state to completed: {e}")
 
     return {
         "batch_id": batch_id,

@@ -32,6 +32,10 @@ if str(_project_root) not in sys.path:
 
 # 然后导入 shared 模块
 from skills.ut.shared import validate_and_write, is_distributed
+from skills.ut.shared.workflow_state_manager import (
+    update_batch_generated,
+    load_workflow_state as load_state_for_check
+)
 
 
 # v5 selection rules ------------------------------------------------------
@@ -137,7 +141,8 @@ def generate_batch(
     batch_size: int = 50,
     skip_distributed: bool = False,
     test_file_filter: str = None,
-    batch_id: str = None
+    batch_id: str = None,
+    workflow_state_path: Path = None
 ) -> dict:
     """生成下一批次测试清单
 
@@ -148,6 +153,7 @@ def generate_batch(
         skip_distributed: 是否跳过 distributed 测试
         test_file_filter: 文件过滤器
         batch_id: 批次ID（可选，默认自动生成）
+        workflow_state_path: workflow_state.json 文件路径（可选，用于状态更新）
 
     Returns:
         批次配置 dict
@@ -205,6 +211,8 @@ def generate_batch(
 
     # 创建批次目录并写入输出文件（校验后写入）
     if batch_dir:
+        # 在batch_dir下创建batch_id子目录
+        batch_dir = batch_dir / batch_id
         batch_dir.mkdir(parents=True, exist_ok=True)
         output_path = batch_dir / "batch_config.json"
         # 校验后写入
@@ -231,6 +239,40 @@ def generate_batch(
         "blocked_reason": None
     }
 
+    # ── 更新 workflow_state.json（方案A + 三重保障）────────────
+    if workflow_state_path and batch_dir:
+        try:
+            # 更新 batch 为 'generated' 状态
+            update_batch_generated(
+                workflow_state_path=workflow_state_path,
+                batch_id=batch_id,
+                batch_size=len(batch[:batch_size]),
+                config_path=str(output_path),
+                created_at=datetime.now().isoformat()
+            )
+
+            # ── 强制输出状态检查（防止Agent批量自动化）────────────
+            print("=" * 60)
+            print("STAGE COMPLETED: generate_batch")
+            print(f"Batch ID: {batch_id}")
+            print(f"Batch Size: {len(batch[:batch_size])}")
+            print(f"Config Path: {output_path}")
+
+            # 检查 workflow_state.json 是否成功更新
+            state = load_state_for_check(workflow_state_path)
+            if batch_id in state.get("batches", {}):
+                batch_state = state["batches"][batch_id]
+                print(f"Workflow State Updated: {batch_state['status']}")
+                print(f"Batch Stats: generated={state['batch_stats']['generated']}")
+            else:
+                print("[WARN] Workflow State NOT UPDATED!")
+
+            print("NEXT ACTION: execute_batch")
+            print("=" * 60)
+        except Exception as e:
+            print(f"[ERROR] Failed to update workflow_state.json: {e}")
+            # 不影响返回结果，继续返回
+
     return result
 
 
@@ -240,7 +282,10 @@ def generate_batch_from_workflow_state(
     batch_size: int = 50,
     skip_distributed: bool = False
 ) -> dict:
-    """从 workflow_state.json 读取路径并生成批次"""
+    """从 workflow_state.json 读取路径并生成批次
+
+    自动更新 workflow_state.json 为 'generated' 状态
+    """
 
     state = load_workflow_state(workflow_state_path)
     paths = state.get("paths", {})
@@ -255,14 +300,14 @@ def generate_batch_from_workflow_state(
     if batch_dir is None:
         batches_dir = paths.get("batches_dir", "")
         if batches_dir:
-            batch_id = f"batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-            batch_dir = Path(batches_dir) / batch_id
+            batch_dir = Path(batches_dir)
 
     return generate_batch(
         manifest_path=manifest_path,
         batch_dir=batch_dir,
         batch_size=batch_size,
-        skip_distributed=skip_distributed
+        skip_distributed=skip_distributed,
+        workflow_state_path=workflow_state_path
     )
 
 

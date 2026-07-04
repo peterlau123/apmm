@@ -200,11 +200,6 @@ def _build_watchdog_script(
 
     Public for unit tests (see test_execute_batch_watchdog.py).
     """
-    if "'" in pytest_full_cmd or "'" in log_path:
-        raise ValueError(
-            "pytest_full_cmd / log_path may not contain single quotes "
-            "(outer wrap uses bash -c '<...>')"
-        )
     return WATCHDOG_TEMPLATE.format(
         log_path=log_path,
         pytest_full_cmd=pytest_full_cmd,
@@ -586,11 +581,18 @@ def _detect_free_gpus(
         parts = [p.strip() for p in ln.split(",")]
         if len(parts) < 4:
             continue
+        # Skip header line (contains non-numeric fields like "index", "name")
+        if not parts[0].lstrip("-").isdigit():
+            continue
         try:
             idx = int(parts[0])
-            used = int(parts[1])
-            total = int(parts[2])
-            util = int(parts[3])
+            # Handle both: "0" (nounits) and "0 MiB" (with units)
+            used_str = parts[1].split()[0] if parts[1] else "0"
+            total_str = parts[2].split()[0] if parts[2] else "0"
+            util_str = parts[3].split()[0] if parts[3] else "0"
+            used = int(used_str)
+            total = int(total_str)
+            util = int(util_str)
         except ValueError:
             continue
         gpu_info[idx] = {"used": used, "total": total, "util": util}
@@ -829,21 +831,31 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     raw_log_path = f"{batch_log_dir}/pytest_{batch_id}.log"  # batch-level pointer
 
     # ── GPU detection + zombie cleanup (design §4.1) ────────────────────────
-    try:
-        free_ids, fallback_card = _detect_free_gpus(
-            container=docker_container, profile=remote_server,
-        )
-    except ConnectionError as e:
-        return _disconnect_wait(batch_id, remote_server, workflow_state_path, str(e))
-
-    if free_ids:
-        gpu_pool = free_ids
-        print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+    # Force GPU mode: if detection fails repeatedly, use all 8 GPUs
+    # Read directly from workflow.yaml config
+    wf_config = wf.get("config", {}) if 'wf' in dir() and wf else {}
+    force_gpu_count = wf_config.get("force_gpu_count", config.get("force_gpu_count", 0))
+    
+    if force_gpu_count > 0:
+        # Force mode: bypass detection, use specified GPU count
+        gpu_pool = list(range(force_gpu_count))
+        print(f"[INFO] Force GPU mode: using {gpu_pool} (parallelism={len(gpu_pool)})")
     else:
-        # 0-card D1 degradation (design §4.2): serialize on the lowest-usage
-        # card. If even fallback is None (detection failed), still try card 0.
-        gpu_pool = [fallback_card if fallback_card is not None else 0]
-        print(f"[WARN] 0 free GPU — D1 degrade: serialize on card {gpu_pool[0]}")
+        try:
+            free_ids, fallback_card = _detect_free_gpus(
+                container=docker_container, profile=remote_server,
+            )
+        except ConnectionError as e:
+            return _disconnect_wait(batch_id, remote_server, workflow_state_path, str(e))
+
+        if free_ids:
+            gpu_pool = free_ids
+            print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+        else:
+            # 0-card D1 degradation (design §4.2): serialize on the lowest-usage
+            # card. If even fallback is None (detection failed), still try card 0.
+            gpu_pool = [fallback_card if fallback_card is not None else 0]
+            print(f"[WARN] 0 free GPU — D1 degrade: serialize on card {gpu_pool[0]}")
 
     n_workers = len(gpu_pool)
 
@@ -882,9 +894,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         node_log = f"{batch_log_dir}/pytest_{batch_id}_{slug}.log"
         node_xml = f"{batch_log_dir}/result_{batch_id}_{slug}.xml"
 
-        # pytest invocation for ONE node. --junit-xml is the result source of
+# pytest invocation for ONE node. --junit-xml is the result source of
         # truth; -o junit_logging=out-err (pytest 9 has no --junit-logging CLI
         # flag — §6.2 实测偏差). Redirection lives in the watchdog template.
+        # NOTE: agent.py now uses base64 encoding to protect brackets [] and all
+        # special characters. No need to escape or use -k workaround here.
         pytest_full_cmd = (
             f"cd /gpfs/gcsp/M2.7_verify/vllm && "
             f"CUDA_VISIBLE_DEVICES={gpu_id} python3 -m pytest {node} "

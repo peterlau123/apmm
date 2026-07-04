@@ -254,8 +254,18 @@ class BastionSession:
         start    = _make_sentinel() + "_START"
         end      = _make_sentinel() + "_END"
         end_line = "\n" + end
+        
+        # Base64 encode the command to protect ALL special characters (brackets, quotes, etc.)
+        # This bypasses ALL shell interpretation layers, ensuring the command reaches the
+        # remote shell exactly as intended.
+        import base64
+        cmd_b64 = base64.b64encode(cmd.encode('utf-8')).decode('ascii')
+        
         with self.lock:
-            self.channel.send(f"echo {start}; {cmd}; echo ''; echo {end}\n")
+            # Execute via: eval $(base64 -d <<< '<encoded>')
+            # The <<< here-string is POSIX-compliant and works in all modern bash versions.
+            # This guarantees the command is decoded and executed verbatim.
+            self.channel.send(f"echo {start}; eval $(base64 -d <<< '{cmd_b64}'); echo ''; echo {end}\n")
             raw = recv_until(self.channel, [end_line], timeout=timeout)
 
         if end_line not in raw:

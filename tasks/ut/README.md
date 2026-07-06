@@ -105,6 +105,75 @@ Stage 1 collect → Stage 2 select_batch → Stage 3 execute(远程pytest)
 
 ---
 
+## 运行策略
+
+UT Workflow支持两种运行策略：
+
+### Single-phase策略（默认）
+
+- **核心思想**: Agent介入每个stage，逐batch处理
+- **执行速度**: 较慢（逐batch，agent等待）
+- **GPU利用率**: 中等（agent上下文占用）
+- **错误处理**: 实时处理（Stage 4立即处理）
+- **适用规模**: 小-中规模（1-200 batch）
+- **适用场景**: 调试、实时处理
+
+### Two-phase策略
+
+- **核心思想**: Phase 1脚本批量执行 + Phase 2 agent智能处理
+- **执行速度**: 快（Phase 1批量执行）
+- **GPU利用率**: 高（无agent开销）
+- **错误处理**: 延迟处理（Phase 2统计分析）
+- **适用规模**: 大规模（500+ batch）
+- **适用场景**: 快速验证、生产运行
+
+### 适用场景矩阵
+
+| 场景 | 推荐通道 | 推荐策略 | batch规模 | 原因 |
+|------|---------|---------|-----------|------|
+| L1烟雾测试 | terminal-workflow | single-phase | 1 batch | 实时调试 |
+| L2-L3测试 | terminal-workflow | single-phase | 10-50 batch | 小规模实时处理 |
+| 开发态快速验证 | terminal-workflow | two-phase | 100-500 batch | 快速跑完看整体状态 |
+| 生产全量测试 | hermes-workflow | two-phase | 500+ batch | Phase 1快速 + Phase 2智能补充 |
+
+---
+
+## Two-phase策略配置参数
+
+| 参数 | 类型 | 说明 | 默认值 |
+|------|------|------|--------|
+| execution_strategy | string | 运行策略选择 | "single-phase" |
+| batch_group_size | int | Phase 1执行的batch总数 | null（需用户设置） |
+| phase1.auto_create_batches | bool | 自动创建batch配置 | true |
+| phase1.auto_execute | bool | 自动执行batch | true |
+| phase1.checkpoint_interval | int | checkpoint写入间隔 | 10 |
+| phase1.enable_force_checkpoints | bool | 启用强制检查点 | true |
+
+---
+
+## Two-phase策略使用指南
+
+### Phase 1执行
+
+```bash
+python tasks/ut/scripts/auto_run_batches_two_phase.py \
+    --workflow-yaml tasks/ut/deployment/production/config/workflow.yaml \
+    --run-dir runs/ut-20260706-123456 \
+    --batch-group-size 100
+```
+
+### Phase 2处理
+
+Phase 1完成后，调用`two-phase-handler` skill处理失败batch：
+
+```
+加载 ut/two-phase-handler skill
+```
+
+设计文档见 [docs/designs/2026-07-06-two-phase-strategy-design.md](docs/designs/2026-07-06-two-phase-strategy-design.md)。
+
+---
+
 ## 关键数据文件
 
 | 文件 | 位置 | 更新时机 |
@@ -141,4 +210,4 @@ Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/u
 
 ---
 
-*Last updated: 2026-06-23*
+*Last updated: 2026-07-07*

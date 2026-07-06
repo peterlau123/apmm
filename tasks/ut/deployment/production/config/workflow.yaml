@@ -27,6 +27,16 @@ workflow:
   description: Hierarchical Agent架构 - Supervisor调度 + Worker执行 + Kanban追踪
 
   # ============================================================
+  # ✍️：运行策略选择（Two-phase Strategy）
+  # ============================================================
+  execution_strategy: "two-phase"  # "single-phase"（默认）或 "two-phase"
+
+  # ============================================================
+  # ✍️：Two-phase策略专用配置
+  # ============================================================
+  batch_group_size: 500  # Phase 1执行的batch总数（设计文档§10）
+
+  # ============================================================
   # ✍️：测试标识
   # ============================================================
   test_name: "ut" # 测试名称，运行目录: {workspace}/runs/{test_name}-{timestamp}
@@ -372,3 +382,25 @@ phase1:
   auto_execute: true               # 自动执行batch
   checkpoint_interval: 10          # 每10个batch写checkpoint（便于恢复）
   enable_force_checkpoints: true   # 启用强制检查点（避免manifest遗漏）
+
+# ============================================================
+# Phase2 - Two-phase Strategy Configuration
+# ============================================================
+phase2:
+  stage1:
+    generate_report: true          # 自动生成Phase1总结报告
+    report_formats: ["json", "markdown"]  # 报告格式
+    auto_generate_suggestions: true       # 自动生成错误类型建议
+
+  stage2:
+    auto_retry_error_types: []     # 自动重试的错误类型（空=需人工决策）
+    wait_for_manual_decision: true # 等待人工决策
+    retry_on_decision: true        # 收到决策后自动重试
+
+# ============================================================
+# Decision Interface - 人工决策交互方式
+# ============================================================
+decision_interface:
+  terminal_workflow: "terminal"    # terminal模式下使用CLI交互
+  hermes_workflow: "feishu"        # hermes模式下使用飞书通知
+  fallback: "yaml_config"          # fallback时读取yaml配置

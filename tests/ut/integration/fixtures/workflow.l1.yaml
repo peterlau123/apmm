@@ -30,36 +30,6 @@ workflow:
   # ============================================================
   batch_group_size: null              # FROZEN(L1): single-phase不使用
 
-  # ============================================================
-  # Phase1 - Two-phase Strategy Configuration（L1使用单阶段模拟）
-  # ============================================================
-  phase1:
-    auto_create_batches: true
-    auto_execute: true
-    checkpoint_interval: 1            # FROZEN(L1): 单batch用最小间隔
-    enable_force_checkpoints: true
-
-  # ============================================================
-  # Phase2 - Two-phase Strategy Configuration（L1跳过）
-  # ============================================================
-  phase2:
-    stage1:
-      generate_report: false          # FROZEN(L1): smoke不需要报告
-      report_formats: ["json"]
-      auto_generate_suggestions: false
-    stage2:
-      auto_retry_error_types: []
-      wait_for_manual_decision: false  # FROZEN(L1): 自动继续
-      retry_on_decision: false
-
-  # ============================================================
-  # Decision Interface - 人工决策交互方式
-  # ============================================================
-  decision_interface:
-    terminal_workflow: "terminal"
-    hermes_workflow: "feishu"
-    fallback: "yaml_config"
-
   test_name: "ut"
 
 # ============================================================
@@ -313,3 +283,33 @@ notifications:
 
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
+
+# ============================================================
+# Phase1 - Two-phase Strategy Configuration（L1使用单阶段模拟）
+# ============================================================
+phase1:
+  auto_create_batches: true
+  auto_execute: true
+  checkpoint_interval: 1            # FROZEN(L1): 单batch用最小间隔
+  enable_force_checkpoints: true
+
+# ============================================================
+# Phase2 - Two-phase Strategy Configuration（L1跳过）
+# ============================================================
+phase2:
+  stage1:
+    generate_report: false          # FROZEN(L1): smoke不需要报告
+    report_formats: ["json"]
+    auto_generate_suggestions: false
+  stage2:
+    auto_retry_error_types: []
+    wait_for_manual_decision: false  # FROZEN(L1): 自动继续
+    retry_on_decision: false
+
+# ============================================================
+# Decision Interface - 人工决策交互方式
+# ============================================================
+decision_interface:
+  terminal_workflow: "terminal"
+  hermes_workflow: "feishu"
+  fallback: "yaml_config"

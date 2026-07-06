@@ -30,36 +30,6 @@ workflow:
   # ============================================================
   batch_group_size: 8                # FROZEN(L3): 8 tests全部在Phase1执行
 
-  # ============================================================
-  # Phase1 - Two-phase Strategy Configuration
-  # ============================================================
-  phase1:
-    auto_create_batches: true
-    auto_execute: true
-    checkpoint_interval: 2            # FROZEN(L3): 2 batches间隔
-    enable_force_checkpoints: true
-
-  # ============================================================
-  # Phase2 - Two-phase Strategy Configuration
-  # ============================================================
-  phase2:
-    stage1:
-      generate_report: true           # FROZEN(L3): 测试报告生成
-      report_formats: ["json", "markdown"]
-      auto_generate_suggestions: true
-    stage2:
-      auto_retry_error_types: []      # FROZEN(L3): 强制人工决策
-      wait_for_manual_decision: true
-      retry_on_decision: true
-
-  # ============================================================
-  # Decision Interface - 人工决策交互方式
-  # ============================================================
-  decision_interface:
-    terminal_workflow: "terminal"
-    hermes_workflow: "feishu"
-    fallback: "yaml_config"
-
   test_name: "ut"
 
 config:
@@ -289,3 +259,33 @@ notifications:
 
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
+
+# ============================================================
+# Phase1 - Two-phase Strategy Configuration
+# ============================================================
+phase1:
+  auto_create_batches: true
+  auto_execute: true
+  checkpoint_interval: 2            # FROZEN(L3): 2 batches间隔
+  enable_force_checkpoints: true
+
+# ============================================================
+# Phase2 - Two-phase Strategy Configuration
+# ============================================================
+phase2:
+  stage1:
+    generate_report: true           # FROZEN(L3): 测试报告生成
+    report_formats: ["json", "markdown"]
+    auto_generate_suggestions: true
+  stage2:
+    auto_retry_error_types: []      # FROZEN(L3): 强制人工决策
+    wait_for_manual_decision: true
+    retry_on_decision: true
+
+# ============================================================
+# Decision Interface - 人工决策交互方式
+# ============================================================
+decision_interface:
+  terminal_workflow: "terminal"
+  hermes_workflow: "feishu"
+  fallback: "yaml_config"

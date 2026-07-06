@@ -29,36 +29,6 @@ workflow:
   # ============================================================
   batch_group_size: null              # FROZEN(L2): single-phase不使用
 
-  # ============================================================
-  # Phase1 - Two-phase Strategy Configuration（L2使用单阶段模拟）
-  # ============================================================
-  phase1:
-    auto_create_batches: true
-    auto_execute: true
-    checkpoint_interval: 1            # FROZEN(L2): 3 tests用最小间隔
-    enable_force_checkpoints: true
-
-  # ============================================================
-  # Phase2 - Two-phase Strategy Configuration（L2跳过）
-  # ============================================================
-  phase2:
-    stage1:
-      generate_report: false          # FROZEN(L2): mini test不需要报告
-      report_formats: ["json"]
-      auto_generate_suggestions: false
-    stage2:
-      auto_retry_error_types: []
-      wait_for_manual_decision: false  # FROZEN(L2): 自动继续
-      retry_on_decision: false
-
-  # ============================================================
-  # Decision Interface - 人工决策交互方式
-  # ============================================================
-  decision_interface:
-    terminal_workflow: "terminal"
-    hermes_workflow: "feishu"
-    fallback: "yaml_config"
-
   test_name: "ut"
 
 config:
@@ -288,3 +258,33 @@ notifications:
 
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
+
+# ============================================================
+# Phase1 - Two-phase Strategy Configuration（L2使用单阶段模拟）
+# ============================================================
+phase1:
+  auto_create_batches: true
+  auto_execute: true
+  checkpoint_interval: 1            # FROZEN(L2): 3 tests用最小间隔
+  enable_force_checkpoints: true
+
+# ============================================================
+# Phase2 - Two-phase Strategy Configuration（L2跳过）
+# ============================================================
+phase2:
+  stage1:
+    generate_report: false          # FROZEN(L2): mini test不需要报告
+    report_formats: ["json"]
+    auto_generate_suggestions: false
+  stage2:
+    auto_retry_error_types: []
+    wait_for_manual_decision: false  # FROZEN(L2): 自动继续
+    retry_on_decision: false
+
+# ============================================================
+# Decision Interface - 人工决策交互方式
+# ============================================================
+decision_interface:
+  terminal_workflow: "terminal"
+  hermes_workflow: "feishu"
+  fallback: "yaml_config"

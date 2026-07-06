@@ -30,7 +30,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-_project_root = Path(__file__).resolve().parents[2]
+_project_root = Path(__file__).resolve().parents[3]
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
@@ -165,12 +165,12 @@ def execute_batch_script(
     }
 
 
-def write_batch_results(
+def validate_batch_results(
     batch_id: str,
     batch_dir: Path,
     result: dict,
 ) -> Path:
-    """Stage 3: Write batch_results.json
+    """Stage 3: Validate batch_results.json
 
     Args:
         batch_id: Batch identifier
@@ -487,7 +487,7 @@ def phase1_batch_loop(
 
             # Stage 3: 结果收集
             print(f"  [Stage 3] Collecting results...")
-            result_path = write_batch_results(batch_id, batch_dir, result)
+            result_path = validate_batch_results(batch_id, batch_dir, result)
 
             # ✅ 检查点3: 结果文件生成
             if enable_force_checkpoints:
@@ -585,21 +585,42 @@ def main():
     )
     parser.add_argument(
         "--enable-force-checkpoints",
-        type=bool,
+        action="store_true",
         default=None,
+        dest="enable_force_checkpoints",
         help="Enable 4 forced checkpoints per batch (default: from workflow.yaml phase1 config)",
     )
     parser.add_argument(
+        "--no-force-checkpoints",
+        action="store_false",
+        dest="enable_force_checkpoints",
+        help="Disable forced checkpoints",
+    )
+    parser.add_argument(
         "--auto-create-batches",
-        type=bool,
+        action="store_true",
         default=None,
+        dest="auto_create_batches",
         help="Auto create batch configs (default: from workflow.yaml phase1 config)",
     )
     parser.add_argument(
+        "--no-auto-create-batches",
+        action="store_false",
+        dest="auto_create_batches",
+        help="Disable auto batch creation",
+    )
+    parser.add_argument(
         "--auto-execute",
-        type=bool,
+        action="store_true",
         default=None,
+        dest="auto_execute",
         help="Auto execute batches (default: from workflow.yaml phase1 config)",
+    )
+    parser.add_argument(
+        "--no-auto-execute",
+        action="store_false",
+        dest="auto_execute",
+        help="Disable auto execution",
     )
 
     args = parser.parse_args()

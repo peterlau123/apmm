@@ -350,30 +350,90 @@ def log_error(message: str, run_dir: Path) -> None:
 # Main Phase 1 Loop
 # ============================================================================
 
+def get_phase1_config(config: dict) -> dict:
+    """Read phase1 config block from workflow.yaml
+
+    Args:
+        config: Config dict from workflow.yaml (from get_config)
+
+    Returns:
+        Phase1 config dict with defaults applied
+
+    Note:
+        Returns defaults if phase1 block not found in workflow.yaml
+    """
+    phase1_defaults = {
+        "auto_create_batches": True,
+        "auto_execute": True,
+        "checkpoint_interval": 10,
+        "enable_force_checkpoints": True,
+        "batch_group_size": 10,
+    }
+
+    phase1_config = config.get("phase1", {})
+
+    # Merge: config values override defaults
+    for key, default_value in phase1_defaults.items():
+        if key not in phase1_config:
+            phase1_config[key] = default_value
+
+    return phase1_config
+
+
 def phase1_batch_loop(
     workflow_yaml_path: Path,
     run_dir: Path,
     batch_group_size: Optional[int] = None,
-    checkpoint_interval: int = 10,
-    enable_force_checkpoints: bool = True,
+    checkpoint_interval: Optional[int] = None,
+    enable_force_checkpoints: Optional[bool] = None,
+    auto_create_batches: Optional[bool] = None,
+    auto_execute: Optional[bool] = None,
 ) -> list:
     """Phase 1: Script batch execution + forced checkpoints
 
     Args:
         workflow_yaml_path: Path to workflow.yaml
         run_dir: Run directory path
-        batch_group_size: Number of batches to execute (from workflow.yaml if None)
-        checkpoint_interval: Write checkpoint every N batches
-        enable_force_checkpoints: Enable 4 forced checkpoints per batch
+        batch_group_size: Number of batches to execute (CLI override, reads from config if None)
+        checkpoint_interval: Write checkpoint every N batches (CLI override, reads from config if None)
+        enable_force_checkpoints: Enable 4 forced checkpoints per batch (CLI override, reads from config if None)
+        auto_create_batches: Auto create batch configs (CLI override, reads from config if None)
+        auto_execute: Auto execute batches (CLI override, reads from config if None)
 
     Returns:
         Checkpoint log list
 
     Raises:
         AssertionError: On checkpoint failure (immediate abort)
+
+    Config-driven design:
+        All parameters read from workflow.yaml phase1 config block by default.
+        CLI args override config values when explicitly provided.
     """
     # Load workflow.yaml config
     config = get_config(workflow_yaml_path)
+
+    # Get phase1 config block (with defaults)
+    phase1_config = get_phase1_config(config)
+
+    # Apply CLI overrides (CLI > config)
+    if batch_group_size is not None:
+        phase1_config["batch_group_size"] = batch_group_size
+    if checkpoint_interval is not None:
+        phase1_config["checkpoint_interval"] = checkpoint_interval
+    if enable_force_checkpoints is not None:
+        phase1_config["enable_force_checkpoints"] = enable_force_checkpoints
+    if auto_create_batches is not None:
+        phase1_config["auto_create_batches"] = auto_create_batches
+    if auto_execute is not None:
+        phase1_config["auto_execute"] = auto_execute
+
+    # Final values (config + CLI overrides)
+    batch_group_size = phase1_config["batch_group_size"]
+    checkpoint_interval = phase1_config["checkpoint_interval"]
+    enable_force_checkpoints = phase1_config["enable_force_checkpoints"]
+    auto_create_batches = phase1_config["auto_create_batches"]
+    auto_execute = phase1_config["auto_execute"]
 
     # Get paths from workflow_state.json
     workflow_state_path = run_dir / "workflow_state.json"
@@ -381,11 +441,6 @@ def phase1_batch_loop(
 
     manifest_path = Path(paths["manifest"])
     batches_dir = Path(paths["batches"])  # Parent dir of all batches
-
-    # Get batch_group_size from workflow.yaml phase1 config
-    if batch_group_size is None:
-        phase1_config = config.get("phase1", {})
-        batch_group_size = phase1_config.get("batch_group_size", 10)
 
     # Get batch_size from workflow.yaml
     batch_size = config.get("config", {}).get("batch_size", 8)
@@ -396,6 +451,8 @@ def phase1_batch_loop(
     print(f"[Phase 1] Batch size: {batch_size}")
     print(f"[Phase 1] Checkpoint interval: {checkpoint_interval}")
     print(f"[Phase 1] Force checkpoints: {enable_force_checkpoints}")
+    print(f"[Phase 1] Auto create batches: {auto_create_batches}")
+    print(f"[Phase 1] Auto execute: {auto_execute}")
 
     for i in range(batch_group_size):
         batch_id = create_batch_id(i)
@@ -518,19 +575,31 @@ def main():
         "--batch-group-size",
         type=int,
         default=None,
-        help="Number of batches to execute (default: from workflow.yaml)",
+        help="Number of batches to execute (default: from workflow.yaml phase1 config)",
     )
     parser.add_argument(
         "--checkpoint-interval",
         type=int,
-        default=10,
-        help="Write checkpoint every N batches (default: 10)",
+        default=None,
+        help="Write checkpoint every N batches (default: from workflow.yaml phase1 config)",
     )
     parser.add_argument(
         "--enable-force-checkpoints",
         type=bool,
-        default=True,
-        help="Enable 4 forced checkpoints per batch (default: True)",
+        default=None,
+        help="Enable 4 forced checkpoints per batch (default: from workflow.yaml phase1 config)",
+    )
+    parser.add_argument(
+        "--auto-create-batches",
+        type=bool,
+        default=None,
+        help="Auto create batch configs (default: from workflow.yaml phase1 config)",
+    )
+    parser.add_argument(
+        "--auto-execute",
+        type=bool,
+        default=None,
+        help="Auto execute batches (default: from workflow.yaml phase1 config)",
     )
 
     args = parser.parse_args()
@@ -550,9 +619,11 @@ def main():
         checkpoint_log = phase1_batch_loop(
             workflow_yaml_path,
             run_dir,
-            args.batch_group_size,
-            args.checkpoint_interval,
-            args.enable_force_checkpoints,
+            batch_group_size=args.batch_group_size,
+            checkpoint_interval=args.checkpoint_interval,
+            enable_force_checkpoints=args.enable_force_checkpoints,
+            auto_create_batches=args.auto_create_batches,
+            auto_execute=args.auto_execute,
         )
         sys.exit(0)
     except AssertionError as e:

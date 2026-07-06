@@ -363,3 +363,12 @@ notifications:
 
     - condition: "worker_error"
       template: "Worker错误 ({stage}): {error_message}"
+
+# ============================================================
+# Phase1 - Two-phase Strategy Configuration
+# ============================================================
+phase1:
+  auto_create_batches: true        # 自动创建batch配置
+  auto_execute: true               # 自动执行batch
+  checkpoint_interval: 10          # 每10个batch写checkpoint（便于恢复）
+  enable_force_checkpoints: true   # 启用强制检查点（避免manifest遗漏）

@@ -14,7 +14,9 @@ Usage:
         --workflow-yaml tasks/ut/deployment/production/config/workflow.yaml \
         --run-dir runs/ut-20260706-123456
 
-Design: tasks/ut/docs/designs/2026-07-06-two-phase-strategy-design.md §5
+Design: tasks/ut/docs/designs/2026-07-06-two-phase-strategy-design.md §5 (lines 92-159)
+  - Lines 92-159: Phase 1 execution flow with 4 forced checkpoints
+  - Lines 163-169: Phase 1 config parameters
 """
 
 import os
@@ -237,7 +239,11 @@ def verify_manifest_updated(batch_id: str, manifest_path: Path) -> bool:
         manifest_path: Path to manifest.json
 
     Returns:
-        True if batch_id found in manifest tests, False otherwise
+        True if batch_id found in manifest tests with updated status (non-pending)
+
+    Note:
+        This verification ensures tests have actual execution results,
+        not just stale batch_id entries from previous failed attempts.
     """
     if not manifest_path.exists():
         return False
@@ -245,11 +251,14 @@ def verify_manifest_updated(batch_id: str, manifest_path: Path) -> bool:
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 
-        # Check if any test has this batch_id
+        # Check if any test has this batch_id with updated status
         tests = manifest.get("tests", [])
         for test in tests:
             if test.get("last_batch_id") == batch_id or test.get("batch_id") == batch_id:
-                return True
+                # ✅ Verify status was updated (not stale 'pending')
+                status = test.get("status", "")
+                if status != "pending":
+                    return True
 
         return False
     except (json.JSONDecodeError, Exception):
@@ -367,7 +376,6 @@ def get_phase1_config(config: dict) -> dict:
         "auto_execute": True,
         "checkpoint_interval": 10,
         "enable_force_checkpoints": True,
-        "batch_group_size": 10,
     }
 
     phase1_config = config.get("phase1", {})
@@ -416,9 +424,18 @@ def phase1_batch_loop(
     # Get phase1 config block (with defaults)
     phase1_config = get_phase1_config(config)
 
+    # ✅ Read batch_group_size from workflow top-level (per design §10)
+    # Default value if not configured
+    batch_group_size_default = 10
+
     # Apply CLI overrides (CLI > config)
     if batch_group_size is not None:
-        phase1_config["batch_group_size"] = batch_group_size
+        # CLI override
+        final_batch_group_size = batch_group_size
+    else:
+        # Read from workflow.yaml top-level
+        final_batch_group_size = config.get("batch_group_size", batch_group_size_default)
+
     if checkpoint_interval is not None:
         phase1_config["checkpoint_interval"] = checkpoint_interval
     if enable_force_checkpoints is not None:
@@ -429,7 +446,7 @@ def phase1_batch_loop(
         phase1_config["auto_execute"] = auto_execute
 
     # Final values (config + CLI overrides)
-    batch_group_size = phase1_config["batch_group_size"]
+    batch_group_size = final_batch_group_size
     checkpoint_interval = phase1_config["checkpoint_interval"]
     enable_force_checkpoints = phase1_config["enable_force_checkpoints"]
     auto_create_batches = phase1_config["auto_create_batches"]
@@ -445,16 +462,28 @@ def phase1_batch_loop(
     # Get batch_size from workflow.yaml
     batch_size = config.get("config", {}).get("batch_size", 8)
 
-    checkpoint_log = []
+    # ✅ Resume support: Read existing checkpoint if available
+    checkpoint_path = run_dir / "phase1_checkpoint.json"
+    if checkpoint_path.exists():
+        checkpoint_data = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+        checkpoint_log = checkpoint_data.get("checkpoint_log", [])
+        start_index = len(checkpoint_log)
+        completed_batch_ids = [e.get("batch_id") for e in checkpoint_log if e.get("status") == "✓ SUCCESS"]
+        print(f"[Phase 1] Resuming from checkpoint: {start_index} batches already processed, {len(completed_batch_ids)} successful")
+    else:
+        checkpoint_log = []
+        start_index = 0
+        completed_batch_ids = []
+        print("[Phase 1] Starting fresh execution (no checkpoint found)")
 
-    print(f"[Phase 1] Starting batch loop: {batch_group_size} batches")
+    print(f"[Phase 1] Starting batch loop: {batch_group_size - start_index} batches remaining (total: {batch_group_size})")
     print(f"[Phase 1] Batch size: {batch_size}")
     print(f"[Phase 1] Checkpoint interval: {checkpoint_interval}")
     print(f"[Phase 1] Force checkpoints: {enable_force_checkpoints}")
     print(f"[Phase 1] Auto create batches: {auto_create_batches}")
     print(f"[Phase 1] Auto execute: {auto_execute}")
 
-    for i in range(batch_group_size):
+    for i in range(start_index, batch_group_size):
         batch_id = create_batch_id(i)
 
         print(f"\n[Batch {i+1}/{batch_group_size}] {batch_id}")

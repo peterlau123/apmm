@@ -768,6 +768,42 @@ workflow:
 - **设计师:** Claude Code
 - **目标版本:** workflow v2.2
 
+### D. Single-phase Fixture配置模式
+
+**问题：** L1/L2测试fixture使用single-phase策略，但仍需保持phase1/phase2/decision_interface配置块结构一致性。
+
+**解决方案：** 通过配置参数巧妙禁用Phase 2处理：
+
+```yaml
+# L1/L2 fixture (single-phase strategy)
+workflow:
+  execution_strategy: "single-phase"
+
+phase2:
+  stage1:
+    generate_report: false         # 不生成统计报告
+    report_formats: []
+    auto_generate_suggestions: false
+  stage2:
+    auto_retry_error_types: []     # 空列表 = 不重试任何error_type
+    wait_for_manual_decision: false # 不等待人工决策
+    retry_on_decision: false       # 不执行重试
+
+decision_interface:
+  terminal_workflow: "terminal"
+  hermes_workflow: "feishu"
+  fallback: "yaml_config"
+```
+
+**效果：**
+- 配置结构保持一致（phase1/phase2/decision_interface都在top-level）
+- Phase 2处理被有效禁用（generate_report=false + wait_for_manual_decision=false）
+- L1/L2测试按single-phase策略执行，无Phase 2后处理
+
+**适用场景：**
+- 烟雾测试（L1）- 快速验证单个batch
+- Linear测试（L2）- 小规模验证，无需统计分析
+
 ---
 
 *设计文档完成时间: 2026-07-06*

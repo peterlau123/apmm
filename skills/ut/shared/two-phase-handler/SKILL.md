@@ -7,6 +7,16 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 
 # Two-phase Handler (Worker Agent v1.0)
 
+> **Infrastructure Dependency Note**
+>
+> This skill assumes existing batch-executor infrastructure from the UT workflow.
+> Phase 2 Stage 2 retry execution relies on:
+> - `skills/ut/unit-test-executor/scripts/execute_batch.py` - Batch execution script
+> - `skills/ut/unit-test-executor/scripts/update_manifest.py` - Manifest incremental update
+> - `manifest.json` schema defined in `skills/ut/shared/manifest_schema.json`
+>
+> Ensure these dependencies are available before invoking Stage 2.
+
 > **HARD CONTRACT — read first, before anything else in this file.**
 >
 > This 4-rule block is the **only** part of the SKILL the runtime treats as

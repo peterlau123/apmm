@@ -32,9 +32,12 @@ workflow:
   execution_strategy: "two-phase"  # "single-phase"（默认）或 "two-phase"
 
   # ============================================================
-  # ✍️：Two-phase策略专用配置
+  # ✍️：test_load配置（测试清单生成）
   # ============================================================
-  batch_group_size: 500  # Phase 1执行的batch总数（设计文档§10）
+  test_load:
+    count: 1000                 # 从manifest抽取的test数量（默认1000）
+    source: null                # manifest来源（null=使用collect产生的manifest）
+    output_dir: "{run_dir}"     # test_load清单输出目录
 
   # ============================================================
   # ✍️：测试标识

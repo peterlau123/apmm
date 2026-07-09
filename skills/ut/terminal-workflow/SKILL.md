@@ -206,6 +206,22 @@ systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md
 
 ---
 
+## Workflow-level Retry（整批重跑）
+
+当workflow停止后（完成/人工停止/错误超阈值），重新执行failed/error batches：
+
+**调用SKILL：** `two-phase-handler`
+- **Phase 2 Stage 1**: 统计分析失败batch
+- **Phase 2 Stage 2**: 执行重试（需人工决策）
+
+**触发条件：**
+- Workflow状态为 `stopped` 或 `completed` 且有failed/error tests
+- 用户请求"重跑失败的batch"
+
+**相关文档：** `skills/ut/shared/two-phase-handler/SKILL.md`
+
+---
+
 ## 硬性约束（不可违反）
 
 ### ⚠️ Agent 必须逐 stage 执行

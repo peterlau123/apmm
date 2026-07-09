@@ -683,6 +683,22 @@ monitor cron created for that run_id.
 
 ---
 
+## Workflow-level Retry（整批重跑）
+
+当workflow停止后（完成/人工停止/错误超阈值），重新执行failed/error batches：
+
+**调用SKILL：** `two-phase-handler`
+- **Phase 2 Stage 1**: 统计分析失败batch
+- **Phase 2 Stage 2**: 执行重试（需人工决策）
+
+**触发方式：**
+- 飞书命令："重跑失败的batch" / "retry failed"
+- Supervisor调用 `two-phase-handler` SKILL
+
+**相关文档：** `skills/ut/shared/two-phase-handler/SKILL.md`
+
+---
+
 ## 硬性约束（不可违反）
 
 ### ⚠️ Supervisor 必须逐 stage 调度

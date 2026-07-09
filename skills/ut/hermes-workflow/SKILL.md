@@ -687,6 +687,10 @@ monitor cron created for that run_id.
 
 当workflow停止后（完成/人工停止/错误超阈值），重新执行failed/error batches：
 
+**输入文件：**
+- `workflow_state.json` — batch执行状态
+- `test_load_xxx.json` — 测试清单（非manifest.json）
+
 **调用SKILL：** `two-phase-handler`
 - **Phase 2 Stage 1**: 统计分析失败batch
 - **Phase 2 Stage 2**: 执行重试（需人工决策）

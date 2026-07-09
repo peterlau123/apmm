@@ -7,6 +7,36 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 
 # UT Workflow Skill (v5 — linear supervisor channel)
 
+## Stage 1: test_load生成（新增）
+
+当workflow启动时（Stage 0环境选择完成后）：
+
+**AI行为：**
+1. 调用 `generate_test_load.py` 从manifest抽取指定数量test
+2. 生成 `test_load_{count}_{timestamp}.json` 清单文件
+3. 后续batch执行基于此清单（而非完整manifest）
+
+**优先级选择策略：**
+- pending → failed → error → passed → ignored
+- 确保优先选择未执行的test
+
+**相关脚本：**
+```bash
+python tasks/ut/scripts/generate_test_load.py \
+    --manifest-path runs/ut-{timestamp}/manifest.json \
+    --count 1000 \
+    --output-dir runs/ut-{timestamp}
+```
+
+**生成文件：**
+- `test_load_1000_20260709_123456.json` — 包含选中tests和statistics
+
+**状态更新：**
+- Batch完成时：`update_batch_state.py` 更新 `workflow_state.json` + `test_load.json`
+- 全部完成时：`update_manifest_from_test_load.py` 更新 `manifest.json`
+
+---
+
 ## Stage 0: 环境选择（新增）
 
 当用户触发"开始运行单元测试"：

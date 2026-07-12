@@ -289,6 +289,50 @@ def _run_py(args, cwd=None, timeout=120):
 
 # ── Shared: Init & Bastion ─────────────────────────────────────────────────────
 
+
+
+def _ensure_test_load(workflow_yaml_path, run_dir, state_path):
+    """Ensure test_load exists. Generate if missing.
+
+    Called after init_workflow_state.py (new run) or on resume (if test_load missing).
+    Reads test_load.count from workflow.yaml (default 1000).
+    """
+    state = _read_json(state_path)
+    test_load_path = state.get("paths", {}).get("test_load", "")
+
+    if test_load_path and Path(test_load_path).exists():
+        print(f"[hermes_runner] test_load exists: {test_load_path}")
+        return
+
+    # Read count from workflow.yaml
+    count = 1000
+    try:
+        cfg = yaml.safe_load(Path(workflow_yaml_path).read_text(encoding="utf-8"))
+        count = cfg.get("workflow", {}).get("test_load", {}).get("count", 1000)
+    except Exception:
+        pass
+
+    # Find manifest path from state
+    manifest_path = state.get("paths", {}).get("manifest", str(run_dir / "manifest.json"))
+
+    print(f"[hermes_runner] Generating test_load (count={count})...")
+    gtl_script = str(PROJECT_ROOT / "tasks" / "ut" / "scripts" / "generate_test_load.py")
+    rc, stdout, stderr = _run_py(
+        [gtl_script,
+         "--manifest-path", manifest_path,
+         "--count", str(count),
+         "--output-dir", str(run_dir),
+         "--workflow-state", str(state_path)],
+        timeout=60,
+    )
+    if rc != 0:
+        print(f"[hermes_runner] generate_test_load failed: {stderr}")
+        sys.exit(1)
+    try:
+        sys.stdout.write(stdout + "\n")
+    except UnicodeEncodeError:
+        sys.stdout.write(stdout.encode("ascii", errors="replace").decode("ascii") + "\n")
+
 def init_or_resume(workflow_yaml_path, resume_from):
     """Initialize a new run or resume from existing. Returns (run_dir, state_path, state, iteration)."""
     if resume_from:
@@ -296,13 +340,9 @@ def init_or_resume(workflow_yaml_path, resume_from):
         state_path = run_dir / "workflow_state.json"
         state = _read_json(state_path)
         iteration = state.get("iteration", 0)
-        # R1: Verify test_load exists on resume
-        test_load_path = state.get("paths", {}).get("test_load", "")
-        if test_load_path and not Path(test_load_path).exists():
-            print(f"[hermes_runner] WARNING: test_load not found: {test_load_path}")
-            print(f"[hermes_runner] Run generate_test_load.py before resuming the loop.")
-        elif not test_load_path:
-            print(f"[hermes_runner] WARNING: test_load path not set in workflow_state.json")
+        # Ensure test_load exists on resume (auto-generate if missing)
+        _ensure_test_load(workflow_yaml_path, run_dir, state_path)
+        state = _read_json(state_path)
         print(f"[hermes_runner] Resumed from {run_dir}, iteration={iteration}")
     else:
         init_script = str(SCRIPT_DIR / "init_workflow_state.py")
@@ -326,6 +366,11 @@ def init_or_resume(workflow_yaml_path, resume_from):
         state_path = run_dir / "workflow_state.json"
         state = _read_json(state_path)
         iteration = 0
+
+        # Auto-generate test_load after init (new run)
+        _ensure_test_load(workflow_yaml_path, run_dir, state_path)
+        # Reload state to get updated test_load path
+        state = _read_json(state_path)
 
     return run_dir, state_path, state, iteration
 

@@ -450,14 +450,30 @@ def phase1_batch_loop(
     manifest_path = Path(paths["manifest"])
     batches_dir = paths["run_dir"] / "batches"  # Batches parent directory
 
-    # R2: Verify test_load exists before entering batch loop
+    # Ensure test_load exists (auto-generate if missing)
     test_load_path = paths.get("test_load", "")
     if not test_load_path or not Path(test_load_path).exists():
-        print(f"[Phase 1] ERROR: test_load not found. Path: {test_load_path}")
-        print(f"[Phase 1] Run generate_test_load.py first:")
-        print(f"  python tasks/ut/scripts/generate_test_load.py --manifest-path {manifest_path} --count <N> --output-dir {paths['run_dir']} --workflow-state {workflow_state_path}")
-        sys.exit(1)
-    print(f"[Phase 1] Using test_load: {test_load_path}")
+        print(f"[Phase 1] test_load not found, generating...")
+        # Read count from workflow.yaml
+        tl_count = config.get("workflow", {}).get("test_load", {}).get("count", 1000)
+        gtl_cmd = [
+            sys.executable,
+            str(_project_root / "tasks" / "ut" / "scripts" / "generate_test_load.py"),
+            "--manifest-path", str(manifest_path),
+            "--count", str(tl_count),
+            "--output-dir", str(paths["run_dir"]),
+            "--workflow-state", str(workflow_state_path),
+        ]
+        gtl_result = subprocess.run(gtl_cmd, capture_output=True, text=True)
+        if gtl_result.returncode != 0:
+            print(f"[Phase 1] generate_test_load failed: {gtl_result.stderr}")
+            sys.exit(1)
+        print(gtl_result.stdout)
+        # Reload paths
+        paths = get_paths(workflow_state_path)
+        test_load_path = paths.get("test_load", "")
+    else:
+        print(f"[Phase 1] Using test_load: {test_load_path}")
 
     # Get batch_size from workflow.yaml
     batch_size = config.get("config", {}).get("batch_size", 8)

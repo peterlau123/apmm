@@ -15,9 +15,15 @@ update_manifest_from_test_load.py - test_load完成后一次性更新manifest.js
 
 import argparse
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
-from collections import defaultdict
+
+_project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
+from skills.ut.manifest_updater.scripts.update_status import calculate_statistics
 
 
 def update_manifest_from_test_load(manifest_path: Path, test_load_path: Path):
@@ -68,11 +74,12 @@ def update_manifest_from_test_load(manifest_path: Path, test_load_path: Path):
             # 更新状态
             manifest_tests[test_node]["status"] = test_load_test.get("status", "pending")
 
-            # 更新其他字段
-            if "error_type" in test_load_test:
-                manifest_tests[test_node]["error_type"] = test_load_test["error_type"]
-            if "error_message" in test_load_test:
-                manifest_tests[test_node]["error_message"] = test_load_test["error_message"]
+            # Copy v5 merge fields (retry_count, ignore_reason, etc.)
+            for field in ("retry_count", "ignore_reason", "error_type", "error_message",
+                          "last_batch_id", "commit", "errors", "failures",
+                          "duration_ms", "exit_code", "log_file", "run_at"):
+                if field in test_load_test:
+                    manifest_tests[test_node][field] = test_load_test[field]
 
             # 记录batch执行历史
             if "batch_id" in test_load_test:
@@ -86,14 +93,8 @@ def update_manifest_from_test_load(manifest_path: Path, test_load_path: Path):
 
             updated_count += 1
 
-    # 重新计算statistics
-    stats = defaultdict(int)
-    for test in manifest["tests"]:
-        status = test.get("status", "pending")
-        stats[status] += 1
-
-    manifest["statistics"] = dict(stats)
-    manifest["statistics"]["total"] = len(manifest["tests"])
+    # Recalculate statistics using shared function
+    manifest["statistics"] = calculate_statistics(manifest["tests"])
 
     # 更新时间戳
     manifest["generated_at"] = datetime.now().isoformat()

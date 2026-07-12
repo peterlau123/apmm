@@ -1,181 +1,136 @@
 #!/usr/bin/env python3
 """
-update_batch_state.py - Batch完成时更新workflow_state.json和test_load.json
+update_batch_state.py - Batch完成后更新test_load和workflow_state
 
-新逻辑：
-- Batch完成时调用此脚本
-- 更新workflow_state.json（batch状态和统计）
-- 更新test_load_xxx.json（test状态和统计）
+数据流架构:
+  - test_load = 工作数据集（运行期间活跃读写）
+  - manifest.json = 主记录（仅由 update_manifest_from_test_load.py 在全部完成后回写）
+  - workflow_state.json = 运行状态
 
-用法：
-    python update_batch_state.py \\
-        --workflow-state runs/ut-20260708/workflow_state.json \\
-        --test-load runs/ut-20260708/test_load_1000_20260708_123456.json \\
-        --batch-id batch_20260708_130000 \\
+本脚本在每个batch完成后调用:
+  1. 读取 batch_results.json + handled_tests.json
+  2. 对 test_load 应用 v5 merge（retry_count, retriable_error->ignored, handled overrides）
+  3. 更新 workflow_state.json 的 batch 状态为 completed
+
+用法:
+    python update_batch_state.py \
+        --workflow-state runs/ut-20260708/workflow_state.json \
+        --batch-id batch_20260708_130000 \
         --batch-results runs/ut-20260708/batches/batch_20260708_130000/batch_results.json
 """
 
+import os
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
+
 import argparse
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
-from collections import defaultdict
+
+_project_root = Path(__file__).resolve().parent.parent.parent
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
+# NOTE: This imports from manifest-updater (higher-level module) to reuse
+# the v5 merge logic. This is an intentional upward dependency -- the
+# alternative (duplicating merge_batch_results) would violate DRY.
+from skills.ut.manifest_updater.scripts.update_status import merge_batch_results
 
 
-def update_workflow_state(workflow_state_path: Path, batch_id: str, batch_results: dict):
-    """更新workflow_state.json
-
-    Args:
-        workflow_state_path: workflow_state.json路径
-        batch_id: batch ID
-        batch_results: batch_results.json内容
-
-    Raises:
-        ValueError: 如果JSON解析失败
-    """
-    try:
-        state = json.loads(workflow_state_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON in workflow_state: {workflow_state_path}\n{e}")
-
-    # 更新batch状态
-    if batch_id in state.get("batches", {}):
-        state["batches"][batch_id]["status"] = "completed"
-        state["batches"][batch_id]["completed_at"] = datetime.now().isoformat()
-
-        # 更新batch统计
-        stats = batch_results.get("stats", {})
-        state["batches"][batch_id]["stats"] = stats
-
-    # 重新计算batch_stats
-    batch_stats = {"generated": 0, "running": 0, "completed": 0, "failed": 0}
-    for bid, binfo in state.get("batches", {}).items():
-        status = binfo.get("status", "generated")
-        if status in batch_stats:
-            batch_stats[status] += 1
-
-    state["batch_stats"] = batch_stats
-
-    # 更新test_stats
-    test_stats = state.get("test_stats", {})
-    for key in ["passed", "failed", "error", "ignored"]:
-        if key not in test_stats:
-            test_stats[key] = 0
-
-    # 从batch_results累加
-    batch_stats_result = batch_results.get("stats", {})
-    test_stats["passed"] += batch_stats_result.get("passed", 0)
-    test_stats["failed"] += batch_stats_result.get("failed", 0)
-    test_stats["error"] += batch_stats_result.get("error", 0)
-    test_stats["ignored"] += batch_stats_result.get("ignored", 0)
-
-    state["test_stats"] = test_stats
-
-    # 更新时间戳
-    state["last_update"] = datetime.now().isoformat()
-
-    # 写回
-    workflow_state_path.write_text(
-        json.dumps(state, indent=2, ensure_ascii=False),
-        encoding="utf-8"
-    )
-
-    print(f"[OK] workflow_state.json已更新")
-    print(f"     batch {batch_id}: completed")
-    print(f"     batch_stats: {batch_stats}")
-
-
-def update_test_load(test_load_path: Path, batch_results: dict):
-    """更新test_load_xxx.json
+def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: dict) -> int:
+    """对test_load应用v5 merge
 
     Args:
         test_load_path: test_load_xxx.json路径
         batch_results: batch_results.json内容
+        handled_tests: handled_tests.json内容
 
-    Raises:
-        ValueError: 如果JSON解析失败
+    Returns:
+        更新的test数量
     """
-    try:
-        test_load = json.loads(test_load_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON in test_load: {test_load_path}\n{e}")
+    test_load = json.loads(test_load_path.read_text(encoding='utf-8'))
 
-    # 更新test状态
-    batch_id = batch_results.get("batch_id", "unknown")
-    for result_test in batch_results.get("tests", []):
-        test_node = result_test.get("test_node")
+    # v5 merge: batch_results first, then handled_tests overrides
+    updated_count = merge_batch_results(test_load, batch_results, handled_tests)
 
-        # 查找对应test
-        for test in test_load["tests"]:
-            if test.get("test_node") == test_node:
-                test["status"] = result_test.get("status", "pending")
-                test["executed_at"] = datetime.now().isoformat()
-                test["batch_id"] = batch_id
-
-                if "error_type" in result_test:
-                    test["error_type"] = result_test["error_type"]
-                if "error_message" in result_test:
-                    test["error_message"] = result_test["error_message"]
-                break
-
-    # 重新计算statistics
-    stats = defaultdict(int)
-    for test in test_load["tests"]:
-        status = test.get("status", "pending")
-        stats[status] += 1
-
-    test_load["statistics"] = dict(stats)
+    # 更新时间戳
+    test_load['updated_at'] = datetime.now().isoformat()
 
     # 写回
     test_load_path.write_text(
         json.dumps(test_load, indent=2, ensure_ascii=False),
-        encoding="utf-8"
+        encoding='utf-8'
     )
 
-    print(f"[OK] test_load.json已更新")
-    print(f"     statistics: {test_load['statistics']}")
+    stats = test_load.get('statistics', {})
+    print(f'[OK] test_load updated: {updated_count} tests')
+    print(f'     statistics: {stats}')
+    return updated_count
+
+
+def update_workflow_state(workflow_state_path: Path, batch_id: str, batch_results: dict):
+    """更新workflow_state.json的batch状态为completed"""
+    state = json.loads(workflow_state_path.read_text(encoding='utf-8'))
+
+    if batch_id in state.get('batches', {}):
+        state['batches'][batch_id]['status'] = 'completed'
+        state['batches'][batch_id]['completed_at'] = datetime.now().isoformat()
+        state['batches'][batch_id]['stats'] = batch_results.get('stats', {})
+
+    # 重新计算batch_stats
+    batch_stats = {'generated': 0, 'running': 0, 'completed': 0, 'failed': 0}
+    for bid, binfo in state.get('batches', {}).items():
+        status = binfo.get('status', 'generated')
+        batch_stats[status] = batch_stats.get(status, 0) + 1
+    state['batch_stats'] = batch_stats
+
+    state['last_update'] = datetime.now().isoformat()
+    workflow_state_path.write_text(
+        json.dumps(state, indent=2, ensure_ascii=False),
+        encoding='utf-8'
+    )
+    print(f'[OK] workflow_state updated: batch {batch_id} -> completed')
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Batch完成后更新状态")
-    parser.add_argument(
-        "--workflow-state",
-        required=True,
-        help="workflow_state.json路径"
-    )
-    parser.add_argument(
-        "--test-load",
-        required=True,
-        help="test_load_xxx.json路径"
-    )
-    parser.add_argument(
-        "--batch-id",
-        required=True,
-        help="batch ID"
-    )
-    parser.add_argument(
-        "--batch-results",
-        required=True,
-        help="batch_results.json路径"
-    )
+    parser = argparse.ArgumentParser(description='Batch完成后更新test_load和workflow_state')
+    parser.add_argument('--workflow-state', required=True, help='workflow_state.json路径')
+    parser.add_argument('--batch-id', required=True, help='batch ID')
+    parser.add_argument('--batch-results', required=True, help='batch_results.json路径')
+    parser.add_argument('--handled-tests', help='handled_tests.json路径（可选）')
 
     args = parser.parse_args()
 
-    # 读取batch_results（添加JSON错误处理）
-    batch_results_path = Path(args.batch_results)
-    try:
-        batch_results = json.loads(batch_results_path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON in batch_results: {batch_results_path}\n{e}")
-
-    # 更新workflow_state.json
     workflow_state_path = Path(args.workflow_state)
+    state = json.loads(workflow_state_path.read_text(encoding='utf-8'))
+    paths = state.get('paths', {})
+
+    # 读取batch_results
+    batch_results = json.loads(Path(args.batch_results).read_text(encoding='utf-8'))
+
+    # 读取handled_tests（如果存在）
+    handled_tests = {'tests': []}
+    if args.handled_tests:
+        ht_path = Path(args.handled_tests)
+    else:
+        # 从batch_dir推断
+        batch_dir = Path(args.batch_results).parent
+        ht_path = batch_dir / 'handled_tests.json'
+    if ht_path.exists():
+        handled_tests = json.loads(ht_path.read_text(encoding='utf-8'))
+
+    # 1. 更新test_load
+    test_load_path = paths.get('test_load', '')
+    if test_load_path and Path(test_load_path).exists():
+        update_test_load(Path(test_load_path), batch_results, handled_tests)
+    else:
+        print('[WARN] test_load path not found in workflow_state, skipping test_load update')
+
+    # 2. 更新workflow_state
     update_workflow_state(workflow_state_path, args.batch_id, batch_results)
 
-    # 更新test_load.json
-    test_load_path = Path(args.test_load)
-    update_test_load(test_load_path, batch_results)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

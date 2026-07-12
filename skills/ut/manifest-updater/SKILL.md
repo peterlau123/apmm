@@ -170,9 +170,10 @@ After all merges, recompute `manifest["statistics"]` by counting tests per statu
 ### Reference
 
 ```python
-from update_manifest import update_manifest
+from update_status import update_from_workflow_state, merge_batch_results
 
-manifest = update_manifest(manifest, batch_results, handled_tests)
+# update_status.py is the canonical writer
+# result = update_from_workflow_state(workflow_state_path)
 ```
 
 ---
@@ -415,6 +416,5 @@ return {
 ---
 
 *创建日期: 2026-06-09*
-*更新日期: 2026-06-13*
-*版本: 3.2.0*
-*版本: 3.0.0*
+*更新日期: 2026-07-12*
+*版本: 3.3.0*

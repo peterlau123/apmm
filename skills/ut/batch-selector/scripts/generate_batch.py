@@ -290,11 +290,13 @@ def generate_batch_from_workflow_state(
     state = load_workflow_state(workflow_state_path)
     paths = state.get("paths", {})
 
-    manifest_path = Path(paths.get("manifest", ""))
-
-    if not manifest_path:
-        print(json.dumps({"error": "manifest path not found in workflow_state.json"}, indent=2))
+    # test_load is the working dataset -- must exist, no fallback to manifest
+    test_load_path = paths.get("test_load", "")
+    if not test_load_path or not Path(test_load_path).exists():
+        print(json.dumps({"error": "test_load path not found in workflow_state.json. Run generate_test_load.py first."}, indent=2))
         sys.exit(1)
+    data_source_path = Path(test_load_path)
+    print(f"[INFO] Reading from test_load: {data_source_path}")
 
     # 如果未指定 batch_dir，从 batches_dir 构建
     if batch_dir is None:
@@ -303,7 +305,7 @@ def generate_batch_from_workflow_state(
             batch_dir = Path(batches_dir)
 
     return generate_batch(
-        manifest_path=manifest_path,
+        manifest_path=data_source_path,
         batch_dir=batch_dir,
         batch_size=batch_size,
         skip_distributed=skip_distributed,

@@ -7,64 +7,67 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 
 # UT Workflow Skill (v5 — linear supervisor channel)
 
-## Stage 1: test_load生成（新增）
+## Data Flow: test_load = working dataset, manifest = master record
 
-当workflow启动时（Stage 0环境选择完成后）：
+test_load_xxx.json is the **working dataset** for the current run. All stages
+(2-5) read and write test_load during the loop. manifest.json is the **master
+record**, updated only once when test_load is fully processed (pending == 0).
 
-**AI行为：**
-1. 调用 `generate_test_load.py` 从manifest抽取指定数量test
-2. 生成 `test_load_{count}_{timestamp}.json` 清单文件
-3. 后续batch执行基于此清单（而非完整manifest）
+This avoids polluting manifest.json with intermediate failure states and
+keeps statistics stable until the run completes.
 
-**优先级选择策略：**
-- pending → failed → error → passed → ignored
-- 确保优先选择未执行的test
+### Stage 1: test_load generation
 
-**相关脚本：**
+When workflow starts (after Stage 0 environment selection):
+
+1. Call generate_test_load.py to extract a subset from manifest
+2. Generates test_load_{count}_{timestamp}.json
+3. Updates workflow_state.json with the test_load path
+4. All subsequent stages operate on test_load
+
 ```bash
 python tasks/ut/scripts/generate_test_load.py \
     --manifest-path runs/ut-{timestamp}/manifest.json \
     --count 1000 \
-    --output-dir runs/ut-{timestamp}
+    --output-dir runs/ut-{timestamp} \
+    --workflow-state runs/ut-{timestamp}/workflow_state.json
 ```
 
-**生成文件：**
-- `test_load_1000_20260709_123456.json` — 包含选中tests和statistics
+### State updates during the loop
 
-**状态更新：**
-- Batch完成时：`update_batch_state.py` 更新 `workflow_state.json` + `test_load.json`
-- 全部完成时：`update_manifest_from_test_load.py` 更新 `manifest.json`
+- **Per-batch**: update_batch_state.py updates test_load (v5 merge: retry_count,
+  retriable_error->ignored, handled_tests overrides) + workflow_state.json
+  (batch status -> completed).
+- **Post-loop**: update_manifest_from_test_load.py syncs test_load -> manifest.json
+  (requires pending == 0 in test_load).
 
----
+### Retry / Resume
 
-## Stage 0: 环境选择（新增）
+- Input: workflow_state.json + test_load_xxx.json (NOT manifest.json)
+- Phase 2 operates within test_load scope
 
-当用户触发"开始运行单元测试"：
+## Startup Flow
 
-**AI行为：**
-1. 提示用户选择运行环境：
-   - 测试环境（l1~l4）
-   - 生产环境
-2. 等待用户确认
-3. 根据确认调用load_deployment_config
-4. 复制模板到runs/ut-{timestamp}/workflow.yaml
+### Step 1: Parameter Confirmation
 
-**相关文档：**
-- tasks/ut/docs/designs/2026-06-29-ut-workflow-config-management-and-merge-batch-design.md
+When user triggers workflow (e.g. "开始运行单元测试" / "跑 ut workflow"):
 
-> Channel: OpenCode / Claude Code, **linear mode** (one supervisor session
-> drives Stages 2–5 in-process).
-> For production / unattended / multi-worker runs, use the `hermes-workflow`
-> channel (Plan 2: Hermes Agent + Kanban + 3 Worker profiles).
->
-> Design spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
+**AI behavior:**
+1. Determine environment (test l1-l4 / production) from user's message
+2. Load corresponding workflow.yaml template
+3. Show current config, ask user to confirm or modify:
 
-This SKILL is one of two channels that share the same loop body
-(`skills/ut/workflow-loop-core/SKILL.md`). It supplies the channel-specific
-callbacks; it does NOT re-implement the loop.
+| Parameter | yaml key | Default | Description |
+|-----------|----------|---------|-------------|
+| manifest 位置 | input_filter.test_list_path | (from yaml) | test_list.txt 原始路径 |
+| 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
+| test_load 数量 | workflow.test_load.count | 1000 | 从 manifest 抽取的 test 数 |
+| batch_size | config.batch_size | 8 | 每批测试数量 |
+| max_retry | config.max_retry_per_test | 3 | 单测试最大重试次数 |
+| resume | config.resume_from | null | 留空=新建, 填路径=续跑 |
 
-> 两个通道的对照、触发与环境总览见
-> `tasks/ut/docs/guides/ut-channels-overview.md`。
+4. User confirms ("确认") or modifies ("改 batch_size=16")
+5. Apply modifications to the run's workflow.yaml copy
 
 ## Trigger flow (this channel)
 
@@ -107,37 +110,67 @@ sequenceDiagram
 
 ---
 
-## Startup (Agent runs these in order, once)
+## Startup (Steps 2-6, after parameter confirmation)
 
-1. **Load SKILLs (once per session):**
-   - this SKILL (`skills/ut/terminal-workflow/SKILL.md`)
-   - `skills/ut/workflow-loop-core/SKILL.md`
-   - the 4 Worker SKILLs:
-     - `skills/ut/batch-selector/SKILL.md`
-     - `skills/ut/unit-test-executor/SKILL.md`
-     - `skills/ut/failure-handler/SKILL.md`
-     - `skills/ut/manifest-updater/SKILL.md`
+### Step 2: Init
 
-2. **Read config:** 从Stage 0选择的环境加载配置模板
-   - Production: `tasks/ut/deployment/production/config/workflow.yaml`
-   - Test: `tests/ut/integration/fixtures/workflow.l{level}.yaml`
-   - 复制到 `runs/ut-{timestamp}/workflow.yaml`（运行副本）
-   Validate with `hermes_runner.validate_required_config(cfg, channel="linear")`.
+For new run:
+```bash
+python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
+    --workflow-yaml runs/ut-{timestamp}/workflow.yaml \
+    --test-list <confirmed_test_list_path>
+```
+Creates run_dir, manifest.json (from test_list), workflow_state.json.
 
-3. **Init or resume the run:**
-   - New run → `hermes_runner._init_or_resume(workflow_yaml, None)`
-   - Resume → `hermes_runner._init_or_resume(workflow_yaml, resume_from)`
-   Both return `(run_dir, state_path, state, iteration)`.
+For resume (resume_from is set): skip init, use existing run_dir.
 
-4. **Verify bastion ping** (single, blocking probe — no daemon spawn):
-   - `hermes_runner._setup_bastion(...)` performs `ensure_connected`.
-   - If unreachable, surface the failure to the user and stop. Do NOT
-     enter the loop.
+### Step 3: Generate test_load
 
-5. **Enter the loop:** call `loop_core.run(...)` with the callbacks
-   defined below.
+For new run (skip if resuming and test_load already exists):
+```bash
+python tasks/ut/scripts/generate_test_load.py \
+    --manifest-path <run_dir>/manifest.json \
+    --count <confirmed_count> \
+    --output-dir <run_dir> \
+    --workflow-state <run_dir>/workflow_state.json
+```
+Creates test_load_{count}_{timestamp}.json and updates workflow_state.json
+with the test_load path. All subsequent stages read from test_load.
 
----
+### Step 4: Bastion Check
+
+hermes_runner._setup_bastion(...) performs ensure_connected.
+If unreachable, surface failure to user and stop. Do NOT enter the loop.
+
+### Step 5: Strategy Branch
+
+Based on execution_strategy from confirmed config:
+
+- **single-phase**: Enter loop_core.run() with the 4 Worker SKILLs:
+  - Stage 2: generate_batch.py reads test_load, selects batch
+  - Stage 3: execute_batch.py runs remote pytest
+  - Stage 4: failure-handler produces handled_tests.json
+  - Stage 4.5: update_batch_state.py applies v5 merge to test_load
+  - Repeat until test_load pending == 0
+
+- **two-phase**: Call auto_run_batches_two_phase.py:
+```bash
+python tasks/ut/scripts/auto_run_batches_two_phase.py \
+    --workflow-yaml runs/ut-{timestamp}/workflow.yaml \
+    --run-dir <run_dir>
+```
+Phase 1 completes, then invoke two-phase-handler SKILL for Phase 2
+(statistical analysis + human decision + retry).
+
+### Step 6: Post-loop (sync test_load to manifest)
+
+When test_load pending == 0:
+```bash
+python skills/ut/manifest-updater/scripts/update_manifest_from_test_load.py \
+    --manifest-path <run_dir>/manifest.json \
+    --test-load-path <run_dir>/test_load_xxx.json
+```
+Syncs test_load results back to manifest.json (master record).
 
 ## Channel callbacks (passed to `loop_core.run`)
 
@@ -212,7 +245,7 @@ systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md
 
 **输入文件：**
 - `workflow_state.json` — batch执行状态
-- `test_load_xxx.json` — 测试清单（非manifest.json）
+- 	est_load_xxx.json - 测试清单（工作数据集，非manifest.json）
 
 **调用SKILL：** `two-phase-handler`
 - **Phase 2 Stage 1**: 统计分析失败batch

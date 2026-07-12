@@ -198,29 +198,32 @@ def validate_batch_results(
     return batch_results_path
 
 
-def update_manifest_incremental(
+def update_batch_state(
     batch_id: str,
     batch_results_path: Path,
-    manifest_path: Path,
-    handled_tests_path: Optional[Path] = None,
+    workflow_state_path: Path,
 ) -> None:
-    """Stage 4: Incremental manifest update
+    """Stage 4.5: Update test_load + workflow_state via update_batch_state.py
+
+    Uses update_batch_state.py which:
+    1. Reads batch_results.json + handled_tests.json from batch_dir
+    2. Applies v5 merge to test_load (retry_count, retriable_error->ignored, handled overrides)
+    3. Updates workflow_state.json batch status to completed
 
     Args:
         batch_id: Batch identifier
         batch_results_path: Path to batch_results.json
-        manifest_path: Path to manifest.json
-        handled_tests_path: Path to handled_tests.json (optional)
+        workflow_state_path: Path to workflow_state.json
 
     Raises:
         subprocess.CalledProcessError: If update fails
     """
-    # Use update_manifest.py with --batch to merge batch_results.json
     cmd = [
         sys.executable,
-        str(_project_root / "skills/ut/manifest-updater/scripts/update_manifest.py"),
-        "--manifest-path", str(manifest_path),
-        "--batch", str(batch_results_path),
+        str(_project_root / "skills/ut/shared/update_batch_state.py"),
+        "--workflow-state", str(workflow_state_path),
+        "--batch-id", batch_id,
+        "--batch-results", str(batch_results_path),
     ]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -231,35 +234,23 @@ def update_manifest_incremental(
         )
 
 
-def verify_manifest_updated(batch_id: str, manifest_path: Path) -> bool:
-    """Checkpoint 4: Verify manifest was updated for batch
+def verify_batch_updated(batch_id: str, workflow_state_path: Path) -> bool:
+    """Checkpoint 4: Verify test_load was updated for batch
 
-    Args:
-        batch_id: Batch identifier
-        manifest_path: Path to manifest.json
-
-    Returns:
-        True if batch_id found in manifest tests with updated status (non-pending)
-
-    Note:
-        This verification ensures tests have actual execution results,
-        not just stale batch_id entries from previous failed attempts.
+    Reads test_load path from workflow_state.json, then checks if any test
+    has this batch_id with updated status (non-pending).
     """
-    if not manifest_path.exists():
-        return False
-
     try:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-
-        # Check if any test has this batch_id with updated status
-        tests = manifest.get("tests", [])
-        for test in tests:
-            if test.get("last_batch_id") == batch_id or test.get("batch_id") == batch_id:
-                # ✅ Verify status was updated (not stale 'pending')
-                status = test.get("status", "")
-                if status != "pending":
+        state = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+        paths = state.get("paths", {})
+        test_load_path = paths.get("test_load", "")
+        if not test_load_path or not Path(test_load_path).exists():
+            return False
+        test_load = json.loads(Path(test_load_path).read_text(encoding="utf-8"))
+        for test in test_load.get("tests", []):
+            if test.get("last_batch_id") == batch_id:
+                if test.get("status", "pending") != "pending":
                     return True
-
         return False
     except (json.JSONDecodeError, Exception):
         return False
@@ -457,7 +448,7 @@ def phase1_batch_loop(
     paths = get_paths(workflow_state_path)
 
     manifest_path = Path(paths["manifest"])
-    batches_dir = Path(paths["batches"])  # Parent dir of all batches
+    batches_dir = paths["run_dir"] / "batches"  # Batches parent directory
 
     # Get batch_size from workflow.yaml
     batch_size = config.get("config", {}).get("batch_size", 8)
@@ -523,15 +514,14 @@ def phase1_batch_loop(
                 assert result_path.exists(), f"[STOP] 结果文件未生成: {result_path}"
                 print(f"  ✓ Checkpoint 3: Results collected")
 
-            # Stage 4: Manifest增量更新
-            print(f"  [Stage 4] Updating manifest...")
-            handled_tests_path = batch_dir / "handled_tests.json"
-            update_manifest_incremental(batch_id, result_path, manifest_path, handled_tests_path)
+            # Stage 4.5: test_load update增量更新
+            print(f"  [Stage 4.5] Updating test_load...")
+            update_batch_state(batch_id, result_path, workflow_state_path)
 
-            # ✅ 检查点4: Manifest更新验证
+            # ✅ 检查点4: test_load更新验证
             if enable_force_checkpoints:
-                assert verify_manifest_updated(batch_id, manifest_path), f"[STOP] Manifest未更新: {batch_id}"
-                print(f"  ✓ Checkpoint 4: Manifest updated")
+                assert verify_batch_updated(batch_id, workflow_state_path), f"[STOP] test_load未更新: {batch_id}"
+                print(f"  ✓ Checkpoint 4: test_load updated")
 
             checkpoint_log.append({
                 "batch_id": batch_id,

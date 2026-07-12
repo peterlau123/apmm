@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# IMPORTANT: This script creates a test_load working dataset from manifest.json.
+# test_load is the active read/write target during the run; manifest.json is
+# the master record, updated only at the end via update_manifest_from_test_load.py.
 """generate_test_load.py - 从manifest中抽取指定数量的test生成test_load清单
 
 用途：
@@ -114,6 +117,27 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
     return output_path
 
 
+
+def update_workflow_state_test_load(workflow_state_path: Path, test_load_path: Path):
+    """Update workflow_state.json with the test_load path.
+
+    This allows generate_batch.py and update_batch_state.py to find the
+    test_load file from workflow_state.
+    """
+    if not workflow_state_path or not workflow_state_path.exists():
+        return
+    state = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+    if "paths" not in state:
+        state["paths"] = {}
+    state["paths"]["test_load"] = str(test_load_path)
+    state["last_update"] = datetime.now().isoformat()
+    workflow_state_path.write_text(
+        json.dumps(state, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
+    print(f"[OK] workflow_state.json updated with test_load path: {test_load_path}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="生成test_load清单")
     parser.add_argument(
@@ -132,6 +156,10 @@ def main():
         required=True,
         help="输出目录"
     )
+    parser.add_argument(
+        "--workflow-state",
+        help="workflow_state.json路径（可选，自动更新test_load路径）"
+    )
 
     args = parser.parse_args()
 
@@ -139,6 +167,10 @@ def main():
     output_dir = Path(args.output_dir)
 
     test_load_path = generate_test_load(manifest_path, args.count, output_dir)
+
+    # 更新workflow_state.json中的test_load路径
+    if args.workflow_state:
+        update_workflow_state_test_load(Path(args.workflow_state), test_load_path)
 
     # 输出路径供后续脚本使用
     print(f"\nTEST_LOAD_PATH={test_load_path}")

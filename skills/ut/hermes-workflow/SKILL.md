@@ -39,92 +39,66 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 >    leak into runs/ paths and break catch-up logic — use
 >    `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
 
-## Stage 1: test_load生成（新增）
+## Data Flow: test_load = working dataset, manifest = master record
 
-当workflow启动时（Stage 0飞书环境选择确认后）：
+test_load_xxx.json is the **working dataset** for the current run. All stages
+(2-5) read and write test_load during the loop. manifest.json is the **master
+record**, updated only once when test_load is fully processed (pending == 0).
 
-**AI行为：**
-1. 调用 `generate_test_load.py` 从manifest抽取指定数量test
-2. 生成 `test_load_{count}_{timestamp}.json` 清单文件
-3. 后续batch执行基于此清单（而非完整manifest）
+This avoids polluting manifest.json with intermediate failure states and
+keeps statistics stable until the run completes.
 
-**优先级选择策略：**
-- pending → failed → error → passed → ignored
-- 确保优先选择未执行的test
+### Stage 1: test_load generation
 
-**相关脚本：**
+When workflow starts (after Stage 0 environment selection):
+
+1. Call generate_test_load.py to extract a subset from manifest
+2. Generates test_load_{count}_{timestamp}.json
+3. Updates workflow_state.json with the test_load path
+4. All subsequent stages operate on test_load
+
 ```bash
 python tasks/ut/scripts/generate_test_load.py \
     --manifest-path runs/ut-{timestamp}/manifest.json \
     --count 1000 \
-    --output-dir runs/ut-{timestamp}
+    --output-dir runs/ut-{timestamp} \
+    --workflow-state runs/ut-{timestamp}/workflow_state.json
 ```
 
-**生成文件：**
-- `test_load_1000_20260709_123456.json` — 包含选中tests和statistics
+### State updates during the loop
 
-**状态更新时机：**
-- **Batch完成时**：`update_batch_state.py` 更新 `workflow_state.json` + `test_load.json`
-- **全部完成时**：`update_manifest_from_test_load.py` 更新 `manifest.json`（需pending==0）
+- **Per-batch**: update_batch_state.py updates test_load (v5 merge: retry_count,
+  retriable_error->ignored, handled_tests overrides) + workflow_state.json
+  (batch status -> completed).
+- **Post-loop**: update_manifest_from_test_load.py syncs test_load -> manifest.json
+  (requires pending == 0 in test_load).
 
-**Resume/Retry输入文件：**
-- `workflow_state.json` + `test_load_xxx.json`
-- **非** `manifest.json`（确保操作的是当前执行范围）
+### Retry / Resume
 
----
+- Input: workflow_state.json + test_load_xxx.json (NOT manifest.json)
+- Phase 2 operates within test_load scope
 
-## Stage 0: 飞书命令解析 - 环境选择（新增）
+## Stage 0: Parameter Confirmation via Feishu
 
-当用户通过飞书发起"单元测试"或"/ut start"时：
+When user sends a trigger message ("跑L4" / "跑 ut workflow" / "正式生产"):
 
-**环境选择流程：**
+**AI behavior:**
+1. Classify intent (hermes_runner Layer 1 regex -> Layer 2 LLM)
+2. Determine environment from intent (tier l1-l4 / production)
+3. Load corresponding workflow.yaml template
+4. Send Feishu parameter confirmation card (editable):
 
-```
-1. 用户飞书触发 → ut-supervisor Agent 收到
-2. AI解析意图，识别为UT workflow触发
-3. 飞书回复提示用户选择环境：
-   ```
-   请选择运行环境：
-   - 测试环境（l1~l4）— 快速验证
-   - 生产环境 — 全量测试
-   请回复："测试环境l1" 或 "生产环境"
-   ```
-4. 等待用户飞书回复确认环境
-5. 根据回复调用load_deployment_config：
-   - 飞书回复："生产环境" → load_deployment_config("production")
-     → 从 tasks/ut/deployment/production/config/workflow.yaml 加载
-   - 飞书回复："测试环境l2" → load_deployment_config("test", level=2)
-     → 从 tests/ut/integration/fixtures/workflow.l2.yaml 加载
-6. 复制模板到 runs/ut-{timestamp}/workflow.yaml（运行副本）
-7. 后续流程同terminal触发（引导参数确认 → 创建run目录）
-```
+| Parameter | yaml key | Default | Description |
+|-----------|----------|---------|-------------|
+| manifest 位置 | input_filter.test_list_path | (from yaml) | test_list.txt 路径 |
+| 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
+| test_load 数量 | workflow.test_load.count | 1000 | 从 manifest 抽取的 test 数 |
+| batch_size | config.batch_size | 8 | 每批测试数量 |
+| max_retry | config.max_retry_per_test | 3 | 单测试最大重试次数 |
+| resume | config.resume_from | null | 留空=新建, 填路径=续跑 |
 
-**配置路径：**
-- Production: `tasks/ut/deployment/production/config/workflow.yaml`
-- Test: `tests/ut/integration/fixtures/workflow.l{level}.yaml`
-- Runtime: `runs/ut-{timestamp}/workflow.yaml`
-
-**关键约束：**
-- 飞书交互必须等待回复（异步消息处理）
-- 环境选择通过飞书消息传递
-- 与terminal触发使用相同的load_deployment_config逻辑
-
-**相关文档：**
-- tasks/ut/docs/designs/2026-06-29-ut-workflow-config-management-and-merge-batch-design.md
-
-> Hermes-channel supervisor for the dual-channel UT workflow.
-> Spec: `tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
-
-This skill is the **生产运行通道 (production channel)** counterpart of
-`ut/workflow`. Both drive the same `workflow-loop-core`; this skill supplies
-the Hermes-specific callbacks: Feishu 双向消息, automatic Bastion recovery,
-and the full workflow state machine.
-
-The loop body lives in `workflow-loop-core` — this skill does **not**
-re-implement stage cadence. It implements the channel-difference layer.
-
-> 两个通道的对照、触发与**环境搭建步骤**（飞书 bot / bastion / 4 gateway）见
-> `tasks/ut/docs/guides/ut-channels-overview.md`。
+5. User replies "确认" or "改 KEY=VALUE" (10s timeout for tier, 5min for legacy)
+6. Apply modifications to run's workflow.yaml copy
 
 ## Trigger flow + environment topology
 
@@ -257,57 +231,51 @@ intent recognizer.
 4. 按 §3.A（tier / production 一键触发）或 §3.B（自由参数确认卡）继续
 ```
 
-### §3.A — Tier / production 启动确认分支（v5 新增）
+### §3.A - Unified Startup Sequence
 
-`classify_intent_llm` 输出 `start_l1` / `start_l2` / `start_l3` / `start_l4` /
-`start_production` 时走此路径。yaml 路径已由 tier 决定，**不再展示自由参数卡**。
+After parameter confirmation (Stage 0):
 
-```
-A1. 查 tier → yaml 固化映射表（§3.C），得到 (yaml_path, mode, eta)
-A2. 飞书发【启动意图确认卡】(send_confirmation_card)
-      - intent / tier_label / yaml_path / test_list_path / mode / eta
-      - tier (start_l1..l4)         → 蓝色 (template=blue)
-      - production (start_production) → 橙色 + ⚠️ "这是生产全量运行" 警告
-      - 卡片提示 "10s 内回复 确认 / 取消，否则自动取消"
-A3. 等用户回复（默认 10s，配置 confirmation_timeout_seconds）
-      - "确认" → 进 A4
-      - "取消" / 超时 → drop（红色"已取消"卡）→ 等下条触发消息，回到第 2 步
-A4. validate_required_config(load_yaml(yaml_path))
-      - test_list_path 或 manifest_source 至少一个
-      - config.remote_server 存在
-      - kanban.enabled=true 时额外：check_gateways_alive() 三个 Gateway 全 active
-      - 任一缺失 → 飞书红色错误卡片 → failed → 退出
-A5. init_or_resume(yaml_path, resume_from=None)
-      → (run_dir, state_path, state, iteration)
-A6. Bastion bring-up + start_heartbeat（同 §3.B 的 8/9 步）
-A7. 进入主循环 loop_core.run(...)
-```
+`
+A1. validate_required_config(load_yaml(yaml_path))
+      - test_list_path or manifest_source at least one
+      - config.remote_server exists
+      - kanban.enabled=true: check_gateways_alive() all active
+      - Any failure -> red error card -> exit
 
-**启动期间状态机互锁**（spec §4.6 边界情况）：
+A2. init_or_resume(yaml_path, resume_from)
+      -> (run_dir, state_path, state, iteration)
+      -> Creates run_dir, manifest.json, workflow_state.json
 
-| 当前 supervisor 状态 | 收到 start_* 意图 | 处理 |
+A3. Generate test_load (skip if resuming and test_load exists):
+      python generate_test_load.py \
+          --manifest-path <run_dir>/manifest.json \
+          --count <confirmed_count> \
+          --output-dir <run_dir> \
+          --workflow-state <run_dir>/workflow_state.json
+      -> Creates test_load_xxx.json
+      -> Updates workflow_state.json with test_load path
+
+A4. Bastion bring-up + start_heartbeat
+      daemon unavailable -> waiting_otp (§7 progressive OTP resend)
+
+A5. Strategy branch (based on execution_strategy):
+      single-phase -> loop_core.run() (Stage 2-5 loop)
+      two-phase    -> auto_run_batches_two_phase.py (Phase 1 batch loop)
+                   -> two-phase-handler SKILL (Phase 2 retry)
+
+A6. Post-loop (when test_load pending == 0):
+      python update_manifest_from_test_load.py \
+          --manifest-path <run_dir>/manifest.json \
+          --test-load-path <run_dir>/test_load_xxx.json
+      -> Syncs test_load -> manifest.json (master record)
+`
+
+**Startup state machine interlock:**
+
+| Current supervisor state | start_* intent | Action |
 |---|---|---|
-| idle（无 run 在跑） | 任意 | 进 A1 |
-| running / paused / waiting_otp | 任意 | 红色卡 "已有 run 在跑（status=X），请先 结束 或 暂停" |
-
-### §3.B — Legacy 自由参数确认卡分支（v4 行为，向后兼容）
-
-仅当 Layer 2 返回 `unknown` 但用户用了 v4 的关键词（"跑 ut workflow" / "启动测试"）
-触发时走此路径。**v5 默认走 §3.A** — 这条留作回退。
-
-```
-B1. 飞书发【参数确认卡片】（蓝色），展示 5 字段：
-      test_list_path, batch_size, manifest_source, kanban.enabled, resume_from
-    选项："确认" / "yaml=PATH" / "resume=RUN_DIR" / "改 KEY=VALUE" / "取消"
-B2. 等待用户回复（5 分钟超时 → 退出）
-B3. "确认" → validate_required_config(cfg)（同 §3.A A4）
-B4. init_or_resume(workflow_yaml, resume_from)
-B5. Bastion bring-up（BastionManager + ensure_connected）
-      daemon 不可用 → 进入 waiting_otp，按 §7 渐进重发节奏发 OTP 卡片
-B6. bastion.start_heartbeat(on_disconnect=...)
-      心跳检测断联只调 mark_disconnected() 上报，不直接弹卡片 / 不切状态
-B7. 进入主循环 loop_core.run(stage_skills, 回调...)
-```
+| idle | any | Proceed to A1 |
+| running / paused / waiting_otp | any | Red card: "already running (status=X), stop or pause first" |
 
 ### §3.C — Tier → yaml 固化映射表
 
@@ -689,7 +657,7 @@ monitor cron created for that run_id.
 
 **输入文件：**
 - `workflow_state.json` — batch执行状态
-- `test_load_xxx.json` — 测试清单（非manifest.json）
+- 	est_load_xxx.json - 测试清单（工作数据集，非manifest.json）
 
 **调用SKILL：** `two-phase-handler`
 - **Phase 2 Stage 1**: 统计分析失败batch

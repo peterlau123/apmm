@@ -233,6 +233,96 @@ def calculate_statistics(tests: list) -> dict:
     return stats
 
 
+# v5 merge logic (ported from update_manifest.py) -----------------------------------
+
+def merge_batch_results(manifest: dict, batch_results: dict, handled: dict) -> int:
+    """v5 manifest merge ? the canonical update path for Stage 5.
+
+    For each test in batch_results["tests"]:
+      - set last_batch_id = batch_results["batch_id"]
+      - copy error_type, error_message, log_file, duration_ms, exit_code if present
+      - if new status in {failed, retriable_error, error}: retry_count += 1
+      - if new status == retriable_error AND retry_count >= max_retry:
+            status = "ignored"
+            ignore_reason = f"max retry exceeded for {error_type}"
+        else:
+            status = new_status
+
+    For each test in handled.get("tests", []):
+      apply status override + ignore_reason if present (AFTER batch_results merge).
+
+    Recompute statistics by counting status occurrences.
+
+    Returns the number of tests updated from batch_results.
+    """
+    tests = manifest.get("tests", [])
+    by_id = {t.get("test_id"): t for t in tests if t.get("test_id") is not None}
+    by_node = {t.get("test_node"): t for t in tests if t.get("test_node")}
+
+    def _find(result):
+        tid = result.get("test_id")
+        if tid is not None and tid in by_id:
+            return by_id[tid]
+        node = result.get("test_node")
+        if node and node in by_node:
+            return by_node[node]
+        return None
+
+    updated_count = 0
+    batch_id = batch_results.get("batch_id")
+    for result in batch_results.get("tests", []):
+        target = _find(result)
+        if target is None:
+            continue
+        updated_count += 1
+        if batch_id is not None:
+            target["last_batch_id"] = batch_id
+        new_status = result.get("status", target.get("status", "pending"))
+        error_type = result.get("error_type")
+        if error_type is not None:
+            target["error_type"] = error_type
+        # Copy additional fields from executor result
+        for field in ("error_message", "log_file", "duration_ms", "exit_code", "run_at"):
+            if field in result and result[field] is not None:
+                target[field] = result[field]
+        if "run_at" not in target:
+            target["run_at"] = datetime.now().isoformat()
+
+        if new_status in ("failed", "retriable_error", "error"):
+            target["retry_count"] = int(target.get("retry_count", 0)) + 1
+
+        max_retry = int(target.get("max_retry", 3))
+        if new_status == "retriable_error" and target.get("retry_count", 0) >= max_retry:
+            target["status"] = "ignored"
+            et = target.get("error_type", error_type or "unknown")
+            target["ignore_reason"] = f"max retry exceeded for {et}"
+        else:
+            target["status"] = new_status
+
+    for handled_t in (handled or {}).get("tests", []):
+        target = _find(handled_t)
+        if target is None:
+            continue
+        # handled_tests status can be in "status" or "final_status"
+        new_status = handled_t.get("status") or handled_t.get("final_status")
+        if new_status:
+            target["status"] = new_status
+        if "ignore_reason" in handled_t:
+            target["ignore_reason"] = handled_t["ignore_reason"]
+        if "ignored_reason" in handled_t:
+            target["ignore_reason"] = handled_t["ignored_reason"]
+        # Copy commit hash if present (from failure-handler fix)
+        if "commit" in handled_t:
+            target["commit"] = handled_t["commit"]
+        # Copy errors[]/failures[] history if present
+        if "errors" in handled_t:
+            target["errors"] = handled_t["errors"]
+        if "failures" in handled_t:
+            target["failures"] = handled_t["failures"]
+
+    # Note: statistics are recalculated by save_manifest() or calculate_statistics()
+    return updated_count
+
 def update_single_status(manifest: dict, test_node: str, status: str, **kwargs) -> bool:
     """更新单个测试状态"""
     for test in manifest["tests"]:
@@ -251,6 +341,9 @@ def update_single_status(manifest: dict, test_node: str, status: str, **kwargs) 
             
             if status == "passed":
                 test["exit_code"] = 0
+            
+            if kwargs.get("version_mismatch_related"):
+                test["version_mismatch_related"] = True
             
             return True
     return False
@@ -298,6 +391,11 @@ def update_from_workflow_state(
 
     if batch_dir is None:
         batches_dir = paths.get("batches_dir")
+        if not batches_dir:
+            # Fallback: construct from run_dir if batches_dir not in paths
+            run_dir_str = paths.get("run_dir", "")
+            if run_dir_str:
+                batches_dir = str(Path(run_dir_str) / "batches")
         if batches_dir and batch_id:
             batch_dir = Path(batches_dir) / batch_id
 
@@ -305,14 +403,15 @@ def update_from_workflow_state(
         return {"error": f"manifest.json not found: {manifest_path}"}
 
     manifest = load_manifest(manifest_path)
-    all_results = []
+    batch_results_data = {"tests": [], "batch_id": batch_id}
+    handled_tests_data = {"tests": []}
 
     if batch_dir:
         batch_results_path = batch_dir / "batch_results.json"
         handled_tests_path = batch_dir / "handled_tests.json"
 
         if batch_results_path.exists():
-            batch_results = json.loads(batch_results_path.read_text(encoding="utf-8"))
+            batch_results_data = json.loads(batch_results_path.read_text(encoding="utf-8"))
             # P1: Type-B fabrication backstop — stat-audit the remote pytest
             # log BEFORE consuming the per-test results into the manifest. If
             # the log doesn't exist or its size disagrees with what
@@ -321,7 +420,7 @@ def update_from_workflow_state(
             # so the supervisor's reconnect loop picks it up instead of the
             # workflow looping on the same batch.
             profile = (state.get("config") or {}).get("remote_server", "t_h20")
-            ok, reason = audit_batch_results(batch_results, profile)
+            ok, reason = audit_batch_results(batch_results_data, profile)
             if not ok:
                 if reason.startswith("bastion_disconnect:"):
                     return {
@@ -333,15 +432,14 @@ def update_from_workflow_state(
                     "error": "audit_failed",
                     "reason": reason,
                     "batch_id": batch_id,
-                    "raw_log_path": (batch_results.get("remote_log") or {}).get("raw_log_path"),
+                    "raw_log_path": (batch_results_data.get("remote_log") or {}).get("raw_log_path"),
                 }
-            all_results.extend(batch_results.get("tests", []))
 
         if handled_tests_path.exists():
-            handled_tests = json.loads(handled_tests_path.read_text(encoding="utf-8"))
-            all_results.extend(handled_tests.get("tests", []))
+            handled_tests_data = json.loads(handled_tests_path.read_text(encoding="utf-8"))
 
-    updated_count = batch_update_status(manifest, all_results)
+    # v5 merge: batch_results first, then handled_tests overrides
+    updated_count = merge_batch_results(manifest, batch_results_data, handled_tests_data)
     is_valid, errors = save_manifest(manifest, manifest_path)
     if not is_valid:
         return {"error": "schema_validation_failed", "details": errors}
@@ -413,6 +511,13 @@ def main():
     parser.add_argument("--log-file", metavar="PATH", help="日志文件路径")
     
     # 输出
+    # Report / stats flags (ported from update_manifest.py)
+    parser.add_argument("--report", action="store_true", help="generate text statistics report")
+    parser.add_argument("--daily-report", action="store_true", help="generate JSON daily report")
+    parser.add_argument("--recalc-stats", action="store_true", help="recalculate statistics and save")
+    parser.add_argument("--version-mismatch", action="store_true", help="mark as version mismatch related")
+    # --test is an alias for --single (backward compat with update_manifest.py)
+    parser.add_argument("--test", metavar="TEST_NODE", dest="single", help="alias for --single")
     parser.add_argument("--dry-run", action="store_true", help="仅显示结果，不写入文件")
     parser.add_argument("--worker-output", action="store_true", 
                         help="输出 Worker 标准格式（符合 worker_output_schema）")
@@ -461,6 +566,64 @@ def main():
     
     manifest = load_manifest(manifest_path)
     
+    if args.report:
+        # Text statistics report
+        stats = calculate_statistics(manifest["tests"])
+        tests = manifest.get("tests", [])
+        lines = [
+            "=" * 60,
+            "Unit Test Statistics Report",
+            f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            "=" * 60,
+            "",
+            f"Total tests: {stats.get('total', 0)}",
+            f"Executed:   {stats.get('executed', 0)}",
+            f"Progress:   {stats.get('progress', 0)}%",
+            "",
+            "Status breakdown:",
+            f"  passed:  {stats.get('passed', 0)}",
+            f"  failed:  {stats.get('failed', 0)}",
+            f"  error:   {stats.get('error', 0)}",
+            f"  pending: {stats.get('pending', 0)}",
+            f"  ignored: {stats.get('ignored', 0)}",
+            "=" * 60,
+        ]
+        print("\n".join(lines))
+        return
+
+    if args.daily_report:
+        # JSON daily report
+        stats = calculate_statistics(manifest["tests"])
+        tests = manifest.get("tests", [])
+        today = datetime.now().strftime("%Y-%m-%d")
+        today_tests = [t for t in tests if t.get("run_at", "").startswith(today)]
+        report = {
+            "date": today,
+            "generated_at": datetime.now().isoformat(),
+            "total_tests": stats.get("total", 0),
+            "executed": stats.get("executed", 0),
+            "progress": stats.get("progress", 0),
+            "status_breakdown": {k: v for k, v in stats.items() if k not in ("total", "executed", "progress")},
+            "today": {
+                "executed": len(today_tests),
+                "passed": sum(1 for t in today_tests if t.get("status") == "passed"),
+                "failed": sum(1 for t in today_tests if t.get("status") == "failed"),
+                "error": sum(1 for t in today_tests if t.get("status") == "error"),
+            },
+        }
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        return
+
+    if args.recalc_stats:
+        stats = calculate_statistics(manifest["tests"])
+        manifest["statistics"] = stats
+        is_valid, errors = save_manifest(manifest, manifest_path)
+        if not is_valid:
+            print(json.dumps({"error": "schema_validation_failed", "details": errors}, indent=2))
+            return
+        print(f"Statistics recalculated: {stats}")
+        return
+
     if args.single:
         # 单个更新
         if not args.status:
@@ -468,6 +631,8 @@ def main():
             return
         
         kwargs = {}
+        if args.version_mismatch:
+            kwargs["version_mismatch_related"] = True
         if args.reason:
             kwargs["ignored_reason"] = args.reason
         if args.error_type:
@@ -522,26 +687,33 @@ def main():
             count = batch_update_status(manifest, results)
             print(f"✓ 批量更新 {count} 个测试状态")
         else:
-            # 从 batch_results 和 handled_tests 更新
-            if batch_results_path.exists() or handled_tests_path.exists():
+            # --batch mode: merge batch_results + handled_tests into manifest
+            if args.workflow_state:
+                # Recommended path: read paths from workflow_state.json,
+                # find batch_dir from current_batch, run audit + v5 merge.
                 update_result = update_from_workflow_state(
-                    workflow_state_path or default_workflow_state,
-                    batch_results_path,
-                    handled_tests_path
+                    workflow_state_path
                 )
                 print(json.dumps(update_result, indent=2))
+                return
+            elif batch_results_path and batch_results_path.exists():
+                # Direct path: manifest-path + batch-results-path given explicitly.
+                # Read batch_results and handled_tests, run v5 merge (no audit).
+                br = json.loads(batch_results_path.read_text(encoding="utf-8"))
+                ht = {"tests": []}
+                if handled_tests_path and handled_tests_path.exists():
+                    ht = json.loads(handled_tests_path.read_text(encoding="utf-8"))
+                count = merge_batch_results(manifest, br, ht)
+                print(f"v5 merge: {count} tests updated")
             else:
-                print(json.dumps({"error": "batch 和 from-file 都需要指定"}, indent=2))
+                print(json.dumps({"error": "--batch requires --workflow-state or --batch-results-path"}, indent=2))
                 return
     
     else:
-        # 默认：从 batch_results 和 handled_tests 更新
-        if batch_results_path.exists() or handled_tests_path.exists():
-            update_result = update_from_workflow_state(
-                workflow_state_path or default_workflow_state,
-                batch_results_path,
-                handled_tests_path
-            )
+        # Default mode: if --workflow-state given, use update_from_workflow_state
+        # (finds batch_dir from state, runs audit + v5 merge).
+        if args.workflow_state:
+            update_result = update_from_workflow_state(workflow_state_path)
             if args.worker_output:
                 worker_result = generate_worker_output(update_result, manifest)
                 print(json.dumps(worker_result, indent=2))
@@ -549,10 +721,8 @@ def main():
                 print(json.dumps(update_result, indent=2))
             return
         else:
-            print(json.dumps({"error": "请指定操作模式 (--single, --batch, --from-file)"}, indent=2))
+            print(json.dumps({"error": "Specify --workflow-state (recommended) or --single/--batch/--from-file"}, indent=2))
             return
-    
-    # 显示统计
     stats = calculate_statistics(manifest["tests"])
     print("\n当前统计:")
     print(f"  Passed: {stats['passed']}")

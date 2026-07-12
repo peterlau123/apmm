@@ -245,7 +245,7 @@ systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md
 
 **输入文件：**
 - `workflow_state.json` — batch执行状态
-- 	est_load_xxx.json - 测试清单（工作数据集，非manifest.json）
+- test_load_xxx.json - 测试清单（工作数据集，非manifest.json）
 
 **调用SKILL：** `two-phase-handler`
 - **Phase 2 Stage 1**: 统计分析失败batch

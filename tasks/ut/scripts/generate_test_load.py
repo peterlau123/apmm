@@ -18,13 +18,19 @@
 
 import argparse
 import json
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
 
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
+
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from skills.ut.shared import validate_and_write
 
 
 def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Path:
@@ -98,7 +104,7 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
 
     # 构建test_load结构
     test_load = {
-        "version": "1.0",
+        "version": "2.0",
         "generated_at": datetime.now().isoformat(),
         "source": str(manifest_path),
         "total_tests": len(selected_tests),
@@ -166,17 +172,14 @@ def main():
     manifest_path = Path(args.manifest_path)
     output_dir = Path(args.output_dir)
 
-    # R3: Skip generation if test_load already exists in workflow_state
+    # Check if test_load already exists (log but always regenerate)
     if args.workflow_state:
         ws_path = Path(args.workflow_state)
         if ws_path.exists():
             state = json.loads(ws_path.read_text(encoding="utf-8"))
             existing_tl = state.get("paths", {}).get("test_load", "")
             if existing_tl and Path(existing_tl).exists():
-                print(f"[SKIP] test_load already exists: {existing_tl}")
-                print(f"        Delete it first if you want to regenerate.")
-                print(f"\nTEST_LOAD_PATH={existing_tl}")
-                return
+                print(f"[WARN] Existing test_load will be overwritten: {existing_tl}")
 
     test_load_path = generate_test_load(manifest_path, args.count, output_dir)
 

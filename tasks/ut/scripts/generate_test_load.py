@@ -66,11 +66,14 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
         """返回test选择优先级（数字越小优先级越高）"""
         status = test.get("status", "pending")
         priority_map = {
-            "pending": 0,   # 最高优先级
-            "failed": 1,
-            "error": 2,
-            "passed": 3,
-            "ignored": 4    # 最低优先级
+            "pending": 0,
+            "fixed_pending_verify": 0,  # verification needed, same as pending
+            "retriable_error": 1,       # needs retry
+            "failed": 2,
+            "error": 3,
+            "passed": 4,
+            "ignored": 5,
+            "running": 9,               # should not be selected
         }
         return priority_map.get(status, 5)
 
@@ -114,7 +117,9 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
 
     # 写入文件
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(test_load, indent=2, ensure_ascii=False), encoding="utf-8")
+    is_valid, errors = validate_and_write(test_load, "manifest", output_path)
+    if not is_valid:
+        raise ValueError(f"Schema validation failed for test_load: {errors}")
 
     print(f"[OK] test_load清单已生成: {output_path}")
     print(f"     总数: {len(selected_tests)} test")

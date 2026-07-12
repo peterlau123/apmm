@@ -160,13 +160,10 @@ def generate_batch(
     """
     manifest = load_manifest(manifest_path)
 
-    # 过滤 pending + fixed_pending_verify 测试（验证批次优先）
-    # 优先级：fixed_pending_verify > pending（确保修复后验证闭环）
-    fixed_pending_verify = [t for t in manifest['tests'] if t.get('status') == 'fixed_pending_verify']
-    pending_tests = [t for t in manifest['tests'] if t.get('status') == 'pending']
-
-    # 合并候选测试，验证批次在前
-    candidates = fixed_pending_verify + pending_tests
+    # v5 selection: use select_batch() for proper retriable_error/failed handling
+    # select_batch filters by selectability (pending/fixed_pending_verify always;
+    # retriable_error/failed only while retry_count < max_retry) and sorts by priority
+    candidates = select_batch(manifest, batch_size * 3)  # get more candidates for filtering
 
     # 应用文件过滤器
     if test_file_filter:

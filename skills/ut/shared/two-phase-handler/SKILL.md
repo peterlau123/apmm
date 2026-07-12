@@ -32,10 +32,13 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 >    Supervisor MUST pause and wait for human input via `user_decision.json`.
 >    No agent may auto-proceed to Stage 2 without explicit human approval.
 >    Skipping this checkpoint is a hard violation that invalidates the run.
-> 3. **Manifest is the single source of truth.** All error classifications come
->    from `manifest.json` — never fabricate error_type based on test names or
->    heuristics alone. If a test lacks `error_type`, classify as `other`.
->    Stats MUST be computed from manifest data, not from batch_results alone.
+3. **test_load is the working dataset.** All error classifications come
+>    from 	est_load_xxx.json (the working dataset for this run). The master
+>    manifest.json is only updated post-loop via update_manifest_from_test_load.py.
+>    Never fabricate error_type based on test names or
+>    heuristics alone. If a test lacks error_type, classify as other.
+>    Stats MUST be computed from test_load data, not from batch_results alone.
+> 
 > 4. **Retry execution follows manifest contract.** Each retry batch MUST produce
 >    `batch_results.json` + incrementally update `manifest.json`. The Stage 2
 >    executor MUST call `execute_batch_script(batch_id)` which internally

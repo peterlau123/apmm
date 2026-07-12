@@ -296,6 +296,13 @@ def init_or_resume(workflow_yaml_path, resume_from):
         state_path = run_dir / "workflow_state.json"
         state = _read_json(state_path)
         iteration = state.get("iteration", 0)
+        # R1: Verify test_load exists on resume
+        test_load_path = state.get("paths", {}).get("test_load", "")
+        if test_load_path and not Path(test_load_path).exists():
+            print(f"[hermes_runner] WARNING: test_load not found: {test_load_path}")
+            print(f"[hermes_runner] Run generate_test_load.py before resuming the loop.")
+        elif not test_load_path:
+            print(f"[hermes_runner] WARNING: test_load path not set in workflow_state.json")
         print(f"[hermes_runner] Resumed from {run_dir}, iteration={iteration}")
     else:
         init_script = str(SCRIPT_DIR / "init_workflow_state.py")

@@ -166,6 +166,18 @@ def main():
     manifest_path = Path(args.manifest_path)
     output_dir = Path(args.output_dir)
 
+    # R3: Skip generation if test_load already exists in workflow_state
+    if args.workflow_state:
+        ws_path = Path(args.workflow_state)
+        if ws_path.exists():
+            state = json.loads(ws_path.read_text(encoding="utf-8"))
+            existing_tl = state.get("paths", {}).get("test_load", "")
+            if existing_tl and Path(existing_tl).exists():
+                print(f"[SKIP] test_load already exists: {existing_tl}")
+                print(f"        Delete it first if you want to regenerate.")
+                print(f"\nTEST_LOAD_PATH={existing_tl}")
+                return
+
     test_load_path = generate_test_load(manifest_path, args.count, output_dir)
 
     # 更新workflow_state.json中的test_load路径

@@ -75,7 +75,7 @@ When user triggers workflow (e.g. "开始运行单元测试" / "跑 ut workflow"
 sequenceDiagram
     actor U as 用户
     participant CC as Claude/OpenCode 会话
-    participant R as hermes_runner
+    participant R as ut_runner
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>CC: 要求"跑/续 UT workflow"
@@ -139,7 +139,7 @@ with the test_load path. All subsequent stages read from test_load.
 
 ### Step 4: Bastion Check
 
-hermes_runner._setup_bastion(...) performs ensure_connected.
+ut_runner._setup_bastion(...) performs ensure_connected.
 If unreachable, surface failure to user and stop. Do NOT enter the loop.
 
 ### Step 5: Strategy Branch
@@ -175,7 +175,7 @@ Syncs test_load results back to manifest.json (master record).
 ## Channel callbacks (passed to `loop_core.run`)
 
 ### `handle_checkpoint(state, manifest)`
-Send a Feishu progress card via `hermes_runner.send_feishu_card(
+Send a Feishu progress card via `ut_runner.send_feishu_card(
 feishu, "progress", manifest, iteration, batch_id=batch_id, mode="linear")`.
 On high error rate, switch to event `"alert"`. Bump `iteration` and
 `last_update` on `state_path` while you're here.
@@ -195,7 +195,7 @@ user interacts via this Claude session, and Ctrl-C is the pause/stop
 signal handled by `loop_core`'s `KeyboardInterrupt` path.
 
 ### `check_terminal_conditions(state, manifest)`
-Delegate to `hermes_runner.check_stop_conditions(state_path)`:
+Delegate to `ut_runner.check_stop_conditions(state_path)`:
 - `pending == 0 and running == 0` → `(True, "pending_count == 0", "completed")`
 - otherwise `(False, "", "")`
 
@@ -232,7 +232,7 @@ If the user asks for any of the following, route them to
 - OTP-driven Bastion auto-recovery.
 
 Those features live in Plan 2 and require the Hermes Agent + Gateway
-profiles documented in `tasks/ut/docs/guides/hermes-runner.md`, with
+profiles documented in `tasks/ut/docs/guides/ut-runner.md`, with
 systemd deployment covered by `tasks/ut/docs/guides/hermes-supervisor-service.md`
 (ut-supervisor agent) and `tasks/ut/docs/guides/hermes-gateway-service.md`
 (3 gateway instances).

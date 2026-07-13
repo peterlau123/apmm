@@ -83,7 +83,7 @@ python tasks/ut/scripts/generate_test_load.py \
 When user sends a trigger message ("跑L4" / "跑 ut workflow" / "正式生产"):
 
 **AI behavior:**
-1. Classify intent (hermes_runner Layer 1 regex -> Layer 2 LLM)
+1. Classify intent (ut_runner Layer 1 regex -> Layer 2 LLM)
 2. Determine environment from intent (tier l1-l4 / production)
 3. Load corresponding workflow.yaml template
 4. Send Feishu parameter confirmation card (editable):
@@ -107,7 +107,7 @@ sequenceDiagram
     actor U as 用户
     participant F as 飞书 bot(cli_aaad…, DM oc_ed80…)
     participant S as ut-supervisor (gateway)
-    participant R as hermes_runner
+    participant R as ut_runner
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>F: "跑 ut workflow"
@@ -168,12 +168,12 @@ machine, no paused/waiting_otp, and Bastion is human-maintained.
 
 ---
 
-## 2. Tooling — `hermes_runner.py`
+## 2. Tooling — `ut_runner.py`
 
 Import the runner as a tool module (it no longer inlines stage logic):
 
 ```python
-from hermes_runner import (
+from ut_runner import (
     parse_command,           # text → Command or None (Layer 1 regex)
     classify_intent_llm,     # text → Command (Layer 2 LLM, with llm_invoker)
     Command,                 # dataclass: intent / confidence / args / source / raw_text
@@ -208,13 +208,13 @@ from bastion_manager import (
 ## 3. Startup sequence (§14.2)
 
 The supervisor distinguishes **two trigger paths** depending on what
-`parse_command(text)` + `classify_intent_llm(text)` (`hermes_runner` Layer 1 +
+`parse_command(text)` + `classify_intent_llm(text)` (`ut_runner` Layer 1 +
 Layer 2) classify the trigger message as. See the spec §4 for the two-layer
 intent recognizer.
 
 ```
 1. 用户飞书发任意消息 → ut-supervisor Agent 收到
-2. 意图识别（hermes_runner Layer 1 → Layer 2）
+2. 意图识别（ut_runner Layer 1 → Layer 2）
      a) Layer 1: parse_command(text) → otp/stop/pause/resume/change_config
         命中 → 直接派发到状态机（§5 命令矩阵），不进启动流程
      b) Layer 1 miss → Layer 2: classify_intent_llm(text) → Command

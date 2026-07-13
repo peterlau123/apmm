@@ -3,7 +3,7 @@
 > 一份文档看清两个 UT 测试通道**怎么触发、怎么跑**，以及 hermes 通道**怎么把环境搭起来**。
 >
 > 权威设计规格：`tasks/ut/docs/designs/2026-06-18-hermes-workflow-dual-channel-design.md`
-> 运维细节：`tasks/ut/docs/guides/hermes-runner.md`、`tasks/ut/docs/guides/hermes-supervisor-service.md`、`tasks/ut/docs/guides/hermes-gateway-service.md`
+> 运维细节：`tasks/ut/docs/guides/ut-runner.md`、`tasks/ut/docs/guides/hermes-supervisor-service.md`、`tasks/ut/docs/guides/hermes-gateway-service.md`
 
 ---
 
@@ -62,7 +62,7 @@ flowchart TD
 sequenceDiagram
     actor U as 用户
     participant CC as Claude/OpenCode 会话
-    participant R as hermes_runner
+    participant R as ut_runner
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>CC: 要求"跑/续 UT workflow"
@@ -101,7 +101,7 @@ sequenceDiagram
     actor U as 用户
     participant F as 飞书 bot(cli_aaad…, DM oc_ed80…)
     participant S as ut-supervisor (gateway)
-    participant R as hermes_runner
+    participant R as ut_runner
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>F: "跑 ut workflow"
@@ -185,7 +185,7 @@ bot 信息分两处，**两处都要对**：
 
 | 文件 | 字段 | 作用 |
 |---|---|---|
-| `.agents/feishu_config.json` | `app_id` (`cli_…`)、`app_secret`、`chat_id` (`oc_…`)、`user_id` (`ou_…`) | bot 凭证 + 默认会话；hermes_runner / feishu_api 用它发卡、读消息 |
+| `.agents/feishu_config.json` | `app_id` (`cli_…`)、`app_secret`、`chat_id` (`oc_…`)、`user_id` (`ou_…`) | bot 凭证 + 默认会话；ut_runner / feishu_api 用它发卡、读消息 |
 | `<profile>/channel_directory.json`（ut-supervisor profile 下） | `{"feishu":[{"id":"oc_…","type":"dm"}]}` | 把该 bot 会话绑定到 ut-supervisor，使其能订阅这条 DM |
 
 要点（踩坑记录）：

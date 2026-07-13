@@ -16,14 +16,14 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HR_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
+UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
 
 
 @pytest.fixture(scope="module")
 def hr():
-    spec = importlib.util.spec_from_file_location("hermes_runner", HR_PATH)
+    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER_PATH)
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["hermes_runner"] = mod
+    sys.modules["ut_runner"] = mod
     spec.loader.exec_module(mod)
     return mod
 

@@ -152,7 +152,7 @@ systemctl --user enable --now \
 
 ## 5. 与 check_gateways_alive() 的对应
 
-Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `hermes_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/terminal-workflow/scripts/hermes_runner.py`）的机制是：
+Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `ut_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/shared/ut_runner.py`）的机制是：
 
 ```python
 KANBAN_GATEWAY_PROFILES = ("ut-orchestrator", "ut-executor", "ut-fixer")
@@ -233,7 +233,7 @@ hermes gateway status
 | Supervisor 报某 Gateway 未 active（红色错误卡片） | 该 unit 未起，或 user/system 查询级别不匹配 → 见 §5 的 DEPLOY-CONFIRM；用 §7.1 复核 |
 | 3 个都 active 但任务不流转 | 看板未对准 → 确认 `ExecStartPre` 的 `hermes kanban boards switch apmm-ut` 生效（§2.1）；`hermes kanban diagnostics` 查看阻塞 |
 | 任务被重复认领 / 争抢 | 是否同时跑了 `hermes kanban daemon` → 停掉，只保留 Gateway（§3） |
-| executor 远程执行失败 | `python tools/agent.py -p t_h20 ping`；见 [bastion.md](../../../docs/guides/bastion.md) 与 `tasks/ut/docs/guides/hermes-runner.md` |
+| executor 远程执行失败 | `python tools/agent.py -p t_h20 ping`；见 [bastion.md](../../../docs/guides/bastion.md) 与 `tasks/ut/docs/guides/ut-runner.md` |
 
 ---
 
@@ -244,10 +244,10 @@ hermes gateway status
 | [hermes-supervisor-service.md](hermes-supervisor-service.md) | Supervisor（1 个长驻 Agent）的 systemd 部署指南 |
 | `tasks/ut/docs/kanban/README.md` | Kanban 集成、3 worker profile、`start_gateway.py` 包装器、远程执行规则 |
 | `skills/ut/terminal-workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
-| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
+| `skills/ut/shared/ut_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
 | `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
 | [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
-| `tasks/ut/docs/guides/hermes-runner.md` | Runner 双模式运行、OTP 交互、排错 |
+| `tasks/ut/docs/guides/ut-runner.md` | Runner 双模式运行、OTP 交互、排错 |
 
 ---
 

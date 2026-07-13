@@ -6,7 +6,7 @@
 
 ## 1. 概述
 
-Hermes Runner (`hermes_runner.py`) 是 UT Workflow 的后台运行器，根据 `workflow.yaml` 中 `kanban.enabled` 自动选择执行模式：
+Hermes Runner (`ut_runner.py`) 是 UT Workflow 的后台运行器，根据 `workflow.yaml` 中 `kanban.enabled` 自动选择执行模式：
 
 | 模式 | kanban.enabled | 执行方式 |
 |------|:---:|------|
@@ -80,7 +80,7 @@ bastion:
 ### 4.1 新建运行
 
 ```bash
-python skills/ut/terminal-workflow/scripts/hermes_runner.py \
+python skills/ut/shared/ut_runner.py \
   --workflow-yaml runs/ut-{timestamp}/workflow.yaml  # 使用运行副本，模板位于 tasks/ut/deployment/production/config/workflow.yaml
 ```
 
@@ -93,7 +93,7 @@ Runner 会：
 ### 4.2 断点续跑
 
 ```bash
-python skills/ut/terminal-workflow/scripts/hermes_runner.py \
+python skills/ut/shared/ut_runner.py \
   --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -105,7 +105,7 @@ Runner 会：
 
 ### 4.3 通过 Hermes 启动
 
-在 Hermes Agent 中加载 `ut/workflow` skill，Agent 识别意图后自动调用 `hermes_runner.py`。
+在 Hermes Agent 中加载 `ut/workflow` skill，Agent 识别意图后自动调用 `ut_runner.py`。
 
 ### 4.4 Kanban 模式
 
@@ -196,7 +196,7 @@ Runner 在以下条件暂停：
 恢复命令：
 ```bash
 # 清除暂停标志后重新启动
-python skills/ut/terminal-workflow/scripts/hermes_runner.py \
+python skills/ut/shared/ut_runner.py \
   --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -265,13 +265,13 @@ python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 
 | 文件 | 说明 |
 |------|------|
-| `skills/ut/terminal-workflow/scripts/hermes_runner.py` | Runner 主脚本 |
+| `skills/ut/shared/ut_runner.py` | Runner 主脚本 |
 | `skills/ut/terminal-workflow/scripts/bastion_manager.py` | Bastion 生命周期管理 |
 | `skills/ut/terminal-workflow/scripts/feishu_api.py` | 飞书 API 封装 |
 | `tasks/ut/deployment/production/config/workflow.yaml` | Workflow 配置模板（含 bastion 节） |
 | `runs/ut-{timestamp}/workflow.yaml` | Workflow 运行副本（实际使用） |
 | `skills/ut/terminal-workflow/workflow_state_schema.json` | 状态文件 Schema |
-| `tasks/ut/docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md` | 设计文档 |
+| `tasks/ut/docs/discussions/2026-06-18-ut-runner-bastion-otp-design.md` | 设计文档 |
 
 ---
 

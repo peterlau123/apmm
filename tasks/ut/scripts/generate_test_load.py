@@ -71,11 +71,11 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
             "retriable_error": 1,       # needs retry
             "failed": 2,
             "error": 3,
-            "passed": 4,
-            "ignored": 5,
+            "ignored": 4,
+            "passed": 5,
             "running": 9,               # should not be selected
         }
-        return priority_map.get(status, 5)
+        return priority_map.get(status, 4)
 
     # 按优先级排序所有tests
     sorted_tests = sorted(all_tests, key=get_priority)

@@ -77,7 +77,7 @@ Kanban operations默认使用**生产环境**配置：
 cd /d/workspace/apmm && export PYTHONPATH= && python -c "
 import sys; sys.path.insert(0,'skills/ut/terminal-workflow/scripts'); sys.path.insert(0,'skills/ut')
 import yaml, json
-from hermes_runner import validate_required_config, check_gateways_alive
+from ut_runner import validate_required_config, check_gateways_alive
 cfg = yaml.safe_load(open('tasks/ut/deployment/production/config/workflow.yaml', encoding='utf-8'))
 ok, missing = validate_required_config(cfg)
 g = check_gateways_alive()
@@ -119,7 +119,7 @@ hermes kanban --board apmm-ut create "UT Workflow: Orchestrate run <run_id>" \
 Remote exec MUST use: python tools/agent.py -p t_h20 run (NOT plain ssh).
 Container v0.13.0_torch2.5.1_compile. Bastion t_h20 VERIFIED LIVE (REMOTE_OK).
 Run all workflow python with PYTHONPATH empty. distributed tests -> executor
-verifies remote GPU>=2. Each round: call hermes_runner.orchestrator_round(
+verifies remote GPU>=2. Each round: call ut_runner.orchestrator_round(
 run_dir, manifest_path, prev_batch_dir, batch_size) to reconcile prev batch
 (Stage5) + select next (Stage2), then create ut-executor + ut-fixer(depends on
 executor) + next orchestrator(depends on fixer). Complete when pending_count==0."

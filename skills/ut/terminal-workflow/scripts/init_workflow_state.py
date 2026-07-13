@@ -183,7 +183,7 @@ def create_initial_state(
     test_name = config.get("workflow", {}).get("test_name", "ut")
 
     # current_run.json must live at the canonical PROJECT_ROOT/.agents (where
-    # hermes_runner.init_or_resume reads it). Do NOT derive from the yaml's
+    # ut_runner.init_or_resume reads it). Do NOT derive from the yaml's
     # parent — frozen test configs live outside .agents and would otherwise
     # write the pointer next to the yaml, leaving the canonical one stale.
     agents_dir = _project_root / ".agents"
@@ -391,7 +391,7 @@ def main():
     )
 
     # Fail loudly on a bad init: a validation failure must surface as a non-zero
-    # exit so callers (e.g. hermes_runner.init_or_resume, which gates on rc != 0)
+    # exit so callers (e.g. ut_runner.init_or_resume, which gates on rc != 0)
     # don't silently reuse a stale run_dir with an un-updated current_run.json.
     if isinstance(result, dict) and result.get("error"):
         print(f"[ERROR] init failed: {result['error']}", file=sys.stderr)

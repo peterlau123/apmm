@@ -67,8 +67,8 @@ _FH = _load_module(
     _PROJECT_ROOT / "skills" / "ut" / "failure-handler" / "scripts" / "analyze_failures.py",
 )
 _HR = _load_module(
-    "perf_hermes_runner",
-    _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "hermes_runner.py",
+    "perf_ut_runner",
+    _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "ut_runner.py",
 )
 
 from skills.ut.shared.validate_schema import validate_manifest  # noqa: E402

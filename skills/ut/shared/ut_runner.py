@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-hermes_runner.py - UT Workflow runner for Hermes (v5: import-only library)
+ut_runner.py - UT Workflow shared runner library (v5)
 
 v5 refactor: the in-process Stage 2-5 loop and the kanban-mode polling loop
 have moved out of this module. Stage logic now lives in the four Worker
@@ -33,13 +33,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-SKILL_DIR = SCRIPT_DIR.parent.parent
-PROJECT_ROOT = SKILL_DIR.parent.parent
+SCRIPT_DIR = Path(__file__).resolve().parent          # skills/ut/shared/
+SKILL_DIR = SCRIPT_DIR.parent                          # skills/ut/
+PROJECT_ROOT = SKILL_DIR.parent.parent                 # apmm/
 
-# Allow imports from skills/ut/shared and workflow/scripts
+# Allow imports from skills/ut/shared and terminal-workflow/scripts (bastion_manager, feishu_api)
 sys.path.insert(0, str(SKILL_DIR))
 sys.path.insert(0, str(SCRIPT_DIR))
+sys.path.insert(0, str(SKILL_DIR / "terminal-workflow" / "scripts"))
 
 from bastion_manager import BastionManager
 from feishu_api import FeishuAPI
@@ -301,7 +302,7 @@ def _ensure_test_load(workflow_yaml_path, run_dir, state_path):
     test_load_path = state.get("paths", {}).get("test_load", "")
 
     if test_load_path and Path(test_load_path).exists():
-        print(f"[hermes_runner] test_load exists: {test_load_path}")
+        print(f"[ut_runner] test_load exists: {test_load_path}")
         return
 
     # Read count from workflow.yaml
@@ -315,7 +316,7 @@ def _ensure_test_load(workflow_yaml_path, run_dir, state_path):
     # Find manifest path from state
     manifest_path = state.get("paths", {}).get("manifest", str(run_dir / "manifest.json"))
 
-    print(f"[hermes_runner] Generating test_load (count={count})...")
+    print(f"[ut_runner] Generating test_load (count={count})...")
     gtl_script = str(PROJECT_ROOT / "tasks" / "ut" / "scripts" / "generate_test_load.py")
     rc, stdout, stderr = _run_py(
         [gtl_script,
@@ -326,7 +327,7 @@ def _ensure_test_load(workflow_yaml_path, run_dir, state_path):
         timeout=60,
     )
     if rc != 0:
-        print(f"[hermes_runner] generate_test_load failed: {stderr}")
+        print(f"[ut_runner] generate_test_load failed: {stderr}")
         sys.exit(1)
     try:
         sys.stdout.write(stdout + "\n")
@@ -343,7 +344,7 @@ def init_or_resume(workflow_yaml_path, resume_from):
         # Ensure test_load exists on resume (auto-generate if missing)
         _ensure_test_load(workflow_yaml_path, run_dir, state_path)
         state = _read_json(state_path)
-        print(f"[hermes_runner] Resumed from {run_dir}, iteration={iteration}")
+        print(f"[ut_runner] Resumed from {run_dir}, iteration={iteration}")
     else:
         init_script = str(SCRIPT_DIR / "init_workflow_state.py")
         rc, stdout, stderr = _run_py(
@@ -351,7 +352,7 @@ def init_or_resume(workflow_yaml_path, resume_from):
             timeout=30,
         )
         if rc != 0:
-            print(f"[hermes_runner] Init failed: {stderr}")
+            print(f"[ut_runner] Init failed: {stderr}")
             sys.exit(1)
         # Windows GBK stdout can't render non-ASCII (✓ ⚠ etc.) coming from the
         # init subprocess — coerce to ascii-safe before printing so the runner
@@ -389,14 +390,14 @@ def _setup_feishu():
         try:
             return FeishuAPI(feishu_config_path)
         except Exception as e:
-            print(f"[hermes_runner] Feishu init failed: {e}")
+            print(f"[ut_runner] Feishu init failed: {e}")
     return None
 
 
 def _setup_bastion(workspace, bastion_cfg, remote_server, feishu_config_path, state_path):
     """Create and connect BastionManager. Returns instance or None."""
     if not bastion_cfg:
-        print("[hermes_runner] No bastion config, skipping bastion management")
+        print("[ut_runner] No bastion config, skipping bastion management")
         return None
 
     bastion = BastionManager(
@@ -407,9 +408,9 @@ def _setup_bastion(workspace, bastion_cfg, remote_server, feishu_config_path, st
     )
     bastion._heartbeat_interval = bastion_cfg.get("heartbeat_interval", 15)
 
-    print("[hermes_runner] Checking bastion connectivity...")
+    print("[ut_runner] Checking bastion connectivity...")
     if not bastion.ensure_connected(reason="startup", stage="init"):
-        print("[hermes_runner] Bastion not available, aborting")
+        print("[ut_runner] Bastion not available, aborting")
         return None
 
     return bastion
@@ -686,7 +687,7 @@ def orchestrator_round(*, run_dir, manifest_path, prev_batch_dir, batch_size, cu
                 parents=[fixer_task_id]
             )
         except Exception as e:
-            print(f"[hermes_runner] Kanban task creation failed: {e}")
+            print(f"[ut_runner] Kanban task creation failed: {e}")
 
     return {
         "completed": False, "next_batch": cfg,
@@ -715,21 +716,21 @@ def check_stop_conditions(state_path) -> tuple[bool, str, str]:
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def main():
-    """Deprecation shim. hermes_runner is now an import-only library.
+    """Deprecation shim. ut_runner is an import-only library.
 
     Stage logic moved to skills/ut/workflow-loop-core/SKILL.md and the four
     Worker SKILLs. Use a channel SKILL (ut/workflow or hermes-workflow) to
     actually drive a run.
     """
     parser = argparse.ArgumentParser(
-        description="hermes_runner (v5): import-only library; stage logic moved to loop_core"
+        description="ut_runner (v5): import-only library; stage logic moved to loop_core"
     )
     parser.add_argument("--workflow-yaml", default=None, help="(unused in v5)")
     parser.add_argument("--resume-from", default=None, help="(unused in v5)")
     parser.parse_args()
 
     print(
-        "[hermes_runner] v5 deprecation: this module no longer runs the workflow.\n"
+        "[ut_runner] v5 deprecation: this module no longer runs the workflow.\n"
         "  - Linear supervisor: load skills/ut/terminal-workflow/SKILL.md\n"
         "  - Kanban / Hermes:   load skills/ut/hermes-workflow/SKILL.md\n"
         "  Both delegate Stage 2-5 to skills/ut/workflow-loop-core."

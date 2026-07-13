@@ -11,7 +11,7 @@
 ### 1.1 当前流程
 
 `
-hermes_runner.init_or_resume(yaml, resume_from)
+ut_runner.init_or_resume(yaml, resume_from)
   -> resume_from 有值: 读 workflow_state.json, 返回 (run_dir, state, iteration)
   -> resume_from 为空: 调用 init_workflow_state.py 创建新 run
 `

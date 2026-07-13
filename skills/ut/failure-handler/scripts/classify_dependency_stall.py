@@ -15,7 +15,7 @@ Contract:
     keeps reason wording on the Python side (LLM only emits dep_hint /
     evidence), so the wording is auditable.
 
-The module mirrors ``classify_intent_llm`` in hermes_runner.py: best-effort
+The module mirrors ``classify_intent_llm`` in ut_runner.py: best-effort
 parser/validator over LLM-produced JSON, no external LLM call inside.
 """
 

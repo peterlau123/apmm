@@ -1,7 +1,7 @@
 """Contract test placeholders for workflow-loop-core (Phase 6, v5).
 
 loop_core is currently SKILL.md-only — concrete Python wiring lands in the
-channel SKILLs (ut/workflow supervisor, hermes-workflow) and in hermes_runner.
+channel SKILLs (ut/workflow supervisor, hermes-workflow) and in ut_runner.
 These placeholders document the contract; remove the skips once the wiring
 exists.
 """

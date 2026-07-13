@@ -1,4 +1,4 @@
-"""Tests for hermes_runner.orchestrator_round (Task 3.1).
+"""Tests for ut_runner.orchestrator_round (Task 3.1).
 
 orchestrator_round chains REAL v5 Worker functions loaded from hyphenated skill
 dirs via importlib:
@@ -15,15 +15,15 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
+UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
 
 
 @pytest.fixture(scope="module")
 def hr():
-    """Import hermes_runner.py by file path (hyphenated parent dirs)."""
-    sys.path.insert(0, str(HERMES_RUNNER.parent))
-    sys.path.insert(0, str(HERMES_RUNNER.parent.parent.parent))
-    spec = importlib.util.spec_from_file_location("hermes_runner", HERMES_RUNNER)
+    """Import ut_runner.py by file path (hyphenated parent dirs)."""
+    sys.path.insert(0, str(UT_RUNNER.parent))
+    sys.path.insert(0, str(UT_RUNNER.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod

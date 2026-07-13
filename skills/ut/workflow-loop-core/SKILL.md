@@ -120,8 +120,8 @@ while True:
 
     # No Stage 2-5 calls here. Workers are running under Hermes Gateway
     # and write their progress into the Kanban board + manifest.
-    gateway_status = check_gateways_alive()   # supplied by hermes_runner
-    kanban_stats   = poll_kanban_stats()      # supplied by hermes_runner
+    gateway_status = check_gateways_alive()   # supplied by ut_runner
+    kanban_stats   = poll_kanban_stats()      # supplied by ut_runner
 
     handle_checkpoint(state, manifest)        # channel emits its update
     sleep(poll_interval)

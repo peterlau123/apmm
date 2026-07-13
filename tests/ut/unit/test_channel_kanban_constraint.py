@@ -12,13 +12,13 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HR_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
+UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
 
 
 def _load_hr():
-    sys.path.insert(0, str(HR_PATH.parent))
-    sys.path.insert(0, str(HR_PATH.parent.parent.parent))
-    spec = importlib.util.spec_from_file_location("hermes_runner", HR_PATH)
+    sys.path.insert(0, str(UT_RUNNER_PATH.parent))
+    sys.path.insert(0, str(UT_RUNNER_PATH.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER_PATH)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod

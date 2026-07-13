@@ -9,13 +9,13 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-HERMES_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "hermes_runner.py"
+UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
 
 
-def _load_hermes_runner():
-    sys.path.insert(0, str(HERMES_RUNNER.parent))
-    sys.path.insert(0, str(HERMES_RUNNER.parent.parent.parent))
-    spec = importlib.util.spec_from_file_location("hermes_runner", HERMES_RUNNER)
+def _load_ut_runner():
+    sys.path.insert(0, str(UT_RUNNER.parent))
+    sys.path.insert(0, str(UT_RUNNER.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -27,7 +27,7 @@ def test_get_execute_config_flattens_nested(tmp_path):
         "remote": {"server": "t_h20", "docker": "v0.13.0_torch2.5.1_compile",
                    "vllm_dir": "/gpfs/gcsp/M2.7_verify/vllm"},
         "batch_size": 8, "timeout": 600, "pytest_args": "-v --tb=long"}}))
-    hr = _load_hermes_runner()
+    hr = _load_ut_runner()
     cfg = hr.get_execute_config(state_path)
     assert cfg["remote_server"] == "t_h20"
     assert cfg["docker_container"] == "v0.13.0_torch2.5.1_compile"
@@ -39,7 +39,7 @@ def test_get_execute_config_flattens_nested(tmp_path):
 def test_get_execute_config_uses_defaults_when_config_empty(tmp_path):
     state_path = tmp_path / "state.json"
     state_path.write_text(json.dumps({"config": {}}))
-    hr = _load_hermes_runner()
+    hr = _load_ut_runner()
     cfg = hr.get_execute_config(state_path)
     assert cfg["remote_server"] == "t_h20"
     assert cfg["docker_container"] == "v0.13.0_torch2.5.1_compile"

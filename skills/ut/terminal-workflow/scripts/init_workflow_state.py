@@ -234,6 +234,10 @@ def create_initial_state(
     if manifest_path is None:
         manifest_path = run_dir / "manifest.json"
 
+    # 读取 input_filter.manifest_source（优先级高于 test_list_path）
+    input_filter = config.get("input_filter", {})
+    manifest_source = input_filter.get("manifest_source")
+
     # 检查是否已存在
     if workflow_state_path.exists() and not reset:
         print(f"[INFO] workflow_state.json 已存在，跳过初始化")
@@ -245,8 +249,16 @@ def create_initial_state(
 
     now = datetime.now(timezone.utc).isoformat()
 
-    # 如果 manifest 不存在，从 test_list.txt 创建
-    if not manifest_path.exists() and test_list_path:
+    # 创建 manifest.json：
+    # 1. manifest_source 指定 -> 拷贝到 run_dir/manifest.json（优先）
+    # 2. test_list_path 指定 -> 从 test_list.txt 创建
+    # 3. manifest_path 已存在 -> 直接使用
+    if manifest_source and Path(manifest_source).exists():
+        shutil.copy2(Path(manifest_source), manifest_path)
+        print(f"[INFO] manifest.json 已从 manifest_source 拷贝: {manifest_source} -> {manifest_path}")
+        pending_count = get_initial_pending_count(manifest_path)
+        total_count = get_initial_total_count(manifest_path)
+    elif not manifest_path.exists() and test_list_path:
         total_count = create_manifest_from_test_list(test_list_path, manifest_path)
         pending_count = total_count
     else:
@@ -346,7 +358,11 @@ def main():
         type=str,
         default=str(
             Path(__file__).parent.parent.parent.parent.parent
-            / ".agents"
+            / "tasks"
+            / "ut"
+            / "deployment"
+            / "production"
+            / "config"
             / "workflow.yaml"
         ),
         help="workflow.yaml 配置文件路径",

@@ -111,7 +111,7 @@ fixer_task (t_zzz)
 | `skills/ut/failure-handler/scripts/analyze_failures.py` | 开头添加 PYTHONPATH 清除 | failure-handler |
 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py` | 开头添加 PYTHONPATH 清除 | failure-handler |
 | `skills/ut/manifest-updater/scripts/update_manifest.py` | 开头添加 PYTHONPATH 清除 | manifest-updater |
-| `skills/ut/manifest-updater/scripts/update_status.py` | 开头添加 PYTHONPATH 清除 | manifest-updater |
+| `skills/ut/manifest-updater/scripts/update_test_load.py` | 开头添加 PYTHONPATH 清除 | manifest-updater |
 
 **修改模式**（统一应用）:
 ```diff

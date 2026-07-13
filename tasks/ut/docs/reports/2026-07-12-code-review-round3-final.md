@@ -44,7 +44,7 @@ All previous HARD issues resolved:
 2. generate_batch.py -> reads test_load (fallback: manifest)
 3. execute_batch.py -> batch_results.json
 4. failure-handler -> handled_tests.json
-5. update_batch_state.py -> v5 merge to test_load + workflow_state
+5. update_test_load_two_phase.py -> v5 merge to test_load + workflow_state
 6. verify_batch_updated -> checks test_load (not manifest)
 7. update_manifest_from_test_load.py -> syncs test_load -> manifest with v5 fields
 

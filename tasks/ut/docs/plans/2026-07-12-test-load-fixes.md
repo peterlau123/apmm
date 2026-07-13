@@ -4,7 +4,7 @@
 
 **Goal:** Fix all 7 issues from code review round 2 to make test_load data flow correctly end-to-end.
 
-**Architecture:** test_load = working dataset (read/written during run), manifest = master record (updated only at end via update_manifest_from_test_load.py). v5 merge logic centralized in update_status.py, reused by update_batch_state.py.
+**Architecture:** test_load = working dataset (read/written during run), manifest = master record (updated only at end via update_manifest_from_test_load.py). v5 merge logic centralized in update_test_load.py, reused by update_test_load_two_phase.py.
 
 **Tech Stack:** Python 3, argparse, jsonschema
 
@@ -133,7 +133,7 @@ Run: python -c "import py_compile; py_compile.compile(r'skills/ut/manifest-updat
 ### Task 4: Add dependency direction comment (S5)
 
 **Files:**
-- Modify: skills/ut/shared/update_batch_state.py
+- Modify: skills/ut/shared/update_test_load_two_phase.py
 
 **Step 1: Add explanatory comment**
 
@@ -146,7 +146,7 @@ Before the import line, add:
 
 **Step 2: Verify syntax**
 
-Run: python -c "import py_compile; py_compile.compile(r'skills/ut/shared/update_batch_state.py', doraise=True)"
+Run: python -c "import py_compile; py_compile.compile(r'skills/ut/shared/update_test_load_two_phase.py', doraise=True)"
 
 ---
 
@@ -167,6 +167,6 @@ Check all SKILL.md files for backspace (0x08) characters.
 **Step 3: Verify data flow consistency**
 
 - generate_batch.py reads test_load first
-- update_batch_state.py writes to test_load
+- update_test_load_two_phase.py writes to test_load
 - verify_batch_updated checks test_load
 - update_manifest_from_test_load.py syncs to manifest with v5 fields

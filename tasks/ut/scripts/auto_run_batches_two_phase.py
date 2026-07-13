@@ -198,14 +198,14 @@ def validate_batch_results(
     return batch_results_path
 
 
-def update_batch_state(
+def merge_batch(
     batch_id: str,
     batch_results_path: Path,
     workflow_state_path: Path,
 ) -> None:
-    """Stage 4.5: Update test_load + workflow_state via update_batch_state.py
+    """Stage 4.5: Update test_load + workflow_state via update_test_load_two_phase.py
 
-    Uses update_batch_state.py which:
+    Uses update_test_load_two_phase.py which:
     1. Reads batch_results.json + handled_tests.json from batch_dir
     2. Applies v5 merge to test_load (retry_count, retriable_error->ignored, handled overrides)
     3. Updates workflow_state.json batch status to completed
@@ -220,7 +220,7 @@ def update_batch_state(
     """
     cmd = [
         sys.executable,
-        str(_project_root / "skills/ut/shared/update_batch_state.py"),
+        str(_project_root / "skills/ut/shared/update_test_load_two_phase.py"),
         "--workflow-state", str(workflow_state_path),
         "--batch-id", batch_id,
         "--batch-results", str(batch_results_path),
@@ -239,6 +239,9 @@ def verify_batch_updated(batch_id: str, workflow_state_path: Path) -> bool:
 
     Reads test_load path from workflow_state.json, then checks if any test
     has this batch_id with updated status (non-pending).
+
+    Standalone version: skills/ut/manifest-updater/scripts/verify_batch_checkpoint.py
+    (same logic, with CLI interface for external use).
     """
     try:
         state = json.loads(workflow_state_path.read_text(encoding="utf-8"))
@@ -541,7 +544,7 @@ def phase1_batch_loop(
 
             # Stage 4.5: test_load update增量更新
             print(f"  [Stage 4.5] Updating test_load...")
-            update_batch_state(batch_id, result_path, workflow_state_path)
+            merge_batch(batch_id, result_path, workflow_state_path)
 
             # ✅ 检查点4: test_load更新验证
             if enable_force_checkpoints:

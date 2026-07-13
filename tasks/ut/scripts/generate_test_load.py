@@ -132,7 +132,7 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
 def update_workflow_state_test_load(workflow_state_path: Path, test_load_path: Path):
     """Update workflow_state.json with the test_load path.
 
-    This allows generate_batch.py and update_batch_state.py to find the
+    This allows generate_batch.py and update_test_load_two_phase.py to find the
     test_load file from workflow_state.
     """
     if not workflow_state_path or not workflow_state_path.exists():

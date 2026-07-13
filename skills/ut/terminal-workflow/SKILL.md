@@ -35,7 +35,7 @@ python tasks/ut/scripts/generate_test_load.py \
 
 ### State updates during the loop
 
-- **Per-batch**: update_batch_state.py updates test_load (v5 merge: retry_count,
+- **Per-batch**: update_test_load_two_phase.py updates test_load (v5 merge: retry_count,
   retriable_error->ignored, handled_tests overrides) + workflow_state.json
   (batch status -> completed).
 - **Post-loop**: update_manifest_from_test_load.py syncs test_load -> manifest.json
@@ -150,7 +150,7 @@ Based on execution_strategy from confirmed config:
   - Stage 2: generate_batch.py reads test_load, selects batch
   - Stage 3: execute_batch.py runs remote pytest
   - Stage 4: failure-handler produces handled_tests.json
-  - Stage 4.5: update_batch_state.py applies v5 merge to test_load
+  - Stage 4.5: update_test_load_two_phase.py applies v5 merge to test_load
   - Repeat until test_load pending == 0
 
 - **two-phase**: Call auto_run_batches_two_phase.py:

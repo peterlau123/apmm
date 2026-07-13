@@ -84,7 +84,7 @@ print("[OK] workflow.yaml 校验通过，启动 Workflow...")
 | batch_config.json | `generate_batch.py` 输出前 | 不写入，返回错误给 Supervisor |
 | batch_results.json | `run_batch.py` 输出前 | 不写入，返回错误给 Supervisor |
 | handled_tests.json | `generate_handled_manifest.py` 输出前 | 不写入，返回错误给 Supervisor |
-| manifest.json | `update_status.py` 输出前 | 不写入，返回错误给 Supervisor |
+| manifest.json | `update_test_load.py` 输出前 | 不写入，返回错误给 Supervisor |
 
 ---
 
@@ -407,7 +407,7 @@ def migrate_manifest(source_path: Path, target_path: Path, backup: bool = True) 
 | `batch-selector/scripts/generate_batch.py` | batch_config.json | 输出前校验 |
 | `unit-test-executor/scripts/run_batch.py` | batch_results.json | 输出前校验 |
 | `failure-handler/scripts/generate_handled_manifest.py` | handled_tests.json | 输出前校验 |
-| `manifest-updater/scripts/update_status.py` | manifest.json | 输出前校验 |
+| `manifest-updater/scripts/update_test_load.py` | manifest.json | 输出前校验 |
 
 **修改示例 (JSON 输出)**:
 
@@ -447,7 +447,7 @@ print("[OK] workflow.yaml 校验通过，启动 Workflow...")
 - [ ] 4.3 修改 `generate_batch.py` 添加 batch_config.json 校验
 - [ ] 4.4 修改 `run_batch.py` 添加 batch_results.json 校验
 - [ ] 4.5 修改 `generate_handled_manifest.py` 添加 handled_tests.json 校验
-- [ ] 4.6 修改 `update_status.py` 添加 manifest.json 校验
+- [ ] 4.6 修改 `update_test_load.py` 添加 manifest.json 校验
 - [ ] 4.7 验证所有脚本校验逻辑正确
 
 **验证方式**: 运行各脚本，检查校验逻辑正确触发

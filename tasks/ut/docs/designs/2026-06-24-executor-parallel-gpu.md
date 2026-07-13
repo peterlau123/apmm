@@ -196,7 +196,7 @@ python3 -m pytest <node> --junit-xml=<remote>/result_<node>.xml -v --tb=long -o 
 
 ### Bug B — batch 级 raw_log_path 从不写，P1 audit 失败（已修复）
 - **现象**：`batch_results.remote_log.raw_log_path` 指向 `pytest_<batch_id>.log`（batch 级聚合 log），但 v6 每个 node 写的是 per-node log `pytest_<batch_id>_<node>.log`，**batch 级文件从不被写**。
-- **下游影响**：`skills/ut/manifest-updater/scripts/update_status.py:audit_batch_results`（P1 audit）会独立 `stat` `raw_log_path` 并与 `size_bytes` 比对（±4096 容差）。v6 下该文件不存在 → audit 返回 "remote log not found or stat unparseable" → 即使测试真跑通，batch_results.tests 也会被 manifest-updater **拒绝消费**。
+- **下游影响**：`skills/ut/manifest-updater/scripts/update_test_load.py:audit_batch_results`（P1 audit）会独立 `stat` `raw_log_path` 并与 `size_bytes` 比对（±4096 容差）。v6 下该文件不存在 → audit 返回 "remote log not found or stat unparseable" → 即使测试真跑通，batch_results.tests 也会被 manifest-updater **拒绝消费**。
 - **次要问题**：v6 当前 `size_bytes = sum(per-node log sizes)`，与 `raw_log_path` 指向的（不存在的）batch 文件语义不一致。
 - **修复**：
   1. `_aggregate_batch_log()` 函数已在代码中（execute_batch.py:442-471）

@@ -24,7 +24,7 @@ PROJECT_ROOT = SKILL_DIR.parent.parent
 sys.path.insert(0, str(SKILL_DIR))
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from skills.ut.manifest_updater.scripts.update_status import merge_batch_results
+from skills.ut.manifest_updater.scripts.update_test_load import merge_batch_results
 
 # Hermes Kanban API
 try:

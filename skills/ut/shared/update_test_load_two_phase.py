@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-update_batch_state.py - Batch完成后更新test_load和workflow_state
+update_test_load_two_phase.py - Batch完成后更新test_load和workflow_state
 
 数据流架构:
   - test_load = 工作数据集（运行期间活跃读写）
@@ -13,7 +13,7 @@ update_batch_state.py - Batch完成后更新test_load和workflow_state
   3. 更新 workflow_state.json 的 batch 状态为 completed
 
 用法:
-    python update_batch_state.py \
+    python update_test_load_two_phase.py \
         --workflow-state runs/ut-20260708/workflow_state.json \
         --batch-id batch_20260708_130000 \
         --batch-results runs/ut-20260708/batches/batch_20260708_130000/batch_results.json
@@ -36,7 +36,7 @@ if str(_project_root) not in sys.path:
 # NOTE: This imports from manifest-updater (higher-level module) to reuse
 # the v5 merge logic. This is an intentional upward dependency -- the
 # alternative (duplicating merge_batch_results) would violate DRY.
-from skills.ut.manifest_updater.scripts.update_status import merge_batch_results
+from skills.ut.manifest_updater.scripts.update_test_load import merge_batch_results, calculate_statistics
 
 
 def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: dict) -> int:
@@ -54,6 +54,8 @@ def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: d
 
     # v5 merge: batch_results first, then handled_tests overrides
     updated_count = merge_batch_results(test_load, batch_results, handled_tests)
+    # Recompute statistics after merge
+    test_load['statistics'] = calculate_statistics(test_load.get('tests', []))
 
     # 更新时间戳
     test_load['updated_at'] = datetime.now().isoformat()

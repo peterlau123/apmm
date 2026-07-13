@@ -16,7 +16,7 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 ORCH_PATH = PROJECT_ROOT / "skills" / "ut" / "hermes-workflow" / "scripts" / "orchestrator_round.py"
-UPDATE_STATUS = PROJECT_ROOT / "skills" / "ut" / "manifest-updater" / "scripts" / "update_status.py"
+UPDATE_STATUS = PROJECT_ROOT / "skills" / "ut" / "manifest-updater" / "scripts" / "update_test_load.py"
 BATCH_SELECTOR = PROJECT_ROOT / "skills" / "ut" / "batch-selector" / "scripts" / "generate_batch.py"
 
 

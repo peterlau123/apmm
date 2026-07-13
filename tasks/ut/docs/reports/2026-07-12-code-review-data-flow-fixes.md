@@ -51,11 +51,11 @@ merge_batch_results() 和 save_manifest() 都调用 calculate_statistics。冗�
 
 ### HARD 违规
 
-#### P1. update_status.py 缺失 CLI 参数
+#### P1. update_test_load.py 缺失 CLI 参数
 
-被删除的 update_manifest.py 提供以下 CLI 接口，update_status.py 均不支持：
+被删除的 update_manifest.py 提供以下 CLI 接口，update_test_load.py 均不支持：
 
-| 参数 | 功能 | update_status.py 对应 |
+| 参数 | 功能 | update_test_load.py 对应 |
 |------|------|----------------------|
 | --report | 生成文本统计报告 | 无 |
 | --daily-report | 生成 JSON 每日报告 | 无 |
@@ -65,15 +65,15 @@ merge_batch_results() 和 save_manifest() 都调用 calculate_statistics。冗�
 
 同时丢失的函数: generate_report() 和 generate_daily_report()。
 
-但 单元测试流程规范_v2.md 已被更新为引用 update_status.py --report 等不存在的命令。
+但 单元测试流程规范_v2.md 已被更新为引用 update_test_load.py --report 等不存在的命令。
 
 影响: 运维人员按指南执行会直接报错。报告生成功能不可用。
 
-修复方案: 将缺失的参数和函数从 update_manifest.py 迁入 update_status.py。
+修复方案: 将缺失的参数和函数从 update_manifest.py 迁入 update_test_load.py。
 
 #### P2. --test vs --single 参数名不一致
 
-指南写: update_status.py --test xxx --status failed
+指南写: update_test_load.py --test xxx --status failed
 实际参数: --single 而非 --test
 
 修复方案: 添加 --test 作为 --single 的别名，或修正指南。
@@ -86,7 +86,7 @@ merge_batch_results() 和 save_manifest() 都调用 calculate_statistics。冗�
 
 #### P4. SKILL.md State updates 描述与实际行为不一致
 
-文档写道 update_status.py 更新 workflow_state.json batch completed，但实际不更新。
+文档写道 update_test_load.py 更新 workflow_state.json batch completed，但实际不更新。
 
 修复方案: 在 update_from_workflow_state() 末尾调用 update_batch_completed()，或修正文档。
 
@@ -103,7 +103,7 @@ merge_batch_results() 和 save_manifest() 都调用 calculate_statistics。冗�
 
 | 优先级 | 编号 | 问题 | 修复工作量 |
 |--------|------|------|----------|
-| P0 | P1 | update_status.py 缺失 --report/--daily-report/--recalc-stats/--test/--version-mismatch | 中 |
+| P0 | P1 | update_test_load.py 缺失 --report/--daily-report/--recalc-stats/--test/--version-mismatch | 中 |
 | P0 | P2 | 指南引用 --test 但实际参数名是 --single | 小 |
 | P1 | S1 | SKILL.md Markdown 损坏 | 小 |
 | P1 | S2 | generate_test_load.py 注释在 shebang 之前 | 极小 |

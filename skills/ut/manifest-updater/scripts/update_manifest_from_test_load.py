@@ -23,7 +23,7 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.manifest_updater.scripts.update_status import calculate_statistics
+from skills.ut.manifest_updater.scripts.update_test_load import calculate_statistics
 
 
 def update_manifest_from_test_load(manifest_path: Path, test_load_path: Path):

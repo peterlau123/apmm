@@ -19,7 +19,7 @@ def _load(name: str, filename: str):
     return mod
 
 
-update_manifest_mod = _load("ut_updater_update_manifest_v5", "update_manifest.py")
+update_test_load_mod = _load("ut_updater_update_test_load_v5", "update_test_load.py")
 
 
 def _make_manifest(tests):
@@ -34,8 +34,8 @@ def test_last_batch_id_set_after_merge():
         "batch_id": "b001",
         "tests": [{"test_id": "t1", "status": "passed"}],
     }
-    out = update_manifest_mod.update_manifest(manifest, batch_results, {})
-    t1 = next(t for t in out["tests"] if t["test_id"] == "t1")
+    update_test_load_mod.merge_batch_results(manifest, batch_results, {})
+    t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
     assert t1["last_batch_id"] == "b001"
     assert t1["status"] == "passed"
 
@@ -48,8 +48,8 @@ def test_retry_count_incremented_on_failure():
         "batch_id": "b002",
         "tests": [{"test_id": "t1", "status": "failed", "error_type": "assertion"}],
     }
-    out = update_manifest_mod.update_manifest(manifest, batch_results, {})
-    t1 = next(t for t in out["tests"] if t["test_id"] == "t1")
+    update_test_load_mod.merge_batch_results(manifest, batch_results, {})
+    t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
     assert t1["retry_count"] == 1
     assert t1["status"] == "failed"
     assert t1["error_type"] == "assertion"
@@ -63,8 +63,8 @@ def test_retriable_error_max_retry_becomes_ignored():
         "batch_id": "b003",
         "tests": [{"test_id": "t1", "status": "retriable_error", "error_type": "oom"}],
     }
-    out = update_manifest_mod.update_manifest(manifest, batch_results, {})
-    t1 = next(t for t in out["tests"] if t["test_id"] == "t1")
+    update_test_load_mod.merge_batch_results(manifest, batch_results, {})
+    t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
     assert t1["retry_count"] == 3
     assert t1["status"] == "ignored"
     assert "max retry exceeded for oom" in t1["ignore_reason"]
@@ -84,8 +84,8 @@ def test_statistics_includes_retriable_error_count():
             {"test_id": "t3", "status": "failed", "error_type": "assertion"},
         ],
     }
-    out = update_manifest_mod.update_manifest(manifest, batch_results, {})
-    stats = out["statistics"]
+    update_test_load_mod.merge_batch_results(manifest, batch_results, {})
+    stats = update_test_load_mod.calculate_statistics(manifest["tests"])
     assert stats.get("passed", 0) == 1
     assert stats.get("retriable_error", 0) == 1
     assert stats.get("failed", 0) == 1

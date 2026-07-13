@@ -93,7 +93,7 @@ skills/ut/unit-test-executor/scripts/execute_batch.py
 skills/ut/failure-handler/scripts/analyze_failures.py
 skills/ut/failure-handler/scripts/generate_handled_manifest.py
 skills/ut/manifest-updater/scripts/update_manifest.py
-skills/ut/manifest-updater/scripts/update_status.py
+skills/ut/manifest-updater/scripts/update_test_load.py
 ```
 
 **代码**:

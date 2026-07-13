@@ -14,13 +14,13 @@
 
 用法：
     # 从 workflow_state.json 读取路径
-    python update_status.py --workflow-state PATH --batch --from-file results.json
+    python update_test_load.py --workflow-state PATH --batch --from-file results.json
     
     # 直接指定路径
-    python update_status.py --manifest-path PATH --single "tests/xxx.py::test_func" --status passed
+    python update_test_load.py --manifest-path PATH --single "tests/xxx.py::test_func" --status passed
     
     # 设置 ignored 状态
-    python update_status.py --manifest-path PATH --single "tests/xxx.py::test_func" --status ignored --reason "版本不兼容"
+    python update_test_load.py --manifest-path PATH --single "tests/xxx.py::test_func" --status ignored --reason "版本不兼容"
 
 NOTE: PYTHONPATH must be cleared before importing any project modules to avoid
 Hermes venv leaking into apmm subprocesses (fake 'jsonschema not installed').
@@ -219,6 +219,8 @@ def calculate_statistics(tests: list) -> dict:
         "failed": 0,
         "error": 0,
         "ignored": 0,
+        "retriable_error": 0,
+        "fixed_pending_verify": 0,
         "total": len(tests),
     }
     
@@ -227,7 +229,7 @@ def calculate_statistics(tests: list) -> dict:
         if status in stats:
             stats[status] += 1
     
-    stats["executed"] = stats["passed"] + stats["failed"] + stats["error"]
+    stats["executed"] = stats["passed"] + stats["failed"] + stats["error"] + stats["retriable_error"] + stats["fixed_pending_verify"]
     stats["progress"] = round(stats["executed"] / stats["total"] * 100, 1) if stats["total"] > 0 else 0
     
     return stats
@@ -384,7 +386,10 @@ def update_from_workflow_state(
         return state
 
     paths = state.get("paths", {})
-    manifest_path = Path(paths.get("manifest", ""))
+    # HARD CONTRACT: per-batch writes go to test_load, NOT manifest.
+    test_load_path = Path(paths.get("test_load", ""))
+    if not test_load_path or not test_load_path.exists():
+        return {"error": f"test_load not found in workflow_state paths.test_load: {test_load_path}"}
 
     if batch_id is None:
         batch_id = state.get("current_batch", {}).get("batch_id")
@@ -392,17 +397,13 @@ def update_from_workflow_state(
     if batch_dir is None:
         batches_dir = paths.get("batches_dir")
         if not batches_dir:
-            # Fallback: construct from run_dir if batches_dir not in paths
             run_dir_str = paths.get("run_dir", "")
             if run_dir_str:
                 batches_dir = str(Path(run_dir_str) / "batches")
         if batches_dir and batch_id:
             batch_dir = Path(batches_dir) / batch_id
 
-    if not manifest_path.exists():
-        return {"error": f"manifest.json not found: {manifest_path}"}
-
-    manifest = load_manifest(manifest_path)
+    test_load = load_manifest(test_load_path)
     batch_results_data = {"tests": [], "batch_id": batch_id}
     handled_tests_data = {"tests": []}
 
@@ -439,18 +440,20 @@ def update_from_workflow_state(
             handled_tests_data = json.loads(handled_tests_path.read_text(encoding="utf-8"))
 
     # v5 merge: batch_results first, then handled_tests overrides
-    updated_count = merge_batch_results(manifest, batch_results_data, handled_tests_data)
-    is_valid, errors = save_manifest(manifest, manifest_path)
-    if not is_valid:
-        return {"error": "schema_validation_failed", "details": errors}
+    updated_count = merge_batch_results(test_load, batch_results_data, handled_tests_data)
+    test_load["statistics"] = calculate_statistics(test_load.get("tests", []))
+    test_load["updated_at"] = datetime.now().isoformat()
+    test_load_path.write_text(
+        json.dumps(test_load, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
     return {
         "status": "updated",
-        "manifest_path": str(manifest_path),
+        "test_load_path": str(test_load_path),
         "batch_dir": str(batch_dir) if batch_dir else None,
         "batch_id": batch_id,
         "updated_count": updated_count,
-        "statistics": manifest["statistics"],
+        "statistics": test_load["statistics"],
         "timestamp": datetime.now().isoformat()
     }
 

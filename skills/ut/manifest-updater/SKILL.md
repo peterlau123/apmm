@@ -1,7 +1,7 @@
 ---
 name: manifest-updater
 description: Stage 5 - update test_load per-batch (v5 merge), sync to manifest post-loop
-version: 4.0.0
+version: 4.1.0
 when_to_use: Per-batch after Stage 4 (failure-handler); post-loop when test_load pending==0
 ---
 
@@ -11,17 +11,23 @@ when_to_use: Per-batch after Stage 4 (failure-handler); post-loop when test_load
 
 ```
 Per-batch - linear/kanban mode:
-  update_status.py --workflow-state <path>
+  update_test_load.py --workflow-state <path>
     -> update_from_workflow_state()
     -> audit_batch_results() (Type-B stat check on remote log)
     -> merge_batch_results(test_load, batch_results, handled_tests)
     -> writes test_load + validates schema
 
 Per-batch - two-phase mode:
-  update_batch_state.py --workflow-state --batch-id --batch-results
+  update_test_load_two_phase.py --workflow-state --batch-id --batch-results
     -> merge_batch_results(test_load, batch_results, handled_tests)
-    -> writes test_load (NO audit - two-phase uses checkpoint verification instead)
+    -> calculate_statistics(test_load) (recompute, never copy)
+    -> writes test_load (NO stat audit - two-phase uses checkpoint verification instead)
     -> updates workflow_state.json (batch -> completed)
+
+  verify_batch_checkpoint.py --workflow-state --batch-id
+    -> reads test_load from workflow_state paths.test_load
+    -> checks any test has last_batch_id == batch_id with non-pending status
+    -> exit 0 = verified, 1 = failed, 2 = error
 
 Post-loop (when test_load pending == 0):
   update_manifest_from_test_load.py
@@ -29,7 +35,7 @@ Post-loop (when test_load pending == 0):
     -> uses calculate_statistics for manifest statistics
 
 Manual/debug:
-  update_status.py --report / --daily-report / --recalc-stats / --single / --batch
+  update_test_load.py --report / --daily-report / --recalc-stats / --single / --batch
 ```
 
 ## HARD CONTRACT (non-negotiable)
@@ -42,8 +48,8 @@ Manual/debug:
 2. **Stat audit in linear/kanban mode.** update_from_workflow_state() runs
    audit_batch_results() which stat-checks the remote pytest log before
    consuming batch_results. If audit returns {"error":"audit_failed"},
-   test_load MUST NOT be mutated. Two-phase mode uses checkpoint
-   verification (verify_batch_updated) instead of stat audit.
+   test_load MUST NOT be mutated. Two-phase mode uses
+   verify_batch_checkpoint.py instead of stat audit.
 
 3. **batch_results.json is read-only.** Stage 5 never re-classifies tests,
    never re-runs pytest, never edits batch_results.json. The only permitted
@@ -74,11 +80,12 @@ For each test in handled_tests['tests'] (applied AFTER batch_results):
 
 | Script | Location | Purpose |
 |--------|----------|---------|
-| update_status.py | manifest-updater/scripts/ | Linear/kanban per-batch (with audit) + manual CLI + library |
-| update_batch_state.py | shared/ | Two-phase per-batch (no audit) + workflow_state update |
+| update_test_load.py | manifest-updater/scripts/ | Linear/kanban per-batch (with stat audit) + manual CLI + shared library |
+| update_test_load_two_phase.py | shared/ | Two-phase per-batch (no stat audit) + workflow_state update |
+| verify_batch_checkpoint.py | manifest-updater/scripts/ | Two-phase checkpoint: verify test_load was updated for a batch |
 | update_manifest_from_test_load.py | manifest-updater/scripts/ | Post-loop: sync test_load -> manifest.json |
-| generate_daily_reports.py | manifest-updater/scripts/ | Utility: daily report |
-| merge_phases.py | manifest-updater/scripts/ | Utility: merge Phase 1+2 manifests |
+| generate_daily_reports.py | manifest-updater/scripts/ | Utility: daily report (deprecated, use --daily-report flag) |
+| merge_phases.py | manifest-updater/scripts/ | Utility: one-time merge Phase 1+2 manifests |
 
 ## Input / Output
 
@@ -120,11 +127,12 @@ Output: manifest.json        (updated with all results + v5 fields)
 ## Related
 
 - [manifest_schema.json](../shared/manifest_schema.json)
-- [update_status.py](scripts/update_status.py) - merge_batch_results + audit + CLI
+- [update_test_load.py](scripts/update_test_load.py) - merge_batch_results + stat audit + CLI (linear/kanban)
+- [update_test_load_two_phase.py](../shared/update_test_load_two_phase.py) - Two-phase per-batch (no stat audit)
+- [verify_batch_checkpoint.py](scripts/verify_batch_checkpoint.py) - Two-phase checkpoint verification
 - [update_manifest_from_test_load.py](scripts/update_manifest_from_test_load.py) - Post-loop sync
-- [update_batch_state.py](../shared/update_batch_state.py) - Two-phase per-batch
 
 ---
 
 *Updated: 2026-07-13*
-*Version: 4.0.0*
+*Version: 4.1.0*

@@ -473,7 +473,7 @@ def _parse_junit(xml_text: str, *, exit_code: int, node: str) -> dict:
 #
 # remote_log.raw_log_path points at the batch-level pytest_<batch_id>.log, but
 # v6's per-test watchdogs only write per-node logs (pytest_<batch_id>_<slug>.log).
-# The P1 audit (update_status.audit_batch_results) independently `stat`s
+# The P1 audit (update_test_load.audit_batch_results) independently `stat`s
 # raw_log_path and rejects the batch if it's missing/empty — so a phantom batch
 # path makes every genuinely-passing batch un-consumable. We materialize the
 # batch log by concatenating the per-node logs (in input order) and stat it for

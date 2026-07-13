@@ -155,7 +155,7 @@ skills/ut/
 │   ├── SOUL.md  ← ut-manifest-updater 身份定义
 │   ├── scripts/
 │   │   ├── update_manifest.py
-│   │   └── update_status.py
+│   │   └── update_test_load.py
 │   └── references/
 │
 ├── unit-test-collector/  ← Stage1 Worker（新增）

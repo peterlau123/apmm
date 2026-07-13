@@ -162,7 +162,7 @@
 
 | 分类 | 文件数 | 典型文件 |
 |------|:------:|----------|
-| **A. 已迁移脚本** | 16 | `scripts/merge_manifests.py`, `scripts/update_status.py` |
+| **A. 已迁移脚本** | 16 | `scripts/merge_manifests.py`, `scripts/update_test_load.py` |
 | **B. Archive备份** | 5 | `test_analysis/archive/phase1_manifest_*.json` |
 | **C. 过时状态文件** | 4 | `execution_state.json`, `state_manager.py` |
 | **D. 测试脚本残留** | 4 | `scripts/test_automation_unit_tests.py`, `conftest.py` |
@@ -274,7 +274,7 @@
     - `init_workflow_state.py` → workflow_state.json ✅
     - `generate_batch.py` → batch_config.json ✅
     - `generate_handled_manifest.py` → handled_tests.json ✅
-    - `update_status.py` → manifest.json ✅
+    - `update_test_load.py` → manifest.json ✅
     - `supervisor_loop.py` → workflow.yaml 启动前校验 ✅
   - 需求:
     1. 创建通用校验函数 `validate_schema.py` ✅
@@ -307,7 +307,7 @@
 - init_workflow_state.py: workflow_state.json 校验
 - generate_batch.py: batch_config.json 校验
 - generate_handled_manifest.py: handled_tests.json 校验
-- update_status.py: manifest.json 校验
+- update_test_load.py: manifest.json 校验
 
 ---
 

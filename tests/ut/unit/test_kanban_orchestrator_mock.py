@@ -47,7 +47,7 @@ def _make_test(test_id, status="pending", retry_count=0, max_retry=3, deps=None)
 class TestOrchestratorRoundMultiRound:
     """Test multi-round orchestrator behavior with mocked workers."""
 
-    def test_round1_select_tests_no_prev_batch(self, hr, tmp_path):
+    def test_round1_select_tests_no_prev_batch(self, orch, tmp_path):
         """Round 1: No prev batch → select pending tests."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -57,10 +57,12 @@ class TestOrchestratorRoundMultiRound:
             _make_test("t2", status="pending"),
             _make_test("t3", status="passed"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=None,
             batch_size=8,
         )
@@ -69,7 +71,7 @@ class TestOrchestratorRoundMultiRound:
         assert result["next_batch"]["selected_count"] == 2
         assert len(list(run_dir.glob("batch_*"))) == 1
 
-    def test_round2_reconcile_prev_batch_results(self, hr, tmp_path):
+    def test_round2_reconcile_prev_batch_results(self, orch, tmp_path):
         """Round 2: Reconcile prev batch results → update manifest → select remaining."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -79,6 +81,8 @@ class TestOrchestratorRoundMultiRound:
             _make_test("t1", status="pending"),
             _make_test("t2", status="pending"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         prev_batch_dir = run_dir / "batch_0001"
         prev_batch_dir.mkdir()
@@ -89,7 +93,7 @@ class TestOrchestratorRoundMultiRound:
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=prev_batch_dir,
             batch_size=8,
         )
@@ -101,7 +105,7 @@ class TestOrchestratorRoundMultiRound:
         assert result["next_batch"]["selected_count"] == 1
         assert result["next_batch"]["tests"][0]["test_id"] == "t2"
 
-    def test_round3_completed_when_nothing_pending(self, hr, tmp_path):
+    def test_round3_completed_when_nothing_pending(self, orch, tmp_path):
         """Round 3: All tests passed → completed=True, next_batch=None."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -111,10 +115,12 @@ class TestOrchestratorRoundMultiRound:
             _make_test("t1", status="passed"),
             _make_test("t2", status="passed"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=None,
             batch_size=8,
         )
@@ -122,7 +128,7 @@ class TestOrchestratorRoundMultiRound:
         assert result["completed"] is True
         assert result["next_batch"] is None
 
-    def test_reconcile_with_retriable_error(self, hr, tmp_path):
+    def test_reconcile_with_retriable_error(self, orch, tmp_path):
         """Reconcile retriable error → increment retry_count, status stays retriable_error."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -131,6 +137,8 @@ class TestOrchestratorRoundMultiRound:
         manifest_path.write_text(json.dumps(_make_manifest([
             _make_test("t1", status="pending", retry_count=0, max_retry=3),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         prev_batch_dir = run_dir / "batch_0001"
         prev_batch_dir.mkdir()
@@ -141,7 +149,7 @@ class TestOrchestratorRoundMultiRound:
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=prev_batch_dir,
             batch_size=8,
         )
@@ -158,7 +166,7 @@ class TestOrchestratorRoundMultiRound:
 class TestOrchestratorRoundDependencyChains:
     """Test dependency chain handling with mocked batch selector."""
 
-    def test_dependency_not_checked_by_selector(self, hr, tmp_path):
+    def test_dependency_not_checked_by_selector(self, orch, tmp_path):
         """Batch selector does NOT check dependencies - both tests selected."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -168,17 +176,19 @@ class TestOrchestratorRoundDependencyChains:
             _make_test("t1", status="pending"),
             _make_test("t2", status="pending", deps=["t1"]),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=None,
             batch_size=8,
         )
 
         assert result["next_batch"]["selected_count"] == 2
 
-    def test_dependency_resolved_after_reconcile(self, hr, tmp_path):
+    def test_dependency_resolved_after_reconcile(self, orch, tmp_path):
         """After t1 passes, t2 becomes selectable."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -188,6 +198,8 @@ class TestOrchestratorRoundDependencyChains:
             _make_test("t1", status="pending"),
             _make_test("t2", status="pending", deps=["t1"]),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         prev_batch_dir = run_dir / "batch_0001"
         prev_batch_dir.mkdir()
@@ -198,7 +210,7 @@ class TestOrchestratorRoundDependencyChains:
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=prev_batch_dir,
             batch_size=8,
         )
@@ -209,7 +221,7 @@ class TestOrchestratorRoundDependencyChains:
         assert result["next_batch"]["selected_count"] == 1
         assert result["next_batch"]["tests"][0]["test_id"] == "t2"
 
-    def test_handled_tests_applies_status_override(self, hr, tmp_path):
+    def test_handled_tests_applies_status_override(self, orch, tmp_path):
         """Handled tests should apply status override from handled_tests.json."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -219,6 +231,8 @@ class TestOrchestratorRoundDependencyChains:
             _make_test("t1", status="pending"),
             _make_test("t2", status="pending"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         prev_batch_dir = run_dir / "batch_0001"
         prev_batch_dir.mkdir()
@@ -232,7 +246,7 @@ class TestOrchestratorRoundDependencyChains:
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=prev_batch_dir,
             batch_size=8,
         )
@@ -248,7 +262,7 @@ class TestOrchestratorRoundDependencyChains:
 class TestOrchestratorRoundBatchSizing:
     """Test batch size handling."""
 
-    def test_batch_size_respected(self, hr, tmp_path):
+    def test_batch_size_respected(self, orch, tmp_path):
         """Batch size limit should be respected."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -260,17 +274,19 @@ class TestOrchestratorRoundBatchSizing:
             _make_test("t3", status="pending"),
             _make_test("t4", status="pending"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=None,
             batch_size=2,
         )
 
         assert result["next_batch"]["selected_count"] == 2
 
-    def test_small_batch_multiple_rounds(self, hr, tmp_path):
+    def test_small_batch_multiple_rounds(self, orch, tmp_path):
         """Small batch size requires multiple rounds to complete all tests."""
         run_dir = tmp_path / "run"
         run_dir.mkdir()
@@ -281,10 +297,12 @@ class TestOrchestratorRoundBatchSizing:
             _make_test("t2", status="pending"),
             _make_test("t3", status="pending"),
         ])))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result1 = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=None,
             batch_size=1,
         )
@@ -301,10 +319,12 @@ class TestOrchestratorRoundBatchSizing:
             if t["test_id"] == result1["next_batch"]["tests"][0]["test_id"]:
                 t["status"] = "passed"
         manifest_path.write_text(json.dumps(manifest))
+        wsp = run_dir / "workflow_state.json"
+        wsp.write_text(json.dumps({"paths": {"test_load": str(manifest_path)}}))
 
         result2 = orch.orchestrator_round(
             run_dir=run_dir,
-            manifest_path=manifest_path,
+            workflow_state_path=wsp,
             prev_batch_dir=batch_dir,
             batch_size=1,
         )

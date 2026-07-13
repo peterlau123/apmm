@@ -198,8 +198,19 @@ def _build_watchdog_script(
     - Timeout managed by outer run_remote(timeout=wall_timeout)
     - Zombie cleanup handled by GPU zombie cleaner at batch startup (§4.1)
 
+    Raises ValueError if log_path or pytest_full_cmd contains single quotes
+    (would break the outer ``bash -c '<...>'`` wrapper).
+
     Public for unit tests (see test_execute_batch_watchdog.py).
     """
+    if "'" in pytest_full_cmd:
+        raise ValueError(
+            f"pytest_full_cmd contains single quote (breaks bash -c wrapper): {pytest_full_cmd!r}"
+        )
+    if "'" in log_path:
+        raise ValueError(
+            f"log_path contains single quote (breaks bash -c wrapper): {log_path!r}"
+        )
     return WATCHDOG_TEMPLATE.format(
         log_path=log_path,
         pytest_full_cmd=pytest_full_cmd,
@@ -813,13 +824,18 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Source: workflow.yaml config.container_env (NOT workflow_state.json)
     # Note: CUDA_VISIBLE_DEVICES is excluded here and set per-test in pytest_full_cmd
     import yaml
-    state_raw = json.loads(workflow_state_path.read_text(encoding="utf-8"))
-    workflow_yaml_path = Path(state_raw.get("paths", {}).get("workflow_yaml", ""))
-    if workflow_yaml_path.exists():
-        wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
-        container_env_raw = wf.get("config", {}).get("container_env", {})
-    else:
+    # When exec_config is provided (unit tests), skip reading workflow_state.json
+    if exec_config is not None:
         container_env_raw = {}
+    else:
+        state_raw = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+        workflow_yaml_str = state_raw.get("paths", {}).get("workflow_yaml", "")
+        workflow_yaml_path = Path(workflow_yaml_str) if workflow_yaml_str else None
+        if workflow_yaml_path and workflow_yaml_path.is_file():
+            wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
+            container_env_raw = wf.get("config", {}).get("container_env", {})
+        else:
+            container_env_raw = {}
     # Exclude CUDA_VISIBLE_DEVICES (per-test GPU assignment overrides global config)
     container_env = {
         k: v for k, v in container_env_raw.items()

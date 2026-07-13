@@ -24,7 +24,14 @@ PROJECT_ROOT = SKILL_DIR.parent.parent
 sys.path.insert(0, str(SKILL_DIR))
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from skills.ut.manifest_updater.scripts.update_test_load import merge_batch_results
+# Load merge_batch_results from manifest-updater/scripts/update_test_load.py
+# (hyphenated dir name, can't use normal package import)
+_update_test_load_path = SKILL_DIR.parent / "manifest-updater" / "scripts" / "update_test_load.py"
+_spec_utl = importlib.util.spec_from_file_location("_update_test_load", _update_test_load_path)
+_update_test_load_mod = importlib.util.module_from_spec(_spec_utl)
+sys.modules[_spec_utl.name] = _update_test_load_mod
+_spec_utl.loader.exec_module(_update_test_load_mod)
+merge_batch_results = _update_test_load_mod.merge_batch_results
 
 # Hermes Kanban API
 try:
@@ -36,7 +43,7 @@ except ImportError:
 
 def _load_batch_selector_fn(fn_name):
     """Load a function from batch-selector/scripts/generate_batch.py."""
-    path = SKILL_DIR / "batch-selector" / "scripts" / "generate_batch.py"
+    path = SKILL_DIR.parent / "batch-selector" / "scripts" / "generate_batch.py"
     spec = importlib.util.spec_from_file_location("_generate_batch", path)
     mod = importlib.util.module_from_spec(spec)
     sys.modules[spec.name] = mod

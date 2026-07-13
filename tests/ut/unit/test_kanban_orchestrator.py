@@ -29,7 +29,7 @@ def orch():
     return mod
 
 
-def test_orchestrator_round_reconciles_then_selects(hr, tmp_path):
+def test_orchestrator_round_reconciles_then_selects(orch, tmp_path):
     run_dir = tmp_path / "run"
     run_dir.mkdir()
     mp = run_dir / "manifest.json"
@@ -41,6 +41,9 @@ def test_orchestrator_round_reconciles_then_selects(hr, tmp_path):
         ],
         "statistics": {},
     }))
+    # orchestrator_round reads workflow_state.json to find test_load path
+    wsp = run_dir / "workflow_state.json"
+    wsp.write_text(json.dumps({"paths": {"test_load": str(mp)}}))
     prev = run_dir / "batch_prev"
     prev.mkdir()
     (prev / "batch_results.json").write_text(json.dumps({
@@ -50,7 +53,7 @@ def test_orchestrator_round_reconciles_then_selects(hr, tmp_path):
 
     r = orch.orchestrator_round(
         run_dir=run_dir,
-        manifest_path=mp,
+        workflow_state_path=wsp,
         prev_batch_dir=prev,
         batch_size=8,
     )
@@ -62,7 +65,7 @@ def test_orchestrator_round_reconciles_then_selects(hr, tmp_path):
     assert r["completed"] is False
 
 
-def test_orchestrator_round_completed_when_nothing_pending(hr, tmp_path):
+def test_orchestrator_round_completed_when_nothing_pending(orch, tmp_path):
     run_dir = tmp_path / "run"
     run_dir.mkdir()
     mp = run_dir / "manifest.json"
@@ -73,10 +76,12 @@ def test_orchestrator_round_completed_when_nothing_pending(hr, tmp_path):
         ],
         "statistics": {},
     }))
+    wsp = run_dir / "workflow_state.json"
+    wsp.write_text(json.dumps({"paths": {"test_load": str(mp)}}))
 
     r = orch.orchestrator_round(
         run_dir=run_dir,
-        manifest_path=mp,
+        workflow_state_path=wsp,
         prev_batch_dir=None,
         batch_size=8,
     )

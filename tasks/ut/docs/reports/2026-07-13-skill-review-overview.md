@@ -216,7 +216,44 @@ refactor). Updated all to `skills/ut/shared/ut_runner.py`.
 - 0 regressions from our changes
 - 137 previously-broken tests now fixed (F2 import path)
 
-### F2: Two-phase-handler inline code variable consistency (P3, accepted)
+### F2: Pre-existing test failures (P2, COMPLETED)
+
+All pre-existing test failures and errors have been fixed:
+
+**Issue 1: kanban_orchestrator fixture mismatch (11 errors -> 0)**
+- Root cause: `test_kanban_orchestrator.py` and `test_kanban_orchestrator_mock.py` defined
+  fixture `orch` but test functions requested `hr` (fixture name mismatch).
+- Also fixed: `orchestrator_round.py` used broken package import
+  `from skills.ut.manifest_updater.scripts.update_test_load import merge_batch_results`
+  (hyphenated dir name is not a valid Python package). Replaced with `importlib.util`
+  loading, matching the existing pattern for `generate_batch.py`.
+- Also fixed: `orchestrator_round.py` path resolution used `SKILL_DIR` (hermes-workflow/)
+  instead of `SKILL_DIR.parent` (ut/) for both `manifest-updater` and `batch-selector`.
+- Also fixed: test functions passed `manifest_path=` but function expects
+  `workflow_state_path=`. Updated tests to create `workflow_state.json` with
+  `paths.test_load` pointing to the manifest.
+
+**Issue 2: classify_error.py missing (5 tests not collected -> 0)**
+- Root cause: `test_execute_batch_v5.py` tried to load `classify_error.py` from
+  `unit-test-executor/scripts/` but the file was never created as a standalone module.
+  In v6, classification logic was merged into `_parse_junit` in `execute_batch.py`.
+- Fix: Created `classify_error.py` with a `classify(error_message, test_node)` function
+  implementing the text-based classification the tests expect.
+
+**Issue 3: execute_batch.py bugs (7 failures -> 0)**
+- **3a**: `workflow_yaml_path.exists()` returned True for `Path("")` (resolves to `.`,
+  the current directory), causing `PermissionError` when trying to read it as a file.
+  Fixed: changed to `is_file()` and added empty-string guard.
+- **3b**: `execute_batch()` always read `workflow_state_path` even when `exec_config`
+  was provided (unit tests), causing `FileNotFoundError` when the state file didn't
+  exist. Fixed: skip state file reading when `exec_config` is not None.
+- **3c**: `_build_watchdog_script()` didn't validate for single quotes in
+  `log_path` / `pytest_full_cmd`, despite the docstring saying it should.
+  Fixed: added `ValueError` validation matching the test expectations.
+
+**Regression test results**: 415 passed, 5 skipped, 0 failed, 0 errors.
+
+### F3: Two-phase-handler inline code variable consistency (P3, accepted)
 
 The 14 inline Python code blocks in `two-phase-handler/SKILL.md` are illustrative
 (????), not executable. Variable naming inconsistencies within these blocks

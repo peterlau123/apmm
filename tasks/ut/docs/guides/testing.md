@@ -198,7 +198,7 @@ D:\workspace\apmm\
 │   ├── test_summary.md   # 测试结果汇总（最终统计）
 │   ├── import_errors_summary.md # 导入错误分类详情
 │   └── README.md         # 本文件
-└── CLAUDE.md             # 项目说明
+└── AGENTS.md             # 项目说明
 ```
 
 远程目录 `/gpfs/gcsp/M2.7_verify/`:

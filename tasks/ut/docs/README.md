@@ -2,7 +2,7 @@
 
 > **vLLM pytest 单元测试套件 — 所有 UT 专属文档**
 >
-> ⚠️ **本目录是 UT 文档唯一收纳处**。项目级 `docs/` 禁止接收 UT-only 文档；归位规则见 [`CLAUDE.md` §5](../../../CLAUDE.md)。
+> ⚠️ **本目录是 UT 文档唯一收纳处**。项目级 `docs/` 禁止接收 UT-only 文档；归位规则见 [`AGENTS.md` §5](../../../AGENTS.md)。
 >
 > 主入口在父目录的 [`tasks/ut/README.md`](../README.md)。本文件是 UT **文档**（设计 / 指南 / 报告 / 事故）的导航。
 

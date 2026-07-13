@@ -5,7 +5,7 @@
 > ⚠️ **本目录只放跨子系统 / 项目级文档**（bastion / environment / ai-workflow / superpowers 框架自身）。
 > 禁止接收仅服务单一 `tasks/<x>` 的详细文档（spec / plan / incident / report / 子系统运维 guide）。
 >
-> 归位规则见 [`CLAUDE.md` §5](../CLAUDE.md)。子系统文档入口：
+> 归位规则见 [`AGENTS.md` §5](../AGENTS.md)。子系统文档入口：
 > - UT：[`tasks/ut/docs/`](../tasks/ut/docs/README.md)
 > - accuracy / performance / 其它：在 `tasks/<x>/docs/` 下镜像同样的目录骨架。
 

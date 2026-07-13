@@ -22,7 +22,6 @@ apmm/
 ├── README.md         # 本文件 — 项目总入口
 ├── AGENTS.md         # Agent 工作指南
 ├── PROGRESS.md       # 总体进度
-└── CLAUDE.md         # AI 行为准则
 ```
 
 ---

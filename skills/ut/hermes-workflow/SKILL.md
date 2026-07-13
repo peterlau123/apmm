@@ -182,7 +182,9 @@ When user sends a trigger message ("跑L4" / "跑 ut workflow" / "正式生产")
 
 |-----------|----------|---------|-------------|
 
-| manifest 位置 | input_filter.test_list_path | (from yaml) | test_list.txt 路径 |
+| test_list 路径 | input_filter.test_list_path | (from yaml) | test_list.txt 路径（与 manifest_source 二选一） |
+
+| manifest 来源 | input_filter.manifest_source | null | 已有 manifest.json 路径（优先于 test_list_path） |
 
 | 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
 

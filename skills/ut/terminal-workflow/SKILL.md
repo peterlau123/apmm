@@ -59,7 +59,8 @@ When user triggers workflow (e.g. "开始运行单元测试" / "跑 ut workflow"
 
 | Parameter | yaml key | Default | Description |
 |-----------|----------|---------|-------------|
-| manifest 位置 | input_filter.test_list_path | (from yaml) | test_list.txt 原始路径 |
+| test_list 路径 | input_filter.test_list_path | (from yaml) | test_list.txt 原始路径（与 manifest_source 二选一） |
+| manifest 来源 | input_filter.manifest_source | null | 已有 manifest.json 路径（优先于 test_list_path） |
 | 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
 | test_load 数量 | workflow.test_load.count | 1000 | 从 manifest 抽取的 test 数 |
 | batch_size | config.batch_size | 8 | 每批测试数量 |

@@ -64,7 +64,7 @@ def calculate_batch_stats(batches: dict) -> dict:
     return stats
 
 
-def calculate_test_stats(batches: dict, manifest_stats: dict = None) -> dict:
+def calculate_test_stats(batches: dict, test_load_stats: dict = None) -> dict:
     """统计 test 数量"""
     stats = {"passed": 0, "failed": 0, "error": 0, "ignored": 0, "pending": 0}
     for batch_info in batches.values():
@@ -75,9 +75,9 @@ def calculate_test_stats(batches: dict, manifest_stats: dict = None) -> dict:
             stats["error"] += batch_stats.get("error", 0)
             stats["ignored"] += batch_stats.get("ignored", 0)
 
-    if manifest_stats:
-        stats["pending"] = manifest_stats.get("pending", 0)
-        stats["total_tests"] = manifest_stats.get("total_tests", 0)
+    if test_load_stats:
+        stats["pending"] = test_load_stats.get("pending", 0)
+        stats["total_tests"] = test_load_stats.get("total_tests", 0)
     return stats
 
 

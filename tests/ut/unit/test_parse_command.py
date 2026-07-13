@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
+UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "shared" / "ut_runner.py"
 
 
 @pytest.fixture(scope="module")

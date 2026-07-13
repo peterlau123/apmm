@@ -572,19 +572,19 @@ def apply_pending_config(state_path) -> dict:
     return effective
 
 
-def refresh_manifest_stats(state_path, manifest_path) -> dict:
-    """Tally test statuses from the manifest into state['manifest_stats'].
+def refresh_test_load_stats(state_path, test_load_path) -> dict:
+    """Tally test statuses from the test_load into state['test_load_stats'].
 
     Feeds check_stop_conditions. Returns the tally dict.
     """
-    manifest = _read_json(manifest_path)
+    test_load = _read_json(test_load_path)
     stats: dict = {}
-    for t in manifest.get("tests", []):
+    for t in test_load.get("tests", []):
         status = t.get("status")
         stats[status] = stats.get(status, 0) + 1
 
     state = _read_json(state_path)
-    state["manifest_stats"] = stats
+    state["test_load_stats"] = stats
     _write_json(state_path, state)
     return stats
 
@@ -594,11 +594,11 @@ def refresh_manifest_stats(state_path, manifest_path) -> dict:
 def check_stop_conditions(state_path) -> tuple[bool, str, str]:
     """Terminal check: (done, reason, status).
 
-    done = True iff manifest_stats.pending == 0 AND running == 0.
+    done = True iff test_load_stats.pending == 0 AND running == 0.
     status is one of {"completed", ""} (channels add their own statuses).
     """
     state = _read_json(state_path)
-    stats = state.get("manifest_stats") or {}
+    stats = state.get("test_load_stats") or {}
     pending = stats.get("pending", 1)  # default 1 → not done
     running = stats.get("running", 0)
 

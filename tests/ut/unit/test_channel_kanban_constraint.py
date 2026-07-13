@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
+UT_RUNNER_PATH = PROJECT_ROOT / "skills" / "ut" / "shared" / "ut_runner.py"
 
 
 def _load_hr():

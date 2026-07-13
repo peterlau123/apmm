@@ -18,7 +18,7 @@ Run Python with the repo on path. The runner self-resolves the project root
 from its own location and adds `skills/ut/shared` + its scripts dir to sys.path:
 - `D:/workspace/apmm/skills/ut/shared/ut_runner.py`
   → `parse_command, init_or_resume, validate_required_config,
-     check_gateways_alive, refresh_manifest_stats, check_stop_conditions,
+     check_gateways_alive, refresh_test_load_stats, check_stop_conditions,
      apply_pending_config, send_feishu_card`
 - `D:/workspace/apmm/skills/ut/terminal-workflow/scripts/bastion_manager.py`
   → `BastionManager, otp_resend_delay, otp_should_at_user`

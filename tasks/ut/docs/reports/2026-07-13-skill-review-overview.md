@@ -144,7 +144,7 @@ Remaining `manifest` references are all SKILL names (`manifest-updater`, `manife
 |---|----------|-------|-----|
 | 10.1 | P1 | HARD CONTRACT rule 1: "Stage 5 mutates `manifest.json`" | Fixed: "Stage 5 mutates `test_load`" |
 | 10.2 | P1 | `handle_checkpoint(state, manifest)` + `check_terminal_conditions(state, manifest)` | Fixed: both changed to `test_load` |
-| 10.3 | P1 | `refresh_manifest_stats(state_path, manifest_path)` param name | Fixed: doc shows `test_load_path` (function name kept - see Follow-up F1) |
+| 10.3 | P1 | `refresh_manifest_stats(state_path, manifest_path)` param name | Fixed: renamed to `refresh_test_load_stats(state_path, test_load_path)` (see F1 - completed) |
 | 10.4 | P1 | `send_feishu_card` progress + complete cards used `manifest` | Fixed: both changed to `test_load` |
 | 10.5 | P2 | §6 Kanban: "never touches the manifest" + "manifest has a single writer" + "read-only from the manifest" | Fixed: all changed to `test_load` |
 | 10.6 | P2 | §11.2 Pitfalls: "the manifest is poisoned" + `mv manifest.json` | Fixed: "test_load is poisoned" + `mv test_load_xxx.json` |
@@ -182,27 +182,39 @@ Remaining `manifest` references are all SKILL names (`manifest-updater`, `manife
 
 ## Follow-up Items (Not Addressed in This Review)
 
-### F1: Rename `refresh_manifest_stats` function (P2, deferred)
+### F1: Rename `refresh_manifest_stats` -> `refresh_test_load_stats` (P2, COMPLETED)
 
-The function `refresh_manifest_stats(state_path, manifest_path)` in `skills/ut/shared/ut_runner.py`
-still uses the legacy name. During the loop it receives `test_load_path`, not `manifest_path`.
-The state key `manifest_stats` is also legacy.
+**Status**: Done. Full rename + regression test passed.
 
-**Recommended rename**:
-- `refresh_manifest_stats` -> `refresh_test_load_stats`
-- State key `manifest_stats` -> `test_load_stats`
+**Changes applied**:
+- `refresh_manifest_stats` -> `refresh_test_load_stats` (function name)
+- `manifest_path` -> `test_load_path` (parameter name)
+- `manifest_stats` -> `test_load_stats` (state key in workflow_state.json)
+- `TestRefreshManifestStats` -> `TestRefreshTestLoadStats` (test class name)
 
-**Affected files** (requires separate PR + test update):
-- `skills/ut/shared/ut_runner.py` (function def + `check_stop_conditions`)
+**Files modified** (12 files):
+- `skills/ut/shared/ut_runner.py` (function def + `check_stop_conditions` + state key)
 - `skills/ut/shared/workflow_state_manager.py` (`calculate_test_stats` parameter)
-- `tests/ut/unit/test_hermes_runner_api.py` (5+ references)
-- `tests/ut/unit/test_kanban_board.py` (6+ references)
-- `tests/ut/unit/test_loop_core_contract.py` (1 reference)
+- `skills/ut/hermes-workflow/SKILL.md` (2 references in import list + handle_checkpoint)
 - `tests/ut/integration/fixtures/profiles/ut-supervisor/SOUL.md` (1 reference)
-- Multiple docs/plans/worklog files (historical, do not modify)
+- `tests/ut/unit/test_hermes_runner_api.py` (function + state key + test name)
+- `tests/ut/unit/test_kanban_board.py` (function + state key + class name)
+- `tests/ut/unit/test_loop_core_contract.py` (docstring)
+- `tests/ut/unit/test_channel_kanban_constraint.py` (F2: import path fix)
+- `tests/ut/unit/test_classify_intent.py` (F2: import path fix)
+- `tests/ut/unit/test_config_contract.py` (F2: import path fix)
+- `tests/ut/unit/test_kanban_gateway.py` (F2: import path fix)
+- `tests/ut/unit/test_parse_command.py` (F2: import path fix)
 
-**Decision**: Doc-only fix applied this round (parameter name in SKILL.md).
-Function rename deferred to avoid breaking tests without full regression.
+**Also fixed F2** (pre-existing): 7 test files imported `ut_runner.py` from
+`skills/ut/terminal-workflow/scripts/ut_runner.py` (file moved to `shared/` in v5
+refactor). Updated all to `skills/ut/shared/ut_runner.py`.
+
+**Regression test results**:
+- 385 passed, 5 skipped
+- 7 failed + 11 errors (all pre-existing, verified by git stash comparison)
+- 0 regressions from our changes
+- 137 previously-broken tests now fixed (F2 import path)
 
 ### F2: Two-phase-handler inline code variable consistency (P3, accepted)
 

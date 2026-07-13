@@ -1,6 +1,6 @@
 """Tests for Kanban board functions.
 
-Task 2.2: Additional tests for parse_command and refresh_manifest_stats.
+Task 2.2: Additional tests for parse_command and refresh_test_load_stats.
 Focuses on edge cases and integration scenarios.
 """
 import importlib.util
@@ -12,7 +12,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
+UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "shared" / "ut_runner.py"
 
 
 @pytest.fixture(scope="module")
@@ -115,8 +115,8 @@ class TestParseCommandEdgeCases:
         assert result["type"] == "stop"
 
 
-class TestRefreshManifestStats:
-    """Test refresh_manifest_stats with various manifest states."""
+class TestRefreshTestLoadStats:
+    """Test refresh_test_load_stats with various manifest states."""
 
     def test_empty_manifest(self, hr, tmp_path):
         """Empty manifest produces empty stats."""
@@ -125,7 +125,7 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({"config": {}}))
 
-        stats = hr.refresh_manifest_stats(state_path, manifest_path)
+        stats = hr.refresh_test_load_stats(state_path, manifest_path)
         assert stats == {}
 
     def test_single_status(self, hr, tmp_path):
@@ -143,7 +143,7 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({"config": {}}))
 
-        stats = hr.refresh_manifest_stats(state_path, manifest_path)
+        stats = hr.refresh_test_load_stats(state_path, manifest_path)
         assert stats["passed"] == 3
 
     def test_mixed_statuses(self, hr, tmp_path):
@@ -164,7 +164,7 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({"config": {}}))
 
-        stats = hr.refresh_manifest_stats(state_path, manifest_path)
+        stats = hr.refresh_test_load_stats(state_path, manifest_path)
         assert stats["passed"] == 1
         assert stats["pending"] == 1
         assert stats["running"] == 1
@@ -183,10 +183,10 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({"config": {}, "iteration": 5}))
 
-        hr.refresh_manifest_stats(state_path, manifest_path)
+        hr.refresh_test_load_stats(state_path, manifest_path)
 
         state = json.loads(state_path.read_text())
-        assert state["manifest_stats"]["passed"] == 1
+        assert state["test_load_stats"]["passed"] == 1
         assert state["iteration"] == 5
 
     def test_overwrites_previous_stats(self, hr, tmp_path):
@@ -200,14 +200,14 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({
             "config": {},
-            "manifest_stats": {"passed": 99, "pending": 99},
+            "test_load_stats": {"passed": 99, "pending": 99},
         }))
 
-        hr.refresh_manifest_stats(state_path, manifest_path)
+        hr.refresh_test_load_stats(state_path, manifest_path)
 
         state = json.loads(state_path.read_text())
-        assert state["manifest_stats"]["passed"] == 1
-        assert "pending" not in state["manifest_stats"]
+        assert state["test_load_stats"]["passed"] == 1
+        assert "pending" not in state["test_load_stats"]
 
     def test_missing_status_key(self, hr, tmp_path):
         """Test entry without status key counts as None status."""
@@ -223,7 +223,7 @@ class TestRefreshManifestStats:
         state_path = tmp_path / "state.json"
         state_path.write_text(json.dumps({"config": {}}))
 
-        stats = hr.refresh_manifest_stats(state_path, manifest_path)
+        stats = hr.refresh_test_load_stats(state_path, manifest_path)
         assert stats.get(None) == 1
         assert stats["passed"] == 1
 

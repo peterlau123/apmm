@@ -20,7 +20,7 @@ def test_supervisor_must_provide_handle_checkpoint():
 
 @pytest.mark.skip(reason="loop_core SKILL-only; wiring lands with channel implementations")
 def test_terminal_pending_zero_returns_completed():
-    """When manifest_stats.pending == 0 and running == 0, check_terminal_conditions
+    """When test_load_stats.pending == 0 and running == 0, check_terminal_conditions
     must return (True, 'completed', reason). loop_core then finalizes state and
     exits. This is the only happy-path exit.
     """

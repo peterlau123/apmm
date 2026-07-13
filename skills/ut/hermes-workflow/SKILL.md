@@ -366,7 +366,7 @@ from ut_runner import (
 
     apply_pending_config,    # merge pending_config → config on resume
 
-    refresh_manifest_stats,  # tally test_load statuses into state
+    refresh_test_load_stats,  # tally test_load statuses into state
 
     check_stop_conditions,   # (done, reason, status)
 
@@ -708,7 +708,7 @@ Called after every successful Stage 5 (and each Kanban poll round):
 
 
 
-1. `refresh_manifest_stats(state_path, test_load_path)` → tally into state.
+1. `refresh_test_load_stats(state_path, test_load_path)` → tally into state.
 
 2. Post a progress card via `send_feishu_card(feishu, "progress", test_load, iteration, ...)`.
 

@@ -14,7 +14,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
+UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "shared" / "ut_runner.py"
 
 
 @pytest.fixture(scope="module")
@@ -123,7 +123,7 @@ def test_apply_pending_config_noop_when_empty(hr, tmp_path):
 def test_check_stop_conditions_done(hr, tmp_path):
     state_path = tmp_path / "workflow_state.json"
     state_path.write_text(json.dumps({
-        "manifest_stats": {"pending": 0, "running": 0, "passed": 10},
+        "test_load_stats": {"pending": 0, "running": 0, "passed": 10},
     }), encoding="utf-8")
     done, reason, status = hr.check_stop_conditions(state_path)
     assert done is True
@@ -134,7 +134,7 @@ def test_check_stop_conditions_done(hr, tmp_path):
 def test_check_stop_conditions_not_done_when_pending(hr, tmp_path):
     state_path = tmp_path / "workflow_state.json"
     state_path.write_text(json.dumps({
-        "manifest_stats": {"pending": 3, "running": 0},
+        "test_load_stats": {"pending": 3, "running": 0},
     }), encoding="utf-8")
     done, reason, status = hr.check_stop_conditions(state_path)
     assert done is False
@@ -145,15 +145,15 @@ def test_check_stop_conditions_not_done_when_pending(hr, tmp_path):
 def test_check_stop_conditions_not_done_when_running(hr, tmp_path):
     state_path = tmp_path / "workflow_state.json"
     state_path.write_text(json.dumps({
-        "manifest_stats": {"pending": 0, "running": 2},
+        "test_load_stats": {"pending": 0, "running": 2},
     }), encoding="utf-8")
     done, _, _ = hr.check_stop_conditions(state_path)
     assert done is False
 
 
-# ── 2.2 refresh_manifest_stats ────────────────────────────────────────────────
+# ── 2.2 refresh_test_load_stats ────────────────────────────────────────────────
 
-def test_refresh_manifest_stats(hr, tmp_path):
+def test_refresh_test_load_stats(hr, tmp_path):
     mp = tmp_path / "manifest.json"
     mp.write_text(json.dumps({"version": "2.0", "tests": [
         {"test_id": "t1", "status": "passed"},
@@ -161,8 +161,8 @@ def test_refresh_manifest_stats(hr, tmp_path):
         {"test_id": "t3", "status": "running"}], "statistics": {}}))
     sp = tmp_path / "state.json"
     sp.write_text(json.dumps({"config": {}}))
-    hr.refresh_manifest_stats(sp, mp)
-    s = json.loads(sp.read_text())["manifest_stats"]
+    hr.refresh_test_load_stats(sp, mp)
+    s = json.loads(sp.read_text())["test_load_stats"]
     assert s["pending"] == 1 and s["running"] == 1 and s["passed"] == 1
 
 

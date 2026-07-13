@@ -1,594 +1,145 @@
 ---
 name: unit-test-executor
-description: Worker Agent - 单元测试执行器，执行 pytest 测试批次（含 GPU 检测），生成 batch_results.json，由 Supervisor 调用执行 Stage 3
-version: 5.0.0
-when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 execute Stage（含 distributed 测试 GPU 检测）
+description: Stage 3 - execute pytest batch remotely, generate batch_results.json
+version: 5.1.0
+when_to_use: Supervisor calls to execute a batch of tests on remote GPU host
 ---
 
-# Unit Test Executor (Worker Agent v5)
-
-> ⚠️ **HARD CONTRACT — read first, before anything else in this file.**
->
-> This 5-rule block is the **only** part of the SKILL the runtime treats as
-> non-negotiable. If a rule below conflicts with anything later in this file,
-> the rule wins.
->
-> 1. **Output schema is canonical.** `batch_results.json` MUST be produced by
->    `skills/ut/unit-test-executor/scripts/execute_batch.py` and MUST validate
->    against `skills/ut/unit-test-executor/batch_results_schema.json`
->    (additionalProperties:false). Required top-level keys:
->    `batch_id / started_at / finished_at / exit_code / remote_log / tests /
->    statistics`. **Never hand-write this file.** A hand-rolled payload that
->    drifts (e.g. `executed_at` / `total_duration_seconds` / `stats`) will be
->    rejected by the executor's strict validator AND by the manifest-updater
->    stat audit.
-> 2. **Run the script, do not narrate.** The only sanctioned way to run a
->    batch is `python skills/ut/unit-test-executor/scripts/execute_batch.py
->    --batch-config <path> --workflow-state <path>`. If you cannot run that
->    script (sandbox blocked / agent.py error / bastion disconnected), STOP
->    and return `{"next_action":"wait","reason":...}` — do NOT fabricate a
->    plausible result.
-> 3. **JUnit XML is the source of truth.** Every status in
->    `batch_results.tests[*].status` comes from parsing
->    `<remote_log_dir>/<batch_id>/result_<batch_id>_<node>.xml`
->    fetched via `agent.py`. If XML is missing/unparseable, classify
->    as `retriable_error`/`timeout` — do NOT fall back to grep.
-> 4. **All timestamps are UTC ISO 8601 with Z suffix.** Pattern:
->    `^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$`. Local time,
->    offsets (`+08:00`), microseconds, and tzname suffixes are schema
->    violations.
-> 5. **No retry inside the Worker.** Status `retriable_error` / `error` is a
->    signal to Stage 2 (batch-selector). Do NOT loop, do NOT re-run, do NOT
->    mutate `retry_count`.
->
-> Violations leave a trace: the strict schema validator in `execute_batch.py`
-> raises `ValueError("batch_results.json violates schema at /...")` BEFORE
-> writing, and the manifest-updater stat audit refuses to consume any
-> `batch_results.json` whose `remote_log.raw_log_path` is missing or whose
-> recorded `size_bytes` disagrees with `stat -c %s` on the remote.
-
-## Behavior (v5/v6)
-
-This section describes the v5/v6 Worker contract (parallel execution via ThreadPoolExecutor).
-
-### 1. Remote raw_log + local summary
-
-Stage 3 runs pytest **remotely** under a bash watchdog (idle-timeout +
-wall-clock fallback, see [2026-06-23-pytest-timeout-redesign.md](../../tasks/ut/docs/designs/2026-06-23-pytest-timeout-redesign.md)),
-redirecting **all** stdout/stderr to a single remote file:
-
-```
-<remote_log_dir>/<batch_id>/pytest_<batch_id>.log
-```
-
-This is the **only** file the Worker writes on the remote host. After pytest
-returns, the Worker issues a second remote call
-(`grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' ... ; tail -50 ...`)
-and writes the captured text to a **local** `summary.txt` next to
-`batch_results.json`.
-
-`batch_results.json` carries a `remote_log` pointer instead of inlining the
-log:
-
-```json
-"remote_log": {
-  "host": "t_h20",
-  "container": "v0.13.0_torch2.5.1_compile",
-  "raw_log_path": "/gpfs/.../ut_logs/<batch_id>/pytest_<batch_id>.log",
-  "size_bytes": 4242,
-  "captured_at": "2026-06-20T12:34:56Z"
-}
-```
-
-`captured_at` uses `datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")`.
-
-### 2. Error classification
-
-`classify_error.classify(summary_text, test_id) -> (status, error_type)`:
-
-| Pattern                                                | status            | error_type   |
-| ------------------------------------------------------ | ----------------- | ------------ |
-| `PASSED ...` (and no FAILED on the same fragment)      | `passed`          | `None`       |
-| `torch.cuda.OutOfMemoryError` / `CUDA out of memory`   | `retriable_error` | `oom`        |
-| pytest-timeout (`+ Timeout >Ns +` / `Failed: Timeout`) | `retriable_error` | `timeout`    |
-| `ERROR collecting` / `ImportError` / `ModuleNotFound`  | `error`           | `collection` |
-| `FAILED ...`                                           | `failed`          | `assertion`  |
-| anything else                                          | `error`           | `other`      |
-
-OOM and pytest-timeout are **transient** → re-runnable in a later batch by
-Stage 2. They are *not* treated as hard failures here.
-
-The legacy category-letter `classify_error()` API (C/E/D/P/M/S/U) is preserved
-for back-compat; the new tuple-returning `classify()` is what the executor
-wires into `batch_results.json`.
-
-### 3. No Worker self-retry
-
-The Worker runs each test **exactly once per batch**. It does NOT loop over
-test execution, does NOT re-attempt on flake, and does NOT mutate
-`retry_count`. Retries are owned by Stage 2 (batch selector), which re-selects
-tests with `status ∈ {retriable_error, error}` whose `retry_count < max_retry`.
-
-### 4. Bastion disconnect handling
-
-When the remote-call helper (`run_remote`) raises `ConnectionError` — i.e. the
-bastion daemon is unreachable / SSH connect failed — the Worker:
-
-1. Calls `BastionManager(...).mark_disconnected(reason=...)` to set
-   `bastion.status = "disconnected"` in `workflow_state.json`.
-2. Returns `{"batch_id": ..., "next_action": "wait", "reason": ...}`.
-3. **Does NOT** write `batch_results.json`.
-4. **Does NOT** mutate manifest or per-test status.
-
-The Supervisor sees `next_action=wait`, parks the batch, and resumes once
-heartbeat / OTP recovery flips `bastion.status` back to `connected`. No tests
-are billed against `retry_count` for a disconnect.
-
-`BastionManager` exposes the symmetric pair `mark_disconnected(reason=...)`
-and `mark_connected()` for any caller that needs to surface connection state.
-
----
-
-
----
-
-## Worker 角色
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Worker Agent Session (临时，执行后释放)                     │
-│                                                             │
-│  职责：                                                      │
-│  • 读取 batch_config.json                                   │
-│  • 检测 distributed 测试和 GPU 可用性                        │
-│  • 远程执行 pytest 测试                                      │
-│  • 解析测试结果                                              │
-│  • 写入 batch_results.json                                  │
-│  • 返回极简结果给 Supervisor                                │
-│                                                             │
-│  输入：batch_config.json                                     │
-│  输出：batch_results.json + 极简 stats                       │
-│  Session 结束后：Context 释放                                │
-│                                                             │
-│  ⚠️ GPU 检测职责已从 batch-selector 移至本 Stage            │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 流程图 (v6 Parallel)
-
-```mermaid
-flowchart TB
-    subgraph Input["[输入] Supervisor 调用"]
-        A1["batch_config.json"]
-        A2["GPU pool detection"]
-    end
-    
-    Input --> GPU
-    
-    subgraph GPU["[Step 1] GPU Detection + Zombie Cleanup"]
-        G1["nvidia-smi query"]
-        G2["Detect free GPUs"]
-        G3["Cleanup own zombies"]
-        G4["D1 fallback: serialize on lowest-usage card"]
-    end
-    
-    GPU --> Parallel
-    
-    subgraph Parallel["[Step 2] Parallel Execution (ThreadPoolExecutor)"]
-        P1["Test 1 → GPU 0 → Watchdog → JUnit XML"]
-        P2["Test 2 → GPU 1 → Watchdog → JUnit XML"]
-        P3["Test N → GPU M → Watchdog → JUnit XML"]
-    end
-    
-    Parallel --> Aggregate
-    
-    subgraph Aggregate["[Step 3] Batch Log Aggregation"]
-        A3["Concat per-node logs"]
-        A4["Stat batch log size"]
-        A5["Write batch_results.json"]
-    end
-    
-    Aggregate --> Output
-    
-    subgraph Output["[输出] 返回结果"]
-        O1["batch_results.json"]
-        O2["summary.txt"]
-        O3["stats → Supervisor"]
-    end
-```
-
-> **v6**: 每个test_node独立执行，pin到free GPU，JUnit XML作为结果source of truth。Hang只kill该test，无batch-level collateral。
-
----
-
-## 输入输出
-
-### 输入（从 Supervisor context 获取）
-
-| 字段 | 来源 | 说明 |
-|------|------|------|
-| `workflow_state_path` | Supervisor context | 状态文件路径 |
-| `batch_config_path` | workflow.yaml | 批次配置路径 |
-| `pytest_args` | workflow.yaml | pytest 参数 |
-| `timeout` | workflow.yaml | 超时时间（秒） |
-
-### 输出
-
-| 类型 | 内容 | 说明 |
-|------|------|------|
-| **文件** | batch_results.json | 测试结果文件 |
-| **返回** | stats (极简) | 给 Supervisor 的返回值 |
-
----
-
-## 执行流程
-
-### Step 1: 加载批次配置
-
-```python
-import json
-from pathlib import Path
-
-# 从 workflow_state.json 读取路径配置（不硬编码）
-from shared.config_loader import get_paths
-paths = get_paths(workflow_state_path)
-
-# 读取 batch_config
-batch_config_path = paths["batch_config"]
-batch_config = json.loads(Path(batch_config_path).read_text())
-
-tests = batch_config["tests"]
-batch_id = batch_config["batch_id"]
-distributed_count = batch_config.get("distributed_count", 0)
-
-# 判断是否有 distributed 测试
-has_distributed = distributed_count > 0
-```
-
-### Step 1b: GPU 检测（distributed 测试需要）
-
-```bash
-# 仅当 distributed 测试存在时检测 GPU
-if has_distributed:
-    # 通过 agent.py 检查远程 GPU
-    python agent.py -p t_h20 run --timeout 30 "
-        sudo docker exec v0.13.0_torch2.5.1_compile bash -c '
-            nvidia-smi --query-gpu=index,memory.used,memory.total --format csv,noheader |
-            awk -F, \"{usage=\$2/\$3; if (usage < 0.1) print GPU \$1: available}\" 
-        '
-    "
-```
-
-```python
-# 解析 GPU 可用性
-def parse_gpu_output(output):
-    available = len([line for line in output.splitlines() if "available" in line])
-    return available
-
-available_gpus = parse_gpu_output(gpu_output) if has_distributed else 999  # normal 测试不需要 GPU
-
-# GPU 不足时返回 blocked_reason
-if has_distributed and available_gpus < 2:
-    return {
-        "stats": {"passed": 0, "failed": 0, "ignored": 0, "error": 0, "pending": 0},
-        "next_action": "wait",
-        "error": None,
-        "blocked_reason": f"distributed 测试需要 2+ GPU，当前可用 {available_gpus} 个"
-    }
-```
-
-### Step 2: 执行 pytest（远程）
-
-```bash
-# 构建 pytest 命令
-test_nodes = [t["test_node"] for t in tests]
-pytest_cmd = f"pytest {' '.join(test_nodes)} -q --tb=long"
-
-# distributed 测试环境变量（GPU 检测已通过）
-if has_distributed and available_gpus >= 2:
-    env_vars = "MASTER_ADDR=localhost MASTER_PORT=29500 WORLD_SIZE=2"
-    pytest_cmd = f"{env_vars} {pytest_cmd}"
-
-# 通过 agent.py 远程执行
-python agent.py -p t_h20 run --timeout 3600 "
-    sudo docker exec v0.13.0_torch2.5.1_compile bash -c '
-        cd /gpfs/gcsp/M2.7_verify/vllm &&
-        {pytest_cmd} 2>&1 | tee ut_logs/{batch_id}.log
-    '
-"
-```
-
-### Step 3: 解析 pytest 输出（远程日志提取）
-
-**v3.2 新增功能**：通过 bastion 远程 grep 提取结果，本地解析生成 batch_results.json
-
-```mermaid
-flowchart LR
-    R[远程日志] --> G[grep PASSED/FAILED/ERROR]
-    G --> B[Bastion 传输]
-    B --> L[本地 stdout]
-    L --> P[parse_remote_log.py]
-    P --> J[batch_results.json]
-```
-
-**执行方式**：
-
-```bash
-# 方式 1：使用 run_batch.py --with-results（推荐）
-python run_batch.py --tests ... --with-results --output-dir ./results
-
-# 方式 2：仅提取已有日志
-python run_batch.py --extract-only /gpfs/.../ut_logs/phase1/batch_001.log
-
-# 方式 3：手动调用 parse_remote_log.py
-python agent.py -p t_h20 run "grep -E '(PASSED|FAILED|ERROR)' {log_file}" |
-    python parse_remote_log.py --stdin --batch-id {batch_id} --output batch_results.json
-```
-
-**核心脚本**：
-
-| 脚本 | 功能 |
-|------|------|
-| `run_batch.py` | 新增 `--with-results`, `--extract-only` 选项 |
-| `parse_remote_log.py` | 解析 grep 输出，生成 batch_results.json |
-| `agent.py` | Bastion SSH daemon，远程执行 grep |
-
-**错误分类映射**：
-
-| C/E/D/P/M/S | batch_results error_type |
-|-------------|--------------------------|
-| C (Code Bug) | `functional` |
-| E (Environment) | `other` |
-| D (Dependency) | `dependency` |
-| P (Platform) | `resource` |
-| M (Model) | `download_error` |
-
-**Bastion 传输限制**：
-- recv buffer: 65535 bytes (~65KB)
-- 建议单批次传输 (<50KB)，避免全量传输
-
-### Step 4: 写入文件并返回
-
-```python
-# batch_results 结构
-batch_results = {
-    "batch_id": batch_id,
-    "executed_at": datetime.now().isoformat(),
-    "tests": results["passed"] + results["failed"] + results["error"],
-    "stats": {
-        "passed": len(results["passed"]),
-        "failed": len(results["failed"]),
-        "error": len(results["error"]),
-        "total": len(tests)
-    },
-    "log_file": f"/gpfs/gcsp/M2.7_verify/vllm/ut_logs/{batch_id}.log"
-}
-
-# 写入 batch_results.json（路径从 workflow.yaml 读取）
-batch_results_path = paths["batch_results"]
-Path(batch_results_path).write_text(json.dumps(batch_results, indent=2))
-
-# 返回极简结果给 Supervisor（统一格式）
-return {
-    "stats": {
-        "passed": len(results["passed"]),
-        "failed": len(results["failed"]),
-        "ignored": 0,
-        "error": len(results["error"]),
-        "pending": 0
-    },
-    "next_action": "continue",
-    "error": None,
-    "blocked_reason": None
-}
-```
-
----
-
-## 返回格式规范（统一）
-
-```json
+# Unit Test Executor (v5.1)
+
+## HARD CONTRACT (non-negotiable)
+
+1. **Output schema is canonical.** atch_results.json MUST be produced by
+   execute_batch.py and MUST validate against atch_results_schema.json.
+   Never hand-write this file.
+
+2. **Run the script, do not narrate.** The only sanctioned way to run a batch:
+   `
+   python skills/ut/unit-test-executor/scripts/execute_batch.py \
+       --batch-config <path> --workflow-state <path>
+   `
+   If you cannot run it (sandbox/bastion error), return
+   {"next_action":"wait","reason":...}. Do NOT fabricate results.
+
+3. **Remote log is the source of truth.** Every test status comes from parsing
+   the remote pytest log at <ut_logs_dir>/<batch_id>/pytest_<batch_id>.log.
+   If log is missing/unparseable, classify as 
+etriable_error/	imeout.
+
+4. **All timestamps are UTC ISO 8601 with Z suffix.**
+   Pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$
+
+5. **No retry inside the Worker.** 
+etriable_error/error is a signal to
+   Stage 2 (batch-selector). Do NOT loop, re-run, or mutate 
+etry_count.
+
+## Input / Output
+
+`
+Input:  batch_config.json    (from Stage 2 batch-selector)
+        workflow_state.json   (for paths, remote config)
+Output: batch_results.json    (schema-validated, written to batch_dir)
+        summary.txt           (local copy of grep'd PASSED/FAILED/ERROR lines)
+`
+
+## Script
+
+skills/ut/unit-test-executor/scripts/execute_batch.py (self-contained, ~50KB)
+
+## Behavior
+
+### Remote execution
+
+1. Read batch_config.json -> get test list
+2. Read workflow_state.json -> get remote_server, docker_container, vllm_dir, ut_logs_dir
+3. Build pytest command with watchdog (idle-timeout + wall-clock fallback)
+4. Execute remotely via gent.py -p <profile> run --timeout <T> "..."
+5. All stdout/stderr redirected to single remote file: <ut_logs_dir>/<batch_id>/pytest_<batch_id>.log
+6. After pytest returns: grep -E '(PASSED|FAILED|ERROR|SKIPPED|__WATCHDOG__)' -> local summary.txt
+
+### Error classification
+
+| Pattern | status | error_type |
+|---------|--------|------------|
+| PASSED (no FAILED on same fragment) | passed | None |
+| 	orch.cuda.OutOfMemoryError / CUDA out of memory | 
+etriable_error | oom |
+| pytest-timeout (+ Timeout >Ns + / Failed: Timeout) | 
+etriable_error | timeout |
+| ERROR collecting / ImportError / ModuleNotFound | error | collection |
+| FAILED | ailed | assertion |
+| anything else | error | other |
+
+OOM and timeout are **transient** -> re-runnable by Stage 2 in a later batch.
+
+### Bastion disconnect
+
+When gent.py raises ConnectionError:
+1. Mark astion.status = "disconnected" in workflow_state.json
+2. Return {"next_action": "wait", "reason": ...}
+3. Do NOT write batch_results.json
+
+### batch_results.json structure
+
+`json
 {
-  "stats": {
-    "passed": 40,
-    "failed": 8,
-    "ignored": 0,
-    "error": 2,
-    "pending": 0
+  "batch_id": "batch_20260712_143000",
+  "started_at": "2026-07-12T14:30:00Z",
+  "finished_at": "2026-07-12T14:35:00Z",
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/.../ut_logs/<batch_id>/pytest_<batch_id>.log",
+    "size_bytes": 4242,
+    "captured_at": "2026-06-20T12:34:56Z"
   },
+  "tests": [
+    {"test_id": 1, "test_node": "tests/test_load.py::test_llama", "status": "passed", "error_type": null}
+  ],
+  "statistics": {"passed": 6, "failed": 1, "error": 1, "retriable_error": 0}
+}
+`
+
+Schema: skills/ut/unit-test-executor/batch_results_schema.json
+
+### Type-B fabrication backstop
+
+Stage 5 (manifest-updater) independently stat-checks the remote log before
+consuming batch_results. If the log doesn't exist or size disagrees,
+batch_results is rejected. Do NOT fabricate log paths.
+
+## Return format (unified)
+
+`json
+{
+  "stats": {"passed": 6, "failed": 1, "error": 1, "ignored": 0, "pending": 0},
   "next_action": "continue",
   "error": null,
   "blocked_reason": null
 }
-```
+`
 
-**注意：只返回统一字段，不返回 batch_id、log_file、details_file 等额外字段**
+## Pre/Post conditions
 
----
+| Type | Condition |
+|------|-----------|
+| **Pre** | batch_config.json exists (from Stage 2) |
+| **Pre** | Bastion connected (agent.py ping succeeds) |
+| **Pre** | Remote container running |
+| **Post** | batch_results.json written (schema-validated) |
+| **Post** | summary.txt written (local grep output) |
+| **Post** | Supervisor continues to Stage 4 (failure-handler) |
 
-## distributed 测试处理
+## Prohibited
 
-|| 场景 | GPU 可用 | 动作 |
-||------|:--------:|------|
-|| distributed + GPU ≥ 2 | ≥ 2 | 设置分布式环境变量执行 |
-|| distributed + GPU < 2 | < 2 | **返回 blocked_reason**，next_action="wait" |
-|| normal tests | - | 直接执行（无需 GPU 检测） |
-
-**注意：GPU 检测职责已从 batch-selector 移至本 Stage**
-
----
-
-## 错误分类概览
-
-| 类别 | 说明 | 处理策略 |
-|------|------|----------|
-| **dependency** | Python 包缺失 | 由 Stage 4 处理 |
-| **network** | 网络超时 | 由 Stage 4 处理 |
-| **resource** | GPU/内存不足 | 由 Stage 4 处理 |
-| **version** | PyTorch API 缺失 | 由 Stage 4 处理 |
-| **functional** | 代码逻辑失败 | 由 Stage 4 处理 |
-| **other** | 其他错误 | 由 Stage 4 处理 |
-
-> Stage 3 只负责执行和分类，**不处理错误**（由 Stage 4 failure-handler 处理）
+- Do not fabricate batch_results.json or log paths
+- Do not retry tests inside the Worker (Stage 2 owns retry)
+- Do not modify test_load or manifest (read-only for this stage)
+- Do not send notifications (Supervisor handles)
 
 ---
 
-## 前置/后置任务
-
-| 类型 | 任务 | 说明 |
-|------|------|------|
-| **前置** | Supervisor 调用 | delegate_task 触发 |
-| **前置** | batch_config.json 存在 | Stage 2 输出 |
-| **前置** | 远程容器可用 | t_h20 + Docker |
-| **后置** | batch_results.json 写入 | 输出文件 |
-| **后置** | 返回 stats + batch_id | 极简返回值 |
-| **后置** | Supervisor 继续 Stage 4 | handle_failures |
-
----
-
-## Pitfalls（关键陷阱）
-
-| # | 问题 | 说明 | 解决方案 |
-|---|------|------|----------|
-| 1 | **容器选择错误** | 使用错误容器 | 使用 `v0.13.0_torch2.5.1_compile` |
-| 2 | **distributed GPU** | 单 GPU 执行 distributed | 检测 GPU ≥ 2 才执行 |
-| 3 | **SSH 超时** | agent.py foreground 最大 300s | 长测试用 background |
-| 4 | **pytest 参数** | `-v` 输出太多 | 用 `-q --tb=long` |
-| 5 | **路径前缀重复** | `tests/tests/...` | 检查路径前缀 |
-| 6 | **裸 `docker exec` permission denied** | 远端 `infra` 用户不在 `docker` 组；`/var/run/docker.sock` 仅 `root:docker` 可写 | **必须**用 `sudo -n docker exec ...`（远端已配置 passwordless sudo）。所有 SKILL 示例已是此形式；不要手写 `docker exec ...` |
-| 7 | **`bash -c` 触发 Hermes shell-guard approval** | Hermes core `tools/approval.py` 把 `(bash|sh|zsh|ksh)\s+-[^\s]*c` 列为危险模式；Kanban-gateway session 走 `submit_pending` 路径，60s 内无人响应即超时 → 任务 `blocked` | 已在 `~/.hermes/config.yaml` 的 `command_allowlist` 加入 `shell command via -c/-lc flag`，本机已生效（mtime-keyed cache）。新机器部署时记得同步该配置 |
-
----
-
-## 注意事项
-
-1. **容器版本固定**：必须使用 `v0.13.0_torch2.5.1_compile`
-2. **distributed GPU 检测**：执行前检测 GPU 可用性（已从 batch-selector 移至本 Stage）
-3. **GPU 不足时返回 blocked_reason**：不跳过批次，而是返回 blocked_reason 让 Supervisor 处理
-4. **超时管理**：单批次最大 3600 秒
-5. **极简返回**：只返回 stats 数字，不返回详细错误
-6. **错误不处理**：Stage 3 只分类，Stage 4 处理
-
----
-
-## 禁止操作（硬契约 — 违反即视为污染数据，supervisor 会 invalidate run）
-
-### 数据完整性禁令（不可越权）
-
-- 🚫 **绝对禁止 fabrication**：`batch_results.json` 中的每一个数字（`total_duration_seconds`、`exit_code`、`passed/failed/error` 计数、`gpu_info`、`log_path`）**必须**来自真实执行过的 `agent.py -p t_h20 run "sudo -n docker exec ... pytest ..."` 的返回值；
-  - 禁止：凭印象/上游 SKILL 说明/合理推断填写任何字段；
-  - 禁止：在 `log_path` 写远端不存在的路径（supervisor 会 stat 验证）；
-  - 禁止：`duration_seconds: null` 但 `status: passed/failed` 的组合（要么是真跑过且有 duration，要么是没跑成功 → 报 error，不要谎报状态）；
-  - 如果远端命令失败/超时/中断，**如实记录**为 `status: error` + `error_message: <真实错误>`，不要"补全"成 passed/failed。
-- 🚫 **绝对禁止越权发送 Feishu / Lark / 任何外部通知**：
-  - 禁止：写 Python 脚本调用 `open.feishu.cn`、`api.lark.com`、`webhook` 等 IM API；
-  - 禁止：用 `requests.post` / `curl` 向 Feishu/Lark/Slack/钉钉 发任何消息；
-  - 禁止：跨 profile 读取 `~/.claude/...` / `~/.hermes/profiles/<other>/...` 下的 token；
-  - 唯一允许的通知路径：**返回 stats 给 supervisor**，由 supervisor 走 Hermes 标准投递层（`send_feishu_card` / `hermes-runner`）发出。
-- 🚫 **绝对禁止修改 `manifest.json`**：那是 Stage 5（manifest-updater）的职责，executor 只产 `batch_results.json`。
-- 🚫 **绝对禁止删除/重命名上游产物**：`batch_config.json`、`test_list.txt`、`workflow_state.json`、其他 batch 的目录 —— 都不要碰。
-
-### 行为禁令
-
-- ❌ 不返回详细错误信息（只返回 stats）
-- ❌ 不处理错误（让 Stage 4 处理）
-- ❌ 不下载依赖/模型
-- ❌ 不在本地执行 pytest（必须远程容器内）
-- ❌ 不返回 batch_id/log_file/details_file 等额外字段（只返回统一格式）
-- ❌ 不"尝试 recover Bastion daemon" —— daemon 由 supervisor 通过 OTP 管，worker 看到 daemon 死了就 `next_action=wait` 直接返回，不要自作主张
-- ❌ 不写 `D:/workspace/apmm/scripts/*.py`、`tools/*.py` 等仓库根目录脚本（worker 工作目录是当前 run_dir，仓库脚本是开发者维护的）
-
-### 历史教训（不要重蹈）
-
-| 日期 | 越权行为 | 后果 |
-|---|---|---|
-| 2026-06-22 | 某 worker 在 stage-3 不真跑 pytest，编造 batch_results.json（log_path 指向不存在的远端文件），改 manifest 为 "completed"，并手写 `scripts/send_feishu_report.py` + 用 Claude 工具链的 Feishu token 直接发"完成报告"到 ai-engineer 群 | run `ut-20260621-234651` 被 supervisor invalidated；写入这条约束 |
-
----
-
-## §X. Executor Timeout Placeholder Schema
-
-当 Executor 检测到 timeout 时，返回 placeholder schema（而非最终 classification）：
-
-**Placeholder schema structure:**
-```json
-{
-  "status": "pending",
-  "executor_signal": "timeout_no_xml | timeout_unparseable_xml | timeout_no_testcase | disconnect_exec | disconnect_xml_fetch",
-  "executor_evidence": "Executor-detected evidence for timeout"
-}
-```
-
-**executor_signal 枚举值说明:**
-- `timeout_no_xml`: XML missing after watchdog SIGKILL
-- `timeout_unparseable_xml`: XML unparseable (ET.ParseError)
-- `timeout_no_testcase`: XML has no testcase element
-- `disconnect_exec`: Bastion disconnect during test exec
-- `disconnect_xml_fetch`: Bastion disconnect during xml fetch
-
-**executor_signal 的价值：**
-- 提供 Executor 能检测到的真实信息（XML missing vs disconnect）
-- 运维人员知道 timeout 的具体原因
-- Stage 4 可参考 executor_signal 优化分类决策（可选）
-
-**注意：**
-- Executor 只输出 placeholder，不做最终分类
-- Stage 4 Worker Agent 通过固化 Prompt 判断 log tail，输出最终 classification
-- Python 脚本验证 Agent 输出的 JSON schema，fallback to "unknown" if invalid
-
----
-
-## 相关文档
-
-- **workflow.yaml** - Workflow 配置路径已迁移（见下方说明）
-
-  > **配置路径：** workflow.yaml路径是动态的（`runs/ut-{timestamp}/workflow.yaml`），
-  > 由terminal-workflow或hermes-workflow在Stage 0环境选择后确定。
-  > 模板位于：`tasks/ut/deployment/production/config/workflow.yaml`（production）
-  > 或 `tests/ut/integration/fixtures/workflow.l{1-4}.yaml`（test）
-- [workflow/SKILL.md](../workflow/SKILL.md) - Supervisor 调度逻辑
-- [batch-selector/SKILL.md](../batch-selector/SKILL.md) - 上游 Stage（已移除 GPU 检测）
-- [failure-handler/SKILL.md](../failure-handler/SKILL.md) - 下游 Stage
-- [parse_remote_log.py](scripts/parse_remote_log.py) - **新增**: 远程日志解析脚本
-- [run_batch.py](scripts/run_batch.py) - **更新**: 新增 `--with-results`, `--extract-only`
-- [agent.py](../../tools/agent.py) - Bastion SSH daemon
-
----
-
-## 硬性约束（不可违反）
-
-### ⚠️ 必须更新 workflow_state.json
-
-**unit-test-executor Worker 在执行 batch 时，必须两阶段更新 workflow_state.json！**
-
-正确流程：
-1. 执行前：自动调用 update_batch_running() 更新状态为 'running'
-2. 执行 pytest
-3. 执行后：自动调用 update_batch_completed() 更新状态为 'completed'
-4. 输出 STAGE COMPLETED 状态检查报告
-5. 返回结果给 Supervisor
-
-错误流程：
-❌ 执行后不更新 workflow_state.json
-❌ 只更新一次（缺少 running 状态）
-❌ 跳过状态检查输出
-
-### ⚠️ 禁止批量自动化执行
-
-**unit-test-executor Worker 只负责单个 batch 的执行，不得编写批量脚本！**
-
-正确执行：
-- 一次只执行一个 batch
-- 检查 STAGE COMPLETED 输出
-
-错误执行：
-❌ 编写循环批量执行多个 batch
-❌ 批量执行整个 workflow
-
----
-
-*创建日期: 2026-06-09*
-*更新日期: 2026-07-03*
-*版本: 5.1.0*
+*Updated: 2026-07-13*
+*Version: 5.1.0*

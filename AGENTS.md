@@ -49,7 +49,6 @@ AI Agent ???? - ???? **vLLM ????** (M2.7_verify)
 ```
 apmm/
 ??? .agents/                  # Agent ????
-?   ??? workflow.yaml         #   Workflow ??
 ?   ??? workflow_state.json   #   ????
 ?   ??? batch_config.json     #   ????
 ?   ??? batch_results.json    #   ????
@@ -180,12 +179,20 @@ OpenCode ???? **Brainstorming -> Planning -> Execution -> Verification** ???????
 
 > hermes-workflow 无论 kanban 开关始终支持飞书。kanban 开关仅决定单 Agent 还是多 Agent。
 
-### Step 3: 加载 SKILL
+### Step 3: 环境选择（MUST 问用户）
+确认 workflow.yaml 来源，**必须等待用户选择**：
+
+| 环境 | workflow.yaml 路径 | 说明 |
+|------|-------------------|------|
+| 生产环境 | `tasks/ut/deployment/production/config/workflow.yaml` | 全量测试、生产配置 |
+| 调试环境 | `tests/ut/integration/fixtures/workflow.l*.yaml` | L1-L4 frozen 模板，快速验证 |
+
+### Step 4: 加载 SKILL
 用户确认模式后，才加载对应的 SKILL.md：
 - terminal-workflow -> [skills/ut/terminal-workflow/SKILL.md](skills/ut/terminal-workflow/SKILL.md)
 - hermes-workflow -> [skills/ut/hermes-workflow/SKILL.md](skills/ut/hermes-workflow/SKILL.md)
 
-### Step 4: 参数确认
+### Step 5: 参数确认
 按对应 SKILL.md 的启动序列走参数确认（test_list_path / batch_size / resume_from 等）。
 
 详细路由逻辑见 [tasks/ut/README.md](tasks/ut/README.md) §启动路由。
@@ -205,7 +212,7 @@ UT Workflow ?? 5 ???????????????
 
 | ?? | ??? |
 |------|--------|
-| Workflow ?? | [.agents/workflow.yaml](.agents/workflow.yaml) |
+| Workflow ?? | `tasks/ut/deployment/production/config/`（生产）/ `tests/ut/integration/fixtures/`（调试） |
 | ??? + Stages ?? | [skills/ut/terminal-workflow/SKILL.md](skills/ut/terminal-workflow/SKILL.md) |
 | Kanban ???? | [tasks/ut/docs/kanban/README.md](tasks/ut/docs/kanban/README.md) |
 | ?????????? | [skills/ut/shared/filter_rules.yaml](skills/ut/shared/filter_rules.yaml) |

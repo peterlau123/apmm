@@ -58,12 +58,22 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
   └────────└─> terminal-workflow (轻量线性，无外部依赖)
 ```
 
-#### Step 3: 加载 SKILL
+#### Step 3: 环境选择（MUST 问用户）
+确认 workflow.yaml 来源，**必须等待用户选择**：
+
+| 环境 | workflow.yaml 路径 | 说明 |
+|------|-------------------|------|
+| 生产环境 | `tasks/ut/deployment/production/config/workflow.yaml` | 全量测试、生产配置 |
+| 调试环境 | `tests/ut/integration/fixtures/workflow.l*.yaml` | L1-L4 frozen 模板，快速验证 |
+
+> terminal-workflow 通常使用调试环境；hermes-workflow 通常使用生产环境。但两者可自由组合。
+
+#### Step 4: 加载 SKILL
 用户确认模式后，才加载对应的 SKILL.md：
 - terminal-workflow -> [skills/ut/terminal-workflow/SKILL.md](../../skills/ut/terminal-workflow/SKILL.md)
 - hermes-workflow -> [skills/ut/hermes-workflow/SKILL.md](../../skills/ut/hermes-workflow/SKILL.md)
 
-#### Step 4: 参数确认
+#### Step 5: 参数确认
 按对应 SKILL.md 的启动序列走参数确认（test_list_path / batch_size / resume_from 等）。
 
 ---
@@ -72,13 +82,9 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 适合开发态、调试 stage 行为、单次跑验证。**禁止开 kanban**（运行时强制校验）。
 
-1. 编辑 `.agents/workflow.yaml`，确保 `kanban.enabled: false`，填好 `test_list_path` / `remote_server`。
-2. 在 Claude Code / OpenCode 会话中加载 skill：
-   ```
-   加载 ut/terminal-workflow skill
-   ```
-3. Skill 自动初始化 `workflow_state.json` 并循环 Stage 2-5 直至完成。
-4. 单独跑一个 test：
+1. 按 [启动路由](#启动路由) 完成 Step 2（模式=terminal-workflow）+ Step 3（环境选择）+ Step 4（加载 SKILL）。
+2. Skill 自动初始化 `workflow_state.json` -> 生成 test_load -> 循环 Stage 2-4.5 直至 pending == 0 -> post-loop 回写 manifest。
+3. 单独跑一个 test：
    ```bash
    python tools/agent.py -p t_h20 run --timeout 300 \
      "sudo docker exec v0.13.0_torch2.5.1_compile bash -c \
@@ -91,11 +97,10 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 ### 🅲️ 我要在 Hermes 后台长跑（生产 / L4，**ut/hermes-workflow 通道**）
 
-适合无人值守的长时间运行、L4 集成、生产全量。Kanban 可开可关。
+适合无人值守的长时间运行、L4 集成、生产全量。Kanban 可开可关，飞书始终支持。
 
-1. 启动同 🅰️。
-2. 通过飞书发触发词。
-3. supervisor 全权托管：Bastion 心跳、OTP 自动恢复、状态机（running/paused/waiting_otp/completed/stopped/failed）、参数热改。
+1. 按 [启动路由](#启动路由) 完成 Step 2（模式=hermes-workflow）+ Step 3（环境选择）+ Step 4（加载 SKILL）。
+2. 通过飞书发触发词，supervisor 全权托管：Bastion 心跳、OTP 自动恢复、状态机（running/paused/waiting_otp/completed/stopped/failed）、参数热改。
 
 详见 [skills/ut/hermes-workflow/SKILL.md](../../skills/ut/hermes-workflow/SKILL.md)。
 
@@ -126,20 +131,23 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 
 ```
 ut/terminal-workflow            (线性通道，开发态)
-  └─ 终端会话加载 SKILL → 进程内循环 Stage 2-5
+  └─ 终端会话加载 SKILL -> 进程内循环 Stage 2-4.5
   └─ kanban 强制 OFF
 
 ut/hermes-workflow     (生产通道，长期后台)
-  └─ ut-supervisor 飞书订阅 → 触发后 ensure_bastion → loop_core
+  └─ ut-supervisor 飞书订阅 -> 触发后 ensure_bastion -> loop_core
   └─ kanban 可选；开 kanban 时由 3 个 Gateway (orchestrator/executor/fixer) 协作
-  └─ 共用同一份 workflow-loop-core，5 阶段流水线一致
+  └─ 共用同一份 workflow-loop-core，流水线一致
 ```
 
-5 阶段流水线（两通道共用）：
+流水线（两通道共用）：
 ```
-Stage 1 collect → Stage 2 select_batch → Stage 3 execute(远程pytest)
-                                       → Stage 4 handle_failures → Stage 5 update_status
-                            循环 Stage 2-5 直到 pending == 0
+Init: collect(manifest from test_list)
+  └─ Stage 1: generate test_load
+     └─ [循环] Stage 2: select_batch -> Stage 3: execute(远程pytest)
+        -> Stage 4: handle_failures -> Stage 4.5: update_test_load
+        循环 Stage 2-4.5 直到 test_load pending == 0
+Post-loop: sync test_load -> manifest (update_manifest_from_test_load.py)
 ```
 
 ---
@@ -215,10 +223,13 @@ Phase 1完成后，调用`two-phase-handler` skill处理失败batch：
 
 ## 关键数据文件
 
+> **HARD CONTRACT**: 循环内（Stage 2-4.5）所有 stage 读写 `test_load_xxx.json`（工作数据集）；`manifest.json`（master record）仅在 post-loop（pending==0）回写，避免中间失败状态污染。
+
 | 文件 | 位置 | 更新时机 |
 |---|---|---|
-| `manifest.json` | `test_analysis/manifest.json` | Stage 5 每次循环 |
-| `workflow.yaml` | `.agents/workflow.yaml`（生产）/ `tests/ut/integration/fixtures/workflow.l*.yaml`（L1-L4 frozen） | 手动 |
+| `test_load_xxx.json` | `runs/<run_id>/` | 循环内每 batch（工作数据集） |
+| `manifest.json` | `runs/<run_id>/`（per-run）/ `dataset/manifest.json`（baseline） | post-loop 回写（pending==0） |
+| `workflow.yaml` | `tasks/ut/deployment/production/config/`（生产）/ `tests/ut/integration/fixtures/`（L1-L4 调试） | 手动 |
 | `workflow_state.json` | `runs/<run_id>/workflow_state.json` | 每次循环 |
 
 Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/ut/shared/manifest_schema.json)。
@@ -249,4 +260,4 @@ Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/u
 
 ---
 
-*Last updated: 2026-07-07*
+*Last updated: 2026-07-14*

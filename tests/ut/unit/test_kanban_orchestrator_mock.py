@@ -15,17 +15,17 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
-MANIFEST_UPDATER = PROJECT_ROOT / "skills" / "ut" / "manifest-updater" / "scripts" / "update_manifest.py"
+ORCH_PATH = PROJECT_ROOT / "skills" / "ut" / "hermes-workflow" / "scripts" / "orchestrator_round.py"
+UPDATE_STATUS = PROJECT_ROOT / "skills" / "ut" / "manifest-updater" / "scripts" / "update_status.py"
 BATCH_SELECTOR = PROJECT_ROOT / "skills" / "ut" / "batch-selector" / "scripts" / "generate_batch.py"
 
 
 @pytest.fixture(scope="module")
-def hr():
+def orch():
     """Import ut_runner.py by file path."""
-    sys.path.insert(0, str(UT_RUNNER.parent))
-    sys.path.insert(0, str(UT_RUNNER.parent.parent.parent))
-    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER)
+    sys.path.insert(0, str(ORCH_PATH.parent))
+    sys.path.insert(0, str(ORCH_PATH.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("orchestrator_round", ORCH_PATH)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -58,7 +58,7 @@ class TestOrchestratorRoundMultiRound:
             _make_test("t3", status="passed"),
         ])))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=None,
@@ -87,7 +87,7 @@ class TestOrchestratorRoundMultiRound:
             "tests": [{"test_id": "t1", "status": "passed"}],
         }))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=prev_batch_dir,
@@ -112,7 +112,7 @@ class TestOrchestratorRoundMultiRound:
             _make_test("t2", status="passed"),
         ])))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=None,
@@ -139,7 +139,7 @@ class TestOrchestratorRoundMultiRound:
             "tests": [{"test_id": "t1", "status": "retriable_error", "error_type": "oom"}],
         }))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=prev_batch_dir,
@@ -169,7 +169,7 @@ class TestOrchestratorRoundDependencyChains:
             _make_test("t2", status="pending", deps=["t1"]),
         ])))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=None,
@@ -196,7 +196,7 @@ class TestOrchestratorRoundDependencyChains:
             "tests": [{"test_id": "t1", "status": "passed"}],
         }))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=prev_batch_dir,
@@ -230,7 +230,7 @@ class TestOrchestratorRoundDependencyChains:
             "tests": [{"test_id": "t1", "status": "ignored", "ignore_reason": "manually ignored"}],
         }))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=prev_batch_dir,
@@ -261,7 +261,7 @@ class TestOrchestratorRoundBatchSizing:
             _make_test("t4", status="pending"),
         ])))
 
-        result = hr.orchestrator_round(
+        result = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=None,
@@ -282,7 +282,7 @@ class TestOrchestratorRoundBatchSizing:
             _make_test("t3", status="pending"),
         ])))
 
-        result1 = hr.orchestrator_round(
+        result1 = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=None,
@@ -302,7 +302,7 @@ class TestOrchestratorRoundBatchSizing:
                 t["status"] = "passed"
         manifest_path.write_text(json.dumps(manifest))
 
-        result2 = hr.orchestrator_round(
+        result2 = orch.orchestrator_round(
             run_dir=run_dir,
             manifest_path=manifest_path,
             prev_batch_dir=batch_dir,

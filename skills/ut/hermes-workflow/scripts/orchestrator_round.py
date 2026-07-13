@@ -1,125 +1,132 @@
-"""
-Orchestrator Round - Kanban 调度循环逻辑
+#!/usr/bin/env python3
+"""orchestrator_round.py - Kanban mode orchestrator (Stage 5 + Stage 2 per round)
 
-职责：
-1. 监控 batch-selector task 完成状态
-2. 调用 kanban_task_creator 创建依赖链
-3. 提交 tasks 到 Hermes Kanban
-4. 循环直到 batch-selector 返回空
+Used ONLY in hermes-workflow with kanban.enabled=true.
+Each round: reconcile previous batch results into test_load (v5 merge),
+then select next batch, then create Kanban tasks.
 
-设计文档：§5.2 调度逻辑
+Called by: ut-orchestrator Worker profile
 """
 
 import json
-import time
+import os
+import sys
+import importlib.util
 from pathlib import Path
-from typing import Dict, Optional
 
-from .kanban_task_creator import create_dependency_chain, save_tasks_to_kanban
+if 'PYTHONPATH' in os.environ:
+    del os.environ['PYTHONPATH']
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+SKILL_DIR = SCRIPT_DIR.parent
+PROJECT_ROOT = SKILL_DIR.parent.parent
+
+sys.path.insert(0, str(SKILL_DIR))
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from skills.ut.manifest_updater.scripts.update_status import merge_batch_results
+
+# Hermes Kanban API
+try:
+    from hermes_cli.kanban_db import connect, create_task
+except ImportError:
+    connect = None
+    create_task = None
 
 
-def check_task_completion(task_name: str, kanban_file: str) -> bool:
+def _load_batch_selector_fn(fn_name):
+    """Load a function from batch-selector/scripts/generate_batch.py."""
+    path = SKILL_DIR / "batch-selector" / "scripts" / "generate_batch.py"
+    spec = importlib.util.spec_from_file_location("_generate_batch", path)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    return getattr(mod, fn_name)
+
+
+def orchestrator_round(*, run_dir, workflow_state_path, prev_batch_dir,
+                       batch_size, current_task_id=None):
+    """Kanban ut-orchestrator round: Stage 5 (reconcile prev) then Stage 2 (select next).
+
+    Operates on test_load (the working dataset), not manifest.json.
+
+    Parameters
+    ----------
+    run_dir: Path-like, the workflow run directory
+    workflow_state_path: Path-like, workflow_state.json (to find test_load path)
+    prev_batch_dir: Path-like or None, previous batch directory for reconciliation
+    batch_size: int, number of tests per batch
+    current_task_id: str or None, the Kanban task ID that triggered this round
+
+    Returns {"completed": bool, "next_batch": dict|None,
+             "executor_task_id": str|None, "fixer_task_id": str|None,
+             "next_orchestrator_task_id": str|None}.
     """
-    检查 task 是否完成
+    select_batch = _load_batch_selector_fn("select_batch")
+    write_batch_config = _load_batch_selector_fn("write_batch_config")
 
-    Args:
-        task_name: task 名称
-        kanban_file: Kanban 文件路径
+    run_dir = Path(run_dir)
 
-    Returns:
-        True: task 已完成
-        False: task 未完成
-    """
-    if not Path(kanban_file).exists():
-        return False
+    # Read test_load path from workflow_state
+    state = json.loads(Path(workflow_state_path).read_text(encoding="utf-8"))
+    test_load_path = Path(state["paths"]["test_load"])
+    test_load = json.loads(test_load_path.read_text(encoding="utf-8"))
 
-    with open(kanban_file) as f:
-        for line in f:
-            task = json.loads(line)
-            if task.get("task_name") == task_name:
-                return task.get("status") == "completed"
+    # Stage 5: reconcile previous batch results into test_load (v5 merge)
+    if prev_batch_dir is not None:
+        br = Path(prev_batch_dir) / "batch_results.json"
+        if br.exists():
+            batch_results = json.loads(br.read_text(encoding="utf-8"))
+            hp = Path(prev_batch_dir) / "handled_tests.json"
+            handled = json.loads(hp.read_text(encoding="utf-8")) if hp.exists() else {"tests": []}
+            merge_batch_results(test_load, batch_results, handled)
+            test_load_path.write_text(
+                json.dumps(test_load, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
 
-    return False
+    # Stage 2: select next batch from test_load
+    selected = select_batch(test_load, batch_size)
+    if not selected:
+        return {"completed": True, "next_batch": None}
 
+    nb = f"batch_{len(list(run_dir.glob('batch_*'))) + 1:04d}"
+    nd = run_dir / nb
+    nd.mkdir(exist_ok=True)
+    cfg = write_batch_config(
+        path=nd / "batch_config.json",
+        batch_id=nb,
+        iteration=0,
+        run_id=run_dir.name,
+        selected=selected,
+    )
 
-def orchestrator_loop(
-    manifest_path: str,
-    run_dir: str,
-    kanban_file: str,
-    max_rounds: int = 100,
-) -> Dict:
-    """
-    Kanban 调度循环
+    # Hermes Kanban API: create executor, fixer, next orchestrator tasks
+    executor_task_id = None
+    fixer_task_id = None
+    next_orchestrator_task_id = None
 
-    Args:
-        manifest_path: manifest.json 路径
-        run_dir: 运行目录路径
-        kanban_file: Kanban 文件路径
-        max_rounds: 最大轮次（防止无限循环）
+    if connect and create_task:
+        try:
+            conn = connect()
+            executor_task_id = create_task(
+                conn, title=f"execute-{nb}", assignee="ut-executor",
+                parents=[current_task_id] if current_task_id else []
+            )
+            fixer_task_id = create_task(
+                conn, title=f"failure-handle-{nb}", assignee="ut-fixer",
+                parents=[executor_task_id]
+            )
+            next_orchestrator_task_id = create_task(
+                conn, title=f"orchestrator-{len(list(run_dir.glob('batch_*'))) + 2:04d}",
+                assignee="ut-batch-selector",
+                parents=[fixer_task_id]
+            )
+        except Exception as e:
+            print(f"[orchestrator_round] Kanban task creation failed: {e}")
 
-    Returns:
-        result: {
-            "status": "completed",
-            "total_rounds": N,
-            "total_tests": M,
-            "pass_rate": X,
-        }
-    """
-    current_round = 1
-
-    while current_round <= max_rounds:
-        # Step 1: 等待 batch-selector task 完成
-        batch_selector_task = f"batch-selector-round-{current_round}"
-
-        # Polling 等待（简化实现，实际应使用 Hermes webhook）
-        while not check_task_completion(batch_selector_task, kanban_file):
-            time.sleep(5)  # 5秒 polling间隔
-
-        # Step 2: 读取 batch-selector 结果
-        batch_config_path = f"{run_dir}/batch_config.json"
-        batch_result = json.loads(Path(batch_config_path).read_text())
-
-        # Step 3: 创建依赖链
-        dependency_chain = create_dependency_chain(
-            batch_result, manifest_path, run_dir, current_round
-        )
-
-        # Step 4: 检查循环终止条件
-        if dependency_chain is None:
-            # batch-selector 返回空，循环终止
-            manifest = json.loads(Path(manifest_path).read_text())
-            stats = manifest.get("statistics", {})
-
-            return {
-                "status": "completed",
-                "total_rounds": current_round,
-                "total_tests": stats.get("total", 0),
-                "pass_rate": stats.get("pass_rate", 0),
-            }
-
-        # Step 5: 提交依赖链到 Kanban
-        save_tasks_to_kanban(dependency_chain, kanban_file)
-
-        # Step 6: 进入下一轮
-        current_round += 1
-
-    # 达到 max_rounds，返回异常
     return {
-        "status": "max_rounds_exceeded",
-        "total_rounds": current_round,
-        "reason": f"Reached max_rounds limit ({max_rounds})",
+        "completed": False, "next_batch": cfg,
+        "executor_task_id": executor_task_id,
+        "fixer_task_id": fixer_task_id,
+        "next_orchestrator_task_id": next_orchestrator_task_id
     }
-
-
-# 测试入口（手动验证）
-if __name__ == "__main__":
-    manifest_path = "tests/ut/integration/fixtures/test_manifest.json"
-    run_dir = "tests/ut/integration/fixtures/run_dir"
-    kanban_file = "tests/ut/integration/fixtures/kanban_tasks.jsonl"
-
-    # 清空 kanban_file
-    Path(kanban_file).write_text("")
-
-    # 运行调度循环（需要模拟 batch-selector 完成）
-    result = orchestrator_loop(manifest_path, run_dir, kanban_file, max_rounds=3)
-    print(f"Orchestrator result: {json.dumps(result, indent=2)}")

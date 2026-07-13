@@ -184,7 +184,7 @@ from ut_runner import (
     apply_pending_config,    # merge pending_config → config on resume
     refresh_manifest_stats,  # tally manifest statuses into state
     check_stop_conditions,   # (done, reason, status)
-    orchestrator_round,      # kanban Stage5+Stage2 (used by ut-orchestrator)
+    # orchestrator_round moved to hermes-workflow/scripts/orchestrator_round.py
     send_feishu_card,        # progress / complete / alert / paused card
 )
 from bastion_manager import (

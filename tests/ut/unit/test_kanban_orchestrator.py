@@ -1,4 +1,4 @@
-"""Tests for ut_runner.orchestrator_round (Task 3.1).
+"""Tests for orchestrator_round (Task 3.1).
 
 orchestrator_round chains REAL v5 Worker functions loaded from hyphenated skill
 dirs via importlib:
@@ -15,15 +15,15 @@ from pathlib import Path
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UT_RUNNER = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "ut_runner.py"
+ORCH_PATH = PROJECT_ROOT / "skills" / "ut" / "hermes-workflow" / "scripts" / "orchestrator_round.py"
 
 
 @pytest.fixture(scope="module")
-def hr():
+def orch():
     """Import ut_runner.py by file path (hyphenated parent dirs)."""
-    sys.path.insert(0, str(UT_RUNNER.parent))
-    sys.path.insert(0, str(UT_RUNNER.parent.parent.parent))
-    spec = importlib.util.spec_from_file_location("ut_runner", UT_RUNNER)
+    sys.path.insert(0, str(ORCH_PATH.parent))
+    sys.path.insert(0, str(ORCH_PATH.parent.parent.parent))
+    spec = importlib.util.spec_from_file_location("orchestrator_round", ORCH_PATH)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -48,7 +48,7 @@ def test_orchestrator_round_reconciles_then_selects(hr, tmp_path):
         "tests": [{"test_id": "t1", "status": "passed"}],
     }))
 
-    r = hr.orchestrator_round(
+    r = orch.orchestrator_round(
         run_dir=run_dir,
         manifest_path=mp,
         prev_batch_dir=prev,
@@ -74,7 +74,7 @@ def test_orchestrator_round_completed_when_nothing_pending(hr, tmp_path):
         "statistics": {},
     }))
 
-    r = hr.orchestrator_round(
+    r = orch.orchestrator_round(
         run_dir=run_dir,
         manifest_path=mp,
         prev_batch_dir=None,

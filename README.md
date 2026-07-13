@@ -9,7 +9,7 @@
 ```
 apmm/
 ├── .agents/          # Agent 运行状态（workflow 配置、批次数据、日志）
-├── skills/           # Agent 技能定义（ut/ 下 8 个 Skill）
+├── skills/           # Agent 技能定义（ut/ 下 9 个 Skill）
 ├── tasks/            # 任务工作区
 │   ├── ut/           #   单元测试 ← 当前活跃
 │   ├── compile/      #   编译测试

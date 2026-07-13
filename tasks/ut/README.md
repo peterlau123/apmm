@@ -111,7 +111,7 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 | Hermes profile 同步 | `python tasks/ut/scripts/deploy_tier.py --tier L4` · [tests/ut/integration/fixtures/profiles/README.md](../../tests/ut/integration/fixtures/profiles/README.md) |
 | 故障复盘 / 历史 incident | [docs/incidents/](docs/incidents/) |
 | 周报 / 兼容性分析 | [docs/reports/](docs/reports/) |
-| 完整流程规范 v2 | [docs/单元测试流程规范_v2.md](docs/单元测试流程规范_v2.md) |
+| 完整流程规范 v2 | [docs/guides/单元测试流程规范_v2.md](docs/guides/单元测试流程规范_v2.md) |
 | 完整文档中心 | [docs/README.md](docs/README.md) |
 
 ---

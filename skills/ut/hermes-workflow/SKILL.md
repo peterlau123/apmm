@@ -36,7 +36,7 @@ when_to_use: Loaded into the ut-supervisor profile when a Feishu trigger message
 
 >    produces `handled_tests.json` via `generate_handled_manifest.py`.
 
->    Stage 5 mutates `manifest.json` via `update_test_load.py`. Each stage
+>    Stage 5 mutates `test_load` via `update_test_load.py`. Each stage
 
 >    REJECTS hand-rolled payloads through strict jsonschema validation +
 
@@ -366,7 +366,7 @@ from ut_runner import (
 
     apply_pending_config,    # merge pending_config → config on resume
 
-    refresh_manifest_stats,  # tally manifest statuses into state
+    refresh_manifest_stats,  # tally test_load statuses into state
 
     check_stop_conditions,   # (done, reason, status)
 
@@ -700,7 +700,7 @@ This channel supplies:
 
 
 
-### `handle_checkpoint(state, manifest)`
+### `handle_checkpoint(state, test_load)`
 
 
 
@@ -708,9 +708,9 @@ Called after every successful Stage 5 (and each Kanban poll round):
 
 
 
-1. `refresh_manifest_stats(state_path, manifest_path)` → tally into state.
+1. `refresh_manifest_stats(state_path, test_load_path)` → tally into state.
 
-2. Post a progress card via `send_feishu_card(feishu, "progress", manifest, iteration, ...)`.
+2. Post a progress card via `send_feishu_card(feishu, "progress", test_load, iteration, ...)`.
 
 3. Drain + process user commands (see `check_user_commands`).
 
@@ -788,7 +788,7 @@ already produced.
 
 
 
-### `check_terminal_conditions(state, manifest)`
+### `check_terminal_conditions(state, test_load)`
 
 
 
@@ -914,11 +914,11 @@ checking run as described in §4–§5.
 
 
 
-ut-supervisor **never touches the manifest** — Workers and the orchestrator
+ut-supervisor **never touches test_load** — Workers and the orchestrator
 
 own it (the `ut-orchestrator` Worker subprocess runs Stage 5 then Stage 2 via
 
-`orchestrator_round`, so the manifest has a single writer per round). The
+`orchestrator_round`, so test_load has a single writer per round). The
 
 supervisor only:
 
@@ -934,9 +934,9 @@ supervisor only:
 
    for systemd auto-recovery, poll), poll Kanban stats, run the shared
 
-   command + Bastion checks, post a progress card read **read-only** from the
+   command + Bastion checks, post a progress card read **read-only** from
 
-   manifest. `pending == 0 and running == 0` → `completed`.
+   test_load. `pending == 0 and running == 0` → `completed`.
 
 
 
@@ -1128,7 +1128,7 @@ wasn't classified into a tier):
 
 1. **No `check_expected.py`** — production has no expected-outcome fixture.
 
-2. **Post plain completion card** via `send_feishu_card(feishu, "complete", manifest, iteration)`.
+2. **Post plain completion card** via `send_feishu_card(feishu, "complete", test_load, iteration)`.
 
    (Green card with progress stats: passed/failed/error/pending counts.)
 
@@ -1254,11 +1254,11 @@ off to handle_failures / Stage 4):
 
 
 
-If fabrication is confirmed: `mv manifest.json manifest.json.fabricated.bak`
+If fabrication is confirmed: `mv test_load_xxx.json test_load_xxx.json.fabricated.bak`
 
 and `mv <batch_dir> <batch_dir>.fabricated.bak`, write an `INVALID.md` with
 
-evidence, and post a red Feishu card. Do **not** resume — the manifest is
+evidence, and post a red Feishu card. Do **not** resume — test_load is
 
 poisoned and Stage 2 (batch-selector) will see no pending tests left.
 

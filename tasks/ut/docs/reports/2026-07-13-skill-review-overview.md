@@ -2,7 +2,7 @@
 
 **Review Date**: 2026-07-13
 **Scope**: All 10 skills in the UT Workflow pipeline
-**Status**: Skills 1-5 clean, Skills 6-7 reviewed and fixed
+**Status**: Skills 1-10 reviewed and fixed (F1 deferred)
 
 ---
 
@@ -109,16 +109,47 @@ manifest.json (master record)
 
 ---
 
-## Skills 8-10: Pending Review
+## Skill 8: workflow-loop-core v5.0 -> v5.1 (FIXED)
 
-### (8) workflow-loop-core v5.0
-- Pure documentation, 0 scripts. Channel-agnostic design. CLEAN.
+### Issues Found and Fixed
 
-### (9) terminal-workflow v5.0
-- Updated: ghost `update_batch_state.py` -> `update_test_load_two_phase.py`
+| # | Severity | Issue | Fix |
+|---|----------|-------|-----|
+| 8.1 | P1 | Interface param `manifest_path` should be `test_load_path` | Fixed: interface table (3 rows), linear pseudocode (3 lines), kanban pseudocode (3 lines), callback signatures `handle_checkpoint(state, test_load)` + `check_terminal_conditions(state, test_load)` |
+| 8.2 | P2 | Mermaid flowchart `Read[读取 state + manifest]` | Fixed: changed to `Read[读取 state + test_load]` |
+| 8.3 | P2 | Kanban comment "Kanban board + manifest" | Fixed: "Kanban board + test_load" |
 
-### (10) hermes-workflow v5.0
-- Updated: ghost `update_status.py` -> `update_test_load.py`, `update_batch_state.py` -> `update_test_load_two_phase.py`
+Remaining `manifest` references are all SKILL names (`manifest-updater`, `manifest_updater`) - correct.
+
+---
+
+## Skill 9: terminal-workflow v5.1 (FIXED)
+
+### Issues Found and Fixed
+
+| # | Severity | Issue | Fix |
+|---|----------|-------|-----|
+| 9.1 | P1 | `handle_checkpoint(state, manifest)` and `check_terminal_conditions(state, manifest)` used `manifest` | Fixed: both signatures changed to `test_load` |
+| 9.2 | P1 | `send_feishu_card(feishu, "progress", manifest, ...)` showed stale stats | Fixed: changed to `test_load` |
+
+5 `manifest.json` references verified CORRECT (generate_test_load reads from manifest, init creates manifest, post-loop writes to manifest).
+
+---
+
+## Skill 10: hermes-workflow v5.1 (FIXED)
+
+### Issues Found and Fixed
+
+| # | Severity | Issue | Fix |
+|---|----------|-------|-----|
+| 10.1 | P1 | HARD CONTRACT rule 1: "Stage 5 mutates `manifest.json`" | Fixed: "Stage 5 mutates `test_load`" |
+| 10.2 | P1 | `handle_checkpoint(state, manifest)` + `check_terminal_conditions(state, manifest)` | Fixed: both changed to `test_load` |
+| 10.3 | P1 | `refresh_manifest_stats(state_path, manifest_path)` param name | Fixed: doc shows `test_load_path` (function name kept - see Follow-up F1) |
+| 10.4 | P1 | `send_feishu_card` progress + complete cards used `manifest` | Fixed: both changed to `test_load` |
+| 10.5 | P2 | §6 Kanban: "never touches the manifest" + "manifest has a single writer" + "read-only from the manifest" | Fixed: all changed to `test_load` |
+| 10.6 | P2 | §11.2 Pitfalls: "the manifest is poisoned" + `mv manifest.json` | Fixed: "test_load is poisoned" + `mv test_load_xxx.json` |
+
+6 `manifest.json` references verified CORRECT (init creates manifest, generate_test_load reads from manifest, post-loop sync writes to manifest, "Write final manifest" at completion).
 
 ---
 
@@ -143,8 +174,42 @@ manifest.json (master record)
 
 - 2 files renamed (git mv): `update_status.py` -> `update_test_load.py`, `update_batch_state.py` -> `update_test_load_two_phase.py`
 - 1 new file created: `verify_batch_checkpoint.py`
-- 25+ files modified (SKILL.md, scripts, tests, docs) to update all references
-- 21 tests passing
+- 30+ files modified (SKILL.md, scripts, tests, docs) to update all references
+- 21 tests passing (skills 6-7)
+- 4 SKILL.md files updated (skills 7-10): manifest->test_load in callbacks, pseudocode, HARD CONTRACT
+
+---
+
+## Follow-up Items (Not Addressed in This Review)
+
+### F1: Rename `refresh_manifest_stats` function (P2, deferred)
+
+The function `refresh_manifest_stats(state_path, manifest_path)` in `skills/ut/shared/ut_runner.py`
+still uses the legacy name. During the loop it receives `test_load_path`, not `manifest_path`.
+The state key `manifest_stats` is also legacy.
+
+**Recommended rename**:
+- `refresh_manifest_stats` -> `refresh_test_load_stats`
+- State key `manifest_stats` -> `test_load_stats`
+
+**Affected files** (requires separate PR + test update):
+- `skills/ut/shared/ut_runner.py` (function def + `check_stop_conditions`)
+- `skills/ut/shared/workflow_state_manager.py` (`calculate_test_stats` parameter)
+- `tests/ut/unit/test_hermes_runner_api.py` (5+ references)
+- `tests/ut/unit/test_kanban_board.py` (6+ references)
+- `tests/ut/unit/test_loop_core_contract.py` (1 reference)
+- `tests/ut/integration/fixtures/profiles/ut-supervisor/SOUL.md` (1 reference)
+- Multiple docs/plans/worklog files (historical, do not modify)
+
+**Decision**: Doc-only fix applied this round (parameter name in SKILL.md).
+Function rename deferred to avoid breaking tests without full regression.
+
+### F2: Two-phase-handler inline code variable consistency (P3, accepted)
+
+The 14 inline Python code blocks in `two-phase-handler/SKILL.md` are illustrative
+(????), not executable. Variable naming inconsistencies within these blocks
+(e.g., `get_tests_by_batch_id` parameter vs body) are acceptable for documentation
+purposes. Fixed the most critical issues (import paths, manifest->test_load references).
 
 ---
 

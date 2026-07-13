@@ -20,7 +20,7 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 
 >
 
-> This skill assumes existing batch-executor infrastructure from the UT workflow.
+> This skill assumes existing unit-test-executor infrastructure from the UT workflow.
 
 > Phase 2 Stage 2 retry execution relies on:
 
@@ -84,13 +84,13 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 
 > 
 
-> 4. **Retry execution follows manifest contract.** Each retry batch MUST produce
+> 4. **Retry execution follows test_load contract.** Each retry batch MUST produce
 
 >    `batch_results.json` + incrementally update `test_load`. The Stage 2
 
 >    executor MUST call `execute_batch_script(batch_id)` which internally
 
->    enforces manifest update. Bypassing this contract breaks Phase 1/Phase 2
+>    enforces test_load update. Bypassing this contract breaks Phase 1/Phase 2
 
 >    data flow.
 
@@ -116,7 +116,7 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 
 │  • 扫描 Phase 1 所有 batch                                  │
 
-│  • 从 manifest 读取 test 结果                               │
+│  • 从 test_load 读取 test 结果                               │
 
 │  • 按 error_type 分类统计                                   │
 
@@ -142,7 +142,7 @@ when_to_use: 作为 Worker Agent 被 Supervisor 调用，执行 Phase 2 Stage 1�
 
 │  ⚠️ 两阶段分离，人工决策 checkpoint                         │
 
-│  ⚠️ Manifest 单一数据源                                     │
+│  ⚠️ test_load 单一数据源                                     │
 
 └─────────────────────────────────────────────────────────────┘
 
@@ -490,11 +490,11 @@ def get_error_type_priority(error_type):
 
 def get_tests_by_batch_id(test_load, batch_id):
 
-    """从 manifest 获取指定 batch 的测试"""
+    """从 test_load 获取指定 batch 的测试"""
 
     return [
 
-        test for test in manifest['tests']
+        test for test in test_load['tests']
 
         if test.get('last_batch_id') == batch_id
 
@@ -510,7 +510,7 @@ error_stats = {}
 
 for batch_id in phase1_batch_list:
 
-    batch_tests = get_tests_by_batch_id(manifest, batch_id)
+    batch_tests = get_tests_by_batch_id(test_load, batch_id)
 
 
 
@@ -1086,11 +1086,11 @@ for batch_id in batches_to_retry:
 
 
 
-    # ✅ 强制检查点 2: Manifest 增量更新
+    # ✅ 强制检查点 2: test_load 增量更新
 
     # execute_batch_script 内部调用 manifest-updater，这里只验证
 
-    assert verify_batch_updated(manifest_path, batch_id), \
+    assert verify_batch_updated(test_load_path, batch_id), \
 
         f"{batch_id} manifest 未更新"
 
@@ -1210,7 +1210,7 @@ return {
 
 def execute_batch_script(batch_id):
 
-    """执行单个 batch（调用 batch-executor）"""
+    """执行单个 batch（调用 unit-test-executor）"""
 
 
 
@@ -1222,23 +1222,23 @@ def execute_batch_script(batch_id):
 
 
 
-    # 调用 batch-executor（Phase 1 的执行逻辑）
+    # 调用 unit-test-executor/scripts/execute_batch.py（Phase 1 的执行逻辑）
 
-    from skills.ut.batch_executor import execute_batch
+    import subprocess
 
+    proc = subprocess.run(
 
+        ["python", "skills/ut/unit-test-executor/scripts/execute_batch.py",
 
-    result = execute_batch(
+         "--batch-config", str(batch_config_path),
 
-        batch_id=batch_id,
+         "--workflow-state", str(workflow_state_path)],
 
-        test_list=batch_config['tests'],
-
-        run_dir=run_dir,
-
-        test_load_path=test_load_path
+        capture_output=True, text=True
 
     )
+
+    result = json.loads(proc.stdout) if proc.returncode == 0 else {"error": proc.stderr}
 
 
 
@@ -1254,9 +1254,9 @@ def execute_batch_script(batch_id):
 
 ```python
 
-def verify_batch_updated(manifest_path, batch_id):
+def verify_batch_updated(test_load_path, batch_id):
 
-    """验证 manifest 已更新（检查点 2）"""
+    """验证 test_load 已更新（检查点 2）"""
 
 
 
@@ -1268,7 +1268,7 @@ def verify_batch_updated(manifest_path, batch_id):
 
     batch_tests = [
 
-        t for t in manifest['tests']
+        t for t in test_load['tests']
 
         if t.get('last_batch_id') == batch_id
 
@@ -1442,9 +1442,9 @@ result = invoke_skill('two-phase-handler', {
 
   - Never fabricate error_type based on test names alone.
 
-  - Never fabricate batch_count/test_count without reading manifest.
+  - Never fabricate batch_count/test_count without reading test_load.
 
-  - All affected_test_files MUST be extracted from manifest.
+  - All affected_test_files MUST be extracted from test_load.
 
 
 
@@ -1486,7 +1486,7 @@ result = invoke_skill('two-phase-handler', {
 
 - [manifest_schema.json](../manifest_schema.json) — error_type 定义
 
-- [batch-executor/SKILL.md](../batch-executor/SKILL.md) — execute_batch_script 实现
+- [unit-test-executor/SKILL.md](../unit-test-executor/SKILL.md) — execute_batch_script 实现
 
 
 

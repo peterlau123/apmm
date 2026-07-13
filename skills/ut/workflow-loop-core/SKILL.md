@@ -21,7 +21,7 @@ terminal conditions.
 
 ```mermaid
 flowchart TD
-    Start([loop_core.run]) --> Read[读取 state + manifest]
+    Start([loop_core.run]) --> Read[读取 state + test_load]
     Read --> Term{终止判定<br/>pending==0 且 running==0?}
     Term -->|是| Final[finalize 写终态] --> End([退出])
     Term -->|否| Cmd[check_user_commands drain]
@@ -44,12 +44,12 @@ flowchart TD
 |---|---|---|
 | `stage_skills` | `dict[str, SkillRef]` | The 4 Worker SKILLs already loaded by the channel: `batch_selector`, `unit_test_executor`, `failure_handler`, `manifest_updater`. |
 | `state_path` | `Path` | `workflow_state.json` for this run. |
-| `manifest_path` | `Path` | `manifest.json` for this run. |
+| `test_load_path` | `Path` | `test_load_xxx.json` for this run. |
 | `run_dir` | `Path` | Run root (`runs/<test_name>-<ts>`). |
-| `handle_checkpoint` | `callable(state, manifest)` | Called after every successful Stage 5. Channel-specific (Feishu card / kanban update / no-op). |
+| `handle_checkpoint` | `callable(state, test_load)` | Called after every successful Stage 5. Channel-specific (Feishu card / kanban update / no-op). |
 | `handle_bastion_disconnect` | `callable(reason: str)` | Called when an executor returns `next_action == "wait"` due to bastion loss. Linear-mode: log + Feishu alert + poll until ping recovers. Kanban-mode: no-op (Gateway has its own daemon). |
 | `check_user_commands` | `callable() -> list[Command]` | Returns user-initiated commands (pause/resume/stop/reconfigure). Linear OpenCode: returns `[]`. Hermes channel: drains a control queue. |
-| `check_terminal_conditions` | `callable(state, manifest) -> (bool, reason, status)` | Returns `(True, reason, "completed"|"stopped"|"failed")` or `(False, "", "")`. |
+| `check_terminal_conditions` | `callable(state, test_load) -> (bool, reason, status)` | Returns `(True, reason, "completed"|"stopped"|"failed")` or `(False, "", "")`. |
 
 The callbacks are the **only** channel hooks. No global state, no
 implicit Feishu/Kanban knowledge leaks into the core.
@@ -60,10 +60,10 @@ implicit Feishu/Kanban knowledge leaks into the core.
 
 ```
 while True:
-    state, manifest = read(state_path), read(manifest_path)
+    state, test_load = read(state_path), read(test_load_path)
 
     # Terminal check first — never start a stage if we're already done
-    done, reason, status = check_terminal_conditions(state, manifest)
+    done, reason, status = check_terminal_conditions(state, test_load)
     if done:
         finalize(state_path, status, reason)
         break
@@ -93,7 +93,7 @@ while True:
     run_skill(stage_skills.manifest_updater, handled, ...)
 
     # Checkpoint (channel-specific: Feishu card, kanban tile, log, …)
-    handle_checkpoint(read(state_path), read(manifest_path))
+    handle_checkpoint(read(state_path), read(test_load_path))
 ```
 
 Iteration counter and `last_update` are bumped after each successful
@@ -106,9 +106,9 @@ implementations bump in `handle_checkpoint`).
 
 ```
 while True:
-    state, manifest = read(state_path), read(manifest_path)
+    state, test_load = read(state_path), read(test_load_path)
 
-    done, reason, status = check_terminal_conditions(state, manifest)
+    done, reason, status = check_terminal_conditions(state, test_load)
     if done:
         finalize(state_path, status, reason)
         break
@@ -119,11 +119,11 @@ while True:
         break
 
     # No Stage 2-5 calls here. Workers are running under Hermes Gateway
-    # and write their progress into the Kanban board + manifest.
+    # and write their progress into the Kanban board + test_load.
     gateway_status = check_gateways_alive()   # supplied by ut_runner
     kanban_stats   = poll_kanban_stats()      # supplied by ut_runner
 
-    handle_checkpoint(state, manifest)        # channel emits its update
+    handle_checkpoint(state, test_load)        # channel emits its update
     sleep(poll_interval)
 ```
 

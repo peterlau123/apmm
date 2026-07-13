@@ -174,9 +174,9 @@ Syncs test_load results back to manifest.json (master record).
 
 ## Channel callbacks (passed to `loop_core.run`)
 
-### `handle_checkpoint(state, manifest)`
+### `handle_checkpoint(state, test_load)`
 Send a Feishu progress card via `ut_runner.send_feishu_card(
-feishu, "progress", manifest, iteration, batch_id=batch_id, mode="linear")`.
+feishu, "progress", test_load, iteration, batch_id=batch_id, mode="linear")`.
 On high error rate, switch to event `"alert"`. Bump `iteration` and
 `last_update` on `state_path` while you're here.
 
@@ -194,7 +194,7 @@ Returns `[]`. Linear OpenCode has no out-of-band command channel — the
 user interacts via this Claude session, and Ctrl-C is the pause/stop
 signal handled by `loop_core`'s `KeyboardInterrupt` path.
 
-### `check_terminal_conditions(state, manifest)`
+### `check_terminal_conditions(state, test_load)`
 Delegate to `ut_runner.check_stop_conditions(state_path)`:
 - `pending == 0 and running == 0` → `(True, "pending_count == 0", "completed")`
 - otherwise `(False, "", "")`

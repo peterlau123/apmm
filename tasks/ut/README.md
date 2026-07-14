@@ -121,26 +121,26 @@ ut/hermes-workflow     (生产通道，长期后台)
 
 ```mermaid
 flowchart TD
-    Init["<b>Init</b><br/>manifest from test_list or manifest_source"]
-    S1["<b>Stage 1: Generate test_load</b><br/>extract N tests from manifest"]
+    Init["Init<br/>manifest from test_list or manifest_source"]
+    S1["Stage 1: Generate test_load<br/>extract N tests from manifest"]
 
-    subgraph Loop ["<b>Batch Loop</b> - repeat until test_load pending == 0"]
-        S2["<b>Stage 2: Select batch</b><br/>generate_batch.py"]
-        S3["<b>Stage 3: Execute batch</b><br/>remote pytest on GPU server"]
-        S4["<b>Stage 4: Handle failures</b><br/>classify + retry / ignore / fix"]
-        S45["<b>Stage 4.5: Update test_load</b><br/>v5 merge (retry_count, status)"]
+    subgraph Loop ["Batch Loop - repeat until test_load pending == 0"]
+        S2["Stage 2: Select batch<br/>generate_batch.py"]
+        S3["Stage 3: Execute batch<br/>remote pytest on GPU server"]
+        S4["Stage 4: Handle failures<br/>classify + retry / ignore / fix"]
+        S45["Stage 4.5: Update test_load<br/>v5 merge: retry_count, status"]
         S2 --> S3
         S3 --> S4
         S4 --> S45
-        S45 -->|pending > 0| S2
+        S45 -->|still pending| S2
     end
 
-    S5["<b>Stage 5: Sync to manifest</b><br/>update_manifest_from_test_load.py"]
+    S5["Stage 5: Sync to manifest<br/>update_manifest_from_test_load.py"]
     Done(["Complete"])
 
     Init --> S1
     S1 --> S2
-    S45 -->|pending == 0| S5
+    S45 -->|all done| S5
     S5 --> Done
 ```
 

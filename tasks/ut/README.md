@@ -6,29 +6,6 @@
 
 ## 我想干嘛？
 
-### 🅰️ 我要跑这个仓库的测试（最常用）
-
-| 跑什么 | 飞书 apmm-ut 群里说 | 模式 | 用例数 | 耗时 |
-|---|---|---|---|---|
-| L1 烟雾 | `跑 L1` | linear | 1 | < 1 min |
-| L2 mini | `跑 L2` | linear | ~10 | ~3 min |
-| L3 fast | `跑 L3` | linear | ~50 | ~15 min |
-| L4 retry | `跑 L4` | **kanban** | 3 (retry subset) | ~60 min |
-| 正式生产 | `跑 ut workflow 的正式生产` | kanban | 全量 | hours – days |
-
-**前置一次性启动**（gateway + supervisor，幂等，已起则秒退）：
-```bash
-python tasks/ut/scripts/start_hermes_ut_runtime.py
-```
-- daemon **不需要预先 serve**，supervisor 会通过飞书 OTP 卡自动索取并自起。
-- 状态查询：`... --status`。停止：`... --stop`。
-
-完成后在飞书发触发词即可，supervisor 会发参数确认卡，回 `确认` 启动。
-
-> 不在飞书群里？先拉到 apmm-ut 群里。配置 webhook 见 [skills/ut/terminal-workflow/references/feishu-integration.md](../../skills/ut/terminal-workflow/references/feishu-integration.md)。
-
----
-
 ### 启动路由
 
 当用户表达「跑 UT / 跑单元测试 / start UT / 跑测试」等意图时，按以下 4 步执行，**不得跳步**：
@@ -67,6 +44,15 @@ python tasks/ut/scripts/start_hermes_ut_runtime.py
 | 调试环境 | `tests/ut/integration/fixtures/workflow.l*.yaml` | L1-L4 frozen 模板，快速验证 |
 
 > terminal-workflow 通常使用调试环境；hermes-workflow 通常使用生产环境。但两者可自由组合。
+
+**???? L1-L4 ???**
+
+| ?? | ?? | ??? | ?? | ?? |
+|------|------|--------|------|------|
+| L1 ?? | single-phase | 1 | < 1 min | ?? 5 ? stage ?? |
+| L2 mini | single-phase | ~10 | ~3 min | ?? batch ?? |
+| L3 fast | two-phase | ~50 | ~15 min | ?? failure-handler + retry |
+| L4 retry | kanban | 3 (retry subset) | ~60 min | ???? |
 
 #### Step 4: 加载 SKILL
 用户确认模式后，才加载对应的 SKILL.md：

@@ -157,7 +157,6 @@ def create_initial_state(
     manifest_path: Path = None,
     test_list_source: Path = None,
     reset: bool = False,
-    template_path: Path = None,
 ) -> dict:
     """
     创建初始 workflow_state.json
@@ -168,7 +167,6 @@ def create_initial_state(
         manifest_path: manifest.json 路径（可选，默认在 run_dir 下）
         test_list_source: test_list.txt 原始路径（可选，优先级高于 workflow.yaml 配置）
         reset: 是否重置状态
-        template_path: workflow template路径（可选，如果提供则拷贝到run_dir/workflow.yaml）
 
     Returns:
         dict: 创建的状态数据
@@ -199,14 +197,15 @@ def create_initial_state(
     batches_dir.mkdir(exist_ok=True)
     print(f"[INFO] 批次目录已创建: {batches_dir}")
 
-    # 拷贝 workflow template（如果指定）
-    if template_path and Path(template_path).exists():
-        template_source = Path(template_path)
-        target_workflow_yaml = run_dir / "workflow.yaml"
-        shutil.copy2(template_source, target_workflow_yaml)
-        print(f"[OK] Template copied: {template_source} -> {target_workflow_yaml}")
-        # 更新 workflow_yaml_path 为拷贝后的路径
+    # Always copy workflow.yaml to run_dir (never modify original)
+    target_workflow_yaml = run_dir / "workflow.yaml"
+    source_yaml = Path(workflow_yaml_path)
+    if source_yaml.resolve() != target_workflow_yaml.resolve():
+        shutil.copy2(source_yaml, target_workflow_yaml)
+        print(f"[OK] workflow.yaml copied: {source_yaml} -> {target_workflow_yaml}")
         workflow_yaml_path = target_workflow_yaml
+    else:
+        print(f"[INFO] workflow.yaml already in run_dir: {target_workflow_yaml}")
 
     # 读取 input_filter 配置（manifest_source 优先于 test_list_path）
     input_filter = config.get("input_filter", {})
@@ -334,12 +333,11 @@ def reset_state(
     run_dir: Path = None,
     manifest_path: Path = None,
     test_list_source: Path = None,
-    template_path: Path = None,
 ) -> dict:
     """重置状态文件"""
     print("[INFO] 重置 workflow_state.json...")
     return create_initial_state(
-        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=True, template_path=template_path
+        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=True
     )
 
 
@@ -374,13 +372,6 @@ def main():
         help="test_list.txt 原始文件路径（将拷贝到运行目录）",
     )
     parser.add_argument("--reset", action="store_true", help="重置状态文件")
-    parser.add_argument(
-        "--template-path",
-        type=str,
-        default=None,
-        help="Workflow template path (from load_deployment_config). "
-             "If provided, copy template to run_dir/workflow.yaml",
-    )
 
     args = parser.parse_args()
 
@@ -406,10 +397,9 @@ def main():
     run_dir = Path(args.run_dir) if args.run_dir else None
     manifest_path = Path(args.manifest_path) if args.manifest_path else None
     test_list_source = Path(args.test_list) if args.test_list else None
-    template_path = Path(args.template_path) if args.template_path else None
 
     result = create_initial_state(
-        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=args.reset, template_path=template_path
+        workflow_yaml_path, run_dir, manifest_path, test_list_source, reset=args.reset
     )
 
     # Fail loudly on a bad init: a validation failure must surface as a non-zero

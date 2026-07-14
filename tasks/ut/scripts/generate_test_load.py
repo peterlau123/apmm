@@ -91,6 +91,7 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
 
     # 确保statistics包含所有状态字段
     statistics = {
+        "total": len(selected_tests),
         "pending": status_counts.get("pending", 0),
         "passed": status_counts.get("passed", 0),
         "failed": status_counts.get("failed", 0),
@@ -109,7 +110,8 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
     test_load = {
         "version": "2.0",
         "generated_at": datetime.now().isoformat(),
-        "source": str(manifest_path),
+        "source": "test_list_file",
+        "manifest_path": str(manifest_path),
         "total_tests": len(selected_tests),
         "tests": selected_tests,
         "statistics": statistics  # 使用实际计算的statistics

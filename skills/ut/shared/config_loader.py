@@ -211,6 +211,7 @@ def get_paths(workflow_state_path: Optional[Path] = None) -> Dict[str, Path]:
         "run_dir": run_dir,
         "logs_dir": Path(paths_config.get("logs_dir", str(run_dir / "logs"))),
         "reports_dir": Path(paths_config.get("reports_dir", str(run_dir / "reports"))),
+        "test_load": Path(paths_config.get("test_load", "")),
         "workspace": workspace,
     }
 

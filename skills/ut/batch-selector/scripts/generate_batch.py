@@ -190,6 +190,17 @@ def generate_batch(
             break
 
     # batch_config.json 内容（写入文件）
+    # Guard: empty batch means no selectable tests
+    if not batch:
+        if skip_distributed and not normal:
+            raise ValueError(
+                f"All {len(candidates)} candidates are distributed tests and "
+                f"skip_distributed=True. Cannot form batch."
+            )
+        raise ValueError(
+            f"Empty batch: no selectable tests from {len(candidates)} candidates"
+        )
+
     batch_config = {
         "batch_id": batch_id,
         "tests": batch[:batch_size],

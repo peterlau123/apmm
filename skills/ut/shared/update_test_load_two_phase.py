@@ -36,7 +36,15 @@ if str(_project_root) not in sys.path:
 # NOTE: This imports from manifest-updater (higher-level module) to reuse
 # the v5 merge logic. This is an intentional upward dependency -- the
 # alternative (duplicating merge_batch_results) would violate DRY.
-from skills.ut.manifest_updater.scripts.update_test_load import merge_batch_results, calculate_statistics
+# manifest-updater uses hyphen (not importable as Python module)
+# Load update_test_load.py via importlib from file path
+import importlib.util
+_utl_path = Path(__file__).parent.parent / "manifest-updater" / "scripts" / "update_test_load.py"
+_spec = importlib.util.spec_from_file_location("update_test_load", _utl_path)
+_utl = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_utl)
+merge_batch_results = _utl.merge_batch_results
+calculate_statistics = _utl.calculate_statistics
 
 
 def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: dict) -> int:

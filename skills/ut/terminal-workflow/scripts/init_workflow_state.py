@@ -249,21 +249,22 @@ def create_initial_state(
 
     now = datetime.now(timezone.utc).isoformat()
 
-    # 创建 manifest.json：
+    # 创建 manifest.json（2 级优先）：
     # 1. manifest_source 指定 -> 拷贝到 run_dir/manifest.json（优先）
     # 2. test_list_path 指定 -> 从 test_list.txt 创建
-    # 3. manifest_path 已存在 -> 直接使用
     if manifest_source and Path(manifest_source).exists():
         shutil.copy2(Path(manifest_source), manifest_path)
         print(f"[INFO] manifest.json 已从 manifest_source 拷贝: {manifest_source} -> {manifest_path}")
         pending_count = get_initial_pending_count(manifest_path)
         total_count = get_initial_total_count(manifest_path)
-    elif not manifest_path.exists() and test_list_path:
+    elif test_list_path:
         total_count = create_manifest_from_test_list(test_list_path, manifest_path)
         pending_count = total_count
     else:
-        pending_count = get_initial_pending_count(manifest_path)
-        total_count = get_initial_total_count(manifest_path)
+        raise ValueError(
+            "无法创建 manifest.json：input_filter.manifest_source 和 "
+            "input_filter.test_list_path 均未指定，请至少配置一个"
+        )
 
     # 构建状态数据
     state = {
@@ -356,16 +357,10 @@ def main():
     parser.add_argument(
         "--workflow-yaml",
         type=str,
-        default=str(
-            Path(__file__).parent.parent.parent.parent.parent
-            / "tasks"
-            / "ut"
-            / "deployment"
-            / "production"
-            / "config"
-            / "workflow.yaml"
-        ),
-        help="workflow.yaml 配置文件路径",
+        default=None,
+        help="workflow.yaml 路径（未指定时自动检测：生产环境 "
+             "tasks/ut/deployment/production/config/workflow.yaml，"
+             "调试环境 tests/ut/integration/fixtures/workflow.l1.yaml）",
     )
     parser.add_argument(
         "--run-dir",
@@ -396,7 +391,25 @@ def main():
 
     args = parser.parse_args()
 
-    workflow_yaml_path = Path(args.workflow_yaml)
+    # 自动检测 workflow.yaml（未指定 --workflow-yaml 时）
+    if args.workflow_yaml is None:
+        project_root = Path(__file__).parent.parent.parent.parent.parent
+        prod_yaml = project_root / "tasks" / "ut" / "deployment" / "production" / "config" / "workflow.yaml"
+        debug_yaml = project_root / "tests" / "ut" / "integration" / "fixtures" / "workflow.l1.yaml"
+        if prod_yaml.exists():
+            workflow_yaml_arg = str(prod_yaml)
+            print(f"[INFO] 未指定 --workflow-yaml，使用生产环境配置: {workflow_yaml_arg}")
+        elif debug_yaml.exists():
+            workflow_yaml_arg = str(debug_yaml)
+            print(f"[INFO] 未指定 --workflow-yaml，使用调试环境配置: {workflow_yaml_arg}")
+        else:
+            print("[ERROR] 未指定 --workflow-yaml，且无法自动检测到配置文件", file=sys.stderr)
+            print(f"  生产环境: {prod_yaml}", file=sys.stderr)
+            print(f"  调试环境: {debug_yaml}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        workflow_yaml_arg = args.workflow_yaml
+    workflow_yaml_path = Path(workflow_yaml_arg)
     run_dir = Path(args.run_dir) if args.run_dir else None
     manifest_path = Path(args.manifest_path) if args.manifest_path else None
     test_list_source = Path(args.test_list) if args.test_list else None

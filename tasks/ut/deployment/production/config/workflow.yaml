@@ -29,7 +29,7 @@ workflow:
   # ============================================================
   # ✍️：运行策略选择（Two-phase Strategy）
   # ============================================================
-  execution_strategy: "two-phase"  # "single-phase"（默认）或 "two-phase"
+  execution_strategy: "single-phase"  # "single-phase"（默认）或 "two-phase"
 
   # ============================================================
   # ✍️：test_load配置（测试清单生成）
@@ -131,7 +131,7 @@ config:
 input_filter:
   # ✍️：test_list路径（必须指定）
   # 场景 1: 用户指定的 test_list.txt 原始路径
-  test_list_path: "D:/workspace/apmm/tasks/ut/dataset/ut_test_list_full_20260624_173600.txt" # ✍️: 用户指定的 test_list.txt 原始路径（必填）
+  test_list_path: null # ✍️: 用户指定的 test_list.txt 原始路径（必填）
 
   # 场景 2: 用户指定的输入 manifest.json
   manifest_source: null # ✍️: 用户指定的已有 manifest.json 路径
@@ -319,7 +319,7 @@ worker_output_schema:
 # Kanban - Hermes Kanban 配置（方案 A-1）
 # ============================================================
 kanban:
-  enabled: true # ✍️: true 启用 Kanban 模式，false 使用线性 workflow
+  enabled: false # ✍️: false 默认线性（terminal-workflow），true=Kanban 多 Agent
 
   # Board 配置
   board:

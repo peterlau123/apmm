@@ -117,15 +117,34 @@ ut/hermes-workflow     (生产通道，长期后台)
   └─ 共用同一份 workflow-loop-core，流水线一致
 ```
 
-流水线（两通道共用）：
+???????????
+
+```mermaid
+flowchart TD
+    Init["<b>Init</b><br/>manifest from test_list or manifest_source"]
+    S1["<b>Stage 1: Generate test_load</b><br/>extract N tests from manifest"]
+
+    subgraph Loop ["<b>Batch Loop</b> - repeat until test_load pending == 0"]
+        S2["<b>Stage 2: Select batch</b><br/>generate_batch.py"]
+        S3["<b>Stage 3: Execute batch</b><br/>remote pytest on GPU server"]
+        S4["<b>Stage 4: Handle failures</b><br/>classify + retry / ignore / fix"]
+        S45["<b>Stage 4.5: Update test_load</b><br/>v5 merge (retry_count, status)"]
+        S2 --> S3
+        S3 --> S4
+        S4 --> S45
+        S45 -->|pending > 0| S2
+    end
+
+    S5["<b>Stage 5: Sync to manifest</b><br/>update_manifest_from_test_load.py"]
+    Done(["Complete"])
+
+    Init --> S1
+    S1 --> S2
+    S45 -->|pending == 0| S5
+    S5 --> Done
 ```
-Init: collect(manifest from test_list)
-  └─ Stage 1: generate test_load
-     └─ [循环] Stage 2: select_batch -> Stage 3: execute(远程pytest)
-        -> Stage 4: handle_failures -> Stage 4.5: update_test_load
-        循环 Stage 2-4.5 直到 test_load pending == 0
-Post-loop: sync test_load -> manifest (update_manifest_from_test_load.py)
-```
+
+> **?????**?test_load ????????????Stage 2-4.5 ????manifest ??????? Stage 5??????????
 
 ---
 

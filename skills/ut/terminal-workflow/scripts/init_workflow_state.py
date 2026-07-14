@@ -124,7 +124,6 @@ def update_current_run_pointer(
     run_dir: Path,
     workflow_state_path: Path,
     test_list_path: Path = None,
-    status: str = "active",
 ) -> None:
     """
     更新 current_run.json 指针文件
@@ -134,14 +133,12 @@ def update_current_run_pointer(
         run_dir: 运行目录路径
         workflow_state_path: workflow_state.json 路径
         test_list_path: test_list.txt 路径（可选）
-        status: 运行状态 (active/completed/paused)
     """
     pointer_file = agents_dir / "current_run.json"
     pointer_data = {
         "run_dir": str(run_dir),
         "workflow_state_path": str(workflow_state_path),
         "started_at": datetime.now(timezone.utc).isoformat(),
-        "status": status,
     }
 
     if test_list_path:

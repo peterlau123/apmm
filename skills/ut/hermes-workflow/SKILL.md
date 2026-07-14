@@ -1112,9 +1112,7 @@ When the run was triggered via a tier intent (`start_l1..l4` from §3.A):
 
 4. **Write final manifest** + `workflow_state.json` (status=completed).
 
-5. **Mark `current_run.json`** completed.
-
-6. **`bastion.stop_heartbeat()`** on the way out.
+5. **`bastion.stop_heartbeat()`** on the way out.
 
 
 
@@ -1136,7 +1134,7 @@ wasn't classified into a tier):
 
 3. Attach `git log master..<branch> --oneline` auto-fix summary if applicable.
 
-4. Write final manifest + `workflow_state.json`, mark `current_run.json`,
+4. Write final manifest + `workflow_state.json`,
 
    `bastion.stop_heartbeat()` — same as tier completion.
 

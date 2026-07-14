@@ -10,15 +10,30 @@ when_to_use: User asks to run / resume / supervise the UT workflow interactively
 ## Data Flow: test_load = working dataset, manifest = master record
 
 test_load_xxx.json is the **working dataset** for the current run. All stages
-(2-5) read and write test_load during the loop. manifest.json is the **master
+(2-4.5) read and write test_load during the loop. manifest.json is the **master
 record**, updated only once when test_load is fully processed (pending == 0).
 
 This avoids polluting manifest.json with intermediate failure states and
 keeps statistics stable until the run completes.
 
-### Stage 1: test_load generation
+### Pipeline overview
 
-When workflow starts (after Stage 0 environment selection):
+```
+Init: collect (manifest from test_list or manifest_source)
+  |
+  v
+Stage 1: generate test_load (extract N tests from manifest)
+  |
+  v
+[Loop] Stage 2: select_batch -> Stage 3: execute (remote pytest) 
+       -> Stage 4: handle_failures -> Stage 4.5: update_test_load
+       Loop Stage 2-4.5 until test_load pending == 0
+  |
+  v
+Stage 5: sync test_load -> manifest (update_manifest_from_test_load.py)
+```
+
+### Stage 1: test_load generation
 
 1. Call generate_test_load.py to extract a subset from manifest
 2. Generates test_load_{count}_{timestamp}.json
@@ -31,6 +46,36 @@ python tasks/ut/scripts/generate_test_load.py \
     --count 1000 \
     --output-dir runs/ut-{timestamp} \
     --workflow-state runs/ut-{timestamp}/workflow_state.json
+```
+
+### Stage 2: batch selection (generate_batch.py)
+
+Reads test_load, selects next batch of pending tests. Normal tests first,
+distributed tests when no normal tests remain.
+
+### Stage 3: batch execution (execute_batch.py)
+
+Runs pytest remotely on GPU server. Normal batch: 1 GPU/test. Distributed
+batch: torchrun with gpu_per_test GPUs/test.
+
+### Stage 4: failure handling (failure-handler)
+
+Reads batch_results.json, classifies failures, produces handled_tests.json
+with retry/ignore/fix decisions.
+
+### Stage 4.5: test_load update (update_test_load_two_phase.py)
+
+Applies v5 merge to test_load: retry_count++, retriable_error->ignored,
+handled overrides. Updates workflow_state.json batch status.
+
+### Stage 5: post-loop manifest sync
+
+When test_load pending == 0, sync results back to manifest.json:
+
+```bash
+python skills/ut/manifest-updater/scripts/update_manifest_from_test_load.py \
+    --manifest-path <run_dir>/manifest.json \
+    --test-load-path <run_dir>/test_load_xxx.json
 ```
 
 ### State updates during the loop

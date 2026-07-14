@@ -97,10 +97,6 @@ def create_run_dir(
     run_dir = runs_dir / f"{test_name}-{timestamp}"
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    # 创建子目录
-    (run_dir / "logs").mkdir(exist_ok=True)
-    (run_dir / "reports").mkdir(exist_ok=True)
-
     return run_dir
 
 

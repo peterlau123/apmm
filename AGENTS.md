@@ -90,17 +90,18 @@ apmm/
 
 ## 开发调试工作模式
 
-OpenCode ???? **Brainstorming -> Planning -> Execution -> Verification** ??????????????????????????
+> 本节描述 **Agent 自身在开发调试时** 应遵循的工作方式，与 UT Workflow 自身的运行模式（terminal / hermes）无关。
 
-> 以下是开发调试环境下的工作流（非生产环境）。生产环境走 UT Workflow 5 步启动路由（见下方§用户意图路由）。
+Agent 在开发调试（编写代码、修复 bug、重构等）时，采用 **Brainstorming -> Planning -> Execution -> Verification** 四阶段工作流，强制先思考、再计划、再实施、最后验证。
 
-**????**?[docs/guides/ai-workflow.md](docs/guides/ai-workflow.md)
+**注意**：当用户触发「跑 UT workflow」时，Agent 走的是 [§用户意图路由](#用户意图路由) 的 5 步启动流程，不需要经过此四阶段。
 
-**????**?
-- ? ?????????? Phase 1-3?
-- ? ????????????? Verification Loop?
-- ? ?????????
+**详细流程**：[docs/guides/ai-workflow.md](docs/guides/ai-workflow.md)
 
+**核心原则**：
+- ❌ 不跳过思考阶段（必须 Phase 1-3）
+- ❌ 不跳过验证阶段（完成后必须 Verification Loop）
+- ✅ 每步验证、逐步推进
 
 ---
 

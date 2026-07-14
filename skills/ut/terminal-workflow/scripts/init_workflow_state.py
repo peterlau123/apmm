@@ -196,9 +196,6 @@ def create_initial_state(
     else:
         run_dir = Path(run_dir)
         run_dir.mkdir(parents=True, exist_ok=True)
-        # 创建子目录
-        (run_dir / "logs").mkdir(exist_ok=True)
-        (run_dir / "reports").mkdir(exist_ok=True)
 
     # 创建批次目录根
     batches_dir = run_dir / "batches"

@@ -45,15 +45,6 @@
 
 > terminal-workflow 通常使用调试环境；hermes-workflow 通常使用生产环境。但两者可自由组合。
 
-**???? L1-L4 ???**
-
-| ?? | ?? | ??? | ?? | ?? |
-|------|------|--------|------|------|
-| L1 ?? | single-phase | 1 | < 1 min | ?? 5 ? stage ?? |
-| L2 mini | single-phase | ~10 | ~3 min | ?? batch ?? |
-| L3 fast | two-phase | ~50 | ~15 min | ?? failure-handler + retry |
-| L4 retry | kanban | 3 (retry subset) | ~60 min | ???? |
-
 #### Step 4: 加载 SKILL
 用户确认模式后，才加载对应的 SKILL.md：
 - terminal-workflow -> [skills/ut/terminal-workflow/SKILL.md](../../skills/ut/terminal-workflow/SKILL.md)

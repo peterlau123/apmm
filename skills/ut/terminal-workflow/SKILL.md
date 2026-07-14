@@ -153,17 +153,26 @@ with the test_load path. All subsequent stages read from test_load.
 
 ### Step 4: Bastion Check
 
+> **terminal-workflow does NOT use Feishu OTP.** `_setup_bastion()` triggers Feishu-based
+> OTP flow which is inappropriate here. Instead, verify the agent.py SSH daemon is alive.
+
+The agent.py daemon must be running on the Windows host (started via `serve`). Check it:
+
 ```bash
-python -c "
-from skills.ut.shared.ut_runner import _setup_bastion
-from skills.ut.shared.config_loader import load_workflow_yaml, resolve_paths
-config = load_workflow_yaml('<run_dir>/workflow.yaml')
-paths = resolve_paths(config, '<run_dir>')
-bastion = _setup_bastion('<run_dir>', config.get('bastion'), config.get('remote_server'), str(paths.get('feishu_config')), '<run_dir>/workflow_state.json')
-print('Bastion OK' if bastion else 'Bastion FAILED')
-"
+python tools/agent.py --profile t_h20 ping
 ```
-If unreachable, surface failure to user and stop. Do NOT enter the loop.
+
+On success (`[OK] Daemon is running`), optionally verify the remote is reachable:
+
+```bash
+python tools/agent.py --profile t_h20 run "hostname"
+```
+
+On `Permission denied` or SSH errors, ask the user to re-authenticate the bastion daemon
+and retry. Do NOT enter the loop if unreachable.
+
+**Note for future runs:** The daemon persists across runs on the same machine. Only check
+once per session; skip if already verified.
 
 ### Step 5: Strategy Branch
 

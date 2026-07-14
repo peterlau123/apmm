@@ -48,50 +48,120 @@ python tasks/ut/scripts/generate_test_load.py \
 
 ## Startup Flow
 
-### Step 1: Parameter Confirmation
+> Each step uses explicit scripts. Do NOT improvise or skip steps.
 
-When user triggers workflow (e.g. "开始运行单元测试" / "跑 ut workflow"):
+### Step 1: Init (create run_dir + copy files)
 
-**AI behavior:**
-1. Determine environment (test l1-l4 / production) from user's message
-2. Load corresponding workflow.yaml template
-3. Show current config, ask user to confirm or modify:
+For new run:
+```bash
+python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
+    --workflow-yaml <source_workflow_yaml>
+```
+
+This script automatically:
+1. Creates `runs/ut-{timestamp}/` (run_dir)
+2. Copies workflow.yaml to `run_dir/workflow.yaml` (original never modified)
+3. Copies input files to run_dir (manifest_source -> copy manifest.json; test_list_path -> copy test_list.txt + generate manifest.json)
+4. Creates `workflow_state.json` + `batches/` dir
+5. Updates `.agents/current_run.json` pointer
+
+Optional CLI overrides:
+- `--test-list <path>`: override yaml's `input_filter.test_list_path`
+- `--run-dir <path>`: specify run_dir explicitly
+
+For resume (`resume_from` is set): skip this step, use existing run_dir.
+
+### Step 2: Parameter Confirmation
+
+Read config from `run_dir/workflow.yaml` (the copy, NOT the original), show to user:
 
 | Parameter | yaml key | Default | Description |
 |-----------|----------|---------|-------------|
-| test_list 路径 | input_filter.test_list_path | (from yaml) | test_list.txt 原始路径（与 manifest_source 二选一） |
-| manifest 来源 | input_filter.manifest_source | null | 已有 manifest.json 路径（优先于 test_list_path） |
-| 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
-| test_load 数量 | workflow.test_load.count | 1000 | 从 manifest 抽取的 test 数 |
-| batch_size | config.batch_size | 8 | 每批测试数量 |
-| max_retry | config.max_retry_per_test | 3 | 单测试最大重试次数 |
-| resume | config.resume_from | null | 留空=新建, 填路径=续跑 |
+| test_list path | input_filter.test_list_path | (from yaml) | test_list.txt (read-only reference) |
+| manifest source | input_filter.manifest_source | null | manifest.json (read-only reference) |
+| execution strategy | workflow.execution_strategy | two-phase | single-phase / two-phase |
+| test_load count | workflow.test_load.count | 1000 | tests to extract from manifest |
+| batch_size | config.batch_size | 8 | tests per batch |
+| max_retry | config.max_retry_per_test | 3 | max retries per test |
+| resume | config.resume_from | null | empty=new, path=resume |
 
-4. User confirms ("确认") or modifies ("改 batch_size=16")
-5. Apply modifications to the run's workflow.yaml copy
+**AI behavior:**
+1. Read `run_dir/workflow.yaml`
+2. Show parameter table to user
+3. Wait for user confirmation ("confirm") or modification ("batch_size=16")
+4. Apply modifications to `run_dir/workflow.yaml` (NOT the original)
+
+> If user changes `test_list_path` or `manifest_source`, re-run Step 1 with the new source (`--test-list <new_path>`).
+
+### Step 3: Generate test_load
+
+For new run (skip if resuming and test_load already exists):
+```bash
+python tasks/ut/scripts/generate_test_load.py \
+    --manifest-path <run_dir>/manifest.json \
+    --count <confirmed_count> \
+    --output-dir <run_dir> \
+    --workflow-state <run_dir>/workflow_state.json
+```
+Creates `test_load_{count}_{timestamp}.json` and updates `workflow_state.json`
+with the test_load path. All subsequent stages read from test_load.
+
+### Step 4: Bastion Check
+
+```bash
+python -c "
+from skills.ut.shared.ut_runner import _setup_bastion
+from skills.ut.shared.config_loader import load_workflow_yaml, resolve_paths
+config = load_workflow_yaml('<run_dir>/workflow.yaml')
+paths = resolve_paths(config, '<run_dir>')
+bastion = _setup_bastion('<run_dir>', config.get('bastion'), config.get('remote_server'), str(paths.get('feishu_config')), '<run_dir>/workflow_state.json')
+print('Bastion OK' if bastion else 'Bastion FAILED')
+"
+```
+If unreachable, surface failure to user and stop. Do NOT enter the loop.
+
+### Step 5: Strategy Branch
+
+Based on `execution_strategy` from `run_dir/workflow.yaml`:
+
+- **single-phase**: Enter `loop_core.run()` with the 4 Worker SKILLs:
+  - Stage 2: `generate_batch.py` reads test_load, selects batch
+  - Stage 3: `execute_batch.py` runs remote pytest
+  - Stage 4: failure-handler produces `handled_tests.json`
+  - Stage 4.5: `update_test_load.py` applies v5 merge to test_load
+  - Repeat until test_load pending == 0
+
+- **two-phase**:
+```bash
+python tasks/ut/scripts/auto_run_batches_two_phase.py \
+    --workflow-yaml <run_dir>/workflow.yaml \
+    --run-dir <run_dir>
+```
+Phase 1 completes, then invoke two-phase-handler SKILL for Phase 2
+(statistical analysis + human decision + retry).
 
 ## Trigger flow (this channel)
 
 ```mermaid
 sequenceDiagram
-    actor U as 用户
-    participant CC as Claude/OpenCode 会话
-    participant R as ut_runner
+    actor U as User
+    participant CC as Agent Session
     participant B as Bastion(t_h20)
     participant L as loop_core
-    U->>CC: 要求"跑/续 UT workflow"
-    CC->>CC: 加载 ut/terminal-workflow + loop_core + 4 Worker SKILL
-    CC->>R: validate_required_config(runs/ut-{timestamp}/workflow.yaml)
-    CC->>R: init_or_resume(yaml, resume_from)
-    R-->>CC: (run_dir, state_path, state, iteration)
-    CC->>B: _setup_bastion → ensure_connected (单次探测)
-    alt 不可达
-        B-->>CC: 失败
-        CC->>U: 报错并停止（不进循环）
-    else 可达
-        CC->>L: loop_core.run(回调...)
-        L-->>CC: 单向飞书进度卡（可选）
-        Note over CC,U: 暂停/停止 = 用户按 Ctrl-C
+    U->>CC: "Run UT workflow"
+    CC->>CC: Step 1: init_workflow_state.py (creates run_dir + copies yaml)
+    CC->>U: Step 2: Show params from run_dir/workflow.yaml
+    U->>CC: Confirm or modify
+    CC->>CC: Apply mods to run_dir/workflow.yaml
+    CC->>CC: Step 3: generate_test_load.py
+    CC->>B: Step 4: _setup_bastion -> ensure_connected
+    alt unreachable
+        B-->>CC: fail
+        CC->>U: Report and stop (do NOT enter loop)
+    else reachable
+        CC->>L: Step 5: loop_core.run() or auto_run_batches_two_phase.py
+        L-->>CC: Feishu progress cards (optional)
+        Note over CC,U: Pause/stop = user Ctrl-C
     end
 ```
 
@@ -107,66 +177,11 @@ sequenceDiagram
 - **No state machine.** `current_stage` is a breadcrumb in
   `workflow_state.json`, not a guard. The loop body owns ordering.
 - **No user-command channel.** `check_user_commands()` returns `[]`.
-  Pause/stop is the user pressing Ctrl-C in this Claude session.
+  Pause/stop is the user pressing Ctrl-C in this session.
 
 ---
 
-## Startup (Steps 2-6, after parameter confirmation)
 
-### Step 2: Init
-
-For new run:
-```bash
-python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
-    --workflow-yaml runs/ut-{timestamp}/workflow.yaml
-```
-Creates run_dir, copies input files to run_dir, creates manifest.json + workflow_state.json.
-
-Input source (from yaml `input_filter`, 2-level priority):
-1. `manifest_source` set → copies manifest.json to run_dir (test_list NOT copied)
-2. `test_list_path` set → copies test_list.txt to run_dir + generates manifest.json from it
-
-> Input files are always copied to run_dir. Original files are never modified.
-
-For resume (resume_from is set): skip init, use existing run_dir.
-
-### Step 3: Generate test_load
-
-For new run (skip if resuming and test_load already exists):
-```bash
-python tasks/ut/scripts/generate_test_load.py \
-    --manifest-path <run_dir>/manifest.json \
-    --count <confirmed_count> \
-    --output-dir <run_dir> \
-    --workflow-state <run_dir>/workflow_state.json
-```
-Creates test_load_{count}_{timestamp}.json and updates workflow_state.json
-with the test_load path. All subsequent stages read from test_load.
-
-### Step 4: Bastion Check
-
-ut_runner._setup_bastion(...) performs ensure_connected.
-If unreachable, surface failure to user and stop. Do NOT enter the loop.
-
-### Step 5: Strategy Branch
-
-Based on execution_strategy from confirmed config:
-
-- **single-phase**: Enter loop_core.run() with the 4 Worker SKILLs:
-  - Stage 2: generate_batch.py reads test_load, selects batch
-  - Stage 3: execute_batch.py runs remote pytest
-  - Stage 4: failure-handler produces handled_tests.json
-  - Stage 4.5: update_test_load_two_phase.py applies v5 merge to test_load
-  - Repeat until test_load pending == 0
-
-- **two-phase**: Call auto_run_batches_two_phase.py:
-```bash
-python tasks/ut/scripts/auto_run_batches_two_phase.py \
-    --workflow-yaml runs/ut-{timestamp}/workflow.yaml \
-    --run-dir <run_dir>
-```
-Phase 1 completes, then invoke two-phase-handler SKILL for Phase 2
-(statistical analysis + human decision + retry).
 
 ### Step 6: Post-loop (sync test_load to manifest)
 

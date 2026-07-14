@@ -189,8 +189,8 @@ Agent 在开发调试（编写代码、修复 bug、重构等）时，采用 **B
 - terminal-workflow -> [skills/ut/terminal-workflow/SKILL.md](skills/ut/terminal-workflow/SKILL.md)
 - hermes-workflow -> [skills/ut/hermes-workflow/SKILL.md](skills/ut/hermes-workflow/SKILL.md)
 
-### Step 5: 参数确认
-按对应 SKILL.md 的启动序列走参数确认（test_list_path / batch_size / resume_from 等）。
+### Step 5: 启动流程
+按对应 SKILL.md 的 Startup Flow 走启动流程（Init -> 参数确认 -> generate test_load -> bastion check -> strategy branch）。
 
 详细路由逻辑见 [tasks/ut/README.md](tasks/ut/README.md) §启动路由。
 

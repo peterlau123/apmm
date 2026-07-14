@@ -214,29 +214,22 @@ def create_initial_state(
         # 更新 workflow_yaml_path 为拷贝后的路径
         workflow_yaml_path = target_workflow_yaml
 
+    # 读取 input_filter 配置（manifest_source 优先于 test_list_path）
+    input_filter = config.get("input_filter", {})
+    manifest_source = input_filter.get("manifest_source")
+
     # 确定 test_list_source：优先使用命令行参数，否则从 workflow.yaml 读取
     if test_list_source is None:
-        # 从 workflow.yaml 的 input_filter.test_list_path 读取
-        input_filter = config.get("input_filter", {})
         test_list_from_yaml = input_filter.get("test_list_path")
         if test_list_from_yaml:
             test_list_source = Path(test_list_from_yaml)
             print(f"[INFO] 从 workflow.yaml 读取 test_list 路径: {test_list_source}")
-
-    # 拷贝 test_list.txt（如果指定）
-    test_list_path = None
-    if test_list_source:
-        test_list_path = copy_test_list(Path(test_list_source), run_dir)
 
     # 确定各文件路径
     workflow_state_path = run_dir / "workflow_state.json"
 
     if manifest_path is None:
         manifest_path = run_dir / "manifest.json"
-
-    # 读取 input_filter.manifest_source（优先级高于 test_list_path）
-    input_filter = config.get("input_filter", {})
-    manifest_source = input_filter.get("manifest_source")
 
     # 检查是否已存在
     if workflow_state_path.exists() and not reset:
@@ -249,17 +242,23 @@ def create_initial_state(
 
     now = datetime.now(timezone.utc).isoformat()
 
-    # 创建 manifest.json（2 级优先）：
-    # 1. manifest_source 指定 -> 拷贝到 run_dir/manifest.json（优先）
-    # 2. test_list_path 指定 -> 从 test_list.txt 创建
+    # 创建 manifest.json（2 级优先，输入文件拷贝到 run_dir，不修改原文件）：
+    # 1. manifest_source 指定 -> 拷贝 manifest.json 到 run_dir（优先）
+    #    不拷贝 test_list（无需）
+    # 2. test_list_source 指定 -> 拷贝 test_list.txt 到 run_dir + 从其生成 manifest.json
+    test_list_path = None
     if manifest_source and Path(manifest_source).exists():
         shutil.copy2(Path(manifest_source), manifest_path)
         print(f"[INFO] manifest.json 已从 manifest_source 拷贝: {manifest_source} -> {manifest_path}")
         pending_count = get_initial_pending_count(manifest_path)
         total_count = get_initial_total_count(manifest_path)
-    elif test_list_path:
-        total_count = create_manifest_from_test_list(test_list_path, manifest_path)
-        pending_count = total_count
+    elif test_list_source:
+        test_list_path = copy_test_list(Path(test_list_source), run_dir)
+        if test_list_path:
+            total_count = create_manifest_from_test_list(test_list_path, manifest_path)
+            pending_count = total_count
+        else:
+            raise FileNotFoundError(f"test_list 源文件不存在: {test_list_source}")
     else:
         raise ValueError(
             "无法创建 manifest.json：input_filter.manifest_source 和 "

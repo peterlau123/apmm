@@ -118,10 +118,15 @@ sequenceDiagram
 For new run:
 ```bash
 python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
-    --workflow-yaml runs/ut-{timestamp}/workflow.yaml \
-    --test-list <confirmed_test_list_path>
+    --workflow-yaml runs/ut-{timestamp}/workflow.yaml
 ```
-Creates run_dir, manifest.json (from test_list), workflow_state.json.
+Creates run_dir, copies input files to run_dir, creates manifest.json + workflow_state.json.
+
+Input source (from yaml `input_filter`, 2-level priority):
+1. `manifest_source` set → copies manifest.json to run_dir (test_list NOT copied)
+2. `test_list_path` set → copies test_list.txt to run_dir + generates manifest.json from it
+
+> Input files are always copied to run_dir. Original files are never modified.
 
 For resume (resume_from is set): skip init, use existing run_dir.
 

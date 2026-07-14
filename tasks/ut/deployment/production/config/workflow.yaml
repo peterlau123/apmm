@@ -113,6 +113,7 @@ config:
   # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"
   batch_size: 8 # v5 default; 建议 8~16，保证完整日志通过 agent.py run 返回
+  gpu_per_test: 2 # GPUs per distributed test (torchrun --nproc_per_node)
   max_retry_per_test: 3 # v5 default; failure-handler 单测试最多重试次数
 
   # 断点续跑：从已有 run_dir 恢复（跳过 init，直接进入循环）

@@ -810,6 +810,8 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     batch_dir = batch_config_path.parent
     batch_id = batch_config["batch_id"]
     tests = batch_config["tests"]
+    batch_type = batch_config.get("batch_type", "normal")
+    gpu_per_test = batch_config.get("gpu_per_test", 1)
 
     remote_server = config.get("remote_server", "t_h20")
     docker_container = config.get("docker_container", "v0.13.0_torch2.5.1_compile")
@@ -873,7 +875,11 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             gpu_pool = [fallback_card if fallback_card is not None else 0]
             print(f"[WARN] 0 free GPU — D1 degrade: serialize on card {gpu_pool[0]}")
 
-    n_workers = len(gpu_pool)
+    if batch_type == "distributed":
+        n_workers = len(gpu_pool) // gpu_per_test
+        print(f"[INFO] Distributed mode: {n_workers} parallel tests, {gpu_per_test} GPUs each")
+    else:
+        n_workers = len(gpu_pool)
 
     started_at = _utc_now_iso_z()
 
@@ -915,11 +921,22 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         # flag — §6.2 实测偏差). Redirection lives in the watchdog template.
         # NOTE: agent.py now uses base64 encoding to protect brackets [] and all
         # special characters. No need to escape or use -k workaround here.
-        pytest_full_cmd = (
-            f"cd /gpfs/gcsp/M2.7_verify/vllm && "
-            f"CUDA_VISIBLE_DEVICES={gpu_id} python3 -m pytest {node} "
-            f"--junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
-        )
+        if batch_type == "distributed":
+            # Distributed: allocate gpu_per_test contiguous GPUs
+            gpu_start = (idx % n_workers) * gpu_per_test
+            gpu_ids = ",".join(str(gpu_pool[gpu_start + g]) for g in range(gpu_per_test))
+            pytest_full_cmd = (
+                f"cd /gpfs/gcsp/M2.7_verify/vllm && "
+                f"CUDA_VISIBLE_DEVICES={gpu_ids} torchrun --nproc_per_node={gpu_per_test} "
+                f"python3 -m pytest {node} --junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
+            )
+        else:
+            # Normal: single GPU per test
+            pytest_full_cmd = (
+                f"cd /gpfs/gcsp/M2.7_verify/vllm && "
+                f"CUDA_VISIBLE_DEVICES={gpu_id} python3 -m pytest {node} "
+                f"--junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
+            )
         watchdog_script = _build_watchdog_script(
             log_path=node_log,
             pytest_full_cmd=pytest_full_cmd,

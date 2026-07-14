@@ -4,7 +4,12 @@
   "description": "批次测试配置文件格式 - batch_config.json",
   "version": "2.0",
   "type": "object",
-  "required": ["batch_id", "tests", "distributed_count", "generated_at"],
+  "required": [
+    "batch_id",
+    "tests",
+    "distributed_count",
+    "generated_at"
+  ],
   "properties": {
     "batch_id": {
       "type": "string",
@@ -16,15 +21,36 @@
       "description": "本批次待执行的测试列表",
       "items": {
         "type": "object",
-        "required": ["id", "test_node", "test_file", "test_name", "status"],
+        "required": [
+          "id",
+          "test_node",
+          "test_file",
+          "test_name",
+          "status"
+        ],
         "properties": {
-          "id": {"type": "integer", "minimum": 1, "description": "测试序号"},
-          "test_node": {"type": "string", "description": "pytest测试节点 (tests/test_file.py::TestClass::test_method)"},
-          "test_file": {"type": "string", "description": "测试文件路径 (tests/test_file.py)"},
-          "test_name": {"type": "string", "description": "测试方法名 (test_method)"},
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "测试序号"
+          },
+          "test_node": {
+            "type": "string",
+            "description": "pytest测试节点 (tests/test_file.py::TestClass::test_method)"
+          },
+          "test_file": {
+            "type": "string",
+            "description": "测试文件路径 (tests/test_file.py)"
+          },
+          "test_name": {
+            "type": "string",
+            "description": "测试方法名 (test_method)"
+          },
           "status": {
             "type": "string",
-            "enum": ["pending"],
+            "enum": [
+              "pending"
+            ],
             "description": "测试状态",
             "_enum_comments": {
               "pending": "待执行"
@@ -53,14 +79,33 @@
       "items": {
         "type": "object",
         "properties": {
-          "test_node": {"type": "string"},
-          "id": {"type": "integer"}
+          "test_node": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
         }
       }
     },
     "note": {
       "type": "string",
       "description": "提示信息，如 'distributed tests require GPU >= 2'"
+    },
+    "batch_type": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "distributed"
+      ],
+      "default": "normal",
+      "description": "Batch type: normal (single-GPU pytest) or distributed (multi-GPU torchrun)"
+    },
+    "gpu_per_test": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "GPUs per test (1 for normal, 2+ for distributed)"
     }
   }
 }

@@ -161,38 +161,56 @@ def generate_batch(
     manifest = load_manifest(manifest_path)
 
     # v5 selection: use select_batch() for proper retriable_error/failed handling
-    # select_batch filters by selectability (pending/fixed_pending_verify always;
-    # retriable_error/failed only while retry_count < max_retry) and sorts by priority
-    candidates = select_batch(manifest, batch_size * 3)  # get more candidates for filtering
+    candidates = select_batch(manifest, batch_size * 3)
 
-    # 应用文件过滤器
+    # Apply file filter
     if test_file_filter:
-        candidates = [t for t in candidates if test_file_filter in t.get('test_file', '')]
+        candidates = [t for t in candidates if test_file_filter in t.get("test_file", "")]
 
-    # 分离 distributed 和 normal
-    if skip_distributed:
-        candidates = [t for t in candidates if not is_distributed(t['test_node'])]
+    # Separate distributed and normal tests
+    distributed = [t for t in candidates if is_distributed(t["test_node"])]
+    normal = [t for t in candidates if not is_distributed(t["test_node"])]
 
-    distributed = [t for t in candidates if is_distributed(t['test_node'])]
-    normal = [t for t in candidates if not is_distributed(t['test_node'])]
-
-    # 按文件分组
-    grouped = group_by_file(normal)
-
-    # 选择测试
-    batch = []
     if batch_id is None:
         batch_id = f"batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-    for file, tests in sorted(grouped.items()):
-        batch.extend(tests)
-        if len(batch) >= batch_size:
-            break
+    # Strategy: normal batch first, distributed batch when no normal tests left
+    if normal:
+        # Normal batch: group by file, select up to batch_size
+        grouped = group_by_file(normal)
+        batch = []
+        for file, tests in sorted(grouped.items()):
+            batch.extend(tests)
+            if len(batch) >= batch_size:
+                break
+        batch = batch[:batch_size]
 
-    # batch_config.json 内容（写入文件）
-    # Guard: empty batch means no selectable tests
-    if not batch:
-        if skip_distributed and not normal:
+        batch_config = {
+            "batch_id": batch_id,
+            "batch_type": "normal",
+            "tests": batch,
+            "distributed_count": 0,
+            "requires_multi_gpu": False,
+            "gpu_per_test": 1,
+            "generated_at": datetime.now().isoformat(),
+        }
+    elif distributed and not skip_distributed:
+        # Distributed batch: each test needs multiple GPUs (torchrun)
+        batch = distributed[:batch_size]
+
+        batch_config = {
+            "batch_id": batch_id,
+            "batch_type": "distributed",
+            "tests": batch,
+            "distributed_count": len(batch),
+            "requires_multi_gpu": True,
+            "gpu_per_test": 2,  # default: 2 GPUs per distributed test
+            "generated_at": datetime.now().isoformat(),
+        }
+        print(f"[INFO] Distributed batch: {len(batch)} tests, 2 GPUs each")
+    else:
+        # No selectable tests
+        if skip_distributed and distributed:
             raise ValueError(
                 f"All {len(candidates)} candidates are distributed tests and "
                 f"skip_distributed=True. Cannot form batch."
@@ -201,23 +219,6 @@ def generate_batch(
             f"Empty batch: no selectable tests from {len(candidates)} candidates"
         )
 
-    batch_config = {
-        "batch_id": batch_id,
-        "tests": batch[:batch_size],
-        "distributed_count": len(distributed),
-        "requires_multi_gpu": len(distributed) > 0,
-        "generated_at": datetime.now().isoformat()
-    }
-
-    # 如果有 distributed 测试，输出提示
-    if distributed:
-        batch_config["distributed_tests"] = [
-            {"test_node": t["test_node"], "id": t["id"]}
-            for t in distributed[:10]
-        ]
-        batch_config["note"] = "distributed tests require GPU >= 2"
-
-    # 创建批次目录并写入输出文件（校验后写入）
     if batch_dir:
         # 在batch_dir下创建batch_id子目录
         batch_dir = batch_dir / batch_id

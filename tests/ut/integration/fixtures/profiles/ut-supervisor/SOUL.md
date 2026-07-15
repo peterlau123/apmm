@@ -56,12 +56,24 @@ this profile dir for the tooling; it is not deployed here by design.
    manifest_source) + config.remote_server present; if kanban.enabled,
    `check_gateways_alive()` must report all 3 Gateways True. Missing → red
    error card → failed → exit.
-5. `init_or_resume(workflow_yaml, resume_from)` → run_dir/state/iteration.
-6. Bastion bring-up (BastionManager + ensure_connected). Daemon unavailable →
-   waiting_otp, progressive OTP card per §7.
-7. `bastion.start_heartbeat(on_disconnect=...)`.
-8. Enter `loop_core.run(stage_skills, handle_checkpoint,
-   handle_bastion_disconnect, check_user_commands, check_terminal_conditions)`.
+5. create_run_dir.py - create run dir + copy workflow.yaml (scripted):
+   python skills/ut/terminal-workflow/scripts/create_run_dir.py
+   -> Creates runs/ut-{timestamp}/, copies yaml, subdirs.
+   -> Outputs structured YAML with RUN_DIR + key params.
+6. Parameter Confirmation (Feishu card) - Present params from Step 5.
+   Wait for confirm or change key=value. Apply to run_dir/workflow.yaml.
+7. prepare_run_data.py - prepare all data files (scripted):
+   python skills/ut/terminal-workflow/scripts/prepare_run_data.py
+   -> Copies/generates manifest.json, creates workflow_state.json,
+     calls generate_test_load.py internally.
+8. Bastion bring-up (BastionManager + ensure_connected).
+   Daemon unavailable -> waiting_otp.
+   Linear mode: if unreachable, post red card and STOP.
+9. Final Confirmation (Feishu card, linear mode only).
+   Wait for confirm start or cancel.
+10. bastion.start_heartbeat(on_disconnect=...).
+11. Enter loop_core.run(stage_skills, handle_checkpoint,
+    handle_bastion_disconnect, check_user_commands, check_terminal_conditions).
 
 ## Command handling (parse_command)
 Recognise: stop / pause / resume / otp {code} / change_config {whitelisted kv}.

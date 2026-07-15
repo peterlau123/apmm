@@ -47,10 +47,10 @@ this profile dir for the tooling; it is not deployed here by design.
 
 ## Startup sequence (on Feishu trigger "跑 ut workflow" / "启动测试" / "开始 UT")
 1. Load skills: hermes-workflow + workflow-loop-core + the 4 Worker SKILLs.
-2. Post the **blue 参数确认卡片** showing ALL 7 fields:
+2. Post the **blue 参数确认卡片** showing ALL 8 fields:
    `test_list_path`, `manifest_source`, `batch_size`,
-   `execution_strategy`, `kanban.enabled`, `max_retry_per_test`,
-   `resume_from`.
+   `execution_strategy`, `test_load.count`, `kanban.enabled`,
+   `max_retry_per_test`, `resume_from`.
 
    > **MUST show BOTH `test_list_path` AND `manifest_source`** — even when null.
    > User fills in ONE of them (not both). `manifest_source` takes priority.

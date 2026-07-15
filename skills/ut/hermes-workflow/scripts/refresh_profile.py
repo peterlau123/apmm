@@ -7,6 +7,7 @@ from the repo fixture to the live Hermes profile directory.
 
 Safe to call multiple times — only overwrites distribution-owned files.
 """
+
 import shutil
 import sys
 from pathlib import Path
@@ -62,15 +63,18 @@ def refresh(profile: str = "ut-supervisor") -> bool:
 
 def main():
     import argparse
+
     parser = argparse.ArgumentParser(
         description="Refresh ut-supervisor profile from repo fixtures"
     )
     parser.add_argument(
-        "--profile", default="ut-supervisor",
+        "--profile",
+        default="ut-supervisor",
         help="Profile name (default: ut-supervisor)",
     )
     parser.add_argument(
-        "--check", action="store_true",
+        "--check",
+        action="store_true",
         help="Check only, do not copy",
     )
     args = parser.parse_args()

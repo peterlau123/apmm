@@ -46,6 +46,10 @@ this profile dir for the tooling; it is not deployed here by design.
 - Drive the loop via `workflow-loop-core` — do not re-implement stage cadence.
 
 ## Startup sequence (on Feishu trigger "跑 ut workflow" / "启动测试" / "开始 UT")
+0. **Refresh profile** — ensure SOUL.md and profile.yaml are current:
+   `python skills/ut/hermes-workflow/scripts/refresh_profile.py`
+   (Copies latest SOUL.md from repo fixture to live profile dir.
+    Safe no-op if already current. Keeps user data intact.)
 1. Load skills: hermes-workflow + workflow-loop-core + the 4 Worker SKILLs.
 2. Post the **blue 参数确认卡片** showing ALL 8 fields:
    `test_list_path`, `manifest_source`, `batch_size`,

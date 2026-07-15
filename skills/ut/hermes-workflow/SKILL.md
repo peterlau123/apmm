@@ -168,13 +168,16 @@ When user sends a trigger message ("跑L4" / "跑 ut workflow" / "正式生产")
 
 | Parameter | yaml key | Default | Description |
 |-----------|----------|---------|-------------|
-| test_list 路径 | input_filter.test_list_path | (from yaml) | test_list.txt 路径（与 manifest_source 二选一） |
-| manifest 来源 | input_filter.manifest_source | null | 已有 manifest.json 路径（优先于 test_list_path） |
+| 输入来源① | input_filter.test_list_path | (from yaml) | test_list.txt path. 如使用 manifest_source 则此行可为空 |
+| 输入来源② | input_filter.manifest_source | null | 已有 manifest.json path. 优先于 test_list_path |
 | 执行策略 | workflow.execution_strategy | two-phase | single-phase 或 two-phase |
 | test_load 数量 | workflow.test_load.count | 1000 | 从 manifest 抽取的 test 数 |
 | batch_size | config.batch_size | 8 | 每批测试数量 |
 | max_retry | config.max_retry_per_test | 3 | 单测试最大重试次数 |
 | resume | config.resume_from | null | 留空=新建, 填路径=续跑 |
+
+> **Agent 必须同时展示两个输入来源字段**，用户可选其一填写。
+> 当 manifest_source 不为空时，优先使用 manifest_source。
 
 5. User replies "确认" or "改 KEY=VALUE" (10s timeout for tier, 5min for legacy)
 6. Apply modifications to run's workflow.yaml copy

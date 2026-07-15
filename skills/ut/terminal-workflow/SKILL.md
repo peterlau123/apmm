@@ -91,67 +91,124 @@ python skills/ut/manifest-updater/scripts/update_manifest_from_test_load.py \
 - Input: workflow_state.json + test_load_xxx.json (NOT manifest.json)
 - Phase 2 operates within test_load scope
 
-## Startup Flow
+## Startup Flow - 5-Step Script-Driven Sequence
 
-> Each step uses explicit scripts. Do NOT improvise or skip steps.
+> **HARD REQUIREMENT**: Each step below runs a DEDICATED script.
+> Do NOT improvise, merge, or skip steps. The entire flow is designed so that
+> the Agent only orchestrates and presents information - the scripts handle all
+> file creation, copy, and generation.
 
-### Step 1: Init (create run_dir + copy files)
+---
 
-For new run:
+### Step 1: Create Run Dir + Copy workflow.yaml (scripted)
+
+Run the dedicated creation script **before** showing any params to the user:
+
 ```bash
-python skills/ut/terminal-workflow/scripts/init_workflow_state.py \
-    --workflow-yaml <source_workflow_yaml>
+python skills/ut/terminal-workflow/scripts/create_run_dir.py \
+    --workflow-yaml <source_workflow_yaml> \
+    --mode terminal
 ```
 
-This script automatically:
+This script:
 1. Creates `runs/ut-{timestamp}/` (run_dir)
-2. Copies workflow.yaml to `run_dir/workflow.yaml` (original never modified)
-3. Copies input files to run_dir (manifest_source -> copy manifest.json; test_list_path -> copy test_list.txt + generate manifest.json)
-4. Creates `workflow_state.json` + `batches/` dir
-5. Updates `.agents/current_run.json` pointer
+2. Copies `workflow.yaml` to `run_dir/workflow.yaml` (original NEVER modified)
+3. Creates `batches/`, `logs/`, `reports/` subdirs
+4. Updates `.agents/current_run.json` pointer
+5. Prints a YAML block with RUN_DIR path + key parameter summary
 
-Optional CLI overrides:
-- `--test-list <path>`: override yaml's `input_filter.test_list_path`
-- `--run-dir <path>`: specify run_dir explicitly
-
-For resume (`resume_from` is set): skip this step, use existing run_dir.
-
-### Step 2: Parameter Confirmation
-
-Read config from `run_dir/workflow.yaml` (the copy, NOT the original), show to user:
-
-| Parameter | yaml key | Default | Description |
-|-----------|----------|---------|-------------|
-| test_list path | input_filter.test_list_path | (from yaml) | test_list.txt (read-only reference) |
-| manifest source | input_filter.manifest_source | null | manifest.json (read-only reference) |
-| execution strategy | workflow.execution_strategy | two-phase | single-phase / two-phase |
-| test_load count | workflow.test_load.count | 1000 | tests to extract from manifest |
-| batch_size | config.batch_size | 8 | tests per batch |
-| max_retry | config.max_retry_per_test | 3 | max retries per test |
-| resume | config.resume_from | null | empty=new, path=resume |
-
-**AI behavior:**
-1. Read `run_dir/workflow.yaml`
-2. Show parameter table to user
-3. Wait for user confirmation ("confirm") or modification ("batch_size=16")
-4. Apply modifications to `run_dir/workflow.yaml` (NOT the original)
-
-> If user changes `test_list_path` or `manifest_source`, re-run Step 1 with the new source (`--test-list <new_path>`).
-
-### Step 3: Generate test_load
-
-For new run (skip if resuming and test_load already exists):
-```bash
-python tasks/ut/scripts/generate_test_load.py \
-    --manifest-path <run_dir>/manifest.json \
-    --count <confirmed_count> \
-    --output-dir <run_dir> \
-    --workflow-state <run_dir>/workflow_state.json
+**Output format** (agent reads this to show to user):
 ```
-Creates `test_load_{count}_{timestamp}.json` and updates `workflow_state.json`
-with the test_load path. All subsequent stages read from test_load.
+---
+run_dir: runs/ut-20260715-123456
+params:
+  test_list_path: /path/to/test_list.txt
+  manifest_source: null
+  execution_strategy: two-phase
+  test_load_count: 1000
+  batch_size: 8
+  max_retry: 3
+  resume_from: null
+...
+```
 
-### Step 4: Bastion Check
+> For resume (`resume_from` is set): SKIP this step, use existing run_dir.
+> The script does NOT create manifest.json, workflow_state.json, or test_load yet.
+
+---
+
+### Step 2: Parameter Confirmation (Agent interaction)
+
+Read config from `run_dir/workflow.yaml` (the copy, NOT the original), display to user:
+
+| Parameter | yaml key | Source | Description |
+|-----------|----------|--------|-------------|
+| test_list path | input_filter.test_list_path | Step 1 output | test_list.txt (read-only reference) |
+| manifest source | input_filter.manifest_source | Step 1 output | manifest.json (read-only reference) |
+| execution strategy | workflow.execution_strategy | Step 1 output | single-phase / two-phase |
+| test_load count | workflow.test_load.count | Step 1 output | tests to extract from manifest |
+| batch_size | config.batch_size | Step 1 output | tests per batch |
+| max_retry | config.max_retry_per_test | Step 1 output | max retries per test |
+| resume | config.resume_from | Step 1 output | empty=new, path=resume |
+
+**AI behavior (deterministic - no improvisation):**
+1. Read `run_dir/workflow.yaml` (or use the YAML block from Step 1)
+2. Render the parameter table to user
+3. Wait for user: "confirm" or "<key>=<value>"
+4. Apply modifications to `run_dir/workflow.yaml` using yaml.safe_load + write back
+5. If user changed `test_list_path` or `manifest_source`, note this for Step 3
+
+> Do NOT call prepare_run_data.py yet. Do NOT call generate_test_load.py yet.
+> The data files are created in Step 3 after all params are final.
+
+---
+
+### Step 3: Prepare Data Files - manifest + test_load + workflow_state (scripted)
+
+After user confirms all params, run the unified data preparation script:
+
+```bash
+python skills/ut/terminal-workflow/scripts/prepare_run_data.py \
+    --run-dir <run_dir> \
+    [--test-list <override_path>] \
+    [--manifest-source <override_path>] \
+    [--test-load-count <N>] \
+    --mode terminal
+```
+
+This single script REPLACES the old multi-step dance (manifest copy/gen, init_workflow_state, generate_test_load):
+
+1. Reads final config from `run_dir/workflow.yaml`
+2. Copies `manifest_source` into `run_dir/manifest.json`, OR
+   copies `test_list.txt` to `run_dir/` and generates `manifest.json` from it
+3. Creates `workflow_state.json` with schema validation
+4. Calls `tasks/ut/scripts/generate_test_load.py` to generate test_load
+5. Updates workflow_state.json with test_load path
+6. Prints a YAML summary of all created files
+
+**Output format:**
+```
+---
+run_dir: runs/ut-20260715-123456
+manifest: runs/ut-20260715-123456/manifest.json
+test_list: runs/ut-20260715-123456/test_list.txt
+workflow_state: runs/ut-20260715-123456/workflow_state.json
+test_load: runs/ut-20260715-123456/test_load_1000_20260715_123456.json
+total_tests: 1000
+test_load_count: 1000
+batch_size: 8
+execution_strategy: two-phase
+resume_from: null
+...
+```
+
+> If user overrode `test_list_path` or `manifest_source` in Step 2, pass
+> `--test-list` or `--manifest-source` accordingly. The script handles the rest.
+> For resume: SKIP this step entirely (data files already exist in run_dir).
+
+---
+
+### Step 4: Bastion Check (scripted)
 
 > **terminal-workflow does NOT use Feishu OTP.** `_setup_bastion()` triggers Feishu-based
 > OTP flow which is inappropriate here. Instead, verify the agent.py SSH daemon is alive.
@@ -162,30 +219,46 @@ The agent.py daemon must be running on the Windows host (started via `serve`). C
 python tools/agent.py --profile t_h20 ping
 ```
 
-On success (`[OK] Daemon is running`), optionally verify the remote is reachable:
+On success (Daemon is running), optionally verify the remote is reachable:
 
 ```bash
 python tools/agent.py --profile t_h20 run "hostname"
 ```
 
-On `Permission denied` or SSH errors, ask the user to re-authenticate the bastion daemon
+On Permission denied or SSH errors, ask the user to re-authenticate the bastion daemon
 and retry. Do NOT enter the loop if unreachable.
 
 **Note for future runs:** The daemon persists across runs on the same machine. Only check
 once per session; skip if already verified.
 
-### Step 5: Strategy Branch
+---
 
-Based on `execution_strategy` from `run_dir/workflow.yaml`:
+### Step 5: Final User Confirmation + Strategy Branch (Agent interaction + strategy)
 
-- **single-phase**: Enter `loop_core.run()` with the 4 Worker SKILLs:
-  - Stage 2: `generate_batch.py` reads test_load, selects batch
-  - Stage 3: `execute_batch.py` runs remote pytest
-  - Stage 4: failure-handler produces `handled_tests.json`
-  - Stage 4.5: `update_test_load.py` applies v5 merge to test_load
+Present a final summary to the user and wait for explicit confirmation:
+
+```text
+=== Run Summary ===
+  run_dir:        <run_dir>
+  manifest:       <manifest_path>  (N tests)
+  test_load:      <test_load_path> (M tests)
+  strategy:       <execution_strategy>
+  batch_size:     <batch_size>
+  bastion:        connected / unreachable
+
+Start execution? (y/N):
+```
+
+**On user confirms:** enter the strategy branch:
+
+- single-phase: Enter loop_core.run() with the 4 Worker SKILLs:
+  - Stage 2: generate_batch.py reads test_load, selects batch
+  - Stage 3: execute_batch.py runs remote pytest
+  - Stage 4: failure-handler produces handled_tests.json
+  - Stage 4.5: update_test_load.py applies v5 merge to test_load
   - Repeat until test_load pending == 0
 
-- **two-phase**:
+- two-phase:
 ```bash
 python tasks/ut/scripts/auto_run_batches_two_phase.py \
     --workflow-yaml <run_dir>/workflow.yaml \
@@ -193,6 +266,8 @@ python tasks/ut/scripts/auto_run_batches_two_phase.py \
 ```
 Phase 1 completes, then invoke two-phase-handler SKILL for Phase 2
 (statistical analysis + human decision + retry).
+
+**On user declines:** exit without starting the loop.
 
 ## Trigger flow (this channel)
 
@@ -203,24 +278,32 @@ sequenceDiagram
     participant B as Bastion(t_h20)
     participant L as loop_core
     U->>CC: "Run UT workflow"
-    CC->>CC: Step 1: init_workflow_state.py (creates run_dir + copies yaml)
-    CC->>U: Step 2: Show params from run_dir/workflow.yaml
-    U->>CC: Confirm or modify
+    CC->>CC: Step 1: create_run_dir.py (creates run_dir + copies yaml + prints params)
+    CC->>U: Step 2: Show params from create_run_dir.py output
+    U->>CC: Confirm or modify (key=value)
     CC->>CC: Apply mods to run_dir/workflow.yaml
-    CC->>CC: Step 3: generate_test_load.py
-    CC->>B: Step 4: _setup_bastion -> ensure_connected
+    CC->>CC: Step 3: prepare_run_data.py (manifest + test_load + workflow_state)
+    CC->>B: Step 4: agent.py ping (bastion check)
     alt unreachable
         B-->>CC: fail
         CC->>U: Report and stop (do NOT enter loop)
     else reachable
-        CC->>L: Step 5: loop_core.run() or auto_run_batches_two_phase.py
+        CC->>U: Step 5: Final run summary + confirm prompt
+        U->>CC: Confirm start
+        CC->>L: loop_core.run() or auto_run_batches_two_phase.py
         L-->>CC: Feishu progress cards (optional)
         Note over CC,U: Pause/stop = user Ctrl-C
     end
 ```
 
----
+## Summary: What changed
 
+| Old (Agent improvised) | New (Script-driven) |
+|------------------------|---------------------|
+| init_workflow_state.py does everything at once | create_run_dir.py (dir only) + prepare_run_data.py (data files) split at param confirmation boundary |
+| generate_test_load.py called manually by agent | prepare_run_data.py calls it internally |
+| Params shown ad-hoc from yaml | create_run_dir.py prints structured YAML block for agent to display |
+| Bastion check separate, no final confirm | Step 5: run summary + explicit user confirmation before starting loop |
 ## Channel guarantees (v5 simplifications)
 
 - **One-way Feishu.** Progress / completion / alert cards only. No

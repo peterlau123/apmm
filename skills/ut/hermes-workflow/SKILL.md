@@ -313,8 +313,10 @@ intent recognizer.
 4. 按 §3.A（tier / production 一键触发）或 §3.B（自由参数确认卡）继续
 ```
 
-### §3.A - Unified Startup Sequence
-After parameter confirmation (Stage 0):
+### §3.A - Unified Startup Sequence (script-driven)
+
+After parameter confirmation (Stage 0), the startup is fully scripted.
+The supervisor does NOT improvise - it calls scripts in sequence:
 
 ```
 A1. validate_required_config(load_yaml(yaml_path))
@@ -322,29 +324,44 @@ A1. validate_required_config(load_yaml(yaml_path))
       - config.remote_server exists
       - kanban.enabled=true: check_gateways_alive() all active
       - Any failure -> red error card -> exit
-A2. init_or_resume(yaml_path, resume_from)
-      -> (run_dir, state_path, state, iteration)
-      -> Creates run_dir, manifest.json, workflow_state.json
-A3. Generate test_load (skip if resuming and test_load exists):
-      python generate_test_load.py \
-          --manifest-path <run_dir>/manifest.json \
-          --count <confirmed_count> \
-          --output-dir <run_dir> \
-          --workflow-state <run_dir>/workflow_state.json
-      -> Creates test_load_xxx.json
-      -> Updates workflow_state.json with test_load path
-A4. Bastion bring-up + start_heartbeat
+
+A2. create_run_dir.py - create run dir + copy workflow.yaml (scripted)
+      python skills/ut/terminal-workflow/scripts/create_run_dir.py \
+          --workflow-yaml <yaml_path> --mode hermes
+      -> Automatic: creates runs/ut-{timestamp}/, copies yaml, creates subdirs
+      -> Outputs structured YAML with RUN_DIR + key params
+
+A3. Parameter Confirmation (Feishu card)
+      Present params from A2 output to user via Feishu card
+      Wait for user: confirm or change key=value
+      Apply modifications to run_dir/workflow.yaml
+
+A4. prepare_run_data.py - prepare all data files (scripted)
+      python skills/ut/terminal-workflow/scripts/prepare_run_data.py \
+          --run-dir <run_dir> --mode hermes \
+          [--test-list <override>] [--manifest-source <override>]
+      -> Copies/generates manifest.json
+      -> Creates workflow_state.json (schema-validated)
+      -> Calls generate_test_load.py internally
+      -> Outputs structured YAML summary
+
+A5. Bastion bring-up + start_heartbeat
       daemon unavailable -> waiting_otp (§7 progressive OTP resend)
-A5. Strategy branch (based on execution_strategy):
+A6. Strategy branch (based on execution_strategy):
       single-phase -> loop_core.run() (Stage 2-5 loop)
       two-phase    -> auto_run_batches_two_phase.py (Phase 1 batch loop)
                    -> two-phase-handler SKILL (Phase 2 retry)
-A6. Post-loop (when test_load pending == 0):
+
+A7. Post-loop (when test_load pending == 0):
       python update_manifest_from_test_load.py \
           --manifest-path <run_dir>/manifest.json \
           --test-load-path <run_dir>/test_load_xxx.json
       -> Syncs test_load -> manifest.json (master record)
 ```
+
+> Script-driven principle: A2 and A4 are the SAME scripts used by
+> terminal-workflow. Both channels share the same deterministic file
+> preparation. The hermes channel adds Feishu cards around the scripts.
 **Startup state machine interlock:**
 
 | Current supervisor state | start_* intent | Action |

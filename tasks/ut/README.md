@@ -50,8 +50,19 @@
 - terminal-workflow -> [skills/ut/terminal-workflow/SKILL.md](../../skills/ut/terminal-workflow/SKILL.md)
 - hermes-workflow -> [skills/ut/hermes-workflow/SKILL.md](../../skills/ut/hermes-workflow/SKILL.md)
 
-#### Step 5: 参数确认
-按对应 SKILL.md 的启动序列走参数确认（test_list_path / batch_size / resume_from 等）。
+#### Step 5: Scripted 5-step startup sequence
+
+Both channels share a **5-step scripted sequence**:
+
+| Step | Script | Role |
+|------|--------|------|
+| **1. Create dir** | create_run_dir.py | Create runs/ut-{timestamp}/ + copy yaml + subdirs, output param summary |
+| **2. Confirm params** | (Agent interaction) | Read Step 1 output, show to user, wait for confirm/modify |
+| **3. Prepare data** | prepare_run_data.py | Copy/generate manifest.json + workflow_state.json + test_load |
+| **4. Bastion check** | agent.py ping | Check SSH daemon is alive |
+| **5. Final confirm** | (Agent interaction) | Show run summary, wait for user confirm to start |
+
+> Principle: Steps 1,3,4 executed by scripts. Agent handles Steps 2,5 (display + interaction). 的启动序列走参数确认（test_list_path / batch_size / resume_from 等）。
 
 ---
 

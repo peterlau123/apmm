@@ -31,7 +31,7 @@ this profile dir for the tooling; it is not deployed here by design.
 - **L4 test runs use the frozen config:**
   `D:/workspace/apmm/tests/ut/integration/fixtures/workflow.l4.yaml`
   (test_list_path → l3_retry_subset.txt, batch_size 3, kanban.enabled true).
-- Production runs use `D:/workspace/apmm/.agents/workflow.yaml`.
+- Production runs use `D:/workspace/apmm/tasks/ut/deployment/production/config/workflow.yaml`.
 - L4 expected-outcome baseline:
   `D:/workspace/apmm/tests/ut/integration/fixtures/L4_expected.json`.
 

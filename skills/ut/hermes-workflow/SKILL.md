@@ -195,17 +195,25 @@ sequenceDiagram
     S->>F: 参数确认卡(蓝色, 5 字段)
     U->>F: "确认" / "yaml=…" / "改 KEY=VAL"
     F->>S: 命令
-    S->>R: validate_required_config (+kanban: check_gateways_alive)
-    S->>R: init_or_resume → (run_dir, state, …)
-    S->>B: BastionManager.ensure_connected
+    S->>S: validate_required_config (+kanban: check_gateways_alive)
+    S->>S: A2: create_run_dir.py (creates run dir + copies yaml)
+    S->>F: A3: Parameter Confirmation card
+    U->>F: "Confirm" or "change key=value"
+    F->>S: apply to run_dir/workflow.yaml
+    S->>S: A4: prepare_run_data.py (manifest + workflow_state + test_load)
+    S->>B: A5: BastionManager.ensure_connected
     alt daemon 不可用
         S->>F: OTP 卡片(渐进重发 5→15→30→60min)
         U->>F: 6 位 OTP
         F->>S: otp
         S->>B: 同步重启 daemon → mark_connected → running
+    else daemon OK (linear mode)
+        S->>F: Final run summary card + confirm prompt
+        U->>F: "Confirm start"
+        F->>S: proceed
     end
     S->>B: start_heartbeat(on_disconnect)
-    S->>L: loop_core.run(回调...)
+    S->>L: A6: loop_core.run() or auto_run_batches_two_phase.py
     loop 每轮 Stage5 之后
         L->>S: handle_checkpoint
         S->>F: 进度卡 + check_user_commands
@@ -213,19 +221,27 @@ sequenceDiagram
 ```
 
 ```mermaid
-flowchart LR
-    U[用户]
-    BOT[飞书 bot<br/>cli_aaad… / DM oc_ed80…]
-    SUP[ut-supervisor gateway<br/>唯一飞书订阅者]
-    GO[ut-orchestrator<br/>Stage5+Stage2]
-    GE[ut-executor<br/>Stage3 远程 pytest]
-    GF[ut-fixer<br/>Stage4 修复]
-    BAS[Bastion daemon<br/>profile t_h20 / OTP]
-    REMOTE[(远程 GPU<br/>Docker + pytest)]
-    U <--> BOT
+flowchart TD
+    subgraph Linear [Linear mode (kanban.enabled=false)]
+        LIN_CC[ut-supervisor<br/>drives Stage 2-5 directly]
+        LIN_REMOTE[(remote GPU)]
+        LIN_CC -->|agent.py SSH| BAS
+        BAS --> LIN_REMOTE
+    end
+    subgraph Kanban [Kanban mode (kanban.enabled=true)]
+        GO[ut-orchestrator<br/>Stage5+Stage2]
+        GE[ut-executor<br/>Stage3 pytest]
+        GF[ut-fixer<br/>Stage4 retry]
+        SUP2[ut-supervisor<br/>orchestrates via Kanban]
+        SUP2 --> GO --> GE --> GF
+    end
+    U[User] <--> BOT[Feishu bot]
     BOT <--> SUP
-    SUP --> GO --> GE --> GF
-    GE -->|SSH 复用| BAS --> REMOTE
+    SUP --> LIN_CC & SUP2
+    BAS[Bastion daemon<br/>t_h20 / OTP] --> REMOTE[(remote GPU)]
+
+    style Linear fill:#e6f3ff,stroke:#333
+    style Kanban fill:#fff0e6,stroke:#333
 ```
 
 ---
@@ -306,17 +322,23 @@ intent recognizer.
         legacy 关键词 "跑 ut workflow" / "启动测试" / "开始 UT" 在 v5 走 Layer 2：
         - **无 tier 后缀**（裸短语）→ 预期分类为 `unknown` → §3.D 帮助卡
         - 带 tier 后缀（"跑 L4"）或 "正式 / 生产 / 全量" 字眼 → 按 §3.A 走
-        （这是 v5 的保守门：避免误触发数小时生产 run；v4 直接进 §3.B 的旧行为已废弃）
+        （这是 v5 的保守门：避免误触发数小时生产 run）
 3. 一次性加载：hermes-workflow + workflow-loop-core
               + 4 份 Worker SKILL（batch-selector / unit-test-executor /
                 failure-handler / manifest-updater）
-4. 按 §3.A（tier / production 一键触发）或 §3.B（自由参数确认卡）继续
+4. 按 §3.A 启动序列继续
 ```
 
 ### §3.A - Unified Startup Sequence (script-driven)
 
-After parameter confirmation (Stage 0), the startup is fully scripted.
-The supervisor does NOT improvise - it calls scripts in sequence:
+The startup is fully scripted. The supervisor does NOT improvise - it calls
+scripts in sequence.
+
+> **Relationship to Stage 0**: Stage 0 (below) handles intent classification
+> and sends the initial editable Feishu card. A2 runs create_run_dir.py to
+> create the run dir and output structured params. A3 presents these params
+> for final confirmation via a second Feishu card. A4 runs prepare_run_data.py
+> to generate all data files.
 
 ```
 A1. validate_required_config(load_yaml(yaml_path))
@@ -347,6 +369,16 @@ A4. prepare_run_data.py - prepare all data files (scripted)
 
 A5. Bastion bring-up + start_heartbeat
       daemon unavailable -> waiting_otp (§7 progressive OTP resend)
+      kanban.enabled=false (linear mode): if daemon unreachable after
+        OTP timeout, post red Feishu card and STOP (do NOT enter loop).
+        User re-authenticates daemon manually outside hermes.
+
+A5b. Final Confirmation (Feishu card, kanban.enabled=false only)
+      Post run summary card with key fields:
+        - run_dir, manifest (N tests), strategy, batch_size, bastion status
+      Wait for user: "confirm start" or "cancel"
+      On cancel: set status=stopped, do NOT enter loop.
+
 A6. Strategy branch (based on execution_strategy):
       single-phase -> loop_core.run() (Stage 2-5 loop)
       two-phase    -> auto_run_batches_two_phase.py (Phase 1 batch loop)
@@ -391,12 +423,12 @@ start_l3:
 start_l4:
   yaml: tests/ut/integration/fixtures/workflow.l4.yaml
   test_list: tests/ut/integration/fixtures/l4_test_list_v2.txt
-  mode: kanban
+  mode: linear           # kanban.enabled 由 yaml 决定（默认 false）
   eta: "~ 60 min"
 start_production:
   yaml: tasks/ut/deployment/production/config/workflow.yaml
   test_list: (由 yaml 自定义)
-  mode: kanban           # 生产默认 kanban
+  mode: linear           # kanban.enabled 由 yaml 决定（默认 false）
   eta: "hours – days"
 ```
 `mode` / `eta` 仅用于卡片展示；真正生效的是 yaml 内的 `kanban.enabled`。

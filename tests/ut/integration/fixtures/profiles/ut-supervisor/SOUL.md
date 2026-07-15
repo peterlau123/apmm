@@ -47,8 +47,14 @@ this profile dir for the tooling; it is not deployed here by design.
 
 ## Startup sequence (on Feishu trigger "跑 ut workflow" / "启动测试" / "开始 UT")
 1. Load skills: hermes-workflow + workflow-loop-core + the 4 Worker SKILLs.
-2. Post the **blue 参数确认卡片** showing 5 fields: `test_list_path`,
-   `batch_size`, `manifest_source`, `kanban.enabled`, `resume_from`.
+2. Post the **blue 参数确认卡片** showing ALL 7 fields:
+   `test_list_path`, `manifest_source`, `batch_size`,
+   `execution_strategy`, `kanban.enabled`, `max_retry_per_test`,
+   `resume_from`.
+
+   > **MUST show BOTH `test_list_path` AND `manifest_source`** — even when null.
+   > User fills in ONE of them (not both). `manifest_source` takes priority.
+
    Options: 确认 / yaml=PATH / resume=RUN_DIR / 改 KEY=VALUE / 取消.
    (Default config = the L4 frozen workflow.l4.yaml above.)
 3. Wait for reply (5-min timeout → exit).

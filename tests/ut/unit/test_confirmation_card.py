@@ -101,6 +101,22 @@ def test_production_card_has_warning_and_orange_template(api):
     assert "hours–days" in body
 
 
+def test_manifest_source_card(api):
+    sender, captured = _capture_card(api)
+    with patch("feishu_api.requests.post", side_effect=sender):
+        api.send_confirmation_card(
+            intent="start_production",
+            yaml_path="tasks/ut/deployment/production/config/workflow.yaml",
+            manifest_source="runs/ut-prev/manifest.json",
+            mode="linear",
+            eta="hours-days",
+        )
+    body = captured["card"]["elements"][0]["text"]["content"]
+    assert "manifest_source" in body
+    assert "runs/ut-prev/manifest.json" in body
+    assert "test_list_path" not in body
+
+
 def test_default_timeout_displayed(api):
     sender, captured = _capture_card(api)
     with patch("feishu_api.requests.post", side_effect=sender):

@@ -183,8 +183,9 @@ class FeishuAPI:
             "content": f"{tmpl['prefix']}: {agent_id}\n{details}"
         })
 
-    def send_confirmation_card(self, intent, yaml_path, test_list_path, mode,
-                                eta, timeout_seconds=10):
+    def send_confirmation_card(self, intent, yaml_path, test_list_path=None,
+                                manifest_source=None, mode=None, eta=None,
+                                timeout_seconds=10):
         """发送启动意图确认卡片 (Spec §4.5 — Agent intent confirmation gate).
 
         Display-only card; user replies with text "确认" / "取消" (matches the
@@ -199,8 +200,12 @@ class FeishuAPI:
             "start_production". Used to pick the tier label.
         yaml_path: str
             The frozen workflow yaml path that will be used after confirmation.
-        test_list_path: str
-            The test_list_path that will be loaded.
+        test_list_path: str or None
+            The test_list_path that will be loaded (optional,
+            mutually exclusive with manifest_source).
+        manifest_source: str or None
+            The manifest.json source path (optional,
+            mutually exclusive with test_list_path).
         mode: str
             "linear" or "kanban" — derived from ``kanban.enabled`` of the yaml.
         eta: str
@@ -228,7 +233,8 @@ class FeishuAPI:
             f"🤖 {emphasis}我理解你想触发 **{tier_label}**。要开始吗？",
             "",
             f"配置: `{yaml_path}`",
-            f"测试集: `{test_list_path}`",
+            (f"test_list_path: `{test_list_path}`" if not manifest_source
+             else f"manifest_source: `{manifest_source}`"),
             f"模式: **{mode}**",
             f"预计耗时: **{eta}**",
             "",

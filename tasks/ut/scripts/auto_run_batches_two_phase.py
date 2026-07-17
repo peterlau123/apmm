@@ -92,13 +92,22 @@ def create_batch_config(
 
     result = subprocess.run(cmd, capture_output=True, text=True)
 
-    if result.returncode != 0:
-        raise subprocess.CalledProcessError(
-            result.returncode, cmd, result.stdout, result.stderr
-        )
-
     # batch_config.json is at batch_dir / batch_id / batch_config.json
     config_path = batch_dir / batch_id / "batch_config.json"
+
+    # ponytail: 别吞子进程输出(F5)。真实 run 中 generate_batch.py 4 次 exit 0 但未产文件,
+    # 根因无法追溯。两种失败模式(returncode!=0 或文件缺失)都把 stdout/stderr 打到 stderr,
+    # 保留原语义:returncode!=0 抛 CalledProcessError(被外层 except Exception 捕获续跑),
+    # exit 0 但文件缺失则返回路径让检查点1 ABORT。
+    if result.returncode != 0 or not config_path.exists():
+        sys.stderr.write(
+            f"[generate_batch.py] returncode={result.returncode} batch_id={batch_id}\n"
+            f"[stdout]\n{result.stdout}\n[stderr]\n{result.stderr}\n"
+        )
+        if result.returncode != 0:
+            raise subprocess.CalledProcessError(
+                result.returncode, cmd, result.stdout, result.stderr)
+
     return config_path
 
 

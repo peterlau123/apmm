@@ -5,7 +5,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path: sys.path.insert(0, str(PROJECT_ROOT))
-from skills.ut.shared import get_paths
+from skills.ut.ut_common import get_paths
 
 SUGGESTIONS = {
     "dependency": "Check environment, install missing dependencies",
@@ -26,7 +26,9 @@ PRIORITIES = {
 def classify(tests, batch_id, stats):
     for t in tests:
         st = t.get("status", "pending")
-        if st not in ("failed", "error"): continue
+        # ponytail: 旧版统计 failed+error+ignored,refactor 误删 ignored(F1 回归)。
+        # ignored 多为 retriable timeout/oom 经 watchdog SIGKILL 后置位,正是 Phase 2 要捞出来重试的。
+        if st not in ("failed", "error", "ignored"): continue
         et = t.get("error_type") or "other"
         if et not in stats:
             stats[et] = {"test_count": 0, "batch_count": 0, "batch_list": [], "test_list": [],
@@ -76,7 +78,7 @@ def main():
     stats = {}
     for bid in batch_ids:
         bt = [t for t in tl.get("tests",[]) if t.get("last_batch_id")==bid]
-        if not bt: bt = [t for t in tl.get("tests",[]) if t.get("status")!="pending"]
+        if not bt: continue  # ponytail: 空 batch 不兜底,避免把全部非 pending 测试归到自己名下双计数(F2)
         classify(bt, bid, stats)
     meta = {"run_dir":str(run_dir),"test_load_path":str(tl_path),"total_batches":len(batch_ids),"total_tests":len(tl.get("tests",[]))}
     total = sum(s["test_count"] for s in stats.values())

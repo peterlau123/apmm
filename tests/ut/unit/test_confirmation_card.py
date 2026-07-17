@@ -16,7 +16,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-FEISHU_API = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "feishu_api.py"
+FEISHU_API = PROJECT_ROOT / "skills" / "ut" / "ut_common" / "scripts" / "feishu_api.py"
 
 
 @pytest.fixture(scope="module")

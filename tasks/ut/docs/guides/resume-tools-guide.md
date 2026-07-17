@@ -28,7 +28,7 @@
 ### 关键函数
 
 ```python
-from skills.ut.shared.workflow_state_manager import (
+from skills.ut.ut_common.workflow_state_manager import (
     update_batch_generated,  # 更新batch为generated状态
     update_batch_running,    # 更新batch为running状态
     update_batch_completed,  # 更新batch为completed状态

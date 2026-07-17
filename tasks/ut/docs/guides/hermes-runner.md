@@ -80,7 +80,7 @@ bastion:
 ### 4.1 新建运行
 
 ```bash
-python skills/ut/shared/ut_runner.py \
+python skills/ut/ut_common/ut_runner.py \
   --workflow-yaml runs/ut-{timestamp}/workflow.yaml  # 使用运行副本，模板位于 tasks/ut/deployment/production/config/workflow.yaml
 ```
 
@@ -93,7 +93,7 @@ Runner 会：
 ### 4.2 断点续跑
 
 ```bash
-python skills/ut/shared/ut_runner.py \
+python skills/ut/ut_common/ut_runner.py \
   --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -196,7 +196,7 @@ Runner 在以下条件暂停：
 恢复命令：
 ```bash
 # 清除暂停标志后重新启动
-python skills/ut/shared/ut_runner.py \
+python skills/ut/ut_common/ut_runner.py \
   --workflow-yaml runs/ut-20260612-101857/workflow.yaml \
   --resume-from D:/workspace/apmm/runs/ut-20260612-101857
 ```
@@ -265,7 +265,7 @@ python skills/ut/terminal-workflow/scripts/archive/supervisor_loop.py --check
 
 | 文件 | 说明 |
 |------|------|
-| `skills/ut/shared/ut_runner.py` | Runner 主脚本 |
+| `skills/ut/ut_common/ut_runner.py` | Runner 主脚本 |
 | `skills/ut/terminal-workflow/scripts/bastion_manager.py` | Bastion 生命周期管理 |
 | `skills/ut/terminal-workflow/scripts/feishu_api.py` | 飞书 API 封装 |
 | `tasks/ut/deployment/production/config/workflow.yaml` | Workflow 配置模板（含 bastion 节） |

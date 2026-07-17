@@ -24,10 +24,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from skills.ut.shared import load_workflow_yaml
-from skills.ut.shared import validate_and_write
+from skills.ut.ut_common import load_workflow_yaml
+from skills.ut.ut_common import validate_and_write
 
-SHARED_DIR = Path(__file__).resolve().parent.parent.parent  # skills/ut/shared/
+SHARED_DIR = Path(__file__).resolve().parent.parent.parent  # skills/ut/ut_common/
 
 
 def _copy_manifest(manifest_source: Path, run_dir: Path):

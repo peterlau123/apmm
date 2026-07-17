@@ -309,7 +309,7 @@ failed (executor)
 
 | 文件 | 行为 |
 |---|---|
-| `tasks/ut/scripts/.dist/ut-dependency-resolver/`（新建） | 完整 profile dist：SOUL.md（最小，只描述 claim/resolve/release 三步）+ `skills/ut/dependency-resolver/`（完整复制）+ `skills/ut/shared/`（仅 logging + kanban 客户端子集） |
+| `tasks/ut/scripts/.dist/ut-dependency-resolver/`（新建） | 完整 profile dist：SOUL.md（最小，只描述 claim/resolve/release 三步）+ `skills/ut/dependency-resolver/`（完整复制）+ `skills/ut/ut_common/`（仅 logging + kanban 客户端子集） |
 | `tasks/ut/scripts/deploy_tier.py` | hermes profile distribution 同步新 profile；skill 子集声明：`ut-dependency-resolver = [dependency-resolver, shared]` |
 | `tasks/ut/scripts/start_hermes_ut_runtime.py` | `gateway_profiles` 列表加 `ut-dependency-resolver`；preflight `profile_present` 多一项；status display 多一行 |
 | `skills/ut/dependency-resolver/SKILL.md` | 补充 §「作为 Hermes Gateway 运行」: claim filter、两阶段下载流程、超时与 ignored promotion、stage dir 约定 |
@@ -327,7 +327,7 @@ failed (executor)
 tasks/ut/scripts/.dist/ut-dependency-resolver/
   SOUL.md                                          # 最小 SOUL: claim/resolve/release
   skills/ut/dependency-resolver/                   # 完整 (含新 runner + sync 脚本)
-  skills/ut/shared/                                # 仅 logging + kanban 客户端
+  skills/ut/ut_common/                                # 仅 logging + kanban 客户端
 ```
 
 不分发 `failure-handler` / `unit-test-executor` / `batch-selector` / `manifest-updater` — resolver surface 最小化。

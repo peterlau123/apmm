@@ -20,7 +20,7 @@ from tests.ut.integration._synthetic_manifest import (
     simulate_batch_execution,
     simulate_retry_execution,
 )
-from skills.ut.shared.validate_schema import validate_manifest
+from skills.ut.ut_common.validate_schema import validate_manifest
 
 
 class TestSyntheticManifestSchema:

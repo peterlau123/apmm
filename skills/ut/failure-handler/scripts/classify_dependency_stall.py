@@ -7,7 +7,7 @@ Contract:
   - Worker agent loads the固化 prompt from SKILL.md §X, runs LLM with the
     log tail, and obtains a JSON string. It then calls ``classify(log_tail,
     llm_output)`` here, which parses + validates the JSON against
-    ``skills/ut/shared/dependency_stall_schema.json``.
+    ``skills/ut/ut_common/dependency_stall_schema.json``.
   - On any failure (None / non-string / invalid JSON / schema mismatch /
     empty evidence), ``classify`` returns the canonical ``unknown`` fallback
     — never raises.

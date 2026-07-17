@@ -36,7 +36,7 @@
 | 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
 | 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
 | 2026-06-12 | Kanban Phase 1 | docs/kanban/README.md |
-| 2026-06-11 | Schema 统一 | skills/ut/shared/ |
+| 2026-06-11 | Schema 统一 | skills/ut/ut_common/ |
 
 ---
 

@@ -37,8 +37,8 @@ SCRIPT_DIR = Path(__file__).parent
 SKILL_DIR = SCRIPT_DIR.parent.parent
 sys.path.insert(0, str(SKILL_DIR))
 
-from skills.ut.shared import create_run_dir, load_workflow_yaml
-from skills.ut.shared import validate_and_write
+from skills.ut.ut_common import create_run_dir, load_workflow_yaml
+from skills.ut.ut_common import validate_and_write
 
 
 def copy_test_list(test_list_source: Path, run_dir: Path) -> Path:

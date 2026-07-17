@@ -44,8 +44,8 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.shared import validate_and_write
-from skills.ut.shared.bastion_signals import is_disconnect_blob
+from skills.ut.ut_common import validate_and_write
+from skills.ut.ut_common.bastion_signals import is_disconnect_blob
 
 
 # ── Type-B fabrication backstop: stat audit on remote log ─────────────────────
@@ -94,7 +94,7 @@ def _stat_remote_log(profile: str, raw_log_path: str, *, timeout: int = 60):
     stderr = r.stderr or ""
 
     # Disconnect heuristic — non-zero rc + any signal token in either stream.
-    # Tokens are owned by skills/ut/shared/bastion_signals.py (single source
+    # Tokens are owned by skills/ut/ut_common/bastion_signals.py (single source
     # of truth shared with executor's run_remote).
     if r.returncode != 0:
         if is_disconnect_blob(stdout + "\n" + stderr):

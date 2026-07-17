@@ -19,10 +19,10 @@
 - `.agents/workflow.yaml` - 补充logs目录注释
 - `skills/ut/batch-selector/SKILL.md` - 已更新failed过滤逻辑（无需修改）
 - `skills/ut/failure-handler/SKILL.md` - 已更新exhausted状态说明（无需修改）
-- `skills/ut/shared/manifest_schema.json` - 确认retry字段默认值（无需修改，已存在）
+- `skills/ut/ut_common/manifest_schema.json` - 确认retry字段默认值（无需修改，已存在）
 
 ### New Files (2)
-- `skills/ut/shared/scripts/check_environment.py` - 环境检查脚本
+- `skills/ut/ut_common/scripts/check_environment.py` - 环境检查脚本
 - `skills/ut/unit-test-executor/scripts/gpu_scheduler.py` - GPU分配调度器
 
 ---
@@ -30,13 +30,13 @@
 ## Task 1: 创建环境检查脚本 (P0)
 
 **Files:**
-- Create: `skills/ut/shared/scripts/check_environment.py`
-- Create: `skills/ut/shared/scripts/` (目录不存在)
+- Create: `skills/ut/ut_common/scripts/check_environment.py`
+- Create: `skills/ut/ut_common/scripts/` (目录不存在)
 
 - [ ] **Step 1: 创建 shared/scripts 目录**
 
 ```bash
-mkdir -p skills/ut/shared/scripts
+mkdir -p skills/ut/ut_common/scripts
 ```
 
 - [ ] **Step 2: 创建 check_environment.py**
@@ -254,7 +254,7 @@ if __name__ == "__main__":
 - [ ] **Step 3: 验证脚本创建**
 
 ```bash
-ls -la skills/ut/shared/scripts/check_environment.py
+ls -la skills/ut/ut_common/scripts/check_environment.py
 ```
 
 Expected: 文件存在
@@ -262,7 +262,7 @@ Expected: 文件存在
 - [ ] **Step 4: 测试脚本执行（本地部分）**
 
 ```bash
-python skills/ut/shared/scripts/check_environment.py
+python skills/ut/ut_common/scripts/check_environment.py
 ```
 
 Expected: 输出JSON格式，包含bastion检查结果（可能失败，因为远程执行未配置）
@@ -270,7 +270,7 @@ Expected: 输出JSON格式，包含bastion检查结果（可能失败，因为�
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/shared/scripts/check_environment.py
+git add skills/ut/ut_common/scripts/check_environment.py
 git commit -m "feat: add environment check script for UT workflow"
 ```
 
@@ -334,20 +334,20 @@ git commit -m "docs: add logs directory hierarchy notes to workflow.yaml"
 ## Task 3: 确认 retry 字段默认值 (P1-检查)
 
 **Files:**
-- Read: `skills/ut/shared/manifest_schema.json:108-119`
+- Read: `skills/ut/ut_common/manifest_schema.json:108-119`
 
 - [ ] **Step 1: 验证 retry_count 和 max_retry 默认值**
 
 ```bash
-grep -A5 "retry_count" skills/ut/shared/manifest_schema.json
-grep -A5 "max_retry" skills/ut/shared/manifest_schema.json
+grep -A5 "retry_count" skills/ut/ut_common/manifest_schema.json
+grep -A5 "max_retry" skills/ut/ut_common/manifest_schema.json
 ```
 
 Expected: 包含 `default: 0` 和 `default: 3`
 
 - [ ] **Step 2: 确认字段已存在**
 
-Read: `skills/ut/shared/manifest_schema.json:108-119`
+Read: `skills/ut/ut_common/manifest_schema.json:108-119`
 
 Expected: retry_count 和 max_retry 字段定义已存在（无需修改）
 
@@ -742,7 +742,7 @@ git commit -m "feat: add parallel execution mode with GPU scheduling to batch_te
 - [ ] **Step 1: 验证环境检查脚本**
 
 ```bash
-python skills/ut/shared/scripts/check_environment.py 2>&1 | head -20
+python skills/ut/ut_common/scripts/check_environment.py 2>&1 | head -20
 ```
 
 Expected: 输出JSON格式（可能部分检查失败）
@@ -759,8 +759,8 @@ Expected: 两行注释存在
 - [ ] **Step 3: 验证 retry 字段**
 
 ```bash
-jq '.properties.retry_count.default' skills/ut/shared/manifest_schema.json
-jq '.properties.max_retry.default' skills/ut/shared/manifest_schema.json
+jq '.properties.retry_count.default' skills/ut/ut_common/manifest_schema.json
+jq '.properties.max_retry.default' skills/ut/ut_common/manifest_schema.json
 ```
 
 Expected: 输出 0 和 3

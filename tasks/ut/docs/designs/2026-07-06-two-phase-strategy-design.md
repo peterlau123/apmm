@@ -535,7 +535,7 @@ workflow:
 
 **3. 创建Phase 2的Agent Skill**
 
-**文件位置：** `skills/ut/shared/two-phase-handler/SKILL.md`
+**文件位置：** `skills/ut/ut_common/two-phase-handler/SKILL.md`
 
 **改动内容：**
 - Stage 1：统计分析逻辑（按error_type分类）
@@ -736,7 +736,7 @@ workflow:
 
 | 文件类型 | 路径 | 说明 |
 |---------|------|------|
-| **manifest_schema** | `skills/ut/shared/manifest_schema.json` | Error_type枚举定义（第141行） |
+| **manifest_schema** | `skills/ut/ut_common/manifest_schema.json` | Error_type枚举定义（第141行） |
 | **workflow模板** | `tasks/ut/deployment/production/config/workflow.yaml` | 生产配置模板 |
 | **L1-L4模板** | `tests/ut/integration/fixtures/workflow.l*.yaml` | 测试配置模板 |
 | **README** | `tasks/ut/README.md` | UT Workflow入口文档 |

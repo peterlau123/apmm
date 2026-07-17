@@ -61,7 +61,7 @@ tasks/ut/worklog/
 
 | 任务 | 状态 | 详情 |
 |------|:----:|------|
-| Schema 统一 | ✅ | skills/ut/shared/validate_schema.py |
+| Schema 统一 | ✅ | skills/ut/ut_common/validate_schema.py |
 
 ---
 

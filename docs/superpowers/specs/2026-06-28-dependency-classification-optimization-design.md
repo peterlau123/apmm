@@ -194,7 +194,7 @@ LOG 末尾内容如下:
 
 ### 3.2 Schema Validation
 
-Agent 输出必须匹配 `skills/ut/shared/dependency_stall_schema.json`：
+Agent 输出必须匹配 `skills/ut/ut_common/dependency_stall_schema.json`：
 
 ```json
 {
@@ -386,7 +386,7 @@ def test_full_timeout_flow_with_disconnect():
 |---|---|
 | `docs/superpowers/specs/2026-06-28-ut-status-classification-design.md` | Append §X：Executor placeholder schema + Agent 直接输出 |
 | `skills/ut/unit-test-executor/SKILL.md` | 添加 timeout → placeholder schema 说明 |
-| `skills/ut/shared/batch_results_schema.json` | 添加 `dependency_classification` 字段定义（placeholder schema） |
+| `skills/ut/ut_common/batch_results_schema.json` | 添加 `dependency_classification` 字段定义（placeholder schema） |
 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py` | 修改 `_handle_timeout_test()` 参数 |
 | `skills/ut/unit-test-executor/scripts/execute_batch.py` | 修改 timeout 返回，添加 placeholder schema |
 

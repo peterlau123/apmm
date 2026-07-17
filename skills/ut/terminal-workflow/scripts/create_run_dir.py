@@ -16,8 +16,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from skills.ut.shared import create_run_dir as _create_run_dir
-from skills.ut.shared import load_workflow_yaml
+from skills.ut.ut_common import create_run_dir as _create_run_dir
+from skills.ut.ut_common import load_workflow_yaml
 
 
 def main():

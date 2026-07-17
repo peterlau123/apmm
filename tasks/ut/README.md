@@ -103,7 +103,7 @@ Both channels share a **5-step scripted sequence**:
 | 实时进度（数字以此为准） | [PROGRESS.md](PROGRESS.md) |
 | 每日工作日志 | [WORKLOG.md](WORKLOG.md) · [todo.md](todo.md) |
 | 远程环境 / SSH / 容器 / 文件布局 | [docs/guides/testing.md](docs/guides/testing.md) |
-| 测试过滤规则（哪些被排除/为什么） | [skills/ut/shared/filter_rules.yaml](../../skills/ut/shared/filter_rules.yaml) |
+| 测试过滤规则（哪些被排除/为什么） | [skills/ut/ut_common/filter_rules.yaml](../../skills/ut/ut_common/filter_rules.yaml) |
 | Bastion OTP / daemon 设计 | [docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md](docs/discussions/2026-06-18-hermes-runner-bastion-otp-design.md) |
 | Hermes Runner 操作 | [docs/guides/hermes-runner.md](docs/guides/hermes-runner.md) |
 | Kanban 配置 | [docs/kanban/README.md](docs/kanban/README.md) |
@@ -239,7 +239,7 @@ Phase 1完成后，调用`two-phase-handler` skill处理失败batch：
 | `workflow.yaml` | `tasks/ut/deployment/production/config/`（生产）/ `tests/ut/integration/fixtures/`（L1-L4 调试） | 手动 |
 | `workflow_state.json` | `runs/<run_id>/workflow_state.json` | 每次循环 |
 
-Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/ut/shared/manifest_schema.json)。
+Manifest schema 定义见 [skills/ut/ut_common/manifest_schema.json](../../skills/ut/ut_common/manifest_schema.json)。
 
 ---
 
@@ -263,7 +263,7 @@ Manifest schema 定义见 [skills/ut/shared/manifest_schema.json](../../skills/u
 
 `C-代码Bug` · `E-环境问题` · `D-依赖缺失` · `P-平台兼容` · `M-模型缺失` · `S-跳过问题`
 
-机器可读的 `error_type` 枚举见 [manifest_schema.json](../../skills/ut/shared/manifest_schema.json)（`dependency`/`network`/`download_error`/`oom`/`timeout`/...）。
+机器可读的 `error_type` 枚举见 [manifest_schema.json](../../skills/ut/ut_common/manifest_schema.json)（`dependency`/`network`/`download_error`/`oom`/`timeout`/...）。
 
 ---
 

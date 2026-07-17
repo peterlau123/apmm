@@ -1,7 +1,7 @@
 """Tests for v5 schema additions: retriable_error status, oom/timeout error_type,
 last_batch_id pointer, and per-test max_retry."""
 import pytest
-from skills.ut.shared.validate_schema import validate_manifest
+from skills.ut.ut_common.validate_schema import validate_manifest
 
 
 def _base_manifest(test_overrides):

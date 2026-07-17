@@ -194,7 +194,7 @@
 | 🔴 P0 | P1 | README 叫用户加载 `ut/workflow` skill，该 skill 不存在 | 改 README 文案为 `加载 ut/terminal-workflow skill` |
 | 🔴 P0 | S3 | terminal-workflow SKILL 调 `validate_required_config(cfg)` 不传 `channel="linear"`，互锁失效 | 把调用改为 `validate_required_config(cfg, channel="linear")`，加 unit test 断言此 kwarg 被传 |
 | 🔴 P0 | S5 | `start_ut_workflow.py` 引用 `run_workflow.py` 不存在 | 删除 `start_ut_workflow.py`（被 `start_hermes_ut_runtime.py` 取代）或修路径 |
-| 🟠 P1 | S4/S8 | `start_gateway.py` / `hermes_runner.py` / `bastion_manager.py` 物理位置全在 terminal-workflow/scripts 但被 hermes 通道使用 | 抽到 `skills/ut/shared/scripts/`，更新所有 import 路径 |
+| 🟠 P1 | S4/S8 | `start_gateway.py` / `hermes_runner.py` / `bastion_manager.py` 物理位置全在 terminal-workflow/scripts 但被 hermes 通道使用 | 抽到 `skills/ut/ut_common/scripts/`，更新所有 import 路径 |
 | 🟠 P1 | S7/P8 | `.agents/workflow.yaml` 注释说"默认关闭"但值是 `true` | 选一个改：把默认改为 `false`（更符合 README 调试通道）并改注释为 truth |
 | 🟠 P1 | P3 | README 说"回确认启动"，hermes SKILL §3.A 已改成 10s 蓝/橙卡 | 同步 README 描述 |
 | 🟡 P2 | P6 | terminal-workflow 全 skill 仅 1 个 skip 占位测试 | 实测 SKILL 定义的 callback 行为（handle_checkpoint / handle_bastion_disconnect / check_user_commands / check_terminal_conditions） |

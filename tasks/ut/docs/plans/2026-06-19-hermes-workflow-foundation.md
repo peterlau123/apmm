@@ -27,8 +27,8 @@
 - `tests/integration/test_linear_mode_smoke.py` — end-to-end mini-batch smoke
 
 ### Modified
-- `skills/ut/shared/manifest_schema.json` — add `retriable_error`, `oom`, `timeout`, `last_batch_id`, `max_retry`
-- `skills/ut/shared/migrate_manifest.py` — backfill new optional fields
+- `skills/ut/ut_common/manifest_schema.json` — add `retriable_error`, `oom`, `timeout`, `last_batch_id`, `max_retry`
+- `skills/ut/ut_common/migrate_manifest.py` — backfill new optional fields
 - `skills/ut/unit-test-executor/SKILL.md` — remote log strategy + retriable_error + Bastion reporting
 - `skills/ut/unit-test-executor/scripts/execute_batch.py` — implement remote raw_log + local summary + remote_log field
 - `skills/ut/failure-handler/SKILL.md` — vLLM branch constraint, skip retriable_error, last_batch_id resolution
@@ -49,7 +49,7 @@
 ### Task 1.1: Add `retriable_error` to manifest status enum
 
 **Files:**
-- Modify: `skills/ut/shared/manifest_schema.json`
+- Modify: `skills/ut/ut_common/manifest_schema.json`
 - Test: `tests/skills/ut/test_schema_v5.py` (new)
 
 - [ ] **Step 1: Write the failing test** — Create `tests/skills/ut/test_schema_v5.py`:
@@ -57,7 +57,7 @@
 ```python
 import json
 from pathlib import Path
-from skills.ut.shared.validate_schema import validate_manifest
+from skills.ut.ut_common.validate_schema import validate_manifest
 
 def test_status_retriable_error_is_valid():
     manifest = {"version": "2.0", "tests": [{"test_id": "t1", "status": "retriable_error",
@@ -77,7 +77,7 @@ def test_error_type_timeout_is_valid():
 
 - [ ] **Step 2: Run test to verify it fails** — `pytest tests/skills/ut/test_schema_v5.py -v` → FAIL on enum violation.
 
-- [ ] **Step 3: Add `retriable_error` to status enum** — In `skills/ut/shared/manifest_schema.json`, find `tests.items.properties.status.enum`:
+- [ ] **Step 3: Add `retriable_error` to status enum** — In `skills/ut/ut_common/manifest_schema.json`, find `tests.items.properties.status.enum`:
 
 ```json
 "status": {
@@ -100,7 +100,7 @@ def test_error_type_timeout_is_valid():
 - [ ] **Step 6: Commit**
 
 ```bash
-git add skills/ut/shared/manifest_schema.json tests/skills/ut/test_schema_v5.py
+git add skills/ut/ut_common/manifest_schema.json tests/skills/ut/test_schema_v5.py
 git commit -m "feat(schema): add retriable_error status and oom/timeout error_type"
 ```
 
@@ -109,7 +109,7 @@ git commit -m "feat(schema): add retriable_error status and oom/timeout error_ty
 ### Task 1.2: Add `last_batch_id` and `max_retry` fields
 
 **Files:**
-- Modify: `skills/ut/shared/manifest_schema.json`
+- Modify: `skills/ut/ut_common/manifest_schema.json`
 - Test: `tests/skills/ut/test_schema_v5.py` (extend)
 
 - [ ] **Step 1: Append failing test**:
@@ -143,7 +143,7 @@ def test_max_retry_negative_is_invalid():
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/shared/manifest_schema.json tests/skills/ut/test_schema_v5.py
+git add skills/ut/ut_common/manifest_schema.json tests/skills/ut/test_schema_v5.py
 git commit -m "feat(schema): add last_batch_id pointer and per-test max_retry"
 ```
 
@@ -152,13 +152,13 @@ git commit -m "feat(schema): add last_batch_id pointer and per-test max_retry"
 ### Task 1.3: Backward-compat migration
 
 **Files:**
-- Modify: `skills/ut/shared/migrate_manifest.py`
+- Modify: `skills/ut/ut_common/migrate_manifest.py`
 - Test: `tests/skills/ut/test_migrate_manifest_v5.py` (new)
 
 - [ ] **Step 1: Write failing test**:
 
 ```python
-from skills.ut.shared.migrate_manifest import migrate_manifest
+from skills.ut.ut_common.migrate_manifest import migrate_manifest
 
 def test_old_manifest_gets_max_retry_default():
     old = {"version": "2.0", "tests": [{"test_id": "t1", "status": "pending", "retry_count": 0}], "statistics": {}}
@@ -194,7 +194,7 @@ def migrate_manifest(manifest: dict, default_max_retry: int = 3) -> dict:
 - [ ] **Step 5: Commit**
 
 ```bash
-git add skills/ut/shared/migrate_manifest.py tests/skills/ut/test_migrate_manifest_v5.py
+git add skills/ut/ut_common/migrate_manifest.py tests/skills/ut/test_migrate_manifest_v5.py
 git commit -m "feat(migrate): backfill max_retry and last_batch_id for v5 schema"
 ```
 
@@ -1441,7 +1441,7 @@ git commit -m "config(workflow): batch_size=8, max_retry_per_test=3 (v5 defaults
 
 ```python
 import pytest
-from skills.ut.shared.validate_schema import validate_state
+from skills.ut.ut_common.validate_schema import validate_state
 
 def test_pending_config_field_allowed():
     state = {"version": "1.0", "iteration": 0, "status": "running",

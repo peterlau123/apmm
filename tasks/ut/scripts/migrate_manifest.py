@@ -8,7 +8,7 @@ Usage:
     python migrate_manifest.py \
         --test-list tasks/ut/dataset/ut_test_list_full_20260624_173600.txt \
         --old-manifest tasks/ut/dataset/manifest.json \
-        --schema skills/ut/shared/manifest_schema.json \
+        --schema skills/ut/ut_common/manifest_schema.json \
         --output tasks/ut/dataset/manifest.json
 
 Algorithm (Incremental Merge):

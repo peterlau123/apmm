@@ -240,7 +240,7 @@ skills/ut/
   - `batch_results_schema.json` → `skills/ut/unit-test-executor/`
   - `handled_tests_schema.json` → `skills/ut/failure-handler/`
   - `workflow_state_schema.json` → `skills/ut/terminal-workflow/`
-  - `manifest_schema.json` → 保持在 `skills/ut/shared/`
+  - `manifest_schema.json` → 保持在 `skills/ut/ut_common/`
 
 - [ ] 1.2 创建 `workflow_schema.yaml`（YAML 格式 schema）
   - 位置: `skills/ut/terminal-workflow/workflow_schema.yaml`
@@ -267,7 +267,7 @@ skills/ut/
 
 **目标**: 创建通用 schema 校验脚本
 
-**文件**: `skills/ut/shared/validate_schema.py`
+**文件**: `skills/ut/ut_common/validate_schema.py`
 
 **核心函数**:
 
@@ -322,7 +322,7 @@ SCHEMA_FILES = {
     "batch_config": "skills/ut/batch-selector/batch_config_schema.json",
     "batch_results": "skills/ut/unit-test-executor/batch_results_schema.json",
     "handled_tests": "skills/ut/failure-handler/handled_tests_schema.json",
-    "manifest": "skills/ut/shared/manifest_schema.json",
+    "manifest": "skills/ut/ut_common/manifest_schema.json",
     "workflow_state": "skills/ut/terminal-workflow/workflow_state_schema.json",
     "workflow": "skills/ut/terminal-workflow/workflow_schema.yaml",  # YAML schema
 }
@@ -343,7 +343,7 @@ SCHEMA_FILES = {
 
 **目标**: 将现有 manifest.json 迁移到新 schema 格式
 
-**文件**: `skills/ut/shared/migrate_manifest.py`
+**文件**: `skills/ut/ut_common/migrate_manifest.py`
 
 **核心函数**:
 

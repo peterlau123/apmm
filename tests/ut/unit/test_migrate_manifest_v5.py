@@ -1,5 +1,5 @@
 """Tests for v5 manifest migration: backfill max_retry and last_batch_id."""
-from skills.ut.shared.migrate_manifest import migrate_manifest
+from skills.ut.ut_common.migrate_manifest import migrate_manifest
 
 
 def test_old_manifest_gets_max_retry_default():

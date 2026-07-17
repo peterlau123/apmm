@@ -42,7 +42,7 @@ sudo docker save v0.13.0_torch2.5.1_compile_backup:latest | gzip > /gpfs/gcsp/M2
 
 ## 测试范围
 
-测试过滤规则详见 [skills/ut/shared/filter_rules.yaml](../../skills/ut/shared/filter_rules.yaml)。
+测试过滤规则详见 [skills/ut/ut_common/filter_rules.yaml](../../skills/ut/ut_common/filter_rules.yaml)。
 
 `test_manifest.json` 中包含各测试项的进展状态，请及时更新。
 

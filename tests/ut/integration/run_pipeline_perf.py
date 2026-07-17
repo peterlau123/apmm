@@ -71,7 +71,7 @@ _HR = _load_module(
     _PROJECT_ROOT / "skills" / "ut" / "workflow" / "scripts" / "ut_runner.py",
 )
 
-from skills.ut.shared.validate_schema import validate_manifest  # noqa: E402
+from skills.ut.ut_common.validate_schema import validate_manifest  # noqa: E402
 
 
 RUN_ID = "perf-test"

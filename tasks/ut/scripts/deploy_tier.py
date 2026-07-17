@@ -37,7 +37,7 @@ profile skills):
 Note: `shared/` carries cross-skill schemas + validators (manifest_schema.json,
 batch_results_schema.json, handled_tests_schema.json, dependency_stall_schema.json,
 validate_schema.py). Every profile that runs Python from skills/ut/* imports
-from `skills.ut.shared`, so it must ship with the profile.
+from `skills.ut.ut_common`, so it must ship with the profile.
 
 Usage:
     python tasks/ut/scripts/deploy_tier.py --tier L1 --check

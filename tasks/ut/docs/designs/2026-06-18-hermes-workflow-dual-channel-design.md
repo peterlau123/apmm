@@ -909,7 +909,7 @@ batch-selector 的逻辑在 Kanban 模式下由 **ut-orchestrator profile 的 Wo
 | `skills/ut/batch-selector/SKILL.md` | ✏️ 更新 | 选取条件加 retriable_error |
 | `skills/ut/batch-selector/scripts/generate_batch.py` | ✏️ 更新 | 同上 |
 | `skills/ut/manifest-updater/SKILL.md` | ✏️ 更新 | retriable_error retry 用完 → ignored；维护 last_batch_id |
-| `skills/ut/shared/manifest_schema.json` | ✏️ 更新 | status 加 retriable_error；error_type 加 oom/timeout；tests[i] 加 last_batch_id + max_retry |
+| `skills/ut/ut_common/manifest_schema.json` | ✏️ 更新 | status 加 retriable_error；error_type 加 oom/timeout；tests[i] 加 last_batch_id + max_retry |
 | `~/AppData/Local/hermes/profiles/ut-orchestrator/SOUL.md` | ✏️ 更新 | 加载 batch-selector + manifest-updater 两份 SKILL（兼任 Stage 2+5） |
 | `.agents/workflow.yaml` | ✏️ 更新 | batch_size 默认 8；max_retry_per_test 默认 3 |
 

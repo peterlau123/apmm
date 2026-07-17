@@ -7,7 +7,7 @@
 import pytest
 from jsonschema import ValidationError
 
-from skills.ut.shared.validate_schema import validate_state
+from skills.ut.ut_common.validate_schema import validate_state
 
 
 def _minimal_state(**overrides):

@@ -30,7 +30,7 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 from datetime import datetime
-from skills.ut.shared import validate_and_write
+from skills.ut.ut_common import validate_and_write
 
 # Dependency-stall classifier (design 2026-06-23-pytest-timeout-redesign.md §5).
 # Loaded by file path because failure-handler/ is a hyphenated dir (not a Python

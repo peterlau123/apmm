@@ -16,7 +16,7 @@
 |---|---|
 | `skills/ut/unit-test-executor/batch_results_schema.json` | Executor 输出 schema（添加 dependency_classification 字段定义） |
 | `skills/ut/unit-test-executor/scripts/execute_batch.py` | Executor timeout 返回 placeholder schema（5 处修改） |
-| `skills/ut/shared/dependency_stall_schema.json` | Agent 输出验证 schema（已存在，无需修改） |
+| `skills/ut/ut_common/dependency_stall_schema.json` | Agent 输出验证 schema（已存在，无需修改） |
 | `skills/ut/failure-handler/scripts/classify_dependency_stall.py` | Validation + fallback logic（已存在，无需修改） |
 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py` | 参数修改（llm_invoker → agent_classification） |
 | `tests/ut/unit/test_dependency_classification.py` | 单元测试（placeholder schema + agent classification + full flow） |

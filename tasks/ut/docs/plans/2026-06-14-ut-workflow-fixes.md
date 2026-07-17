@@ -19,7 +19,7 @@
 - `.agents/workflow.yaml` - 删除 execution、调整顺序、补充配置和注释
 - `skills/ut/batch-selector/SKILL.md` - 增加 failed 选择逻辑（含 retry_count 过滤）
 - `skills/ut/failure-handler/SKILL.md` - 更新剩余失败处理说明
-- `skills/ut/shared/manifest_schema.json` - 增加 retry_count 和 max_retry 字段
+- `skills/ut/ut_common/manifest_schema.json` - 增加 retry_count 和 max_retry 字段
 
 ### New Files (3)
 - `skills/ut/failure-handler/references/troubleshooting.md` - failure-handler 问题解决手册

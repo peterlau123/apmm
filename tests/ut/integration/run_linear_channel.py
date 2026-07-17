@@ -42,9 +42,9 @@ _BS = _load("lc_generate_batch", "skills/ut/batch-selector/scripts/generate_batc
 _EXEC = _load("lc_execute_batch", "skills/ut/unit-test-executor/scripts/execute_batch.py")
 _MU = _load("lc_update_manifest", "skills/ut/manifest-updater/scripts/update_manifest.py")
 _FH = _load("lc_analyze_failures", "skills/ut/failure-handler/scripts/analyze_failures.py")
-_HR = _load("lc_ut_runner", "skills/ut/shared/ut_runner.py")
+_HR = _load("lc_ut_runner", "skills/ut/ut_common/ut_runner.py")
 
-from skills.ut.shared.validate_schema import validate_manifest  # noqa: E402
+from skills.ut.ut_common.validate_schema import validate_manifest  # noqa: E402
 
 RUN_ID = "ut-linear"
 MAX_ITERS = 12  # safety cap; retry subset should converge in <= max_retry+1 rounds

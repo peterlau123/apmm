@@ -28,7 +28,7 @@ UT workflow 的过滤规则分散在 7+ 个位置，导致：
 
 ### 1. filter_rules.yaml 结构
 
-**位置**: `skills/ut/shared/filter_rules.yaml`
+**位置**: `skills/ut/ut_common/filter_rules.yaml`
 
 **格式**: 纯 YAML，便于脚本直接加载
 
@@ -91,7 +91,7 @@ input_filter:
 - `-q` (quiet 模式)
 - `--tb=long` (详细回溯)
 
-**新增**: `skills/ut/shared/load_filter_rules.py`
+**新增**: `skills/ut/ut_common/load_filter_rules.py`
 
 ---
 

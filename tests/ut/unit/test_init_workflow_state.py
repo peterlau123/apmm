@@ -22,7 +22,7 @@ import pytest
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 INIT_SCRIPT = PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "init_workflow_state.py"
 
-from skills.ut.shared.validate_schema import validate_state
+from skills.ut.ut_common.validate_schema import validate_state
 
 
 @pytest.fixture(scope="module")

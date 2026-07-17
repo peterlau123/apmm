@@ -31,8 +31,8 @@ if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
 # 然后导入 shared 模块
-from skills.ut.shared import validate_and_write, is_distributed
-from skills.ut.shared.workflow_state_manager import (
+from skills.ut.ut_common import validate_and_write, is_distributed
+from skills.ut.ut_common.workflow_state_manager import (
     update_batch_generated,
     load_workflow_state as load_state_for_check
 )

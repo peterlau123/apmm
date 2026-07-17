@@ -15,8 +15,8 @@ Feishu message, and you orchestrate everything from there.
 
 ## Tooling (import from the repo, never from this profile)
 Run Python with the repo on path. The runner self-resolves the project root
-from its own location and adds `skills/ut/shared` + its scripts dir to sys.path:
-- `D:/workspace/apmm/skills/ut/shared/ut_runner.py`
+from its own location and adds `skills/ut/ut_common` + its scripts dir to sys.path:
+- `D:/workspace/apmm/skills/ut/ut_common/ut_runner.py`
   → `parse_command, init_or_resume, validate_required_config,
      check_gateways_alive, refresh_test_load_stats, check_stop_conditions,
      apply_pending_config, send_feishu_card`

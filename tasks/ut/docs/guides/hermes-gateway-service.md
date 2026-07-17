@@ -152,7 +152,7 @@ systemctl --user enable --now \
 
 ## 5. 与 check_gateways_alive() 的对应
 
-Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `ut_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/shared/ut_runner.py`）的机制是：
+Supervisor 在 Kanban 模式（`kanban.enabled: true`）启动校验时，会调用 `ut_runner.check_gateways_alive()` 确认这 3 个 Gateway 在线。该函数（`skills/ut/ut_common/ut_runner.py`）的机制是：
 
 ```python
 KANBAN_GATEWAY_PROFILES = ("ut-orchestrator", "ut-executor", "ut-fixer")
@@ -244,7 +244,7 @@ hermes gateway status
 | [hermes-supervisor-service.md](hermes-supervisor-service.md) | Supervisor（1 个长驻 Agent）的 systemd 部署指南 |
 | `tasks/ut/docs/kanban/README.md` | Kanban 集成、3 worker profile、`start_gateway.py` 包装器、远程执行规则 |
 | `skills/ut/terminal-workflow/scripts/start_gateway.py` | Gateway 启动包装器（本指南 ExecStart 的接地来源） |
-| `skills/ut/shared/ut_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
+| `skills/ut/ut_common/ut_runner.py` | `check_gateways_alive()`（§5 的 unit 命名来源） |
 | `skills/ut/hermes-workflow/ut-orchestrator-SOUL.md` | orchestrator worker 行为（Stage 5 reconcile + Stage 2 select） |
 | [bastion.md](../../../docs/guides/bastion.md) | Bastion 堡垒机连接与凭据配置 |
 | `tasks/ut/docs/guides/ut-runner.md` | Runner 双模式运行、OTP 交互、排错 |

@@ -193,8 +193,8 @@ Remaining `manifest` references are all SKILL names (`manifest-updater`, `manife
 - `TestRefreshManifestStats` -> `TestRefreshTestLoadStats` (test class name)
 
 **Files modified** (12 files):
-- `skills/ut/shared/ut_runner.py` (function def + `check_stop_conditions` + state key)
-- `skills/ut/shared/workflow_state_manager.py` (`calculate_test_stats` parameter)
+- `skills/ut/ut_common/ut_runner.py` (function def + `check_stop_conditions` + state key)
+- `skills/ut/ut_common/workflow_state_manager.py` (`calculate_test_stats` parameter)
 - `skills/ut/hermes-workflow/SKILL.md` (2 references in import list + handle_checkpoint)
 - `tests/ut/integration/fixtures/profiles/ut-supervisor/SOUL.md` (1 reference)
 - `tests/ut/unit/test_hermes_runner_api.py` (function + state key + test name)
@@ -208,7 +208,7 @@ Remaining `manifest` references are all SKILL names (`manifest-updater`, `manife
 
 **Also fixed F2** (pre-existing): 7 test files imported `ut_runner.py` from
 `skills/ut/terminal-workflow/scripts/ut_runner.py` (file moved to `shared/` in v5
-refactor). Updated all to `skills/ut/shared/ut_runner.py`.
+refactor). Updated all to `skills/ut/ut_common/ut_runner.py`.
 
 **Regression test results**:
 - 385 passed, 5 skipped

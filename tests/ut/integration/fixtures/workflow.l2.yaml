@@ -37,8 +37,8 @@ config:
 
   run_dir: &run_dir null
 
-  manifest_schema_path: &manifest_schema_path "{workspace}/skills/ut/shared/manifest_schema.json"
-  filter_rules_path: &filter_rules_path "{workspace}/skills/ut/shared/filter_rules.yaml"
+  manifest_schema_path: &manifest_schema_path "{workspace}/skills/ut/ut_common/manifest_schema.json"
+  filter_rules_path: &filter_rules_path "{workspace}/skills/ut/ut_common/filter_rules.yaml"
 
   test_list_path: &test_list_path "{run_dir}/test_list.txt"
   manifest_path: &manifest_path "{run_dir}/manifest.json"
@@ -94,7 +94,7 @@ stages:
     description: 从test_list.txt生成manifest.json
     input:
       test_list_path: "{run_dir}/test_list.txt"
-      manifest_schema_path: "{workspace}/skills/ut/shared/manifest_schema.json"
+      manifest_schema_path: "{workspace}/skills/ut/ut_common/manifest_schema.json"
     output:
       manifest_path: *manifest_path
     kanban:

@@ -122,7 +122,7 @@ git rm tasks/ut/test_analysis/manifest_legacy.json
 **Inputs**:
 - `tasks/ut/dataset/ut_test_list_full_20260624_173600.txt` (33,286 lines)
 - `tasks/ut/dataset/manifest.json` (31,868 tests, 6,411 passed)
-- `skills/ut/shared/manifest_schema.json`
+- `skills/ut/ut_common/manifest_schema.json`
 
 **Algorithm** (方案2: 增量合并):
 ```python

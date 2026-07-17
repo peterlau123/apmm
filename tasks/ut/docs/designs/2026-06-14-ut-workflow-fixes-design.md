@@ -183,7 +183,7 @@ worker_output_schema → kanban → notifications
 - `skills/ut/batch-selector/SKILL.md` 选择逻辑
 - `skills/ut/failure-handler/SKILL.md` retry_count 处理逻辑
 - `skills/ut/manifest-updater/SKILL.md` retry_count 写入逻辑
-- `skills/ut/shared/manifest_schema.json` retry_count 字段定义
+- `skills/ut/ut_common/manifest_schema.json` retry_count 字段定义
 
 **修改内容**:
 

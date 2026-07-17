@@ -30,7 +30,7 @@ if 'PYTHONPATH' in os.environ:
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from skills.ut.shared import validate_and_write
+from skills.ut.ut_common import validate_and_write
 
 
 def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Path:

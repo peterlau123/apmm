@@ -133,7 +133,7 @@ Run: python -c "import py_compile; py_compile.compile(r'skills/ut/manifest-updat
 ### Task 4: Add dependency direction comment (S5)
 
 **Files:**
-- Modify: skills/ut/shared/update_test_load_two_phase.py
+- Modify: skills/ut/ut_common/update_test_load_two_phase.py
 
 **Step 1: Add explanatory comment**
 
@@ -146,7 +146,7 @@ Before the import line, add:
 
 **Step 2: Verify syntax**
 
-Run: python -c "import py_compile; py_compile.compile(r'skills/ut/shared/update_test_load_two_phase.py', doraise=True)"
+Run: python -c "import py_compile; py_compile.compile(r'skills/ut/ut_common/update_test_load_two_phase.py', doraise=True)"
 
 ---
 

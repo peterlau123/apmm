@@ -36,7 +36,7 @@ _project_root = Path(__file__).resolve().parents[3]
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.shared import get_paths, get_config
+from skills.ut.ut_common import get_paths, get_config
 
 
 # ============================================================================
@@ -220,7 +220,7 @@ def merge_batch(
     """
     cmd = [
         sys.executable,
-        str(_project_root / "skills/ut/shared/update_test_load_two_phase.py"),
+        str(_project_root / "skills/ut/ut_common/update_test_load_two_phase.py"),
         "--workflow-state", str(workflow_state_path),
         "--batch-id", batch_id,
         "--batch-results", str(batch_results_path),

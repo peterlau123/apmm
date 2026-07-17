@@ -17,7 +17,7 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.shared.workflow_state_manager import load_workflow_state
+from skills.ut.ut_common.workflow_state_manager import load_workflow_state
 
 
 def analyze_intermediate_batches(workflow_state_path: Path) -> list:

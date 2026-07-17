@@ -337,7 +337,7 @@ def update_test_status(test: dict, result: dict) -> dict:
 
 ### 4.1 脚本设计
 
-**文件: `skills/ut/shared/scripts/check_environment.py` (新建)**
+**文件: `skills/ut/ut_common/scripts/check_environment.py` (新建)**
 
 **职责:** 一次性检查所有环境状态，输出 JSON 结果和日志
 
@@ -452,7 +452,7 @@ Phase 2: P3 (3h)
 **验证命令:**
 
 ```bash
-python skills/ut/shared/scripts/check_environment.py
+python skills/ut/ut_common/scripts/check_environment.py
 ```
 
 **预期输出:**

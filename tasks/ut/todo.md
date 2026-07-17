@@ -135,8 +135,8 @@
   - 背景: 过滤规则分散在 7+ 个位置，需建立单一来源
   - 设计文档: [2026-06-11-ut-filter-rules-consolidation-design.md](../../tasks/ut/docs/designs/2026-06-11-ut-filter-rules-consolidation-design.md)
   - 实施:
-    1. ✅ 创建 `skills/ut/shared/filter_rules.yaml`（41条规则）
-    2. ✅ 创建 `skills/ut/shared/load_filter_rules.py`（5个函数）
+    1. ✅ 创建 `skills/ut/ut_common/filter_rules.yaml`（41条规则）
+    2. ✅ 创建 `skills/ut/ut_common/load_filter_rules.py`（5个函数）
     3. ✅ 精简 `pytest_config.py`（移除37条规则）
     4. ✅ 更新 `workflow.yaml`（添加 input_filter 块）
     5. ✅ 更新 `generate_batch.py`（使用 load_filter_rules）
@@ -291,14 +291,14 @@
 - handled_tests_schema.json → skills/ut/failure-handler/
 - workflow_state_schema.json → skills/ut/terminal-workflow/
 - workflow_schema.yaml → skills/ut/terminal-workflow/ (新建)
-- manifest_schema.json → skills/ut/shared/ (已更新)
+- manifest_schema.json → skills/ut/ut_common/ (已更新)
 
 **Phase 2**: 校验脚本创建
-- validate_schema.py → skills/ut/shared/
+- validate_schema.py → skills/ut/ut_common/
 - 功能: validate_json(), validate_yaml(), validate_and_write()
 
 **Phase 3**: 迁移脚本创建
-- migrate_manifest.py → skills/ut/shared/
+- migrate_manifest.py → skills/ut/ut_common/
 - 执行迁移: tasks/ut/test_analysis/manifest.json
 - 备份: manifest_legacy.json
 

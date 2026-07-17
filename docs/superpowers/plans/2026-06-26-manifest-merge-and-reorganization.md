@@ -165,7 +165,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 - Create: `tasks/ut/scripts/migrate_manifest.py`
 - Input: `tasks/ut/dataset/ut_test_list_full_20260624_173600.txt`
 - Input: `tasks/ut/dataset/manifest.json`
-- Input: `skills/ut/shared/manifest_schema.json`
+- Input: `skills/ut/ut_common/manifest_schema.json`
 - Output: `tasks/ut/dataset/manifest.json` (merged)
 
 - [ ] **Step 1: Write migrate_manifest.py script**
@@ -188,7 +188,7 @@ Create file `tasks/ut/scripts/migrate_manifest.py` with complete Python code (pa
 python tasks/ut/scripts/migrate_manifest.py \
     --test-list tasks/ut/dataset/ut_test_list_full_20260624_173600.txt \
     --old-manifest tasks/ut/dataset/manifest.json \
-    --schema skills/ut/shared/manifest_schema.json \
+    --schema skills/ut/ut_common/manifest_schema.json \
     --output tasks/ut/dataset/manifest.json
 ```
 

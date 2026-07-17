@@ -64,7 +64,7 @@
 | D6 | LLM 判读位置 | **Stage 4 failure-handler**（Stage 3 只标 raw `error_type=timeout`）|
 | D7 | LLM 输出 schema | 三值 + 强制 evidence：`classification ∈ {"dep_stall","not_dep_stall","unknown"}` + `evidence: str` + `dependency_hint: str?` |
 | D8 | unknown 语义 | `unknown → ignored`（保守优先，与 dep_stall 同款 reason）|
-| D9 | Schema 物理文件 | `skills/ut/shared/dependency_stall_schema.json`（JSON Schema Draft-07）|
+| D9 | Schema 物理文件 | `skills/ut/ut_common/dependency_stall_schema.json`（JSON Schema Draft-07）|
 | D10 | Prompt 物理位置 | `skills/ut/failure-handler/SKILL.md §X`（固化模板，agent 调用时不重写）|
 | D11 | LLM JSON 实例落盘 | `handled_tests.json` 的 `resolution.dependency_classification`（不写 manifest）|
 | D12 | Test 类型差异化 timeout | **不做**（idle 模型消解需求）|
@@ -131,7 +131,7 @@ exit $?
 
 ### 5.1 JSON Schema（D9）
 
-`skills/ut/shared/dependency_stall_schema.json`：
+`skills/ut/ut_common/dependency_stall_schema.json`：
 
 ```json
 {
@@ -169,7 +169,7 @@ exit $?
 现在需要判断 timeout 的真因是不是「依赖资源未就绪」。
 
 输入: log_tail_text (远端 pytest_<batch_id>.log 末尾 200 行 + grep 摘要)
-输出契约: skills/ut/shared/dependency_stall_schema.json
+输出契约: skills/ut/ut_common/dependency_stall_schema.json
 
 Prompt 模板（一字不改地发给 LLM）:
 
@@ -303,7 +303,7 @@ manifest.json schema 不变（已有 `final_status` + `ignored_reason` 即够用
 | 1 | `skills/ut/unit-test-executor/scripts/execute_batch.py` | log 路径改 `pytest_<batch_id>.log`；远端 bash 改 watchdog 模板（§4）；接收 `pytest_idle_timeout` config | refactor |
 | 2 | `skills/ut/unit-test-executor/scripts/execute_batch.py` | 本地 `subprocess.run` timeout 改为 `wall_timeout + 60s`（继续作为绝对兜底）| refactor |
 | 3 | `.agents/workflow.yaml` + `tests/ut/integration/fixtures/workflow.l*.yaml` × 5 | 新增 `stages[execute].pytest_idle_timeout: 120`；保留 `timeout: 600` 改语义注释为 wall-clock 兜底 | config |
-| 4 | `skills/ut/shared/dependency_stall_schema.json` (新) | JSON Schema Draft-07，§5.1 | new |
+| 4 | `skills/ut/ut_common/dependency_stall_schema.json` (新) | JSON Schema Draft-07，§5.1 | new |
 | 5 | `skills/ut/failure-handler/scripts/classify_dependency_stall.py` (新) | pull log 末尾 → LLM 调用 → jsonschema 校验 → unknown fallback | new |
 | 6 | `skills/ut/failure-handler/SKILL.md` | 新增 §X dependency stall classifier 段（§5.2 固化 prompt + schema 引用 + unknown 规则）| docs |
 | 7 | `skills/ut/failure-handler/scripts/generate_handled_manifest.py` | timeout 类失败调 classify_dependency_stall；按 classification 决定 final_status；写入 `resolution.dependency_classification` 字段；拼 ignored_reason | feat |

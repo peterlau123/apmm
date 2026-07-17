@@ -202,7 +202,7 @@ rm tasks/ut/scripts/start_ut_workflow.py
 
 ### 5.1 Profile Distribution
 
-- 验证 `skills/ut/shared/distribution.py` 是否包含最新修改
+- 验证 `skills/ut/ut_common/distribution.py` 是否包含最新修改
 - 生产 profile 路径：`tasks/ut/deployment/test/profiles/ut-supervisor/`
 
 ### 5.2 Manifest 更新脚本

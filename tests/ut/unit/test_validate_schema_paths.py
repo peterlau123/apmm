@@ -10,13 +10,13 @@ from skills.ut.ut_common.validate_schema import SCHEMA_FILES, get_schema_path
 class TestSchemaPaths:
     def test_workflow_schema_in_shared(self):
         path = get_schema_path("workflow")
-        assert "shared" in str(path)
+        assert "ut_common" in str(path)
         assert "terminal-workflow" not in str(path)
         assert path.exists()
 
     def test_workflow_state_schema_in_shared(self):
         path = get_schema_path("workflow_state")
-        assert "shared" in str(path)
+        assert "ut_common" in str(path)
         assert "terminal-workflow" not in str(path)
         assert path.exists()
 

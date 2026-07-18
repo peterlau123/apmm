@@ -44,11 +44,11 @@ SCHEMA_FILES = {
     "batch_config": "skills/ut/batch-selector/batch_config_schema.json",
     "batch_results": "skills/ut/unit-test-executor/batch_results_schema.json",
     "handled_tests": "skills/ut/failure-handler/handled_tests_schema.json",
-    "workflow_state": "skills/ut/shared/workflow_state_schema.json",
-    "workflow": "skills/ut/shared/workflow_schema.yaml",
+    "workflow_state": "skills/ut/ut_common/schemas/workflow_state_schema.json",
+    "workflow": "skills/ut/ut_common/schemas/workflow_schema.yaml",
 
     # shared目录下的schema（多skill共用）
-    "manifest": "skills/ut/shared/manifest_schema.json",
+    "manifest": "skills/ut/ut_common/schemas/manifest_schema.json",
 }
 
 # 项目根目录（可通过环境变量或参数覆盖）

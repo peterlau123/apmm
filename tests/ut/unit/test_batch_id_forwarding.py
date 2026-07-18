@@ -36,10 +36,10 @@ class TestBatchIdForwarding:
         state_path = _make_workflow_state(tmp_path, tl_path)
         batches_dir = tmp_path / "batches"; batches_dir.mkdir()
         result = generate_batch_mod.generate_batch_from_workflow_state(
-            workflow_state_path=state_path, batch_dir=batches_dir, batch_size=8, batch_id="my_custom_id_001")
-        assert result["batch_id"] == "my_custom_id_001"
+            workflow_state_path=state_path, batch_dir=batches_dir, batch_size=8, batch_id="batch_20260717_120000")
+        assert result["batch_id"] == "batch_20260717_120000"
         cfg = json.loads(Path(result["batch_config_path"]).read_text(encoding="utf-8"))
-        assert cfg["batch_id"] == "my_custom_id_001"
+        assert cfg["batch_id"] == "batch_20260717_120000"
     def test_none_batch_id_auto_generates(self, tmp_path, generate_batch_mod):
         tl_path = _make_test_load(tmp_path)
         state_path = _make_workflow_state(tmp_path, tl_path)
@@ -53,5 +53,5 @@ class TestBatchIdForwarding:
         state_path = _make_workflow_state(tmp_path, tl_path)
         batches_dir = tmp_path / "batches"; batches_dir.mkdir()
         result = generate_batch_mod.generate_batch_from_workflow_state(
-            workflow_state_path=state_path, batch_dir=batches_dir, batch_size=8, batch_id="batch_dir_test_42")
-        assert Path(result["batch_dir"]).name == "batch_dir_test_42"
+            workflow_state_path=state_path, batch_dir=batches_dir, batch_size=8, batch_id="batch_20260717_130000")
+        assert Path(result["batch_dir"]).name == "batch_20260717_130000"

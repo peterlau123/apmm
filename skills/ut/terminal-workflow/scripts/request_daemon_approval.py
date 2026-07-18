@@ -9,6 +9,9 @@ import time
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
+# feishu_api moved to ut_common/scripts/
+SHARED_SCRIPTS = SCRIPT_DIR.parent.parent.parent / "ut_common" / "scripts"
+sys.path.insert(0, str(SHARED_SCRIPTS))
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from feishu_api import FeishuAPI

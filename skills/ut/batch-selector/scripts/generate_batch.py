@@ -287,9 +287,10 @@ def generate_batch(
 
 def generate_batch_from_workflow_state(
     workflow_state_path: Path,
-    batch_dir: Path = None,
+    batch_dir=None,
     batch_size: int = 50,
-    skip_distributed: bool = False
+    skip_distributed: bool = False,
+    batch_id=None
 ) -> dict:
     """从 workflow_state.json 读取路径并生成批次
 
@@ -318,6 +319,7 @@ def generate_batch_from_workflow_state(
         batch_dir=batch_dir,
         batch_size=batch_size,
         skip_distributed=skip_distributed,
+        batch_id=batch_id,
         workflow_state_path=workflow_state_path
     )
 
@@ -342,7 +344,8 @@ def main():
             workflow_state_path=workflow_state_path,
             batch_dir=batch_dir,
             batch_size=args.batch_size,
-            skip_distributed=args.skip_distributed
+            skip_distributed=args.skip_distributed,
+            batch_id=args.batch_id
         )
         print(json.dumps(result, indent=2, ensure_ascii=False))
 

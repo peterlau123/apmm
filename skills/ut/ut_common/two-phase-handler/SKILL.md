@@ -19,8 +19,8 @@ Implementation code extracted to `scripts/`. This SKILL.md contains only contrac
 ## Dependencies
 
 - `skills/ut/unit-test-executor/scripts/execute_batch.py` — batch executor
-- `skills/ut/shared/update_test_load_two_phase.py` — test_load update
-- `skills/ut/shared/manifest_schema.json` — schema
+- `skills/ut/ut_common/update_test_load_two_phase.py` — test_load update
+- `skills/ut/ut_common/manifest_schema.json` — schema
 
 ## Usage
 

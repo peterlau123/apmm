@@ -37,7 +37,7 @@ except ImportError as e:  # pragma: no cover
 
 _SCHEMA_PATH = (
     Path(__file__).resolve().parent.parent.parent
-    / "shared" / "dependency_stall_schema.json"
+    / "ut_common" / "schemas" / "dependency_stall_schema.json"
 )
 
 _JSON_FENCE_RE = re.compile(

@@ -24,6 +24,8 @@ import sys
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
+SHARED_SCRIPTS = Path(__file__).resolve().parent.parent.parent / "ut_common" / "scripts"
+sys.path.insert(0, str(SHARED_SCRIPTS))
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from feishu_api import FeishuAPI

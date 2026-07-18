@@ -16,7 +16,7 @@ from datetime import datetime
 
 # Import the module to test
 import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "skills/ut/shared"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "skills/ut/ut_common"))
 from workflow_state_manager import (
     load_workflow_state,
     save_workflow_state,

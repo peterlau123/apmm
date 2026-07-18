@@ -19,7 +19,7 @@ import yaml
 from pathlib import Path
 from typing import List, Dict, Any
 
-# 默认路径：skills/ut/shared/filter_rules.yaml
+# 默认路径：skills/ut/ut_common/filter_rules.yaml
 DEFAULT_RULES_PATH = Path(__file__).parent / "filter_rules.yaml"
 
 # ── Cache to avoid repeated yaml loading on large manifests ──────────────────

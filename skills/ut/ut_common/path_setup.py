@@ -3,11 +3,11 @@
 
 自动将项目根目录添加到 sys.path，确保 skills 包可被导入。
 使用方法：
-    from skills.ut.shared.path_setup import setup_path
+    from skills.ut.ut_common.path_setup import setup_path
     setup_path()
     
 或直接导入：
-    from skills.ut.shared.path_setup import *  # 自动设置路径
+    from skills.ut.ut_common.path_setup import *  # 自动设置路径
 """
 
 import sys

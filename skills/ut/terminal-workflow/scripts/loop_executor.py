@@ -14,7 +14,7 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.shared.workflow_state_manager import (
+from skills.ut.ut_common.workflow_state_manager import (
     load_workflow_state, update_batch_generated,
     update_batch_running, update_batch_completed
 )

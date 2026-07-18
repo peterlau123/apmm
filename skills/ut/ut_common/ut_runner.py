@@ -33,11 +33,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal
 
-SCRIPT_DIR = Path(__file__).resolve().parent          # skills/ut/shared/
+SCRIPT_DIR = Path(__file__).resolve().parent          # skills/ut/ut_common/
 SKILL_DIR = SCRIPT_DIR.parent                          # skills/ut/
 PROJECT_ROOT = SKILL_DIR.parent.parent                 # apmm/
 
-# Allow imports from skills/ut/shared and shared/scripts (bastion_manager, feishu_api)
+# Allow imports from skills/ut/ut_common and shared/scripts (bastion_manager, feishu_api)
 sys.path.insert(0, str(SKILL_DIR))
 sys.path.insert(0, str(SCRIPT_DIR))
 sys.path.insert(0, str(SCRIPT_DIR / "scripts"))

@@ -75,7 +75,7 @@ def main():
             results.append({"batch_id": bid, "status": "failed", "reason": "No batch_results.json"})
             continue
         ur = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "skills/ut/shared/update_test_load_two_phase.py"),
+            [sys.executable, str(PROJECT_ROOT / "skills/ut/ut_common/update_test_load_two_phase.py"),
              "--batch-id", bid, "--batch-results", str(rp2), "--workflow-state", str(wf)],
             capture_output=True, text=True)
         if ur.returncode != 0:

@@ -51,8 +51,8 @@ _project_root = Path(__file__).resolve().parent.parent.parent.parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from skills.ut.shared import get_paths, get_config  # noqa: E402
-from skills.ut.shared.workflow_state_manager import (
+from skills.ut.ut_common import get_paths, get_config  # noqa: E402
+from skills.ut.ut_common.workflow_state_manager import (
     update_batch_running,
     update_batch_completed,
     load_workflow_state as load_state_for_check
@@ -61,9 +61,9 @@ from skills.ut.shared.workflow_state_manager import (
 _SCRIPT_DIR = Path(__file__).resolve().parent
 
 
-# Shared bastion-disconnect detector (see skills/ut/shared/bastion_signals.py).
+# Shared bastion-disconnect detector (see skills/ut/ut_common/bastion_signals.py).
 # Used by run_remote below to raise ConnectionError on transient outages.
-from skills.ut.shared.bastion_signals import is_disconnect_blob  # noqa: E402
+from skills.ut.ut_common.bastion_signals import is_disconnect_blob  # noqa: E402
 
 # ── Schema (Type-B fabrication backstop) ──────────────────────────────────────
 #
@@ -156,7 +156,7 @@ def _split_remote_log_size(stdout: str) -> tuple[str, int | None]:
 # on this module before instantiation. Use importlib for hyphenated path.
 import importlib.util
 try:
-    _bm_path = _project_root / "skills" / "ut" / "terminal-workflow" / "scripts" / "bastion_manager.py"
+    _bm_path = _project_root / "skills" / "ut" / "ut_common" / "scripts" / "bastion_manager.py"
     _bm_spec = importlib.util.spec_from_file_location("bastion_manager", _bm_path)
     _bm_mod = importlib.util.module_from_spec(_bm_spec)
     _bm_spec.loader.exec_module(_bm_mod)
@@ -312,7 +312,7 @@ def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
     stderr = r.stderr or ""
 
     # Heuristic: agent.py / bastion daemon connection failures — see
-    # skills/ut/shared/bastion_signals.py for the token list (single source
+    # skills/ut/ut_common/bastion_signals.py for the token list (single source
     # of truth shared with manifest-updater's _stat_remote_log).
     if r.returncode != 0 and is_disconnect_blob(stdout + "\n" + stderr):
         raise ConnectionError(f"bastion daemon unreachable: {stderr.strip()[:200]}")
@@ -1224,7 +1224,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--batch-config", required=True)
     parser.add_argument("--workflow-state", required=True)
+    parser.add_argument("--batch-id", default=None, help="Batch identifier (for logging)")
+    parser.add_argument("--timeout", type=int, default=None, help="Per-test wall-clock timeout (seconds)")
     args = parser.parse_args()
 
-    result = execute_batch(Path(args.batch_config), Path(args.workflow_state))
+    exec_config = {}
+    if args.timeout:
+        exec_config["timeout"] = args.timeout
+    result = execute_batch(Path(args.batch_config), Path(args.workflow_state), exec_config=exec_config or None)
     print(json.dumps(result, indent=2))

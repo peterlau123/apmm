@@ -13,6 +13,7 @@
 | 报告 | 日期 | 说明 |
 |------|------|------|
 | [2026-06-24-L4-test-issues-and-fixes.md](2026-06-24-L4-test-issues-and-fixes.md) | 2026-06-24 | L4 测试运行问题总结：PYTHONPATH 泄漏、依赖链 race condition、Watchdog 超时 |
+| [2026-07-19-phase1-500batch-run-summary.md](2026-07-19-phase1-500batch-run-summary.md) | 2026-07-19 | Phase 1 首轮 500 batch 全量执行：1213 测试已处理，通过率 92.9%，6 bug 修复 |
 
 ---
 

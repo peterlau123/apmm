@@ -53,8 +53,11 @@ def create_batch_id(index: int, prefix: str = "batch") -> str:
     Returns:
         Batch ID string
     """
+    # ponytail: no index suffix -- batch_config_schema.json requires
+    # ^batch_[0-9]{8}_[0-9]{6}$. Same-second collisions impossible in practice:
+    # each batch runs remote pytest (seconds-to-minutes). Matches generate_batch.py:175.
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    return f"{prefix}_{timestamp}_{index:04d}"
+    return f"{prefix}_{timestamp}"
 
 
 def create_batch_config(
@@ -486,6 +489,14 @@ def phase1_batch_loop(
         test_load_path = paths.get("test_load", "")
     else:
         print(f"[Phase 1] Using test_load: {test_load_path}")
+
+    # ponytail: generate_batch must select from test_load (live working set), NOT the
+    # frozen manifest. Otherwise executed tests stay "pending" in manifest and get
+    # re-selected every batch (378 dup selections observed). See incident
+    # 2026-07-19-generate-batch-normal-starvation-incident.md.
+    if test_load_path and Path(test_load_path).exists():
+        manifest_path = Path(test_load_path)
+        print(f"[Phase 1] generate_batch will select from test_load: {manifest_path}")
 
     # Get batch_size from workflow.yaml
     batch_size = config.get("config", {}).get("batch_size", 8)

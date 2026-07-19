@@ -622,9 +622,14 @@ def _detect_free_gpus(
 
     free_ids: list[int] = []
     for idx, info in sorted(gpu_info.items()):
+        used = info["used"]
+        total = info["total"]
         util = info["util"]
-        # Coarse free filter: utilization below threshold.
-        if util < threshold_pct:
+        # Free filter: memory usage ratio below threshold.
+        # ponytail: was `util < threshold_pct` (compute util), which mis-flagged
+        # a card holding 86% VRAM at 0% util as "free" -> OOM on pin. Use VRAM ratio.
+        mem_ratio_pct = (used / total * 100) if total > 0 else 100
+        if mem_ratio_pct < threshold_pct:
             free_ids.append(idx)
             continue
         # Occupied above threshold — inspect occupants to decide zombie cleanup.
@@ -928,7 +933,7 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             pytest_full_cmd = (
                 f"cd /gpfs/gcsp/M2.7_verify/vllm && "
                 f"CUDA_VISIBLE_DEVICES={gpu_ids} torchrun --nproc_per_node={gpu_per_test} "
-                f"python3 -m pytest {node} --junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
+                f"-m pytest {node} --junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
             )
         else:
             # Normal: single GPU per test

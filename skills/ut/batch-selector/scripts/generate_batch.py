@@ -174,8 +174,15 @@ def generate_batch(
     if batch_id is None:
         batch_id = f"batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-    # Strategy: normal batch first, distributed batch when no normal tests left
-    if normal:
+    # Strategy: normal batch first, distributed batch when no normal tests left.
+    # ponytail: was `if normal:` which starved distributed when normal had <batch_size
+    # candidates (22 distributed blocked 2 normal -> every batch only 2 tests).
+    # Now: only take the normal branch when it can FILL a batch; otherwise fall
+    # through to distributed so blocked distributed tests get executed and clear
+    # out of the candidate window. BUT if no distributed left, take normal even
+    # underfilled (else 3 stragglers can never run -> ValueError Empty batch).
+    # See incident 2026-07-19-generate-batch-normal-starvation-incident.md.
+    if len(normal) >= batch_size or not distributed:
         # Normal batch: group by file, select up to batch_size
         grouped = group_by_file(normal)
         batch = []

@@ -12,6 +12,7 @@
 | 2026-07-18 | [Phase 1 启动连环 bug + pi auto-checkpoint 回退事故 (run `ut-20260718-164107`)](2026-07-18-phase1-startup-bugs-and-auto-checkpoint-rollback.md) | auto-checkpoint stash 回退 / batch_id schema / GBK 编码 / torchrun 命令 / manifest 失效 | ✅ 已闭环 |
 | 2026-07-19 | [generate_batch 批次装填率过低事故（manifest 状态冻结）](2026-07-19-generate-batch-normal-starvation-incident.md) | Phase 1 batch 装填率仅 25%，manifest 状态冻结导致重复选 + normal 候选不足 | 📐 待修复 |
 | 2026-07-19 | [triton 3.5.0 与 torch 2.5.1 版本冲突事故（vllm vs inductor）](2026-07-19-triton-torch-version-conflict-incident.md) | 19 个 test_fusion_attn 恒定 failed，vllm 需 triton 3.5.0 / torch 2.5.1 需 triton 3.1.0，依赖冲突 | 📐 待评估 |
+| 2026-07-19 | [HF 模型缓存缺失事故（16 个 failed，3 个模型未离线缓存）](2026-07-19-hf-model-cache-missing-incident.md) | 16 个测试因 HF 模型未缓存失败，涉及 TinyLlama/meta-llama/hmellor 3 模型 | ✅ 已修复 |
 
 ## 相关入口
 

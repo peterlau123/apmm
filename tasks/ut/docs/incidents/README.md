@@ -14,6 +14,8 @@
 | 2026-07-19 | [triton 3.5.0 与 torch 2.5.1 版本冲突事故（vllm vs inductor）](2026-07-19-triton-torch-version-conflict-incident.md) | 19 个 test_fusion_attn 恒定 failed，vllm 需 triton 3.5.0 / torch 2.5.1 需 triton 3.1.0，依赖冲突 | 📐 待评估 |
 | 2026-07-19 | [flashmla FP8 kernel 在 H20 上输出错误事故（C++ 扩展非 triton）](2026-07-19-flashmla-fp8-h20-incorrect-output-incident.md) | 48 个 test_flashmla FP8 参数化恒定 failed，_flashmla_extension_C 的 FP8 kernel 在 H20 部分位置输出错误大值/nan，平台兼容问题 | 📐 待排查 |
 | 2026-07-19 | [HF 模型缓存缺失事故（16 个 failed，3 个模型未离线缓存）](2026-07-19-hf-model-cache-missing-incident.md) | 16 个测试因 HF 模型未缓存失败，涉及 TinyLlama/meta-llama/hmellor 3 模型 | ✅ 已修复 |
+| 2026-07-19 | [vLLM server 启动超时/退出事故（compile 超时 + 模型缓存缺失）](2026-07-19-vllm-server-startup-timeout-incident.md) | 5 个 failed：4 个 mode:3 compile >240s 被内层 timeout 杀，1 个 whisper-small 缓存缺失致 server 崩溃 | 📐 待修复 |
+| 2026-07-19 | [content_format 断言失败事故（上游测试期望与检测逻辑不一致）](2026-07-19-content-format-test-expectation-mismatch-incident.md) | 3 个 test_chat_utils failed，上游测试参数表期望过时（fallbacks Qwen2-VL 期望 string 实为 openai，hf_defined LLAMA_GUARD 期望 openai 实为 string） | 📐 待评估 |
 
 ## 相关入口
 

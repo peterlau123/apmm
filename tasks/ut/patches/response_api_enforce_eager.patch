@@ -1,0 +1,35 @@
+# Response API 测试: 添加 --enforce-eager 绕开 torch 2.5.1 不兼容的 compile 路径
+#
+# 根因: vllm commit eef921f45 "AOT Compilation for torch.compile" 重构了
+# _support_torch_compile 的 monkeypatch (inline_call_ 单参数形式 + VllmBackend
+# 签名), 为 torch >=2.7 写的, 在 torch 2.5.1 上会崩:
+#   - InternalTorchDynamoError: patched_inline_call() takes 1 arg but 4 given
+#   - TypeError: VllmBackend.__call__() got unexpected keyword argument 'options'
+# Response API 测试默认 enforce_eager=False (走 compile), 命中崩溃.
+# 加 --enforce-eager 走 eager 路径绕开. 配合 VLLM_DEEP_GEMM_WARMUP=skip 可通过.
+#
+# 验证: test_response_api_simple::test_basic 1 passed in 38.26s (GPU 1)
+# 详见 incident 2026-07-19 Type A.
+diff --git a/tests/entrypoints/openai/test_response_api_parsable_context.py b/tests/entrypoints/openai/test_response_api_parsable_context.py
+--- a/tests/entrypoints/openai/test_response_api_parsable_context.py
++++ b/tests/entrypoints/openai/test_response_api_parsable_context.py
+@@ -38,7 +38,7 @@ def server():
+         PYTHON_EXECUTION_BACKEND="dangerously_use_uv",
+     )
+ 
+-    with RemoteOpenAIServer(MODEL_NAME, args, env_dict=env_dict) as remote_server:
++    with RemoteOpenAIServer(MODEL_NAME, args + ["--enforce-eager"], env_dict=env_dict) as remote_server:
+         yield remote_server
+ 
+ 
+diff --git a/tests/entrypoints/openai/test_response_api_simple.py b/tests/entrypoints/openai/test_response_api_simple.py
+--- a/tests/entrypoints/openai/test_response_api_simple.py
++++ b/tests/entrypoints/openai/test_response_api_simple.py
+@@ -20,7 +20,7 @@ def server():
+         # PYTHON_EXECUTION_BACKEND="dangerously_use_uv",
+     )
+ 
+-    with RemoteOpenAIServer(MODEL_NAME, args, env_dict=env_dict) as remote_server:
++    with RemoteOpenAIServer(MODEL_NAME, args + ["--enforce-eager"], env_dict=env_dict) as remote_server:
+         yield remote_server
+ 

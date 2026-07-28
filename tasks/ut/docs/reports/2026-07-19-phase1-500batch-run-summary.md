@@ -218,9 +218,9 @@ kernels/attention 类测试整体通过率高。
 - **跳过 HF 网络测试**：离线环境下联网测试必失败，可在 filter_rules 中排除
 - **generate_batch 已修复**：装填率 100%，无需再优化
 
-### 9.3 已修复的 bug 需提交
+### 9.3 已修复的 bug 提交状态
 
-本次修复的 3 个文件（`auto_run_batches_two_phase.py`、`execute_batch.py`、`generate_batch.py`）当前带 skip-worktree 标记，需 `--no-skip-worktree` 后 commit。
+本次修复的 3 个文件（`auto_run_batches_two_phase.py`、`execute_batch.py`、`generate_batch.py`）已提交至 commit `4154db4`（`fix(ut): Phase 1 启动连环 bug 修复 + generate_batch 装填率优化`），skip-worktree 标记已移除，工作区干净。
 
 ---
 

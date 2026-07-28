@@ -522,6 +522,12 @@ def phase1_batch_loop(
     print(f"[Phase 1] Auto create batches: {auto_create_batches}")
     print(f"[Phase 1] Auto execute: {auto_execute}")
 
+    # D1-2 防回归：跨 batch 重复选中检测（incident 2026-07-19-generate-batch-normal-starvation）
+    # generate_batch 从 test_load（实时工作集）选，已跑过的测试 status 变
+    # passed/ignored 不会被重选。若 test_load 更新失效或误从 manifest 选，
+    # 同一 test_node 会出现在多个 batch -> 此处告警。
+    seen_test_nodes = set()
+
     for i in range(start_index, batch_group_size):
         batch_id = create_batch_id(i)
 
@@ -534,6 +540,15 @@ def phase1_batch_loop(
             config_path = create_batch_config(
                 batch_id, manifest_path, batches_dir, batch_size, workflow_state_path
             )
+
+            # D1-2 防回归：重复选中告警 -- 同一 test_node 被 >1 batch 选中 = 异常
+            _batch_cfg = json.loads(config_path.read_text(encoding="utf-8"))
+            for _t in _batch_cfg.get("tests", []):
+                _node = _t.get("test_node") or _t.get("test_id")
+                if _node in seen_test_nodes:
+                    print(f"[WARN] duplicate selection: {_node} already in a prior batch "
+                          "(选择源可能脱节，检查 test_load 是否实时更新而非 manifest)")
+                seen_test_nodes.add(_node)
 
             # Batch directory is batches_dir / batch_id
             batch_dir = batches_dir / batch_id

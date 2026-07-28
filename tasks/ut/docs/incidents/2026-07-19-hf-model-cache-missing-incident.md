@@ -157,3 +157,33 @@ online, pass 'local_files_only=False' as input.
 | server 启动失败 | 5 | test_async_tp / test_sequence_parallel / transcription | RuntimeError: Server failed to start |
 | 其他断言 | 3 | test_chat_utils.py | assert 'string' == 'openai' |
 | **合计** | **91** | | |
+
+---
+
+## Phase 2 前缓存核对（2026-07-19）
+
+用预检脚本 [`tasks/ut/scripts/check_hf_cache_refs.py`](../../../scripts/check_hf_cache_refs.py) 扫描 test_load 4000 的 test_node，提取 17 个候选模型引用，远端 `ls $HF_HUB_CACHE`（`/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub/`，共 52 个已缓存模型）对照。
+
+### 已补齐（3 个，本事故原缺失）
+
+| 模型 | 状态 |
+|------|------|
+| TinyLlama/TinyLlama-1.1B-Chat-v1.0 | ✅ 已缓存 |
+| meta-llama/Meta-Llama-3-8B-Instruct | ✅ 已缓存 |
+| hmellor/tiny-random-Gemma2ForCausalLM | ✅ 已缓存 |
+
+### 新发现缺失（5 个，Phase 1 被 ignored 掩盖）
+
+以下模型对应测试在 Phase 1 全部 `ignored`（来自 `tests/distributed/test_pipeline_parallel.py`，distributed 测试 wall_timeout=300s 不够，未跑到加载模型阶段就超时）。**Phase 2 提高 wall_timeout（已改 600/900s）重跑这些 ignored 测试时，若模型未缓存会 failed**，需提前补缓存：
+
+| 模型 | test_node 示例 |
+|------|---------------|
+| OpenGVLab/InternVL2-1B | test_tp_multimodal_generation[OpenGVLab/InternVL2-1B-...] |
+| ai21labs/Jamba-tiny-dev | test_tp_language_generation[ai21labs/Jamba-tiny-dev-...] |
+| fixie-ai/ultravox-v0_5-llama-3_2-1b | test_tp_multimodal_generation[fixie-ai/ultravox-v0_5-llama-3_2-1b-...] |
+| hmellor/Ilama-3.2-1B | test_tp_language_generation[hmellor/Ilama-3.2-1B-...] |
+| ibm/PowerLM-3b | test_tp_language_generation[ibm/PowerLM-3b-...] |
+
+**补缓存方式**（按经验沉淀 #2 按模型选源）：小模型用 `HF_ENDPOINT=https://hf-mirror.com huggingface-cli download <repo>`，需授权模型用 modelscope。下载后确认缓存结构为 `models--<org>--<name>/snapshots/<rev>/`。
+
+> 启示：Phase 1 的 `ignored`（超时）测试掩盖了模型缓存缺失。提高 wall_timeout 重跑前，必须先补齐这些模型，否则 ignored 会转成 failed。预检脚本 + 远端 ls 对照是有效手段。

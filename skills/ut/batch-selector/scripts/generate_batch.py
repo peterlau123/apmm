@@ -226,6 +226,14 @@ def generate_batch(
             f"Empty batch: no selectable tests from {len(candidates)} candidates"
         )
 
+    # D1-1 防回归：装填率告警（incident 2026-07-19-generate-batch-normal-starvation）
+    # 合法 underfill：收尾阶段 normal<batch_size 且 distributed=0（方案 B3）。
+    # 异常 underfill：候选充足却装不满 -> 选择源脱节或筛选 bug，需排查。
+    if len(batch) < batch_size:
+        print(f"[WARN] underfilled batch: {len(batch)}/{batch_size} tests "
+              f"(type={batch_config['batch_type']}, candidates={len(candidates)}, "
+              f"normal={len(normal)}, distributed={len(distributed)})")
+
     if batch_dir:
         # 在batch_dir下创建batch_id子目录
         batch_dir = batch_dir / batch_id

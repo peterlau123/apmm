@@ -243,6 +243,42 @@ Manifest schema 定义见 [skills/ut/ut_common/manifest_schema.json](../../skill
 
 ---
 
+## 远程执行后端对比
+
+UT Workflow 的远程命令执行支持两种后端，通过 `workflow.yaml` 的 `config.remote_backend` 切换：
+
+| 维度 | `agent`（默认） | `bifrost` |
+|------|----------------|-----------|
+| **传输方式** | SSH over Bastion（paramiko 双跳隧道） | GPFS 共享存储文件交换（inotify） |
+| **链路** | 本地 → Bastion(OTP) → t_h20 → Docker | 本机写 GPFS → H20 daemon 读 GPFS → 执行 → 写回 → 本机读 |
+| **认证** | 双因子 OTP，daemon 挂了需人工介入 | 无认证（依赖 GPFS 权限） |
+| **并发** | 单连接串行（一个 batch 跑完才下一个） | daemon 并发 10 任务 |
+| **可靠性** | SSH 会话易断连，长跑不稳定 | 无连接概念，断电重启不丢已提交任务 |
+| **故障恢复** | 需人工 OTP 重启 daemon | 自愈（fallback scan + .processing 去重） |
+| **状态追踪** | 无（fire-and-forget） | task_id 全生命周期追踪 |
+| **多客户端** | 单租户（一个 daemon） | 天然多客户端（MCP 无状态） |
+| **文件传输** | 支持 upload/download | 仅命令执行（文件走 GPFS） |
+| **配置** | `.bastion_creds` + `agent.py serve` | `BIFROST_CONFIG` 环境变量 + H20 上 `bifrost server` |
+
+### 切换方式
+
+```yaml
+# workflow.yaml
+config:
+  remote_backend: "bifrost"   # 从 "agent" 切到 "bifrost"
+```
+
+bifrost 模式需先在 H20 启动 server：
+```bash
+bifrost server -c /gpfs/gcsp/liuxin/bifrost_test/settings.json
+```
+
+适配层代码见 [tools/remote_executor.py](../../tools/remote_executor.py)，`execute_batch.py` 的 `run_remote()` 自动分发到对应后端。
+
+> **建议**：大规模 two-phase 重试场景优先使用 bifrost，避免 SSH 断连和串行瓶颈。
+
+---
+
 ## Resume工具集（新增）
 
 > 三重保障：代码强制更新 + 强制输出检查 + SKILL硬性约束

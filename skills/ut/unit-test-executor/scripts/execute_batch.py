@@ -282,12 +282,25 @@ def _wrap_with_docker_exec_b64(
 # ── Remote call helper ────────────────────────────────────────────────────────
 
 def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
-    """Run a shell command on the remote host via tools/agent.py.
+    """Run a shell command on the remote host.
+
+    Dispatches to bifrost or agent.py backend based on workflow config.
+    Falls back to agent.py if remote_executor import fails (backward compat).
 
     Returns {"exit_code": int, "stdout": str, "stderr": str, "size_bytes": int|None}.
 
-    Raises ConnectionError if the bastion daemon is unreachable / disconnected.
+    Raises ConnectionError if the remote backend is unreachable / disconnected.
     """
+    # Try bifrost backend via remote_executor adapter
+    try:
+        from tools.remote_executor import run_remote as _run_remote
+        # Read backend from env (set by workflow config) or default to agent
+        backend = os.environ.get("REMOTE_BACKEND", "agent")
+        return _run_remote(cmd, timeout=timeout, profile=profile, backend=backend)
+    except ImportError:
+        pass
+
+    # Fallback: original agent.py path (unchanged behavior)
     agent_py = _project_root / "tools" / "agent.py"
     args = [
         sys.executable, str(agent_py),
@@ -311,9 +324,6 @@ def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
     stdout = r.stdout or ""
     stderr = r.stderr or ""
 
-    # Heuristic: agent.py / bastion daemon connection failures — see
-    # skills/ut/ut_common/bastion_signals.py for the token list (single source
-    # of truth shared with manifest-updater's _stat_remote_log).
     if r.returncode != 0 and is_disconnect_blob(stdout + "\n" + stderr):
         raise ConnectionError(f"bastion daemon unreachable: {stderr.strip()[:200]}")
 
@@ -1232,6 +1242,15 @@ if __name__ == "__main__":
     parser.add_argument("--batch-id", default=None, help="Batch identifier (for logging)")
     parser.add_argument("--timeout", type=int, default=None, help="Per-test wall-clock timeout (seconds)")
     args = parser.parse_args()
+
+    # Read remote_backend from workflow_state.json and set env for run_remote
+    try:
+        _ws = json.loads(Path(args.workflow_state).read_text(encoding="utf-8"))
+        _cfg = _ws.get("config", {})
+        _backend = _cfg.get("remote_backend", "agent")
+        os.environ["REMOTE_BACKEND"] = _backend
+    except (OSError, json.JSONDecodeError, KeyError):
+        pass  # default to "agent"
 
     exec_config = {}
     if args.timeout:

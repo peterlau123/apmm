@@ -83,6 +83,9 @@ config:
 
   # ✍️：远程执行配置
   remote_server: "t_h20"
+  # 远程执行后端: "agent" (SSH bastion, 默认) 或 "bifrost" (GPFS 文件交换)
+  # bifrost 模式需先在 H20 启动 bifrost server，并在本机设置 BIFROST_CONFIG 环境变量
+  remote_backend: "agent"
   docker_container: "v0.13.0_torch2.5.1_compile"
   vllm_dir: &vllm_dir "/gpfs/gcsp/M2.7_verify/vllm"
   ut_logs_dir: "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"

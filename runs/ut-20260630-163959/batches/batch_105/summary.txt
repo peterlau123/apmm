@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_basic.py::test_server_load[enable-server-load-tracking] (gpu=0, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_basic.py::test_show_version[disable-frontend-multiprocessing] (gpu=1, 18066ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_basic.py::test_check_health[disable-frontend-multiprocessing] (gpu=2, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_basic.py::test_request_cancellation[disable-frontend-multiprocessing] (gpu=3, 18066ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_basic.py::test_request_wrong_content_type (gpu=4, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_basic.py::test_health_check_engine_dead_error (gpu=5, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_chat.py::test_no_logprobs_chat[HuggingFaceH4/zephyr-7b-beta] (gpu=6, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chat.py::test_no_logprobs_chat[zephyr-lora] (gpu=7, 2ms, exit=0)

@@ -1,0 +1,8 @@
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestAudioEmbedsValidation::test_malicious_sparse_tensor_rejected (gpu=0, 329ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestAudioEmbedsValidation::test_load_bytes_validates (gpu=1, 302ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestSparseTensorValidationIntegration::test_attack_scenario_completions_api (gpu=2, 321ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestSparseTensorValidationIntegration::test_attack_scenario_chat_api_image (gpu=3, 307ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestSparseTensorValidationIntegration::test_attack_scenario_chat_api_audio (gpu=4, 301ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestSparseTensorValidationIntegration::test_multiple_valid_embeddings_in_batch (gpu=5, 154ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestSparseTensorValidationIntegration::test_mixed_valid_and_malicious_rejected (gpu=6, 323ms, exit=0)
+ERROR          tests/entrypoints/openai/test_tensorizer_entrypoint.py::test_single_completion[unsloth/llama-3.2-1b-Instruct] (gpu=7, 22ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260718_221847",
+  "started_at": "2026-07-18T14:19:01Z",
+  "finished_at": "2026-07-18T14:21:25Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847.log",
+    "size_bytes": 65756,
+    "captured_at": "2026-07-18T14:21:25Z"
+  },
+  "tests": [
+    {
+      "id": 158,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs2-AttentionBackendEnum.TRITON_ATTN-matches2-+quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 341,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 159,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs3-AttentionBackendEnum.TRITON_ATTN-matches3-+quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 340,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 160,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs4-AttentionBackendEnum.TRITON_ATTN-matches4--quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 333,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs4_AttentionBackendEnum_TRITON_ATTN_matches4_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs4_AttentionBackendEnum_TRITON_ATTN_matches4_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 161,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs5-AttentionBackendEnum.TRITON_ATTN-matches5--quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 315,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs5_AttentionBackendEnum_TRITON_ATTN_matches5_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs5_AttentionBackendEnum_TRITON_ATTN_matches5_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 162,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs6-AttentionBackendEnum.TRITON_ATTN-matches6-+quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 299,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 163,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs7-AttentionBackendEnum.TRITON_ATTN-matches7-+quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 463,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 164,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 395,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.xml"
+    },
+    {
+      "id": 165,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 341,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/pytest_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_221847/result_batch_20260718_221847_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+PASSED         tests/compile/test_aot_compile.py::test_force_aot_load (gpu=0, 0ms, exit=0)
+PASSED         tests/compile/test_aot_compile.py::test_save_and_load (gpu=1, 0ms, exit=0)
+PASSED         tests/compile/test_aot_compile.py::test_shape_env (gpu=2, 0ms, exit=0)
+PASSED         tests/compile/test_aot_compile.py::test_gpt2_cache_hit (gpu=3, 0ms, exit=0)
+FAILED         tests/compile/test_compile_ranges.py::test_compile_ranges (gpu=4, 858ms, exit=0)
+FAILED         tests/compile/test_compile_ranges.py::test_inductor_cache_compile_ranges (gpu=5, 897ms, exit=0)
+FAILED         tests/compile/test_config.py::test_VLLM_DISABLE_COMPILE_CACHE[1] (gpu=6, 3265ms, exit=0)
+FAILED         tests/compile/test_config.py::test_use_cudagraphs[NONE-0] (gpu=7, 3302ms, exit=0)

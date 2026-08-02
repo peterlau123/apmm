@@ -1,0 +1,41 @@
+{
+  "batch_id": "batch_20260624_214908",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "test_file": "tests/benchmarks/test_latency_cli.py",
+      "test_name": "test_bench_latency",
+      "status": "pending",
+      "retry_count": 2,
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "last_batch_id": "batch_0001"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "pending",
+      "retry_count": 2,
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "last_batch_id": "batch_0001"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "status": "pending",
+      "retry_count": 2,
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "last_batch_id": "batch_0001"
+    }
+  ],
+  "distributed_count": 0,
+  "requires_multi_gpu": false,
+  "generated_at": "2026-06-24T21:49:08.198881"
+}

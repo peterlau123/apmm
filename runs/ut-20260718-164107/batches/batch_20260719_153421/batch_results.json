@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260719_153421",
+  "started_at": "2026-07-19T07:34:23Z",
+  "finished_at": "2026-07-19T07:56:57Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421.log",
+    "size_bytes": null,
+    "captured_at": "2026-07-19T07:56:57Z"
+  },
+  "tests": [
+    {
+      "id": 1211,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-parallel_setup19-ray-auto-test_options19]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup19_ray_auto_test_options19.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup19_ray_auto_test_options19.xml"
+    },
+    {
+      "id": 1212,
+      "test_node": "tests/distributed/test_shm_broadcast.py::test_shm_broadcast",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_broadcast_py_test_shm_broadcast.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_broadcast_py_test_shm_broadcast.xml"
+    },
+    {
+      "id": 1213,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_allocation_and_free",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_and_free.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_and_free.xml"
+    },
+    {
+      "id": 1214,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_allocation_cycles",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_cycles.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_cycles.xml"
+    },
+    {
+      "id": 1215,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_buffer_access",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_access.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_access.xml"
+    },
+    {
+      "id": 1216,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_buffer_opening",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_opening.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_opening.xml"
+    },
+    {
+      "id": 1217,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_clear_buffer",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_clear_buffer.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_clear_buffer.xml"
+    },
+    {
+      "id": 1218,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_memory_error_on_full_buffer",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/pytest_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_memory_error_on_full_buffer.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_153421/result_batch_20260719_153421_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_memory_error_on_full_buffer.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_020233",
+  "started_at": "2026-06-30T18:02:58Z",
+  "finished_at": "2026-06-30T18:04:52Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233.log",
+    "size_bytes": 115876,
+    "captured_at": "2026-06-30T18:04:52Z"
+  },
+  "tests": [
+    {
+      "id": 748,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-True-group_shape3-1e-05-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 307,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_05_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_05_257_256_dtype1.xml"
+    },
+    {
+      "id": 749,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-True-group_shape3-1e-06-257-256-dtype0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_06_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_06_257_256_dtype0.xml"
+    },
+    {
+      "id": 750,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-True-group_shape3-1e-06-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 318,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_06_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_True_group_shape3_1e_06_257_256_dtype1.xml"
+    },
+    {
+      "id": 751,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape0-1e-05-257-256-dtype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 600,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_05_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_05_257_256_dtype0.xml"
+    },
+    {
+      "id": 752,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape0-1e-05-257-256-dtype1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 547,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_05_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_05_257_256_dtype1.xml"
+    },
+    {
+      "id": 753,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape0-1e-06-257-256-dtype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 575,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_06_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_06_257_256_dtype0.xml"
+    },
+    {
+      "id": 754,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape0-1e-06-257-256-dtype1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 573,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_06_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape0_1e_06_257_256_dtype1.xml"
+    },
+    {
+      "id": 755,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape1-1e-05-257-256-dtype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 554,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/pytest_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape1_1e_05_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020233/result_batch_20260701_020233_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape1_1e_05_257_256_dtype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

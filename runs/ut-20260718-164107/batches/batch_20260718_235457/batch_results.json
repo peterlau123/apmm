@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260718_235457",
+  "started_at": "2026-07-18T15:54:59Z",
+  "finished_at": "2026-07-18T15:56:58Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457.log",
+    "size_bytes": 39750,
+    "captured_at": "2026-07-18T15:56:58Z"
+  },
+  "tests": [
+    {
+      "id": 452,
+      "test_node": "tests/compile/fullgraph/test_full_graph.py::test_full_graph[TinyLlama/TinyLlama-1.1B-Chat-v1.0-model_kwargs2-2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 318,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_full_graph_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_full_graph_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2_2.xml"
+    },
+    {
+      "id": 453,
+      "test_node": "tests/compile/fullgraph/test_full_graph.py::test_full_graph[TinyLlama/TinyLlama-1.1B-Chat-v1.0-model_kwargs2-3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 425,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_full_graph_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_full_graph_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2_3.xml"
+    },
+    {
+      "id": 468,
+      "test_node": "tests/compile/fullgraph/test_full_graph.py::test_custom_compile_config[compilation_config2-TinyLlama/TinyLlama-1.1B-Chat-v1.0-model_kwargs2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 370,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_custom_compile_config_compilation_config2_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_fullgraph_test_full_graph_py_test_custom_compile_config_compilation_config2_TinyLlama_TinyLlama_1_1B_Chat_v1_0_model_kwargs2.xml"
+    },
+    {
+      "id": 528,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[False-True-0-backed-Qwen/Qwen2.5-1.5B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_backed_Qwen_Qwen2_5_1_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_backed_Qwen_Qwen2_5_1_5B_Instruct.xml"
+    },
+    {
+      "id": 531,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[False-True-0-unbacked-Qwen/Qwen2.5-1.5B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_unbacked_Qwen_Qwen2_5_1_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_unbacked_Qwen_Qwen2_5_1_5B_Instruct.xml"
+    },
+    {
+      "id": 534,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[False-True-0-backed_size_oblivious-Qwen/Qwen2.5-1.5B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_0_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.xml"
+    },
+    {
+      "id": 537,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[False-True-1-backed-Qwen/Qwen2.5-1.5B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_1_backed_Qwen_Qwen2_5_1_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_1_backed_Qwen_Qwen2_5_1_5B_Instruct.xml"
+    },
+    {
+      "id": 540,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[False-True-1-unbacked-Qwen/Qwen2.5-1.5B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/pytest_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_235457/result_batch_20260718_235457_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_False_True_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

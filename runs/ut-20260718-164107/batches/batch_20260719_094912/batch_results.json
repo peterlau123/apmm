@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_094912",
+  "started_at": "2026-07-19T01:49:14Z",
+  "finished_at": "2026-07-19T01:49:41Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_094912/pytest_batch_20260719_094912.log",
+    "size_bytes": 5004,
+    "captured_at": "2026-07-19T01:49:41Z"
+  },
+  "tests": [
+    {
+      "id": 5016,
+      "test_node": "tests/kernels/attention/test_flashmla.py::test_flash_mla[torch_dtype1-False-True-64-512-576-1-128-4096-2-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1397,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_094912/pytest_batch_20260719_094912_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype1_False_True_64_512_576_1_128_4096_2_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_094912/result_batch_20260719_094912_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype1_False_True_64_512_576_1_128_4096_2_128.xml"
+    },
+    {
+      "id": 5017,
+      "test_node": "tests/kernels/attention/test_flashmla.py::test_flash_mla[torch_dtype1-False-True-64-512-576-1-128-8192-1-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1667,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_094912/pytest_batch_20260719_094912_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype1_False_True_64_512_576_1_128_8192_1_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_094912/result_batch_20260719_094912_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype1_False_True_64_512_576_1_128_8192_1_128.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

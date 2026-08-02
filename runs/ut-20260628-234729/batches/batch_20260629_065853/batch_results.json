@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260629_065853",
+  "started_at": "2026-06-28T23:10:22Z",
+  "finished_at": "2026-06-28T23:11:48Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/pytest_batch_20260629_065853.log",
+    "size_bytes": 209814,
+    "captured_at": "2026-06-28T23:11:48Z"
+  },
+  "tests": [
+    {
+      "id": 29900,
+      "test_node": "tests/samplers/test_beam_search.py::test_beam_search_single_input[4-64-half-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/pytest_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_single_input_4_64_half_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/result_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_single_input_4_64_half_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 29901,
+      "test_node": "tests/samplers/test_beam_search.py::test_beam_search_with_concurrency_limit[4-64-half-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 156,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/pytest_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_with_concurrency_limit_4_64_half_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/result_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_with_concurrency_limit_4_64_half_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 29902,
+      "test_node": "tests/samplers/test_beam_search.py::test_beam_search_passes_multimodal_data[2-64-half]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='vllm-public-assets.s3.us-west-2.amazonaws.com', port=443): Max retries exceeded with url: /multimodal_asset/mary_had_lamb.ogg (Caused by ConnectTimeoutError(<HTTPSConnection(host='vllm-public-assets.s3.us-west-2.amazonaws.com', port=443) at 0x7fd3617b53a0>, 'Connection to vllm-public-assets.s3.us-west-2.amazonaws.com timed out. (connect timeout=5)'))",
+      "duration_ms": 40387,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/pytest_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_passes_multimodal_data_2_64_half.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/result_batch_20260629_065853_tests_samplers_test_beam_search_py_test_beam_search_passes_multimodal_data_2_64_half.xml"
+    },
+    {
+      "id": 29903,
+      "test_node": "tests/samplers/test_ignore_eos.py::test_ignore_eos[512-half-distilbert/distilgpt2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 3944,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/pytest_batch_20260629_065853_tests_samplers_test_ignore_eos_py_test_ignore_eos_512_half_distilbert_distilgpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_065853/result_batch_20260629_065853_tests_samplers_test_ignore_eos_py_test_ignore_eos_512_half_distilbert_distilgpt2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

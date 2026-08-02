@@ -1,0 +1,35 @@
+{
+    "batch_id":  "batch_20260615_071333",
+    "tests":  [
+                  {
+                      "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestScaledMMRSModel]",
+                      "id":  1
+                  },
+                  {
+                      "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+                      "id":  2
+                  },
+                  {
+                      "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-meta-llama/Llama-3.2-1B-Instruct]",
+                      "id":  3
+                  }
+              ],
+    "distributed_count":  3,
+    "requires_multi_gpu":  true,
+    "generated_at":  "2026-06-15T07:13:33.788204",
+    "distributed_tests":  [
+                              {
+                                  "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestScaledMMRSModel]",
+                                  "id":  1
+                              },
+                              {
+                                  "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+                                  "id":  2
+                              },
+                              {
+                                  "test_node":  "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-meta-llama/Llama-3.2-1B-Instruct]",
+                                  "id":  3
+                              }
+                          ],
+    "note":  "distributed tests require GPU \u003e= 2"
+}

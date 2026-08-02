@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_031313",
+  "started_at": "2026-07-01T19:15:51Z",
+  "finished_at": "2026-07-01T19:17:32Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313.log",
+    "size_bytes": 358790,
+    "captured_at": "2026-07-01T19:17:32Z"
+  },
+  "tests": [
+    {
+      "id": 1868,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_streaming",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_streaming.xml"
+    },
+    {
+      "id": 1869,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_no_tool_call",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_no_tool_call.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_no_tool_call.xml"
+    },
+    {
+      "id": 1870,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_between_tags",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_between_tags.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_between_tags.xml"
+    },
+    {
+      "id": 1871,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_until_eos",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 152,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_until_eos.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_until_eos.xml"
+    },
+    {
+      "id": 1872,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_invalid_json",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_invalid_json.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hermes_tool_parser_py_test_hermes_parser_non_streaming_tool_call_invalid_json.xml"
+    },
+    {
+      "id": 1873,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[How can I help you today?-expected_tool_calls0-How can I help you today?]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_How_can_I_help_you_today_expected_tool_calls0_How_can_I_help_you_today.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_How_can_I_help_you_today_expected_tool_calls0_How_can_I_help_you_today.xml"
+    },
+    {
+      "id": 1874,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{\"name\": \"get_weather\", \"arguments\": {\"city\": \"San Francisco\", \"metric\": \"celsius\"}}]</tool_calls>-expected_tool_calls1-None]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_tool_calls_name_get_weather_arguments_city_San_Francisco_metric_celsius_tool_calls_expected_tool_calls1_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_tool_calls_name_get_weather_arguments_city_San_Francisco_metric_celsius_tool_calls_expected_tool_calls1_None.xml"
+    },
+    {
+      "id": 1875,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{\"name\": \"get_weather\", \"arguments\": {\"city\": \"San Francisco\", \"metric\": \"celsius\"}}, {\"name\": \"register_user\", \"arguments\": {\"name\": \"John Doe\", \"age\": 37, \"address\": {\"city\": \"San Francisco\", \"state\": \"CA\"}, \"role\": null, \"passed_test\": true, \"aliases\": [\"John\", \"Johnny\"]}}]</tool_calls>-expected_tool_calls2-None]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/pytest_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_tool_calls_name_get_weather_arguments_city_San_Francisco_metric_celsius_name_register_user_arguments_name_John_Doe_age_37_address_city_San_Francisco_state_CA_role_null_passed_test_true_aliases_John_Johnny_tool_calls_expected_tool_calls2_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_031313/result_batch_20260702_031313_tests_entrypoints_openai_tool_parsers_test_hunyuan_a13b_tool_parser_py_test_hunyuan_a13b_tool_parser_extract_tool_calls_name_get_weather_arguments_city_San_Francisco_metric_celsius_name_register_user_arguments_name_John_Doe_age_37_address_city_San_Francisco_state_CA_role_null_passed_test_true_aliases_John_Johnny_tool_calls_expected_tool_calls2_None.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 5,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

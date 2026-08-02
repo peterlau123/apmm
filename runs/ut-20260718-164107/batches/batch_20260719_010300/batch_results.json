@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260719_010300",
+  "started_at": "2026-07-18T17:03:02Z",
+  "finished_at": "2026-07-18T17:03:23Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300.log",
+    "size_bytes": 25336,
+    "captured_at": "2026-07-18T17:03:23Z"
+  },
+  "tests": [
+    {
+      "id": 1153,
+      "test_node": "tests/distributed/test_pynccl.py::test_ncclGetUniqueId",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_pynccl_py_test_ncclGetUniqueId.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_pynccl_py_test_ncclGetUniqueId.xml"
+    },
+    {
+      "id": 1154,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-FP]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_FP.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_FP.xml"
+    },
+    {
+      "id": 1155,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-INT8]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT8.xml"
+    },
+    {
+      "id": 1156,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-INT6]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT6.xml"
+    },
+    {
+      "id": 1157,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-INT4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT4.xml"
+    },
+    {
+      "id": 1158,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-2-2-FP]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_FP.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_FP.xml"
+    },
+    {
+      "id": 1159,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-2-2-INT8]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_INT8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_INT8.xml"
+    },
+    {
+      "id": 1160,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-2-2-INT6]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/pytest_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_INT6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010300/result_batch_20260719_010300_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_2_2_INT6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

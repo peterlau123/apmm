@@ -1,0 +1,38 @@
+{
+  "batch_id": "batch_20260624_214908",
+  "processed_at": "2026-06-24T22:10:00+08:00",
+  "tests": [],
+  "stats": {
+    "passed": 0,
+    "fixed_pending_verify": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 0,
+    "pending": 0,
+    "retriable_error": 3
+  },
+  "notes": [
+    {
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "status": "retriable_error",
+      "retry_count": 2,
+      "reason": "NOT in scope per skill Rule 3 - retriable_error owned by Stage 3 executor; retry_count(2) < max_retry(3)"
+    },
+    {
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "retriable_error",
+      "retry_count": 2,
+      "reason": "NOT in scope per skill Rule 3 - retriable_error owned by Stage 3 executor; retry_count(2) < max_retry(3)"
+    },
+    {
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "status": "retriable_error",
+      "retry_count": 2,
+      "reason": "NOT in scope per skill Rule 3 - retriable_error owned by Stage 3 executor; retry_count(2) < max_retry(3)"
+    },
+    {
+      "type": "blocker",
+      "reason": "SSH bastion account locked - cannot access remote logs for dependency-stall classification"
+    }
+  ]
+}

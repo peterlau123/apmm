@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_chat_template.py::test_get_gen_prompt[facebook/opt-125m-template0-True-False-<|im_start|>user\nHello<|im_end|>\n<|im_start|>assistant\nHi there!<|im_end|>\n<|im_start|>user\nWhat is the capital of<|im_end|>\n<|im_start|>assistant\n] (gpu=0, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_chat_template.py::test_get_gen_prompt[facebook/opt-125m-template1-False-False-<|im_start|>user\nHello<|im_end|>\n<|im_start|>assistant\nHi there!<|im_end|>\n<|im_start|>user\nWhat is the capital of] (gpu=1, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_chat_template.py::test_get_gen_prompt[facebook/opt-125m-template2-False-True-<|im_start|>user\nHello<|im_end|>\n<|im_start|>assistant\nHi there!<|im_end|>\n<|im_start|>user\nWhat is the capital of<|im_end|>\n<|im_start|>assistant\nThe capital of] (gpu=2, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_chat_with_tool_reasoning.py::test_chat_streaming_of_tool_and_reasoning (gpu=3, 31ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chat_with_tool_reasoning.py::test_chat_full_of_tool_and_reasoning (gpu=4, 31ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chunked_prompt.py::test_completion_stream_options_and_logprobs_with_long_prompts (gpu=5, 21567ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chunked_prompt.py::test_chat_completion_stream_options_and_logprobs_with_long_prompts (gpu=6, 21074ms, exit=0)
+PASSED         tests/entrypoints/openai/test_cli_args.py::test_config_arg_parsing (gpu=7, 182ms, exit=0)

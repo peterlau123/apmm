@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_completion_with_function_calling.py::test_tool_id_kimi_k2[required-True-Qwen/Qwen3-0.6B] (gpu=0, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_completion_with_function_calling.py::test_tool_id_kimi_k2[required-False-Qwen/Qwen3-0.6B] (gpu=1, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_no_args_tool_call[{}-Qwen/Qwen3-0.6B] (gpu=2, 18569ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_no_args_tool_call[-Qwen/Qwen3-0.6B] (gpu=3, 18569ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_named_tool_use (gpu=4, 20075ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_completion_with_function_calling.py::test_inconsistent_tool_choice_and_tools (gpu=5, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_prompt_embeds[-use-lora-facebook/opt-125m] (gpu=6, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_prompt_embeds[-use-lora-opt125m-lora] (gpu=7, 2ms, exit=0)

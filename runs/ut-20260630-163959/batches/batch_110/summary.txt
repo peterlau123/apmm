@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_chat_echo.py::test_top_logprobs (gpu=0, Nonems, exit=0)
+FAILED         tests/entrypoints/openai/test_chat_error.py::test_chat_error_non_stream (gpu=1, 149ms, exit=0)
+FAILED         tests/entrypoints/openai/test_chat_error.py::test_chat_error_stream (gpu=2, 122ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chat_logit_bias_validation.py::test_chat_logit_bias_valid (gpu=3, 18566ms, exit=0)
+ERROR          tests/entrypoints/openai/test_chat_logit_bias_validation.py::test_chat_logit_bias_invalid (gpu=4, 24580ms, exit=0)
+PASSED         tests/entrypoints/openai/test_chat_template.py::test_load_chat_template (gpu=5, 146ms, exit=0)
+PASSED         tests/entrypoints/openai/test_chat_template.py::test_no_load_chat_template_filelike (gpu=6, 150ms, exit=0)
+PASSED         tests/entrypoints/openai/test_chat_template.py::test_no_load_chat_template_literallike (gpu=7, 146ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260718_222339",
+  "started_at": "2026-07-18T14:23:41Z",
+  "finished_at": "2026-07-18T14:26:09Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339.log",
+    "size_bytes": 92932,
+    "captured_at": "2026-07-18T14:26:09Z"
+  },
+  "tests": [
+    {
+      "id": 174,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs4-AttentionBackendEnum.TRITON_ATTN-matches4--quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 312,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs4_AttentionBackendEnum_TRITON_ATTN_matches4_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs4_AttentionBackendEnum_TRITON_ATTN_matches4_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 175,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs5-AttentionBackendEnum.TRITON_ATTN-matches5--quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 358,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs5_AttentionBackendEnum_TRITON_ATTN_matches5_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs5_AttentionBackendEnum_TRITON_ATTN_matches5_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 176,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs6-AttentionBackendEnum.TRITON_ATTN-matches6-+quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 427,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 177,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs7-AttentionBackendEnum.TRITON_ATTN-matches7-+quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 409,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 178,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 389,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.xml"
+    },
+    {
+      "id": 179,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 650,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.xml"
+    },
+    {
+      "id": 180,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 418,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.xml"
+    },
+    {
+      "id": 181,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 394,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/pytest_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_222339/result_batch_20260718_222339_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_allreduce_rmsnorm_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

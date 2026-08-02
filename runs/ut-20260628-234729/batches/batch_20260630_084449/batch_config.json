@@ -1,0 +1,171 @@
+{
+  "batch_id": "batch_20260630_084450",
+  "tests": [
+    {
+      "id": 83,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than_or_equal_to[5.0-4]",
+      "test_file": "tests/benchmarks/test_plot_filters.py",
+      "test_name": "test_greater_than_or_equal_to[5.0-4]",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 84,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate==5.0-request_rate-5.0-PlotEqualTo]",
+      "test_file": "tests/benchmarks/test_plot_filters.py",
+      "test_name": "test_parse_str[request_rate==5.0-request_rate-5.0-PlotEqualTo]",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 85,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate!=10.0-request_rate-10.0-PlotNotEqualTo]",
+      "test_file": "tests/benchmarks/test_plot_filters.py",
+      "test_name": "test_parse_str[request_rate!=10.0-request_rate-10.0-PlotNotEqualTo]",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 86,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<50.0-request_rate-50.0-PlotLessThan]",
+      "test_file": "tests/benchmarks/test_plot_filters.py",
+      "test_name": "test_parse_str[request_rate<50.0-request_rate-50.0-PlotLessThan]",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 87,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<=50.0-request_rate-50.0-PlotLessThanOrEqualTo]",
+      "test_file": "tests/benchmarks/test_plot_filters.py",
+      "test_name": "test_parse_str[request_rate<=50.0-request_rate-50.0-PlotLessThanOrEqualTo]",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    }
+  ],
+  "distributed_count": 402,
+  "requires_multi_gpu": true,
+  "generated_at": "2026-06-30T08:44:50.311242",
+  "distributed_tests": [
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+      "id": 110
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestAGMMModel]",
+      "id": 111
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestMMRSModel]",
+      "id": 116
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGMMModel]",
+      "id": 117
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestScaledMMRSModel]",
+      "id": 118
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGScaledMMModel]",
+      "id": 119
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestCutlassScaledMMRSModel]",
+      "id": 120
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGCutlassScaledMMModel]",
+      "id": 121
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[False-dtype0-16-16-8-TestMMRSModel]",
+      "id": 122
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[False-dtype0-16-16-8-TestAGMMModel]",
+      "id": 123
+    }
+  ],
+  "note": "distributed tests require GPU >= 2"
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_005402",
+  "started_at": "2026-07-01T16:57:41Z",
+  "finished_at": "2026-07-01T17:00:40Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402.log",
+    "size_bytes": 196593,
+    "captured_at": "2026-07-01T17:00:40Z"
+  },
+  "tests": [
+    {
+      "id": 1756,
+      "test_node": "tests/entrypoints/openai/test_serving_tokens.py::test_same_response_as_chat_completions",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21411,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_same_response_as_chat_completions.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_same_response_as_chat_completions.xml"
+    },
+    {
+      "id": 1757,
+      "test_node": "tests/entrypoints/openai/test_serving_tokens.py::test_stop_string_workflow",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21404,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_stop_string_workflow.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_stop_string_workflow.xml"
+    },
+    {
+      "id": 1758,
+      "test_node": "tests/entrypoints/openai/test_serving_tokens.py::test_generate_with_lora_adapter[server0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_generate_with_lora_adapter_server0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_serving_tokens_py_test_generate_with_lora_adapter_server0.xml"
+    },
+    {
+      "id": 1759,
+      "test_node": "tests/entrypoints/openai/test_shutdown.py::test_shutdown_on_engine_failure",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "Failed: Server died during startup. stdout: #x1B[0;36m(APIServer pid=744337)#x1B[0;0m INFO 07-02 00:59:20 [api_server.py:1351] vLLM API server version 0.13.0\n#x1B[0;36m(APIServer pid=744337)#x1B[0;0m INFO 07-02 00:59:20 [utils.py:253] non-default args: {'port': 54257, 'disable_frontend_multiprocessing': True, 'model': 'hmellor/tiny-random-LlamaForCausalLM', 'dtype': 'bfloat16', 'max_model_len': 128, 'enforce_eager': True, 'gpu_memory_utilization': 0.05, 'max_num_seqs': 2}\n#x1B[0;36m(APIServer pi",
+      "duration_ms": 18519,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_shutdown_py_test_shutdown_on_engine_failure.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_shutdown_py_test_shutdown_on_engine_failure.xml"
+    },
+    {
+      "id": 1760,
+      "test_node": "tests/entrypoints/openai/test_sleep.py::test_sleep_mode",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_sleep_py_test_sleep_mode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_sleep_py_test_sleep_mode.xml"
+    },
+    {
+      "id": 1761,
+      "test_node": "tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_valid_dense_tensor_accepted",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 155,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_valid_dense_tensor_accepted.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_valid_dense_tensor_accepted.xml"
+    },
+    {
+      "id": 1762,
+      "test_node": "tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_valid_sparse_tensor_accepted",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 309,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_valid_sparse_tensor_accepted.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_valid_sparse_tensor_accepted.xml"
+    },
+    {
+      "id": 1763,
+      "test_node": "tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_malicious_sparse_tensor_rejected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 309,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/pytest_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_malicious_sparse_tensor_rejected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_005402/result_batch_20260702_005402_tests_entrypoints_openai_test_sparse_tensor_validation_py_TestPromptEmbedsValidation_test_malicious_sparse_tensor_rejected.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 1,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

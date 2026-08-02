@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260719_012239",
+  "started_at": "2026-07-18T17:23:14Z",
+  "finished_at": "2026-07-18T17:37:25Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239.log",
+    "size_bytes": null,
+    "captured_at": "2026-07-18T17:37:25Z"
+  },
+  "tests": [
+    {
+      "id": 1195,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup3-ray-auto-test_options3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 240725,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.xml"
+    },
+    {
+      "id": 1196,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup4-mp-auto-test_options4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.xml"
+    },
+    {
+      "id": 1197,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup5-ray-auto-test_options5]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.xml"
+    },
+    {
+      "id": 1198,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup6-mp-auto-test_options6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 358,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.xml"
+    },
+    {
+      "id": 1199,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup7-ray-auto-test_options7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 394,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup7_ray_auto_test_options7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup7_ray_auto_test_options7.xml"
+    },
+    {
+      "id": 1200,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup8-mp-auto-test_options8]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup8_mp_auto_test_options8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup8_mp_auto_test_options8.xml"
+    },
+    {
+      "id": 1201,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup9-ray-auto-test_options9]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup9_ray_auto_test_options9.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup9_ray_auto_test_options9.xml"
+    },
+    {
+      "id": 1202,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup10-mp-auto-test_options10]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/pytest_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup10_mp_auto_test_options10.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_012239/result_batch_20260719_012239_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup10_mp_auto_test_options10.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 5
+  }
+}

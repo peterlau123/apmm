@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_025714",
+  "started_at": "2026-06-30T18:57:39Z",
+  "finished_at": "2026-06-30T18:59:32Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714.log",
+    "size_bytes": 1071629,
+    "captured_at": "2026-06-30T18:59:32Z"
+  },
+  "tests": [
+    {
+      "id": 862,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-256-512-dtype2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_256_512_dtype2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_256_512_dtype2.xml"
+    },
+    {
+      "id": 863,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1024-dtype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7fb118e6b2f0>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 763,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype0.xml"
+    },
+    {
+      "id": 864,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1024-dtype1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f92a7de2f60>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 775,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype1.xml"
+    },
+    {
+      "id": 865,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1024-dtype2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f99805e6e40>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 772,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1024_dtype2.xml"
+    },
+    {
+      "id": 866,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1025-dtype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f548bfab380>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 766,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype0.xml"
+    },
+    {
+      "id": 867,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1025-dtype1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7fcee0ed8440>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 760,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype1.xml"
+    },
+    {
+      "id": 868,
+      "test_node": "tests/compile/test_noop_elimination.py::test_noop_elimination[4096-1024-1025-dtype2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7fd8bd135f40>' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dyna",
+      "duration_ms": 794,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_noop_elimination_py_test_noop_elimination_4096_1024_1025_dtype2.xml"
+    },
+    {
+      "id": 871,
+      "test_node": "tests/compile/test_pass_manager.py::test_pass_manager_uuid[callable0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 572,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/pytest_batch_20260701_025714_tests_compile_test_pass_manager_py_test_pass_manager_uuid_callable0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_025714/result_batch_20260701_025714_tests_compile_test_pass_manager_py_test_pass_manager_uuid_callable0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

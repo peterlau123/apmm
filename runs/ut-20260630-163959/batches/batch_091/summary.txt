@@ -1,0 +1,8 @@
+FAILED         tests/compile/test_wrapper.py::test_torch_compile_wrapper[True] (gpu=0, 146ms, exit=0)
+FAILED         tests/compile/test_wrapper.py::test_torch_compile_wrapper[False] (gpu=1, 146ms, exit=0)
+PASSED         tests/config/test_config_generation.py::test_cuda_empty_vs_unset_configs (gpu=2, 280ms, exit=0)
+PASSED         tests/config/test_config_generation.py::test_ray_runtime_env (gpu=3, 12802ms, exit=0)
+FAILED         tests/config/test_mp_reducer.py::test_mp_reducer (gpu=4, 3516ms, exit=0)
+IGNORED        tests/config/test_multimodal_config.py::test_mm_encoder_attn_backend_str_conversion (gpu=5, Nonems, exit=0)
+PASSED         tests/config/test_multimodal_config.py::test_mm_encoder_attn_backend_invalid (gpu=6, 121ms, exit=0)
+IGNORED        tests/config/test_multimodal_config.py::test_mm_encoder_attn_backend_hash_updates (gpu=7, Nonems, exit=0)

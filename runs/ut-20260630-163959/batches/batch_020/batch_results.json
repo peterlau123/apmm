@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260630_234008",
+  "started_at": "2026-06-30T15:40:35Z",
+  "finished_at": "2026-06-30T15:42:08Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008.log",
+    "size_bytes": 175079,
+    "captured_at": "2026-06-30T15:42:08Z"
+  },
+  "tests": [
+    {
+      "id": 394,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[123-10-llm_pair12]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_123_10_llm_pair12.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_123_10_llm_pair12.xml"
+    },
+    {
+      "id": 395,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[8-5-llm_pair12]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_5_llm_pair12.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_5_llm_pair12.xml"
+    },
+    {
+      "id": 396,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[8-30-llm_pair12]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_30_llm_pair12.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_30_llm_pair12.xml"
+    },
+    {
+      "id": 397,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[1-10-llm_pair13]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 21,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_1_10_llm_pair13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_1_10_llm_pair13.xml"
+    },
+    {
+      "id": 398,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[7-10-llm_pair13]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 21,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_7_10_llm_pair13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_7_10_llm_pair13.xml"
+    },
+    {
+      "id": 399,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[16-10-llm_pair13]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 21,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_16_10_llm_pair13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_16_10_llm_pair13.xml"
+    },
+    {
+      "id": 400,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[25-10-llm_pair13]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 21,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_25_10_llm_pair13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_25_10_llm_pair13.xml"
+    },
+    {
+      "id": 401,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[32-10-llm_pair13]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 21,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/pytest_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_32_10_llm_pair13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_234008/result_batch_20260630_234008_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_32_10_llm_pair13.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 0,
+    "error": 5,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

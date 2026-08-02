@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260719_010124",
+  "started_at": "2026-07-18T17:01:27Z",
+  "finished_at": "2026-07-18T17:01:47Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124.log",
+    "size_bytes": 25336,
+    "captured_at": "2026-07-18T17:01:47Z"
+  },
+  "tests": [
+    {
+      "id": 1121,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup14-ray-auto-test_options14]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup14_ray_auto_test_options14.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup14_ray_auto_test_options14.xml"
+    },
+    {
+      "id": 1122,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[intfloat/e5-small-parallel_setup0-mp-pooling-test_options0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_intfloat_e5_small_parallel_setup0_mp_pooling_test_options0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_intfloat_e5_small_parallel_setup0_mp_pooling_test_options0.xml"
+    },
+    {
+      "id": 1123,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[Alibaba-NLP/gte-modernbert-base-parallel_setup1-mp-pooling-test_options1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_Alibaba_NLP_gte_modernbert_base_parallel_setup1_mp_pooling_test_options1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_Alibaba_NLP_gte_modernbert_base_parallel_setup1_mp_pooling_test_options1.xml"
+    },
+    {
+      "id": 1124,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[OpenGVLab/InternVL2-1B-parallel_setup0-mp-auto-test_options0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_OpenGVLab_InternVL2_1B_parallel_setup0_mp_auto_test_options0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_OpenGVLab_InternVL2_1B_parallel_setup0_mp_auto_test_options0.xml"
+    },
+    {
+      "id": 1125,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[microsoft/Phi-3.5-vision-instruct-parallel_setup1-mp-auto-test_options1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_microsoft_Phi_3_5_vision_instruct_parallel_setup1_mp_auto_test_options1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_microsoft_Phi_3_5_vision_instruct_parallel_setup1_mp_auto_test_options1.xml"
+    },
+    {
+      "id": 1126,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[fixie-ai/ultravox-v0_5-llama-3_2-1b-parallel_setup2-mp-auto-test_options2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_fixie_ai_ultravox_v0_5_llama_3_2_1b_parallel_setup2_mp_auto_test_options2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_fixie_ai_ultravox_v0_5_llama_3_2_1b_parallel_setup2_mp_auto_test_options2.xml"
+    },
+    {
+      "id": 1127,
+      "test_node": "tests/distributed/test_pipeline_partition.py::test_custom_layer_partition",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_partition_py_test_custom_layer_partition.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_partition_py_test_custom_layer_partition.xml"
+    },
+    {
+      "id": 1128,
+      "test_node": "tests/distributed/test_pipeline_partition.py::test_uneven_auto_partition[2-2-0-indices0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/pytest_batch_20260719_010124_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_2_2_0_indices0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010124/result_batch_20260719_010124_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_2_2_0_indices0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

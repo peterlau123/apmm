@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_001",
+  "started_at": "2026-06-28T08:32:49Z",
+  "finished_at": "2026-06-28T08:35:00Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/pytest_batch_001.log",
+    "size_bytes": 46066,
+    "captured_at": "2026-06-28T08:35:00Z"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 134,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/pytest_batch_001_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/result_batch_001_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.xml"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/pytest_batch_001_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/result_batch_001_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.xml"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Benchmark failed: '(MaxRetryError(\"HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /meta-llama/Llama-3.2-1B-Instruct/resolve/main/config.json (Caused by ConnectTimeoutError(<HTTPSConnection(host='huggingface.co', port=443) at 0x7f2930f1b170>, 'Connection to huggingface.co timed out. (connect timeout=10)'))\"), '(Request ID: 6fefb1a3-e130-432b-9bd6-07f4eb30d703)')' thrown while requesting HEAD https://huggingface.co/meta-llama/Llama-3.2-1B-Instr",
+      "duration_ms": 91851,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/pytest_batch_001_tests_benchmarks_test_latency_cli_py_test_bench_latency.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/result_batch_001_tests_benchmarks_test_latency_cli_py_test_bench_latency.xml"
+    },
+    {
+      "id": 4,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Meta-Llama-3.1-8B-Instruct-FP8]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "collection failure",
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/pytest_batch_001_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Meta_Llama_3_1_8B_Instruct_FP8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/result_batch_001_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Meta_Llama_3_1_8B_Instruct_FP8.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 1,
+    "failed": 1,
+    "error": 1,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

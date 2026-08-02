@@ -1,0 +1,8 @@
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_blocking_unread_object (gpu=1, 189ms, exit=0)
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_buffer_overflow_and_cleanup (gpu=2, 201ms, exit=0)
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_clear_storage (gpu=3, 158ms, exit=0)
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_invalid_get_operations (gpu=1, 215ms, exit=0)
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_large_object_rejection (gpu=2, 200ms, exit=0)
+PASSED         tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_minimal_put_get_cycle (gpu=3, 183ms, exit=0)
+IGNORED        tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_put_same_key_twice (gpu=1, Nonems, exit=0)
+IGNORED        tests/distributed/test_symm_mem_allreduce.py::test_symm_mem_allreduce[1-2] (gpu=2, Nonems, exit=2)

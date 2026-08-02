@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_040002",
+  "started_at": "2026-06-30T20:02:12Z",
+  "finished_at": "2026-06-30T20:03:23Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002.log",
+    "size_bytes": 150987,
+    "captured_at": "2026-06-30T20:03:23Z"
+  },
+  "tests": [
+    {
+      "id": 1017,
+      "test_node": "tests/detokenizer/test_disable_detokenization.py::test_computed_prefix_blocks[distilbert/distilgpt2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 4057,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_detokenizer_test_disable_detokenization_py_test_computed_prefix_blocks_distilbert_distilgpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_detokenizer_test_disable_detokenization_py_test_computed_prefix_blocks_distilbert_distilgpt2.xml"
+    },
+    {
+      "id": 1018,
+      "test_node": "tests/detokenizer/test_min_tokens.py::test_min_tokens_with_stop[0-None- is Lee, and I'm a student in the college of engineering]",
+      "status": "retriable_error",
+      "error_type": "other",
+      "error_message": "executor task crashed: pytest_full_cmd / log_path may not contain single quotes (outer wrap uses bash -c '<...>')",
+      "duration_ms": null,
+      "exit_code": null,
+      "gpu_id": 1,
+      "log_path": null,
+      "xml_path": null
+    },
+    {
+      "id": 1019,
+      "test_node": "tests/detokenizer/test_min_tokens.py::test_min_tokens_with_stop[0-e- is L]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_detokenizer_test_min_tokens_py_test_min_tokens_with_stop_0_e_is_L.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_detokenizer_test_min_tokens_py_test_min_tokens_with_stop_0_e_is_L.xml"
+    },
+    {
+      "id": 1020,
+      "test_node": "tests/detokenizer/test_min_tokens.py::test_min_tokens_with_stop[5-e- is Lee, and I'm a stud]",
+      "status": "retriable_error",
+      "error_type": "other",
+      "error_message": "executor task crashed: pytest_full_cmd / log_path may not contain single quotes (outer wrap uses bash -c '<...>')",
+      "duration_ms": null,
+      "exit_code": null,
+      "gpu_id": 3,
+      "log_path": null,
+      "xml_path": null
+    },
+    {
+      "id": 1021,
+      "test_node": "tests/detokenizer/test_stop_reason.py::test_stop_reason",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}\"",
+      "duration_ms": 6634,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_detokenizer_test_stop_reason_py_test_stop_reason.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_detokenizer_test_stop_reason_py_test_stop_reason.xml"
+    },
+    {
+      "id": 1024,
+      "test_node": "tests/detokenizer/test_stop_strings.py::test_stop_strings",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 22,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_detokenizer_test_stop_strings_py_test_stop_strings.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_detokenizer_test_stop_strings_py_test_stop_strings.xml"
+    },
+    {
+      "id": 1244,
+      "test_node": "tests/engine/test_arg_utils.py::test_parse_type[str-Hello World!-Hello World!]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_engine_test_arg_utils_py_test_parse_type_str_Hello_World_Hello_World.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_engine_test_arg_utils_py_test_parse_type_str_Hello_World_Hello_World.xml"
+    },
+    {
+      "id": 1273,
+      "test_node": "tests/engine/test_arg_utils.py::test_media_io_kwargs_parser[{\"video\": {\"num_frames\": 123} }-expected1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/pytest_batch_20260701_040002_tests_engine_test_arg_utils_py_test_media_io_kwargs_parser_video_num_frames_123_expected1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_040002/result_batch_20260701_040002_tests_engine_test_arg_utils_py_test_media_io_kwargs_parser_video_num_frames_123_expected1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 2,
+    "error": 1,
+    "skipped": 0,
+    "retriable_error": 2,
+    "ignored": 3
+  }
+}

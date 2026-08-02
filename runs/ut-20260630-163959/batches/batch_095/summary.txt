@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/llm/test_collective_rpc.py::test_collective_rpc[ray-2] (gpu=0, Nonems, exit=0)
+ERROR          tests/entrypoints/llm/test_generate.py::test_multiple_sampling_params (gpu=1, 3855ms, exit=0)
+ERROR          tests/entrypoints/llm/test_generate.py::test_multiple_priority (gpu=2, 3815ms, exit=0)
+IGNORED        tests/entrypoints/llm/test_generate.py::test_max_model_len (gpu=3, Nonems, exit=0)
+FAILED         tests/entrypoints/llm/test_generate.py::test_log_stats (gpu=4, 6168ms, exit=0)
+FAILED         tests/entrypoints/llm/test_gpu_utilization.py::test_gpu_memory_utilization (gpu=5, 4400ms, exit=0)
+FAILED         tests/entrypoints/llm/test_prompt_validation.py::test_empty_prompt (gpu=6, 138ms, exit=0)
+FAILED         tests/entrypoints/llm/test_prompt_validation.py::test_out_of_vocab_token (gpu=7, 133ms, exit=0)

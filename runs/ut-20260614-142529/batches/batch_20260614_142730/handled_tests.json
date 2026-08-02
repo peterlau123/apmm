@@ -1,0 +1,39 @@
+{
+  "batch_id": "batch_20260614_142730",
+  "handled_at": "2026-06-14T14:37:00Z",
+  "handled_tests": [
+    {
+      "id": 1,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestScaledMMRSModel]",
+      "original_status": "error",
+      "new_status": "ignored",
+      "reason": "resource: NCCL error requires multi-GPU setup",
+      "fix_attempted": false,
+      "fix_type": null
+    },
+    {
+      "id": 2,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+      "original_status": "error",
+      "new_status": "ignored",
+      "reason": "resource: NCCL error requires multi-GPU setup",
+      "fix_attempted": false,
+      "fix_type": null
+    },
+    {
+      "id": 3,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-meta-llama/Llama-3.2-1B-Instruct]",
+      "original_status": "error",
+      "new_status": "ignored",
+      "reason": "resource: NCCL error requires multi-GPU setup",
+      "fix_attempted": false,
+      "fix_type": null
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "fixed": 0,
+    "ignored": 3,
+    "pending_retry": 0
+  }
+}

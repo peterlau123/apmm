@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_045919",
+  "started_at": "2026-07-01T21:05:33Z",
+  "finished_at": "2026-07-01T21:11:23Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919.log",
+    "size_bytes": 293360,
+    "captured_at": "2026-07-01T21:11:23Z"
+  },
+  "tests": [
+    {
+      "id": 1972,
+      "test_node": "tests/entrypoints/pooling/classify/test_offline.py::test_token_classify",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_offline_py_test_token_classify.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_offline_py_test_token_classify.xml"
+    },
+    {
+      "id": 1973,
+      "test_node": "tests/entrypoints/pooling/classify/test_offline.py::test_score_api",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_offline_py_test_score_api.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_offline_py_test_score_api.xml"
+    },
+    {
+      "id": 1974,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_single_input_classification[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_single_input_classification_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_single_input_classification_jason9693_Qwen2_5_1_5B_apeach.xml"
+    },
+    {
+      "id": 1975,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_add_special_tokens_false[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_add_special_tokens_false_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_add_special_tokens_false_jason9693_Qwen2_5_1_5B_apeach.xml"
+    },
+    {
+      "id": 1976,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_multiple_inputs_classification[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 38661,
+      "exit_code": 2,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_multiple_inputs_classification_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_multiple_inputs_classification_jason9693_Qwen2_5_1_5B_apeach.xml"
+    },
+    {
+      "id": 1977,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_truncate_prompt_tokens[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_truncate_prompt_tokens_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_truncate_prompt_tokens_jason9693_Qwen2_5_1_5B_apeach.xml"
+    },
+    {
+      "id": 1978,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_invalid_truncate_prompt_tokens_error[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_invalid_truncate_prompt_tokens_error_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_invalid_truncate_prompt_tokens_error_jason9693_Qwen2_5_1_5B_apeach.xml"
+    },
+    {
+      "id": 1979,
+      "test_node": "tests/entrypoints/pooling/classify/test_online.py::test_empty_input_error[jason9693/Qwen2.5-1.5B-apeach]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 38093,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/pytest_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_empty_input_error_jason9693_Qwen2_5_1_5B_apeach.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_045919/result_batch_20260702_045919_tests_entrypoints_pooling_classify_test_online_py_test_empty_input_error_jason9693_Qwen2_5_1_5B_apeach.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 6
+  }
+}

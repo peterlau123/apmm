@@ -1,0 +1,72 @@
+{
+  "version": "2.0",
+  "generated_at": "2026-06-25T03:25:09.880618+00:00",
+  "source": "test_list_file",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "test_node": "tests/config/test_config_utils.py::test_hash_factors_deterministic",
+      "test_file": "tests/config/test_config_utils.py",
+      "test_name": "test_hash_factors_deterministic",
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None]",
+      "test_file": "tests/config/test_config_utils.py",
+      "test_name": "test_normalize_value_matrix[None-None]",
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "ignored",
+      "ignored_reason": "依赖未就绪需人工处理: model 'zai-org/GLM-4.1V-9B-Thinking' invalid repository ID (offline environment HF_HUB_OFFLINE=1 prevents download)"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "pending": 7,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 1
+  }
+}

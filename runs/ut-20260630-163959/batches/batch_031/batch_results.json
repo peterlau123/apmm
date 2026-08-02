@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_002025",
+  "started_at": "2026-06-30T16:20:53Z",
+  "finished_at": "2026-06-30T16:23:18Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025.log",
+    "size_bytes": 23959,
+    "captured_at": "2026-06-30T16:23:18Z"
+  },
+  "tests": [
+    {
+      "id": 482,
+      "test_node": "tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[False-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_False_True.xml"
+    },
+    {
+      "id": 483,
+      "test_node": "tests/compile/fullgraph/test_simple.py::test_simple_piecewise_compile[inductor]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8711,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_piecewise_compile_inductor.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_piecewise_compile_inductor.xml"
+    },
+    {
+      "id": 484,
+      "test_node": "tests/compile/fullgraph/test_simple.py::test_simple_piecewise_compile[eager]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8655,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_piecewise_compile_eager.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_piecewise_compile_eager.xml"
+    },
+    {
+      "id": 485,
+      "test_node": "tests/compile/fullgraph/test_simple.py::test_simple_inductor_graph_partition",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 146,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_inductor_graph_partition.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_simple_py_test_simple_inductor_graph_partition.xml"
+    },
+    {
+      "id": 486,
+      "test_node": "tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[eager-False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_eager_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_eager_False.xml"
+    },
+    {
+      "id": 487,
+      "test_node": "tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[inductor-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8795,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_inductor_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_inductor_False.xml"
+    },
+    {
+      "id": 488,
+      "test_node": "tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[inductor-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8976,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_inductor_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_fullgraph_test_toy_llama_py_test_toy_llama_inductor_True.xml"
+    },
+    {
+      "id": 489,
+      "test_node": "tests/compile/test_aot_compile.py::test_no_dynamo_cache_entry",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/pytest_batch_20260701_002025_tests_compile_test_aot_compile_py_test_no_dynamo_cache_entry.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_002025/result_batch_20260701_002025_tests_compile_test_aot_compile_py_test_no_dynamo_cache_entry.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

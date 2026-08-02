@@ -1,0 +1,46 @@
+{
+  "batch_id": "batch_0001",
+  "started_at": "2026-06-23T15:24:24Z",
+  "finished_at": "2026-06-23T15:28:16Z",
+  "timeout": 600,
+  "pytest_idle_timeout": 120,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_0001/pytest_batch_0001.log",
+    "size_bytes": 1399,
+    "captured_at": "2026-06-23T15:28:16Z"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "status": "failed",
+      "error_type": "assertion",
+      "duration_ms": 0
+    },
+    {
+      "id": 2,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 3,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 0,
+    "failed": 1,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0
+  }
+}

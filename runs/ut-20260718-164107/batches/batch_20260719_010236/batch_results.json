@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260719_010236",
+  "started_at": "2026-07-18T17:02:38Z",
+  "finished_at": "2026-07-18T17:02:59Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236.log",
+    "size_bytes": 25336,
+    "captured_at": "2026-07-18T17:02:59Z"
+  },
+  "tests": [
+    {
+      "id": 1145,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_all_gather",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_all_gather.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_all_gather.xml"
+    },
+    {
+      "id": 1146,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_all_gatherv",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_all_gatherv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_all_gatherv.xml"
+    },
+    {
+      "id": 1147,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_reduce_scatter",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatter.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatter.xml"
+    },
+    {
+      "id": 1148,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_reduce_scatterv",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatterv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatterv.xml"
+    },
+    {
+      "id": 1149,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_with_cudagraph",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_with_cudagraph.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_with_cudagraph.xml"
+    },
+    {
+      "id": 1150,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_send_recv",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_send_recv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_send_recv.xml"
+    },
+    {
+      "id": 1151,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_multiple_send_recv",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.xml"
+    },
+    {
+      "id": 1152,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_broadcast",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/pytest_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_broadcast.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_010236/result_batch_20260719_010236_tests_distributed_test_pynccl_py_test_pynccl_broadcast.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

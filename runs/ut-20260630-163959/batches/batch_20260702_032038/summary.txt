@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[I will call the tool now. <tool_calls>[{"name": "get_weather", "arguments": {"city": "Boston"}}]</tool_calls>-expected_tool_calls3-I will call the tool now. ] (gpu=0, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{"name": "get_weather", "arguments": {"city": "Seattle"}}]</tool_calls>\nThank you!-expected_tool_calls4-None] (gpu=1, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{"name": "complex_tool", "arguments": {"level1": {"level2": {"level3": {"value": 123}}}}}]</tool_calls>-expected_tool_calls5-None] (gpu=2, Nonems, exit=0)
+PASSED         tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_streaming[model_deltas0-expected_tool_calls0] (gpu=3, 123ms, exit=0)
+PASSED         tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_streaming[model_deltas1-expected_tool_calls1] (gpu=4, 147ms, exit=0)
+PASSED         tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_streaming[model_deltas2-expected_tool_calls2] (gpu=5, 119ms, exit=0)
+PASSED         tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_streaming[model_deltas3-expected_tool_calls3] (gpu=6, 121ms, exit=0)
+ERROR          tests/entrypoints/openai/tool_parsers/test_llama3_json_tool_parser.py::test_extract_tool_calls_simple (gpu=7, 120ms, exit=0)

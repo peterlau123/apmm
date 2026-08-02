@@ -1,0 +1,163 @@
+{
+  "workflow": {
+    "name": "UT Test Workflow",
+    "version": "2.2",
+    "test_name": "ut",
+    "started_at": "2026-07-16T14:15:30.655667+00:00",
+    "status": "completed",
+    "completed_at": "2026-07-16T14:36:10Z"
+  },
+  "current_stage": "idle",
+  "iteration": 0,
+  "paths": {
+    "run_dir": "runs\\ut-20260716-221134",
+    "workflow_yaml": "runs\\ut-20260716-221134\\workflow.yaml",
+    "manifest": "runs\\ut-20260716-221134\\manifest.json",
+    "test_list": null,
+    "manifest_schema": "D:\\workspace\\apmm\\skills\\ut\\manifest_schema.json",
+    "batches_dir": "runs\\ut-20260716-221134\\batches",
+    "logs_dir": "runs\\ut-20260716-221134\\logs",
+    "reports_dir": "runs\\ut-20260716-221134\\reports",
+    "workflow_state": "runs\\ut-20260716-221134\\workflow_state.json",
+    "test_load": "runs\\ut-20260716-221134\\test_load_8_20260716_221531.json"
+  },
+  "stats": {
+    "total_tests": 32964,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 0,
+    "pending": 32964,
+    "error_rate": 0.0
+  },
+  "current_batch": {
+    "batch_id": "batch_20260716_223109",
+    "size": 8,
+    "started_at": "2026-07-16T14:31:23Z"
+  },
+  "flags": {
+    "stop_requested": true,
+    "pause_requested": false,
+    "pause_reason": null,
+    "consecutive_failures": 0
+  },
+  "last_update": "2026-07-16T14:36:10Z",
+  "last_worker_result": {
+    "stats": {
+      "passed": 0,
+      "failed": 0,
+      "error": 0,
+      "ignored": 0,
+      "pending": 0
+    },
+    "next_action": "continue",
+    "error": null,
+    "blocked_reason": null
+  },
+  "batches": {
+    "batch_20260716_222801": {
+      "status": "generated",
+      "batch_size": 8,
+      "gpu_pool": null,
+      "created_at": "2026-07-16T22:28:01.222220",
+      "started_at": null,
+      "completed_at": null,
+      "config_path": "runs\\ut-20260716-221134\\batches\\batch_20260716_222801\\batch_config.json",
+      "results_path": null,
+      "stats": null
+    },
+    "batch_20260716_222810": {
+      "status": "generated",
+      "batch_size": 8,
+      "gpu_pool": null,
+      "created_at": "2026-07-16T22:28:10.890091",
+      "started_at": null,
+      "completed_at": null,
+      "config_path": "runs\\ut-20260716-221134\\batches\\batch_20260716_222810\\batch_config.json",
+      "results_path": null,
+      "stats": null
+    },
+    "batch_20260716_222814": {
+      "status": "generated",
+      "batch_size": 8,
+      "gpu_pool": null,
+      "created_at": "2026-07-16T22:28:14.941002",
+      "started_at": null,
+      "completed_at": null,
+      "config_path": "D:\\workspace\\apmm\\runs\\ut-20260716-221134\\batches\\batch_20260716_222814\\batch_config.json",
+      "results_path": null,
+      "stats": null
+    },
+    "batch_20260716_222929": {
+      "status": "generated",
+      "batch_size": 8,
+      "gpu_pool": null,
+      "created_at": "2026-07-16T22:29:29.493905",
+      "started_at": null,
+      "completed_at": null,
+      "config_path": "runs\\ut-20260716-221134\\batches\\batch_20260716_222929\\batch_config.json",
+      "results_path": null,
+      "stats": null
+    },
+    "batch_20260716_222934": {
+      "status": "generated",
+      "batch_size": 8,
+      "gpu_pool": null,
+      "created_at": "2026-07-16T22:29:34.006093",
+      "started_at": null,
+      "completed_at": null,
+      "config_path": "D:\\workspace\\apmm\\runs\\ut-20260716-221134\\batches\\batch_20260716_222934\\batch_config.json",
+      "results_path": null,
+      "stats": null
+    },
+    "batch_20260716_223109": {
+      "status": "completed",
+      "batch_size": 8,
+      "gpu_pool": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "created_at": "2026-07-16T22:31:09.440707",
+      "started_at": "2026-07-16T14:31:23Z",
+      "completed_at": "2026-07-16T14:31:42Z",
+      "config_path": "runs\\ut-20260716-221134\\batches\\batch_20260716_223109\\batch_config.json",
+      "results_path": "runs\\ut-20260716-221134\\batches\\batch_20260716_223109\\batch_results.json",
+      "stats": {
+        "total": 8,
+        "passed": 0,
+        "failed": 0,
+        "error": 0,
+        "skipped": 0,
+        "retriable_error": 0,
+        "ignored": 8
+      }
+    }
+  },
+  "test_stats": {
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 8,
+    "pending": 0
+  },
+  "batch_stats": {
+    "generated": 5,
+    "running": 0,
+    "completed": 1,
+    "failed": 0,
+    "total_tests_executed": 8
+  },
+  "resume_info": {
+    "last_batch_id": "batch_20260716_223109",
+    "last_batch_status": "completed",
+    "pending_batches_count": 4,
+    "can_resume": true,
+    "resume_recommendation": "生成新batch继续执行"
+  }
+}

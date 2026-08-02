@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_044607",
+  "started_at": "2026-06-30T20:46:43Z",
+  "finished_at": "2026-06-30T20:50:24Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607.log",
+    "size_bytes": 160031,
+    "captured_at": "2026-06-30T20:50:24Z"
+  },
+  "tests": [
+    {
+      "id": 1388,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::test_mcp_vs_builtin_tools",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_mcp_vs_builtin_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_mcp_vs_builtin_tools.xml"
+    },
+    {
+      "id": 1389,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::test_parse_remaining_state_commentary_channel",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_parse_remaining_state_commentary_channel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_parse_remaining_state_commentary_channel.xml"
+    },
+    {
+      "id": 1390,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::test_parse_remaining_state_analysis_channel",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_parse_remaining_state_analysis_channel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_parser_test_harmony_utils_py_test_parse_remaining_state_analysis_channel.xml"
+    },
+    {
+      "id": 1391,
+      "test_node": "tests/entrypoints/openai/test_async_tokenization.py::test_with_and_without_truncate[completion]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18065,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_test_async_tokenization_py_test_with_and_without_truncate_completion.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_test_async_tokenization_py_test_with_and_without_truncate_completion.xml"
+    },
+    {
+      "id": 1392,
+      "test_node": "tests/entrypoints/openai/test_async_tokenization.py::test_with_and_without_truncate[chat]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_test_async_tokenization_py_test_with_and_without_truncate_chat.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_test_async_tokenization_py_test_with_and_without_truncate_chat.xml"
+    },
+    {
+      "id": 1393,
+      "test_node": "tests/entrypoints/openai/test_basic.py::test_show_version[default-frontend-multiprocessing]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_show_version_default_frontend_multiprocessing.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_show_version_default_frontend_multiprocessing.xml"
+    },
+    {
+      "id": 1394,
+      "test_node": "tests/entrypoints/openai/test_basic.py::test_check_health[default-frontend-multiprocessing]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21571,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_check_health_default_frontend_multiprocessing.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_check_health_default_frontend_multiprocessing.xml"
+    },
+    {
+      "id": 1395,
+      "test_node": "tests/entrypoints/openai/test_basic.py::test_request_cancellation[default-frontend-multiprocessing]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21072,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/pytest_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_request_cancellation_default_frontend_multiprocessing.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_044607/result_batch_20260701_044607_tests_entrypoints_openai_test_basic_py_test_request_cancellation_default_frontend_multiprocessing.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 0,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 4
+  }
+}

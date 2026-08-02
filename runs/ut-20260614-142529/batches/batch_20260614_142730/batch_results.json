@@ -1,0 +1,41 @@
+{
+  "batch_id": "batch_20260614_142730",
+  "started_at": "2026-06-14T14:35:00Z",
+  "finished_at": "2026-06-14T14:36:00Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestScaledMMRSModel]",
+      "status": "error",
+      "error_type": "resource",
+      "error_message": "NCCL error: unhandled cuda error - requires multi-GPU setup",
+      "duration_ms": 30000
+    },
+    {
+      "id": 2,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+      "status": "error",
+      "error_type": "resource",
+      "error_message": "NCCL error: unhandled cuda error - requires multi-GPU setup",
+      "duration_ms": 30000
+    },
+    {
+      "id": 3,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-meta-llama/Llama-3.2-1B-Instruct]",
+      "status": "error",
+      "error_type": "resource",
+      "error_message": "NCCL error: unhandled cuda error - requires multi-GPU setup",
+      "duration_ms": 30000
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 0,
+    "failed": 0,
+    "error": 3,
+    "skipped": 0,
+    "timeout": 0
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "batch_id": "batch_0001",
+  "handled_at": "2026-06-23T03:30:00Z",
+  "handler": "ut-fixer",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "original_status": "failed",
+      "classification": {
+        "type": "dependency",
+        "subtype": "model_missing",
+        "details": "Model meta-llama/Llama-3.2-1B-Instruct not found in HF cache - config.json missing"
+      },
+      "resolution": {
+        "status": "pending_resolver",
+        "action": "delegate_to_dependency_resolver",
+        "dependency_id": "meta-llama/Llama-3.2-1B-Instruct",
+        "dependency_type": "model"
+      },
+      "final_status": "pending",
+      "fix_applied": false,
+      "fix_details": null,
+      "ignored_reason": null
+    },
+    {
+      "id": 2,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "original_status": "failed",
+      "classification": {
+        "type": "dependency",
+        "subtype": "model_missing",
+        "details": "Model zai-org/GLM-4.1V-9B-Thinking not found in HF cache (offline mode)"
+      },
+      "resolution": {
+        "status": "pending_resolver",
+        "action": "delegate_to_dependency_resolver",
+        "dependency_id": "zai-org/GLM-4.1V-9B-Thinking",
+        "dependency_type": "model"
+      },
+      "final_status": "pending",
+      "fix_applied": false,
+      "fix_details": null,
+      "ignored_reason": null
+    },
+    {
+      "id": 3,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "original_status": "failed",
+      "classification": {
+        "type": "dependency",
+        "subtype": "model_missing",
+        "details": "Model Qwen/Qwen2-VL-7B-Instruct not found in HF cache (offline mode)"
+      },
+      "resolution": {
+        "status": "pending_resolver",
+        "action": "delegate_to_dependency_resolver",
+        "dependency_id": "Qwen/Qwen2-VL-7B-Instruct",
+        "dependency_type": "model"
+      },
+      "final_status": "pending",
+      "fix_applied": false,
+      "fix_details": null,
+      "ignored_reason": null
+    }
+  ],
+  "summary": {
+    "total_tests": 3,
+    "dependency_issues": 3,
+    "fixes_applied": 0,
+    "ignored": 0,
+    "pending_resolver": 3,
+    "delegate_created": true
+  },
+  "next_action": "wait_for_resolver",
+  "blocked_reason": "Waiting for dependency-resolver to download 3 missing models"
+}

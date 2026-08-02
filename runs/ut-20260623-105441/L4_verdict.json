@@ -1,0 +1,100 @@
+{
+  "overall": "PASS",
+  "assertions": [
+    {
+      "id": "TSD",
+      "result": "PASS",
+      "severity": "hard",
+      "expected": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 3,
+        "pending": 0
+      },
+      "actual": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 3,
+        "pending": 0
+      }
+    },
+    {
+      "id": "AF-1",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "--skip-af1 set; remote log stat bypassed"
+    },
+    {
+      "id": "AF-2",
+      "result": "PASS",
+      "severity": "hard"
+    },
+    {
+      "id": "AF-3",
+      "result": "PASS",
+      "severity": "hard",
+      "actual": {
+        "accounted": 3,
+        "expected_total": 3
+      }
+    },
+    {
+      "id": "STG-1",
+      "result": "PASS",
+      "severity": "hard"
+    },
+    {
+      "id": "STG-2",
+      "result": "PASS",
+      "severity": "hard"
+    },
+    {
+      "id": "STG-3",
+      "result": "PASS",
+      "severity": "hard"
+    },
+    {
+      "id": "INV-1",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "dependency-chain check requires kanban_audit; not yet wired into check_expected.py"
+    },
+    {
+      "id": "INV-2",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "dependency-chain check requires kanban_audit; not yet wired into check_expected.py"
+    },
+    {
+      "id": "INV-3",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "dependency-chain check requires kanban_audit; not yet wired into check_expected.py"
+    },
+    {
+      "id": "INV-4",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "dependency-chain check requires kanban_audit; not yet wired into check_expected.py"
+    },
+    {
+      "id": "INV-5",
+      "result": "SKIP",
+      "severity": "hard",
+      "detail": "dependency-chain check requires kanban_audit; not yet wired into check_expected.py"
+    },
+    {
+      "id": "INV-6",
+      "result": "PASS",
+      "severity": "hard",
+      "detail": "terminal pending == 0 (resolver loop closed)"
+    },
+    {
+      "id": "PER_TEST",
+      "result": "SKIP",
+      "severity": "soft",
+      "detail": "3 per_test trajectory entries (informational only)"
+    }
+  ],
+  "summary": "7/13 hard assertions pass"
+}

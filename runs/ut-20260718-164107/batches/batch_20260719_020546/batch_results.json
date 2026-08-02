@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_020546",
+  "started_at": "2026-07-18T18:05:48Z",
+  "finished_at": "2026-07-18T18:06:57Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020546/pytest_batch_20260719_020546.log",
+    "size_bytes": 81484,
+    "captured_at": "2026-07-18T18:06:57Z"
+  },
+  "tests": [
+    {
+      "id": 1643,
+      "test_node": "tests/entrypoints/openai/test_response_api_simple.py::test_reasoning_item[Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 24603,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020546/pytest_batch_20260719_020546_tests_entrypoints_openai_test_response_api_simple_py_test_reasoning_item_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020546/result_batch_20260719_020546_tests_entrypoints_openai_test_response_api_simple_py_test_reasoning_item_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1792,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_basic_audio[hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 33,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020546/pytest_batch_20260719_020546_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020546/result_batch_20260719_020546_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

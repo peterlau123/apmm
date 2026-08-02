@@ -1,0 +1,30 @@
+{
+  "batch_id": "batch_1",
+  "handled_at": "2026-06-15T23:59:00+00:00",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestScaledMMRSModel]",
+      "original_status": "failed",
+      "new_status": "ignored",
+      "reason": "environment",
+      "detail": "os.setpgrp() PermissionError: container kernel restricts setpgid syscall even with --privileged. Not a code bug."
+    },
+    {
+      "id": 2,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+      "original_status": "failed",
+      "new_status": "ignored",
+      "reason": "environment",
+      "detail": "os.setpgrp() PermissionError: container kernel restricts setpgid syscall even with --privileged. Not a code bug."
+    },
+    {
+      "id": 3,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-meta-llama/Llama-3.2-1B-Instruct]",
+      "original_status": "failed",
+      "new_status": "ignored",
+      "reason": "environment",
+      "detail": "os.setpgrp() PermissionError: container kernel restricts setpgid syscall even with --privileged. Not a code bug."
+    }
+  ]
+}

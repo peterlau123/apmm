@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260701_155406",
+  "started_at": "2026-07-01T07:57:23Z",
+  "finished_at": "2026-07-01T07:59:37Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/pytest_batch_20260701_155406.log",
+    "size_bytes": 129509,
+    "captured_at": "2026-07-01T07:59:37Z"
+  },
+  "tests": [
+    {
+      "id": 1584,
+      "test_node": "tests/entrypoints/openai/test_optional_middleware.py::test_enable_request_id_header[--enable-request-id-headers]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 20075,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/pytest_batch_20260701_155406_tests_entrypoints_openai_test_optional_middleware_py_test_enable_request_id_header_enable_request_id_headers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/result_batch_20260701_155406_tests_entrypoints_openai_test_optional_middleware_py_test_enable_request_id_header_enable_request_id_headers.xml"
+    },
+    {
+      "id": 1585,
+      "test_node": "tests/entrypoints/openai/test_optional_middleware.py::test_custom_request_id_header[--enable-request-id-headers]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21576,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/pytest_batch_20260701_155406_tests_entrypoints_openai_test_optional_middleware_py_test_custom_request_id_header_enable_request_id_headers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/result_batch_20260701_155406_tests_entrypoints_openai_test_optional_middleware_py_test_custom_request_id_header_enable_request_id_headers.xml"
+    },
+    {
+      "id": 1586,
+      "test_node": "tests/entrypoints/openai/test_orca_metrics.py::test_chat_completion_with_orca_header[True]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21572,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/pytest_batch_20260701_155406_tests_entrypoints_openai_test_orca_metrics_py_test_chat_completion_with_orca_header_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/result_batch_20260701_155406_tests_entrypoints_openai_test_orca_metrics_py_test_chat_completion_with_orca_header_True.xml"
+    },
+    {
+      "id": 1587,
+      "test_node": "tests/entrypoints/openai/test_orca_metrics.py::test_completion_with_orca_header[True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/pytest_batch_20260701_155406_tests_entrypoints_openai_test_orca_metrics_py_test_completion_with_orca_header_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_155406/result_batch_20260701_155406_tests_entrypoints_openai_test_orca_metrics_py_test_completion_with_orca_header_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

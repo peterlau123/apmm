@@ -1,0 +1,8 @@
+ERROR          tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_streaming (gpu=0, 151ms, exit=0)
+ERROR          tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_no_tool_call (gpu=1, 151ms, exit=0)
+ERROR          tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_between_tags (gpu=2, 151ms, exit=0)
+ERROR          tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_until_eos (gpu=3, 152ms, exit=0)
+ERROR          tests/entrypoints/openai/tool_parsers/test_hermes_tool_parser.py::test_hermes_parser_non_streaming_tool_call_invalid_json (gpu=4, 151ms, exit=0)
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[How can I help you today?-expected_tool_calls0-How can I help you today?] (gpu=5, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{"name": "get_weather", "arguments": {"city": "San Francisco", "metric": "celsius"}}]</tool_calls>-expected_tool_calls1-None] (gpu=6, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/tool_parsers/test_hunyuan_a13b_tool_parser.py::test_hunyuan_a13b_tool_parser_extract[<tool_calls>[{"name": "get_weather", "arguments": {"city": "San Francisco", "metric": "celsius"}}, {"name": "register_user", "arguments": {"name": "John Doe", "age": 37, "address": {"city": "San Francisco", "state": "CA"}, "role": null, "passed_test": true, "aliases": ["John", "Johnny"]}}]</tool_calls>-expected_tool_calls2-None] (gpu=7, Nonems, exit=0)

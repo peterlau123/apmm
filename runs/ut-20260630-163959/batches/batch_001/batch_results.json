@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260630_165502",
+  "started_at": "2026-06-30T08:55:48Z",
+  "finished_at": "2026-06-30T08:57:45Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502.log",
+    "size_bytes": 574684,
+    "captured_at": "2026-06-30T08:57:45Z"
+  },
+  "tests": [
+    {
+      "id": 98,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_different_seeds",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_different_seeds.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_different_seeds.xml"
+    },
+    {
+      "id": 99,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_respects_limits",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_respects_limits.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_respects_limits.xml"
+    },
+    {
+      "id": 100,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_zero_prob_entries_are_removed",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_zero_prob_entries_are_removed.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_zero_prob_entries_are_removed.xml"
+    },
+    {
+      "id": 101,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_zero_items",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_zero_items.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_zero_items.xml"
+    },
+    {
+      "id": 102,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_num_items_per_prompt",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_num_items_per_prompt.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_num_items_per_prompt.xml"
+    },
+    {
+      "id": 103,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_bucket_config_not_mutated",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_bucket_config_not_mutated.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_bucket_config_not_mutated.xml"
+    },
+    {
+      "id": 104,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_video_sampling",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_video_sampling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_video_sampling.xml"
+    },
+    {
+      "id": 105,
+      "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_video_only_sampling",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/pytest_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_video_only_sampling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_165502/result_batch_20260630_165502_tests_benchmarks_test_random_dataset_py_test_random_mm_video_only_sampling.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 6,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

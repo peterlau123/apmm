@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_050937",
+  "started_at": "2026-06-30T21:10:08Z",
+  "finished_at": "2026-06-30T21:11:56Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937.log",
+    "size_bytes": 302231,
+    "captured_at": "2026-06-30T21:11:56Z"
+  },
+  "tests": [
+    {
+      "id": 1428,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_extra_fields_allowed",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_extra_fields_allowed.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_extra_fields_allowed.xml"
+    },
+    {
+      "id": 1429,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_complex_message_content",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_complex_message_content.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_complex_message_content.xml"
+    },
+    {
+      "id": 1430,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_custom_role",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_custom_role.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_custom_role.xml"
+    },
+    {
+      "id": 1431,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_long_seed",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_long_seed.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_long_seed.xml"
+    },
+    {
+      "id": 1432,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_invocations",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_invocations.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_py_test_invocations.xml"
+    },
+    {
+      "id": 1433,
+      "test_node": "tests/entrypoints/openai/test_chat_echo.py::test_chat_session_with_echo_and_continue_final_message[test_case0]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_chat_session_with_echo_and_continue_final_message_test_case0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_chat_session_with_echo_and_continue_final_message_test_case0.xml"
+    },
+    {
+      "id": 1434,
+      "test_node": "tests/entrypoints/openai/test_chat_echo.py::test_chat_session_with_echo_and_continue_final_message[test_case1]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_chat_session_with_echo_and_continue_final_message_test_case1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_chat_session_with_echo_and_continue_final_message_test_case1.xml"
+    },
+    {
+      "id": 1435,
+      "test_node": "tests/entrypoints/openai/test_chat_echo.py::test_prompt_logprobs",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/pytest_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_prompt_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050937/result_batch_20260701_050937_tests_entrypoints_openai_test_chat_echo_py_test_prompt_logprobs.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 8,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "batch_id": "batch_20260630_073600",
+  "started_at": "2026-06-29T23:36:05Z",
+  "finished_at": "2026-06-29T23:37:28Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600.log",
+    "size_bytes": 10689,
+    "captured_at": "2026-06-29T23:37:28Z"
+  },
+  "tests": [
+    {
+      "id": 78,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than_or_equal_to[10.0-3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 129,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_less_than_or_equal_to_10_0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/result_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_less_than_or_equal_to_10_0_3.xml"
+    },
+    {
+      "id": 79,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than_or_equal_to[5.0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 128,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_less_than_or_equal_to_5_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/result_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_less_than_or_equal_to_5_0_2.xml"
+    },
+    {
+      "id": 80,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than[10.0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 129,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_10_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/result_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_10_0_2.xml"
+    },
+    {
+      "id": 81,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than[5.0-3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 134,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_5_0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/result_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_5_0_3.xml"
+    },
+    {
+      "id": 82,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than_or_equal_to[10.0-3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/pytest_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_or_equal_to_10_0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073600/result_batch_20260630_073600_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_greater_than_or_equal_to_10_0_3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

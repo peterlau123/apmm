@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_232117",
+  "started_at": "2026-07-01T15:24:03Z",
+  "finished_at": "2026-07-01T15:25:38Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117.log",
+    "size_bytes": 19853,
+    "captured_at": "2026-07-01T15:25:38Z"
+  },
+  "tests": [
+    {
+      "id": 1684,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_direct_function_call_object_preservation",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_direct_function_call_object_preservation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_direct_function_call_object_preservation.xml"
+    },
+    {
+      "id": 1685,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_mixed_input_types_with_function_calls",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_mixed_input_types_with_function_calls.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_mixed_input_types_with_function_calls.xml"
+    },
+    {
+      "id": 1686,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_function_call_with_complex_arguments",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_with_complex_arguments.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_with_complex_arguments.xml"
+    },
+    {
+      "id": 1687,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_invalid_function_call_fallback",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_invalid_function_call_fallback.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_invalid_function_call_fallback.xml"
+    },
+    {
+      "id": 1688,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_string_input_not_affected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 116,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_string_input_not_affected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_string_input_not_affected.xml"
+    },
+    {
+      "id": 1689,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_empty_list_input",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_empty_list_input.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_empty_list_input.xml"
+    },
+    {
+      "id": 1690,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_function_call_output_not_affected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_output_not_affected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_output_not_affected.xml"
+    },
+    {
+      "id": 1691,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_mixed_function_call_and_output",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 120,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/pytest_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_mixed_function_call_and_output.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_232117/result_batch_20260701_232117_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_mixed_function_call_and_output.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

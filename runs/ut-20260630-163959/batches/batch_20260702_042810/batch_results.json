@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_042811",
+  "started_at": "2026-07-01T20:30:39Z",
+  "finished_at": "2026-07-01T20:32:01Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811.log",
+    "size_bytes": 551207,
+    "captured_at": "2026-07-01T20:32:01Z"
+  },
+  "tests": [
+    {
+      "id": 1948,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_no_tool_call[False]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_no_tool_call_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_no_tool_call_False.xml"
+    },
+    {
+      "id": 1949,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[simple_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_simple_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_simple_streaming.xml"
+    },
+    {
+      "id": 1950,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[simple_nonstreaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_simple_nonstreaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_simple_nonstreaming.xml"
+    },
+    {
+      "id": 1951,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[more_types_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_more_types_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_more_types_streaming.xml"
+    },
+    {
+      "id": 1952,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[more_types_nonstreaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_more_types_nonstreaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_more_types_nonstreaming.xml"
+    },
+    {
+      "id": 1953,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[parameterless_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_parameterless_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_parameterless_streaming.xml"
+    },
+    {
+      "id": 1954,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[parameterless_nonstreaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_parameterless_nonstreaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_parameterless_nonstreaming.xml"
+    },
+    {
+      "id": 1955,
+      "test_node": "tests/entrypoints/openai/tool_parsers/test_pythonic_tool_parser.py::test_tool_call[empty_dict_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/pytest_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_empty_dict_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_042811/result_batch_20260702_042811_tests_entrypoints_openai_tool_parsers_test_pythonic_tool_parser_py_test_tool_call_empty_dict_streaming.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 8,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "batch_id": "batch_0001",
+  "run_dir": "D:/workspace/apmm/runs/ut-20260623-233807",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "test_file": "tests/benchmarks/test_latency_cli.py",
+      "test_name": "test_bench_latency",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "status": "pending"
+    }
+  ],
+  "pytest_args": "-q --tb=long",
+  "remote_server": "t_h20",
+  "docker_container": "v0.13.0_torch2.5.1_compile",
+  "ut_logs_dir": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs",
+  "vllm_dir": "/gpfs/gcsp/M2.7_verify/vllm",
+  "container_env": {
+    "HF_HOME": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub",
+    "HF_HUB_CACHE": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_CACHE": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/hub",
+    "HF_DATASETS_CACHE": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets",
+    "CUDA_VISIBLE_DEVICES": "0,1,2,3,4,5,6,7"
+  },
+  "timeout": 600,
+  "pytest_idle_timeout": 120,
+  "workflow_yaml": "tests/ut/integration/fixtures/workflow.l4.yaml"
+}

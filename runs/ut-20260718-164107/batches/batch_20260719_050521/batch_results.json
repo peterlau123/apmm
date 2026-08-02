@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_050521",
+  "started_at": "2026-07-18T21:05:24Z",
+  "finished_at": "2026-07-18T21:05:49Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_050521/pytest_batch_20260719_050521.log",
+    "size_bytes": 4830,
+    "captured_at": "2026-07-18T21:05:49Z"
+  },
+  "tests": [
+    {
+      "id": 3577,
+      "test_node": "tests/kernels/attention/test_cache.py::test_swap_blocks[auto-cuda:1-0-dtype1-10000-16-64-8-256-direction2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_050521/pytest_batch_20260719_050521_tests_kernels_attention_test_cache_py_test_swap_blocks_auto_cuda_1_0_dtype1_10000_16_64_8_256_direction2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_050521/result_batch_20260719_050521_tests_kernels_attention_test_cache_py_test_swap_blocks_auto_cuda_1_0_dtype1_10000_16_64_8_256_direction2.xml"
+    },
+    {
+      "id": 3578,
+      "test_node": "tests/kernels/attention/test_cache.py::test_swap_blocks[auto-cuda:1-0-dtype1-10000-16-80-8-256-direction0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_050521/pytest_batch_20260719_050521_tests_kernels_attention_test_cache_py_test_swap_blocks_auto_cuda_1_0_dtype1_10000_16_80_8_256_direction0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_050521/result_batch_20260719_050521_tests_kernels_attention_test_cache_py_test_swap_blocks_auto_cuda_1_0_dtype1_10000_16_80_8_256_direction0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

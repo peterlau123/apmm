@@ -1,0 +1,120 @@
+{
+  "batch_id": "batch_20260625_113734",
+  "started_at": "2026-06-25T03:39:55Z",
+  "finished_at": "2026-06-25T03:45:54Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734.log",
+    "size_bytes": 105197,
+    "captured_at": "2026-06-25T03:45:54Z"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 129,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.xml"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 130,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict1_compilation_config_use_inductor_graph_partition_true.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict1_compilation_config_use_inductor_graph_partition_true.xml"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 125,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.xml"
+    },
+    {
+      "id": 4,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 131,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict1_enable_prefix_caching.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict1_enable_prefix_caching.xml"
+    },
+    {
+      "id": 5,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict2_no_disable_log_stats.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict2_no_disable_log_stats.xml"
+    },
+    {
+      "id": 6,
+      "test_node": "tests/config/test_config_utils.py::test_hash_factors_deterministic",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_config_test_config_utils_py_test_hash_factors_deterministic.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_config_test_config_utils_py_test_hash_factors_deterministic.xml"
+    },
+    {
+      "id": 7,
+      "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None]",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_config_test_config_utils_py_test_normalize_value_matrix_None_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_config_test_config_utils_py_test_normalize_value_matrix_None_None.xml"
+    },
+    {
+      "id": 8,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'zai-org/GLM-4.1V-9B-Thinking'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 263199,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/pytest_batch_20260625_113734_tests_kernels_core_test_mrope_py_test_mrope_11_dtype0_1_model_info0_zai_org_GLM_4_1V_9B_Thinking.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260625_113734/result_batch_20260625_113734_tests_kernels_core_test_mrope_py_test_mrope_11_dtype0_1_model_info0_zai_org_GLM_4_1V_9B_Thinking.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 3
+  }
+}

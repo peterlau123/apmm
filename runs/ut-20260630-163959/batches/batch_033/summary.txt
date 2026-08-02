@@ -1,0 +1,8 @@
+FAILED         tests/compile/test_config.py::test_use_cudagraphs[FULL_DECODE_ONLY-1] (gpu=0, 1815ms, exit=0)
+IGNORED        tests/compile/test_config.py::test_use_cudagraphs[PIECEWISE-13] (gpu=1, Nonems, exit=0)
+FAILED         tests/compile/test_config.py::test_use_cudagraphs[FULL_AND_PIECEWISE-14] (gpu=2, 1873ms, exit=0)
+FAILED         tests/compile/test_config.py::test_no_compilation (gpu=3, 1857ms, exit=0)
+FAILED         tests/compile/test_config.py::test_enforce_eager (gpu=4, 4019ms, exit=0)
+FAILED         tests/compile/test_config.py::test_splitting_ops_dynamic (gpu=5, 123ms, exit=0)
+FAILED         tests/compile/test_config.py::test_moe_splitting_ops_deepep_ht_inductor_partition (gpu=6, 124ms, exit=0)
+PASSED         tests/compile/test_decorator.py::test_ignore_torch_compile_decorator[True] (gpu=7, 110ms, exit=0)

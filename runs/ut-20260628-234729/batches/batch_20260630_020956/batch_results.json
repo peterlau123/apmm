@@ -1,0 +1,85 @@
+{
+  "batch_id": "batch_20260630_020956",
+  "started_at": "2026-06-29T18:10:02Z",
+  "finished_at": "2026-06-29T18:15:28Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956.log",
+    "size_bytes": 484988,
+    "captured_at": "2026-06-29T18:15:28Z"
+  },
+  "tests": [
+    {
+      "id": 10,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_True_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/result_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_True_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 11,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_True_False_5_FLASH_ATTN_meta_llama_Llama_3_2_1B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/result_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_True_False_5_FLASH_ATTN_meta_llama_Llama_3_2_1B_Instruct.xml"
+    },
+    {
+      "id": 12,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_False_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/result_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_False_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 13,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_False_False_5_FLASH_ATTN_meta_llama_Llama_3_2_1B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/result_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_uni_False_False_5_FLASH_ATTN_meta_llama_Llama_3_2_1B_Instruct.xml"
+    },
+    {
+      "id": 14,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 83258,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/pytest_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_mp_True_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_020956/result_batch_20260630_020956_tests_basic_correctness_test_basic_correctness_py_test_models_False_mp_True_False_5_FLASH_ATTN_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 5,
+    "passed": 0,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 4
+  }
+}

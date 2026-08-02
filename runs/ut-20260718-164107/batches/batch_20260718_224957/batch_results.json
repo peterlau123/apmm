@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260718_224957",
+  "started_at": "2026-07-18T14:50:47Z",
+  "finished_at": "2026-07-18T14:52:59Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957.log",
+    "size_bytes": 64548,
+    "captured_at": "2026-07-18T14:52:59Z"
+  },
+  "tests": [
+    {
+      "id": 190,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs6-AttentionBackendEnum.TRITON_ATTN-matches6-+quant_fp8,-rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 327,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs6_AttentionBackendEnum_TRITON_ATTN_matches6_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 191,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs7-AttentionBackendEnum.TRITON_ATTN-matches7-+quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 422,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs7_AttentionBackendEnum_TRITON_ATTN_matches7_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 192,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 339,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.xml"
+    },
+    {
+      "id": 193,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 382,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.xml"
+    },
+    {
+      "id": 194,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 309,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.xml"
+    },
+    {
+      "id": 195,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 388,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.xml"
+    },
+    {
+      "id": 196,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-Qwen/Qwen3-0.6B-model_kwargs12-AttentionBackendEnum.TRITON_ATTN-matches12--rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 455,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.xml"
+    },
+    {
+      "id": 197,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[True-Qwen/Qwen3-0.6B-model_kwargs13-AttentionBackendEnum.TRITON_ATTN-matches13-+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 322,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/pytest_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_224957/result_batch_20260718_224957_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_True_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

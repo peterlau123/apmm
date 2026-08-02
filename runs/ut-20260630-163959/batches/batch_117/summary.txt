@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_errors_with_prompt_embeds[-use-lora-facebook/opt-125m] (gpu=0, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_errors_with_prompt_embeds[-use-lora-opt125m-lora] (gpu=1, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_logprobs_and_prompt_embeds[-use-lora-facebook/opt-125m-1] (gpu=2, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_logprobs_and_prompt_embeds[-use-lora-facebook/opt-125m-0] (gpu=3, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_logprobs_and_prompt_embeds[-use-lora-opt125m-lora-1] (gpu=4, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_completions_with_logprobs_and_prompt_embeds[-use-lora-opt125m-lora-0] (gpu=5, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_prompt_logprobs_raises_error[-use-lora] (gpu=6, 2ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_empty_prompt_embeds[-use-lora] (gpu=7, 2ms, exit=0)

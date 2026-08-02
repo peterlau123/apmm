@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_005705",
+  "started_at": "2026-06-30T16:57:37Z",
+  "finished_at": "2026-06-30T16:59:17Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705.log",
+    "size_bytes": 220496,
+    "captured_at": "2026-06-30T16:59:17Z"
+  },
+  "tests": [
+    {
+      "id": 596,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-gpt2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_gpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_gpt2.xml"
+    },
+    {
+      "id": 597,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-Qwen/Qwen2-7B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_7B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_7B_Instruct.xml"
+    },
+    {
+      "id": 598,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-meta-llama/Llama-3.1-8B]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_meta_llama_Llama_3_1_8B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_meta_llama_Llama_3_1_8B.xml"
+    },
+    {
+      "id": 599,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<vllm.compilation.backends.VllmBackend object at 0x7fbb69c6f1a0>' raised:\nTypeError: VllmBackend.__call__() got an unexpected keyword argument 'options'\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1087,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_0.xml"
+    },
+    {
+      "id": 600,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: aot_compile is not supported by the current configuration. Please make sure torch.compile is enabled with the latest version of PyTorch (current using torch: 2.5.1+cu124)",
+      "duration_ms": 1101,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_1.xml"
+    },
+    {
+      "id": 601,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed_size_oblivious-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "KeyError: 'backed_size_oblivious'",
+      "duration_ms": 1101,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_size_oblivious_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_size_oblivious_0.xml"
+    },
+    {
+      "id": 602,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed_size_oblivious-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "KeyError: 'backed_size_oblivious'",
+      "duration_ms": 1078,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_size_oblivious_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_False_backed_size_oblivious_1.xml"
+    },
+    {
+      "id": 603,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[True-backed-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<vllm.compilation.backends.VllmBackend object at 0x7f09971ab4a0>' raised:\nTypeError: VllmBackend.__call__() got an unexpected keyword argument 'options'\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1117,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/pytest_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_True_backed_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_005705/result_batch_20260701_005705_tests_compile_test_dynamic_shapes_compilation_py_test_model_specialization_with_evaluate_guards_True_backed_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

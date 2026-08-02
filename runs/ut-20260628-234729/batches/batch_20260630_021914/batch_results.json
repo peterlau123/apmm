@@ -1,0 +1,85 @@
+{
+  "batch_id": "batch_20260630_021915",
+  "started_at": "2026-06-29T18:19:20Z",
+  "finished_at": "2026-06-29T18:20:33Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915.log",
+    "size_bytes": 14432,
+    "captured_at": "2026-06-29T18:20:33Z"
+  },
+  "tests": [
+    {
+      "id": 20,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_ray_L4_extra_env2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/result_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_ray_L4_extra_env2.xml"
+    },
+    {
+      "id": 21,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_mp_L4_extra_env3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/result_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_mp_L4_extra_env3.xml"
+    },
+    {
+      "id": 22,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_meta_llama_Llama_3_2_1B_Instruct_ray_L4_extra_env4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/result_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_meta_llama_Llama_3_2_1B_Instruct_ray_L4_extra_env4.xml"
+    },
+    {
+      "id": 23,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_meta_llama_Llama_3_2_1B_Instruct_mp_L4_extra_env5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/result_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_meta_llama_Llama_3_2_1B_Instruct_mp_L4_extra_env5.xml"
+    },
+    {
+      "id": 24,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--A100-extra_env6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/pytest_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_ray_A100_extra_env6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_021915/result_batch_20260630_021915_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_facebook_opt_125m_ray_A100_extra_env6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 5,
+    "passed": 3,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

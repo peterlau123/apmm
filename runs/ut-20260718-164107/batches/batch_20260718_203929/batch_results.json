@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260718_203929",
+  "started_at": "2026-07-18T12:39:31Z",
+  "finished_at": "2026-07-18T12:40:40Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/pytest_batch_20260718_203929.log",
+    "size_bytes": 13020,
+    "captured_at": "2026-07-18T12:40:40Z"
+  },
+  "tests": [
+    {
+      "id": 22,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-TinyLlama/TinyLlama-1.1B-Chat-v1.0-ray--L4-extra_env4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/pytest_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_TinyLlama_TinyLlama_1_1B_Chat_v1_0_ray_L4_extra_env4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/result_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_TinyLlama_TinyLlama_1_1B_Chat_v1_0_ray_L4_extra_env4.xml"
+    },
+    {
+      "id": 23,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-TinyLlama/TinyLlama-1.1B-Chat-v1.0-mp--L4-extra_env5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/pytest_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_TinyLlama_TinyLlama_1_1B_Chat_v1_0_mp_L4_extra_env5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/result_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_True_TinyLlama_TinyLlama_1_1B_Chat_v1_0_mp_L4_extra_env5.xml"
+    },
+    {
+      "id": 30,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-TinyLlama/TinyLlama-1.1B-Chat-v1.0-ray--L4-extra_env4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/pytest_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_False_TinyLlama_TinyLlama_1_1B_Chat_v1_0_ray_L4_extra_env4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/result_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_False_TinyLlama_TinyLlama_1_1B_Chat_v1_0_ray_L4_extra_env4.xml"
+    },
+    {
+      "id": 31,
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-TinyLlama/TinyLlama-1.1B-Chat-v1.0-mp--L4-extra_env5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/pytest_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_False_TinyLlama_TinyLlama_1_1B_Chat_v1_0_mp_L4_extra_env5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_203929/result_batch_20260718_203929_tests_basic_correctness_test_basic_correctness_py_test_models_distributed_False_TinyLlama_TinyLlama_1_1B_Chat_v1_0_mp_L4_extra_env5.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

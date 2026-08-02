@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_collective_rpc.py::test_return_none (gpu=0, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_collective_rpc.py::test_echo_args_kwargs (gpu=1, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_completion_error.py::test_completion_error_non_stream (gpu=2, Nonems, exit=0)
+FAILED         tests/entrypoints/openai/test_completion_error.py::test_completion_error_stream (gpu=3, 122ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-auto-True-Qwen/Qwen3-0.6B] (gpu=4, 20069ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-auto-False-Qwen/Qwen3-0.6B] (gpu=5, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-required-True-Qwen/Qwen3-0.6B] (gpu=6, 20074ms, exit=0)
+ERROR          tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-required-False-Qwen/Qwen3-0.6B] (gpu=7, 20068ms, exit=0)

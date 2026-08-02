@@ -1,0 +1,17 @@
+# E2E validation test list - 2 pass + 1 fail + 1 error + 1 retriable
+# Purpose: Validate workflow e2e with controlled outcomes for testing
+# Created: 2026-06-27 (保留以前的 l1/mini/l4 test lists)
+# Source: tasks/ut/test_analysis/remote_log_summary/ + l3_retry_subset.txt
+
+# 2 pass tests (随机挑选 from passed_cases_unique.txt)
+tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]
+tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]
+
+# 1 fail test (from failed_cases_unique.txt)
+tests/benchmarks/test_latency_cli.py::test_bench_latency
+
+# 1 error test (from error_cases_unique.txt)
+tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Meta-Llama-3.1-8B-Instruct-FP8]
+
+# 1 retriable error test (from l3_retry_subset.txt - known timeout/network issues)
+tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]

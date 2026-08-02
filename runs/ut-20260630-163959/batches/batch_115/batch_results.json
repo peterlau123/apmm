@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_053321",
+  "started_at": "2026-06-30T21:33:52Z",
+  "finished_at": "2026-06-30T21:38:35Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321.log",
+    "size_bytes": 321963,
+    "captured_at": "2026-06-30T21:38:35Z"
+  },
+  "tests": [
+    {
+      "id": 1476,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-tool_choice2-True-Qwen/Qwen3-0.6B]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_True_tool_choice2_True_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_True_tool_choice2_True_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1477,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[True-tool_choice2-False-Qwen/Qwen3-0.6B]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_True_tool_choice2_False_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_True_tool_choice2_False_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1478,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-auto-True-Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18568,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_auto_True_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_auto_True_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1479,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-auto-False-Qwen/Qwen3-0.6B]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_auto_False_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_auto_False_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1480,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-required-True-Qwen/Qwen3-0.6B]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_required_True_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_required_True_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1481,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-required-False-Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 19573,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_required_False_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_required_False_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1482,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-tool_choice2-True-Qwen/Qwen3-0.6B]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_tool_choice2_True_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_tool_choice2_True_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1483,
+      "test_node": "tests/entrypoints/openai/test_completion_with_function_calling.py::test_function_tool_use[False-tool_choice2-False-Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 20068,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/pytest_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_tool_choice2_False_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_053321/result_batch_20260701_053321_tests_entrypoints_openai_test_completion_with_function_calling_py_test_function_tool_use_False_tool_choice2_False_Qwen_Qwen3_0_6B.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 5
+  }
+}

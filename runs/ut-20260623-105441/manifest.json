@@ -1,0 +1,62 @@
+{
+  "version": "2.0",
+  "generated_at": "2026-06-23T02:54:41.658899+00:00",
+  "source": "test_list_file",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "test_file": "tests/benchmarks/test_latency_cli.py",
+      "test_name": "test_bench_latency",
+      "status": "ignored",
+      "ignore_reason": "model_missing: meta-llama/Llama-3.2-1B-Instruct not in HF cache; user chose option 2 (skip)",
+      "run_count": 1,
+      "retry_count": 1,
+      "last_duration_ms": 5000,
+      "last_run_at": "2026-06-23T03:25:09Z",
+      "last_exit_code": 1,
+      "last_batch_id": "batch_0001",
+      "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_0001/raw_log.txt"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "ignored",
+      "ignore_reason": "model_missing: zai-org/GLM-4.1V-9B-Thinking not in HF cache; user chose option 2 (skip)",
+      "run_count": 1,
+      "retry_count": 1,
+      "last_duration_ms": 2000,
+      "last_run_at": "2026-06-23T03:25:09Z",
+      "last_exit_code": 1,
+      "last_batch_id": "batch_0001",
+      "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_0001/raw_log.txt"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "status": "ignored",
+      "ignore_reason": "model_missing: Qwen/Qwen2-VL-7B-Instruct not in HF cache; user chose option 2 (skip)",
+      "run_count": 1,
+      "retry_count": 1,
+      "last_duration_ms": 2000,
+      "last_run_at": "2026-06-23T03:25:09Z",
+      "last_exit_code": 1,
+      "last_batch_id": "batch_0001",
+      "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_0001/raw_log.txt"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 3,
+    "pending": 0,
+    "executed": 3,
+    "progress": 100.0
+  }
+}

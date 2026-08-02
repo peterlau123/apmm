@@ -1,0 +1,65 @@
+{
+  "workflow": {
+    "name": "UT Test Workflow",
+    "version": "2.2",
+    "test_name": "ut",
+    "started_at": "2026-06-24T13:20:40.408809+00:00",
+    "finished_at": "2026-06-24T22:12:00+08:00",
+    "status": "completed"
+  },
+  "current_stage": "finalize",
+  "iteration": 3,
+  "paths": {
+    "run_dir": "D:\\workspace\\apmm\\runs\\ut-20260624-212040",
+    "workflow_yaml": "tests\\ut\\integration\\fixtures\\workflow.l4.yaml",
+    "manifest": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\manifest.json",
+    "test_list": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\test_list.txt",
+    "manifest_schema": "D:\\workspace\\apmm\\skills\\ut\\shared\\manifest_schema.json",
+    "batches_dir": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\batches",
+    "logs_dir": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\logs",
+    "reports_dir": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\reports",
+    "workflow_state": "D:\\workspace\\apmm\\runs\\ut-20260624-212040\\workflow_state.json"
+  },
+  "stats": {
+    "total": 3,
+    "pending": 0,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 3,
+    "executed": 3,
+    "progress": 100.0
+  },
+  "current_batch": {
+    "batch_id": "batch_20260624_214908",
+    "batch_dir": "batch_0002",
+    "size": 3,
+    "started_at": "2026-06-24T21:49:08+08:00",
+    "status": "completed"
+  },
+  "flags": {
+    "stop_requested": false,
+    "pause_requested": false,
+    "pause_reason": null,
+    "consecutive_failures": 0
+  },
+  "last_update": "2026-06-24T22:12:00+08:00",
+  "config": {
+    "remote_server": "t_h20",
+    "batch_size": 50,
+    "max_retry_per_test": 3
+  },
+  "completion_summary": {
+    "reason": "stop_condition_met",
+    "final_stats": {
+      "passed": 0,
+      "failed": 0,
+      "error": 0,
+      "ignored": 3,
+      "pending": 0
+    },
+    "iterations": 3,
+    "tests_exhausted": 3,
+    "exhausted_reason": "max retry exceeded for timeout (retriable_error)"
+  }
+}

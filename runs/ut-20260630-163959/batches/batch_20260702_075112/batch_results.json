@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_075113",
+  "started_at": "2026-07-01T23:54:56Z",
+  "finished_at": "2026-07-01T23:58:30Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113.log",
+    "size_bytes": 241348,
+    "captured_at": "2026-07-01T23:58:30Z"
+  },
+  "tests": [
+    {
+      "id": 2052,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_text_1_str_text_2_str[model0]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_str_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_str_model0.xml"
+    },
+    {
+      "id": 2053,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_score_max_model_len[model0]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_score_max_model_len_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_score_max_model_len_model0.xml"
+    },
+    {
+      "id": 2054,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_invocations[model0]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_invocations_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_invocations_model0.xml"
+    },
+    {
+      "id": 2055,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_use_activation[model0]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_use_activation_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_use_activation_model0.xml"
+    },
+    {
+      "id": 2056,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_text_1_str_text_2_list[model1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_list_model1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_list_model1.xml"
+    },
+    {
+      "id": 2057,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_text_1_list_text_2_list[model1]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 19070,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_list_text_2_list_model1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_list_text_2_list_model1.xml"
+    },
+    {
+      "id": 2058,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_text_1_str_text_2_str[model1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_str_model1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_text_1_str_text_2_str_model1.xml"
+    },
+    {
+      "id": 2059,
+      "test_node": "tests/entrypoints/pooling/score/test_online_score.py::TestModel::test_score_max_model_len[model1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/pytest_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_score_max_model_len_model1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_075113/result_batch_20260702_075113_tests_entrypoints_pooling_score_test_online_score_py_TestModel_test_score_max_model_len_model1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 5,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "batch_id": "batch_20260625_113734",
+  "generated_at": "2026-06-25T11:50:00Z",
+  "tests": [
+    {
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "final_status": "ignored",
+      "fix_attempts": 0,
+      "commit": null,
+      "ignored_reason": "依赖未就绪需人工处理: model 'zai-org/GLM-4.1V-9B-Thinking' invalid repository ID (offline environment HF_HUB_OFFLINE=1 prevents download)",
+      "skip_reason": null,
+      "errors": [
+        {
+          "error_key": "zai-org/GLM-4.1V-9B-Thinking",
+          "error_type": "download_error",
+          "error_message": "ValueError: Invalid repository ID or local directory specified: 'zai-org/GLM-4.1V-9B-Thinking'. Please verify: 1. Valid HF repo ID. 2. Local directory with config.json.",
+          "status": "pending",
+          "occurred_at": "2026-06-25T03:39:55Z",
+          "resolved_at": null
+        }
+      ],
+      "failures": []
+    }
+  ],
+  "stats": {
+    "passed": 0,
+    "fixed_pending_verify": 0,
+    "failed": 0,
+    "ignored": 1,
+    "pending": 0
+  },
+  "handled_tests_path": "D:/workspace/apmm/runs/ut-20260625-112509/batches/handled_tests.json"
+}

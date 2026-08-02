@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_013930",
+  "started_at": "2026-07-01T17:45:10Z",
+  "finished_at": "2026-07-01T17:48:34Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930.log",
+    "size_bytes": 192818,
+    "captured_at": "2026-07-01T17:48:34Z"
+  },
+  "tests": [
+    {
+      "id": 1796,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_basic_audio[openai/whisper-small]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21074,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_openai_whisper_small.xml"
+    },
+    {
+      "id": 1797,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_audio_prompt[openai/whisper-small]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21073,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_openai_whisper_small.xml"
+    },
+    {
+      "id": 1798,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_streaming_response[openai/whisper-small]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_openai_whisper_small.xml"
+    },
+    {
+      "id": 1799,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_stream_options[openai/whisper-small]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21073,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_stream_options_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_stream_options_openai_whisper_small.xml"
+    },
+    {
+      "id": 1800,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_long_audio_request[openai/whisper-small]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_long_audio_request_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_long_audio_request_openai_whisper_small.xml"
+    },
+    {
+      "id": 1801,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_basic_audio[google/gemma-3n-E2B-it]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_google_gemma_3n_E2B_it.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_basic_audio_google_gemma_3n_E2B_it.xml"
+    },
+    {
+      "id": 1802,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_audio_prompt[google/gemma-3n-E2B-it]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_google_gemma_3n_E2B_it.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_google_gemma_3n_E2B_it.xml"
+    },
+    {
+      "id": 1803,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_streaming_response[google/gemma-3n-E2B-it]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/pytest_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_google_gemma_3n_E2B_it.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_013930/result_batch_20260702_013930_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_google_gemma_3n_E2B_it.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 5
+  }
+}

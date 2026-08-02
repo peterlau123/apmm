@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_230241",
+  "started_at": "2026-07-01T15:08:26Z",
+  "finished_at": "2026-07-01T15:10:17Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241.log",
+    "size_bytes": 201161,
+    "captured_at": "2026-07-01T15:10:17Z"
+  },
+  "tests": [
+    {
+      "id": 1668,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_streaming[False-openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_streaming_False_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_streaming_False_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1669,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_web_search[openai/gpt-oss-20b]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_web_search_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_web_search_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1670,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_code_interpreter[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_code_interpreter_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_code_interpreter_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1671,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_reasoning_item[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_reasoning_item_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_reasoning_item_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1672,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_calling[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1673,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_calling_multi_turn[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 51,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_multi_turn_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_multi_turn_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1674,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_calling_required[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_required_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_required_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1675,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_system_message_with_tools[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/pytest_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_system_message_with_tools_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_230241/result_batch_20260701_230241_tests_entrypoints_openai_test_response_api_with_harmony_py_test_system_message_with_tools_openai_gpt_oss_20b.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 0,
+    "error": 7,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/openai/test_serving_chat.py::test_serving_chat_should_set_correct_max_tokens (gpu=0, Nonems, exit=0)
+FAILED         tests/entrypoints/openai/test_serving_chat.py::test_serving_chat_could_load_correct_generation_config (gpu=1, 153ms, exit=0)
+FAILED         tests/entrypoints/openai/test_serving_chat.py::test_serving_chat_did_set_correct_cache_salt[gpt_oss] (gpu=2, 153ms, exit=0)
+FAILED         tests/entrypoints/openai/test_serving_chat.py::test_serving_chat_did_set_correct_cache_salt[any] (gpu=3, 147ms, exit=0)
+FAILED         tests/entrypoints/openai/test_serving_chat.py::test_serving_chat_data_parallel_rank_extraction (gpu=4, 153ms, exit=0)
+ERROR          tests/entrypoints/openai/test_serving_chat.py::TestServingChatWithHarmony::test_simple_chat[non_streaming] (gpu=5, 152ms, exit=0)
+ERROR          tests/entrypoints/openai/test_serving_chat.py::TestServingChatWithHarmony::test_simple_chat[streaming] (gpu=6, 152ms, exit=0)
+ERROR          tests/entrypoints/openai/test_serving_chat.py::TestServingChatWithHarmony::test_tool_call_response_with_content[non_streaming] (gpu=7, 152ms, exit=0)

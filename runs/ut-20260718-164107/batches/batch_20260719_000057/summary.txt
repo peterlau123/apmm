@@ -1,0 +1,8 @@
+IGNORED        tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed-Qwen/Qwen2.5-1.5B-Instruct] (gpu=1, Nonems, exit=0)
+PASSED         tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-unbacked-Qwen/Qwen2.5-1.5B-Instruct] (gpu=2, 0ms, exit=0)
+PASSED         tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-Qwen/Qwen2.5-1.5B-Instruct] (gpu=3, 1ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8] (gpu=4, 3736ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-40-8] (gpu=5, 2308ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-64-8] (gpu=6, 3901ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-40-8] (gpu=7, 2670ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-533-128-64-8] (gpu=1, 3474ms, exit=0)

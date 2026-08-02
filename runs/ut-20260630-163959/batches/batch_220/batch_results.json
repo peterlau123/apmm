@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260701_153830",
+  "started_at": "2026-07-01T07:39:00Z",
+  "finished_at": "2026-07-01T07:39:50Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/pytest_batch_20260701_153830.log",
+    "size_bytes": 113440,
+    "captured_at": "2026-07-01T07:39:50Z"
+  },
+  "tests": [
+    {
+      "id": 1564,
+      "test_node": "tests/entrypoints/openai/test_metrics.py::test_metrics_exist[--disable-frontend-multiprocessing-multimodal]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 407,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/pytest_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_exist_disable_frontend_multiprocessing_multimodal.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/result_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_exist_disable_frontend_multiprocessing_multimodal.xml"
+    },
+    {
+      "id": 1565,
+      "test_node": "tests/entrypoints/openai/test_metrics.py::test_abort_metrics_reset[--disable-frontend-multiprocessing-multimodal]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/pytest_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_abort_metrics_reset_disable_frontend_multiprocessing_multimodal.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/result_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_abort_metrics_reset_disable_frontend_multiprocessing_multimodal.xml"
+    },
+    {
+      "id": 1566,
+      "test_node": "tests/entrypoints/openai/test_metrics.py::test_metrics_counts[--disable-frontend-multiprocessing-text]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/pytest_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_counts_disable_frontend_multiprocessing_text.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/result_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_counts_disable_frontend_multiprocessing_text.xml"
+    },
+    {
+      "id": 1567,
+      "test_node": "tests/entrypoints/openai/test_metrics.py::test_metrics_exist[--disable-frontend-multiprocessing-text]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 407,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/pytest_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_exist_disable_frontend_multiprocessing_text.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_153830/result_batch_20260701_153830_tests_entrypoints_openai_test_metrics_py_test_metrics_exist_disable_frontend_multiprocessing_text.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

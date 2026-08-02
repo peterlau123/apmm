@@ -98,6 +98,9 @@ def _run_bifrost(
     if not _BIFROST_BIN.exists():
         raise FileNotFoundError(f"bifrost binary not found: {_BIFROST_BIN}")
 
+    # E2E timing: submit (t0) -> result fetched (t1)
+    t0 = time.monotonic()
+
     # bifrost doesn't interpret shell features; wrap complex commands.
     # Heuristic: if the command contains shell metacharacters, wrap in sh -c.
     shell_chars = any(c in cmd for c in "&&|><$;`()")
@@ -152,7 +155,10 @@ def _run_bifrost(
         # Terminal states
         if "completed" in status_lower or "failed" in status_lower or "timeout" in status_lower:
             # Read result file directly from GPFS (bifrost writes results/<id>_result.json)
-            return _fetch_bifrost_result(task_id, sr.stdout.strip())
+            result = _fetch_bifrost_result(task_id, sr.stdout.strip())
+            # E2E timing: total wall-clock from submit to result fetched
+            result["e2e_duration_ms"] = int((time.monotonic() - t0) * 1000)
+            return result
 
         time.sleep(poll_interval)
 

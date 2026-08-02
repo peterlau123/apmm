@@ -36,6 +36,38 @@ def determine_batches(decision, report):
     return list(set(batches))
 
 
+def _refresh_stats(wf_path: Path):
+    """F4: Tally test_load stats into workflow_state after each retry."""
+    if not wf_path.exists():
+        return
+    state = json.loads(wf_path.read_text(encoding="utf-8"))
+    tl_path = state.get("paths", {}).get("test_load", "")
+    if not tl_path:
+        return
+    tl = Path(tl_path)
+    if not tl.is_absolute():
+        tl = wf_path.parent / tl
+    if not tl.exists():
+        return
+    test_load = json.loads(tl.read_text(encoding="utf-8"))
+    stats = {}
+    for t in test_load.get("tests", []):
+        st = t.get("status", "pending")
+        stats[st] = stats.get(st, 0) + 1
+    state["stats"] = {
+        "total_tests": len(test_load.get("tests", [])),
+        "passed": stats.get("passed", 0),
+        "failed": stats.get("failed", 0),
+        "error": stats.get("error", 0),
+        "ignored": stats.get("ignored", 0),
+        "pending": stats.get("pending", 0),
+        "error_rate": 0.0,
+    }
+    state["test_load_stats"] = stats
+    state["last_update"] = datetime.now(timezone.utc).isoformat()
+    wf_path.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
 def main():
     p = argparse.ArgumentParser(description="Phase 2 Stage 2: Retry batches")
     p.add_argument("--run-dir", "-d", required=True)
@@ -81,11 +113,16 @@ def main():
         if ur.returncode != 0:
             results.append({"batch_id": bid, "status": "failed", "reason": "test_load update failed"})
             continue
+        # F4: Refresh test_load stats into workflow_state after each retry
+        _refresh_stats(wf)
         rd = json.loads(rp2.read_text(encoding="utf-8"))
         st = rd.get("stats", {})
         results.append({"batch_id": bid, "status": "success",
                         "tests_passed": st.get("passed", 0), "tests_failed": st.get("failed", 0)})
         print(f"  OK {bid}")
+
+    # F4: Final stats refresh after all retries
+    _refresh_stats(wf)
 
     report = {
         "stage": "phase2_stage2",

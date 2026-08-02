@@ -624,6 +624,9 @@ def phase1_batch_loop(
     phase1_report = generate_phase1_summary(checkpoint_log)
     write_report(phase1_report, "phase1_summary.json", run_dir)
 
+    # F1+F2: Update workflow_state - refresh stats + transition to phase1_complete
+    _finalize_phase1_state(run_dir)
+
     print(f"\n[Phase 1 Complete] Summary:")
     print(f"  Total batches: {phase1_report['total_batches']}")
     print(f"  Successful: {phase1_report['successful_batches']}")
@@ -631,7 +634,66 @@ def phase1_batch_loop(
     print(f"  Success rate: {phase1_report['success_rate']}%")
     print(f"  Report: {run_dir / 'phase1_summary.json'}")
 
+    # F3: Auto-trigger Phase 2 Stage 1 (statistical analysis)
+    _trigger_phase2_stage1(run_dir)
+
     return checkpoint_log
+
+
+def _finalize_phase1_state(run_dir: Path):
+    """F1+F2: Refresh test_load stats into workflow_state + mark phase1 complete."""
+    ws_path = run_dir / "workflow_state.json"
+    if not ws_path.exists():
+        return
+    state = json.loads(ws_path.read_text(encoding="utf-8"))
+
+    # F1: Tally test_load stats into workflow_state
+    tl_path = state.get("paths", {}).get("test_load", "")
+    if tl_path:
+        tl = Path(tl_path)
+        if not tl.is_absolute():
+            tl = run_dir / tl
+        if tl.exists():
+            test_load = json.loads(tl.read_text(encoding="utf-8"))
+            stats = {}
+            for t in test_load.get("tests", []):
+                st = t.get("status", "pending")
+                stats[st] = stats.get(st, 0) + 1
+            state["stats"] = {
+                "total_tests": len(test_load.get("tests", [])),
+                "passed": stats.get("passed", 0),
+                "failed": stats.get("failed", 0),
+                "error": stats.get("error", 0),
+                "ignored": stats.get("ignored", 0),
+                "pending": stats.get("pending", 0),
+                "error_rate": 0.0,
+            }
+            state["test_load_stats"] = stats
+
+    # F2: Transition workflow state to phase1_complete
+    state["workflow"]["status"] = "phase1_complete"
+    state["current_stage"] = "phase2"
+    state["last_update"] = datetime.now(timezone.utc).isoformat()
+
+    ws_path.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[Phase 1] workflow_state updated: status=phase1_complete, current_stage=phase2")
+
+
+def _trigger_phase2_stage1(run_dir: Path):
+    """F3: Auto-run Phase 2 Stage 1 statistical analysis after Phase 1 completes."""
+    stage1_script = _project_root / "skills" / "ut" / "ut_common" / "two-phase-handler" / "scripts" / "phase2_stage1.py"
+    if not stage1_script.exists():
+        print(f"[WARN] Phase 2 Stage 1 script not found: {stage1_script}")
+        return
+    print(f"\n[Phase 2] Auto-triggering Stage 1 statistical analysis...")
+    result = subprocess.run(
+        [sys.executable, str(stage1_script), "--run-dir", str(run_dir)],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        print(f"[Phase 2] Stage 1 complete: {run_dir / 'phase2_stage1_report.json'}")
+    else:
+        print(f"[Phase 2] Stage 1 failed: {result.stderr.strip()[:200]}")
 
 
 # ============================================================================

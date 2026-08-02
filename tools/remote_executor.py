@@ -139,27 +139,22 @@ def _run_bifrost(
             f"bifrost submit returned no task_id: {r.stdout[:200]}"
         )
 
-    # Poll until terminal state
+    # Poll until terminal state: watch the result file directly on GPFS.
+    # A local stat() on GPFS is ~1ms (vs spawning `bifrost client status`,
+    # which costs ~30ms + process startup each poll). Tight interval keeps
+    # e2e latency ≈ server execution time, not poll cadence.
     deadline = time.monotonic() + timeout + 120  # generous margin
-    poll_interval = 2  # seconds
+    poll_interval = 0.2  # seconds - GPFS stat is cheap
+    shared_storage = _get_bifrost_shared_storage()
+    result_file = shared_storage / "results" / f"{task_id}_result.json"
 
     while time.monotonic() < deadline:
-        sr = subprocess.run(
-            [str(_BIFROST_BIN), "client", "status", task_id],
-            capture_output=True, text=True, timeout=10,
-            env=_bifrost_env(),
-        )
-        output = (sr.stdout or "") + "\n" + (sr.stderr or "")
-        status_lower = output.lower()
-
-        # Terminal states
-        if "completed" in status_lower or "failed" in status_lower or "timeout" in status_lower:
+        if result_file.exists():
             # Read result file directly from GPFS (bifrost writes results/<id>_result.json)
-            result = _fetch_bifrost_result(task_id, sr.stdout.strip())
+            result = _fetch_bifrost_result(task_id, "")
             # E2E timing: total wall-clock from submit to result fetched
             result["e2e_duration_ms"] = int((time.monotonic() - t0) * 1000)
             return result
-
         time.sleep(poll_interval)
 
     raise TimeoutError(f"bifrost task {task_id} did not complete within {timeout + 120}s")

@@ -89,7 +89,13 @@ def calculate_resume_info(batches: dict, batch_stats: dict) -> dict:
     last_batch_id = max(batches.keys(), key=lambda k: batches[k].get("created_at", ""))
     last_batch = batches[last_batch_id]
     can_resume = last_batch.get("status") in ("generated", "running", "completed")
-    pending = batch_stats.get("generated", 0) - batch_stats.get("completed", 0) - batch_stats.get("running", 0)
+    # pending = 仍处于 generated/running 的 batch 数（基于实际状态, 而非增量计数）
+    # 旧实现用 batch_stats 增量计数相减: generated - completed - running,
+    # 但 generated 是"生成时+1"的增量, completed 是累计数, 口径不一致 -> 负数。
+    pending = sum(
+        1 for b in batches.values()
+        if b.get("status") in ("generated", "running")
+    )
 
     if last_batch.get("status") == "running":
         recommendation = "继续执行当前running batch，或检查是否需要重新执行"

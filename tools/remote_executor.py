@@ -288,6 +288,86 @@ def run_remote(
         return _run_agent_py(cmd, timeout=timeout, profile=profile)
 
 
+# ── GPU 探查与动态并行度 ────────────────────────────────────────────────────
+
+# GPU 空闲判定阈值: 利用率 < 5% 且显存占用 < 500MB 视为空闲
+_GPU_IDLE_UTIL_PCT = 5.0
+_GPU_IDLE_MEM_MIB = 500
+
+
+def probe_gpus(timeout: int = 60, backend: str = "bifrost") -> dict:
+    """Probe GPU availability on the remote node.
+
+    Runs ``nvidia-smi`` remotely and parses per-GPU utilization/memory.
+    Returns:
+        {
+          "total": int,          # total GPU count
+          "idle": int,           # idle (free) GPU count
+          "busy": int,           # busy GPU count
+          "gpus": [{"index": int, "util_pct": float, "mem_used_mib": int, "idle": bool}, ...]
+        }
+    """
+    cmd = (
+        "nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader"
+    )
+    result = run_remote(cmd, timeout=timeout, backend=backend)
+    if result["exit_code"] != 0:
+        raise ConnectionError(
+            f"GPU probe failed (exit {result['exit_code']}): {result['stderr'][:300]}"
+        )
+
+    gpus = []
+    for line in (result["stdout"] or "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        parts = [p.strip() for p in line.split(",")]
+        if len(parts) < 3:
+            continue
+        try:
+            idx = int(parts[0])
+            util = float(parts[1].rstrip("%"))
+            mem = int(parts[2].split()[0])  # "0 MiB" -> 0
+        except ValueError:
+            continue
+        idle = util < _GPU_IDLE_UTIL_PCT and mem < _GPU_IDLE_MEM_MIB
+        gpus.append({"index": idx, "util_pct": util, "mem_used_mib": mem, "idle": idle})
+
+    idle = sum(1 for g in gpus if g["idle"])
+    return {
+        "total": len(gpus),
+        "idle": idle,
+        "busy": len(gpus) - idle,
+        "gpus": gpus,
+    }
+
+
+def compute_parallelism(
+    *,
+    probe_result: Optional[dict] = None,
+    max_parallel: int = 10,
+    backend: str = "bifrost",
+) -> int:
+    """Determine parallelism from GPU availability.
+
+    Priority:
+      1. explicit probe_result (if given, no remote call)
+      2. remote GPU probe (idle GPU count)
+      3. fallback to max_parallel if probe fails
+
+    Result is clamped to [1, max_parallel].
+    """
+    try:
+        if probe_result is None:
+            probe_result = probe_gpus(backend=backend)
+        idle = probe_result.get("idle", 0)
+        parallelism = idle if idle > 0 else 1
+    except (ConnectionError, FileNotFoundError):
+        parallelism = max_parallel
+
+    return max(1, min(parallelism, max_parallel))
+
+
 # ── Self-test ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":

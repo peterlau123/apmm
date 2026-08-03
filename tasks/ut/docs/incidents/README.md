@@ -17,6 +17,7 @@
 | 2026-07-19 | [vLLM server 启动超时/退出事故（compile 超时 + 模型缓存缺失）](2026-07-19-vllm-server-startup-timeout-incident.md) | 5 个 failed：4 个 mode:3 compile >240s 被内层 timeout 杀，1 个 whisper-small 缓存缺失致 server 崩溃 | 📐 待修复 |
 | 2026-07-19 | [Response API 测试 torch.compile + DeepGEMM 崩溃事故（torch 2.5.1 API 不匹配）](2026-07-19-response-api-torch-compile-deepgemm-crash-incident.md) | 7 个 test_response_api_*.py error，vllm eef921f45 AOT compile 重构与 torch 2.5.1 不匹配（inline_call/VllmBackend）+ deep_gemm._C 未编译 warmup 崩 | ✅ 已闭环 |
 | 2026-07-19 | [content_format 断言失败事故（上游测试期望与检测逻辑不一致）](2026-07-19-content-format-test-expectation-mismatch-incident.md) | 3 个 test_chat_utils failed，上游测试参数表期望过时（fallbacks Qwen2-VL 期望 string 实为 openai，hf_defined LLAMA_GUARD 期望 openai 实为 string） | 📐 待评估 |
+| 2026-08-03 | [测试清单数量溯因事故（test_async_llm 22 条静默丢失）](2026-08-03-test-list-count-loss-incident.md) | hf_hub/hf_hub/hub 混淆致 TinyLlama 缓存结构损坏 → collect ERROR → 22 条用例静默丢失（32964→32933） | ✅ 已修复 |
 
 ## 相关入口
 

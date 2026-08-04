@@ -273,10 +273,19 @@ def _wrap_with_docker_exec_b64(
     # Outer quoting uses double quotes around a pure-ASCII payload (echo +
     # pipe + base64 chars). No single quotes, no newlines, no shell meta in
     # the encoded chunk → no quoting risk in any hop.
-    return (
+    # 2026-08-04 修复: bifrost 后端 (shell_words 解析, 不经 shell) 下
+    # 无 sh -c 包装的 `sudo ... bash -c "echo | base64 -d | bash"` 提交
+    # 失败 (exit=1/0ms timeout) —— shell_words 把嵌套引号/管道拆坏。
+    # 手动验证: 加 `sh -c '...'` 前缀后 bifrost 提交成功。
+    # 返回自带 sh -c, remote_executor._run_bifrost 检测 startswith("sh -c")
+    # 不会二次包装。
+    inner = (
         f"sudo -n docker exec{env_flags} {docker_container} bash -c "
         f"\"echo {encoded} | base64 -d | bash\""
     )
+    # 外层用单引号包整个命令 (bifrost shell_words 解析后交给 sh -c 执行,
+    # 内部双引号原样保留给 bash -c)。
+    return f"sh -c '{inner}'"
 
 
 # ── Remote call helper ────────────────────────────────────────────────────────
@@ -583,6 +592,11 @@ def _detect_free_gpus(
     except ConnectionError:
         raise
     out = res.get("stdout", "") or ""
+    # DEBUG 2026-08-04: 探测命令实际输出
+    import os as _os
+    if _os.environ.get("BIFROST_DEBUG_GPU"):
+        print(f"[DBG-detect] cmd={cmd[:150]}...", flush=True)
+        print(f"[DBG-detect] exit={res.get('exit_code')} stdout={out[:300]!r}", flush=True)
     if res.get("exit_code", 0) != 0 and not out:
         return [], None
 

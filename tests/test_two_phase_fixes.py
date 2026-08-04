@@ -521,30 +521,30 @@ class TestRetryTimeout_TestLoadUpdate:
         spec.loader.exec_module(cls._retry_mod)
 
     def test_retry_one_deletes_old_result(self, tmp_path):
-        """retry_one 执行前应删除旧 batch_results.json."""
+        """run_super_batch 执行前应删除旧 batch_results.json (Bug 1)."""
         # 创建旧结果文件
-        bid = "batch_test"
-        batch_dir = tmp_path / "batches" / bid
+        super_id = "super_0001"
+        batch_dir = tmp_path / "batches" / super_id
         batch_dir.mkdir(parents=True)
         old_result = batch_dir / "batch_results.json"
         old_result.write_text('{"old": true}')
-        config = batch_dir / "batch_config.json"
-        config.write_text('{"tests": []}')
 
         # mock subprocess.run 模拟失败 (无新文件生成)
         with patch("subprocess.run", return_value=MagicMock(returncode=1, stdout="", stderr="error")):
-            result = self._retry_mod.retry_one(bid, str(tmp_path), wall_timeout=30)
+            result = self._retry_mod.run_super_batch(
+                super_id, [{"id": 1, "test_node": "x"}], str(tmp_path),
+                wall_timeout=30, batch_type="normal", gpu_per_test=1)
 
         # 旧文件被删除, 且无新文件 -> status=no_result
         assert result["status"] == "no_result", f"expected no_result, got {result}"
 
     def test_retry_one_calls_update_test_load(self, tmp_path):
-        """retry_one 成功后应调用 update_test_load_two_phase.py."""
+        """split_back 成功后应调用 update_test_load_two_phase.py (Bug 3)."""
         bid = "batch_test2"
         batch_dir = tmp_path / "batches" / bid
         batch_dir.mkdir(parents=True)
         config = batch_dir / "batch_config.json"
-        config.write_text('{"tests": []}')
+        config.write_text('{"tests": [{"id": 1}]}')
 
         # workflow_state
         wf = tmp_path / "workflow_state.json"
@@ -554,17 +554,12 @@ class TestRetryTimeout_TestLoadUpdate:
         }))
         (tmp_path / "test_load.json").write_text(json.dumps({"tests": []}))
 
-        # mock subprocess.run: 第一次 (execute_batch) 成功, 第二次 (update_test_load) 也成功
-        def fake_run(*args, **kwargs):
-            # 如果是 execute_batch, 创建 batch_results.json
-            cmd = " ".join(kwargs.get("args", args[0]) if args else [])
-            if "update_test_load_two_phase" not in cmd:
-                (batch_dir / "batch_results.json").write_text(
-                    json.dumps({"statistics": {"passed": 1, "failed": 0}}))
-            return MagicMock(returncode=0, stdout="OK", stderr="")
+        # mock subprocess.run: update_test_load_two_phase 调用成功
+        with patch("subprocess.run", return_value=MagicMock(returncode=0, stdout="OK", stderr="")):
+            result = self._retry_mod.split_back(
+                {"tests": [{"id": 1, "status": "passed"}]},
+                {1: bid}, str(tmp_path))
 
-        with patch("subprocess.run", side_effect=fake_run):
-            result = self._retry_mod.retry_one(bid, str(tmp_path), wall_timeout=30)
-
-        assert result["status"] == "done", f"expected done, got {result}"
-        assert result["passed"] == 1
+        assert len(result) == 1, f"expected 1 batch result, got {result}"
+        assert result[0]["status"] == "done"
+        assert result[0]["passed"] == 1

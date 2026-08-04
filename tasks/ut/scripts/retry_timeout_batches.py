@@ -15,6 +15,7 @@ GPU 会争抢同一批空闲卡 (实测 2 并发即互相踩踏 → 任务洪峰
       [--max-batch-size 8] [--limit 10] [--timeout 600]
 """
 import argparse, json, os, subprocess, sys, time
+import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -75,6 +76,10 @@ def run_super_batch(super_id: str, tests: list, run_dir: str, wall_timeout: int,
             capture_output=True, text=True, timeout=wall_timeout + 2400, env=env,
         )
         elapsed = time.monotonic() - t0
+        # DEBUG 2026-08-04: 打印 execute_batch 完整输出 (定位探测 0 卡问题)
+        if True:
+            print(f"    [DBG] rc={r.returncode} stdout tail: "
+                  f"{(r.stdout or '')[-800:]}", flush=True)
         if rp.exists():
             rd = json.loads(rp.read_text())
             return {"rc": r.returncode, "elapsed": elapsed, "results": rd,
@@ -157,6 +162,81 @@ def split_back(results: dict, test_to_batch: dict, run_dir: str) -> list:
     return out
 
 
+def load_slow_tests(run_dir: Path, ut_logs_base=None,
+                    slow_threshold: float = 600) -> tuple:
+    """找出已知慢测试 (重试超限 + XML 实测超时), 重试时跳过避免连坐。
+
+    两个来源:
+    1. test_load: status=ignored 且 retry_count>=3 (重试已超限, 8/4 实测
+       retry 5-11 次仍 ignored) —— key 是 test_id (数字) 和 test_node
+    2. ut_logs 的 result_*.xml: testcase time > slow_threshold (Phase 1
+       XML 实测, 如 test_sequence_parallelism 19-20min —— 这些 retry=0
+       没被来源 1 覆盖, 但放回队列会再次拖到 watchdog 600s 连坐同批)
+
+    Returns: (slow: {test_id_or_node: reason}, xml_prefixes: [test_node 前缀])
+    清单落盘 retry_slow_tests.json 供后续单独处理 (提 timeout 单跑或接受 failed)。
+    """
+    tls = sorted(run_dir.glob("test_load_*.json"),
+                 key=lambda p: p.stat().st_mtime, reverse=True)
+    slow = {}
+    if tls:
+        tl = json.loads(tls[0].read_text())
+        for t in tl.get("tests", []):
+            if t.get("status") == "ignored" and t.get("retry_count", 0) >= 3:
+                reason = (t.get("ignored_reason")
+                          or t.get("error_type") or "slow")
+                if t.get("test_id") is not None:
+                    slow[str(t["test_id"])] = reason
+                if t.get("test_node"):
+                    slow[t["test_node"]] = reason
+    else:
+        print("  [WARN] 无 test_load 文件, 慢测试剔除来源 1 失效", flush=True)
+
+    # 来源 2: XML 实测耗时 > slow_threshold 的测试 (按 test_node 前缀匹配)
+    xml_prefixes = []
+    if ut_logs_base and ut_logs_base.exists():
+        for bdir in ut_logs_base.glob("batch_*/"):
+            for f in bdir.glob("result_*.xml"):
+                try:
+                    tree = ET.parse(f)
+                except Exception:
+                    continue
+                for tc in tree.getroot().iter("testcase"):
+                    try:
+                        dur = float(tc.get("time", 0))
+                    except (TypeError, ValueError):
+                        continue
+                    if dur > slow_threshold:
+                        cls = (tc.get("classname") or "").replace(".", "/") + ".py"
+                        prefix = f"{cls}::{tc.get('name') or ''}"
+                        # 去参数化后缀 [..] 才能 startswith 匹配 test_node
+                        prefix = prefix.split("[")[0]
+                        if prefix not in xml_prefixes:
+                            xml_prefixes.append(prefix)
+        print(f"[retry] XML 实测 >{slow_threshold:.0f}s 慢测试前缀 {len(xml_prefixes)} 个",
+              flush=True)
+
+    out = run_dir / "retry_slow_tests.json"
+    out.write_text(json.dumps({
+        "slow": slow,
+        "xml_prefixes": xml_prefixes,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+    }, ensure_ascii=False, indent=1))
+    print(f"[retry] 已知慢测试 {len(slow)} 个 + XML 前缀 {len(xml_prefixes)} 个"
+          f" → {out.name}")
+    return slow, xml_prefixes
+
+
+def is_slow_test(t: dict, slow: dict, xml_prefixes: list) -> bool:
+    """判断测试是否慢测试 (test_id / test_node / XML 前缀三种匹配)."""
+    if str(t.get("id")) in slow:
+        return True
+    tn = t.get("test_node") or ""
+    if tn in slow:
+        return True
+    return any(tn.startswith(p) for p in xml_prefixes)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", default=str(RUN_DIR))
@@ -164,6 +244,10 @@ def main():
                     help="合并 batch 的测试数上限 (默认 8, 单 execute_batch 内部并行)")
     ap.add_argument("--limit", type=int, default=None, help="只重跑前 N 个 batch (试点)")
     ap.add_argument("--timeout", type=int, default=600, help="每测试 watchdog 超时秒数 (默认 600)")
+    ap.add_argument("--ut-logs", default="/gpfs/gcsp/M2.7_verify/vllm/ut_logs",
+                    help="vLLM ut_logs 目录 (扫描 XML 实测慢测试)")
+    ap.add_argument("--slow-threshold", type=float, default=600,
+                    help="XML 实测耗时超过此秒数的测试视为慢测试 (默认 600)")
     args = ap.parse_args()
 
     run_dir = Path(args.run_dir)
@@ -178,6 +262,10 @@ def main():
     # 合并, 混在一起 execute_batch 会按错误的 gpu_per_test 分配 GPU。
     grouped = defaultdict(list)  # batch_type -> [(test, batch_id)]
     skipped_batches = 0
+    slow, xml_prefixes = load_slow_tests(run_dir,
+                                         Path(args.ut_logs),
+                                         args.slow_threshold)
+    skipped_slow = 0
     for bid in batches:
         cfg_path = run_dir / "batches" / bid / "batch_config.json"
         if not cfg_path.exists():
@@ -188,11 +276,16 @@ def main():
         for t in cfg.get("tests", []):
             if t.get("id") in test_to_batch:
                 continue  # 同一测试出现在多个 batch 只取第一个
+            # 剔除已知慢测试: 重试超限或 XML 实测超时, 再跑只会连坐同批
+            if is_slow_test(t, slow, xml_prefixes):
+                skipped_slow += 1
+                continue
             test_to_batch[t["id"]] = bid
             grouped[btype].append((t, bid))
     total_tests = sum(len(v) for v in grouped.values())
     print(f"[retry] 收集 {total_tests} 个测试来自 {len(batches)} 个 timeout batch "
-          f"(跳过 config 缺失 {skipped_batches}), max-batch-size={args.max_batch_size}")
+          f"(跳过 config 缺失 {skipped_batches}, 跳过慢测试 {skipped_slow}), "
+          f"max-batch-size={args.max_batch_size}")
     for btype, items in grouped.items():
         print(f"  - {btype}: {len(items)} 个测试")
 
@@ -260,6 +353,22 @@ def main():
         print(f"  [{done_count}] {super_id}: {len(stests)} 测试 "
               f"({len(sbids)} 个原 batch) {btype} gpu_per_test={gpu_per_test} "
               f"空闲GPU={idle}", flush=True)
+        # 2026-08-04: 等 daemon 空闲再启动 execute_batch —— 否则上一个
+        # super-batch 的测试还在 daemon 队列 (active>0), execute_batch 探测
+        # 到 0 卡 → D1 degrade → distributed 崩 (insufficient GPUs)。
+        # 调度器侧兜底 (execute_batch 内部也有 5×30s 等待, 但连跑时不够)。
+        import json as _json
+        _hb_path = Path(ENV["BIFROST_CONFIG"]).parent / "heartbeat.json"
+        for _wait in range(20):  # 最多 10 分钟
+            try:
+                hb = _json.loads(_hb_path.read_text())
+                active = hb.get("active_tasks", 0)
+            except Exception:
+                active = 0
+            if active == 0:
+                break
+            print(f"    [WAIT] daemon active={active}, 等 30s 释放 GPU...", flush=True)
+            time.sleep(30)
         r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
                             btype, gpu_per_test)
         # ── 自动重试 (2026-08-04): ignored/no_result 不视为完成 ─────────

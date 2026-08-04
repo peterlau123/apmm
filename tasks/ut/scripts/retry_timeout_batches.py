@@ -34,6 +34,9 @@ def retry_one(bid: str, run_dir: str, wall_timeout: int = 300) -> dict:
     env.update(ENV)
     wf = str(Path(run_dir) / "workflow_state.json")
     exe = str(PROJECT_ROOT / "skills/ut/unit-test-executor/scripts/execute_batch.py")
+    rp = Path(run_dir) / "batches" / bid / "batch_results.json"
+    # ponytail: 执行前删旧结果文件, 失败=无文件=真实失败（Phase 1 旧文件仍在）
+    rp.unlink(missing_ok=True)
     t0 = time.monotonic()
     try:
         r = subprocess.run(
@@ -44,11 +47,18 @@ def retry_one(bid: str, run_dir: str, wall_timeout: int = 300) -> dict:
             capture_output=True, text=True, timeout=wall_timeout + 1200, env=env,
         )
         elapsed = time.monotonic() - t0
-        # 读更新后的 batch_results
-        rp = Path(run_dir) / "batches" / bid / "batch_results.json"
         if rp.exists():
             rd = json.loads(rp.read_text())
             st = rd.get("statistics", {})
+            # Bug 3: 回写 test_load (update_test_load_two_phase 内部已修反斜杠路径)
+            ur = subprocess.run(
+                [sys.executable,
+                 str(PROJECT_ROOT / "skills/ut/ut_common/update_test_load_two_phase.py"),
+                 "--batch-id", bid, "--batch-results", str(rp),
+                 "--workflow-state", wf],
+                capture_output=True, text=True)
+            if ur.returncode != 0:
+                print(f"  [WARN] test_load update failed for {bid}: {ur.stderr.strip()[:200]}")
             return {
                 "batch_id": bid, "rc": r.returncode, "elapsed": elapsed,
                 "passed": st.get("passed", 0), "failed": st.get("failed", 0),

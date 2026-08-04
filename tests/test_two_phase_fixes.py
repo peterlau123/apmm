@@ -332,3 +332,141 @@ class TestPhase1_UserCommandCheck:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
+
+
+class TestResolveTestLoadPath:
+    """_resolve_test_load_path: 反斜杠归一化 + repo-relative 锚定."""
+
+    def test_linux_absolute_path(self, tmp_path):
+        p = _p2s2._resolve_test_load_path(str(tmp_path / "test_load.json"), tmp_path / "wf.json")
+        assert p == tmp_path / "test_load.json"
+
+    def test_linux_relative_path(self, tmp_path):
+        p = _p2s2._resolve_test_load_path("test_load.json", tmp_path / "wf.json")
+        assert p == tmp_path / "test_load.json"
+
+    def test_windows_backslash_repo_relative(self):
+        """反斜杠 repo-relative: runs\\ut-xxx\\test_load.json → 锚定项目根."""
+        wf = _PROJECT_ROOT / "runs" / "ut-xxx" / "workflow_state.json"
+        p = _p2s2._resolve_test_load_path(r"runs\ut-xxx\test_load.json", wf)
+        assert p == _PROJECT_ROOT / "runs" / "ut-xxx" / "test_load.json"
+
+    def test_windows_backslash_filename_relative(self, tmp_path):
+        """反斜杠文件名相对路径: xxx\test_load.json → 锚定 run_dir."""
+        wf = tmp_path / "workflow_state.json"
+        p = _p2s2._resolve_test_load_path(r"test_load.json", wf)
+        assert p == tmp_path / "test_load.json"
+
+    def test_backslash_already_normalized(self):
+        """正斜杠路径原样传递."""
+        wf = _PROJECT_ROOT / "runs" / "ut-xxx" / "workflow_state.json"
+        p = _p2s2._resolve_test_load_path("runs/ut-xxx/test_load.json", wf)
+        assert p == _PROJECT_ROOT / "runs" / "ut-xxx" / "test_load.json"
+
+
+class TestF4_Phase2Stage2Backslash:
+    """_refresh_stats 在反斜杠路径下的正确性 (Bug 2 回归)."""
+
+    def test_refresh_with_windows_backslash_repo_relative(self, tmp_path):
+        _refresh_stats = _p2s2._refresh_stats
+
+        test_load = {"tests": [{"status": "passed"}, {"status": "failed"}]}
+        # 真实位置的 test_load (在项目根下, 模拟 repo-relative)
+        tl_path = _PROJECT_ROOT / "runs" / "ut-xxx" / "test_load.json"
+        tl_path.parent.mkdir(parents=True, exist_ok=True)
+        tl_path.write_text(json.dumps(test_load))
+
+        # workflow_state 里用反斜杠 repo-relative 路径
+        ws = {
+            "stats": {},
+            "paths": {"test_load": r"runs\ut-xxx\test_load.json"},
+        }
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+
+        _refresh_stats(ws_path)
+
+        result = json.loads(ws_path.read_text())
+        assert result["stats"]["passed"] == 1
+        assert result["stats"]["failed"] == 1
+
+    def test_refresh_with_windows_backslash_filename(self, tmp_path):
+        _refresh_stats = _p2s2._refresh_stats
+
+        test_load = {"tests": [{"status": "passed"}]}
+        (tmp_path / "test_load.json").write_text(json.dumps(test_load))
+
+        # 反斜杠文件名相对路径
+        ws = {
+            "stats": {},
+            "paths": {"test_load": r"test_load.json"},
+        }
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+
+        _refresh_stats(ws_path)
+
+        result = json.loads(ws_path.read_text())
+        assert result["stats"]["passed"] == 1
+
+
+class TestRetryTimeout_TestLoadUpdate:
+    """retry_timeout_batches.py 的回写 test_load 功能 (Bug 3)."""
+
+    _retry_mod = None
+
+    @classmethod
+    def setup_class(cls):
+        path = _PROJECT_ROOT / "tasks" / "ut" / "scripts" / "retry_timeout_batches.py"
+        spec = importlib.util.spec_from_file_location("retry_timeout_batches", path)
+        cls._retry_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls._retry_mod)
+
+    def test_retry_one_deletes_old_result(self, tmp_path):
+        """retry_one 执行前应删除旧 batch_results.json."""
+        # 创建旧结果文件
+        bid = "batch_test"
+        batch_dir = tmp_path / "batches" / bid
+        batch_dir.mkdir(parents=True)
+        old_result = batch_dir / "batch_results.json"
+        old_result.write_text('{"old": true}')
+        config = batch_dir / "batch_config.json"
+        config.write_text('{"tests": []}')
+
+        # mock subprocess.run 模拟失败 (无新文件生成)
+        with patch("subprocess.run", return_value=MagicMock(returncode=1, stdout="", stderr="error")):
+            result = self._retry_mod.retry_one(bid, str(tmp_path), wall_timeout=30)
+
+        # 旧文件被删除, 且无新文件 -> status=no_result
+        assert result["status"] == "no_result", f"expected no_result, got {result}"
+
+    def test_retry_one_calls_update_test_load(self, tmp_path):
+        """retry_one 成功后应调用 update_test_load_two_phase.py."""
+        bid = "batch_test2"
+        batch_dir = tmp_path / "batches" / bid
+        batch_dir.mkdir(parents=True)
+        config = batch_dir / "batch_config.json"
+        config.write_text('{"tests": []}')
+
+        # workflow_state
+        wf = tmp_path / "workflow_state.json"
+        wf.write_text(json.dumps({
+            "paths": {"test_load": str(tmp_path / "test_load.json")},
+            "batches": {},
+        }))
+        (tmp_path / "test_load.json").write_text(json.dumps({"tests": []}))
+
+        # mock subprocess.run: 第一次 (execute_batch) 成功, 第二次 (update_test_load) 也成功
+        def fake_run(*args, **kwargs):
+            # 如果是 execute_batch, 创建 batch_results.json
+            cmd = " ".join(kwargs.get("args", args[0]) if args else [])
+            if "update_test_load_two_phase" not in cmd:
+                (batch_dir / "batch_results.json").write_text(
+                    json.dumps({"statistics": {"passed": 1, "failed": 0}}))
+            return MagicMock(returncode=0, stdout="OK", stderr="")
+
+        with patch("subprocess.run", side_effect=fake_run):
+            result = self._retry_mod.retry_one(bid, str(tmp_path), wall_timeout=30)
+
+        assert result["status"] == "done", f"expected done, got {result}"
+        assert result["passed"] == 1

@@ -15,6 +15,7 @@
 | [2026-06-24-L4-test-issues-and-fixes.md](2026-06-24-L4-test-issues-and-fixes.md) | 2026-06-24 | L4 测试运行问题总结：PYTHONPATH 泄漏、依赖链 race condition、Watchdog 超时 |
 | [2026-07-19-phase1-500batch-run-summary.md](2026-07-19-phase1-500batch-run-summary.md) | 2026-07-19 | Phase 1 首轮 500 batch 全量执行：1213 测试已处理，通过率 92.9%，6 bug 修复 |
 | [2026-07-19-phase1-pending-todos.md](2026-07-19-phase1-pending-todos.md) | 2026-07-19 | Phase 1 待办项清单：Phase 2 前必做项（filter_rules/wall_timeout/failed分类）+ 防回归措施 |
+| [2026-08-04-phase2-timeout-retry-fixes-and-resume.md](2026-08-04-phase2-timeout-retry-fixes-and-resume.md) | 2026-08-04 | Phase 2 timeout 重试 3+1 bug 修复（旧结果残留/反斜杠路径/不回写 test_load/container_env 丢失）+ 动态并行度 + 全量重试恢复 |
 
 ---
 

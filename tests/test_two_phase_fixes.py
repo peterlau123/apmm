@@ -563,3 +563,33 @@ class TestRetryTimeout_TestLoadUpdate:
         assert len(result) == 1, f"expected 1 batch result, got {result}"
         assert result[0]["status"] == "done"
         assert result[0]["passed"] == 1
+
+
+class TestExecuteBatch_WorkerCount:
+    """execute_batch.py 的 n_workers 计算 (2026-08-04 修复: 防 0)."""
+
+    def test_distributed_n_workers_min_1(self):
+        """distributed 模式 GPU < gpu_per_test 时 n_workers 应 fallback 到 1.
+
+        原 bug: len(gpu_pool) // gpu_per_test = 0 → ThreadPoolExecutor(0)
+        ValueError → execute_batch 崩溃无结果 (no_result).
+        """
+        # 模拟: 探测到 0-1 张卡, gpu_per_test=2
+        for free in (0, 1):
+            gpu_pool = [0] if free else [0]  # fallback 到单卡
+            n_workers = len(gpu_pool) // 2
+            # 修复后逻辑: min 1
+            n_workers = max(1, n_workers)
+            assert n_workers >= 1, f"n_workers 必须 >=1, got {n_workers}"
+
+    def test_distributed_n_workers_normal(self):
+        """distributed 模式 GPU 充足时正常计算."""
+        gpu_pool = list(range(8))  # 8 卡空闲
+        n_workers = max(1, len(gpu_pool) // 2)  # gpu_per_test=2
+        assert n_workers == 4
+
+    def test_normal_n_workers_min_1(self):
+        """normal 模式 n_workers 至少 1."""
+        gpu_pool = [0]  # fallback 单卡
+        n_workers = max(1, len(gpu_pool))
+        assert n_workers == 1

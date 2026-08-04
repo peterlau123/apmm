@@ -908,9 +908,18 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
 
     if batch_type == "distributed":
         n_workers = len(gpu_pool) // gpu_per_test
+        # 2026-08-04 修复: 探测到 GPU < gpu_per_test 时 n_workers=0 →
+        # ThreadPoolExecutor(0) ValueError → execute_batch 崩溃无结果。
+        # fallback 到 1 (串行), 保证至少能跑。
+        if n_workers < 1:
+            n_workers = 1
+            print(f"[WARN] Free GPUs ({len(gpu_pool)}) < gpu_per_test ({gpu_per_test}), "
+                  f"serialize (n_workers=1)")
         print(f"[INFO] Distributed mode: {n_workers} parallel tests, {gpu_per_test} GPUs each")
     else:
         n_workers = len(gpu_pool)
+        if n_workers < 1:
+            n_workers = 1  # 理论不会发生 (gpu_pool 至少有 fallback), 防御
 
     started_at = _utc_now_iso_z()
 

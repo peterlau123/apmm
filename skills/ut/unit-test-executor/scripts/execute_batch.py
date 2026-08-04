@@ -900,6 +900,29 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         if free_ids:
             gpu_pool = free_ids
             print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+        elif batch_type == "distributed":
+            # 2026-08-04 修复: distributed 需要 ≥ gpu_per_test 卡, 探测到
+            # 0 空闲时 D1 degrade 到单卡 → n_workers=1 → 串行硬跑易崩且
+            # 实际是"上一个 super-batch 的 GPU 未释放"的瞬时状态。
+            # 等待重试探测 (最多 5×30s), GPU 释放后自然恢复并行。
+            import time as _t
+            gpu_pool = [fallback_card if fallback_card is not None else 0]
+            retried = False
+            for attempt in range(5):
+                _t.sleep(30)
+                free_ids, fallback_card = _detect_free_gpus(
+                    container=docker_container, profile=remote_server,
+                )
+                if len(free_ids) >= gpu_per_test:
+                    gpu_pool = free_ids
+                    print(f"[INFO] GPU freed, retry detected: {gpu_pool} "
+                          f"(attempt {attempt+1})")
+                    retried = True
+                    break
+            if not retried:
+                gpu_pool = [fallback_card if fallback_card is not None else 0]
+                print(f"[WARN] 0 free GPU after 5 retries — D1 degrade: "
+                      f"serialize on card {gpu_pool[0]}")
         else:
             # 0-card D1 degradation (design §4.2): serialize on the lowest-usage
             # card. If even fallback is None (detection failed), still try card 0.

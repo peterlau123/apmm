@@ -940,9 +940,18 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             # Distributed: allocate gpu_per_test contiguous GPUs
             gpu_start = (idx % n_workers) * gpu_per_test
             gpu_ids = ",".join(str(gpu_pool[gpu_start + g]) for g in range(gpu_per_test))
+            # Dynamic master_port: torchrun defaults to 29500 which collides
+            # when multiple distributed tests run concurrently (EADDRINUSE).
+            # Port must be GLOBALLY unique (across batches + workers), so we
+            # combine a random base with the worker idx: same idx in two
+            # concurrent batches must never collide.
+            import random
+            port_base = random.randint(20000, 30000)
+            master_port = port_base + (idx % 97)  # spread within a batch
             pytest_full_cmd = (
                 f"cd /gpfs/gcsp/M2.7_verify/vllm && "
                 f"CUDA_VISIBLE_DEVICES={gpu_ids} torchrun --nproc_per_node={gpu_per_test} "
+                f"--master_port={master_port} "
                 f"-m pytest {node} --junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
             )
         else:

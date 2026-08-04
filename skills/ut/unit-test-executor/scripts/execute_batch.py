@@ -305,8 +305,13 @@ def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
         from tools.remote_executor import run_remote as _run_remote
         # Read backend from env (set by workflow config) or default to agent
         backend = os.environ.get("REMOTE_BACKEND", "agent")
+        # DEBUG 2026-08-04: 确认走的后端
+        if os.environ.get("BIFROST_DEBUG_TASK"):
+            print(f"[DBG-backend] remote_executor backend={backend}", flush=True)
         return _run_remote(cmd, timeout=timeout, profile=profile, backend=backend)
     except ImportError:
+        if os.environ.get("BIFROST_DEBUG_TASK"):
+            print("[DBG-backend] remote_executor import FAIL → agent.py fallback", flush=True)
         pass
 
     # Fallback: original agent.py path (unchanged behavior)
@@ -1324,11 +1329,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Read remote_backend from workflow_state.json and set env for run_remote
+    # 2026-08-04 修复: 优先环境变量 (retry 脚本显式传 REMOTE_BACKEND=bifrost),
+    # workflow_state.json 兜底 —— 否则 config={} 时默认 "agent" 覆盖 env,
+    # run_remote 走 agent.py (paramiko 缺失) → 测试全失败 (exit=1 ignored)。
     try:
         _ws = json.loads(Path(args.workflow_state).read_text(encoding="utf-8"))
         _cfg = _ws.get("config", {})
         _backend = _cfg.get("remote_backend", "agent")
-        os.environ["REMOTE_BACKEND"] = _backend
+        os.environ["REMOTE_BACKEND"] = os.environ.get(
+            "REMOTE_BACKEND", _backend
+        ) or _backend
     except (OSError, json.JSONDecodeError, KeyError):
         pass  # default to "agent"
 

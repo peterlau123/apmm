@@ -138,6 +138,10 @@ def _run_bifrost(
         raise ConnectionError(
             f"bifrost submit returned no task_id: {r.stdout[:200]}"
         )
+    # DEBUG 2026-08-04: 打印 task_id 定位任务去向
+    if os.environ.get("BIFROST_DEBUG_TASK"):
+        print(f"[DBG-task] submitted {task_id} storage={_get_bifrost_shared_storage()} "
+              f"cmd={cmd[:80]}", flush=True)
 
     # Poll until terminal state: watch the result file directly on GPFS.
     # A local stat() on GPFS is ~1ms (vs spawning `bifrost client status`,

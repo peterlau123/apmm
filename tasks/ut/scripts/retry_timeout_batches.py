@@ -349,7 +349,13 @@ def main():
         done_count += 1
         # batch_id 必须匹配 execute_batch schema: ^batch_[A-Za-z0-9_]+$
         # (super_0001 不匹配 → 结果被 rejected 隔离, 实测踩坑 2026-08-04)
-        super_id = f"batch_super_{done_count:04d}"
+        # ⚠️ 编号避开已存在的 batch_super_* 目录 (2026-08-04: 撞上 8/4 遗留
+        # batch_super_0001 目录 + ut_logs 旧 XML → execute_batch 行为异常)。
+        existing_supers = [int(p.name.split("_")[-1]) for p in
+                           (run_dir / "batches").glob("batch_super_*")
+                           if p.name.split("_")[-1].isdigit()]
+        next_no = max(existing_supers, default=0) + 1
+        super_id = f"batch_super_{next_no:04d}"
         print(f"  [{done_count}] {super_id}: {len(stests)} 测试 "
               f"({len(sbids)} 个原 batch) {btype} gpu_per_test={gpu_per_test} "
               f"空闲GPU={idle}", flush=True)
@@ -357,8 +363,13 @@ def main():
         # super-batch 的测试还在 daemon 队列 (active>0), execute_batch 探测
         # 到 0 卡 → D1 degrade → distributed 崩 (insufficient GPUs)。
         # 调度器侧兜底 (execute_batch 内部也有 5×30s 等待, 但连跑时不够)。
+        # v2 (19:30): WAIT 超时后跳过该批 (留到下一轮), 不硬跑 —— 硬跑会
+        # 在 daemon 队列满时再提交 4-8 任务 → 洪峰 → daemon 卡死 (active=10
+        # 恒满, server.log 停更 20 分钟, 实测 19:21 卡死)。
         import json as _json
         _hb_path = Path(ENV["BIFROST_CONFIG"]).parent / "heartbeat.json"
+        _waited = False
+        active = 0
         for _wait in range(20):  # 最多 10 分钟
             try:
                 hb = _json.loads(_hb_path.read_text())
@@ -367,8 +378,20 @@ def main():
                 active = 0
             if active == 0:
                 break
+            _waited = True
             print(f"    [WAIT] daemon active={active}, 等 30s 释放 GPU...", flush=True)
             time.sleep(30)
+        if _waited and active > 0:
+            print(f"    [SKIP] daemon 持续 active={active} (10 分钟未释放), "
+                  f"跳过本批留给下轮 (批次 {sbids[:3]})", flush=True)
+            # 放回队列: 整批回队头
+            queue.insert(0, (sbids[0], stests))
+            for bid_ in sbids[1:]:
+                queue.insert(1, (bid_, [t for t, _ in grouped[btype]
+                                        if t.get("id") in test_to_batch
+                                        and test_to_batch[t.get("id")] == bid_]))
+            time.sleep(60)
+            continue
         r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
                             btype, gpu_per_test)
         # ── 自动重试 (2026-08-04): ignored/no_result 不视为完成 ─────────

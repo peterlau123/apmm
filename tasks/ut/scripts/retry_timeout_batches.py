@@ -15,6 +15,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 RUN_DIR = PROJECT_ROOT / "runs" / "ut-20260718-164107"
 # 环境: bifrost 后端 + HF 离线设置
 ENV = {

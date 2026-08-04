@@ -200,7 +200,7 @@ def main():
     #   - distributed: min(剩余测试, 空闲卡数 // gpu_per_test)  (2 卡/测试)
     # 切批以"原 batch"为最小单位 (整批纳入, 不拆散) —— 否则同一原 batch
     # 的测试散到多个 super-batch, split_back 多次覆盖同一 batch_results.json。
-    results = []
+    results_map = {}  # batch_id -> 摘要 (同 batch 多次回写去重)
     t_start = time.monotonic()
     done_count = 0
     # remaining: {btype: [ (batch_id, tests), ... ]} 保持原 batch 完整
@@ -264,21 +264,24 @@ def main():
                   f" {r.get('stderr_tail','')}", flush=True)
             # 拆不回结果, 记录原 batch 为 no_result
             for bid in sbids:
-                results.append({"batch_id": bid, "status": "no_result",
-                                "error": r.get("error", r.get("status"))})
+                results_map[bid] = {"batch_id": bid, "status": "no_result",
+                                    "error": r.get("error", r.get("status"))}
             continue
         # 拆回 + 回写
         per_batch = split_back(r["results"], test_to_batch, str(run_dir))
-        results.extend(per_batch)
+        # progress 按 batch_id 去重: 同一原 batch 拆多轮时更新而非新增
+        for pb in per_batch:
+            results_map[pb["batch_id"]] = pb
         done_p = sum(x.get("passed", 0) for x in per_batch)
         done_f = sum(x.get("failed", 0) for x in per_batch)
         print(f"    → done {r['elapsed']:.0f}s: p={done_p} f={done_f} "
               f"({len(per_batch)} 个原 batch 回写)", flush=True)
         # 增量保存
         (run_dir / "retry_timeout_progress.json").write_text(
-            json.dumps(results, ensure_ascii=False, indent=1))
+            json.dumps(list(results_map.values()), ensure_ascii=False, indent=1))
 
     total = time.monotonic() - t_start
+    results = list(results_map.values())
     summary = {
         "total": len(batches),
         "super_batches": done_count,

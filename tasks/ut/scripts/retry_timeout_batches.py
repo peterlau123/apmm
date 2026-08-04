@@ -23,6 +23,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 RUN_DIR = PROJECT_ROOT / "runs" / "ut-20260718-164107"
+# 自动重试参数 (2026-08-04): ignored/no_result 不视为完成, 最多重试次数与等待
+MAX_RETRIES = 3
+RETRY_WAIT = 30  # 秒, 避开环境冲突窗口 (并发/flashinfer 竞争)
 # 环境: bifrost 后端 + HF 离线设置
 ENV = {
     "BIFROST_CONFIG": "/gpfs/gcsp/liuxin/bifrost_test/settings.json",
@@ -259,23 +262,53 @@ def main():
               f"空闲GPU={idle}", flush=True)
         r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
                             btype, gpu_per_test)
-        if r.get("status") != "done" or not r.get("results"):
-            print(f"    → {r.get('status')} rc={r.get('rc')} {r.get('elapsed',0):.0f}s"
-                  f" {r.get('stderr_tail','')}", flush=True)
-            # 拆不回结果, 记录原 batch 为 no_result
-            for bid in sbids:
-                results_map[bid] = {"batch_id": bid, "status": "no_result",
-                                    "error": r.get("error", r.get("status"))}
-            continue
-        # 拆回 + 回写
-        per_batch = split_back(r["results"], test_to_batch, str(run_dir))
-        # progress 按 batch_id 去重: 同一原 batch 拆多轮时更新而非新增
-        for pb in per_batch:
-            results_map[pb["batch_id"]] = pb
-        done_p = sum(x.get("passed", 0) for x in per_batch)
-        done_f = sum(x.get("failed", 0) for x in per_batch)
-        print(f"    → done {r['elapsed']:.0f}s: p={done_p} f={done_f} "
-              f"({len(per_batch)} 个原 batch 回写)", flush=True)
+        # ── 自动重试 (2026-08-04): ignored/no_result 不视为完成 ─────────
+        # 实测: pytest 收集 0 (JUnit XML no testcase) 被标 ignored, 但节点
+        # 在源码里有效 (collect-only 验证 1 test collected) —— 是执行时
+        # 环境冲突 (并发/flashinfer 竞争) 而非节点失效。重试可恢复。
+        attempts = 1
+        while attempts <= MAX_RETRIES:
+            if r.get("status") != "done" or not r.get("results"):
+                # no_result: 无结果文件, 重试
+                if attempts < MAX_RETRIES:
+                    print(f"    → {r.get('status')} rc={r.get('rc')} "
+                          f"{r.get('elapsed',0):.0f}s, 重试 {attempts+1}/{MAX_RETRIES}...",
+                          flush=True)
+                    time.sleep(RETRY_WAIT)
+                    r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
+                                        btype, gpu_per_test)
+                    attempts += 1
+                    continue
+                print(f"    → {r.get('status')} rc={r.get('rc')} {r.get('elapsed',0):.0f}s"
+                      f" {r.get('stderr_tail','')}", flush=True)
+                # 拆不回结果, 记录原 batch 为 no_result
+                for bid in sbids:
+                    results_map[bid] = {"batch_id": bid, "status": "no_result",
+                                        "error": r.get("error", r.get("status"))}
+                break
+            # done 但 ignored 占比高 → 重试 (ignored = pytest 收集 0, 环境问题)
+            tests = r["results"].get("tests", [])
+            if tests:
+                ignored_cnt = sum(1 for t in tests if t.get("status") == "ignored")
+                real_cnt = sum(1 for t in tests if t.get("status") in ("passed", "failed"))
+                if ignored_cnt > real_cnt and attempts < MAX_RETRIES:
+                    print(f"    → done 但 ignored={ignored_cnt} (> real={real_cnt}), "
+                          f"重试 {attempts+1}/{MAX_RETRIES}...", flush=True)
+                    time.sleep(RETRY_WAIT)
+                    r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
+                                        btype, gpu_per_test)
+                    attempts += 1
+                    continue
+            # 拆回 + 回写
+            per_batch = split_back(r["results"], test_to_batch, str(run_dir))
+            # progress 按 batch_id 去重: 同一原 batch 拆多轮时更新而非新增
+            for pb in per_batch:
+                results_map[pb["batch_id"]] = pb
+            done_p = sum(x.get("passed", 0) for x in per_batch)
+            done_f = sum(x.get("failed", 0) for x in per_batch)
+            print(f"    → done {r['elapsed']:.0f}s: p={done_p} f={done_f} "
+                  f"({len(per_batch)} 个原 batch 回写)", flush=True)
+            break
         # 增量保存
         (run_dir / "retry_timeout_progress.json").write_text(
             json.dumps(list(results_map.values()), ensure_ascii=False, indent=1))

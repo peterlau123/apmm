@@ -28,6 +28,11 @@ def load_workflow_state(workflow_state_path: Path) -> dict:
         raise FileNotFoundError(f"workflow_state.json 不存在: {workflow_state_path}")
 
     lock_path = workflow_state_path.with_suffix(".json.lock")
+    # lock 文件可能不存在 (首次读/被清理) —— "r" 模式不创建会抛
+    # FileNotFoundError。touch 确保存在后再加共享锁 (2026-08-04 修复:
+    # v5 retry 的 execute_batch 首次更新 workflow_state 时崩在这个点)。
+    if not lock_path.exists():
+        lock_path.touch()
     with open(lock_path, "r", encoding="utf-8") as lockf:
         fcntl.flock(lockf.fileno(), fcntl.LOCK_SH)
         try:

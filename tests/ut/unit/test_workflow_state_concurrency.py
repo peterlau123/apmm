@@ -50,3 +50,13 @@ class TestWorkflowStateConcurrency:
         save_workflow_state({"workflow": {"status": "running"}, "batches": {}}, ws_path)
         state = load_workflow_state(ws_path)
         assert state["workflow"]["status"] == "running"
+
+    def test_load_without_lock_file(self, tmp_path):
+        """lock 文件不存在时 load 不崩 (2026-08-04 修复: 'r' 模式不创建文件)."""
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps({"workflow": {"status": "running"},
+                                       "batches": {}, "paths": {}}))
+        assert not ws_path.with_suffix(".json.lock").exists()
+        state = load_workflow_state(ws_path)
+        assert state["workflow"]["status"] == "running"
+        assert ws_path.with_suffix(".json.lock").exists()

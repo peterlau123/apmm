@@ -101,8 +101,20 @@ def split_back(results: dict, test_to_batch: dict, run_dir: str) -> list:
     for bid, tests in by_batch.items():
         bdir = Path(run_dir) / "batches" / bid
         bdir.mkdir(exist_ok=True)
+        # 同一原 batch 可能被拆到多个 super-batch (8 测试 2 卡分两轮),
+        # batch_results.json 已有旧结果时 MERGE (按 test id 去重), 不覆盖。
+        prev = {}
+        prev_path = bdir / "batch_results.json"
+        if prev_path.exists():
+            try:
+                prev = {t["id"]: t for t in json.loads(prev_path.read_text()).get("tests", [])}
+            except Exception:
+                prev = {}
+        merged_tests = {t["id"]: t for t in tests}
+        merged_tests.update({k: v for k, v in prev.items() if k not in merged_tests})
+        merged_list = list(merged_tests.values())
         # 按原 batch 重建 batch_results.json (statistics 按当前子集重算)
-        stats = Counter(t.get("status") for t in tests)
+        stats = Counter(t.get("status") for t in merged_list)
         br = {
             "batch_id": bid,
             "started_at": results.get("started_at"),
@@ -110,9 +122,9 @@ def split_back(results: dict, test_to_batch: dict, run_dir: str) -> list:
             "timeout": results.get("timeout"),
             "exit_code": results.get("exit_code"),
             "remote_log": results.get("remote_log"),
-            "tests": tests,
+            "tests": merged_list,
             "statistics": {
-                "total": len(tests),
+                "total": len(merged_list),
                 "passed": stats.get("passed", 0),
                 "failed": stats.get("failed", 0),
                 "error": stats.get("error", 0),
@@ -137,7 +149,7 @@ def split_back(results: dict, test_to_batch: dict, run_dir: str) -> list:
             "batch_id": bid, "status": "done",
             "passed": st["passed"], "failed": st["failed"],
             "error": st["error"], "ignored": st["ignored"],
-            "tests": len(tests),
+            "tests": len(merged_list),
         })
     return out
 
@@ -186,12 +198,18 @@ def main():
     # 单进程串行, 每批启动前探测 H20 空闲 GPU, 按空闲卡数决定批大小:
     #   - normal:      min(剩余测试, 空闲卡数)          (1 卡/测试)
     #   - distributed: min(剩余测试, 空闲卡数 // gpu_per_test)  (2 卡/测试)
-    # 这样批内测试正好用满空闲 GPU, 单进程探测无争抢, daemon 队列不积压。
+    # 切批以"原 batch"为最小单位 (整批纳入, 不拆散) —— 否则同一原 batch
+    # 的测试散到多个 super-batch, split_back 多次覆盖同一 batch_results.json。
     results = []
     t_start = time.monotonic()
     done_count = 0
-    remaining = {btype: list(items) for btype, items in grouped.items()}  # 每类剩余队列
-    total_tests_planned = sum(len(v) for v in remaining.values())
+    # remaining: {btype: [ (batch_id, tests), ... ]} 保持原 batch 完整
+    remaining = {}
+    for btype, items in grouped.items():
+        by_bid = defaultdict(list)
+        for t, bid in items:
+            by_bid[bid].append(t)
+        remaining[btype] = list(by_bid.items())
     while any(remaining.values()):
         # 探测空闲 GPU (bifrost probe_gpus; 失败时按 4 卡保守处理)
         try:
@@ -209,18 +227,28 @@ def main():
         if remaining.get("normal"):
             btype = "normal"
             gpu_per_test = 1
-            max_take = idle
+            max_tests = idle
         elif remaining.get("distributed"):
             btype = "distributed"
             gpu_per_test = 2
-            max_take = max(1, idle // gpu_per_test)
+            max_tests = max(1, idle // gpu_per_test)
         else:
             break
-        # 取最多 max_take 个测试组成 super-batch
-        take = min(max_take, len(remaining[btype]))
-        stests = [item[0] for item in remaining[btype][:take]]
-        sbids = sorted({item[1] for item in remaining[btype][:take]})
-        remaining[btype] = remaining[btype][take:]
+
+        # 整批纳入: 从队列头开始取原 batch, 直到测试数超过 max_tests
+        stests, sbids = [], []
+        queue = remaining[btype]
+        while queue and len(stests) + len(queue[0][1]) <= max_tests:
+            bid, tests = queue.pop(0)
+            stests.extend(tests)
+            sbids.append(bid)
+        if not stests and queue:
+            # 单个原 batch 超过 max_tests (如 8 测试但只有 2 卡): 拆开
+            bid, tests = queue.pop(0)
+            stests = tests[:max_tests]
+            # 剩余部分放回队列头 (保持原 batch 完整性已不可能, 记录为部分)
+            queue.insert(0, (bid, tests[max_tests:]))
+            sbids = [bid]
 
         done_count += 1
         # batch_id 必须匹配 execute_batch schema: ^batch_[A-Za-z0-9_]+$

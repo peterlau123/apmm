@@ -531,6 +531,25 @@ def phase1_batch_loop(
     for i in range(start_index, batch_group_size):
         batch_id = create_batch_id(i)
 
+        # 用户命令检查: 每 batch 前读 workflow_state flags.
+        # 支持 stop_requested / pause_requested (由 supervisor 写入),
+        # Phase1 是长循环, 无此检查则启动后无法中途停止 (2026-08-04 审查).
+        try:
+            _ws_now = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+            _flags = _ws_now.get("flags", {})
+            if _flags.get("stop_requested"):
+                print(f"\n[Phase 1] stop_requested detected at batch {i+1}, stopping...")
+                # 保留已完成的 batch 结果, 状态机交给 supervisor 处理
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+            if _flags.get("pause_requested"):
+                print(f"\n[Phase 1] pause_requested detected at batch {i+1}, pausing...")
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+        except Exception as _e:
+            # 读 flags 失败不阻塞执行 (可能并发写, 下次循环再查)
+            print(f"  [WARN] flags check failed: {_e}")
+
         print(f"\n[Batch {i+1}/{batch_group_size}] {batch_id}")
 
         try:

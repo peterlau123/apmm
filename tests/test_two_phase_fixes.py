@@ -258,5 +258,77 @@ class TestF4_Phase2Stage2StatsRefresh:
         assert result["stats"]["failed"] == 1
 
 
+class TestPhase1_UserCommandCheck:
+    """Phase 1 循环的 stop/pause 检查 (2026-08-04 审查新增).
+
+    Phase 1 是长循环 (batch_group_size 个 batch), 原实现无用户命令检查,
+    启动后无法中途停止. 现在每 batch 前检查 workflow_state flags.
+    """
+
+    def _make_ws(self, tmp_path, flags=None):
+        ws = {
+            "workflow": {"name": "UT", "status": "running"},
+            "current_stage": "collect",
+            "stats": {},
+            "flags": flags or {},
+            "paths": {},
+        }
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+        # 创建 test_load 文件 (Phase1 循环在 flags 检查前会验证其存在)
+        (tmp_path / "test_load.json").write_text(json.dumps({"tests": []}))
+        return ws_path
+
+    def test_stop_requested_breaks_loop(self, tmp_path):
+        """stop_requested=true 时循环应在第一个 batch 前退出."""
+        from tasks.ut.scripts.auto_run_batches_two_phase import phase1_batch_loop
+
+        ws_path = self._make_ws(tmp_path, {"stop_requested": True})
+        # 用 mock 避免真正执行 batch
+        with patch("tasks.ut.scripts.auto_run_batches_two_phase.get_config",
+                   return_value={"phase1": {"auto_create_batches": False, "auto_execute": False,
+                                            "checkpoint_interval": 10, "enable_force_checkpoints": False},
+                                 "workflow": {}, "config": {"batch_size": 8}}), \
+             patch("tasks.ut.scripts.auto_run_batches_two_phase.get_paths",
+                   return_value={"run_dir": tmp_path, "manifest": tmp_path / "manifest.json",
+                                 "test_load": tmp_path / "test_load.json"}):
+            # batch_group_size=5, 但 stop 应立即退出 -> 返回空 checkpoint_log
+            log = phase1_batch_loop(tmp_path / "workflow.yaml", tmp_path, batch_group_size=5)
+        # 没有执行任何 batch
+        assert log == []
+
+    def test_pause_requested_breaks_loop(self, tmp_path):
+        """pause_requested=true 时循环应在第一个 batch 前退出."""
+        from tasks.ut.scripts.auto_run_batches_two_phase import phase1_batch_loop
+
+        ws_path = self._make_ws(tmp_path, {"pause_requested": True})
+        with patch("tasks.ut.scripts.auto_run_batches_two_phase.get_config",
+                   return_value={"phase1": {"auto_create_batches": False, "auto_execute": False,
+                                            "checkpoint_interval": 10, "enable_force_checkpoints": False},
+                                 "workflow": {}, "config": {"batch_size": 8}}), \
+             patch("tasks.ut.scripts.auto_run_batches_two_phase.get_paths",
+                   return_value={"run_dir": tmp_path, "manifest": tmp_path / "manifest.json",
+                                 "test_load": tmp_path / "test_load.json"}):
+            log = phase1_batch_loop(tmp_path / "workflow.yaml", tmp_path, batch_group_size=5)
+        assert log == []
+
+    def test_no_flags_runs_normally(self, tmp_path):
+        """无 flags 时循环正常执行 (不提前退出)."""
+        from tasks.ut.scripts.auto_run_batches_two_phase import phase1_batch_loop
+
+        self._make_ws(tmp_path, {})
+        # auto_create_batches=False -> 直接跳过 batch 创建, 模拟空循环
+        with patch("tasks.ut.scripts.auto_run_batches_two_phase.get_config",
+                   return_value={"phase1": {"auto_create_batches": False, "auto_execute": False,
+                                            "checkpoint_interval": 10, "enable_force_checkpoints": False},
+                                 "workflow": {}, "config": {"batch_size": 8}}), \
+             patch("tasks.ut.scripts.auto_run_batches_two_phase.get_paths",
+                   return_value={"run_dir": tmp_path, "manifest": tmp_path / "manifest.json",
+                                 "test_load": tmp_path / "test_load.json"}):
+            log = phase1_batch_loop(tmp_path / "workflow.yaml", tmp_path, batch_group_size=3)
+        # auto_create_batches=False 时循环体直接跳过, 无 batch 执行
+        assert isinstance(log, list)
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

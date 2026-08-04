@@ -987,6 +987,15 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         if batch_type == "distributed":
             # Distributed: allocate gpu_per_test contiguous GPUs
             gpu_start = (idx % n_workers) * gpu_per_test
+            # 2026-08-04 修复: D1 degrade (gpu_pool 仅 1 卡) 时
+            # gpu_pool[gpu_start+g] 越界 (list index out of range) →
+            # retriable_error 全批报废。degrade 场景分布式无法跑
+            # (需 ≥ gpu_per_test 卡), 直接抛错走外层重试。
+            if gpu_start + gpu_per_test > len(gpu_pool):
+                raise RuntimeError(
+                    f"insufficient GPUs for distributed test: need {gpu_per_test}, "
+                    f"pool={gpu_pool}"
+                )
             gpu_ids = ",".join(str(gpu_pool[gpu_start + g]) for g in range(gpu_per_test))
             # Dynamic master_port: torchrun defaults to 29500 which collides
             # when multiple distributed tests run concurrently (EADDRINUSE).

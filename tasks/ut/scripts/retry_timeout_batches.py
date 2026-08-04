@@ -177,34 +177,59 @@ def main():
     for btype, items in grouped.items():
         print(f"  - {btype}: {len(items)} 个测试")
 
-    # ── 切成 super-batches (每个 batch_type 独立切分) ─────────────────────
-    super_batches = []   # (batch_type, tests, 原 batch ids)
-    for btype, items in grouped.items():
-        cur_tests, cur_bids = [], set()
-        for t, bid in items:
-            if len(cur_tests) >= args.max_batch_size:
-                super_batches.append((btype, cur_tests, sorted(cur_bids)))
-                cur_tests, cur_bids = [], set()
-            cur_tests.append(t)
-            cur_bids.add(bid)
-        if cur_tests:
-            super_batches.append((btype, cur_tests, sorted(cur_bids)))
-    print(f"[retry] 切成 {len(super_batches)} 个 super-batch")
-
-    # ── 单进程串行跑每个 super-batch (execute_batch 内部并行) ─────────────
+    # ── 单进程调度器 + 动态 GPU 感知切批 (2026-08-04 v4) ─────────────────
+    # 用户方案: 不搞多进程并发 (多进程各自探测 GPU 会争抢同一批空闲卡)。
+    # 单进程串行, 每批启动前探测 H20 空闲 GPU, 按空闲卡数决定批大小:
+    #   - normal:      min(剩余测试, 空闲卡数)          (1 卡/测试)
+    #   - distributed: min(剩余测试, 空闲卡数 // gpu_per_test)  (2 卡/测试)
+    # 这样批内测试正好用满空闲 GPU, 单进程探测无争抢, daemon 队列不积压。
     results = []
     t_start = time.monotonic()
-    for i, (btype, stests, sbids) in enumerate(super_batches, 1):
-        gpu_per_test = 2 if btype == "distributed" else 1
-        super_id = f"super_{i:04d}"
-        print(f"  [{i}/{len(super_batches)}] {super_id}: {len(stests)} 测试 "
-              f"({len(sbids)} 个原 batch) {btype} gpu_per_test={gpu_per_test}",
-              flush=True)
+    done_count = 0
+    remaining = {btype: list(items) for btype, items in grouped.items()}  # 每类剩余队列
+    total_tests_planned = sum(len(v) for v in remaining.values())
+    while any(remaining.values()):
+        # 探测空闲 GPU (bifrost probe_gpus; 失败时按 4 卡保守处理)
+        try:
+            from tools.remote_executor import probe_gpus
+            idle = probe_gpus(backend="bifrost").get("idle", 4)
+        except Exception as e:
+            print(f"  [WARN] GPU 探测失败 ({e}), 按 4 卡处理", flush=True)
+            idle = 4
+        if idle <= 0:
+            print(f"  [WAIT] 无空闲 GPU, 等 60s...", flush=True)
+            time.sleep(60)
+            continue
+
+        # 选一类跑: 优先 normal (占多数), 无 normal 才跑 distributed
+        if remaining.get("normal"):
+            btype = "normal"
+            gpu_per_test = 1
+            max_take = idle
+        elif remaining.get("distributed"):
+            btype = "distributed"
+            gpu_per_test = 2
+            max_take = max(1, idle // gpu_per_test)
+        else:
+            break
+        # 取最多 max_take 个测试组成 super-batch
+        take = min(max_take, len(remaining[btype]))
+        stests = [item[0] for item in remaining[btype][:take]]
+        sbids = sorted({item[1] for item in remaining[btype][:take]})
+        remaining[btype] = remaining[btype][take:]
+
+        done_count += 1
+        # batch_id 必须匹配 execute_batch schema: ^batch_[A-Za-z0-9_]+$
+        # (super_0001 不匹配 → 结果被 rejected 隔离, 实测踩坑 2026-08-04)
+        super_id = f"batch_super_{done_count:04d}"
+        print(f"  [{done_count}] {super_id}: {len(stests)} 测试 "
+              f"({len(sbids)} 个原 batch) {btype} gpu_per_test={gpu_per_test} "
+              f"空闲GPU={idle}", flush=True)
         r = run_super_batch(super_id, stests, str(run_dir), args.timeout,
                             btype, gpu_per_test)
         if r.get("status") != "done" or not r.get("results"):
             print(f"    → {r.get('status')} rc={r.get('rc')} {r.get('elapsed',0):.0f}s"
-                  f" {r.get('stderr_tail','')}")
+                  f" {r.get('stderr_tail','')}", flush=True)
             # 拆不回结果, 记录原 batch 为 no_result
             for bid in sbids:
                 results.append({"batch_id": bid, "status": "no_result",
@@ -224,14 +249,14 @@ def main():
     total = time.monotonic() - t_start
     summary = {
         "total": len(batches),
-        "super_batches": len(super_batches),
+        "super_batches": done_count,
         "elapsed_secs": total,
         "results": results,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
     out = run_dir / "retry_timeout_summary.json"
     out.write_text(json.dumps(summary, ensure_ascii=False, indent=1))
-    print(f"\n[retry] 完成 {len(batches)} batches ({len(super_batches)} super-batches) "
+    print(f"\n[retry] 完成 {len(batches)} batches ({done_count} super-batches) "
           f"in {total:.0f}s → {out}")
     statuses = Counter(r.get("status") for r in results)
     print(f"状态分布: {dict(statuses)}")

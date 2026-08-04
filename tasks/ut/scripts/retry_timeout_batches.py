@@ -43,10 +43,14 @@ def run_super_batch(super_id: str, tests: list, run_dir: str, wall_timeout: int,
     wf = str(Path(run_dir) / "workflow_state.json")
     exe = str(PROJECT_ROOT / "skills/ut/unit-test-executor/scripts/execute_batch.py")
 
-    # 合并 batch 的临时 config (放 run_dir 下, 不污染 batches/)
-    tmp_dir = Path(run_dir) / ".superbatches"
-    tmp_dir.mkdir(exist_ok=True)
-    cfg_path = tmp_dir / f"{super_id}_config.json"
+    # super-batch 的 config 写到 batches/{super_id}/ (与正常 batch 同结构)。
+    # 注意: execute_batch 把 batch_results.json 写到 batch-config 同目录
+    # (batch_dir = config 的父目录), 放 .superbatches/ 会导致结果写在
+    # .superbatches/batch_results.json 而 retry 检查 batches/... 找不到
+    # → no_result。实测踩坑 2026-08-04。
+    bdir = Path(run_dir) / "batches" / super_id
+    bdir.mkdir(parents=True, exist_ok=True)
+    cfg_path = bdir / "batch_config.json"
     cfg_path.write_text(json.dumps({
         "batch_id": super_id,
         "batch_type": batch_type,
@@ -57,7 +61,7 @@ def run_super_batch(super_id: str, tests: list, run_dir: str, wall_timeout: int,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }, ensure_ascii=False, indent=1))
 
-    rp = Path(run_dir) / "batches" / super_id / "batch_results.json"
+    rp = bdir / "batch_results.json"
     rp.unlink(missing_ok=True)
     t0 = time.monotonic()
     try:

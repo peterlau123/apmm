@@ -841,18 +841,34 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Source: workflow.yaml config.container_env (NOT workflow_state.json)
     # Note: CUDA_VISIBLE_DEVICES is excluded here and set per-test in pytest_full_cmd
     import yaml
-    # When exec_config is provided (unit tests), skip reading workflow_state.json
-    if exec_config is not None:
-        container_env_raw = {}
-    else:
+    # Container env 读取不因 exec_config 存在而跳过 (2026-08-04 修复:
+    # retry 脚本传 --timeout → exec_config 非 None → 原逻辑直接给 {} →
+    # HF_HUB_OFFLINE 等变量丢失 → 容器内测试联网 huggingface.co 失败)。
+    # exec_config 显式提供 container_env 时优先 (unit tests 注入用)。
+    if exec_config is not None and exec_config.get("container_env"):
+        container_env_raw = exec_config["container_env"]
+    elif workflow_state_path.exists():
         state_raw = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+        # paths.workflow_yaml 可能是 Windows 反斜杠相对路径
+        # (如 "runs\\ut-xxx\\workflow.yaml") → 归一化 + 锚定 (与
+        # _resolve_test_load_path 同规则: runs/ 前缀 → 项目根, 否则 → run_dir)。
         workflow_yaml_str = state_raw.get("paths", {}).get("workflow_yaml", "")
-        workflow_yaml_path = Path(workflow_yaml_str) if workflow_yaml_str else None
+        workflow_yaml_path = None
+        if workflow_yaml_str:
+            workflow_yaml_str = workflow_yaml_str.replace("\\", "/")
+            workflow_yaml_path = Path(workflow_yaml_str)
+            if not workflow_yaml_path.is_absolute():
+                if workflow_yaml_path.parts and workflow_yaml_path.parts[0] == "runs":
+                    workflow_yaml_path = _project_root / workflow_yaml_path
+                else:
+                    workflow_yaml_path = workflow_state_path.parent / workflow_yaml_path
         if workflow_yaml_path and workflow_yaml_path.is_file():
             wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
             container_env_raw = wf.get("config", {}).get("container_env", {})
         else:
             container_env_raw = {}
+    else:
+        container_env_raw = {}
     # Exclude CUDA_VISIBLE_DEVICES (per-test GPU assignment overrides global config)
     container_env = {
         k: v for k, v in container_env_raw.items()

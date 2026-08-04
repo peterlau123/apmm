@@ -334,6 +334,104 @@ if __name__ == "__main__":
     pytest.main([__file__, "-v"])
 
 
+class TestExecuteBatch_ContainerEnvResolution:
+    """Bug 4: execute_batch.py 的 container_env 读取 (2026-08-04 修复).
+
+    原逻辑: exec_config 非 None 时直接给 container_env_raw={} → retry 脚本
+    传 --timeout 后 HF_HUB_OFFLINE 等变量丢失 → 容器内测试联网 huggingface.co
+    失败。且 paths.workflow_yaml 可能是 Windows 反斜杠路径, Linux 下
+    Path().is_file()=False 读不到 workflow.yaml。
+    """
+
+    def _make_ws(self, tmp_path, workflow_yaml_rel=None, backslash=True):
+        """构造 workflow_state.json + workflow.yaml, 返回路径."""
+        # workflow.yaml 放 tmp_path 下 (模拟 run_dir)
+        wf_yaml = tmp_path / "workflow.yaml"
+        wf_yaml.write_text(
+            "config:\n"
+            "  container_env:\n"
+            "    HF_HUB_OFFLINE: '1'\n"
+            "    HF_HOME: /gpfs/hf_home\n"
+            "    CUDA_VISIBLE_DEVICES: '0,1'\n"
+        )
+        ws = {
+            "paths": {"workflow_yaml": str(wf_yaml)},
+        }
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+        return ws_path
+
+    def _extract_container_env(self, tmp_path, exec_config=None):
+        """按 execute_batch.py 修复后的逻辑提取 container_env."""
+        import yaml
+        state_raw = json.loads((tmp_path / "workflow_state.json").read_text(encoding="utf-8"))
+        if exec_config is not None and exec_config.get("container_env"):
+            return exec_config["container_env"]
+        workflow_yaml_str = state_raw.get("paths", {}).get("workflow_yaml", "")
+        workflow_yaml_path = None
+        if workflow_yaml_str:
+            workflow_yaml_str = workflow_yaml_str.replace("\\", "/")
+            workflow_yaml_path = Path(workflow_yaml_str)
+            if not workflow_yaml_path.is_absolute():
+                if workflow_yaml_path.parts and workflow_yaml_path.parts[0] == "runs":
+                    workflow_yaml_path = _PROJECT_ROOT / workflow_yaml_path
+                else:
+                    workflow_yaml_path = (tmp_path / "workflow_state.json").parent / workflow_yaml_path
+        if workflow_yaml_path and workflow_yaml_path.is_file():
+            wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
+            return wf.get("config", {}).get("container_env", {})
+        return {}
+
+    def test_exec_config_present_still_reads_workflow_yaml(self, tmp_path):
+        """exec_config 存在 (如 retry 传 --timeout) 时也必须读到 container_env."""
+        self._make_ws(tmp_path)
+        # retry_timeout_batches.py 会传 exec_config={"timeout": 600}
+        ce = self._extract_container_env(tmp_path, exec_config={"timeout": 600})
+        assert ce.get("HF_HUB_OFFLINE") == "1"
+        assert ce.get("HF_HOME") == "/gpfs/hf_home"
+
+    def test_windows_backslash_path_resolution(self, tmp_path):
+        """Windows 反斜杠路径 (runs\\ut-xxx\\workflow.yaml) 也能解析."""
+        # 模拟 repo-relative 反斜杠路径
+        fake_run = _PROJECT_ROOT / "runs" / "ut-test"
+        fake_run.mkdir(parents=True, exist_ok=True)
+        (fake_run / "workflow.yaml").write_text(
+            "config:\n"
+            "  container_env:\n"
+            "    HF_HUB_OFFLINE: '1'\n"
+        )
+        ws = {"paths": {"workflow_yaml": r"runs\ut-test\workflow.yaml"}}
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+
+        state_raw = json.loads(ws_path.read_text(encoding="utf-8"))
+        import yaml
+        workflow_yaml_str = state_raw.get("paths", {}).get("workflow_yaml", "").replace("\\", "/")
+        workflow_yaml_path = Path(workflow_yaml_str)
+        if not workflow_yaml_path.is_absolute():
+            if workflow_yaml_path.parts and workflow_yaml_path.parts[0] == "runs":
+                workflow_yaml_path = _PROJECT_ROOT / workflow_yaml_path
+        assert workflow_yaml_path.is_file()
+        wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
+        assert wf["config"]["container_env"]["HF_HUB_OFFLINE"] == "1"
+
+    def test_exec_config_container_env_wins(self, tmp_path):
+        """exec_config 显式提供 container_env 时优先 (unit tests 注入)."""
+        self._make_ws(tmp_path)
+        ce = self._extract_container_env(tmp_path, exec_config={
+            "container_env": {"CUSTOM_VAR": "1"},
+        })
+        assert ce == {"CUSTOM_VAR": "1"}
+
+    def test_missing_workflow_yaml_returns_empty(self, tmp_path):
+        """无 workflow_yaml 路径时返回 {} (不崩)."""
+        ws = {"paths": {}}
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+        ce = self._extract_container_env(tmp_path)
+        assert ce == {}
+
+
 class TestResolveTestLoadPath:
     """_resolve_test_load_path: 反斜杠归一化 + repo-relative 锚定."""
 

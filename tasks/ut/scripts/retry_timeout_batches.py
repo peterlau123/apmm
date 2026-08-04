@@ -78,7 +78,8 @@ def retry_one(bid: str, run_dir: str, wall_timeout: int = 300) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", default=str(RUN_DIR))
-    ap.add_argument("--concurrency", type=int, default=8)
+    ap.add_argument("--concurrency", type=int, default=None,
+                    help="并发度 (默认: 动态探测 H20 空闲 GPU 数, 见 tools/remote_executor.compute_parallelism)")
     ap.add_argument("--limit", type=int, default=None, help="只重跑前 N 个 batch (试点)")
     ap.add_argument("--timeout", type=int, default=600, help="每测试 watchdog 超时秒数 (默认 600)")
     args = ap.parse_args()
@@ -88,11 +89,25 @@ def main():
     batches = report["error_statistics"]["timeout"]["batch_list"]
     if args.limit:
         batches = batches[:args.limit]
-    print(f"[retry] 重跑 {len(batches)} 个 timeout batch, 并发 {args.concurrency}, per-test timeout {args.timeout}s")
+
+    # 动态并行度 (2026-08-04): 默认探测 H20 空闲 GPU 数, 显式 --concurrency 覆盖。
+    # 8 并发实测压垮 daemon (GPFS 同步 I/O 占满 worker, 已修 bifrost runner);
+    # 现在 daemon 可承载更高并发, 但 GPU 并行度上限 = 空闲卡数, 探测更准。
+    if args.concurrency is not None:
+        concurrency = args.concurrency
+    else:
+        try:
+            from tools.remote_executor import compute_parallelism
+            concurrency = compute_parallelism(max_parallel=8)
+            print(f"[retry] 动态并行度: H20 空闲 GPU → {concurrency}")
+        except Exception as e:
+            concurrency = 4  # 探测失败 fallback: 保守并发, 避免压垮 daemon
+            print(f"[retry] GPU 探测失败 ({e}), fallback 并发 {concurrency}")
+    print(f"[retry] 重跑 {len(batches)} 个 timeout batch, 并发 {concurrency}, per-test timeout {args.timeout}s")
 
     results = []
     t_start = time.monotonic()
-    with ProcessPoolExecutor(max_workers=args.concurrency) as pool:
+    with ProcessPoolExecutor(max_workers=concurrency) as pool:
         futs = {pool.submit(retry_one, b, str(run_dir), args.timeout): b for b in batches}
         done = 0
         for fut in as_completed(futs):

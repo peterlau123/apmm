@@ -4,9 +4,9 @@
     "version": "2.2",
     "test_name": "ut",
     "started_at": "2026-07-18T12:35:12.052124+00:00",
-    "status": "running"
+    "status": "phase1_complete"
   },
-  "current_stage": "collect",
+  "current_stage": "phase2",
   "iteration": 0,
   "paths": {
     "run_dir": "runs\\ut-20260718-164107",
@@ -21,12 +21,12 @@
     "test_load": "runs\\ut-20260718-164107\\test_load_4000_20260718_203512.json"
   },
   "stats": {
-    "total_tests": 32933,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "ignored": 0,
-    "pending": 32933,
+    "total_tests": 4000,
+    "passed": 1418,
+    "failed": 91,
+    "error": 7,
+    "ignored": 2484,
+    "pending": 0,
     "error_rate": 0.0
   },
   "current_batch": {
@@ -40,7 +40,7 @@
     "pause_reason": null,
     "consecutive_failures": 0
   },
-  "last_update": "2026-07-19T22:10:24.073112",
+  "last_update": "2026-08-04T00:43:23.374667+00:00",
   "last_worker_result": {
     "stats": {
       "passed": 0,
@@ -24142,5 +24142,11 @@
     "profile": "t_h20",
     "last_heartbeat_at": "2026-07-19T12:32:39.742232+00:00",
     "last_disconnect_reason": "agent.py timed out: Command '['C:\\\\Users\\\\admin\\\\anaconda3\\\\python.exe', 'D:\\\\workspace\\\\apmm\\\\tools\\\\agent.py', '-p', 't_h20', 'run', '--timeout', '40', 'sudo -n docker exec v0.13.0_torch2.5.1_compile bash -c \"echo bnZpZGlhLXNtaSAtLXF1ZXJ5LWdwdT1pbmRleCxtZW1vcnkudXNlZCxtZW1vcnkudG90YWwsdXRpbGl6YXRpb24uZ3B1IC0tZm9ybWF0PWNzdixub2hlYWRlcixub3VuaXRzIDI+L2Rldi9udWxsOyBlY2hvIF9fQVBQU19fOyBudmlkaWEtc21pIC0tcXVlcnktY29tcHV0ZS1hcHBzPXBpZCx1c2VkX21lbW9yeSxncHVfdXVpZCAtLWZvcm1hdD1jc3Ysbm9oZWFkZXIsbm91bml0cyAyPi9kZXYvbnVsbDsgZWNobyBfX1VVSURTX187IG52aWRpYS1zbWkgLS1xdWVyeS1ncHU9aW5kZXgsZ3B1X3V1aWQgLS1mb3JtYXQ9Y3N2LG5vaGVhZGVyLG5vdW5pdHMgMj4vZGV2L251bGw= | base64 -d | bash\"']' timed out after 100 seconds"
+  },
+  "test_load_stats": {
+    "failed": 91,
+    "passed": 1418,
+    "ignored": 2484,
+    "error": 7
   }
 }

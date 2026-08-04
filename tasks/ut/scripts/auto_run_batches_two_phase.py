@@ -648,11 +648,24 @@ def _finalize_phase1_state(run_dir: Path):
     state = json.loads(ws_path.read_text(encoding="utf-8"))
 
     # F1: Tally test_load stats into workflow_state
+    # NOTE: paths.test_load may be Windows-style backslash relative path
+    # (e.g. "runs\\ut-xxx\\test_load.json"). Resolve against run_dir:
+    # 1. normalize backslashes to '/'
+    # 2. if the result already starts with the run_dir basename, it is a
+    #    repo-relative path -> anchor at project root; otherwise it is a
+    #    filename relative to run_dir -> anchor at run_dir.
     tl_path = state.get("paths", {}).get("test_load", "")
     if tl_path:
+        tl_path = tl_path.replace("\\", "/")
         tl = Path(tl_path)
         if not tl.is_absolute():
-            tl = run_dir / tl
+            # Repo-relative like "runs/ut-xxx/test_load.json"?
+            # run_dir.name == "ut-xxx", so a path containing "/ut-xxx/"
+            # before the filename is repo-relative.
+            if tl.parts and tl.parts[0] == "runs":
+                tl = _project_root / tl
+            else:
+                tl = run_dir / tl
         if tl.exists():
             test_load = json.loads(tl.read_text(encoding="utf-8"))
             stats = {}

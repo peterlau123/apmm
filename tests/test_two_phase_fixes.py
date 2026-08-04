@@ -109,6 +109,63 @@ class TestF1F2_Phase1StateTransition:
         result = json.loads(ws_path.read_text())
         assert result["stats"]["passed"] == 1
 
+    def test_handles_windows_backslash_repo_relative_path(self, tmp_path):
+        """Regression: Windows-style backslash repo-relative path
+        ('runs\\ut-xxx\\test_load.json') must resolve against project root,
+        not run_dir (which would double-prefix)."""
+        from tasks.ut.scripts.auto_run_batches_two_phase import _finalize_phase1_state, _project_root
+
+        # Build repo-relative test_load under a fake runs/ut-xxx dir
+        run_dir = tmp_path / "runs" / "ut-test-run"
+        run_dir.mkdir(parents=True)
+        test_load = {"tests": [{"status": "passed"}, {"status": "failed"}]}
+        (run_dir / "test_load.json").write_text(json.dumps(test_load))
+
+        # workflow_state lives in the run dir; paths use Windows backslashes
+        ws = {
+            "workflow": {"name": "UT", "status": "running"},
+            "current_stage": "collect",
+            "stats": {},
+            "paths": {"test_load": "runs\\ut-test-run\\test_load.json"},
+        }
+        ws_path = run_dir / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+
+        # Patch _project_root to tmp_path so repo-relative resolves correctly
+        import tasks.ut.scripts.auto_run_batches_two_phase as mod
+        old_root = mod._project_root
+        try:
+            mod._project_root = tmp_path
+            _finalize_phase1_state(run_dir)
+        finally:
+            mod._project_root = old_root
+
+        result = json.loads(ws_path.read_text())
+        assert result["stats"]["passed"] == 1
+        assert result["stats"]["failed"] == 1
+        assert result["stats"]["total_tests"] == 2
+
+    def test_handles_backslash_filename_relative_to_run_dir(self, tmp_path):
+        """Backslash filename-only path ('test_load.json') resolves to run_dir."""
+        from tasks.ut.scripts.auto_run_batches_two_phase import _finalize_phase1_state
+
+        test_load = {"tests": [{"status": "error"}]}
+        (tmp_path / "test_load.json").write_text(json.dumps(test_load))
+
+        ws = {
+            "workflow": {"name": "UT", "status": "running"},
+            "current_stage": "collect",
+            "stats": {},
+            "paths": {"test_load": "test_load.json"},
+        }
+        ws_path = tmp_path / "workflow_state.json"
+        ws_path.write_text(json.dumps(ws))
+
+        _finalize_phase1_state(tmp_path)
+
+        result = json.loads(ws_path.read_text())
+        assert result["stats"]["error"] == 1
+
 
 class TestF3_Phase2AutoTrigger:
     """F3: _trigger_phase2_stage1 calls phase2_stage1.py."""

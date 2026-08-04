@@ -18,11 +18,23 @@ if 'PYTHONPATH' in os.environ:
 
 
 def load_workflow_state(workflow_state_path: Path) -> dict:
-    """加载 workflow_state.json，校验必需字段"""
+    """加载 workflow_state.json，校验必需字段 (带共享锁, 防读半写文件)
+
+    与 save_workflow_state 的 LOCK_EX 配对: 写进程持独占锁写文件时,
+    读进程持共享锁等待, 不会读到截断/半写内容。
+    """
+    import fcntl
     if not workflow_state_path.exists():
         raise FileNotFoundError(f"workflow_state.json 不存在: {workflow_state_path}")
 
-    content = workflow_state_path.read_text(encoding="utf-8")
+    lock_path = workflow_state_path.with_suffix(".json.lock")
+    with open(lock_path, "r", encoding="utf-8") as lockf:
+        fcntl.flock(lockf.fileno(), fcntl.LOCK_SH)
+        try:
+            content = workflow_state_path.read_text(encoding="utf-8")
+        finally:
+            fcntl.flock(lockf.fileno(), fcntl.LOCK_UN)
+
     try:
         state = json.loads(content)
     except json.JSONDecodeError as e:
@@ -41,9 +53,29 @@ def load_workflow_state(workflow_state_path: Path) -> dict:
 
 
 def save_workflow_state(state: dict, workflow_state_path: Path) -> None:
-    """保存 workflow_state.json"""
+    """保存 workflow_state.json (带文件锁, 防并发写损坏)
+
+    并发场景: 多 batch 并行执行 (execute_batch 多进程) 时, 每个进程
+    都会 read-modify-write workflow_state.json. 无锁时两个进程同时读
+    旧版 -> 各自修改 -> 后写者覆盖, 甚至写到一半被另一个覆盖 ->
+    JSON 损坏 (JSONDecodeError: Extra data, 见 2026-08-04 incident).
+
+    锁实现要点: 锁必须加在独立 lock 文件上, 而非目标文件本身。
+    直接 open(path, "w") 会在 flock 之前截断文件, 并发时先截断者
+    会清空后写者的内容 -> 空文件/损坏。
+    """
+    import fcntl
     state["last_update"] = datetime.now().isoformat()
-    workflow_state_path.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+    payload = json.dumps(state, indent=2, ensure_ascii=False)
+    workflow_state_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = workflow_state_path.with_suffix(".json.lock")
+    with open(lock_path, "w", encoding="utf-8") as lockf:
+        fcntl.flock(lockf.fileno(), fcntl.LOCK_EX)
+        try:
+            # 持锁后再写目标文件 (open "w" 截断发生在持锁之后, 安全)
+            workflow_state_path.write_text(payload, encoding="utf-8")
+        finally:
+            fcntl.flock(lockf.fileno(), fcntl.LOCK_UN)
 
 
 def calculate_batch_stats(batches: dict) -> dict:

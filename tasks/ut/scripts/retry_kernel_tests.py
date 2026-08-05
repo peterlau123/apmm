@@ -29,15 +29,17 @@ KERNEL_FILES = ("tests/kernels/attention/test_cache.py",
                 "tests/kernels/attention/test_prefix_prefill.py")
 
 
-def collect_targets(run_dir: Path):
-    """从 test_load 收集目标: ignored 且 retry=0 的 test_cache/prefix_prefill 用例."""
+def collect_targets(run_dir: Path, files: tuple, device: str | None = None):
+    """从 test_load 收集目标: ignored 且 retry=0 的指定文件用例 (可加 device 过滤)."""
     tls = sorted(run_dir.glob("test_load_*.json"),
                  key=lambda p: p.stat().st_mtime, reverse=True)
     tl = json.loads(tls[0].read_text())
     targets = []
     for t in tl.get("tests", []):
         node = t.get("test_node") or ""
-        if not any(node.startswith(f) for f in KERNEL_FILES):
+        if not any(node.startswith(f) for f in files):
+            continue
+        if device and device not in node:
             continue
         if t.get("status") == "ignored" and t.get("retry_count", 0) == 0:
             targets.append(t)
@@ -135,23 +137,60 @@ def main():
     ap.add_argument("--run-dir", default=str(PROJECT_ROOT / "runs" / "ut-20260718-164107"))
     ap.add_argument("--limit", type=int, default=None, help="只跑前 N 个 (试点)")
     ap.add_argument("--host", default=HOST)
+    ap.add_argument("--file", default=",".join(KERNEL_FILES),
+                    help="要跑的文件前缀 (逗号分隔)")
+    ap.add_argument("--device", default=None,
+                    help="只跑 node 含该字符串的用例 (如 cuda:0, 避开异常卡)")
+    ap.add_argument("--device-map", default=None,
+                    help="运行层替换 device, 如 cuda:1=cuda:0 (回写用原 node)")
+    ap.add_argument("--tag", default="kernel",
+                    help="进度/汇总文件名标签, 如 fql")
     args = ap.parse_args()
     run_dir = Path(args.run_dir)
+    files = tuple(f.strip() for f in args.file.split(",") if f.strip())
 
-    targets = collect_targets(run_dir)
+    targets = collect_targets(run_dir, files, args.device)
+    # 断点续跑: 跳过 progress 里已有的节点 (中断后重启不重跑)
+    progress_path = run_dir / f"retry_{args.tag}_progress.json"
+    existing = set()
+    if progress_path.exists():
+        try:
+            existing = set(json.loads(progress_path.read_text()).keys())
+        except Exception:
+            pass
+    if existing:
+        before = len(targets)
+        targets = [t for t in targets if t["test_node"] not in existing]
+        print(f"[kernel] 断点续跑: 跳过已有 {before - len(targets)} 个, 剩余 {len(targets)} 个")
     if args.limit:
         targets = targets[:args.limit]
-    print(f"[kernel] 收集 {len(targets)} 个目标 (test_cache + prefix_prefill, ignored retry=0)")
+    print(f"[kernel] 收集 {len(targets)} 个目标 (files={files}, device={args.device}, "
+          f"ignored retry=0)")
 
+    # device-map: cuda:1=cuda:0 → 运行时替换 node 里的 device, 回写用原 node
+    dev_map = {}
+    if args.device_map and "=" in args.device_map:
+        src, dst = args.device_map.split("=", 1)
+        dev_map[src] = dst
+        print(f"[kernel] device-map: {src} → {dst}")
+
+    # 载入已有结果保持计数准确 (断点续跑)
     results = {}
-    progress_path = run_dir / "retry_kernel_progress.json"
+    if existing:
+        try:
+            results = {k: v for k, v in json.loads(progress_path.read_text()).items()}
+        except Exception:
+            pass
     t_start = time.monotonic()
     done = 0
     passed = failed = error = ignored = 0
     for t in targets:
         node = t["test_node"]
+        run_node = node
+        for src, dst in dev_map.items():
+            run_node = run_node.replace(src, dst)
         done += 1
-        res = run_one(args.host, node)
+        res = run_one(args.host, run_node)
         results[node] = res
         if res["status"] == "passed":
             passed += 1
@@ -175,9 +214,10 @@ def main():
         "total": len(targets), "passed": passed, "failed": failed,
         "error": error, "ignored": ignored,
         "elapsed_secs": total_s,
+        "files": list(files), "device": args.device,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
-    (run_dir / "retry_kernel_summary.json").write_text(
+    (run_dir / f"retry_{args.tag}_summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=1))
     print(f"\n[kernel] 完成 {len(targets)} 个 in {total_s/60:.0f}min: "
           f"passed={passed} failed={failed} error={error} ignored={ignored}")

@@ -90,11 +90,14 @@ ignored retry=0 用例：
 
 **test_load 最终全量（4000 条）**：passed=3041 / failed=225 / ignored=726 / error=8
 
-剩余 726 ignored 构成（全部有据可查）：
+剩余 323 ignored 构成（全部有据可查）：
 - 241 kernel skipped（pytest 主动跳过，有效结果）
-- **403 fused_quant_layernorm（GPU 1 卡硬件异常**——device 参数全固化 cuda:1，
-  同一 kernel 在 cuda:0 上全过；非 kernel bug，详见兼容性报告 §2.1）
-- 58 真慢测试（sequence_parallelism 19-20min / shm_broadcast 60min）
+- **58 真慢测试（sequence_parallelism 19-20min / shm_broadcast 60min）**
 - 24 人工过滤 + 其他（`不需要运行` / GPU 不足）
+
+> **更正（2026-08-05 下午）**：fused_quant_layernorm 403 个经 **device 映射重跑**
+> （cuda:1 → cuda:0，`--device-map`）**全部 passed**——根因是 GPU 1 卡硬件
+> 异常（非 kernel bug），已通过映射到健康卡验证。test_load passed **3041 → 3444
+> （86.1%）**。详见兼容性报告 §2.1。
 
 *更新时间: 2026-08-05*

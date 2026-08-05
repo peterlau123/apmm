@@ -903,11 +903,14 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Read directly from workflow.yaml config
     wf_config = wf.get("config", {}) if 'wf' in dir() and wf else {}
     force_gpu_count = wf_config.get("force_gpu_count", config.get("force_gpu_count", 0))
-    
+    # 2026-08-05: 排除异常卡 (如 GPU 1 illegal memory access), 配置 exclude_gpus=[1]
+    exclude_gpus = wf_config.get("exclude_gpus", config.get("exclude_gpus", []))
+
     if force_gpu_count > 0:
         # Force mode: bypass detection, use specified GPU count
-        gpu_pool = list(range(force_gpu_count))
-        print(f"[INFO] Force GPU mode: using {gpu_pool} (parallelism={len(gpu_pool)})")
+        gpu_pool = [i for i in range(force_gpu_count) if i not in exclude_gpus]
+        print(f"[INFO] Force GPU mode: using {gpu_pool} (parallelism={len(gpu_pool)})"
+              + (f" exclude={exclude_gpus}" if exclude_gpus else ""))
     else:
         try:
             free_ids, fallback_card = _detect_free_gpus(
@@ -917,8 +920,9 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             return _disconnect_wait(batch_id, remote_server, workflow_state_path, str(e))
 
         if free_ids:
-            gpu_pool = free_ids
-            print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+            gpu_pool = [i for i in free_ids if i not in exclude_gpus]
+            print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})"
+                  + (f" exclude={exclude_gpus}" if exclude_gpus else ""))
         elif batch_type == "distributed":
             # 2026-08-04 修复: distributed 需要 ≥ gpu_per_test 卡, 探测到
             # 0 空闲时 D1 degrade 到单卡 → n_workers=1 → 串行硬跑易崩且

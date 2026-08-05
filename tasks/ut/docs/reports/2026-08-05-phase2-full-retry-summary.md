@@ -92,7 +92,8 @@ ignored retry=0 用例：
 
 剩余 726 ignored 构成（全部有据可查）：
 - 241 kernel skipped（pytest 主动跳过，有效结果）
-- 403 fused_quant_layernorm（illegal memory access，H20 兼容性问题）
+- **403 fused_quant_layernorm（GPU 1 卡硬件异常**——device 参数全固化 cuda:1，
+  同一 kernel 在 cuda:0 上全过；非 kernel bug，详见兼容性报告 §2.1）
 - 58 真慢测试（sequence_parallelism 19-20min / shm_broadcast 60min）
 - 24 人工过滤 + 其他（`不需要运行` / GPU 不足）
 

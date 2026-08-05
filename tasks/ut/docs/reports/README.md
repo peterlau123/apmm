@@ -17,6 +17,7 @@
 | [2026-07-19-phase1-pending-todos.md](2026-07-19-phase1-pending-todos.md) | 2026-07-19 | Phase 1 待办项清单：Phase 2 前必做项（filter_rules/wall_timeout/failed分类）+ 防回归措施 |
 | [2026-08-04-phase2-timeout-retry-fixes-and-resume.md](2026-08-04-phase2-timeout-retry-fixes-and-resume.md) | 2026-08-04 | Phase 2 timeout 重试 3+1 bug 修复（旧结果残留/反斜杠路径/不回写 test_load/container_env 丢失）+ 动态并行度 + 全量重试恢复 |
 | [2026-08-05-phase2-full-retry-summary.md](2026-08-05-phase2-full-retry-summary.md) | 2026-08-05 | Phase 2 全量重试完成：727 timeout batch / 440 super batches，passed 1418→2723（68%），剩余 ignored 完整分类 |
+| [2026-08-05-phase2-retry-final-summary.md](2026-08-05-phase2-retry-final-summary.md) | 2026-08-05 | **Phase 2 重跑最终总结**：三轮重跑（全量/kernel/fql device 映射），passed 1418→3444（86.1%），4 个问题全部解决 |
 
 ---
 

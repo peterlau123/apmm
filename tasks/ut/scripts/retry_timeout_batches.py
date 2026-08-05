@@ -237,6 +237,11 @@ def is_slow_test(t: dict, slow: dict, xml_prefixes: list) -> bool:
     return any(tn.startswith(p) for p in xml_prefixes)
 
 
+def collect_decision(is_slow: bool, slow_only: bool) -> bool:
+    """收集决策: slow_only=True 只收慢测试; 默认 (False) 跳过慢测试."""
+    return is_slow if slow_only else not is_slow
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run-dir", default=str(RUN_DIR))
@@ -248,6 +253,8 @@ def main():
                     help="vLLM ut_logs 目录 (扫描 XML 实测慢测试)")
     ap.add_argument("--slow-threshold", type=float, default=600,
                     help="XML 实测耗时超过此秒数的测试视为慢测试 (默认 600)")
+    ap.add_argument("--slow-only", action="store_true",
+                    help="只跑已知慢测试 (需配合 --timeout 1800+ 提 watchdog)")
     args = ap.parse_args()
 
     run_dir = Path(args.run_dir)
@@ -276,16 +283,18 @@ def main():
         for t in cfg.get("tests", []):
             if t.get("id") in test_to_batch:
                 continue  # 同一测试出现在多个 batch 只取第一个
-            # 剔除已知慢测试: 重试超限或 XML 实测超时, 再跑只会连坐同批
-            if is_slow_test(t, slow, xml_prefixes):
-                skipped_slow += 1
+            is_slow = is_slow_test(t, slow, xml_prefixes)
+            if not collect_decision(is_slow, args.slow_only):
+                if is_slow:
+                    skipped_slow += 1
                 continue
             test_to_batch[t["id"]] = bid
             grouped[btype].append((t, bid))
     total_tests = sum(len(v) for v in grouped.values())
     print(f"[retry] 收集 {total_tests} 个测试来自 {len(batches)} 个 timeout batch "
           f"(跳过 config 缺失 {skipped_batches}, 跳过慢测试 {skipped_slow}), "
-          f"max-batch-size={args.max_batch_size}")
+          f"max-batch-size={args.max_batch_size}"
+          + (" [SLOW-ONLY 模式]" if args.slow_only else ""))
     for btype, items in grouped.items():
         print(f"  - {btype}: {len(items)} 个测试")
 

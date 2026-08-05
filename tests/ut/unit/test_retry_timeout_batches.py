@@ -8,6 +8,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from tasks.ut.scripts.retry_timeout_batches import (  # noqa: E402
+    collect_decision,
     is_slow_test,
     load_slow_tests,
 )
@@ -73,6 +74,14 @@ def test_load_slow_tests_xml_scan(tmp_path):
     slow, xml_prefixes = load_slow_tests(tmp_path, ut_logs_base=tmp_path)
     assert ("tests/compile/distributed/test_sequence_parallelism.py::"
             "test_sequence_parallelism_pass") in xml_prefixes
+
+
+def test_collect_decision_slow_only_mode():
+    """--slow-only 只收慢测试; 默认跳过慢测试 (2026-08-05 慢测试单跑支持)."""
+    assert collect_decision(is_slow=True, slow_only=True) is True
+    assert collect_decision(is_slow=False, slow_only=True) is False
+    assert collect_decision(is_slow=True, slow_only=False) is False
+    assert collect_decision(is_slow=False, slow_only=False) is True
 
 
 def test_is_slow_test_matches_three_ways(run_dir):

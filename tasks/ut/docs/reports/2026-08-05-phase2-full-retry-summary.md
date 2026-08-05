@@ -73,4 +73,27 @@ ignored=1044 / error=8 / pending=0）。
 - `runs/ut-20260718-164107/retry_slow_tests.json`（慢测试清单）
 - `runs/ut-20260718-164107/test_load_4000_20260718_203512.json`（test_load 数据）
 
+---
+
+## 8. 追加：kernel 测试串行重跑（2026-08-05 下午）
+
+使用 `tasks/ut/scripts/retry_kernel_tests.py`（SSH 直连 H20，**不设
+CUDA_VISIBLE_DEVICES**，串行单跑），处理 test_cache + prefix_prefill 的
+ignored retry=0 用例：
+
+| 项 | 值 |
+|---|---|
+| 目标 | 556 个（559 - 3 试点；fused_quant_layernorm 403 已排除） |
+| 结果 | **passed 315 + skipped 241**（failed=0, error=0），118min |
+| skipped 原因 | 代码主动跳过：`Triton implementation only supports NHD layout` 等 |
+| test_load 变化 | passed 2723 → **3041**（通过率 68% → **76%**） |
+
+**test_load 最终全量（4000 条）**：passed=3041 / failed=225 / ignored=726 / error=8
+
+剩余 726 ignored 构成（全部有据可查）：
+- 241 kernel skipped（pytest 主动跳过，有效结果）
+- 403 fused_quant_layernorm（illegal memory access，H20 兼容性问题）
+- 58 真慢测试（sequence_parallelism 19-20min / shm_broadcast 60min）
+- 24 人工过滤 + 其他（`不需要运行` / GPU 不足）
+
 *更新时间: 2026-08-05*

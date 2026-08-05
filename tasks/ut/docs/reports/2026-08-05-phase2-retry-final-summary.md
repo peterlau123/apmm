@@ -63,8 +63,25 @@
 
 ## 6. 遗留项
 
-1. **58 个慢测试单跑**（第④轮，`--timeout 1800`，预计 2-4h）——完成后追加结果
+1. ~~58 个慢测试单跑~~（第④轮）：**已执行并止损**——见 §7
 2. **GPU 1 卡硬件诊断**（`nvidia-smi -r` / 驱动排查 / 换卡）——用户安排
-3. 慢测试跑完后：manifest 再同步 + 入库 + 本报告追加
+
+## 7. 追加：慢测试单跑结果（2026-08-05 夜，已止损）
+
+`retry_timeout_batches.py --slow-only --timeout 1800`（新增参数，commit `8adf310`）：
+
+| 项 | 值 |
+|---|---|
+| 收集 | **~94 个**（xml_prefixes 前缀匹配全部 sequence_parallelism/attn_quant/symm_mem/shm_broadcast 变体，超出预估 58） |
+| 已执行 | **64 个 / 14h**：✅ 22 passed / ❌ 37 failed / ⏸️ 5 ignored |
+| 止损 | 剩余 ~30 个 sequence_parallelism 未跑（同型失败率 ~58%，收益低，用户决定停止） |
+| 回写 | ✅ 53 个 super batch 结果与 test_load 0 差异（全部生效） |
+
+**failed 根因**：`torch.multiprocessing.spawn.ProcessRaisedException`（`init_distributed_environment` 崩溃）——分布式初始化失败，非超时；同文件部分变体通过（222609: 6p/2f），疑似参数化变体/环境 flaky。
+
+**慢的原因**（测试设计使然）：torch.compile 即时编译（每变体独立编译模型 10-20min）+ 2 进程分布式 spawn + 大模型加载（Qwen3-0.6B / Llama-3.1-8B NVFP4）。
+
+**test_load 最终**：passed **3,454（86.4%）** / failed 251 / ignored 287 / error 8
+（vs 慢跑前 3,444：+10 passed / +26 failed——慢测试救回部分 + 暴露真实失败）
 
 *更新时间: 2026-08-05*

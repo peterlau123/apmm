@@ -19,6 +19,7 @@
 | 2026-07-19 | [content_format 断言失败事故（上游测试期望与检测逻辑不一致）](2026-07-19-content-format-test-expectation-mismatch-incident.md) | 3 个 test_chat_utils failed，上游测试参数表期望过时（fallbacks Qwen2-VL 期望 string 实为 openai，hf_defined LLAMA_GUARD 期望 openai 实为 string） | 📐 待评估 |
 | 2026-08-03 | [测试清单数量溯因事故（test_async_llm 22 条静默丢失）](2026-08-03-test-list-count-loss-incident.md) | hf_hub/hf_hub/hub 混淆致 TinyLlama 缓存结构损坏 → collect ERROR → 22 条用例静默丢失（32964→32933） | ✅ 已修复 |
 | 2026-08-05 | [CUDA_VISIBLE_DEVICES 单卡导致 kernel 参数化节点 not found 事故](2026-08-05-kernel-cuda-visible-devices-param-notfound-incident.md) | 962 个 kernel 测试（test_cache/prefix_prefill/fused_quant_layernorm）Phase 1 起被误判 ignored：单卡 env 致参数化只生成 cuda:0，cuda:1 节点 not found → 收集 0 | ✅ 已修复（专项串行重跑，315 passed + 241 skipped） |
+| 2026-08-05 | [H20 GPU 1 卡硬件异常事故（GPC1 MMU Fault）](2026-08-05-gpu1-hardware-fault-incident.md) | 403 个 fused_quant_layernorm 全失败的根因：卡 1 GPC1 硬件单元故障（Xid 31 ×9），一度误判为 kernel bug | 🟡 测试侧已闭环（device 映射 400 全过 + exclude_gpus），硬件待维修（上报管理员） |
 
 ## 相关入口
 

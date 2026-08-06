@@ -4,6 +4,16 @@
 
 ---
 
+## 🎯 目标
+
+- **主目标**：运行针对 **Minimax-M2.7** 的全量单元测试，**暴露所有 vLLM 0.13.0 + torch 2.5.1 的兼容性问题**（H20 环境）
+- 发现代码 bug 后在 vLLM 源码修复并提交；无法修复的归类记录（见 [docs/incidents/README.md](docs/incidents/README.md)）
+- **测试环境**：t_h20，容器 `v0.13.0_torch2.5.1_compile`（vLLM 0.13.0 + torch 2.5.1+cu124，详见 [docs/guides/troubleshooting.md](docs/guides/troubleshooting.md)）
+- **测试范围**：过滤规则见 [skills/ut/ut_common/filter_rules.yaml](../../skills/ut/ut_common/filter_rules.yaml)
+- **进度追踪**：[PROGRESS.md](PROGRESS.md)（每周更新，只记录测试用例运行进度）
+
+---
+
 ## 我想干嘛？
 
 ### 启动路由

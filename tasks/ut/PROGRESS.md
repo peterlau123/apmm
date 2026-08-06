@@ -1,71 +1,38 @@
 # 单元测试进度追踪
 
-> **vLLM v0.13.0 + PyTorch 2.5.1 pytest 测试进度**
+> **只记录测试用例运行进度**，每周更新一次，每次标记时间戳。
+> 兼容性问题/事故/工作记录见 [docs/incidents/](docs/incidents/) 与 [docs/reports/](docs/reports/)。
 
 ---
 
-## 最新统计
+## 2026-08-05（run ut-20260718-164107 收官）
 
 | 指标 | 数值 |
 |------|:----:|
-| 总测试用例数 | 32,964 |
-| 已执行用例数 | 32,964 |
-| 进度 | 19.45% |
-| 通过数 | 6,411 |
+| 总测试用例数 | 4,000 |
+| ✅ passed | 3,454 |
+| ❌ failed | 251 |
+| ⚠️ error | 8 |
+| ⏸️ ignored | 287 |
+| **通过率** | **86.4%** |
+
+**本周进展**：Phase 2 三轮重跑（全量 727 batch / kernel 556 / fql 403）完成，
+通过率 35.5% → 86.4%（+2,036 用例）。详见
+[docs/reports/2026-08-05-phase2-retry-final-summary.md](docs/reports/2026-08-05-phase2-retry-final-summary.md)。
 
 ---
 
-## Skills 版本
+<!-- 每周更新模板：
+## YYYY-MM-DD（本周）
 
-| Stage | Skill | 版本 |
-|:-----:|-------|:----:|
-| 1 | unit-test-collector | v2.1 |
-| 2 | batch-selector | v2.2 |
-| 3 | unit-test-executor | v5.0 |
-| 4 | failure-handler | v3.0 |
-| 5 | manifest-updater | v3.2 |
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | {TOTAL} |
+| ✅ passed | {PASSED} |
+| ❌ failed | {FAILED} |
+| ⚠️ error | {ERROR} |
+| ⏸️ ignored | {IGNORED} |
+| **通过率** | **{PCT}%** |
 
----
-
-## 里程碑
-
-| 日期 | 里程碑 | 详情 |
-|------|--------|------|
-| 2026-06-26 | Phase 4 启动 + SKILL v5.0 | 集成测试骨架 · unit-test-executor v5.0版本统一 |
-| 2026-06-26 | Manifest Dedupe Fix | 过滤69个伪测试（pytest警告源行无::分隔符）→ 32,964 unique tests |
-| 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
-| 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
-| 2026-06-12 | Kanban Phase 1 | docs/kanban/README.md |
-| 2026-06-11 | Schema 统一 | skills/ut/ut_common/ |
-
----
-
-## Hermes Kanban 集成
-
-| Phase | 状态 |
-|:-----:|:----:|
-| 1 基础设施 | ✅ |
-| 2 方案集成 | ✅ |
-| 3 真实验证 | ✅ |
-| 4 生产化 | 🔄 进行中 |
-
----
-
-## 待完成工作
-
-- Workflow 集成测试骨架（已创建）
-- Kanban Phase 4 生产化 profiles（待填充）
-
----
-
-## 更新模板
-
-> 复制以下模板添加新里程碑
-
-```markdown
-| YYYY-MM-DD | <里程碑名> | [worklog/YYYY-MM-DD/<file>.md](...) |
-```
-
----
-
-*最后更新: 2026-06-26*
+**本周进展**：{一句话总结}。详见 {报告链接}。
+-->

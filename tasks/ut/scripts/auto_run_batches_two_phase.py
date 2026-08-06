@@ -473,7 +473,7 @@ def phase1_batch_loop(
         tl_count = config.get("workflow", {}).get("test_load", {}).get("count", 1000)
         gtl_cmd = [
             sys.executable,
-            str(_project_root / "tasks" / "ut" / "scripts" / "generate_test_load.py"),
+            str(_project_root / "skills" / "ut" / "ut_common" / "scripts" / "generate_test_load.py"),
             "--manifest-path", str(manifest_path),
             "--count", str(tl_count),
             "--output-dir", str(paths["run_dir"]),

@@ -92,6 +92,43 @@ def ut_logs_increment(start: datetime, end: datetime) -> tuple[int, int]:
         con.close()
 
 
+# 提取具体兼容性问题细节的关键词 (错误类型/API/症状)
+DETAIL_KEYWORDS = [
+    "illegal memory access", "not found", "runtimeerror", "xid", "cuda error",
+    "timeout", "超时", "failed to start", "processraisedexception",
+    "distnetworkerror", "segfault", "崩溃", "异常", "失败", "不兼容",
+    "mismatch", "incompatible", "version conflict", "crash",
+]
+
+
+def extract_issue_details(f: Path) -> list[str]:
+    """从报告/incident 提取具体兼容性问题细节 (错误/API/症状行), 最多 2 条.
+
+    只提取含错误关键词且信息量足够的完整行; 无命中返回空 (周报填\"无\")."""
+    hits = []
+    seen = set()
+    for ln in f.read_text(errors="ignore").splitlines():
+        t = ln.strip()
+        if len(t) < 15 or len(t) > 220:
+            continue
+        if t.startswith(("#", "|", "```", "---", "*", "-", ">", "`", "（", "(", "E ")):
+            continue
+        tl = t.lower()
+        # 截断行 (以冒号/逗号/连接符结尾) 信息不完整, 跳过; Xid 证据行特判保留
+        if t[-1] not in "。！？)）." and "xid" not in tl:
+            continue
+        if not any(k in tl for k in DETAIL_KEYWORDS):
+            continue
+        key = t[:80]
+        if key in seen:
+            continue
+        seen.add(key)
+        hits.append(t)
+        if len(hits) >= 2:
+            break
+    return hits
+
+
 def compat_issue_lines(files: list[tuple[Path, datetime]]) -> list[str]:
     """从本周报告/incident 文件提取兼容性问题要点 (标题行)."""
     lines = []
@@ -109,11 +146,10 @@ def compat_issue_lines(files: list[tuple[Path, datetime]]) -> list[str]:
 def build_weekly_md(files, runs_inc, tc_inc, start, end) -> str:
     """生成周报 (精简, 直击问题, 开头说明相对上周增量)."""
     now = datetime.now(TZ)
-    prev = [f.name for f, _ in files]
     lines = [
         f"# 单元测试兼容性问题检查报告（vLLM 0.13.0 + torch 2.5.1）",
         f"\n> 窗口：{start:%Y-%m-%d %H:%M} ~ {end:%Y-%m-%d %H:%M}｜生成：{now:%Y-%m-%d %H:%M}",
-        f"> **相对上周增量**：新增报告/incident **{len(prev)}** 个，ut_logs 新增入库 runs **+{runs_inc}** / test_cases **+{tc_inc}**",
+        f"> **相对上周增量**：新增报告/incident **{len(files)}** 个，ut_logs 新增入库 runs **+{runs_inc}** / test_cases **+{tc_inc}**",
         "",
         "## 目录",
         "1. 本周增量发现",
@@ -124,10 +160,16 @@ def build_weekly_md(files, runs_inc, tc_inc, start, end) -> str:
         "",
         "## 1. 本周增量发现（相对上周）",
     ]
-    if prev:
-        lines += ["- " + p for p in prev]
+    # 从本周报告/incident 提取具体兼容性问题细节 (API/错误/症状), 无则填"无"
+    detail_lines = []
+    for f, mt in files:
+        for d in extract_issue_details(f):
+            rel = f.relative_to(PROJECT_ROOT)
+            detail_lines.append(f"- **[{f.stem}]({rel})**: {d}")
+    if detail_lines:
+        lines += detail_lines
     else:
-        lines.append("- 本周无新增报告/incident")
+        lines.append("- 本周无新增具体兼容性问题细节（无新 API/错误类型报告）")
     lines += [
         "",
         "## 2. 新增报告 / incidents",

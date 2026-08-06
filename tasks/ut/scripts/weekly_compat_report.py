@@ -80,8 +80,10 @@ def ut_logs_increment(start: datetime, end: datetime) -> tuple[int, int]:
         r = con.execute(
             "SELECT COUNT(*) FROM runs WHERE indexed_at >= ? AND indexed_at <= ?",
             (start_s, end_s)).fetchone()[0]
+        # test_cases 无时间列, 通过 run_id JOIN runs 统计窗口内新增
         t = con.execute(
-            "SELECT COUNT(*) FROM test_cases WHERE indexed_at >= ? AND indexed_at <= ?",
+            "SELECT COUNT(*) FROM test_cases tc JOIN runs r ON tc.run_id = r.id "
+            "WHERE r.indexed_at >= ? AND r.indexed_at <= ?",
             (start_s, end_s)).fetchone()[0]
         return r, t
     except sqlite3.Error:

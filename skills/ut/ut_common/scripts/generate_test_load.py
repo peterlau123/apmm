@@ -26,8 +26,8 @@ from pathlib import Path
 if 'PYTHONPATH' in os.environ:
     del os.environ['PYTHONPATH']
 
-# Add project root to path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+# Add project root to path (脚本位于 skills/ut/ut_common/scripts/ = 5 级)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from skills.ut.ut_common import validate_and_write

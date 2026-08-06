@@ -167,7 +167,7 @@ def _generate_test_load(
 
     Hard-fails (sys.exit) if the script is missing or returns non-zero.
     """
-    gtl_script = PROJECT_ROOT / "tasks" / "ut" / "scripts" / "generate_test_load.py"
+    gtl_script = PROJECT_ROOT / "skills" / "ut" / "ut_common" / "scripts" / "generate_test_load.py"
     if not gtl_script.exists():
         print(f"[ERROR] generate_test_load.py not found: {gtl_script}", file=sys.stderr)
         sys.exit(1)

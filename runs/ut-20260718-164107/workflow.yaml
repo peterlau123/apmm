@@ -27,6 +27,13 @@ config:
   batch_logs_dir: '{batch_dir_template}/logs'
   remote_server: t_h20
   docker_container: v0.13.0_torch2.5.1_compile
+  # 2026-08-04 止损: execute_batch 的 _detect_free_gpus 完整跑时探测命令
+  # exit=1 (bifrost 后端下 base64 嵌套命令解析失败), 单独调却成功 ——
+  # 时序/环境差异未定位。H20 专用节点 8 卡全空, 强制 8 卡绕过探测。
+  # v2 (19:28): 8 → 4 —— force 8 卡时 execute_batch 无脑 8 workers 并行,
+  # 任务洪峰压垮 daemon 队列 (active=10 满 → 卡死)。4 卡减半洪峰,
+  # 且 H20 常态 4 卡空闲 (其他用户占 4)。
+  force_gpu_count: 4
   vllm_dir: /gpfs/gcsp/M2.7_verify/vllm
   ut_logs_dir: /gpfs/gcsp/M2.7_verify/vllm/ut_logs
   container_env:

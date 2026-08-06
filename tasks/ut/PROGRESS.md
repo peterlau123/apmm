@@ -5,6 +5,25 @@
 
 ---
 
+## 2026-08-06（run ut-20260806-103121：8000 cases 全量）
+
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | 8,000 |
+| ✅ passed | 4,233 |
+| ❌ failed | 3,767 |
+| ⚠️ error | 0 |
+| ⏸️ ignored | 0 |
+| **通过率** | **52.9%** |
+
+**本周进展**：8000 cases 全量执行完成（0 ignored——排除坏卡 GPU1 + 7 卡并行）。
+所有失败均为真实兼容性问题（`_moe_C` 扩展算子注册失效 2,638 + inductor 编译 402 +
+FP8/DeepGEMM/float8_e8m0fnu 等 1,129）。manifest 同步：progress 35.1% → **59.4%**
+（executed 19,562 / passed 14,760 / pending 12,505）。详见
+[docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md)。
+
+---
+
 ## 2026-08-05（run ut-20260718-164107 收官）
 
 | 指标 | 数值 |

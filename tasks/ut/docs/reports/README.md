@@ -18,6 +18,7 @@
 | [2026-08-04-phase2-timeout-retry-fixes-and-resume.md](2026-08-04-phase2-timeout-retry-fixes-and-resume.md) | 2026-08-04 | Phase 2 timeout 重试 3+1 bug 修复 + 动态并行度 + 全量重试恢复 |
 | [2026-08-05-phase2-full-retry-summary.md](2026-08-05-phase2-full-retry-summary.md) | 2026-08-05 | Phase 2 全量重试完成：passed 1418→2723（68%），剩余 ignored 完整分类 |
 | [2026-08-05-phase2-retry-final-summary.md](2026-08-05-phase2-retry-final-summary.md) | 2026-08-05 | **Phase 2 重跑最终总结**：三轮重跑，passed 1418→3444（86.1%），4 个问题全部解决 |
+| [2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md) | 2026-08-06 | **8000 cases run 兼容性问题**：4233 passed（52.9%）/ 3767 failed，`_moe_C` 注册失效 2638 + FP8/inductor/DeepGEMM 清单 |
 | [2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md](2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md) | 2026-08-05 | vLLM 0.13.0 + torch 2.5.1 在 H20 兼容性问题全清单（6 项，含解决状态与原因剖析） |
 
 ---

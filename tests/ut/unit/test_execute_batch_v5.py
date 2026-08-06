@@ -131,6 +131,40 @@ def _decode_inner(cmd: str) -> str:
     return _b64.b64decode(m.group(1)).decode("utf-8") if m else cmd
 
 
+def test_execute_batch_exclude_gpus_filters_pool(tmp_path, capsys):
+    """exclude_gpus 配置应把异常卡从 gpu_pool 过滤掉 (2026-08-05 GPU 1 硬件异常).
+
+    exclude_gpus 从 workflow.yaml 的 config 读取 (get_config 顶层 dict 无此字段).
+    """
+    cfg = _write_batch_config(tmp_path)
+    state = _write_workflow_state(tmp_path)
+    # workflow.yaml: config.exclude_gpus=[1]
+    wf_yaml = tmp_path / "workflow.yaml"
+    wf_yaml.write_text("config:\n  exclude_gpus: [1]\n  container_env: {}\n",
+                       encoding="utf-8")
+    state_data = json.loads(state.read_text(encoding="utf-8"))
+    state_data["paths"]["workflow_yaml"] = str(wf_yaml)
+    state.write_text(json.dumps(state_data), encoding="utf-8")
+
+    def fake_run_remote(cmd, *, timeout=None, **kwargs):
+        inner = _decode_inner(cmd)
+        if "cat " in inner:
+            xml = _PASSING_XML_B if "test_b" in inner else _PASSING_XML_A
+            return {"exit_code": 0, "stdout": xml, "stderr": ""}
+        return {"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": 4242}
+
+    with mock.patch.object(execute_batch_mod, "run_remote",
+                           side_effect=fake_run_remote), \
+         mock.patch.object(execute_batch_mod, "_detect_free_gpus",
+                           return_value=([0, 1, 2], 0)):
+        result = execute_batch_mod.execute_batch(cfg, state)
+
+    captured = capsys.readouterr().out
+    assert "exclude=[1]" in captured, f"应打印 exclude=[1], 实际: {captured[-500:]}"
+    assert "[0, 2]" in captured, f"gpu_pool 应过滤卡 1 → [0, 2], 实际: {captured[-500:]}"
+    assert result is not None
+
+
 def test_execute_batch_writes_remote_log_pointer_and_local_summary(tmp_path):
     """The executor produces:
     - batch_results.json with remote_log.raw_log_path naming pytest_<batch_id>.log

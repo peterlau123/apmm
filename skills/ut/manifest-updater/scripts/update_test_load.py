@@ -297,7 +297,7 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict) -> i
         if new_status == "retriable_error" and target.get("retry_count", 0) >= max_retry:
             target["status"] = "ignored"
             et = target.get("error_type", error_type or "unknown")
-            target["ignore_reason"] = f"max retry exceeded for {et}"
+            target["ignored_reason"] = f"max retry exceeded for {et}"
         else:
             target["status"] = new_status
 
@@ -309,10 +309,11 @@ def merge_batch_results(manifest: dict, batch_results: dict, handled: dict) -> i
         new_status = handled_t.get("status") or handled_t.get("final_status")
         if new_status:
             target["status"] = new_status
-        if "ignore_reason" in handled_t:
-            target["ignore_reason"] = handled_t["ignore_reason"]
+        # 统一写正确字段 ignored_reason；兼容旧数据里的 ignore_reason
         if "ignored_reason" in handled_t:
-            target["ignore_reason"] = handled_t["ignored_reason"]
+            target["ignored_reason"] = handled_t["ignored_reason"]
+        elif "ignore_reason" in handled_t:
+            target["ignored_reason"] = handled_t["ignore_reason"]
         # Copy commit hash if present (from failure-handler fix)
         if "commit" in handled_t:
             target["commit"] = handled_t["commit"]

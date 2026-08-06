@@ -165,8 +165,9 @@ def test_execute_batch_pytest_cmd_is_single_line_and_uses_sudo_n(tmp_path):
     assert captured_cmds, "no remote cmds captured"
     for i, cmd in enumerate(captured_cmds):
         assert "\n" not in cmd, f"cmd #{i} has bare newline: {cmd[:200]!r}"
-        assert cmd.startswith("sudo -n docker exec "), (
-            f"cmd #{i} must start with `sudo -n docker exec`: {cmd[:120]!r}"
+        # 2026-08-04: 加 sh -c 包装 (bifrost 后端)
+        assert cmd.startswith("sh -c 'sudo -n docker exec "), (
+            f"cmd #{i} must start with `sh -c 'sudo -n docker exec`: {cmd[:120]!r}"
         )
 
 
@@ -242,7 +243,8 @@ def test_docker_wrap_uses_sudo_dash_n():
     cmd = execute_batch_mod._wrap_with_docker_exec_b64(
         "v0.13.0_torch2.5.1_compile", "echo hi"
     )
-    assert cmd.startswith("sudo -n docker exec ")
+    # 2026-08-04: 加 sh -c 包装 (bifrost 后端需 sh -c 才能解析管道/引号)
+    assert cmd.startswith("sh -c 'sudo -n docker exec ")
     assert "sudo docker" not in cmd
 
 
@@ -261,7 +263,8 @@ def test_docker_wrap_payload_is_pure_ascii_no_quoting_hazard():
     inner = "echo 'hello \"world\"' && grep -E '(A|B)' /tmp/foo.log"
     cmd = execute_batch_mod._wrap_with_docker_exec_b64("C", inner)
     assert "base64 -d" in cmd
-    assert cmd.count("'") == 0
+    # 外层 sh -c 单引号 2 个 (开头+结尾), base64 载荷内无引号
+    assert cmd.count("'") == 2, f"expected 2 outer quotes, got {cmd.count(chr(39))}"
     import base64 as _b64, re as _re
     m = _re.search(r"echo (\S+) \| base64 -d", cmd)
     assert m

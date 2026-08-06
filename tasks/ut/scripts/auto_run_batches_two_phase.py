@@ -531,6 +531,25 @@ def phase1_batch_loop(
     for i in range(start_index, batch_group_size):
         batch_id = create_batch_id(i)
 
+        # 用户命令检查: 每 batch 前读 workflow_state flags.
+        # 支持 stop_requested / pause_requested (由 supervisor 写入),
+        # Phase1 是长循环, 无此检查则启动后无法中途停止 (2026-08-04 审查).
+        try:
+            _ws_now = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+            _flags = _ws_now.get("flags", {})
+            if _flags.get("stop_requested"):
+                print(f"\n[Phase 1] stop_requested detected at batch {i+1}, stopping...")
+                # 保留已完成的 batch 结果, 状态机交给 supervisor 处理
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+            if _flags.get("pause_requested"):
+                print(f"\n[Phase 1] pause_requested detected at batch {i+1}, pausing...")
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+        except Exception as _e:
+            # 读 flags 失败不阻塞执行 (可能并发写, 下次循环再查)
+            print(f"  [WARN] flags check failed: {_e}")
+
         print(f"\n[Batch {i+1}/{batch_group_size}] {batch_id}")
 
         try:
@@ -648,11 +667,24 @@ def _finalize_phase1_state(run_dir: Path):
     state = json.loads(ws_path.read_text(encoding="utf-8"))
 
     # F1: Tally test_load stats into workflow_state
+    # NOTE: paths.test_load may be Windows-style backslash relative path
+    # (e.g. "runs\\ut-xxx\\test_load.json"). Resolve against run_dir:
+    # 1. normalize backslashes to '/'
+    # 2. if the result already starts with the run_dir basename, it is a
+    #    repo-relative path -> anchor at project root; otherwise it is a
+    #    filename relative to run_dir -> anchor at run_dir.
     tl_path = state.get("paths", {}).get("test_load", "")
     if tl_path:
+        tl_path = tl_path.replace("\\", "/")
         tl = Path(tl_path)
         if not tl.is_absolute():
-            tl = run_dir / tl
+            # Repo-relative like "runs/ut-xxx/test_load.json"?
+            # run_dir.name == "ut-xxx", so a path containing "/ut-xxx/"
+            # before the filename is repo-relative.
+            if tl.parts and tl.parts[0] == "runs":
+                tl = _project_root / tl
+            else:
+                tl = run_dir / tl
         if tl.exists():
             test_load = json.loads(tl.read_text(encoding="utf-8"))
             stats = {}

@@ -67,7 +67,37 @@ def test_retriable_error_max_retry_becomes_ignored():
     t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
     assert t1["retry_count"] == 3
     assert t1["status"] == "ignored"
-    assert "max retry exceeded for oom" in t1["ignore_reason"]
+    assert "max retry exceeded for oom" in t1["ignored_reason"]
+
+
+def test_handled_tests_override_writes_ignored_reason():
+    """handled_tests 的 ignored_reason 应写入正确字段（曾写错为 ignore_reason）。"""
+    manifest = _make_manifest([
+        {"test_id": "t1", "status": "failed", "retry_count": 1, "max_retry": 3},
+    ])
+    handled = {
+        "tests": [{"test_id": "t1", "status": "ignored", "ignored_reason": "manually ignored"}],
+    }
+    update_test_load_mod.merge_batch_results(manifest, {"batch_id": "b005", "tests": []}, handled)
+    t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
+    assert t1["status"] == "ignored"
+    assert t1["ignored_reason"] == "manually ignored"
+    # 错误字段不应再被写入
+    assert "ignore_reason" not in t1
+
+
+def test_handled_tests_legacy_ignore_reason_migrated():
+    """旧数据 handled_tests 用 ignore_reason 时，也应迁移写入正确字段 ignored_reason。"""
+    manifest = _make_manifest([
+        {"test_id": "t1", "status": "failed", "retry_count": 1, "max_retry": 3},
+    ])
+    handled = {
+        "tests": [{"test_id": "t1", "status": "ignored", "ignore_reason": "legacy reason"}],
+    }
+    update_test_load_mod.merge_batch_results(manifest, {"batch_id": "b006", "tests": []}, handled)
+    t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
+    assert t1["ignored_reason"] == "legacy reason"
+    assert "ignore_reason" not in t1
 
 
 def test_statistics_includes_retriable_error_count():

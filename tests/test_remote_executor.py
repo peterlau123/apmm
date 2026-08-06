@@ -68,23 +68,19 @@ class TestShellWrapping:
     def _capture_bifrost_command(self, cmd: str) -> str:
         """Run _run_bifrost with mocked subprocess, return the --command arg value."""
         captured = []
-        call_count = [0]
 
         def fake_run(args, **kwargs):
             captured.append(args)
-            call_count[0] += 1
-            if call_count[0] == 1:
-                # submit call -> return task_id
-                return MagicMock(returncode=0, stdout="Task ID: fake-uuid\n", stderr="")
-            else:
-                # status poll -> return Completed immediately
-                return MagicMock(returncode=0, stdout="Status: Completed\n", stderr="")
+            # submit call -> return task_id
+            return MagicMock(returncode=0, stdout="Task ID: fake-uuid\n", stderr="")
 
         with patch("subprocess.run", side_effect=fake_run):
+            # poll now checks result file existence on GPFS; make it appear immediately
             with patch("tools.remote_executor._fetch_bifrost_result", return_value={"exit_code": 0, "stdout": "", "stderr": "", "size_bytes": None}):
-                _run_bifrost(cmd, timeout=30)
-                cmd_idx = captured[0].index("--command") + 1
-                return captured[0][cmd_idx]
+                with patch("pathlib.Path.exists", return_value=True):
+                    _run_bifrost(cmd, timeout=30)
+                    cmd_idx = captured[0].index("--command") + 1
+                    return captured[0][cmd_idx]
 
     def test_simple_command_not_wrapped(self):
         cmd = self._capture_bifrost_command("hostname")

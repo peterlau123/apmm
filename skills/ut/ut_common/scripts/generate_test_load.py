@@ -33,13 +33,16 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from skills.ut.ut_common import validate_and_write
 
 
-def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Path:
+def generate_test_load(manifest_path: Path, count: int, output_dir: Path,
+                       exclude_node_substr: str | None = None) -> Path:
     """从manifest中抽取指定数量的test生成test_load清单
 
     Args:
         manifest_path: manifest.json路径（collect产生或用户指定）
         count: 要抽取的test数量
         output_dir: 输出目录
+        exclude_node_substr: 排除 test_node 含该子串的测试（如 "cuda:1"
+            排除 device 固化在异常卡上的用例, 2026-08-06 新增）
 
     Returns:
         生成的test_load文件路径
@@ -79,6 +82,14 @@ def generate_test_load(manifest_path: Path, count: int, output_dir: Path) -> Pat
 
     # 按优先级排序所有tests
     sorted_tests = sorted(all_tests, key=get_priority)
+
+    # 排除 test_node 含指定子串的测试（如 cuda:1 固化在异常卡的用例）
+    if exclude_node_substr:
+        before = len(sorted_tests)
+        sorted_tests = [t for t in sorted_tests
+                        if exclude_node_substr not in (t.get("test_node") or "")]
+        print(f"[INFO] exclude_node_substr={exclude_node_substr!r}: "
+              f"排除 {before - len(sorted_tests)} 个节点")
 
     # 选择指定数量
     selected_tests = sorted_tests[:count]
@@ -173,6 +184,11 @@ def main():
         "--workflow-state",
         help="workflow_state.json路径（可选，自动更新test_load路径）"
     )
+    parser.add_argument(
+        "--exclude-node-substr",
+        default=None,
+        help="排除 test_node 含该子串的测试（如 'cuda:1' 排除坏卡固化的用例）"
+    )
 
     args = parser.parse_args()
 
@@ -188,7 +204,8 @@ def main():
             if existing_tl and Path(existing_tl).exists():
                 print(f"[WARN] Existing test_load will be overwritten: {existing_tl}")
 
-    test_load_path = generate_test_load(manifest_path, args.count, output_dir)
+    test_load_path = generate_test_load(manifest_path, args.count, output_dir,
+                                        exclude_node_substr=args.exclude_node_substr)
 
     # 更新workflow_state.json中的test_load路径
     if args.workflow_state:

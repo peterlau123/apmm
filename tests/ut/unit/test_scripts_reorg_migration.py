@@ -22,6 +22,23 @@ def test_generate_test_load_migrated_to_ut_common():
     assert hasattr(mod, "main") or hasattr(mod, "generate_test_load")
 
 
+def test_generate_test_load_project_root_5_levels():
+    """迁移后 PROJECT_ROOT 层级 = 5 (skills/ut/ut_common/scripts) — 4 级会算到 skills/ 目录.
+
+    2026-08-06 实测: 迁移遗漏导致 prepare_run_data 调 generate_test_load 报
+    ModuleNotFoundError (PROJECT_ROOT 少一级)."""
+    src = (PROJECT_ROOT / "skills" / "ut" / "ut_common" / "scripts" / "generate_test_load.py").read_text()
+    assert "parent.parent.parent.parent.parent" in src, \
+        "PROJECT_ROOT 必须是 5 级 parent (脚本在 skills/ut/ut_common/scripts/ 下)"
+
+
+def test_prepare_run_data_points_to_new_generate_test_load():
+    """prepare_run_data.py 的 generate_test_load 引用指向 ut_common (迁移遗漏修复)."""
+    src = (PROJECT_ROOT / "skills" / "ut" / "terminal-workflow" / "scripts" / "prepare_run_data.py").read_text()
+    assert "ut_common" in src and "generate_test_load.py" in src
+    assert "/tasks/ut/scripts/generate_test_load.py" not in src
+
+
 def test_check_expected_migrated_to_ut_common():
     """check_expected.py 已迁移, 且 grade_tier 引用指向新路径."""
     p = PROJECT_ROOT / "skills" / "ut" / "ut_common" / "scripts" / "check_expected.py"

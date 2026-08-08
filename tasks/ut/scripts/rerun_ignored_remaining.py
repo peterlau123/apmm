@@ -40,7 +40,15 @@ def main():
                     help="运行层 device 替换 (如 cuda:1=cuda:0), 回写用原 node")
     ap.add_argument("--from-manifest-cuda1", action="store_true",
                     help="从 manifest 选 cuda:1 pending 节点 (而非 test_load)")
+    ap.add_argument("--run-dir", default=None,
+                    help="run 目录 (默认 runs/ut-20260807-110322)")
     args = ap.parse_args()
+    global RUN_DIR, TL_PATH, BATCHES, WS_PATH
+    if args.run_dir:
+        RUN_DIR = PROJECT_ROOT / args.run_dir
+        TL_PATH = sorted(RUN_DIR.glob("test_load_*.json"))[-1]
+        BATCHES = RUN_DIR / "batches"
+        WS_PATH = RUN_DIR / "workflow_state.json"
     if args.from_manifest_cuda1:
         m = json.loads(RUN_DIR.joinpath("manifest.json").read_text())
         targets = [t for t in m.get("tests", [])

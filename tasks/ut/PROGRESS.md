@@ -44,11 +44,13 @@ pending 320=cuda:1 坏卡）。详见
 
 ## TODO（待办项）
 
-- [ ] **ignored 1,984 重跑**（run ut-20260807-110322）：detokenize 904（模型已下载 HF 缓存）+ peft ~250 + tool_choice/scheduler 等 ~800（timeout 连坐/execute_batch 挂起）+ distributed 17（环境限制）
-- [ ] **execute_batch 挂起根因排查**：GPU 空闲但进程挂起（CPU 0 无输出）——怀疑 bifrost daemon 通信/GPU 探测竞态；修复后重跑效率大增
-- [ ] **error 333 重跑验证**（进行中，区分真实失败 vs 环境问题）
-- [ ] **cuda:1 320 坏卡节点**：`retry_kernel_tests.py --device-map "cuda:1=cuda:0"` 补跑（GPU1 换卡后可直接跑）
-- [ ] **detokenize 大模型测试优化**：execute_batch 对 CodeLlama-7b/Pixtral-12B 加载不稳定——考虑小批量（4/批）+ 更长超时
+- [ ] **新 run `ut-20260808-pending2` 跑完剩余 1,624**（716 可跑目标进行中 → detokenize 902 单独分批 → 全部结束后用户处理）
+- [ ] **detokenize 902**（模型已下载 HF 缓存——大模型加载慢——小批量 + 长超时——新 run 的 SKIP 项）
+- [x] ~~execute_batch 挂起排查~~ ✅ **已完成**（bifrost daemon 假活根因：GPU 探测同步阻塞 → async+spawn_blocking 修复 cb7f4ab；另 agent bastion/ssh 直连评估记录于排障日志）
+- [x] ~~error 333~~ ✅ **已定性**（stale 节点——代码演进——下次 run 定向 collect）
+- [x] ~~cuda:1 320~~ ✅ **全部通过**（device-map + bifrost 修复）
+- [ ] **stale 591 定向 collect**（下次 run：--collect-only 校验——测试还在则更新节点 pending 跑，已删则移除）
+- [ ] **detokenize 大模型测试优化**：小批量（4/批）+ 更长超时
 
 ---
 

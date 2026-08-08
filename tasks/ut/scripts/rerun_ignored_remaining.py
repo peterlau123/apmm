@@ -21,7 +21,10 @@ BATCHES = RUN_DIR / "batches"
 EXEC = PROJECT_ROOT / "skills/ut/unit-test-executor/scripts/execute_batch.py"
 UPD = PROJECT_ROOT / "skills/ut/ut_common/update_test_load_two_phase.py"
 ENV = {"REMOTE_BACKEND": "bifrost",
-       "BIFROST_CONFIG": "/gpfs/gcsp/liuxin/bifrost_test/settings.json"}
+       "BIFROST_CONFIG": "/gpfs/gcsp/liuxin/bifrost_test/settings.json",
+       # HF 离线: 模型缺失快速报错而非 hang (无网络时下载尝试卡死占并发)
+       "HF_HOME": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub",
+       "HF_HUB_OFFLINE": "1"}
 SKIP_FILES = ("test_detokenize", "test_peft_helper")  # detokenize=模型类分批跑; peft_helper=stale 节点(代码已演进)
 
 
@@ -42,6 +45,10 @@ def main():
                     help="从 manifest 选 cuda:1 pending 节点 (而非 test_load)")
     ap.add_argument("--run-dir", default=None,
                     help="run 目录 (默认 runs/ut-20260807-110322)")
+    ap.add_argument("--no-skip", action="store_true",
+                    help="不跳过 SKIP_FILES (全量跑, 含 detokenize 等)")
+    ap.add_argument("--timeout", type=int, default=900,
+                    help="每用例超时秒数 (超时标记 ignored, 默认 900)")
     args = ap.parse_args()
     global RUN_DIR, TL_PATH, BATCHES, WS_PATH
     if args.run_dir:
@@ -61,9 +68,10 @@ def main():
                        and args.include_only in (t.get("test_node") or "")]
             print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status}, include={args.include_only})")
         else:
+            skip = () if args.no_skip else SKIP_FILES
             targets = [t for t in tl["tests"] if t.get("status") == args.status
-                       and not any(f in (t.get("test_node") or "") for f in SKIP_FILES)]
-            print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status})")
+                       and not any(f in (t.get("test_node") or "") for f in skip)]
+            print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status}{', 全量无跳过' if args.no_skip else ''})")
     dev_map = {}
     if args.device_map and "=" in args.device_map:
         src, dst = args.device_map.split("=", 1)
@@ -96,7 +104,7 @@ def main():
         try:
             r = subprocess.run(
                 [sys.executable, str(EXEC), "--batch-config", str(cfg_dir / "batch_config.json"),
-                 "--workflow-state", str(WS_PATH), "--batch-id", bid, "--timeout", "3000"],
+                 "--workflow-state", str(WS_PATH), "--batch-id", bid, "--timeout", str(args.timeout)],
                 capture_output=True, text=True, env={**__import__("os").environ, **ENV}, timeout=3600)
         except subprocess.TimeoutExpired:
             print(f"  ✗ {bid}: execute_batch 3600s 超时 (跳过, 残留需清理)")

@@ -20,6 +20,7 @@
 | [2026-08-05-phase2-retry-final-summary.md](2026-08-05-phase2-retry-final-summary.md) | 2026-08-05 | **Phase 2 重跑最终总结**：三轮重跑，passed 1418→3444（86.1%），4 个问题全部解决 |
 | [2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md) | 2026-08-06 | **8000 cases run 兼容性问题**：4233 passed（52.9%）/ 3767 failed，`_moe_C` 注册失效 2638 + FP8/inductor/DeepGEMM 清单 |
 | [2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md) | 2026-08-08 | **pending 12,185 run 兼容性问题**：8613 passed（70.7%），ignored 1984 分类（模型类/peft/慢测试）+ execute_batch 不稳定待办 |
+| [2026-08-08-troubleshooting-log.md](2026-08-08-troubleshooting-log.md) | 2026-08-08 | **排障溯因日志**：bifrost 假活根因（GPU 探测同步阻塞→async 修复）+ backend 故障链 + stale 节点 + cuda:1 device-map + 脚本三坑 |
 | [2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md](2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md) | 2026-08-05 | vLLM 0.13.0 + torch 2.5.1 在 H20 兼容性问题全清单（6 项，含解决状态与原因剖析） |
 
 ---

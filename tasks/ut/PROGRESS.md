@@ -24,6 +24,24 @@ manifest 同步：progress 35.1% → **59.4%**（executed 19,562 / passed 17,398
 pending 12,505）。详见
 [docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md)。
 
+## 2026-08-07/08（run ut-20260807-110322：pending 12,185 全量）
+
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | 12,185 |
+| ✅ passed | 8,613 |
+| ❌ failed | 1,253 |
+| ⚠️ error | 333 |
+| ⏸️ ignored | 1,984（**待办重跑**） |
+| **通过率** | **70.7%** |
+
+**本周进展**：manifest 剩余 pending 12,185 全量执行（marlin 已修复基础上）。
+ignored 1,984 分类（detokenize 模型类 904 + peft ~250 + 慢测试 ~800 + distributed 17）；
+**execute_batch 层不稳定**（部分批次挂起——GPU 空闲 CPU 0）已记录待办。
+**manifest 同步：progress 59.4% → 90.3%**（executed 29,763 / passed 26,011 /
+pending 320=cuda:1 坏卡）。详见
+[docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md)。
+
 ---
 
 ## 2026-08-05（run ut-20260718-164107 收官）

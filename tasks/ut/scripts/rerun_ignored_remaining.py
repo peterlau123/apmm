@@ -34,16 +34,18 @@ def main():
                     help="batch 前缀 (避免多进程 batch 命名冲突, 默认 ig)")
     ap.add_argument("--max-batch-size", type=int, default=8,
                     help="每批测试数 (调大减少批间调度开销, 默认 8)")
+    ap.add_argument("--status", default="ignored",
+                    help="要重跑的状态 (ignored/error/failed, 默认 ignored)")
     args = ap.parse_args()
     tl = json.loads(TL_PATH.read_text())
     if args.include_only:
-        targets = [t for t in tl["tests"] if t.get("status") == "ignored"
+        targets = [t for t in tl["tests"] if t.get("status") == args.status
                    and args.include_only in (t.get("test_node") or "")]
-        print(f"[rerun-ig] 目标: {len(targets)} 个 (include={args.include_only})")
+        print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status}, include={args.include_only})")
     else:
-        targets = [t for t in tl["tests"] if t.get("status") == "ignored"
+        targets = [t for t in tl["tests"] if t.get("status") == args.status
                    and not any(f in (t.get("test_node") or "") for f in SKIP_FILES)]
-        print(f"[rerun-ig] 目标: {len(targets)} 个 (非模型类 ignored)")
+        print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status})")
     if not targets:
         print("无目标")
         return

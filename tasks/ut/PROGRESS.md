@@ -42,6 +42,14 @@ ignored 1,984 分类（detokenize 模型类 904 + peft ~250 + 慢测试 ~800 + d
 pending 320=cuda:1 坏卡）。详见
 [docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md)。
 
+## TODO（待办项）
+
+- [ ] **ignored 1,984 重跑**（run ut-20260807-110322）：detokenize 904（模型已下载 HF 缓存）+ peft ~250 + tool_choice/scheduler 等 ~800（timeout 连坐/execute_batch 挂起）+ distributed 17（环境限制）
+- [ ] **execute_batch 挂起根因排查**：GPU 空闲但进程挂起（CPU 0 无输出）——怀疑 bifrost daemon 通信/GPU 探测竞态；修复后重跑效率大增
+- [ ] **error 333 重跑验证**（进行中，区分真实失败 vs 环境问题）
+- [ ] **cuda:1 320 坏卡节点**：`retry_kernel_tests.py --device-map "cuda:1=cuda:0"` 补跑（GPU1 换卡后可直接跑）
+- [ ] **detokenize 大模型测试优化**：execute_batch 对 CodeLlama-7b/Pixtral-12B 加载不稳定——考虑小批量（4/批）+ 更长超时
+
 ---
 
 ## 2026-08-05（run ut-20260718-164107 收官）

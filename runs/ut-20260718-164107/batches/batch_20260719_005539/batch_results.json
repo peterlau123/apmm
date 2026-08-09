@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260719_005539",
-  "started_at": "2026-07-18T16:55:42Z",
-  "finished_at": "2026-07-18T16:56:03Z",
-  "timeout": 300,
-  "exit_code": 0,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539.log",
-    "size_bytes": 25336,
-    "captured_at": "2026-07-18T16:56:03Z"
+ "batch_id": "batch_20260719_005539",
+ "started_at": "2026-08-04T21:15:55Z",
+ "finished_at": "2026-08-04T21:17:51Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/pytest_batch_super_0390.log",
+  "size_bytes": 53428,
+  "captured_at": "2026-08-04T21:17:51Z"
+ },
+ "tests": [
+  {
+   "id": 1029,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_pipeline_parallel[test_target1-2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ray.exceptions.RuntimeEnvSetupError: Failed to set up runtime environment.\nFailed to upload working_dir /gpfs/gcsp/M2.7_verify/vllm to the Ray cluster: Package size (22814.74MiB) exceeds the maximum size of 512.00MiB. You can exclude large files using the 'excludes' option to the runtime_env or provide a remote URI of a zip file using protocols such as 's3://', 'https://' and so on, refer to https://docs.ray.io/en/latest/ray-core/handling-dependencies.html#api-reference.",
+   "duration_ms": 99976,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/pytest_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target1_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/result_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target1_2.xml"
   },
-  "tests": [
-    {
-      "id": 1025,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target0-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target0_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target0_2.xml"
-    },
-    {
-      "id": 1026,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target1-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target1_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target1_2.xml"
-    },
-    {
-      "id": 1027,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target2-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target2_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target2_2.xml"
-    },
-    {
-      "id": 1028,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_pipeline_parallel[test_target0-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target0_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target0_2.xml"
-    },
-    {
-      "id": 1029,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_pipeline_parallel[test_target1-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target1_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target1_2.xml"
-    },
-    {
-      "id": 1030,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target0-2-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target0_2_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target0_2_2.xml"
-    },
-    {
-      "id": 1031,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target1-2-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target1_2_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target1_2_2.xml"
-    },
-    {
-      "id": 1032,
-      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target2-2-2]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/pytest_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target2_2_2.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_005539/result_batch_20260719_005539_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target2_2_2.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 8
+  {
+   "id": 1030,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target0-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/pytest_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target0_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/result_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target0_2_2.xml"
+  },
+  {
+   "id": 1031,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target1-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/pytest_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target1_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/result_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target1_2_2.xml"
+  },
+  {
+   "id": 1032,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target2-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/pytest_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target2_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0390/result_batch_super_0390_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target2_2_2.xml"
+  },
+  {
+   "id": 1025,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target0-2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ray.exceptions.RuntimeEnvSetupError: Failed to set up runtime environment.\nFailed to upload working_dir /gpfs/gcsp/M2.7_verify/vllm to the Ray cluster: Package size (22814.42MiB) exceeds the maximum size of 512.00MiB. You can exclude large files using the 'excludes' option to the runtime_env or provide a remote URI of a zip file using protocols such as 's3://', 'https://' and so on, refer to https://docs.ray.io/en/latest/ray-core/handling-dependencies.html#api-reference.",
+   "duration_ms": 142473,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target0_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target0_2.xml"
+  },
+  {
+   "id": 1026,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target1-2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ray.exceptions.RuntimeEnvSetupError: Failed to set up runtime environment.\nFailed to upload working_dir /gpfs/gcsp/M2.7_verify/vllm to the Ray cluster: Package size (22814.42MiB) exceeds the maximum size of 512.00MiB. You can exclude large files using the 'excludes' option to the runtime_env or provide a remote URI of a zip file using protocols such as 's3://', 'https://' and so on, refer to https://docs.ray.io/en/latest/ray-core/handling-dependencies.html#api-reference.",
+   "duration_ms": 142630,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target1_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target1_2.xml"
+  },
+  {
+   "id": 1027,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel[test_target2-2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ray.exceptions.RuntimeEnvSetupError: Failed to set up runtime environment.\nFailed to upload working_dir /gpfs/gcsp/M2.7_verify/vllm to the Ray cluster: Package size (22814.51MiB) exceeds the maximum size of 512.00MiB. You can exclude large files using the 'excludes' option to the runtime_env or provide a remote URI of a zip file using protocols such as 's3://', 'https://' and so on, refer to https://docs.ray.io/en/latest/ray-core/handling-dependencies.html#api-reference.",
+   "duration_ms": 102561,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_test_target2_2.xml"
+  },
+  {
+   "id": 1028,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_pipeline_parallel[test_target0-2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ray.exceptions.RuntimeEnvSetupError: Failed to set up runtime environment.\nFailed to upload working_dir /gpfs/gcsp/M2.7_verify/vllm to the Ray cluster: Package size (22814.51MiB) exceeds the maximum size of 512.00MiB. You can exclude large files using the 'excludes' option to the runtime_env or provide a remote URI of a zip file using protocols such as 's3://', 'https://' and so on, refer to https://docs.ray.io/en/latest/ray-core/handling-dependencies.html#api-reference.",
+   "duration_ms": 102350,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target0_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_distributed_test_comm_ops_py_test_multi_process_pipeline_parallel_test_target0_2.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

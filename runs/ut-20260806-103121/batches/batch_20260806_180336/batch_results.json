@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_180336",
+  "started_at": "2026-08-06T10:03:36Z",
+  "finished_at": "2026-08-06T10:04:02Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336.log",
+    "size_bytes": 50224,
+    "captured_at": "2026-08-06T10:04:02Z"
+  },
+  "tests": [
+    {
+      "id": 17436,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe_with_bias[256]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 7584,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_with_bias_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_with_bias_256.xml"
+    },
+    {
+      "id": 17437,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_align_block_size_opcheck[1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1469,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_align_block_size_opcheck_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_align_block_size_opcheck_1.xml"
+    },
+    {
+      "id": 17438,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_align_block_size_opcheck[2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 957,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_align_block_size_opcheck_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_align_block_size_opcheck_2.xml"
+    },
+    {
+      "id": 17439,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_moe_align_block_size_opcheck",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 740,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_batched_moe_align_block_size_opcheck.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_batched_moe_align_block_size_opcheck.xml"
+    },
+    {
+      "id": 17440,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_sum[dtype0-128-2-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1408,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_1.xml"
+    },
+    {
+      "id": 17441,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_sum[dtype0-128-2-33]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1413,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_33.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_33.xml"
+    },
+    {
+      "id": 17442,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_sum[dtype0-128-2-222]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 670,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_222.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_2_222.xml"
+    },
+    {
+      "id": 17443,
+      "test_node": "tests/kernels/moe/test_moe.py::test_moe_sum[dtype0-128-6-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 704,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/pytest_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_6_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_180336/result_batch_20260806_180336_tests_kernels_moe_test_moe_py_test_moe_sum_dtype0_128_6_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

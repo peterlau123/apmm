@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_134413",
+  "started_at": "2026-08-06T05:44:14Z",
+  "finished_at": "2026-08-06T05:44:42Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413.log",
+    "size_bytes": 216312,
+    "captured_at": "2026-08-06T05:44:42Z"
+  },
+  "tests": [
+    {
+      "id": 14016,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype31-quant_config31-PplxPrepareAndFinalize-NaiveBatchedExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 170,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype31_quant_config31_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype31_quant_config31_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.xml"
+    },
+    {
+      "id": 14017,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype0-None-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1]",
+      "status": "failed",
+      "error_type": "oom",
+      "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 0 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/kernels/moe/modular_kernel_tools/parallel_utils.py\", line 71, in _worker_parallel_launch\n    torch.distributed.init_process_group(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_l",
+      "duration_ms": 7646,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype0_None_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype0_None_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.xml"
+    },
+    {
+      "id": 14018,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype1-None-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1]",
+      "status": "failed",
+      "error_type": "oom",
+      "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 0 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/kernels/moe/modular_kernel_tools/parallel_utils.py\", line 71, in _worker_parallel_launch\n    torch.distributed.init_process_group(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_l",
+      "duration_ms": 8391,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype1_None_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype1_None_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.xml"
+    },
+    {
+      "id": 14019,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype2-quant_config2-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 647,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype2_quant_config2_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype2_quant_config2_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.xml"
+    },
+    {
+      "id": 14020,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype3-quant_config3-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 366,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype3_quant_config3_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype3_quant_config3_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.xml"
+    },
+    {
+      "id": 14021,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype4-quant_config4-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 429,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype4_quant_config4_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype4_quant_config4_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.xml"
+    },
+    {
+      "id": 14022,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype5-quant_config5-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 256,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype5_quant_config5_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype5_quant_config5_MoEPrepareAndFinalizeNoEP_TritonExperts_16_1.xml"
+    },
+    {
+      "id": 14023,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype6-quant_config6-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1337,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/pytest_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype6_quant_config6_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134413/result_batch_20260806_134413_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype6_quant_config6_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,4 @@
+ERROR          tests/entrypoints/openai/test_tokenization.py::test_detokenize[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta] (gpu=0, 31ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_without_zp (gpu=2, 483ms, exit=1)
+PASSED         tests/tool_use/test_tool_choice_required.py::test_structured_outputs_json[sample_output0-True] (gpu=3, 181ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8] (gpu=4, 3152ms, exit=1)

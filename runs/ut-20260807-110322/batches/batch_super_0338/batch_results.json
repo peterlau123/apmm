@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0338",
+  "started_at": "2026-08-07T19:27:06Z",
+  "finished_at": "2026-08-07T19:40:20Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338.log",
+    "size_bytes": 504546,
+    "captured_at": "2026-08-07T19:40:20Z"
+  },
+  "tests": [
+    {
+      "id": 28830,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_model_streamer_s3.py::test_runai_model_loader_download_files_s3_mocked_with_patch",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.",
+      "duration_ms": 125,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_s3_py_test_runai_model_loader_download_files_s3_mocked_with_patch.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_s3_py_test_runai_model_loader_download_files_s3_mocked_with_patch.xml"
+    },
+    {
+      "id": 28831,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_utils.py::test_is_runai_obj_uri",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 168,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_is_runai_obj_uri.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_is_runai_obj_uri.xml"
+    },
+    {
+      "id": 28832,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_utils.py::test_runai_list_safetensors_local",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the specified revision on the local disk. Please check your internet connection and try again.",
+      "duration_ms": 140983,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_runai_list_safetensors_local.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_runai_list_safetensors_local.xml"
+    },
+    {
+      "id": 28833,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_utils.py::test_runai_pull_files_gcs",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "google.api_core.exceptions.RetryError: Timeout of 120.0s exceeded, last exception: HTTPSConnectionPool(host='storage.googleapis.com', port=443): Max retries exceeded with url: /storage/v1/b/gcp-public-data-landsat?projection=noAcl&prettyPrint=false (Caused by ConnectTimeoutError(<HTTPSConnection(host='storage.googleapis.com', port=443) at 0x7fe49bb83800>, 'Connection to storage.googleapis.com timed out. (connect timeout=60)'))",
+      "duration_ms": 781111,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_runai_pull_files_gcs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_runai_utils_py_test_runai_pull_files_gcs.xml"
+    },
+    {
+      "id": 28834,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_weight_utils.py::test_runai_model_loader",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the specified revision on the local disk. Please check your internet connection and try again.",
+      "duration_ms": 140868,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_weight_utils_py_test_runai_model_loader.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_runai_streamer_loader_test_weight_utils_py_test_runai_model_loader.xml"
+    },
+    {
+      "id": 28835,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_deserialized_encrypted_vllm_model_has_same_outputs",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 4880,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_deserialized_encrypted_vllm_model_has_same_outputs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_deserialized_encrypted_vllm_model_has_same_outputs.xml"
+    },
+    {
+      "id": 28836,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_deserialized_hf_model_has_same_outputs",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+      "duration_ms": 607,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_deserialized_hf_model_has_same_outputs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_deserialized_hf_model_has_same_outputs.xml"
+    },
+    {
+      "id": 28837,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_load_without_tensorizer_load_format",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2940,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/pytest_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_load_without_tensorizer_load_format.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0338/result_batch_super_0338_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_load_without_tensorizer_load_format.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+PASSED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype0-6-64-45-1024-128] (gpu=0, 182ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype0-6-64-64-512-512] (gpu=2, 172ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype0-6-64-64-1024-2048] (gpu=3, 175ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype0-6-64-222-128-2048] (gpu=4, 204ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype0-6-64-222-1024-2048] (gpu=5, 175ms, exit=0)
+FAILED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype1-1-8-1-128-128] (gpu=6, 1607ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype1-1-8-1-512-512] (gpu=0, 1461ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-False-dtype1-1-8-1-1024-2048] (gpu=2, 1530ms, exit=1)

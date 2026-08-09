@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183552",
+ "started_at": "2026-08-07T23:01:12Z",
+ "finished_at": "2026-08-07T23:01:49Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481.log",
+  "size_bytes": 17233,
+  "captured_at": "2026-08-07T23:01:49Z"
+ },
+ "tests": [
+  {
+   "id": 29989,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[Qwen/Qwen3-Next-80B-A3B-Instruct-hybrid-False-Hybrid models does not support prefix caching since the feature is still experimental.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_Qwen_Qwen3_Next_80B_A3B_Instruct_hybrid_False_Hybrid_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_Qwen_Qwen3_Next_80B_A3B_Instruct_hybrid_False_Hybrid_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.xml"
+  },
+  {
+   "id": 29990,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[ibm-granite/granite-4.0-h-small-hybrid-False-Hybrid models does not support prefix caching since the feature is still experimental.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_ibm_granite_granite_4_0_h_small_hybrid_False_Hybrid_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_ibm_granite_granite_4_0_h_small_hybrid_False_Hybrid_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.xml"
+  },
+  {
+   "id": 29991,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[state-spaces/mamba-130m-hf-attention_free-False-Attention free models does not support prefix caching since the feature is still experimental.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_state_spaces_mamba_130m_hf_attention_free_False_Attention_free_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_state_spaces_mamba_130m_hf_attention_free_False_Attention_free_models_does_not_support_prefix_caching_since_the_feature_is_still_experimental.xml"
+  },
+  {
+   "id": 29992,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[openai/whisper-small-encoder_decoder-False-Encoder decoder models does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_openai_whisper_small_encoder_decoder_False_Encoder_decoder_models_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_prefix_caching_supported_openai_whisper_small_encoder_decoder_False_Encoder_decoder_models_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29993,
+   "test_node": "tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops0-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 237,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops0_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops0_True.xml"
+  },
+  {
+   "id": 29994,
+   "test_node": "tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops1-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 212,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops1_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops1_True.xml"
+  },
+  {
+   "id": 29995,
+   "test_node": "tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops2-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 157,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops2_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_eager_custom_ops2_False.xml"
+  },
+  {
+   "id": 29996,
+   "test_node": "tests/test_config.py::test_is_custom_op_enabled[inductor-custom_ops3-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 151,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/pytest_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_inductor_custom_ops3_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0481/result_batch_super_0481_tests_test_config_py_test_is_custom_op_enabled_inductor_custom_ops3_False.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 4
+ }
+}

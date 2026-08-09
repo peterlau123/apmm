@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_114527",
+  "started_at": "2026-08-06T03:45:27Z",
+  "finished_at": "2026-08-06T03:45:53Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527.log",
+    "size_bytes": 45781,
+    "captured_at": "2026-08-06T03:45:53Z"
+  },
+  "tests": [
+    {
+      "id": 12123,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype1-1024-1024-32-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1342,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_32_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_32_32.xml"
+    },
+    {
+      "id": 12124,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype1-1024-1024-224-8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1303,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_224_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_224_8.xml"
+    },
+    {
+      "id": 12125,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype1-1024-1024-224-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1305,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_224_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_224_32.xml"
+    },
+    {
+      "id": 12126,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype1-1024-1024-512-8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1352,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_512_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_512_8.xml"
+    },
+    {
+      "id": 12127,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype1-1024-1024-512-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1378,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_512_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_None_dtype1_1024_1024_512_32.xml"
+    },
+    {
+      "id": 12128,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-block_shape1-dtype0-128-128-32-8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_32_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_32_8.xml"
+    },
+    {
+      "id": 12129,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-block_shape1-dtype0-128-128-32-32]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 148,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_32_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_32_32.xml"
+    },
+    {
+      "id": 12130,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-block_shape1-dtype0-128-128-224-8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 155,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/pytest_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_224_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_114527/result_batch_20260806_114527_tests_kernels_moe_test_batched_moe_py_test_batched_mm_False_block_shape1_dtype0_128_128_224_8.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0394",
+  "started_at": "2026-08-07T21:22:22Z",
+  "finished_at": "2026-08-07T21:22:49Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394.log",
+    "size_bytes": 28235,
+    "captured_at": "2026-08-07T21:22:49Z"
+  },
+  "tests": [
+    {
+      "id": 29280,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[FlexOlmoForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 267,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_FlexOlmoForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_FlexOlmoForCausalLM.xml"
+    },
+    {
+      "id": 29281,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[GemmaForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 164,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_GemmaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_GemmaForCausalLM.xml"
+    },
+    {
+      "id": 29282,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Gemma2ForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 259,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 29283,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Gemma3ForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 274,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma3ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma3ForCausalLM.xml"
+    },
+    {
+      "id": 29284,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Gemma3nForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 480,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma3nForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Gemma3nForCausalLM.xml"
+    },
+    {
+      "id": 29285,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Qwen3NextForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "assert None is not None",
+      "duration_ms": 509,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Qwen3NextForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Qwen3NextForCausalLM.xml"
+    },
+    {
+      "id": 29286,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[GlmForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 167,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_GlmForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_GlmForCausalLM.xml"
+    },
+    {
+      "id": 29287,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Glm4ForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 200,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Glm4ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_models_test_registry_py_test_registry_imports_Glm4ForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

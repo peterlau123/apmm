@@ -1,0 +1,8 @@
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[VoxtralForConditionalGeneration] (gpu=0, 320ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[BagelForConditionalGeneration] (gpu=2, 368ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[RForConditionalGeneration] (gpu=3, 243ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[Dots1ForCausalLM] (gpu=4, 363ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[TransformersMultiModalMoEForCausalLM] (gpu=5, 323ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[LlamaForCausalLM] (gpu=6, 4843ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[HunYuanVLForConditionalGeneration] (gpu=0, 283ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[GraniteMoeForCausalLM] (gpu=2, 282ms, exit=1)

@@ -1,61 +1,61 @@
 {
-  "batch_id": "batch_20260719_220928",
-  "started_at": "2026-07-19T14:09:31Z",
-  "finished_at": "2026-07-19T14:10:22Z",
-  "timeout": 300,
-  "exit_code": 0,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/pytest_batch_20260719_220928.log",
-    "size_bytes": 7368,
-    "captured_at": "2026-07-19T14:10:22Z"
+ "batch_id": "batch_20260719_220928",
+ "started_at": "2026-08-04T21:00:50Z",
+ "finished_at": "2026-08-04T21:01:03Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/pytest_batch_super_0386.log",
+  "size_bytes": 7338,
+  "captured_at": "2026-08-04T21:01:03Z"
+ },
+ "tests": [
+  {
+   "id": 8711,
+   "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-1029]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/pytest_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_1029.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/result_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_1029.xml"
   },
-  "tests": [
-    {
-      "id": 8711,
-      "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-1029]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/pytest_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_1029.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/result_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_1029.xml"
-    },
-    {
-      "id": 8712,
-      "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-5120]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/pytest_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5120.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/result_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5120.xml"
-    },
-    {
-      "id": 8713,
-      "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-5137]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/pytest_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5137.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_220928/result_batch_20260719_220928_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5137.xml"
-    }
-  ],
-  "statistics": {
-    "total": 3,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 3
+  {
+   "id": 8712,
+   "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-5120]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/pytest_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5120.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/result_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5120.xml"
+  },
+  {
+   "id": 8713,
+   "test_node": "tests/kernels/core/test_fused_quant_layernorm.py::test_rms_norm[cuda:1-0-group_size2-quant_dtype1-dtype0-True-False-1-5137]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/pytest_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5137.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0386/result_batch_super_0386_tests_kernels_core_test_fused_quant_layernorm_py_test_rms_norm_cuda_1_0_group_size2_quant_dtype1_dtype0_True_False_1_5137.xml"
   }
+ ],
+ "statistics": {
+  "total": 3,
+  "passed": 0,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 3
+ }
 }

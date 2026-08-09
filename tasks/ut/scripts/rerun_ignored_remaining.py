@@ -25,7 +25,43 @@ ENV = {"REMOTE_BACKEND": "bifrost",
        # HF 离线: 模型缺失快速报错而非 hang (无网络时下载尝试卡死占并发)
        "HF_HOME": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub",
        "HF_HUB_OFFLINE": "1"}
-SKIP_FILES = ("test_detokenize", "test_peft_helper")  # detokenize=模型类分批跑; peft_helper=stale 节点(代码已演进)
+SKIP_FILES = ("test_detokenize", "test_peft_helper")
+
+# 兼容性 SKIP 类 (记录根因不重跑 — 2026-08-09 用户拍板)
+SKIP_CATEGORIES = ("_C算子", "FP8", "inductor", "flash/mla", "cutlass", "torch API")
+
+
+def _classify(t):
+    """按 error_message/test_file 分类 (兼容性 SKIP vs 可重跑 4 组)."""
+    e = (t.get("error_message") or t.get("error_type") or "")[:200]
+    f = (t.get("test_file") or t.get("test_node") or "").split("/")[-1]
+    if any(k in f for k in ("marlin", "gptq", "awq", "gguf")) or "NotImplementedError" in e:
+        return "_C算子"
+    if "fp8" in f or "float8" in f:
+        return "FP8"
+    if any(k in f for k in ("fusion", "inductor", "compile", "dynamo")) or "BackendCompilerFailed" in e:
+        return "inductor"
+    if any(k in f for k in ("flash_attn", "flashmla", "mla_backend", "attention_backend")):
+        return "flash/mla"
+    if any(k in f for k in ("cutlass", "machete")):
+        return "cutlass"
+    if "module 'torch' has no attribute" in e:
+        return "torch API"
+    if "JUnit XML" in e or "watchdog SIGKILL" in e:
+        return "timeout"
+    if any(k in e for k in ("LocalEntryNotFound", "404", "OfflineMode", "connection", "HF_")):
+        return "models"
+    if "skipped" in e.lower() or "SKIPPED" in e:
+        return "skipped"
+    return "other"
+
+
+def _category_match(t, category):
+    """category 过滤: all=排除兼容性 SKIP 类; 指定组=只选该组."""
+    c = _classify(t)
+    if category == "all":
+        return c not in SKIP_CATEGORIES
+    return c == category  # detokenize=模型类分批跑; peft_helper=stale 节点(代码已演进)
 
 
 def main():
@@ -49,6 +85,8 @@ def main():
                     help="不跳过 SKIP_FILES (全量跑, 含 detokenize 等)")
     ap.add_argument("--timeout", type=int, default=900,
                     help="每用例超时秒数 (超时标记 ignored, 默认 900)")
+    ap.add_argument("--category", default="all",
+                    help="按失败类别过滤: all/skipped/models/other/timeout (默认 all=排除兼容性 SKIP 类)")
     args = ap.parse_args()
     global RUN_DIR, TL_PATH, BATCHES, WS_PATH
     if args.run_dir:
@@ -70,8 +108,9 @@ def main():
         else:
             skip = () if args.no_skip else SKIP_FILES
             targets = [t for t in tl["tests"] if t.get("status") == args.status
-                       and not any(f in (t.get("test_node") or "") for f in skip)]
-            print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status}{', 全量无跳过' if args.no_skip else ''})")
+                       and not any(f in (t.get("test_node") or "") for f in skip)
+                       and _category_match(t, args.category)]
+            print(f"[rerun-ig] 目标: {len(targets)} 个 (status={args.status}{', 全量无跳过' if args.no_skip else ''}, category={args.category})")
     dev_map = {}
     if args.device_map and "=" in args.device_map:
         src, dst = args.device_map.split("=", 1)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185140",
+  "started_at": "2026-08-07T10:51:40Z",
+  "finished_at": "2026-08-07T10:51:42Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:51:42Z"
+  },
+  "tests": [
+    {
+      "id": 31511,
+      "test_node": "tests/tools/test_config_validator.py::test_config[\\n@config\\n@dataclass\\nclass _TestConfig4:\\n    a: Union[Literal[1], Literal[2]] = 1\\n    \"\"\"docstring\"\"\"\\n-must use a single Literal]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_tools_test_config_validator_py_test_config_n_config_n_dataclass_nclass__TestConfig4_n_a_Union_Literal_1_Literal_2_1_n_docstring_n_must_use_a_single_Literal.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_tools_test_config_validator_py_test_config_n_config_n_dataclass_nclass__TestConfig4_n_a_Union_Literal_1_Literal_2_1_n_docstring_n_must_use_a_single_Literal.xml"
+    },
+    {
+      "id": 31512,
+      "test_node": "tests/transformers_utils/test_config.py::test_get_llama3_eos_token",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_transformers_utils_test_config_py_test_get_llama3_eos_token.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_transformers_utils_test_config_py_test_get_llama3_eos_token.xml"
+    },
+    {
+      "id": 31513,
+      "test_node": "tests/transformers_utils/test_config.py::test_get_blip2_eos_token",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_transformers_utils_test_config_py_test_get_blip2_eos_token.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_transformers_utils_test_config_py_test_get_blip2_eos_token.xml"
+    },
+    {
+      "id": 31536,
+      "test_node": "tests/utils_/test_argparse_utils.py::test_underscore_to_dash",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_underscore_to_dash.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_underscore_to_dash.xml"
+    },
+    {
+      "id": 31537,
+      "test_node": "tests/utils_/test_argparse_utils.py::test_mixed_usage",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_mixed_usage.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_mixed_usage.xml"
+    },
+    {
+      "id": 31538,
+      "test_node": "tests/utils_/test_argparse_utils.py::test_with_equals_sign",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_equals_sign.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_equals_sign.xml"
+    },
+    {
+      "id": 31539,
+      "test_node": "tests/utils_/test_argparse_utils.py::test_with_int_value",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_int_value.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_int_value.xml"
+    },
+    {
+      "id": 31540,
+      "test_node": "tests/utils_/test_argparse_utils.py::test_with_bool_flag",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/pytest_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_bool_flag.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185140/result_batch_20260807_185140_tests_utils__test_argparse_utils_py_test_with_bool_flag.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

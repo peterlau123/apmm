@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0357",
+  "started_at": "2026-08-07T20:40:36Z",
+  "finished_at": "2026-08-07T20:41:02Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357.log",
+    "size_bytes": 19429,
+    "captured_at": "2026-08-07T20:41:02Z"
+  },
+  "tests": [
+    {
+      "id": 28984,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFDownload::test_download_gguf_sharded_files",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 181,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_sharded_files.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_sharded_files.xml"
+    },
+    {
+      "id": 28985,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFDownload::test_download_gguf_subdir",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 196,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_subdir.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_subdir.xml"
+    },
+    {
+      "id": 28986,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFDownload::test_download_gguf_no_files_found",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 192,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_no_files_found.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_no_files_found.xml"
+    },
+    {
+      "id": 28987,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFModelLoader::test_prepare_weights_local_file",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 171,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_local_file.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_local_file.xml"
+    },
+    {
+      "id": 28988,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFModelLoader::test_prepare_weights_https_url",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 183,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_https_url.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_https_url.xml"
+    },
+    {
+      "id": 28989,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFModelLoader::test_prepare_weights_repo_filename",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 222,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_repo_filename.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_repo_filename.xml"
+    },
+    {
+      "id": 28990,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFModelLoader::test_prepare_weights_repo_quant_type",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 264,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_repo_quant_type.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_repo_quant_type.xml"
+    },
+    {
+      "id": 28991,
+      "test_node": "tests/models/test_gguf_download.py::TestGGUFModelLoader::test_prepare_weights_invalid_format",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 306,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/pytest_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_invalid_format.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0357/result_batch_super_0357_tests_models_test_gguf_download_py_TestGGUFModelLoader_test_prepare_weights_invalid_format.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

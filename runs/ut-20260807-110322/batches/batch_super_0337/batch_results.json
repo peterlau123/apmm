@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0337",
+  "started_at": "2026-08-07T19:24:00Z",
+  "finished_at": "2026-08-07T19:26:35Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337.log",
+    "size_bytes": 203298,
+    "captured_at": "2026-08-07T19:26:35Z"
+  },
+  "tests": [
+    {
+      "id": 28822,
+      "test_node": "tests/lora/test_utils.py::test_get_adapter_absolute_path_huggingface",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 330,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_lora_test_utils_py_test_get_adapter_absolute_path_huggingface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_lora_test_utils_py_test_get_adapter_absolute_path_huggingface.xml"
+    },
+    {
+      "id": 28823,
+      "test_node": "tests/lora/test_utils.py::test_get_adapter_absolute_path_huggingface_error",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 463,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_lora_test_utils_py_test_get_adapter_absolute_path_huggingface_error.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_lora_test_utils_py_test_get_adapter_absolute_path_huggingface_error.xml"
+    },
+    {
+      "id": 28824,
+      "test_node": "tests/lora/test_worker.py::test_worker_apply_lora",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3188,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_lora_test_worker_py_test_worker_apply_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_lora_test_worker_py_test_worker_apply_lora.xml"
+    },
+    {
+      "id": 28825,
+      "test_node": "tests/model_executor/model_loader/fastsafetensors_loader/test_fastsafetensors_loader.py::test_model_loader_download_files",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 186,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_model_executor_model_loader_fastsafetensors_loader_test_fastsafetensors_loader_py_test_model_loader_download_files.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_model_executor_model_loader_fastsafetensors_loader_test_fastsafetensors_loader_py_test_model_loader_download_files.xml"
+    },
+    {
+      "id": 28826,
+      "test_node": "tests/model_executor/model_loader/fastsafetensors_loader/test_weight_utils.py::test_fastsafetensors_model_loader",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the specified revision on the local disk. Please check your internet connection and try again.",
+      "duration_ms": 140036,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_model_executor_model_loader_fastsafetensors_loader_test_weight_utils_py_test_fastsafetensors_model_loader.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_model_executor_model_loader_fastsafetensors_loader_test_weight_utils_py_test_fastsafetensors_model_loader.xml"
+    },
+    {
+      "id": 28827,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_model_streamer_loader.py::test_get_model_loader_with_runai_flag",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 232,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_get_model_loader_with_runai_flag.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_get_model_loader_with_runai_flag.xml"
+    },
+    {
+      "id": 28828,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_model_streamer_loader.py::test_runai_model_loader_download_files",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 184,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_runai_model_loader_download_files.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_runai_model_loader_download_files.xml"
+    },
+    {
+      "id": 28829,
+      "test_node": "tests/model_executor/model_loader/runai_streamer_loader/test_runai_model_streamer_loader.py::test_runai_model_loader_download_files_gcs",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': 'gs://vertex-model-garden-public-us/codegemma/codegemma-2b/'. Use `repo_type` argument if needed.",
+      "duration_ms": 187,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/pytest_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_runai_model_loader_download_files_gcs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0337/result_batch_super_0337_tests_model_executor_model_loader_runai_streamer_loader_test_runai_model_streamer_loader_py_test_runai_model_loader_download_files_gcs.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

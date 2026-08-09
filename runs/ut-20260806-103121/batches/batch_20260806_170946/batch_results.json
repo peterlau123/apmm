@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_170946",
+  "started_at": "2026-08-06T09:09:47Z",
+  "finished_at": "2026-08-06T09:10:31Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946.log",
+    "size_bytes": 133280,
+    "captured_at": "2026-08-06T09:10:31Z"
+  },
+  "tests": [
+    {
+      "id": 16738,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2183-b_type2183-c_type2183-1-666-128-256-12-3-4-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1623,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2183_b_type2183_c_type2183_1_666_128_256_12_3_4_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2183_b_type2183_c_type2183_1_666_128_256_12_3_4_False_False.xml"
+    },
+    {
+      "id": 16739,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2184-b_type2184-c_type2184-1-666-128-2048-5-2-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1590,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2184_b_type2184_c_type2184_1_666_128_2048_5_2_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2184_b_type2184_c_type2184_1_666_128_2048_5_2_1_False_False.xml"
+    },
+    {
+      "id": 16740,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2185-b_type2185-c_type2185-1-666-128-2048-5-2-4-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1654,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2185_b_type2185_c_type2185_1_666_128_2048_5_2_4_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2185_b_type2185_c_type2185_1_666_128_2048_5_2_4_False_False.xml"
+    },
+    {
+      "id": 16741,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2186-b_type2186-c_type2186-1-666-128-2048-5-3-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1590,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2186_b_type2186_c_type2186_1_666_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2186_b_type2186_c_type2186_1_666_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 16742,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2187-b_type2187-c_type2187-1-666-128-2048-5-3-4-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1612,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2187_b_type2187_c_type2187_1_666_128_2048_5_3_4_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2187_b_type2187_c_type2187_1_666_128_2048_5_3_4_False_False.xml"
+    },
+    {
+      "id": 16743,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2188-b_type2188-c_type2188-1-666-128-2048-12-2-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1637,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2188_b_type2188_c_type2188_1_666_128_2048_12_2_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2188_b_type2188_c_type2188_1_666_128_2048_12_2_1_False_False.xml"
+    },
+    {
+      "id": 16744,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2189-b_type2189-c_type2189-1-666-128-2048-12-2-4-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 579,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2189_b_type2189_c_type2189_1_666_128_2048_12_2_4_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2189_b_type2189_c_type2189_1_666_128_2048_12_2_4_False_False.xml"
+    },
+    {
+      "id": 16745,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type2190-b_type2190-c_type2190-1-666-128-2048-12-3-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 600,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/pytest_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2190_b_type2190_c_type2190_1_666_128_2048_12_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_170946/result_batch_20260806_170946_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type2190_b_type2190_c_type2190_1_666_128_2048_12_3_1_False_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

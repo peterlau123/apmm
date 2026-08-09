@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182417",
+ "started_at": "2026-08-07T20:17:53Z",
+ "finished_at": "2026-08-07T20:20:38Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346.log",
+  "size_bytes": 231490,
+  "captured_at": "2026-08-07T20:20:38Z"
+ },
+ "tests": [
+  {
+   "id": 28895,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[False-dtype2-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_False_dtype2_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_False_dtype2_True.xml"
+  },
+  {
+   "id": 28896,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[False-dtype2-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_False_dtype2_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_False_dtype2_False.xml"
+  },
+  {
+   "id": 28897,
+   "test_node": "tests/model_executor/test_model_load_with_params.py::test_model_loading_with_params",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 2475,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_model_loading_with_params.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_model_loading_with_params.xml"
+  },
+  {
+   "id": 28898,
+   "test_node": "tests/model_executor/test_model_load_with_params.py::test_roberta_model_loading_with_params",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 222,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_roberta_model_loading_with_params.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_roberta_model_loading_with_params.xml"
+  },
+  {
+   "id": 28899,
+   "test_node": "tests/model_executor/test_model_load_with_params.py::test_facebook_roberta_model_loading_with_params",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 195,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_facebook_roberta_model_loading_with_params.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_model_load_with_params_py_test_facebook_roberta_model_loading_with_params.xml"
+  },
+  {
+   "id": 28900,
+   "test_node": "tests/model_executor/test_qwen3_omni.py::test_qwen3_omni_get_updates_use_audio_in_video",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 952,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_qwen3_omni_py_test_qwen3_omni_get_updates_use_audio_in_video.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_qwen3_omni_py_test_qwen3_omni_get_updates_use_audio_in_video.xml"
+  },
+  {
+   "id": 28901,
+   "test_node": "tests/model_executor/test_weight_utils.py::test_hf_transfer_auto_activation",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 130,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_weight_utils_py_test_hf_transfer_auto_activation.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_weight_utils_py_test_hf_transfer_auto_activation.xml"
+  },
+  {
+   "id": 28902,
+   "test_node": "tests/model_executor/test_weight_utils.py::test_download_weights_from_hf",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: An error happened while trying to locate the files on the Hub and we cannot find the appropriate snapshot folder for the specified revision on the local disk. Please check your internet connection and try again.",
+   "duration_ms": 139577,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/pytest_batch_super_0346_tests_model_executor_test_weight_utils_py_test_download_weights_from_hf.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0346/result_batch_super_0346_tests_model_executor_test_weight_utils_py_test_download_weights_from_hf.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 4,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_134140",
+  "started_at": "2026-08-07T05:41:41Z",
+  "finished_at": "2026-08-07T05:42:32Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140.log",
+    "size_bytes": 65268,
+    "captured_at": "2026-08-07T05:42:32Z"
+  },
+  "tests": [
+    {
+      "id": 22061,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_heuristic[types7-257x4224x4160]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1877,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_heuristic_types7_257x4224x4160.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_heuristic_types7_257x4224x4160.xml"
+    },
+    {
+      "id": 22062,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_heuristic[types7-1024x8192x4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2260,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_heuristic_types7_1024x8192x4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_heuristic_types7_1024x8192x4096.xml"
+    },
+    {
+      "id": 22063,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_devices[cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1428,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_devices_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_devices_cuda_0.xml"
+    },
+    {
+      "id": 22065,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_subset",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1453,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_subset.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_subset.xml"
+    },
+    {
+      "id": 22066,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_cuda_graph",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2232,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_cuda_graph.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_machete_mm_py_test_machete_cuda_graph.xml"
+    },
+    {
+      "id": 22067,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_without_zp",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::marlin_int4_fp8_preprocess' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::marlin_int4_fp8_preprocess' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLaye",
+      "duration_ms": 1511,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_marlin_int4_fp8_preprocess_without_zp.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_marlin_int4_fp8_preprocess_without_zp.xml"
+    },
+    {
+      "id": 22068,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_awq",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::marlin_int4_fp8_preprocess' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::marlin_int4_fp8_preprocess' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLaye",
+      "duration_ms": 646,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_marlin_int4_fp8_preprocess_awq.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_marlin_int4_fp8_preprocess_awq.xml"
+    },
+    {
+      "id": 22069,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_repack[nk_factors0-True-False-quant_type0-64-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch.testing._internal.optests.generate_tests.OpCheckError: opcheck(op, ...): test_schema failed with Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for ",
+      "duration_ms": 609,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/pytest_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_repack_nk_factors0_True_False_quant_type0_64_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_134140/result_batch_20260807_134140_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_repack_nk_factors0_True_False_quant_type0_64_128.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

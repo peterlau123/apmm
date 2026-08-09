@@ -1,0 +1,8 @@
+PASSED         tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_failed_store (gpu=0, 151ms, exit=0)
+PASSED         tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_full_scenario (gpu=2, 151ms, exit=0)
+FAILED         tests/v1/kv_offload/test_cpu_offloading.py::test_cpu_offloading[FLASH_ATTN-48] (gpu=3, 13383ms, exit=1)
+FAILED         tests/v1/kv_offload/test_cpu_offloading.py::test_cpu_offloading[FLASHINFER-48] (gpu=4, 12826ms, exit=1)
+PASSED         tests/v1/kv_offload/test_worker.py::test_offloading_worker (gpu=5, 128ms, exit=0)
+PASSED         tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test0-50-cuda:0] (gpu=6, 877ms, exit=0)
+PASSED         tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test1-50-cuda:0] (gpu=0, 22912ms, exit=0)
+PASSED         tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test2-50-cuda:0] (gpu=2, 4513ms, exit=0)

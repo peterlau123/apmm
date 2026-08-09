@@ -1,0 +1,8 @@
+FAILED         tests/quantization/test_fp8.py::test_model_load_and_run[False-True-neuralmagic/Meta-Llama-3-8B-Instruct-FP8-KV] (gpu=0, 270ms, exit=1)
+PASSED         tests/quantization/test_fp8.py::test_model_load_and_run[False-True-nm-testing/Qwen2-0.5B-Instruct-FP8-SkipQKV] (gpu=2, 0ms, exit=0)
+PASSED         tests/quantization/test_fp8.py::test_kv_cache_model_load_and_run[False-nm-testing/Qwen2-1.5B-Instruct-FP8-K-V] (gpu=3, 0ms, exit=0)
+FAILED         tests/quantization/test_fp8.py::test_load_fp16_model[False-False-auto] (gpu=4, 5096ms, exit=1)
+FAILED         tests/quantization/test_fp8.py::test_load_fp16_model[False-False-fp8] (gpu=5, 4704ms, exit=1)
+FAILED         tests/quantization/test_fp8.py::test_load_fp16_model[False-True-auto] (gpu=6, 3536ms, exit=1)
+FAILED         tests/quantization/test_fp8.py::test_load_fp16_model[False-True-fp8] (gpu=0, 3081ms, exit=1)
+PASSED         tests/quantization/test_fp8.py::test_scaled_fp8_quant[dtype0] (gpu=2, 706ms, exit=0)

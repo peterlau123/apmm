@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_marlin_0365",
+  "started_at": "2026-08-07T02:02:27Z",
+  "finished_at": "2026-08-07T02:03:10Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365.log",
+    "size_bytes": 65390,
+    "captured_at": "2026-08-07T02:03:10Z"
+  },
+  "tests": [
+    {
+      "id": 17518,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-2-32-128-128-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1024,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_2_32_128_128_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_2_32_128_128_32.xml"
+    },
+    {
+      "id": 17519,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-2-32-128-128-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1131,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_2_32_128_128_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_2_32_128_128_64.xml"
+    },
+    {
+      "id": 17520,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-8-128-128-16]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1078,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_16.xml"
+    },
+    {
+      "id": 17521,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-8-128-128-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1120,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_32.xml"
+    },
+    {
+      "id": 17522,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-8-128-128-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1113,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_8_128_128_64.xml"
+    },
+    {
+      "id": 17523,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-12-128-128-16]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 522,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_16.xml"
+    },
+    {
+      "id": 17524,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-12-128-128-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 466,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_32.xml"
+    },
+    {
+      "id": 17525,
+      "test_node": "tests/kernels/moe/test_moe.py::test_batched_fused_marlin_moe[32-4-12-128-128-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 452,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/pytest_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0365/result_batch_20260807_marlin_0365_tests_kernels_moe_test_moe_py_test_batched_fused_marlin_moe_32_4_12_128_128_64.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

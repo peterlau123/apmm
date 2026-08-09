@@ -1,0 +1,8 @@
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[Gemma3nForConditionalGeneration] (gpu=0, 289ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[KeyeForConditionalGeneration] (gpu=2, 345ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[RobertaModel] (gpu=3, 366ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[QWenLMHeadModel] (gpu=4, 287ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[TransformersMoEEmbeddingModel] (gpu=5, 317ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[Mamba2ForCausalLM] (gpu=6, 286ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[Ovis2_5] (gpu=0, 291ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[DeepseekV2ForCausalLM] (gpu=2, 3657ms, exit=0)

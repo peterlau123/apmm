@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0508",
+  "started_at": "2026-08-07T23:49:25Z",
+  "finished_at": "2026-08-07T23:49:37Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508.log",
+    "size_bytes": 10788,
+    "captured_at": "2026-08-07T23:49:37Z"
+  },
+  "tests": [
+    {
+      "id": 30307,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-mistralai/Pixtral-12B-2409-False-\\u6211\\u5f88\\u611f\\u8c22\\u4f60\\u7684\\u70ed\\u60c5]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_u6211_u5f88_u611f_u8c22_u4f60_u7684_u70ed_u60c5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_u6211_u5f88_u611f_u8c22_u4f60_u7684_u70ed_u60c5.xml"
+    },
+    {
+      "id": 30308,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-mistralai/Pixtral-12B-2409-False-\\u1015\\u102f\\u1036\\u1015\\u103c\\u1004\\u103a\\u101c\\u1031\\u1038\\u1015\\u103c\\u1031\\u102c\\u1015\\u103c\\u1015\\u102b\\u103a]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_u1015_u102f_u1036_u1015_u103c_u1004_u103a_u101c_u1031_u1038_u1015_u103c_u1031_u102c_u1015_u103c_u1015_u102b_u103a.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_u1015_u102f_u1036_u1015_u103c_u1004_u103a_u101c_u1031_u1038_u1015_u103c_u1031_u102c_u1015_u103c_u1015_u102b_u103a.xml"
+    },
+    {
+      "id": 30309,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-mistralai/Pixtral-12B-2409-False-Some text with adjacent special tokens                <|padding|><|padding|><fim_prefix><fim_middle><fim_suffix>other text<fim_pad>]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_Some_text_with_adjacent_special_tokens_padding_padding_fim_prefix_fim_middle_fim_suffix_other_text_fim_pad.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_mistralai_Pixtral_12B_2409_False_Some_text_with_adjacent_special_tokens_padding_padding_fim_prefix_fim_middle_fim_suffix_other_text_fim_pad.xml"
+    },
+    {
+      "id": 30310,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-False-facebook/opt-125m0-True-Hello here, this is a simple test]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_Hello_here_this_is_a_simple_test.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_Hello_here_this_is_a_simple_test.xml"
+    },
+    {
+      "id": 30311,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-False-facebook/opt-125m0-True-vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs. It is designed to be used in production environments, where inference and serving]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_vLLM_is_a_high_throughput_and_memory_efficient_inference_and_serving_engine_for_LLMs_It_is_designed_to_be_used_in_production_environments_where_inference_and_serving.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_vLLM_is_a_high_throughput_and_memory_efficient_inference_and_serving_engine_for_LLMs_It_is_designed_to_be_used_in_production_environments_where_inference_and_serving.xml"
+    },
+    {
+      "id": 30312,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-False-facebook/opt-125m0-True-\\u6211\\u5f88\\u611f\\u8c22\\u4f60\\u7684\\u70ed\\u60c5]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_u6211_u5f88_u611f_u8c22_u4f60_u7684_u70ed_u60c5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_u6211_u5f88_u611f_u8c22_u4f60_u7684_u70ed_u60c5.xml"
+    },
+    {
+      "id": 30313,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-False-facebook/opt-125m0-True-\\u1015\\u102f\\u1036\\u1015\\u103c\\u1004\\u103a\\u101c\\u1031\\u1038\\u1015\\u103c\\u1031\\u102c\\u1015\\u103c\\u1015\\u102b\\u103a]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_u1015_u102f_u1036_u1015_u103c_u1004_u103a_u101c_u1031_u1038_u1015_u103c_u1031_u102c_u1015_u103c_u1015_u102b_u103a.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_u1015_u102f_u1036_u1015_u103c_u1004_u103a_u101c_u1031_u1038_u1015_u103c_u1031_u102c_u1015_u103c_u1015_u102b_u103a.xml"
+    },
+    {
+      "id": 30314,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-False-facebook/opt-125m0-True-Some text with adjacent special tokens                <|padding|><|padding|><fim_prefix><fim_middle><fim_suffix>other text<fim_pad>]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/pytest_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_Some_text_with_adjacent_special_tokens_padding_padding_fim_prefix_fim_middle_fim_suffix_other_text_fim_pad.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0508/result_batch_super_0508_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_False_facebook_opt_125m0_True_Some_text_with_adjacent_special_tokens_padding_padding_fim_prefix_fim_middle_fim_suffix_other_text_fim_pad.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

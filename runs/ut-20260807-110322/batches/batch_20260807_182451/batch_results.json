@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182451",
+ "started_at": "2026-08-07T20:36:23Z",
+ "finished_at": "2026-08-07T20:36:58Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353.log",
+  "size_bytes": 69324,
+  "captured_at": "2026-08-07T20:36:58Z"
+ },
+ "tests": [
+  {
+   "id": 28951,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_8bit_bnb_model[yec019/fbopt-350m-8bit-read pre-quantized 8-bit opt model]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_8bit_bnb_model_yec019_fbopt_350m_8bit_read_pre_quantized_8_bit_opt_model.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_8bit_bnb_model_yec019_fbopt_350m_8bit_read_pre_quantized_8_bit_opt_model.xml"
+  },
+  {
+   "id": 28952,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_tp_4bit_bnb_model[facebook/opt-125m-quantize opt model inflight]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_tp_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_tp_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.xml"
+  },
+  {
+   "id": 28953,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_tp_4bit_bnb_model[mistralai/Mistral-7B-Instruct-v0.3-quantize inflight model with both HF and Mistral format weights]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_tp_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_tp_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.xml"
+  },
+  {
+   "id": 28954,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_pp_4bit_bnb_model[facebook/opt-125m-quantize opt model inflight]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_pp_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_pp_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.xml"
+  },
+  {
+   "id": 28955,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_pp_4bit_bnb_model[mistralai/Mistral-7B-Instruct-v0.3-quantize inflight model with both HF and Mistral format weights]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_pp_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_load_pp_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.xml"
+  },
+  {
+   "id": 28956,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_4bit_bnb_moe_model[allenai/OLMoE-1B-7B-0125-Instruct-quantize moe model inflight]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_4bit_bnb_moe_model_allenai_OLMoE_1B_7B_0125_Instruct_quantize_moe_model_inflight.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_4bit_bnb_moe_model_allenai_OLMoE_1B_7B_0125_Instruct_quantize_moe_model_inflight.xml"
+  },
+  {
+   "id": 28957,
+   "test_node": "tests/models/quantization/test_bitsandbytes.py::test_4bit_bnb_embedding_model[half-intfloat/e5-small-quantize embedding model inflight]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_4bit_bnb_embedding_model_half_intfloat_e5_small_quantize_embedding_model_inflight.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_bitsandbytes_py_test_4bit_bnb_embedding_model_half_intfloat_e5_small_quantize_embedding_model_inflight.xml"
+  },
+  {
+   "id": 28958,
+   "test_node": "tests/models/quantization/test_fp8.py::test_models[1-FLASH_ATTN-True-4-fp8_e4m3-TinyLlama/TinyLlama-1.1B-Chat-v1.0-nm-testing/Llama-3.2-1B-Instruct-FP8-KV]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 12162,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/pytest_batch_super_0353_tests_models_quantization_test_fp8_py_test_models_1_FLASH_ATTN_True_4_fp8_e4m3_TinyLlama_TinyLlama_1_1B_Chat_v1_0_nm_testing_Llama_3_2_1B_Instruct_FP8_KV.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0353/result_batch_super_0353_tests_models_quantization_test_fp8_py_test_models_1_FLASH_ATTN_True_4_fp8_e4m3_TinyLlama_TinyLlama_1_1B_Chat_v1_0_nm_testing_Llama_3_2_1B_Instruct_FP8_KV.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 1,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 7
+ }
+}

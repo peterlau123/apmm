@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_20260808_ig_0030",
+  "started_at": "2026-08-09T01:14:31Z",
+  "finished_at": "2026-08-09T01:14:43Z",
+  "timeout": 900,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/pytest_batch_20260808_ig_0030.log",
+    "size_bytes": 107950,
+    "captured_at": "2026-08-09T01:14:43Z"
+  },
+  "tests": [
+    {
+      "id": 32897,
+      "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[llama3-eagle3-speculator]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 211,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/pytest_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_llama3_eagle3_speculator.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/result_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_llama3_eagle3_speculator.xml"
+    },
+    {
+      "id": 32898,
+      "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[qwen3-eagle3-speculator]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 212,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/pytest_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_qwen3_eagle3_speculator.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/result_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_qwen3_eagle3_speculator.xml"
+    },
+    {
+      "id": 32899,
+      "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[qwen3-eagle3-speculator-w4a16-verifier]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 197,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/pytest_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_qwen3_eagle3_speculator_w4a16_verifier.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260808_ig_0030/result_batch_20260808_ig_0030_tests_v1_spec_decode_test_speculators_eagle3_py_test_eagle3_speculators_model_qwen3_eagle3_speculator_w4a16_verifier.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

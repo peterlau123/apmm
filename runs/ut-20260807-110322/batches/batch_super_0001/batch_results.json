@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0001",
+  "started_at": "2026-08-07T12:56:47Z",
+  "finished_at": "2026-08-07T12:57:14Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001.log",
+    "size_bytes": 18157,
+    "captured_at": "2026-08-07T12:57:14Z"
+  },
+  "tests": [
+    {
+      "id": 24522,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora_tp4[True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp4_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp4_True.xml"
+    },
+    {
+      "id": 24523,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_pass",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2923,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_pass.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_pass.xml"
+    },
+    {
+      "id": 24524,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_rank-config_change0-is greater than max_lora_rank]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_rank_config_change0_is_greater_than_max_lora_rank.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_rank_config_change0_is_greater_than_max_lora_rank.xml"
+    },
+    {
+      "id": 24525,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_dora-config_change1-does not yet support DoRA]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_dora_config_change1_does_not_yet_support_DoRA.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_dora_config_change1_does_not_yet_support_DoRA.xml"
+    },
+    {
+      "id": 24526,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_modules_to_save-config_change2-only supports modules_to_save being None]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_modules_to_save_config_change2_only_supports_modules_to_save_being_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_modules_to_save_config_change2_only_supports_modules_to_save_being_None.xml"
+    },
+    {
+      "id": 24527,
+      "test_node": "tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1392,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_1.xml"
+    },
+    {
+      "id": 24528,
+      "test_node": "tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1345,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_4.xml"
+    },
+    {
+      "id": 24529,
+      "test_node": "tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-16]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1349,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/pytest_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0001/result_batch_super_0001_tests_lora_test_punica_ops_py_test_kernels_shrink_0_cuda_0_dtype0_1_2049_1_1_16.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

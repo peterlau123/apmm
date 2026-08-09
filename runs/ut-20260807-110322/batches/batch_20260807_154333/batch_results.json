@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_154333",
+  "started_at": "2026-08-07T07:43:33Z",
+  "finished_at": "2026-08-07T07:44:00Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333.log",
+    "size_bytes": 19087,
+    "captured_at": "2026-08-07T07:44:00Z"
+  },
+  "tests": [
+    {
+      "id": 24251,
+      "test_node": "tests/lora/test_layers.py::test_embeddings[False-64000-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 279,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_64000_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_64000_cuda_0_4.xml"
+    },
+    {
+      "id": 24255,
+      "test_node": "tests/lora/test_layers.py::test_embeddings[False-128000-cuda:0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 345,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_1.xml"
+    },
+    {
+      "id": 24256,
+      "test_node": "tests/lora/test_layers.py::test_embeddings[False-128000-cuda:0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 359,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_2.xml"
+    },
+    {
+      "id": 24257,
+      "test_node": "tests/lora/test_layers.py::test_embeddings[False-128000-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 358,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_embeddings_False_128000_cuda_0_4.xml"
+    },
+    {
+      "id": 24261,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-512-cuda:0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2427,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_1.xml"
+    },
+    {
+      "id": 24262,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-512-cuda:0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2428,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_2.xml"
+    },
+    {
+      "id": 24263,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-512-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1666,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_512_cuda_0_4.xml"
+    },
+    {
+      "id": 24267,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-32000-cuda:0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1626,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/pytest_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154333/result_batch_20260807_154333_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

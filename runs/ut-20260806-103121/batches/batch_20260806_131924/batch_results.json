@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_131924",
+  "started_at": "2026-08-06T05:19:25Z",
+  "finished_at": "2026-08-06T05:20:07Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924.log",
+    "size_bytes": 19854,
+    "captured_at": "2026-08-06T05:20:07Z"
+  },
+  "tests": [
+    {
+      "id": 13664,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[True-False-8-64-224-1024-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2094,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_1024_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_1024_1024.xml"
+    },
+    {
+      "id": 13665,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[True-False-8-64-224-3072-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2166,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_3072_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_3072_1024.xml"
+    },
+    {
+      "id": 13666,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[True-False-8-64-224-3072-1536]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1500,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_3072_1536.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_224_3072_1536.xml"
+    },
+    {
+      "id": 13667,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[True-False-8-64-32768-1024-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2060,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_32768_1024_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_True_False_8_64_32768_1024_1024.xml"
+    },
+    {
+      "id": 13668,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[False-True-6-40-2-1024-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2125,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_1024_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_1024_1024.xml"
+    },
+    {
+      "id": 13669,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[False-True-6-40-2-3072-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2040,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_3072_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_3072_1024.xml"
+    },
+    {
+      "id": 13670,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[False-True-6-40-2-3072-1536]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1179,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_3072_1536.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_2_3072_1536.xml"
+    },
+    {
+      "id": 13671,
+      "test_node": "tests/kernels/moe/test_cutlass_moe.py::test_cutlass_moe_8_bit_cuda_graph[False-True-6-40-7-3072-1536]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1215,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/pytest_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_7_3072_1536.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_131924/result_batch_20260806_131924_tests_kernels_moe_test_cutlass_moe_py_test_cutlass_moe_8_bit_cuda_graph_False_True_6_40_7_3072_1536.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

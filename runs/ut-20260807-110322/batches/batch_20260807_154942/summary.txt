@@ -1,0 +1,8 @@
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[0-4] (gpu=0, 385ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[0-8] (gpu=2, 337ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-1] (gpu=3, 364ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-2] (gpu=4, 353ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-4] (gpu=5, 390ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-8] (gpu=6, 395ms, exit=0)
+FAILED         tests/lora/test_layers.py::test_get_masked_input_and_mask (gpu=0, 1107ms, exit=1)
+FAILED         tests/lora/test_llama_tp.py::test_llama_lora[True] (gpu=2, 393ms, exit=1)

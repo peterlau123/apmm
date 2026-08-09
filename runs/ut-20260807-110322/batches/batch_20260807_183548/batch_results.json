@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183548",
+ "started_at": "2026-08-07T22:59:34Z",
+ "finished_at": "2026-08-07T23:00:11Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480.log",
+  "size_bytes": 15300,
+  "captured_at": "2026-08-07T23:00:11Z"
+ },
+ "tests": [
+  {
+   "id": 29981,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[BAAI/bge-base-en-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_BAAI_bge_base_en_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_BAAI_bge_base_en_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29982,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[boltuix/NeuroBERT-NER-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_boltuix_NeuroBERT_NER_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_boltuix_NeuroBERT_NER_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29983,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[papluca/xlm-roberta-base-language-detection-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_papluca_xlm_roberta_base_language_detection_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_papluca_xlm_roberta_base_language_detection_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29984,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[Alibaba-NLP/gte-Qwen2-1.5B-instruct-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_Alibaba_NLP_gte_Qwen2_1_5B_instruct_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_Alibaba_NLP_gte_Qwen2_1_5B_instruct_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29985,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[intfloat/e5-small-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_intfloat_e5_small_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_intfloat_e5_small_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29986,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[openai/clip-vit-base-patch32-decoder-True-Pooling models with causal attn and last pooling support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_openai_clip_vit_base_patch32_decoder_True_Pooling_models_with_causal_attn_and_last_pooling_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_openai_clip_vit_base_patch32_decoder_True_Pooling_models_with_causal_attn_and_last_pooling_support_prefix_caching.xml"
+  },
+  {
+   "id": 29987,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[google/siglip-base-patch16-224-encoder_only-False-Pooling models with bidirectional attn does not support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_google_siglip_base_patch16_224_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_google_siglip_base_patch16_224_encoder_only_False_Pooling_models_with_bidirectional_attn_does_not_support_prefix_caching.xml"
+  },
+  {
+   "id": 29988,
+   "test_node": "tests/test_config.py::test_is_prefix_caching_supported[Qwen/Qwen3-0.6B-decoder-True-Generative models support prefix caching.]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/pytest_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_Qwen_Qwen3_0_6B_decoder_True_Generative_models_support_prefix_caching.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0480/result_batch_super_0480_tests_test_config_py_test_is_prefix_caching_supported_Qwen_Qwen3_0_6B_decoder_True_Generative_models_support_prefix_caching.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 8
+ }
+}

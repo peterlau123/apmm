@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_113923",
+  "started_at": "2026-08-07T03:39:24Z",
+  "finished_at": "2026-08-07T03:39:50Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923.log",
+    "size_bytes": 20154,
+    "captured_at": "2026-08-07T03:39:50Z"
+  },
+  "tests": [
+    {
+      "id": 20324,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-1-24576-512]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1499,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_1_24576_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_1_24576_512.xml"
+    },
+    {
+      "id": 20325,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-16-256-512]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1153,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_256_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_256_512.xml"
+    },
+    {
+      "id": 20326,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-16-16384-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 994,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_16384_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_16384_128.xml"
+    },
+    {
+      "id": 20327,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-16-24576-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1642,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_24576_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_16_24576_4096.xml"
+    },
+    {
+      "id": 20328,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-32-8192-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1554,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_32_8192_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_32_8192_4096.xml"
+    },
+    {
+      "id": 20329,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-32-16384-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1654,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_32_16384_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_32_16384_4096.xml"
+    },
+    {
+      "id": 20330,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-33-1024-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 800,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_33_1024_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_33_1024_1024.xml"
+    },
+    {
+      "id": 20331,
+      "test_node": "tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[True-True-False-33-8192-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 866,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/pytest_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_33_8192_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_113923/result_batch_20260807_113923_tests_kernels_quantization_test_cutlass_2of4_sparse_py_test_cutlass_sparse_int8_gemm_True_True_False_33_8192_128.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

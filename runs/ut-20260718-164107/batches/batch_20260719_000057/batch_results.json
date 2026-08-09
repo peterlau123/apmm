@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260719_000057",
-  "started_at": "2026-07-18T16:01:00Z",
-  "finished_at": "2026-07-18T16:03:15Z",
-  "timeout": 300,
-  "exit_code": 0,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057.log",
-    "size_bytes": 808922,
-    "captured_at": "2026-07-18T16:03:15Z"
+ "batch_id": "batch_20260719_000057",
+ "started_at": "2026-08-04T11:39:20Z",
+ "finished_at": "2026-08-04T11:40:25Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010.log",
+  "size_bytes": 808842,
+  "captured_at": "2026-08-04T11:40:25Z"
+ },
+ "tests": [
+  {
+   "id": 591,
+   "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed-Qwen/Qwen2.5-1.5B-Instruct]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_Qwen_Qwen2_5_1_5B_Instruct.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_Qwen_Qwen2_5_1_5B_Instruct.xml"
   },
-  "tests": [
-    {
-      "id": 591,
-      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed-Qwen/Qwen2.5-1.5B-Instruct]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_Qwen_Qwen2_5_1_5B_Instruct.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_Qwen_Qwen2_5_1_5B_Instruct.xml"
-    },
-    {
-      "id": 594,
-      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-unbacked-Qwen/Qwen2.5-1.5B-Instruct]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 0,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.xml"
-    },
-    {
-      "id": 597,
-      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-Qwen/Qwen2.5-1.5B-Instruct]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 1,
-      "exit_code": 0,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.xml"
-    },
-    {
-      "id": 783,
-      "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
-      "duration_ms": 3736,
-      "exit_code": 0,
-      "gpu_id": 4,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_64_8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_64_8.xml"
-    },
-    {
-      "id": 784,
-      "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-40-8]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
-      "duration_ms": 2308,
-      "exit_code": 0,
-      "gpu_id": 5,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_40_8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_40_8.xml"
-    },
-    {
-      "id": 785,
-      "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-64-8]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
-      "duration_ms": 3901,
-      "exit_code": 0,
-      "gpu_id": 6,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_64_8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_64_8.xml"
-    },
-    {
-      "id": 786,
-      "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-40-8]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
-      "duration_ms": 2670,
-      "exit_code": 0,
-      "gpu_id": 7,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_40_8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_40_8.xml"
-    },
-    {
-      "id": 787,
-      "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-533-128-64-8]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
-      "duration_ms": 3474,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/pytest_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_533_128_64_8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_000057/result_batch_20260719_000057_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_533_128_64_8.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 2,
-    "failed": 5,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 1
+  {
+   "id": 594,
+   "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-unbacked-Qwen/Qwen2.5-1.5B-Instruct]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_unbacked_Qwen_Qwen2_5_1_5B_Instruct.xml"
+  },
+  {
+   "id": 597,
+   "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-Qwen/Qwen2.5-1.5B-Instruct]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_False_1_backed_size_oblivious_Qwen_Qwen2_5_1_5B_Instruct.xml"
+  },
+  {
+   "id": 783,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "duration_ms": 3237,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_64_8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_64_8.xml"
+  },
+  {
+   "id": 784,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-40-8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "duration_ms": 2020,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_40_8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_7_128_40_8.xml"
+  },
+  {
+   "id": 785,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-64-8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "duration_ms": 3159,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_64_8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_64_8.xml"
+  },
+  {
+   "id": 786,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-40-8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "duration_ms": 2050,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_40_8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_256_128_40_8.xml"
+  },
+  {
+   "id": 787,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-533-128-64-8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "duration_ms": 3127,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/pytest_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_533_128_64_8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0010/result_batch_super_0010_tests_compile_test_fusion_attn_py_test_attention_quant_pattern_AttentionBackendEnum_TRITON_ATTN_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_TestAttentionFp8StaticQuantPatternModel_quant_fp8_dtype0_533_128_64_8.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

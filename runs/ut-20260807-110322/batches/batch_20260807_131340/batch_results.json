@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_131340",
+  "started_at": "2026-08-07T05:13:40Z",
+  "finished_at": "2026-08-07T05:14:08Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340.log",
+    "size_bytes": 19701,
+    "captured_at": "2026-08-07T05:14:08Z"
+  },
+  "tests": [
+    {
+      "id": 21660,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_quant[0-dtype1-5137-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1780,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_5137_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_5137_7.xml"
+    },
+    {
+      "id": 21661,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_quant[0-dtype1-5137-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1765,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_5137_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_5137_4096.xml"
+    },
+    {
+      "id": 21662,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_quant[0-dtype1-8193-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1792,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_1.xml"
+    },
+    {
+      "id": 21663,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_quant[0-dtype1-8193-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1763,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_7.xml"
+    },
+    {
+      "id": 21664,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_quant[0-dtype1-8193-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1741,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_quant_0_dtype1_8193_4096.xml"
+    },
+    {
+      "id": 21665,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_azp_quant[0-dtype0-17-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1783,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_1.xml"
+    },
+    {
+      "id": 21666,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_azp_quant[0-dtype0-17-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 860,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_7.xml"
+    },
+    {
+      "id": 21667,
+      "test_node": "tests/kernels/quantization/test_int8_quant.py::test_dynamic_scaled_int8_azp_quant[0-dtype0-17-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 819,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/pytest_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_131340/result_batch_20260807_131340_tests_kernels_quantization_test_int8_quant_py_test_dynamic_scaled_int8_azp_quant_0_dtype0_17_4096.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

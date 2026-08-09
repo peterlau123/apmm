@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260718_225522",
-  "started_at": "2026-07-18T14:55:24Z",
-  "finished_at": "2026-07-18T15:11:44Z",
-  "timeout": 300,
-  "exit_code": 1,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522.log",
-    "size_bytes": null,
-    "captured_at": "2026-07-18T15:11:44Z"
+ "batch_id": "batch_20260718_225522",
+ "started_at": "2026-08-05T12:38:09Z",
+ "finished_at": "2026-08-05T13:08:14Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463.log",
+  "size_bytes": 40625,
+  "captured_at": "2026-08-05T13:08:14Z"
+ },
+ "tests": [
+  {
+   "id": 210,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs12-AttentionBackendEnum.TRITON_ATTN-matches12--rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 1172481,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/result_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.xml"
   },
-  "tests": [
-    {
-      "id": 206,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 411,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.xml"
-    },
-    {
-      "id": 207,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 336,
-      "exit_code": 0,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.xml"
-    },
-    {
-      "id": 208,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
-      "duration_ms": 436,
-      "exit_code": 0,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.xml"
-    },
-    {
-      "id": 209,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.xml"
-    },
-    {
-      "id": 210,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs12-AttentionBackendEnum.TRITON_ATTN-matches12--rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.xml"
-    },
-    {
-      "id": 211,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs13-AttentionBackendEnum.TRITON_ATTN-matches13-+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.xml"
-    },
-    {
-      "id": 212,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[True-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
-    },
-    {
-      "id": 213,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[False-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/pytest_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_225522/result_batch_20260718_225522_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 2,
-    "failed": 1,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 5
+  {
+   "id": 211,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs13-AttentionBackendEnum.TRITON_ATTN-matches13-+rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 1177382,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/result_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.xml"
+  },
+  {
+   "id": 208,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 337,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/pytest_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/result_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.xml"
+  },
+  {
+   "id": 209,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 280,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/pytest_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/result_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.xml"
+  },
+  {
+   "id": 206,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 255,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs8_AttentionBackendEnum_FLASHINFER_matches8_rms_norm.xml"
+  },
+  {
+   "id": 207,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 290,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs9_AttentionBackendEnum_FLASHINFER_matches9_rms_norm.xml"
+  },
+  {
+   "id": 212,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[True-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 237,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/pytest_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/result_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
+  },
+  {
+   "id": 213,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[False-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 310,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/pytest_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/result_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

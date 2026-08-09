@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190019",
+  "started_at": "2026-08-07T11:00:20Z",
+  "finished_at": "2026-08-07T11:00:21Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T11:00:21Z"
+  },
+  "tests": [
+    {
+      "id": 32496,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_connector.py::TestIntegrationScenarios::test_lmcache_kv_events_aggregation",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_connector_py_TestIntegrationScenarios_test_lmcache_kv_events_aggregation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_connector_py_TestIntegrationScenarios_test_lmcache_kv_events_aggregation.xml"
+    },
+    {
+      "id": 32497,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_multimodal_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_multimodal_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_multimodal_interface.xml"
+    },
+    {
+      "id": 32498,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_config_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_config_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_config_interface.xml"
+    },
+    {
+      "id": 32499,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_request_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_request_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_request_interface.xml"
+    },
+    {
+      "id": 32500,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_new_request_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_new_request_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_new_request_interface.xml"
+    },
+    {
+      "id": 32501,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_sampling_params_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_sampling_params_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_sampling_params_interface.xml"
+    },
+    {
+      "id": 32502,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_tp_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_tp_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_tp_interface.xml"
+    },
+    {
+      "id": 32503,
+      "test_node": "tests/v1/kv_connector/unit/test_lmcache_integration.py::test_forward_context_interface",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/pytest_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_forward_context_interface.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190019/result_batch_20260807_190019_tests_v1_kv_connector_unit_test_lmcache_integration_py_test_forward_context_interface.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

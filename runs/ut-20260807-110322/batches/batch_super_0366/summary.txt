@@ -1,0 +1,8 @@
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[NomicBertModel] (gpu=0, 283ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[GPTBigCodeForCausalLM] (gpu=2, 4045ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[LLaMAForCausalLM] (gpu=3, 261ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[TeleChatForCausalLM] (gpu=4, 306ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[NemotronForCausalLM] (gpu=5, 5133ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen2ForCausalLM] (gpu=6, 5264ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[TransformersMultiModalForSequenceClassification] (gpu=0, 285ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[GPT2ForSequenceClassification] (gpu=2, 304ms, exit=1)

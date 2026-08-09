@@ -1,0 +1,8 @@
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_handshake_failure_returns_finished (gpu=0, 1252ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_transfer_setup_failure_returns_finished (gpu=2, 1038ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[vllm_version-config_overrides0-version_override0-True-True] (gpu=3, 844ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[nixl_connector_version-config_overrides1-version_override1-True-True] (gpu=4, 805ms, exit=0)
+FAILED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[model_name-config_overrides2-version_override2-True-True] (gpu=5, 899ms, exit=1)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[dtype-config_overrides3-version_override3-True-True] (gpu=6, 932ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[cache_dtype-config_overrides4-version_override4-True-True] (gpu=0, 809ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_compatibility_hash_validation[num_kv_heads-config_overrides5-version_override5-True-True] (gpu=2, 890ms, exit=0)

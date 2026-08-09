@@ -1,49 +1,49 @@
 {
-  "batch_id": "batch_20260719_091235",
-  "started_at": "2026-07-19T01:12:36Z",
-  "finished_at": "2026-07-19T01:12:38Z",
-  "timeout": 300,
-  "exit_code": 1,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_091235/pytest_batch_20260719_091235.log",
-    "size_bytes": null,
-    "captured_at": "2026-07-19T01:12:38Z"
+ "batch_id": "batch_20260719_091235",
+ "started_at": "2026-08-04T14:26:41Z",
+ "finished_at": "2026-08-04T14:27:06Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0078/pytest_batch_super_0078.log",
+  "size_bytes": 15330,
+  "captured_at": "2026-08-04T14:27:06Z"
+ },
+ "tests": [
+  {
+   "id": 3991,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype1-128-num_heads1-seq_lens_and_common_prefix0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 496,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0078/pytest_batch_super_0078_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0078/result_batch_super_0078_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix0.xml"
   },
-  "tests": [
-    {
-      "id": 3991,
-      "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype1-128-num_heads1-seq_lens_and_common_prefix0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_091235/pytest_batch_20260719_091235_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_091235/result_batch_20260719_091235_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix0.xml"
-    },
-    {
-      "id": 3992,
-      "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype1-128-num_heads1-seq_lens_and_common_prefix1]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_091235/pytest_batch_20260719_091235_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix1.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_091235/result_batch_20260719_091235_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix1.xml"
-    }
-  ],
-  "statistics": {
-    "total": 2,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 2
+  {
+   "id": 3992,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype1-128-num_heads1-seq_lens_and_common_prefix1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 475,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0078/pytest_batch_super_0078_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0078/result_batch_super_0078_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype1_128_num_heads1_seq_lens_and_common_prefix1.xml"
   }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

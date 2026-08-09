@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185659",
+  "started_at": "2026-08-07T10:56:59Z",
+  "finished_at": "2026-08-07T10:57:03Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:57:03Z"
+  },
+  "tests": [
+    {
+      "id": 32069,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCudagraphDispatcher::test_dispatcher[PIECEWISE-3-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphDispatcher_test_dispatcher_PIECEWISE_3_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphDispatcher_test_dispatcher_PIECEWISE_3_True.xml"
+    },
+    {
+      "id": 32070,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCUDAGraphWrapper::test_capture_and_replay",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_capture_and_replay.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_capture_and_replay.xml"
+    },
+    {
+      "id": 32071,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCUDAGraphWrapper::test_bypass_on_mode_mismatch",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_bypass_on_mode_mismatch.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_bypass_on_mode_mismatch.xml"
+    },
+    {
+      "id": 32072,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCUDAGraphWrapper::test_bypass_on_mode_none",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_bypass_on_mode_none.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCUDAGraphWrapper_test_bypass_on_mode_none.xml"
+    },
+    {
+      "id": 32073,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCudagraphIntegration::test_capture_replay_bypass_logic",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphIntegration_test_capture_replay_bypass_logic.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphIntegration_test_capture_replay_bypass_logic.xml"
+    },
+    {
+      "id": 32074,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_dispatch.py::TestCudagraphIntegration::test_nested_wrappers",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphIntegration_test_nested_wrappers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_dispatch_py_TestCudagraphIntegration_test_nested_wrappers.xml"
+    },
+    {
+      "id": 32075,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_mode.py::test_backend_and_cudagraph_mode_combo[FA3-FULL-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_mode_py_test_backend_and_cudagraph_mode_combo_FA3_FULL_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_mode_py_test_backend_and_cudagraph_mode_combo_FA3_FULL_True.xml"
+    },
+    {
+      "id": 32076,
+      "test_node": "tests/v1/cudagraph/test_cudagraph_mode.py::test_backend_and_cudagraph_mode_combo[FA3-FULL_AND_PIECEWISE-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/pytest_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_mode_py_test_backend_and_cudagraph_mode_combo_FA3_FULL_AND_PIECEWISE_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185659/result_batch_20260807_185659_tests_v1_cudagraph_test_cudagraph_mode_py_test_backend_and_cudagraph_mode_combo_FA3_FULL_AND_PIECEWISE_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

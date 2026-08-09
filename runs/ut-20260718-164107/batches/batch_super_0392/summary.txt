@@ -1,0 +1,4 @@
+PASSED         tests/distributed/test_context_parallel.py::test_cp_generation[Qwen/Qwen2.5-1.5B-Instruct-parallel_setup2-mp-auto-test_options2] (gpu=0, 1096ms, exit=0)
+PASSED         tests/distributed/test_context_parallel.py::test_cp_generation[Qwen/Qwen2.5-1.5B-Instruct-parallel_setup3-mp-auto-test_options3] (gpu=1, 1126ms, exit=0)
+IGNORED        tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target0-1-2] (gpu=0, Nonems, exit=None)
+PASSED         tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target0-2-2] (gpu=1, 210ms, exit=0)

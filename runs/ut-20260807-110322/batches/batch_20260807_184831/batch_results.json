@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_184831",
+  "started_at": "2026-08-07T10:48:31Z",
+  "finished_at": "2026-08-07T10:48:35Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:48:35Z"
+  },
+  "tests": [
+    {
+      "id": 31221,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls_pre_v11_tokenizer[argument_before_name_and_name_in_argument]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_pre_v11_tokenizer_argument_before_name_and_name_in_argument.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_pre_v11_tokenizer_argument_before_name_and_name_in_argument.xml"
+    },
+    {
+      "id": 31222,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls[single_tool_add]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_single_tool_add.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_single_tool_add.xml"
+    },
+    {
+      "id": 31223,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls[single_tool_weather]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_single_tool_weather.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_single_tool_weather.xml"
+    },
+    {
+      "id": 31224,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls[multiple_tool_calls]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_multiple_tool_calls.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_multiple_tool_calls.xml"
+    },
+    {
+      "id": 31225,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls_streaming_pre_v11_tokenizer[no_tools]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_no_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_no_tools.xml"
+    },
+    {
+      "id": 31226,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls_streaming_pre_v11_tokenizer[single_tool_add]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_add.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_add.xml"
+    },
+    {
+      "id": 31227,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls_streaming_pre_v11_tokenizer[single_tool_add_strings]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_add_strings.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_add_strings.xml"
+    },
+    {
+      "id": 31228,
+      "test_node": "tests/tool_parsers/test_mistral_tool_parser.py::test_extract_tool_calls_streaming_pre_v11_tokenizer[single_tool_weather]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/pytest_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_weather.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184831/result_batch_20260807_184831_tests_tool_parsers_test_mistral_tool_parser_py_test_extract_tool_calls_streaming_pre_v11_tokenizer_single_tool_weather.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

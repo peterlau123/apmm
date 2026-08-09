@@ -1,0 +1,8 @@
+PASSED         tests/lora/test_fused_moe_lora_kernel.py::test_fused_moe_lora_kernel_fully_sharded[False-42-dtype1-16-64-2048-1408-4-64-6-100] (gpu=0, 0ms, exit=0)
+FAILED         tests/lora/test_gptoss_tp.py::test_gpt_oss_lora (gpu=2, 440ms, exit=1)
+PASSED         tests/lora/test_gptoss_tp.py::test_gpt_oss_lora_tp2[False] (gpu=3, 0ms, exit=0)
+PASSED         tests/lora/test_gptoss_tp.py::test_gpt_oss_lora_tp2[True] (gpu=4, 0ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_embeddings[True-512-cuda:0-1] (gpu=5, 2206ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_embeddings[True-512-cuda:0-2] (gpu=6, 2206ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_embeddings[True-512-cuda:0-4] (gpu=0, 1690ms, exit=0)
+PASSED         tests/lora/test_layers.py::test_embeddings[True-32000-cuda:0-1] (gpu=2, 1618ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_155429",
+  "started_at": "2026-08-07T07:54:29Z",
+  "finished_at": "2026-08-07T07:55:10Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429.log",
+    "size_bytes": 79171,
+    "captured_at": "2026-08-07T07:55:10Z"
+  },
+  "tests": [
+    {
+      "id": 24514,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-32-512-6-200]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1597,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_200.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_200.xml"
+    },
+    {
+      "id": 24515,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-32-512-6-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2534,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_1024.xml"
+    },
+    {
+      "id": 24516,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-32-512-6-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4985,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_32_512_6_4096.xml"
+    },
+    {
+      "id": 24517,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 447,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora.xml"
+    },
+    {
+      "id": 24518,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora_mixed",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 420,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_mixed.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_mixed.xml"
+    },
+    {
+      "id": 24519,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora_tp2[False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp2_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp2_False.xml"
+    },
+    {
+      "id": 24520,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora_tp2[True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp2_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp2_True.xml"
+    },
+    {
+      "id": 24521,
+      "test_node": "tests/lora/test_olmoe_tp.py::test_olmoe_lora_tp4[False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/pytest_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp4_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155429/result_batch_20260807_155429_tests_lora_test_olmoe_tp_py_test_olmoe_lora_tp4_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

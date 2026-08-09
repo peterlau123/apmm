@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0454",
+  "started_at": "2026-08-07T22:28:50Z",
+  "finished_at": "2026-08-07T22:29:29Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454.log",
+    "size_bytes": 277247,
+    "captured_at": "2026-08-07T22:29:29Z"
+  },
+  "tests": [
+    {
+      "id": 29762,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_wNa16[wNa16_args0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 244,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_wNa16_wNa16_args0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_wNa16_wNa16_args0.xml"
+    },
+    {
+      "id": 29763,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_wNa16[wNa16_args1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 185,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_wNa16_wNa16_args1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_wNa16_wNa16_args1.xml"
+    },
+    {
+      "id": 29764,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w4a16_marlin24",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 185,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_w4a16_marlin24.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_w4a16_marlin24.xml"
+    },
+    {
+      "id": 29765,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_fp8",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 243,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_fp8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_fp8.xml"
+    },
+    {
+      "id": 29766,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_kv_cache",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 237,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_kv_cache.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_kv_cache.xml"
+    },
+    {
+      "id": 29767,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of40]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 240,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of40.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of40.xml"
+    },
+    {
+      "id": 29768,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of41]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 166,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of41.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of41.xml"
+    },
+    {
+      "id": 29769,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of42]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 150,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_2of4_quant_fp8_args_2of42.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

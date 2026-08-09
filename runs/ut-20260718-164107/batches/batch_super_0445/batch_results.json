@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0445",
+  "started_at": "2026-08-05T02:42:09Z",
+  "finished_at": "2026-08-05T02:46:27Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445.log",
+    "size_bytes": 53594,
+    "captured_at": "2026-08-05T02:46:27Z"
+  },
+  "tests": [
+    {
+      "id": 1211,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-parallel_setup19-ray-auto-test_options19]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 241769,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup19_ray_auto_test_options19.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup19_ray_auto_test_options19.xml"
+    },
+    {
+      "id": 1213,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_allocation_and_free",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 208,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_and_free.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_and_free.xml"
+    },
+    {
+      "id": 1214,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_allocation_cycles",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_cycles.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_allocation_cycles.xml"
+    },
+    {
+      "id": 1215,
+      "test_node": "tests/distributed/test_shm_buffer.py::TestSingleWriterShmRingBuffer::test_buffer_access",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 158,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_access.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_distributed_test_shm_buffer_py_TestSingleWriterShmRingBuffer_test_buffer_access.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 3,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

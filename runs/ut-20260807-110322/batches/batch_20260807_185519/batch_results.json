@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185519",
+  "started_at": "2026-08-07T10:55:20Z",
+  "finished_at": "2026-08-07T10:55:21Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:55:21Z"
+  },
+  "tests": [
+    {
+      "id": 31901,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_free_kv_cache_block_queue_get_all_free_blocks",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_free_kv_cache_block_queue_get_all_free_blocks.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_free_kv_cache_block_queue_get_all_free_blocks.xml"
+    },
+    {
+      "id": 31902,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys.xml"
+    },
+    {
+      "id": 31903,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_no_mm_inputs",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_no_mm_inputs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_no_mm_inputs.xml"
+    },
+    {
+      "id": 31904,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_cache_salt",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_cache_salt.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_cache_salt.xml"
+    },
+    {
+      "id": 31905,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_prompt_embeds",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_prompt_embeds.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_prompt_embeds.xml"
+    },
+    {
+      "id": 31906,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_different_prompt_embeds",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_different_prompt_embeds.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_different_prompt_embeds.xml"
+    },
+    {
+      "id": 31907,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_generate_block_hash_extra_keys_lora",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_generate_block_hash_extra_keys_lora.xml"
+    },
+    {
+      "id": 31908,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_hash_block_tokens[sha256]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/pytest_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_hash_block_tokens_sha256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185519/result_batch_20260807_185519_tests_v1_core_test_kv_cache_utils_py_test_hash_block_tokens_sha256.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

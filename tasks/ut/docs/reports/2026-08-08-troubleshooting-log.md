@@ -99,3 +99,11 @@ pytest `not found`（如 `test_peft_helper_error` 已从代码移除；当前文
 3. **节点 stale**（代码演进）≠ 测试失败——重跑前校验节点有效性
 4. **device-map 回写用原 node**（运行替换 + 结果还原）
 5. **进程匹配/DONE flag/JSON 竞态**——进度脚本三坑（§6）
+
+## §9 2026-08-09 补充（分组重跑期）
+
+1. **HF hang 真因（假活主因——不是时钟）**：新 run 缺 workflow.yaml → execute_batch 读不到 container_env（HF_HUB_OFFLINE）→ 测试离线 HF 下载 hang 占满并发 → "假活"观感。修复：复制 workflow.yaml + paths.workflow_yaml（✅ 单元 478 + 端到端验证）。**教训：新 run 必须带 workflow.yaml，H20 是物理机非 VM（时钟假设错误）**
+2. **bifrost 假活残余**：tokio 执行层（worker）在 H20 环境偶发卡（任务 spawn 后不执行）——scan 忙轮询已修（7f7a509），执行层待专项（探针 cron 兜底）
+3. **test_load 写坏**：update_test_load_two_phase 非原子 write_text → 中断写坏 JSON → 修复原子写（tmp+rename）
+4. **update 路径坑**：update 工具读 paths.test_load（不是顶层 test_load_path）——新 run 需补 paths（workflow_yaml + test_load）
+5. **_C 算子 JIT 补充**：编译+注册+单测全 OK，但与 vllm 共存 core dump（两个 so 注册 _C CUDA impl——加载机制冲突）——不可用（记录，torch 2.8 评估）

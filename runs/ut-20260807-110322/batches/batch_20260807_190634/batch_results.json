@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190634",
+  "started_at": "2026-08-07T11:06:35Z",
+  "finished_at": "2026-08-07T11:07:27Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634.log",
+    "size_bytes": 250699,
+    "captured_at": "2026-08-07T11:07:27Z"
+  },
+  "tests": [
+    {
+      "id": 32595,
+      "test_node": "tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test3-50-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 5408,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_correctness_py_test_logitsprocs_logitsprocs_under_test3_50_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_correctness_py_test_logitsprocs_logitsprocs_under_test3_50_cuda_0.xml"
+    },
+    {
+      "id": 32597,
+      "test_node": "tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test4-50-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 38029,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_correctness_py_test_logitsprocs_logitsprocs_under_test4_50_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_correctness_py_test_logitsprocs_logitsprocs_under_test4_50_cuda_0.xml"
+    },
+    {
+      "id": 32599,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_NONE]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6373,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_NONE.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_NONE.xml"
+    },
+    {
+      "id": 32600,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6546,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT.xml"
+    },
+    {
+      "id": 32601,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6166,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN.xml"
+    },
+    {
+      "id": 32602,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6461,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS.xml"
+    },
+    {
+      "id": 32603,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs_req",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5034,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_req.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_custom_logitsprocs_req.xml"
+    },
+    {
+      "id": 32604,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT-pooling]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 3969,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/pytest_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT_pooling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190634/result_batch_20260807_190634_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT_pooling.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

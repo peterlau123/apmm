@@ -1,0 +1,1258 @@
+{
+ "batch_id": "batch_20260808_ig_0019",
+ "batch_type": "normal",
+ "tests": [
+  {
+   "id": 29510,
+   "test_node": "tests/models/test_transformers.py::test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-AWQ-quantization_kwargs0]",
+   "test_file": "tests/models/test_transformers.py",
+   "test_name": "test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-AWQ-quantization_kwargs0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183041",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 291,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:30:45.221027",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250063"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.766456"
+    }
+   ]
+  },
+  {
+   "id": 29511,
+   "test_node": "tests/models/test_transformers.py::test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-GPTQ-quantization_kwargs1]",
+   "test_file": "tests/models/test_transformers.py",
+   "test_name": "test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-GPTQ-quantization_kwargs1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183041",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 169,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:30:45.221030",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250065"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.766458"
+    }
+   ]
+  },
+  {
+   "id": 29741,
+   "test_node": "tests/plugins/lora_resolvers/test_filesystem_resolver.py::test_filesystem_resolver",
+   "test_file": "tests/plugins/lora_resolvers/test_filesystem_resolver.py",
+   "test_name": "test_filesystem_resolver",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183325",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 5,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:29.627792",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.250608"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.767009"
+    }
+   ]
+  },
+  {
+   "id": 29743,
+   "test_node": "tests/plugins/lora_resolvers/test_filesystem_resolver.py::test_nonlora_adapter",
+   "test_file": "tests/plugins/lora_resolvers/test_filesystem_resolver.py",
+   "test_name": "test_nonlora_adapter",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183325",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:29.627794",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.250610"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.767011"
+    }
+   ]
+  },
+  {
+   "id": 29745,
+   "test_node": "tests/plugins_tests/test_io_processor_plugins.py::test_prithvi_mae_plugin_online[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "test_file": "tests/plugins_tests/test_io_processor_plugins.py",
+   "test_name": "test_prithvi_mae_plugin_online[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183325",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 270,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:29.627800",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.250614"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.767016"
+    }
+   ]
+  },
+  {
+   "id": 29746,
+   "test_node": "tests/plugins_tests/test_io_processor_plugins.py::test_prithvi_mae_plugin_offline[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "test_file": "tests/plugins_tests/test_io_processor_plugins.py",
+   "test_name": "test_prithvi_mae_plugin_offline[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183329",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 287,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:34.753494",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250617"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767018"
+    }
+   ]
+  },
+  {
+   "id": 29754,
+   "test_node": "tests/quantization/test_auto_round.py::test_auto_round[OPEA/Qwen2.5-0.5B-Instruct-int4-sym-inc]",
+   "test_file": "tests/quantization/test_auto_round.py",
+   "test_name": "test_auto_round[OPEA/Qwen2.5-0.5B-Instruct-int4-sym-inc]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 141,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906239",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250636"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767038"
+    }
+   ]
+  },
+  {
+   "id": 29755,
+   "test_node": "tests/quantization/test_auto_round.py::test_auto_round[Intel/Qwen2-0.5B-Instruct-int4-sym-AutoRound]",
+   "test_file": "tests/quantization/test_auto_round.py",
+   "test_name": "test_auto_round[Intel/Qwen2-0.5B-Instruct-int4-sym-AutoRound]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 151,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906258",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250639"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767040"
+    }
+   ]
+  },
+  {
+   "id": 29756,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w8a8_static_setup[model_args0]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w8a8_static_setup[model_args0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 276,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906264",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250641"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767042"
+    }
+   ]
+  },
+  {
+   "id": 29757,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w8a8_static_setup[model_args1]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w8a8_static_setup[model_args1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 273,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906267",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250643"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767045"
+    }
+   ]
+  },
+  {
+   "id": 29758,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w8a8_logprobs[False-10-4-neuralmagic/Llama-3.2-1B-quantized.w8a8]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w8a8_logprobs[False-10-4-neuralmagic/Llama-3.2-1B-quantized.w8a8]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 237,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906270",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250645"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767047"
+    }
+   ]
+  },
+  {
+   "id": 29759,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_no_enforce_eager",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_no_enforce_eager",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 236,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906272",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250648"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767050"
+    }
+   ]
+  },
+  {
+   "id": 29760,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w8a8_dynamic_per_token[False-model_args0]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w8a8_dynamic_per_token[False-model_args0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 145,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906274",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250650"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767052"
+    }
+   ]
+  },
+  {
+   "id": 29761,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w8a8_dynamic_per_token[False-model_args1]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w8a8_dynamic_per_token[False-model_args1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183335",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 161,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:39.906277",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250652"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767055"
+    }
+   ]
+  },
+  {
+   "id": 29762,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_wNa16[wNa16_args0]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_wNa16[wNa16_args0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 244,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335127",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250655"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767057"
+    }
+   ]
+  },
+  {
+   "id": 29763,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_wNa16[wNa16_args1]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_wNa16[wNa16_args1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 185,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335145",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250657"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767059"
+    }
+   ]
+  },
+  {
+   "id": 29764,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_w4a16_marlin24",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_w4a16_marlin24",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 185,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335151",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250661"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767062"
+    }
+   ]
+  },
+  {
+   "id": 29765,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_fp8",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_fp8",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 243,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335154",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250663"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767064"
+    }
+   ]
+  },
+  {
+   "id": 29766,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_kv_cache",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_kv_cache",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 237,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335157",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250666"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767067"
+    }
+   ]
+  },
+  {
+   "id": 29767,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of40]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8[args_2of40]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 240,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335159",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250668"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767069"
+    }
+   ]
+  },
+  {
+   "id": 29768,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of41]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8[args_2of41]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 166,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335161",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250671"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767071"
+    }
+   ]
+  },
+  {
+   "id": 29769,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of42]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8[args_2of42]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183340",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 150,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:44.335164",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250673"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767074"
+    }
+   ]
+  },
+  {
+   "id": 29770,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8[args_2of43]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8[args_2of43]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 242,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523143",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250676"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767076"
+    }
+   ]
+  },
+  {
+   "id": 29771,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8_compressed[args_2of40]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8_compressed[args_2of40]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 254,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523161",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250678"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767079"
+    }
+   ]
+  },
+  {
+   "id": 29772,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8_compressed[args_2of41]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8_compressed[args_2of41]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 195,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523170",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250680"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767081"
+    }
+   ]
+  },
+  {
+   "id": 29773,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8_compressed[args_2of42]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8_compressed[args_2of42]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 249,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523173",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250682"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767084"
+    }
+   ]
+  },
+  {
+   "id": 29774,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_fp8_compressed[args_2of43]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_fp8_compressed[args_2of43]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 195,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523175",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250685"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767086"
+    }
+   ]
+  },
+  {
+   "id": 29775,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_int8_compressed[args_2of40]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_int8_compressed[args_2of40]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 244,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523177",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250687"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767088"
+    }
+   ]
+  },
+  {
+   "id": 29776,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_int8_compressed[args_2of41]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_int8_compressed[args_2of41]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 188,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523180",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250689"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767090"
+    }
+   ]
+  },
+  {
+   "id": 29777,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_int8_compressed[args_2of42]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_int8_compressed[args_2of42]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183344",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 180,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:49.523182",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250691"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767093"
+    }
+   ]
+  },
+  {
+   "id": 29778,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_int8_compressed[args_2of43]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_int8_compressed[args_2of43]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183349",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 176,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:54.142427",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250693"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767095"
+    }
+   ]
+  },
+  {
+   "id": 29779,
+   "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_2of4_quant_int8[args_2of40]",
+   "test_file": "tests/quantization/test_compressed_tensors.py",
+   "test_name": "test_compressed_tensors_2of4_quant_int8[args_2of40]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_183349",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 242,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:33:54.142445",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.250696"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.767098"
+    }
+   ]
+  }
+ ],
+ "distributed_count": 0,
+ "requires_multi_gpu": false,
+ "gpu_per_test": 1,
+ "generated_at": "2026-08-09T08:59:29.026364"
+}

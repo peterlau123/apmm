@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190522",
+  "started_at": "2026-08-07T11:05:22Z",
+  "finished_at": "2026-08-07T11:05:46Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522.log",
+    "size_bytes": 19131,
+    "captured_at": "2026-08-07T11:05:46Z"
+  },
+  "tests": [
+    {
+      "id": 32576,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_cpu_manager",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 193,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_cpu_manager.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_cpu_manager.xml"
+    },
+    {
+      "id": 32577,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_basic",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 116,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_basic.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_basic.xml"
+    },
+    {
+      "id": 32578,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_t1_to_t2_promotion",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 192,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_t1_to_t2_promotion.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_t1_to_t2_promotion.xml"
+    },
+    {
+      "id": 32579,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_eviction_with_load",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 216,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_eviction_with_load.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_eviction_with_load.xml"
+    },
+    {
+      "id": 32580,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_adaptive_target",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 179,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_adaptive_target.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_adaptive_target.xml"
+    },
+    {
+      "id": 32581,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_t1_t2_eviction_policy",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 214,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_t1_t2_eviction_policy.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_t1_t2_eviction_policy.xml"
+    },
+    {
+      "id": 32582,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_ghost_list_bounds",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 114,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_ghost_list_bounds.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_ghost_list_bounds.xml"
+    },
+    {
+      "id": 32583,
+      "test_node": "tests/v1/kv_offload/test_cpu_manager.py::test_arc_manager_touch_ordering",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 122,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/pytest_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_touch_ordering.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190522/result_batch_20260807_190522_tests_v1_kv_offload_test_cpu_manager_py_test_arc_manager_touch_ordering.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

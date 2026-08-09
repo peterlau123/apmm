@@ -1,0 +1,8 @@
+PASSED         tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[False-False-False-512-8192-4096] (gpu=0, 1713ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[False-False-False-512-16384-128] (gpu=2, 1739ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_2of4_sparse.py::test_cutlass_sparse_int8_gemm[False-False-False-512-24576-128] (gpu=3, 1196ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_fp8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-1-256-128] (gpu=4, 1697ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_fp8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-1-16384-1024] (gpu=5, 1756ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_fp8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-1-24576-496] (gpu=6, 1710ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_fp8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-16-256-496] (gpu=0, 768ms, exit=0)
+PASSED         tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_fp8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-16-16384-128] (gpu=2, 983ms, exit=0)

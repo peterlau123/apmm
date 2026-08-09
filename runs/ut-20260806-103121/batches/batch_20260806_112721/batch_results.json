@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_112721",
+  "started_at": "2026-08-06T03:27:21Z",
+  "finished_at": "2026-08-06T03:28:03Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721.log",
+    "size_bytes": 20097,
+    "captured_at": "2026-08-06T03:28:03Z"
+  },
+  "tests": [
+    {
+      "id": 11963,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-8-16-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8923,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_16_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_16_itype1.xml"
+    },
+    {
+      "id": 11964,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-8-32-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9646,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_32_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_32_itype0.xml"
+    },
+    {
+      "id": 11965,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-8-32-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9714,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_32_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_8_32_itype1.xml"
+    },
+    {
+      "id": 11966,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-32-4-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 23820,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_4_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_4_itype0.xml"
+    },
+    {
+      "id": 11967,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-32-4-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 19986,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_4_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_4_itype1.xml"
+    },
+    {
+      "id": 11968,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-32-16-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 23832,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_16_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_16_itype0.xml"
+    },
+    {
+      "id": 11969,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-32-16-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8123,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_16_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_16_itype1.xml"
+    },
+    {
+      "id": 11970,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_single_example[seq_len_chunk_size0-32-32-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8361,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/pytest_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_32_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112721/result_batch_20260806_112721_tests_kernels_mamba_test_mamba_ssm_ssd_py_test_mamba_chunk_scan_single_example_seq_len_chunk_size0_32_32_itype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

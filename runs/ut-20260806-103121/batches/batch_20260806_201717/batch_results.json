@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_201717",
+  "started_at": "2026-08-06T12:17:18Z",
+  "finished_at": "2026-08-06T12:17:45Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717.log",
+    "size_bytes": 33573,
+    "captured_at": "2026-08-06T12:17:45Z"
+  },
+  "tests": [
+    {
+      "id": 19843,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-512-dtype12-64-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1627,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype12_64_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype12_64_0.xml"
+    },
+    {
+      "id": 19844,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-512-dtype13-128-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1682,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype13_128_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype13_128_0.xml"
+    },
+    {
+      "id": 19845,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-512-dtype14-512-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1639,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype14_512_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_512_dtype14_512_0.xml"
+    },
+    {
+      "id": 19846,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-4096-dtype15-64-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1670,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype15_64_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype15_64_0.xml"
+    },
+    {
+      "id": 19847,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-4096-dtype16-128-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: assert False\n +  where False = <built-in method allclose of type object at 0x7f4e1cc5e280>(tensor([[176., 240.,  11.,  ..., 120.,  72., 104.],\\n        [ 30., 160.,  48.,  ...,  48., 240., 120.],\\n        [160., 128.,  52.,  ...,  72., 320., 240.],\\n        ...,\\n        [ 72.,  44., 416.,  ...,  52., 176., 208.],\\n        [ 13., 448., 160.,  ..., 104., 416., 448.],\\n        [144., 208.,  40.,  ..., 128., 104., 160.]], device='cuda:0'), tensor([[176., 240.,  11.,  ..., 120.,  72.",
+      "duration_ms": 1693,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype16_128_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype16_128_0.xml"
+    },
+    {
+      "id": 19848,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-4096-dtype17-512-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: assert False\n +  where False = <built-in method allclose of type object at 0x7f9c9dc5e280>(tensor([[176., 224.,  11.,  ..., 120.,  72., 104.],\\n        [ 30., 144.,  48.,  ...,  48., 240., 120.],\\n        [160., 128.,  52.,  ...,  72., 320., 240.],\\n        ...,\\n        [ 72.,  40., 416.,  ...,  52., 176., 208.],\\n        [ 13., 448., 160.,  ..., 104., 416., 448.],\\n        [144., 208.,  40.,  ..., 128., 104., 160.]], device='cuda:0'), tensor([[176., 224.,  11.,  ..., 120.,  72.",
+      "duration_ms": 1771,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype17_512_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_4096_dtype17_512_0.xml"
+    },
+    {
+      "id": 19849,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-5120-dtype18-64-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 587,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_5120_dtype18_64_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_5120_dtype18_64_0.xml"
+    },
+    {
+      "id": 19850,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_per_token_group_quant_fp8[2050-5120-dtype19-128-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: assert False\n +  where False = <built-in method allclose of type object at 0x7f985b05e280>(tensor([[176., 240.,  11.,  ..., 128., 256., 144.],\\n        [104., 128., 224.,  ..., 208., 192.,  24.],\\n        [352., 416., 288.,  ..., 224.,  14., 144.],\\n        ...,\\n        [ 60., 320., 320.,  ..., 352., 256., 224.],\\n        [104., 176.,  72.,  ..., 320., 288., 384.],\\n        [208.,   7., 352.,  ..., 288., 288., 288.]], device='cuda:0'), tensor([[176., 240.,  11.,  ..., 128., 256.",
+      "duration_ms": 650,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/pytest_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_5120_dtype19_128_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201717/result_batch_20260806_201717_tests_kernels_quantization_test_block_fp8_py_test_per_token_group_quant_fp8_2050_5120_dtype19_128_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

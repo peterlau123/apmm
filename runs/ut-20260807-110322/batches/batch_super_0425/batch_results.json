@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0425",
+  "started_at": "2026-08-07T21:55:16Z",
+  "finished_at": "2026-08-07T21:55:41Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425.log",
+    "size_bytes": 19956,
+    "captured_at": "2026-08-07T21:55:41Z"
+  },
+  "tests": [
+    {
+      "id": 29529,
+      "test_node": "tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes1-4-expected_shuffle_indices1-expected_gpu_sample_counts1-expected_grouped_sizes_per_gpu1-fewer samples than GPUs]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes1_4_expected_shuffle_indices1_expected_gpu_sample_counts1_expected_grouped_sizes_per_gpu1_fewer_samples_than_GPUs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes1_4_expected_shuffle_indices1_expected_gpu_sample_counts1_expected_grouped_sizes_per_gpu1_fewer_samples_than_GPUs.xml"
+    },
+    {
+      "id": 29530,
+      "test_node": "tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes2-1-expected_shuffle_indices2-expected_gpu_sample_counts2-expected_grouped_sizes_per_gpu2-single GPU]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes2_1_expected_shuffle_indices2_expected_gpu_sample_counts2_expected_grouped_sizes_per_gpu2_single_GPU.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes2_1_expected_shuffle_indices2_expected_gpu_sample_counts2_expected_grouped_sizes_per_gpu2_single_GPU.xml"
+    },
+    {
+      "id": 29531,
+      "test_node": "tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes3-2-expected_shuffle_indices3-expected_gpu_sample_counts3-expected_grouped_sizes_per_gpu3-balanced assignment]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes3_2_expected_shuffle_indices3_expected_gpu_sample_counts3_expected_grouped_sizes_per_gpu3_balanced_assignment.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes3_2_expected_shuffle_indices3_expected_gpu_sample_counts3_expected_grouped_sizes_per_gpu3_balanced_assignment.xml"
+    },
+    {
+      "id": 29532,
+      "test_node": "tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes4-2-expected_shuffle_indices4-expected_gpu_sample_counts4-expected_grouped_sizes_per_gpu4-unbalanced sizes]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes4_2_expected_shuffle_indices4_expected_gpu_sample_counts4_expected_grouped_sizes_per_gpu4_unbalanced_sizes.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes4_2_expected_shuffle_indices4_expected_gpu_sample_counts4_expected_grouped_sizes_per_gpu4_unbalanced_sizes.xml"
+    },
+    {
+      "id": 29533,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model[1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_1.xml"
+    },
+    {
+      "id": 29534,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model[3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_3.xml"
+    },
+    {
+      "id": 29535,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model[5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_5.xml"
+    },
+    {
+      "id": 29536,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model_empty_input",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_empty_input.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_empty_input.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 4
+  }
+}

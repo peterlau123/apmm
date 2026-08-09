@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0360",
+  "started_at": "2026-08-07T20:44:51Z",
+  "finished_at": "2026-08-07T20:45:34Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360.log",
+    "size_bytes": 78253,
+    "captured_at": "2026-08-07T20:45:34Z"
+  },
+  "tests": [
+    {
+      "id": 29008,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[KimiLinearForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 338,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_KimiLinearForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_KimiLinearForCausalLM.xml"
+    },
+    {
+      "id": 29009,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[GraniteMoeSharedForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 307,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_GraniteMoeSharedForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_GraniteMoeSharedForCausalLM.xml"
+    },
+    {
+      "id": 29010,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen3NextForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Test can_initialize failed when called with args ('Qwen3NextForCausalLM', <_pytest.monkeypatch.MonkeyPatch object at 0x7fce97dca840>, <tests.models.registry.HfExampleModels object at 0x7fcefcad0080>) and kwargs {} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/models/test_initialization.py\", line 119, in can_initialize\n    LLM(\n  File",
+      "duration_ms": 7650,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3NextForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3NextForCausalLM.xml"
+    },
+    {
+      "id": 29011,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[TeleChat2ForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 324,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_TeleChat2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_TeleChat2ForCausalLM.xml"
+    },
+    {
+      "id": 29012,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[JAISLMHeadModel]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 272,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_JAISLMHeadModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_JAISLMHeadModel.xml"
+    },
+    {
+      "id": 29013,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[MiMoForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 357,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_MiMoForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_MiMoForCausalLM.xml"
+    },
+    {
+      "id": 29014,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[OpenPanguMTPModel]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 254,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_OpenPanguMTPModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_OpenPanguMTPModel.xml"
+    },
+    {
+      "id": 29015,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[LlavaOnevisionForConditionalGeneration]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 293,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/pytest_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_LlavaOnevisionForConditionalGeneration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0360/result_batch_super_0360_tests_models_test_initialization_py_test_can_initialize_large_subset_LlavaOnevisionForConditionalGeneration.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

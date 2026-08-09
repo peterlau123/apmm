@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0462",
+  "started_at": "2026-08-05T12:07:05Z",
+  "finished_at": "2026-08-05T12:07:35Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/pytest_batch_super_0462.log",
+    "size_bytes": 44309,
+    "captured_at": "2026-08-05T12:07:35Z"
+  },
+  "tests": [
+    {
+      "id": 208,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 337,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/pytest_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/result_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs10_AttentionBackendEnum_TRITON_ATTN_matches10_rms_norm.xml"
+    },
+    {
+      "id": 209,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 280,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/pytest_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0462/result_batch_super_0462_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_meta_llama_Meta_Llama_3_8B_Instruct_model_kwargs11_AttentionBackendEnum_TRITON_ATTN_matches11_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

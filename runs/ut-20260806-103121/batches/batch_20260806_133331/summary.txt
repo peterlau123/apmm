@@ -1,0 +1,8 @@
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-6-512-1024-1024] (gpu=0, 1549ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-6-4096-4096-1024] (gpu=2, 2142ms, exit=1)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-256-8192-5120] (gpu=3, 208ms, exit=0)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-127-4096-5120] (gpu=4, 186ms, exit=0)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-10-8192-5120] (gpu=5, 244ms, exit=0)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-10-4096-5120] (gpu=6, 248ms, exit=0)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-1-8192-5120] (gpu=0, 186ms, exit=0)
+PASSED         tests/kernels/moe/test_flashinfer.py::test_flashinfer_per_tensor_moe_fp8_no_graph[1-16-1-4096-5120] (gpu=2, 226ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_155638",
+  "started_at": "2026-08-06T07:56:39Z",
+  "finished_at": "2026-08-06T07:57:09Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638.log",
+    "size_bytes": 270473,
+    "captured_at": "2026-08-06T07:57:09Z"
+  },
+  "tests": [
+    {
+      "id": 15778,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1223-b_type1223-c_type1223-4-1-128-2048-5-3-1-True-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 2113,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1223_b_type1223_c_type1223_4_1_128_2048_5_3_1_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1223_b_type1223_c_type1223_4_1_128_2048_5_3_1_True_True.xml"
+    },
+    {
+      "id": 15779,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1224-b_type1224-c_type1224-2-1-128-2048-5-3-1-True-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 2127,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1224_b_type1224_c_type1224_2_1_128_2048_5_3_1_True_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1224_b_type1224_c_type1224_2_1_128_2048_5_3_1_True_False.xml"
+    },
+    {
+      "id": 15780,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1225-b_type1225-c_type1225-4-1-128-2048-5-3-1-True-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 2195,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1225_b_type1225_c_type1225_4_1_128_2048_5_3_1_True_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1225_b_type1225_c_type1225_4_1_128_2048_5_3_1_True_False.xml"
+    },
+    {
+      "id": 15781,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1226-b_type1226-c_type1226--1-1-128-2048-5-3-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 1964,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1226_b_type1226_c_type1226_1_1_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1226_b_type1226_c_type1226_1_1_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15782,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1227-b_type1227-c_type1227-2-1-128-2048-5-3-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 1923,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1227_b_type1227_c_type1227_2_1_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1227_b_type1227_c_type1227_2_1_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15783,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1228-b_type1228-c_type1228-4-1-128-2048-5-3-1-False-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 1964,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1228_b_type1228_c_type1228_4_1_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1228_b_type1228_c_type1228_4_1_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15784,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1229-b_type1229-c_type1229-2-1-128-2048-5-3-4-True-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 715,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1229_b_type1229_c_type1229_2_1_128_2048_5_3_4_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1229_b_type1229_c_type1229_2_1_128_2048_5_3_4_True_True.xml"
+    },
+    {
+      "id": 15785,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type1230-b_type1230-c_type1230-4-1-128-2048-5-3-4-True-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_moe_C::moe_wna16_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_moe_C::moe_wna16_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerB",
+      "duration_ms": 770,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/pytest_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1230_b_type1230_c_type1230_4_1_128_2048_5_3_4_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_155638/result_batch_20260806_155638_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type1230_b_type1230_c_type1230_4_1_128_2048_5_3_4_True_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

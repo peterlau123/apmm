@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_195240",
+  "started_at": "2026-08-06T11:52:41Z",
+  "finished_at": "2026-08-06T11:53:12Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240.log",
+    "size_bytes": 19443,
+    "captured_at": "2026-08-06T11:53:12Z"
+  },
+  "tests": [
+    {
+      "id": 19466,
+      "test_node": "tests/kernels/quantization/test_allspark_gemm.py::test_gptq_allspark_gemm_ampere[dtype1-True--1-mnk_factors5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors5.xml"
+    },
+    {
+      "id": 19467,
+      "test_node": "tests/kernels/quantization/test_allspark_gemm.py::test_gptq_allspark_gemm_ampere[dtype1-True--1-mnk_factors6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors6.xml"
+    },
+    {
+      "id": 19468,
+      "test_node": "tests/kernels/quantization/test_allspark_gemm.py::test_gptq_allspark_gemm_ampere[dtype1-True--1-mnk_factors7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_allspark_gemm_py_test_gptq_allspark_gemm_ampere_dtype1_True_1_mnk_factors7.xml"
+    },
+    {
+      "id": 19469,
+      "test_node": "tests/kernels/quantization/test_awq.py::test_awq_dequantize_opcheck",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 731,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_awq_py_test_awq_dequantize_opcheck.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_awq_py_test_awq_dequantize_opcheck.xml"
+    },
+    {
+      "id": 19470,
+      "test_node": "tests/kernels/quantization/test_awq.py::test_awq_gemm_opcheck",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_awq_py_test_awq_gemm_opcheck.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_awq_py_test_awq_gemm_opcheck.xml"
+    },
+    {
+      "id": 19471,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_dequantize[-1-448-3584]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1388,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_3584.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_3584.xml"
+    },
+    {
+      "id": 19472,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_dequantize[-1-448-18944]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 954,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_18944.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_18944.xml"
+    },
+    {
+      "id": 19473,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_dequantize[-1-448-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 920,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/pytest_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_195240/result_batch_20260806_195240_tests_kernels_quantization_test_awq_triton_py_test_dequantize_1_448_128.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

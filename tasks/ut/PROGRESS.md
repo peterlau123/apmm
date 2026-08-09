@@ -44,9 +44,11 @@ pending 320=cuda:1 坏卡）。详见
 
 ## TODO（待办项）
 
-- [ ] **新 run `ut-20260808-pending2` 跑完剩余 1,624**（716 可跑目标进行中 → detokenize 902 单独分批 → 全部结束后用户处理）
-- [ ] **detokenize 902**（模型已下载 HF 缓存——大模型加载慢——小批量 + 长超时——新 run 的 SKIP 项）
-- [x] ~~execute_batch 挂起排查~~ ✅ **已完成**（bifrost daemon 假活根因：GPU 探测同步阻塞 → async+spawn_blocking 修复 cb7f4ab；另 agent bastion/ssh 直连评估记录于排障日志）
+- [ ] **工作日处理**（2026-08-09 收尾）：剩余 pending 5,060（other 未跑 + timeout 1,717 未跑）决策 + ignored 241/models 931 记录跳过 + 兼容性 2,063（torch 2.8 评估）
+- [ ] **bifrost tokio 执行层专项**（假活根治——H20 时钟环境——探针兜底中）
+- [ ] **模型下载**（gated 模型——需 token/授权——models 931 依赖）
+- [x] ~~12,185 run 落盘（9,157/75.1%——2026-08-08）~~
+- [x] ~~manifest 分组重跑（skipped/models/other/timeout——passed +61——2026-08-09 中断收尾）~~
 - [x] ~~error 333~~ ✅ **已定性**（stale 节点——代码演进——下次 run 定向 collect）
 - [x] ~~cuda:1 320~~ ✅ **全部通过**（device-map + bifrost 修复）
 - [ ] **stale 591 定向 collect**（下次 run：--collect-only 校验——测试还在则更新节点 pending 跑，已删则移除）

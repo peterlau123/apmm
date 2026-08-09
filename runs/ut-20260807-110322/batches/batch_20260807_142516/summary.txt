@@ -1,0 +1,8 @@
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_hqq_marlin_gemm[True-mnk_factors2-64-256-128] (gpu=0, 1669ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_hqq_marlin_gemm[True-mnk_factors3-64-64-128] (gpu=2, 1606ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_hqq_marlin_gemm[True-mnk_factors3-64-256-128] (gpu=3, 1540ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_gemm_subset_input (gpu=4, 1749ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_gemm_with_bias[1] (gpu=5, 1726ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_gemm_with_bias[256] (gpu=6, 1660ms, exit=1)
+PASSED         tests/kernels/quantization/test_per_token_group_quant.py::test_per_token_group_quant_fp8[64-False-False-shape0] (gpu=0, 1331ms, exit=0)
+PASSED         tests/kernels/quantization/test_per_token_group_quant.py::test_per_token_group_quant_fp8[64-False-False-shape1] (gpu=2, 1195ms, exit=0)

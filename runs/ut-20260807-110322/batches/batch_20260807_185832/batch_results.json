@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185832",
+  "started_at": "2026-08-07T10:58:33Z",
+  "finished_at": "2026-08-07T10:58:36Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:58:36Z"
+  },
+  "tests": [
+    {
+      "id": 32319,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_multi_abort[RequestOutputKind.FINAL_ONLY]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_multi_abort_RequestOutputKind_FINAL_ONLY.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_multi_abort_RequestOutputKind_FINAL_ONLY.xml"
+    },
+    {
+      "id": 32320,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_finished_flag[engine_args0-Hello my name is Robert and-1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args0_Hello_my_name_is_Robert_and_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args0_Hello_my_name_is_Robert_and_1.xml"
+    },
+    {
+      "id": 32321,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_finished_flag[engine_args0-Hello my name is Robert and-3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args0_Hello_my_name_is_Robert_and_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args0_Hello_my_name_is_Robert_and_3.xml"
+    },
+    {
+      "id": 32322,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_finished_flag[engine_args1-prompt1-1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args1_prompt1_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args1_prompt1_1.xml"
+    },
+    {
+      "id": 32323,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_finished_flag[engine_args1-prompt1-3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args1_prompt1_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_finished_flag_engine_args1_prompt1_3.xml"
+    },
+    {
+      "id": 32324,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_mid_stream_cancellation[engine_args0-Hello my name is Robert and]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_mid_stream_cancellation_engine_args0_Hello_my_name_is_Robert_and.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_mid_stream_cancellation_engine_args0_Hello_my_name_is_Robert_and.xml"
+    },
+    {
+      "id": 32325,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_mid_stream_cancellation[engine_args1-prompt1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_mid_stream_cancellation_engine_args1_prompt1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_mid_stream_cancellation_engine_args1_prompt1.xml"
+    },
+    {
+      "id": 32326,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_customize_loggers",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/pytest_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_customize_loggers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185832/result_batch_20260807_185832_tests_v1_engine_test_async_llm_py_test_customize_loggers.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

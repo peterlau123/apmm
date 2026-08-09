@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185311",
+  "started_at": "2026-08-07T10:53:12Z",
+  "finished_at": "2026-08-07T10:53:13Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:53:13Z"
+  },
+  "tests": [
+    {
+      "id": 31677,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[2-meta-llama/Meta-Llama-3-8B-mixed_medium]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_mixed_medium.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_mixed_medium.xml"
+    },
+    {
+      "id": 31678,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[2-meta-llama/Meta-Llama-3-8B-large_decode]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_large_decode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_large_decode.xml"
+    },
+    {
+      "id": 31679,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[2-meta-llama/Meta-Llama-3-8B-large_prefill]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_large_prefill.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_large_prefill.xml"
+    },
+    {
+      "id": 31680,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[2-meta-llama/Meta-Llama-3-8B-single_decode]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_single_decode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_single_decode.xml"
+    },
+    {
+      "id": 31681,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[2-meta-llama/Meta-Llama-3-8B-single_prefill]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_single_prefill.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_2_meta_llama_Meta_Llama_3_8B_single_prefill.xml"
+    },
+    {
+      "id": 31682,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[4-meta-llama/Meta-Llama-3-8B-small_decode]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_small_decode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_small_decode.xml"
+    },
+    {
+      "id": 31683,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[4-meta-llama/Meta-Llama-3-8B-small_prefill]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_small_prefill.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_small_prefill.xml"
+    },
+    {
+      "id": 31684,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_causal_backend_correctness[4-meta-llama/Meta-Llama-3-8B-mixed_small]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/pytest_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_mixed_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185311/result_batch_20260807_185311_tests_v1_attention_test_attention_backends_py_test_causal_backend_correctness_4_meta_llama_Meta_Llama_3_8B_mixed_small.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

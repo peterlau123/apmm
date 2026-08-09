@@ -68,11 +68,10 @@ def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: d
     # 更新时间戳
     test_load['updated_at'] = datetime.now().isoformat()
 
-    # 写回
-    test_load_path.write_text(
-        json.dumps(test_load, indent=2, ensure_ascii=False),
-        encoding='utf-8'
-    )
+    # 写回 (2026-08-09 修复: 直接 write_text 在中断/并发时写坏 JSON — 改原子写)
+    tmp = test_load_path.with_suffix(test_load_path.suffix + ".tmp")
+    tmp.write_text(json.dumps(test_load, indent=2, ensure_ascii=False), encoding='utf-8')
+    tmp.replace(test_load_path)
 
     stats = test_load.get('statistics', {})
     print(f'[OK] test_load updated: {updated_count} tests')

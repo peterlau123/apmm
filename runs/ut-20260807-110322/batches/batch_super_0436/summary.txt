@@ -1,0 +1,8 @@
+PASSED         tests/multimodal/test_processing.py::test_find_mm_placeholders[PromptReplacement-prompt1-expected1-repl_by_key0] (gpu=0, 128ms, exit=0)
+PASSED         tests/multimodal/test_processing.py::test_find_mm_placeholders[PromptReplacement-prompt2-expected2-repl_by_key0] (gpu=2, 160ms, exit=0)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[0-0-True-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=3, 193ms, exit=1)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[0-1-True-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=4, 191ms, exit=1)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[1-0-False-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=5, 155ms, exit=1)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[1-1-True-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=6, 197ms, exit=1)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[1-2-True-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=0, 148ms, exit=1)
+FAILED         tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[2-1-False-llava-hf/llava-v1.6-mistral-7b-hf] (gpu=2, 154ms, exit=1)

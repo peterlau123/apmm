@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_r80_09",
+  "started_at": "2026-08-06T12:25:37Z",
+  "finished_at": "2026-08-06T12:26:05Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09.log",
+    "size_bytes": 20088,
+    "captured_at": "2026-08-06T12:26:05Z"
+  },
+  "tests": [
+    {
+      "id": 19915,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7168-256-block_size60-out_dtype60-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1976,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_256_block_size60_out_dtype60_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_256_block_size60_out_dtype60_0.xml"
+    },
+    {
+      "id": 19916,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7168-3884-block_size61-out_dtype61-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2034,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_3884_block_size61_out_dtype61_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_3884_block_size61_out_dtype61_0.xml"
+    },
+    {
+      "id": 19917,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7168-4096-block_size62-out_dtype62-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1498,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_4096_block_size62_out_dtype62_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_4096_block_size62_out_dtype62_0.xml"
+    },
+    {
+      "id": 19918,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7168-13824-block_size63-out_dtype63-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2418,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_13824_block_size63_out_dtype63_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_13824_block_size63_out_dtype63_0.xml"
+    },
+    {
+      "id": 19919,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7168-16384-block_size64-out_dtype64-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2574,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_16384_block_size64_out_dtype64_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7168_16384_block_size64_out_dtype64_0.xml"
+    },
+    {
+      "id": 19920,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7748-256-block_size65-out_dtype65-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1991,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_256_block_size65_out_dtype65_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_256_block_size65_out_dtype65_0.xml"
+    },
+    {
+      "id": 19921,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7748-3884-block_size66-out_dtype66-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1207,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_3884_block_size66_out_dtype66_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_3884_block_size66_out_dtype66_0.xml"
+    },
+    {
+      "id": 19922,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_matmul[8-7748-4096-block_size67-out_dtype67-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1229,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/pytest_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_4096_block_size67_out_dtype67_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_r80_09/result_batch_20260806_r80_09_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_matmul_8_7748_4096_block_size67_out_dtype67_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

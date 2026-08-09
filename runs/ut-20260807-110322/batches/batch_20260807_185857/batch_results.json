@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185857",
+  "started_at": "2026-08-07T10:58:58Z",
+  "finished_at": "2026-08-07T10:59:02Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:59:02Z"
+  },
+  "tests": [
+    {
+      "id": 32359,
+      "test_node": "tests/v1/engine/test_init_error_messaging.py::test_kv_cache_oom_insufficient_memory",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_init_error_messaging_py_test_kv_cache_oom_insufficient_memory.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_init_error_messaging_py_test_kv_cache_oom_insufficient_memory.xml"
+    },
+    {
+      "id": 32360,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_compatibility_with_skip_tokenizer_init[False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_compatibility_with_skip_tokenizer_init_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_compatibility_with_skip_tokenizer_init_False.xml"
+    },
+    {
+      "id": 32361,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_compatibility_with_skip_tokenizer_init[True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_compatibility_with_skip_tokenizer_init_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_compatibility_with_skip_tokenizer_init_True.xml"
+    },
+    {
+      "id": 32362,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_parallel_sampling[False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_parallel_sampling_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_parallel_sampling_False.xml"
+    },
+    {
+      "id": 32363,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_parallel_sampling[True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_parallel_sampling_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_parallel_sampling_True.xml"
+    },
+    {
+      "id": 32364,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_engine_metrics",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_engine_metrics.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_engine_metrics.xml"
+    },
+    {
+      "id": 32365,
+      "test_node": "tests/v1/engine/test_llm_engine.py::test_skip_tokenizer_initialization[TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_skip_tokenizer_initialization_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_llm_engine_py_test_skip_tokenizer_initialization_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 32366,
+      "test_node": "tests/v1/engine/test_parallel_sampling.py::test_parent_request_to_output_stream",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/pytest_batch_20260807_185857_tests_v1_engine_test_parallel_sampling_py_test_parent_request_to_output_stream.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185857/result_batch_20260807_185857_tests_v1_engine_test_parallel_sampling_py_test_parent_request_to_output_stream.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

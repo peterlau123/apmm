@@ -1,0 +1,1578 @@
+{
+ "batch_id": "batch_20260808_ig_0003",
+ "batch_type": "normal",
+ "tests": [
+  {
+   "id": 1067,
+   "test_node": "tests/distributed/test_eplb_fused_moe_layer.py::test_eplb_fml[False-256-256-16-4-2]",
+   "test_file": "tests/distributed/test_eplb_fused_moe_layer.py",
+   "test_name": "test_eplb_fml[False-256-256-16-4-2]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005823",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1189257,
+   "exit_code": 0,
+   "run_at": "2026-07-19T00:58:46.617022",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489757"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694302"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725942"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521658"
+    }
+   ]
+  },
+  {
+   "id": 1068,
+   "test_node": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml[latency-256-256-256-32-8-2]",
+   "test_file": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py",
+   "test_name": "test_eplb_fml[latency-256-256-256-32-8-2]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005823",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1192442,
+   "exit_code": 0,
+   "run_at": "2026-07-19T00:58:46.617024",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489759"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694304"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725944"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521660"
+    }
+   ]
+  },
+  {
+   "id": 1070,
+   "test_node": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml[throughput-256-256-256-32-8-2]",
+   "test_file": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py",
+   "test_name": "test_eplb_fml[throughput-256-256-256-32-8-2]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005823",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1178394,
+   "exit_code": 0,
+   "run_at": "2026-07-19T00:58:46.617028",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489763"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694308"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725949"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521664"
+    }
+   ]
+  },
+  {
+   "id": 1072,
+   "test_node": "tests/distributed/test_eplb_spec_decode.py::test_eplb_spec_decode[qwen3_next_mtp]",
+   "test_file": "tests/distributed/test_eplb_spec_decode.py",
+   "test_name": "test_eplb_spec_decode[qwen3_next_mtp]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005823",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Model architectures ['Qwen3NextForCausalLM'] failed to be inspected. Please check the logs for more details. [type=value_error, input_value=ArgsKwargs((), {'model': ...rocessor_plugin': None}), input_type=ArgsKwargs]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 7917,
+   "exit_code": 1,
+   "run_at": "2026-07-19T00:58:46.617032",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489767"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694313"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725953"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521668"
+    }
+   ]
+  },
+  {
+   "id": 1074,
+   "test_node": "tests/distributed/test_eplb_spec_decode.py::test_eplb_spec_decode_qwen3_next_mtp_async",
+   "test_file": "tests/distributed/test_eplb_spec_decode.py",
+   "test_name": "test_eplb_spec_decode_qwen3_next_mtp_async",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005846",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Model architectures ['Qwen3NextForCausalLM'] failed to be inspected. Please check the logs for more details. [type=value_error, input_value=ArgsKwargs((), {'model': ...rocessor_plugin': None}), input_type=ArgsKwargs]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 7810,
+   "exit_code": 1,
+   "run_at": "2026-07-19T00:59:10.191257",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489771"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694319"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725958"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521672"
+    }
+   ]
+  },
+  {
+   "id": 1084,
+   "test_node": "tests/distributed/test_expert_parallel.py::test_ep[deepseek-ai/DeepSeek-V2-Lite-parallel_setup0-mp-auto-test_options0]",
+   "test_file": "tests/distributed/test_expert_parallel.py",
+   "test_name": "test_ep[deepseek-ai/DeepSeek-V2-Lite-parallel_setup0-mp-auto-test_options0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005910",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 361321,
+   "exit_code": 1,
+   "run_at": "2026-07-19T00:59:33.553613",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489795"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694340"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725982"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521695"
+    }
+   ]
+  },
+  {
+   "id": 1097,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_initialization_tensor_parallel",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_initialization_tensor_parallel",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1149663,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145404",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489822"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694368"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726010"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521723"
+    }
+   ]
+  },
+  {
+   "id": 1098,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_collective_rpc",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_collective_rpc",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1190394,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145438",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489824"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694370"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726012"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521726"
+    }
+   ]
+  },
+  {
+   "id": 1099,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_failure_callback",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_failure_callback",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1236868,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145441",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489826"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694372"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726014"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521728"
+    }
+   ]
+  },
+  {
+   "id": 1100,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_worker_monitor",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_worker_monitor",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1176786,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145443",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489828"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694374"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726016"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521730"
+    }
+   ]
+  },
+  {
+   "id": 1101,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_get_response_message_queues",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_get_response_message_queues",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1183761,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145445",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489831"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694376"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726018"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521732"
+    }
+   ]
+  },
+  {
+   "id": 1102,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_shutdown_cleanup",
+   "test_file": "tests/distributed/test_multiproc_executor.py",
+   "test_name": "test_multiproc_executor_shutdown_cleanup",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_005957",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "Exception: WorkerProc initialization failed due to an exception in a background process. See stack trace for root cause.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1133784,
+   "exit_code": 0,
+   "run_at": "2026-07-19T01:00:36.145447",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489833"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694378"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726020"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521734"
+    }
+   ]
+  },
+  {
+   "id": 1108,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[ibm/PowerLM-3b-parallel_setup1-mp-auto-test_options1]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[ibm/PowerLM-3b-parallel_setup1-mp-auto-test_options1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010036",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'ibm/PowerLM-3b'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 297,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:00:59.928932",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489845"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694392"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726033"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521747"
+    }
+   ]
+  },
+  {
+   "id": 1109,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[ai21labs/Jamba-tiny-dev-parallel_setup2-mp-auto-test_options2]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[ai21labs/Jamba-tiny-dev-parallel_setup2-mp-auto-test_options2]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010036",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'ai21labs/Jamba-tiny-dev'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 301,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:00:59.928934",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489847"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694395"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726037"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521749"
+    }
+   ]
+  },
+  {
+   "id": 1110,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[TinyLlama/TinyLlama-1.1B-Chat-v1.0-parallel_setup3-mp-auto-test_options3]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[TinyLlama/TinyLlama-1.1B-Chat-v1.0-parallel_setup3-mp-auto-test_options3]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010036",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 240814,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:00:59.928936",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489850"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694397"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726040"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521754"
+    }
+   ]
+  },
+  {
+   "id": 1111,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[hmellor/Ilama-3.2-1B-parallel_setup4-mp-auto-test_options4]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[hmellor/Ilama-3.2-1B-parallel_setup4-mp-auto-test_options4]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010036",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'hmellor/Ilama-3.2-1B'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 257,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:00:59.928938",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489852"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694399"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726042"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521756"
+    }
+   ]
+  },
+  {
+   "id": 1112,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup5-mp-auto-test_options5]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup5-mp-auto-test_options5]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010036",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 331,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:00:59.928940",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489854"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694401"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726044"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521759"
+    }
+   ]
+  },
+  {
+   "id": 1113,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup6-ray-auto-test_options6]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup6-ray-auto-test_options6]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 383,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609798",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489856"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694404"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726046"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521761"
+    }
+   ]
+  },
+  {
+   "id": 1114,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup7-mp-auto-test_options7]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup7-mp-auto-test_options7]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 224,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609849",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489859"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694406"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726049"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521763"
+    }
+   ]
+  },
+  {
+   "id": 1115,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup8-ray-auto-test_options8]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup8-ray-auto-test_options8]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 297,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609855",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489862"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694408"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726051"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521765"
+    }
+   ]
+  },
+  {
+   "id": 1116,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup9-mp-auto-test_options9]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup9-mp-auto-test_options9]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 304,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609858",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489864"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694410"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726053"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521767"
+    }
+   ]
+  },
+  {
+   "id": 1117,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup10-ray-auto-test_options10]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup10-ray-auto-test_options10]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 295,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609860",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489866"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694412"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726055"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521770"
+    }
+   ]
+  },
+  {
+   "id": 1118,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup11-mp-auto-test_options11]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup11-mp-auto-test_options11]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 278,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609863",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489868"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694414"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726057"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521772"
+    }
+   ]
+  },
+  {
+   "id": 1119,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup12-ray-auto-test_options12]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup12-ray-auto-test_options12]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 364,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609865",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489870"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694417"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726060"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521775"
+    }
+   ]
+  },
+  {
+   "id": 1120,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup13-mp-auto-test_options13]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup13-mp-auto-test_options13]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010059",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 378,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:24.609868",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489872"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694419"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726062"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521777"
+    }
+   ]
+  },
+  {
+   "id": 1121,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup14-ray-auto-test_options14]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup14-ray-auto-test_options14]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010124",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 279,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:48.219867",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489875"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694421"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726064"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521779"
+    }
+   ]
+  },
+  {
+   "id": 1122,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[intfloat/e5-small-parallel_setup0-mp-pooling-test_options0]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_embedding[intfloat/e5-small-parallel_setup0-mp-pooling-test_options0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010124",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "AssertionError: Test test_tp_language_embedding failed when called with args () and kwargs {'model_id': 'intfloat/e5-small', 'parallel_setup': ParallelSetup(tp_size=1, pp_size=2, eager_mode=True), 'distributed_backend': 'mp', 'runner': 'pooling', 'test_options': PPTestOptions(multi_node_only=False, load_format=None), 'num_gpus_available': 2} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  F",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 532,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:48.219897",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489877"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694423"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726066"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521781"
+    }
+   ]
+  },
+  {
+   "id": 1123,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[Alibaba-NLP/gte-modernbert-base-parallel_setup1-mp-pooling-test_options1]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_language_embedding[Alibaba-NLP/gte-modernbert-base-parallel_setup1-mp-pooling-test_options1]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010124",
+   "run_count": 0,
+   "retry_count": 3,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'Alibaba-NLP/gte-modernbert-base'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 258,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:48.219901",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489879"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694425"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726068"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521783"
+    }
+   ]
+  },
+  {
+   "id": 1124,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[OpenGVLab/InternVL2-1B-parallel_setup0-mp-auto-test_options0]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_multimodal_generation[OpenGVLab/InternVL2-1B-parallel_setup0-mp-auto-test_options0]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010124",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'OpenGVLab/InternVL2-1B'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 349,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:48.219903",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489881"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694427"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726070"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521785"
+    }
+   ]
+  },
+  {
+   "id": 1126,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[fixie-ai/ultravox-v0_5-llama-3_2-1b-parallel_setup2-mp-auto-test_options2]",
+   "test_file": "tests/distributed/test_pipeline_parallel.py",
+   "test_name": "test_tp_multimodal_generation[fixie-ai/ultravox-v0_5-llama-3_2-1b-parallel_setup2-mp-auto-test_options2]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010124",
+   "run_count": 0,
+   "retry_count": 2,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'fixie-ai/ultravox-v0_5-llama-3_2-1b'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 298,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:01:48.219907",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489885"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694432"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726075"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521790"
+    }
+   ]
+  },
+  {
+   "id": 1141,
+   "test_node": "tests/distributed/test_pp_cudagraph.py::test_pp_cudagraph[FLASH_ATTN-2-hmellor/tiny-random-LlamaForCausalLM]",
+   "test_file": "tests/distributed/test_pp_cudagraph.py",
+   "test_name": "test_pp_cudagraph[FLASH_ATTN-2-hmellor/tiny-random-LlamaForCausalLM]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010212",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 240948,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:02:36.004854",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489920"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694465"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726109"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521826"
+    }
+   ]
+  },
+  {
+   "id": 1142,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl",
+   "test_file": "tests/distributed/test_pynccl.py",
+   "test_name": "test_pynccl",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_010212",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 147,
+   "exit_code": 1,
+   "run_at": "2026-07-19T01:02:36.004856",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489922"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694467"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.726111"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521828"
+    }
+   ]
+  }
+ ],
+ "distributed_count": 0,
+ "requires_multi_gpu": false,
+ "gpu_per_test": 1,
+ "generated_at": "2026-08-09T13:02:21.217997"
+}

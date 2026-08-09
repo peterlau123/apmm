@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182931",
+ "started_at": "2026-08-07T21:34:53Z",
+ "finished_at": "2026-08-07T21:35:35Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407.log",
+  "size_bytes": 30700,
+  "captured_at": "2026-08-07T21:35:35Z"
+ },
+ "tests": [
+  {
+   "id": 29384,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[CLIPModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 210,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_CLIPModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_CLIPModel.xml"
+  },
+  {
+   "id": 29385,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[LlavaNextForConditionalGeneration]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 315,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_LlavaNextForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_LlavaNextForConditionalGeneration.xml"
+  },
+  {
+   "id": 29386,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[Phi3VForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 194,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Phi3VForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Phi3VForCausalLM.xml"
+  },
+  {
+   "id": 29387,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[Qwen2VLForConditionalGeneration]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 226,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Qwen2VLForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Qwen2VLForConditionalGeneration.xml"
+  },
+  {
+   "id": 29388,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[SiglipModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 212,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_SiglipModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_SiglipModel.xml"
+  },
+  {
+   "id": 29389,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[PrithviGeoSpatialMAE]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "assert None is not None",
+   "duration_ms": 223,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_PrithviGeoSpatialMAE.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_PrithviGeoSpatialMAE.xml"
+  },
+  {
+   "id": 29390,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[Terratorch]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "assert None is not None",
+   "duration_ms": 235,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Terratorch.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_Terratorch.xml"
+  },
+  {
+   "id": 29391,
+   "test_node": "tests/models/test_registry.py::test_registry_imports[BertForSequenceClassification]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 261,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/pytest_batch_super_0407_tests_models_test_registry_py_test_registry_imports_BertForSequenceClassification.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0407/result_batch_super_0407_tests_models_test_registry_py_test_registry_imports_BertForSequenceClassification.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

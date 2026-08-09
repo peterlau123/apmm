@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0388",
+  "started_at": "2026-08-04T21:10:10Z",
+  "finished_at": "2026-08-04T21:10:26Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/pytest_batch_super_0388.log",
+    "size_bytes": 83501,
+    "captured_at": "2026-08-04T21:10:26Z"
+  },
+  "tests": [
+    {
+      "id": 212,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[True-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 237,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/pytest_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/result_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_True_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
+    },
+    {
+      "id": 213,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[False-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 310,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/pytest_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0388/result_batch_super_0388_tests_compile_distributed_test_fusions_e2e_py_test_rms_group_quant_False_Qwen_Qwen3_30B_A3B_FP8_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 1,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

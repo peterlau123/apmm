@@ -1,0 +1,6 @@
+IGNORED        tests/kernels/attention/test_cache.py::test_gather_and_maybe_dequant_cache_mla[cuda:1-auto-dtype0-8-512-1024-16-64-512] (gpu=0, Nonems, exit=4)
+IGNORED        tests/kernels/attention/test_cache.py::test_gather_and_maybe_dequant_cache_mla[cuda:1-fp8-dtype0-8-512-1024-16-64-512] (gpu=1, Nonems, exit=4)
+PASSED         tests/kernels/attention/test_cache.py::test_cp_gather_cache_mla[cuda:0-auto-dtype0-8-512-1024-16-64-512] (gpu=2, 738ms, exit=0)
+IGNORED        tests/kernels/attention/test_cache.py::test_cp_gather_cache_mla[cuda:1-auto-dtype0-8-512-1024-16-64-512] (gpu=3, Nonems, exit=4)
+PASSED         tests/kernels/attention/test_cascade_flash_attn.py::test_merge_kernel[dtype0-128-num_heads2-16912] (gpu=0, 422ms, exit=0)
+PASSED         tests/kernels/attention/test_cascade_flash_attn.py::test_merge_kernel[dtype0-192-num_heads0-1] (gpu=1, 412ms, exit=0)

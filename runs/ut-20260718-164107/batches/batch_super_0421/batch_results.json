@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_super_0421",
+  "started_at": "2026-08-05T01:40:55Z",
+  "finished_at": "2026-08-05T01:41:39Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421.log",
+    "size_bytes": 36890,
+    "captured_at": "2026-08-05T01:41:39Z"
+  },
+  "tests": [
+    {
+      "id": 1124,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[OpenGVLab/InternVL2-1B-parallel_setup0-mp-auto-test_options0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'OpenGVLab/InternVL2-1B'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 349,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_OpenGVLab_InternVL2_1B_parallel_setup0_mp_auto_test_options0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_OpenGVLab_InternVL2_1B_parallel_setup0_mp_auto_test_options0.xml"
+    },
+    {
+      "id": 1125,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[microsoft/Phi-3.5-vision-instruct-parallel_setup1-mp-auto-test_options1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 316,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_microsoft_Phi_3_5_vision_instruct_parallel_setup1_mp_auto_test_options1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_microsoft_Phi_3_5_vision_instruct_parallel_setup1_mp_auto_test_options1.xml"
+    },
+    {
+      "id": 1126,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_multimodal_generation[fixie-ai/ultravox-v0_5-llama-3_2-1b-parallel_setup2-mp-auto-test_options2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'fixie-ai/ultravox-v0_5-llama-3_2-1b'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 298,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_fixie_ai_ultravox_v0_5_llama_3_2_1b_parallel_setup2_mp_auto_test_options2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_distributed_test_pipeline_parallel_py_test_tp_multimodal_generation_fixie_ai_ultravox_v0_5_llama_3_2_1b_parallel_setup2_mp_auto_test_options2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 1,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_marlin_0120",
+  "started_at": "2026-08-06T23:41:16Z",
+  "finished_at": "2026-08-06T23:41:55Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120.log",
+    "size_bytes": 21790,
+    "captured_at": "2026-08-06T23:41:55Z"
+  },
+  "tests": [
+    {
+      "id": 15509,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type954-b_type954-c_type954--1-666-128-2048-5-3-1-False-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1866,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type954_b_type954_c_type954_1_666_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type954_b_type954_c_type954_1_666_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15510,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type955-b_type955-c_type955-2-666-128-2048-5-3-1-False-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1813,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type955_b_type955_c_type955_2_666_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type955_b_type955_c_type955_2_666_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15511,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type956-b_type956-c_type956-4-666-128-2048-5-3-1-False-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1867,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type956_b_type956_c_type956_4_666_128_2048_5_3_1_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type956_b_type956_c_type956_4_666_128_2048_5_3_1_False_False.xml"
+    },
+    {
+      "id": 15512,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type957-b_type957-c_type957-2-666-128-2048-5-3-4-True-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1920,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type957_b_type957_c_type957_2_666_128_2048_5_3_4_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type957_b_type957_c_type957_2_666_128_2048_5_3_4_True_True.xml"
+    },
+    {
+      "id": 15513,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type958-b_type958-c_type958-4-666-128-2048-5-3-4-True-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1246,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type958_b_type958_c_type958_4_666_128_2048_5_3_4_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type958_b_type958_c_type958_4_666_128_2048_5_3_4_True_True.xml"
+    },
+    {
+      "id": 15514,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type959-b_type959-c_type959-2-666-128-2048-5-3-4-True-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1886,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type959_b_type959_c_type959_2_666_128_2048_5_3_4_True_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type959_b_type959_c_type959_2_666_128_2048_5_3_4_True_False.xml"
+    },
+    {
+      "id": 15515,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type960-b_type960-c_type960-4-666-128-2048-5-3-4-True-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1067,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type960_b_type960_c_type960_4_666_128_2048_5_3_4_True_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type960_b_type960_c_type960_4_666_128_2048_5_3_4_True_False.xml"
+    },
+    {
+      "id": 15516,
+      "test_node": "tests/kernels/moe/test_moe.py::test_fused_marlin_moe[a_type961-b_type961-c_type961--1-666-128-2048-5-3-4-False-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 989,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/pytest_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type961_b_type961_c_type961_1_666_128_2048_5_3_4_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_marlin_0120/result_batch_20260807_marlin_0120_tests_kernels_moe_test_moe_py_test_fused_marlin_moe_a_type961_b_type961_c_type961_1_666_128_2048_5_3_4_False_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

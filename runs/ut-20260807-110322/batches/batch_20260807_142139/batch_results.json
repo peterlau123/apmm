@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_142139",
+  "started_at": "2026-08-07T06:21:39Z",
+  "finished_at": "2026-08-07T06:22:22Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139.log",
+    "size_bytes": 131753,
+    "captured_at": "2026-08-07T06:22:22Z"
+  },
+  "tests": [
+    {
+      "id": 22630,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type501-b_type501-c_type501-2-26-2368-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1925,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type501_b_type501_c_type501_2_26_2368_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type501_b_type501_c_type501_2_26_2368_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22631,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type502-b_type502-c_type502-4-26-2368-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1447,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type502_b_type502_c_type502_4_26_2368_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type502_b_type502_c_type502_4_26_2368_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22632,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type503-b_type503-c_type503-8-26-2368-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1895,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type503_b_type503_c_type503_8_26_2368_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type503_b_type503_c_type503_8_26_2368_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22633,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type504-b_type504-c_type504--1-26-9472-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1823,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type504_b_type504_c_type504_1_26_9472_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type504_b_type504_c_type504_1_26_9472_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22634,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type505-b_type505-c_type505-2-26-9472-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 2020,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type505_b_type505_c_type505_2_26_9472_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type505_b_type505_c_type505_2_26_9472_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22635,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type506-b_type506-c_type506-4-26-9472-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1972,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type506_b_type506_c_type506_4_26_9472_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type506_b_type506_c_type506_4_26_9472_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22636,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type507-b_type507-c_type507-8-26-9472-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1059,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type507_b_type507_c_type507_8_26_9472_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type507_b_type507_c_type507_8_26_9472_1664_False_False_False_True.xml"
+    },
+    {
+      "id": 22637,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type508-b_type508-c_type508--1-26-9472-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_gemm' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_gemm' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functiona",
+      "duration_ms": 1051,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/pytest_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type508_b_type508_c_type508_1_26_9472_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_142139/result_batch_20260807_142139_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type508_b_type508_c_type508_1_26_9472_1664_False_False_False_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_201556",
+  "started_at": "2026-08-06T12:15:56Z",
+  "finished_at": "2026-08-06T12:16:23Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556.log",
+    "size_bytes": 19140,
+    "captured_at": "2026-08-06T12:16:23Z"
+  },
+  "tests": [
+    {
+      "id": 19818,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-24-128-8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2145,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_8.xml"
+    },
+    {
+      "id": 19819,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-24-128-14]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2070,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_14.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_14.xml"
+    },
+    {
+      "id": 19820,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-24-128-17]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2158,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_17.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_17.xml"
+    },
+    {
+      "id": 19821,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-24-128-23]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2135,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_23.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_23.xml"
+    },
+    {
+      "id": 19822,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-24-128-32]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2146,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_24_128_32.xml"
+    },
+    {
+      "id": 19823,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-32-128-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2129,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_1.xml"
+    },
+    {
+      "id": 19824,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-32-128-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1037,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_2.xml"
+    },
+    {
+      "id": 19825,
+      "test_node": "tests/kernels/quantization/test_awq_triton.py::test_gemm[8-128-32-128-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1042,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/pytest_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_201556/result_batch_20260806_201556_tests_kernels_quantization_test_awq_triton_py_test_gemm_8_128_32_128_4.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

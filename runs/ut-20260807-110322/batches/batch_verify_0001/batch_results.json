@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_verify_0001",
+  "started_at": "2026-08-08T02:29:14Z",
+  "finished_at": "2026-08-08T02:29:15Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-08T02:29:15Z"
+  },
+  "tests": [
+    {
+      "id": 24524,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_rank-config_change0-is greater than max_lora_rank]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_rank_config_change0_is_greater_than_max_lora_rank.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_rank_config_change0_is_greater_than_max_lora_rank.xml"
+    },
+    {
+      "id": 24525,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_dora-config_change1-does not yet support DoRA]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_dora_config_change1_does_not_yet_support_DoRA.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_dora_config_change1_does_not_yet_support_DoRA.xml"
+    },
+    {
+      "id": 24526,
+      "test_node": "tests/lora/test_peft_helper.py::test_peft_helper_error[test_modules_to_save-config_change2-only supports modules_to_save being None]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_modules_to_save_config_change2_only_supports_modules_to_save_being_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_lora_test_peft_helper_py_test_peft_helper_error_test_modules_to_save_config_change2_only_supports_modules_to_save_being_None.xml"
+    },
+    {
+      "id": 28853,
+      "test_node": "tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_False.xml"
+    },
+    {
+      "id": 28854,
+      "test_node": "tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_True.xml"
+    },
+    {
+      "id": 28946,
+      "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_4bit_bnb_model[facebook/opt-125m-quantize opt model inflight]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_4bit_bnb_model_facebook_opt_125m_quantize_opt_model_inflight.xml"
+    },
+    {
+      "id": 28947,
+      "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_4bit_bnb_model[mistralai/Mistral-7B-Instruct-v0.3-quantize inflight model with both HF and Mistral format weights]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_4bit_bnb_model_mistralai_Mistral_7B_Instruct_v0_3_quantize_inflight_model_with_both_HF_and_Mistral_format_weights.xml"
+    },
+    {
+      "id": 28948,
+      "test_node": "tests/models/quantization/test_bitsandbytes.py::test_load_pre_quant_4bit_bnb_model[PrunaAI/Einstein-v6.1-Llama3-8B-bnb-4bit-smashed-read pre-quantized 4-bit FP4 model]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/pytest_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_pre_quant_4bit_bnb_model_PrunaAI_Einstein_v6_1_Llama3_8B_bnb_4bit_smashed_read_pre_quantized_4_bit_FP4_model.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_verify_0001/result_batch_verify_0001_tests_models_quantization_test_bitsandbytes_py_test_load_pre_quant_4bit_bnb_model_PrunaAI_Einstein_v6_1_Llama3_8B_bnb_4bit_smashed_read_pre_quantized_4_bit_FP4_model.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

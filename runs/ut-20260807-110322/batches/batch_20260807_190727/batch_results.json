@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190727",
+  "started_at": "2026-08-07T11:07:28Z",
+  "finished_at": "2026-08-07T11:08:11Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727.log",
+    "size_bytes": 225490,
+    "captured_at": "2026-08-07T11:08:11Z"
+  },
+  "tests": [
+    {
+      "id": 32605,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT-spec_dec]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<vllm.compilation.backends.VllmBackend object at 0x7fb047df2f00>' raised:\nTypeError: VllmBackend.__call__() got an unexpected keyword argument 'options'\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 6458,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT_spec_dec.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_ENTRYPOINT_spec_dec.xml"
+    },
+    {
+      "id": 32606,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN-pooling]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3367,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN_pooling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN_pooling.xml"
+    },
+    {
+      "id": 32607,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN-spec_dec]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3573,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN_spec_dec.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_FQCN_spec_dec.xml"
+    },
+    {
+      "id": 32608,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS-pooling]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3382,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS_pooling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS_pooling.xml"
+    },
+    {
+      "id": 32609,
+      "test_node": "tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS-spec_dec]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3449,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS_spec_dec.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_offline_py_test_rejects_custom_logitsprocs_CustomLogitprocSource_LOGITPROC_SOURCE_CLASS_spec_dec.xml"
+    },
+    {
+      "id": 32610,
+      "test_node": "tests/v1/logits_processors/test_custom_online.py::test_custom_logitsprocs[server0-facebook/opt-125m]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 6845,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_custom_logitsprocs_server0_facebook_opt_125m.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_custom_logitsprocs_server0_facebook_opt_125m.xml"
+    },
+    {
+      "id": 32611,
+      "test_node": "tests/v1/logits_processors/test_custom_online.py::test_custom_logitsprocs[server1-facebook/opt-125m]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 12359,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_custom_logitsprocs_server1_facebook_opt_125m.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_custom_logitsprocs_server1_facebook_opt_125m.xml"
+    },
+    {
+      "id": 32612,
+      "test_node": "tests/v1/logits_processors/test_custom_online.py::test_invalid_custom_logitsproc_arg[server0-facebook/opt-125m]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 4833,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/pytest_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_invalid_custom_logitsproc_arg_server0_facebook_opt_125m.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190727/result_batch_20260807_190727_tests_v1_logits_processors_test_custom_online_py_test_invalid_custom_logitsproc_arg_server0_facebook_opt_125m.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 1,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

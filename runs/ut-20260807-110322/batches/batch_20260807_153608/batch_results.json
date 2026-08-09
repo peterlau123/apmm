@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_153608",
+  "started_at": "2026-08-07T07:36:09Z",
+  "finished_at": "2026-08-07T07:36:34Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608.log",
+    "size_bytes": 22998,
+    "captured_at": "2026-08-07T07:36:34Z"
+  },
+  "tests": [
+    {
+      "id": 23857,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype0-shape1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 835,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype0_shape1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype0_shape1.xml"
+    },
+    {
+      "id": 23858,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype1-shape0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 833,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype1_shape0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype1_shape0.xml"
+    },
+    {
+      "id": 23859,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype1-shape1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 851,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype1_shape1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_fla_layernorm_guard_py_test_multidimensional_input_dtype1_shape1.xml"
+    },
+    {
+      "id": 23860,
+      "test_node": "tests/kernels/test_flex_attention.py::test_flex_attention_vs_default_backend",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_flex_attention_vs_default_backend.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_flex_attention_vs_default_backend.xml"
+    },
+    {
+      "id": 23861,
+      "test_node": "tests/kernels/test_flex_attention.py::test_encoder_flex_attention_vs_default_backend",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_encoder_flex_attention_vs_default_backend.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_encoder_flex_attention_vs_default_backend.xml"
+    },
+    {
+      "id": 23862,
+      "test_node": "tests/kernels/test_flex_attention.py::test_block_mask_direct_vs_slow_path",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_block_mask_direct_vs_slow_path.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_block_mask_direct_vs_slow_path.xml"
+    },
+    {
+      "id": 23863,
+      "test_node": "tests/kernels/test_flex_attention.py::test_physical_to_logical_mapping_handles_reused_blocks",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 522,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_physical_to_logical_mapping_handles_reused_blocks.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_flex_attention_py_test_physical_to_logical_mapping_handles_reused_blocks.xml"
+    },
+    {
+      "id": 24116,
+      "test_node": "tests/kernels/test_shuffle_rows.py::test_shuffle_rows_edge_cases",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: num_cols must be divisible by 128 / sizeof(input_tensor.scalar_type()) / 8",
+      "duration_ms": 639,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/pytest_batch_20260807_153608_tests_kernels_test_shuffle_rows_py_test_shuffle_rows_edge_cases.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153608/result_batch_20260807_153608_tests_kernels_test_shuffle_rows_py_test_shuffle_rows_edge_cases.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

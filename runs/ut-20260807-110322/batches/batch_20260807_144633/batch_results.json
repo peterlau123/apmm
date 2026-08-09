@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_144633",
+  "started_at": "2026-08-07T06:46:33Z",
+  "finished_at": "2026-08-07T06:47:00Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633.log",
+    "size_bytes": 19599,
+    "captured_at": "2026-08-07T06:47:00Z"
+  },
+  "tests": [
+    {
+      "id": 23120,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype0-1024-8191]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1011,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_8191.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_8191.xml"
+    },
+    {
+      "id": 23121,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype0-1024-16383]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 863,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_16383.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_16383.xml"
+    },
+    {
+      "id": 23122,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype0-1024-32767]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 849,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_32767.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype0_1024_32767.xml"
+    },
+    {
+      "id": 23123,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype1-64-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1372,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_1.xml"
+    },
+    {
+      "id": 23124,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype1-64-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1076,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_7.xml"
+    },
+    {
+      "id": 23125,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype1-64-16]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 958,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_16.xml"
+    },
+    {
+      "id": 23126,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype1-64-63]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 868,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_63.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_63.xml"
+    },
+    {
+      "id": 23127,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[True-42-dtype1-64-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 817,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/pytest_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_144633/result_batch_20260807_144633_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_True_42_dtype1_64_128.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

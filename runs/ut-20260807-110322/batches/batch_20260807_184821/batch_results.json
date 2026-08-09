@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_184821",
+  "started_at": "2026-08-07T10:48:21Z",
+  "finished_at": "2026-08-07T10:48:25Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:48:25Z"
+  },
+  "tests": [
+    {
+      "id": 31205,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_with_content_before_tool_calls",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_with_content_before_tool_calls.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_with_content_before_tool_calls.xml"
+    },
+    {
+      "id": 31206,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_no_tool_calls",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_no_tool_calls.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_no_tool_calls.xml"
+    },
+    {
+      "id": 31207,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_with_thinking_tags",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_with_thinking_tags.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_with_thinking_tags.xml"
+    },
+    {
+      "id": 31208,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_extract_tool_calls_multiline_json_not_supported",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_extract_tool_calls_multiline_json_not_supported.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_extract_tool_calls_multiline_json_not_supported.xml"
+    },
+    {
+      "id": 31209,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_arguments_incremental_output",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_arguments_incremental_output.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_arguments_incremental_output.xml"
+    },
+    {
+      "id": 31210,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_arguments_delta_only",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_arguments_delta_only.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_arguments_delta_only.xml"
+    },
+    {
+      "id": 31211,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_openai_compatibility",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_openai_compatibility.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_openai_compatibility.xml"
+    },
+    {
+      "id": 31212,
+      "test_node": "tests/tool_parsers/test_minimax_tool_parser.py::test_streaming_thinking_tag_buffering",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/pytest_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_thinking_tag_buffering.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184821/result_batch_20260807_184821_tests_tool_parsers_test_minimax_tool_parser_py_test_streaming_thinking_tag_buffering.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_191640",
+  "started_at": "2026-08-07T11:16:41Z",
+  "finished_at": "2026-08-07T11:17:07Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640.log",
+    "size_bytes": 19261,
+    "captured_at": "2026-08-07T11:17:07Z"
+  },
+  "tests": [
+    {
+      "id": 32714,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_presence_penalty[2.0-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 806,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_presence_penalty_2_0_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_presence_penalty_2_0_32_cuda_0.xml"
+    },
+    {
+      "id": 32716,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[-2.0-1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1173,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_1_cuda_0.xml"
+    },
+    {
+      "id": 32718,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[-2.0-2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1186,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_2_cuda_0.xml"
+    },
+    {
+      "id": 32720,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[-2.0-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1187,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_32_cuda_0.xml"
+    },
+    {
+      "id": 32722,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[2.0-1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1173,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_1_cuda_0.xml"
+    },
+    {
+      "id": 32724,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[2.0-2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1186,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_2_cuda_0.xml"
+    },
+    {
+      "id": 32726,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_frequency_penalty[2.0-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 702,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_frequency_penalty_2_0_32_cuda_0.xml"
+    },
+    {
+      "id": 32728,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[0.1-1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 626,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/pytest_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191640/result_batch_20260807_191640_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_1_cuda_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

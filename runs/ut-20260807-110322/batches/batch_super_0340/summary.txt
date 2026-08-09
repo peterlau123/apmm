@@ -1,0 +1,8 @@
+FAILED         tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_serialize_and_serve_entrypoints (gpu=0, 13205ms, exit=1)
+FAILED         tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[device] (gpu=2, 5352ms, exit=1)
+FAILED         tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[mode] (gpu=3, 5412ms, exit=1)
+FAILED         tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[dtype] (gpu=4, 5303ms, exit=1)
+PASSED         tests/model_executor/model_loader/test_registry.py::test_register_model_loader (gpu=5, 136ms, exit=0)
+PASSED         tests/model_executor/model_loader/test_registry.py::test_invalid_model_loader (gpu=6, 135ms, exit=0)
+PASSED         tests/model_executor/model_loader/test_sharded_state_loader.py::test_filter_subtensors (gpu=0, 153ms, exit=0)
+IGNORED        tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-False] (gpu=2, Nonems, exit=None)

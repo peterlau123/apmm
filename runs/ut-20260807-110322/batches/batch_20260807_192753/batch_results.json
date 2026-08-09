@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_192753",
+  "started_at": "2026-08-07T11:27:53Z",
+  "finished_at": "2026-08-07T11:28:22Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753.log",
+    "size_bytes": 228737,
+    "captured_at": "2026-08-07T11:28:22Z"
+  },
+  "tests": [
+    {
+      "id": 32881,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1968,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_1.xml"
+    },
+    {
+      "id": 32882,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1971,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_3.xml"
+    },
+    {
+      "id": 32883,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[10]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1956,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_10.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_ngram_max_len_10.xml"
+    },
+    {
+      "id": 32884,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 245,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_1.xml"
+    },
+    {
+      "id": 32885,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 255,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_3.xml"
+    },
+    {
+      "id": 32886,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-10]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 247,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_10.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_FLASH_ATTN_10.xml"
+    },
+    {
+      "id": 32887,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TRITON_ATTN-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 165,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_TRITON_ATTN_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_TRITON_ATTN_1.xml"
+    },
+    {
+      "id": 32888,
+      "test_node": "tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TRITON_ATTN-3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 162,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/pytest_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_TRITON_ATTN_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192753/result_batch_20260807_192753_tests_v1_spec_decode_test_max_len_py_test_eagle_max_len_TRITON_ATTN_3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

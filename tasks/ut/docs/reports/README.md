@@ -21,6 +21,8 @@
 | [2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md) | 2026-08-06 | **8000 cases run 兼容性问题**：4233 passed（52.9%）/ 3767 failed，`_moe_C` 注册失效 2638 + FP8/inductor/DeepGEMM 清单 |
 | [2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md) | 2026-08-08 | **pending 12,185 run 兼容性问题**：8613 passed（70.7%），ignored 1984 分类（模型类/peft/慢测试）+ execute_batch 不稳定待办 |
 | [2026-08-08-troubleshooting-log.md](2026-08-08-troubleshooting-log.md) | 2026-08-08 | **排障溯因日志**：bifrost 假活根因（GPU 探测同步阻塞→async 修复）+ backend 故障链 + stale 节点 + cuda:1 device-map + 脚本三坑 |
+| [2026-08-09-vllm-0.13.0-torch2.5.1-rerun-summary.md](2026-08-09-vllm-0.13.0-torch2.5.1-rerun-summary.md) | 2026-08-09 | **分组重跑总结**：6,080 目标——skipped 241/models 931 不可救 + other 61 救回 + timeout 未跑——manifest 26,936（81.7%）|
+| [2026-08-09-vllm-0.13.0-torch2.5.1-issue-classification.md](2026-08-09-vllm-0.13.0-torch2.5.1-issue-classification.md) | 2026-08-09 | **问题归类溯源**：兼容性 2,063（_C 算子/FP8/inductor 等——torch 2.8 评估）+ 可跑 4,017 结果 + 关键实证 |
 | [2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md](2026-08-05-vllm-0.13.0-torch2.5.1-compat-issues.md) | 2026-08-05 | vLLM 0.13.0 + torch 2.5.1 在 H20 兼容性问题全清单（6 项，含解决状态与原因剖析） |
 
 ---

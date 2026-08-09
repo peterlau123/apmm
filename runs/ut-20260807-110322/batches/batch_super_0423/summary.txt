@@ -1,0 +1,8 @@
+FAILED         tests/models/test_transformers.py::test_embed_loading[Qwen/Qwen3-Embedding-0.6B] (gpu=0, 14139ms, exit=1)
+FAILED         tests/models/test_transformers.py::test_embed_loading[TinyLlama/TinyLlama-1.1B-Chat-v1.0] (gpu=2, 13134ms, exit=1)
+PASSED         tests/models/test_transformers.py::test_pooling[TransformersEmbeddingModel] (gpu=3, 247ms, exit=0)
+PASSED         tests/models/test_transformers.py::test_pooling[TransformersForSequenceClassification] (gpu=4, 246ms, exit=0)
+PASSED         tests/models/test_utils.py::test_module_with_batchnorm_can_load (gpu=5, 149ms, exit=0)
+PASSED         tests/models/test_utils.py::test_module_with_child_containing_batchnorm_can_autoload (gpu=6, 183ms, exit=0)
+PASSED         tests/models/test_utils.py::test_module_skip_prefix (gpu=0, 209ms, exit=0)
+PASSED         tests/models/test_utils.py::test_module_skip_substr (gpu=2, 166ms, exit=0)

@@ -1,0 +1,8 @@
+PASSED         tests/kernels/quantization/test_machete_mm.py::test_machete_heuristic[types7-257x4224x4160] (gpu=0, 1877ms, exit=0)
+PASSED         tests/kernels/quantization/test_machete_mm.py::test_machete_heuristic[types7-1024x8192x4096] (gpu=2, 2260ms, exit=0)
+PASSED         tests/kernels/quantization/test_machete_mm.py::test_machete_devices[cuda:0] (gpu=3, 1428ms, exit=0)
+PASSED         tests/kernels/quantization/test_machete_mm.py::test_machete_subset (gpu=4, 1453ms, exit=0)
+PASSED         tests/kernels/quantization/test_machete_mm.py::test_machete_cuda_graph (gpu=5, 2232ms, exit=0)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_without_zp (gpu=6, 1511ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_awq (gpu=0, 646ms, exit=1)
+FAILED         tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_repack[nk_factors0-True-False-quant_type0-64-128] (gpu=2, 609ms, exit=1)

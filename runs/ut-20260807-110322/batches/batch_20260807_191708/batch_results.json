@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_191708",
+  "started_at": "2026-08-07T11:17:08Z",
+  "finished_at": "2026-08-07T11:17:34Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708.log",
+    "size_bytes": 19254,
+    "captured_at": "2026-08-07T11:17:34Z"
+  },
+  "tests": [
+    {
+      "id": 32730,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[0.1-2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1218,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_2_cuda_0.xml"
+    },
+    {
+      "id": 32732,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[0.1-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1230,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_0_1_32_cuda_0.xml"
+    },
+    {
+      "id": 32734,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[1.9-1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1259,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_1_cuda_0.xml"
+    },
+    {
+      "id": 32736,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[1.9-2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 833,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_2_cuda_0.xml"
+    },
+    {
+      "id": 32738,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_repetition_penalty[1.9-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 920,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_repetition_penalty_1_9_32_cuda_0.xml"
+    },
+    {
+      "id": 32740,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_allowed_token_ids[0-1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1210,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_1_cuda_0.xml"
+    },
+    {
+      "id": 32742,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_allowed_token_ids[0-2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 570,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_2_cuda_0.xml"
+    },
+    {
+      "id": 32744,
+      "test_node": "tests/v1/sample/test_sampler.py::test_sampler_allowed_token_ids[0-32-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 805,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/pytest_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_32_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191708/result_batch_20260807_191708_tests_v1_sample_test_sampler_py_test_sampler_allowed_token_ids_0_32_cuda_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

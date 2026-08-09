@@ -1,0 +1,8 @@
+PASSED         tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype0-shape1] (gpu=0, 835ms, exit=0)
+PASSED         tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype1-shape0] (gpu=2, 833ms, exit=0)
+PASSED         tests/kernels/test_fla_layernorm_guard.py::test_multidimensional_input[dtype1-shape1] (gpu=3, 851ms, exit=0)
+PASSED         tests/kernels/test_flex_attention.py::test_flex_attention_vs_default_backend (gpu=4, 0ms, exit=0)
+PASSED         tests/kernels/test_flex_attention.py::test_encoder_flex_attention_vs_default_backend (gpu=5, 0ms, exit=0)
+PASSED         tests/kernels/test_flex_attention.py::test_block_mask_direct_vs_slow_path (gpu=6, 0ms, exit=0)
+PASSED         tests/kernels/test_flex_attention.py::test_physical_to_logical_mapping_handles_reused_blocks (gpu=0, 522ms, exit=0)
+FAILED         tests/kernels/test_shuffle_rows.py::test_shuffle_rows_edge_cases (gpu=2, 639ms, exit=1)

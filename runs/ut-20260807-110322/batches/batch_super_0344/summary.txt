@@ -1,0 +1,8 @@
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops[none,+relu3-3-inductor-ops_enabled14-False] (gpu=0, 252ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops[all,-rms_norm-3-inductor-ops_enabled15-True] (gpu=2, 219ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[all,none] (gpu=3, 220ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[all,+rms_norm,all] (gpu=4, 134ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[+rms_norm,-rms_norm] (gpu=5, 225ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_topk_dispatch[False] (gpu=6, 243ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[True-dtype0-True] (gpu=0, 0ms, exit=0)
+PASSED         tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[True-dtype0-False] (gpu=2, 0ms, exit=0)

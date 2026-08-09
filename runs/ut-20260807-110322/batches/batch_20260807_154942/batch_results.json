@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_154942",
+  "started_at": "2026-08-07T07:49:43Z",
+  "finished_at": "2026-08-07T07:50:24Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942.log",
+    "size_bytes": 149473,
+    "captured_at": "2026-08-07T07:50:24Z"
+  },
+  "tests": [
+    {
+      "id": 24443,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 385,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_0_4.xml"
+    },
+    {
+      "id": 24444,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[0-8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 337,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_0_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_0_8.xml"
+    },
+    {
+      "id": 24445,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 364,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_1.xml"
+    },
+    {
+      "id": 24446,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 353,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_2.xml"
+    },
+    {
+      "id": 24447,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 390,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_4.xml"
+    },
+    {
+      "id": 24448,
+      "test_node": "tests/lora/test_layers.py::test_vocab_parallel_embedding_indices[1-8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 395,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_vocab_parallel_embedding_indices_1_8.xml"
+    },
+    {
+      "id": 24449,
+      "test_node": "tests/lora/test_layers.py::test_get_masked_input_and_mask",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1107,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_layers_py_test_get_masked_input_and_mask.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_layers_py_test_get_masked_input_and_mask.xml"
+    },
+    {
+      "id": 24450,
+      "test_node": "tests/lora/test_llama_tp.py::test_llama_lora[True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 393,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/pytest_batch_20260807_154942_tests_lora_test_llama_tp_py_test_llama_lora_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154942/result_batch_20260807_154942_tests_lora_test_llama_tp_py_test_llama_lora_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

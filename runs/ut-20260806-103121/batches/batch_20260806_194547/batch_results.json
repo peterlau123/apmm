@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_194547",
+  "started_at": "2026-08-06T11:45:48Z",
+  "finished_at": "2026-08-06T11:46:15Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547.log",
+    "size_bytes": 23144,
+    "captured_at": "2026-08-06T11:46:15Z"
+  },
+  "tests": [
+    {
+      "id": 19362,
+      "test_node": "tests/kernels/moe/test_pplx_moe.py::test_pplx_moe_slow[False-block_shape1-True-world_dp_size0-dtype1-6-64-mnk6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_slow_False_block_shape1_True_world_dp_size0_dtype1_6_64_mnk6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_slow_False_block_shape1_True_world_dp_size0_dtype1_6_64_mnk6.xml"
+    },
+    {
+      "id": 19363,
+      "test_node": "tests/kernels/moe/test_pplx_moe.py::test_pplx_moe_slow[False-block_shape1-True-world_dp_size0-dtype1-6-64-mnk7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_slow_False_block_shape1_True_world_dp_size0_dtype1_6_64_mnk7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_slow_False_block_shape1_True_world_dp_size0_dtype1_6_64_mnk7.xml"
+    },
+    {
+      "id": 19364,
+      "test_node": "tests/kernels/moe/test_pplx_moe.py::test_pplx_prepare_finalize[False-world_dp_size0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_prepare_finalize_False_world_dp_size0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_prepare_finalize_False_world_dp_size0.xml"
+    },
+    {
+      "id": 19365,
+      "test_node": "tests/kernels/moe/test_pplx_moe.py::test_pplx_moe[False-False-world_dp_size0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_False_False_world_dp_size0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_False_False_world_dp_size0.xml"
+    },
+    {
+      "id": 19366,
+      "test_node": "tests/kernels/moe/test_pplx_moe.py::test_pplx_moe[True-False-world_dp_size0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_True_False_world_dp_size0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_pplx_moe_py_test_pplx_moe_True_False_world_dp_size0.xml"
+    },
+    {
+      "id": 19367,
+      "test_node": "tests/kernels/moe/test_silu_mul_fp8_quant_deep_gemm.py::test_silu_mul_fp8_quant_deep_gemm[1-1-128-fp8_type0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 465,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_1_1_128_fp8_type0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_1_1_128_fp8_type0.xml"
+    },
+    {
+      "id": 19368,
+      "test_node": "tests/kernels/moe/test_silu_mul_fp8_quant_deep_gemm.py::test_silu_mul_fp8_quant_deep_gemm[1-4-128-fp8_type1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 861,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_1_4_128_fp8_type1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_1_4_128_fp8_type1.xml"
+    },
+    {
+      "id": 19369,
+      "test_node": "tests/kernels/moe/test_silu_mul_fp8_quant_deep_gemm.py::test_silu_mul_fp8_quant_deep_gemm[2-4-256-fp8_type2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 891,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/pytest_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_2_4_256_fp8_type2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_194547/result_batch_20260806_194547_tests_kernels_moe_test_silu_mul_fp8_quant_deep_gemm_py_test_silu_mul_fp8_quant_deep_gemm_2_4_256_fp8_type2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

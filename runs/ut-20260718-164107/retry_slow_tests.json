@@ -1,0 +1,37 @@
+{
+ "slow": {
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs4-AttentionBackendEnum.FLASHINFER-matches4-]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1-+quant_fp8]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs2-AttentionBackendEnum.TRITON_ATTN-matches2--quant_fp8]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs3-AttentionBackendEnum.TRITON_ATTN-matches3-+quant_fp8]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs4-AttentionBackendEnum.FLASHINFER-matches4-]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8,-rms_norm]": "max retry exceeded for other",
+  "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1--quant_fp8,+rms_norm]": "max retry exceeded for other",
+  "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel--quant_fp8-dtype1-533-128-64-8]": "timeout"
+ },
+ "xml_prefixes": [
+  "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant",
+  "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass",
+  "tests/distributed/test_eplb_fused_moe_layer.py::test_eplb_fml",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_shutdown_cleanup",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_worker_monitor",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_get_response_message_queues",
+  "tests/distributed/test_nccl_symm_mem_allreduce.py::test_nccl_symm_mem_allreduce",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_properties",
+  "tests/distributed/test_symm_mem_allreduce.py::test_symm_mem_allreduce",
+  "tests/distributed/test_shm_broadcast.py::test_shm_broadcast",
+  "tests/distributed/test_eplb_execute.py::test_rearrange_expert_weights_with_redundancy",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_failure_callback",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_initialization_tensor_parallel",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_collective_rpc",
+  "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml",
+  "tests/distributed/test_eplb_execute.py::test_rearrange_expert_weights_no_change",
+  "tests/distributed/test_eplb_execute.py::test_async_transfer_layer_without_mtp",
+  "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_initialization",
+  "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp",
+  "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_allreduce_rmsnorm",
+  "tests/distributed/test_eplb_execute.py::test_rearrange_expert_weights_profile_mode"
+ ],
+ "generated_at": "2026-08-05T08:53:32.843317+00:00"
+}

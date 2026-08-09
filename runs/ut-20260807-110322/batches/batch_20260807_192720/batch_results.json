@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_192720",
+  "started_at": "2026-08-07T11:27:20Z",
+  "finished_at": "2026-08-07T11:27:52Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720.log",
+    "size_bytes": 35135,
+    "captured_at": "2026-08-07T11:27:52Z"
+  },
+  "tests": [
+    {
+      "id": 32873,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose[8-TRITON_ATTN-eagle]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 213,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TRITON_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TRITON_ATTN_eagle.xml"
+    },
+    {
+      "id": 32874,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose[8-TRITON_ATTN-eagle3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 261,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TRITON_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TRITON_ATTN_eagle3.xml"
+    },
+    {
+      "id": 32875,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose[8-TREE_ATTN-eagle]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 176,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TREE_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TREE_ATTN_eagle.xml"
+    },
+    {
+      "id": 32876,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose[8-TREE_ATTN-eagle3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 255,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TREE_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_8_TREE_ATTN_eagle3.xml"
+    },
+    {
+      "id": 32877,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose_tree[spec_token_tree0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 282,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree0.xml"
+    },
+    {
+      "id": 32878,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose_tree[spec_token_tree1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 245,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree1.xml"
+    },
+    {
+      "id": 32879,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose_tree[spec_token_tree2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 168,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree2.xml"
+    },
+    {
+      "id": 32880,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_propose_tree[spec_token_tree3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 243,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/pytest_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192720/result_batch_20260807_192720_tests_v1_spec_decode_test_eagle_py_test_propose_tree_spec_token_tree3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

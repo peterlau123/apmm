@@ -45,7 +45,7 @@ def test_workflow_state_paths_points_to_yaml():
 
 def test_rerun_script_env_has_hf():
     """rerun 脚本 ENV 必须含 HF 离线变量 (execute_batch 进程 env 兜底)."""
-    src = (PROJECT_ROOT / "tasks/ut/scripts/rerun_ignored_remaining.py").read_text(encoding="utf-8")
+    src = (PROJECT_ROOT / "tasks/ut/scripts/rerun_selective.py").read_text(encoding="utf-8")
     assert "HF_HUB_OFFLINE" in src and 'HF_HUB_OFFLINE": "1"' in src, "rerun ENV 缺 HF_HUB_OFFLINE"
     assert "HF_HOME" in src, "rerun ENV 缺 HF_HOME"
 

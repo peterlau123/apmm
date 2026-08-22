@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>vLLM 0.13.0 + PyTorch 2.5.1 兼容性单元测试深度归因报告</title>
+<style>
+  :root {
+    --bg: #0b1120; --card: #111a2e; --card2: #0f1626; --border: #1e2a45;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8;
+    --green: #4ade80; --red: #f87171; --yellow: #fbbf24; --purple: #c084fc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.7; padding: 40px 24px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.8em; color: #fff; margin-bottom: 8px; }
+  h2 { font-size: 1.35em; color: var(--accent); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  h3 { font-size: 1.1em; color: #e0f2fe; margin: 22px 0 10px; }
+  .sub { color: var(--muted); font-size: .92em; margin-bottom: 24px; }
+  .sub b { color: var(--text); }
+  .meta { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 18px 0; font-size: .9em; color: var(--muted); }
+  .meta div { margin: 3px 0; }
+  .meta b { color: var(--text); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 18px 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
+  .card .num { font-size: 2em; font-weight: 700; }
+  .card .lbl { color: var(--muted); font-size: .85em; margin-top: 4px; }
+  .g-pass .num { color: var(--green); } .g-fail .num { color: var(--red); }
+  .g-err .num { color: var(--yellow); } .g-ig .num { color: var(--muted); }
+  .g-compat .num { color: var(--purple); }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .92em; }
+  th { background: var(--card2); color: var(--accent); text-align: left; padding: 10px 12px; border: 1px solid var(--border); }
+  td { padding: 9px 12px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: .78em; font-weight: 600; }
+  .t-easy { background: rgba(74,222,128,.15); color: var(--green); border: 1px solid rgba(74,222,128,.4); }
+  .t-med { background: rgba(251,191,36,.15); color: var(--yellow); border: 1px solid rgba(251,191,36,.4); }
+  .t-diff { background: rgba(248,113,113,.15); color: var(--red); border: 1px solid rgba(248,113,113,.4); }
+  .t-manual { background: rgba(192,132,252,.15); color: var(--purple); border: 1px solid rgba(192,132,252,.4); }
+  .evid { background: var(--card2); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 12px 0; border-radius: 0 8px 8px 0; font-size: .9em; }
+  .evid code { color: #7dd3fc; background: rgba(56,189,248,.08); padding: 1px 6px; border-radius: 4px; }
+  .warn { background: rgba(192,132,252,.08); border: 1px solid rgba(192,132,252,.3); padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: .9em; }
+  .concl { background: linear-gradient(135deg, rgba(56,189,248,.08), rgba(192,132,252,.08)); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0; }
+  .concl .big { font-size: 1.05em; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  code { background: rgba(56,189,248,.1); color: #7dd3fc; padding: 1px 6px; border-radius: 4px; font-size: .9em; font-family: "JetBrains Mono", Consolas, monospace; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .foot { color: var(--muted); font-size: .82em; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .badge { display: inline-block; background: rgba(56,189,248,.12); border: 1px solid rgba(56,189,248,.3); color: var(--accent); padding: 2px 10px; border-radius: 6px; font-size: .8em; margin-right: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>vLLM 0.13.0 + PyTorch 2.5.1 兼容性单元测试深度归因报告</h1>
+<div class="sub">H20 芯片（sm_90）· 32,955 个单元测试 · 2026-08-22</div>
+
+<div class="meta">
+  <div><b>背景</b>：H20 上以 vllm 0.13.0 + torch 2.5.1+cu124 运行 vLLM 单元测试全集，暴露兼容性问题归因</div>
+  <div><b>目的</b>：为开发团队提供决策辅助——目标芯片是否按 vllm 0.13.0 + torch 2.5.1 搭配，或升级 torch</div>
+  <div><b>数据源</b>：runs/ut-20260808-manifest-remaining/manifest.json（8/8 终态完整快照，32,955 条）</div>
+  <div><b>运行环境</b>：容器 v0.13.0_torch2.5.1_compile（python3.12 · torch 2.5.1+cu124 · triton 3.5.0）</div>
+</div>
+
+<div class="cards">
+  <div class="card g-pass"><div class="num">26,875</div><div class="lbl">passed (81.5%)</div></div>
+  <div class="card g-fail"><div class="num">3,095</div><div class="lbl">failed (9.4%)</div></div>
+  <div class="card g-err"><div class="num">810</div><div class="lbl">error (2.5%)</div></div>
+  <div class="card g-ig"><div class="num">2,170</div><div class="lbl">ignored (6.6%)</div></div>
+  <div class="card g-compat"><div class="num">2,122</div><div class="lbl">核心兼容性问题</div></div>
+</div>
+
+<h2>0. 口径说明</h2>
+<table>
+  <tr><th>口径</th><th>非 passed</th><th>说明</th></tr>
+  <tr><td>8/9 快照 ut-20260807-110322</td><td>6,019</td><td>此前引用的统计（failed 3,006 / error 904 / ignored 2,106 / retriable 3）</td></tr>
+  <tr><td><b>8/8 终态 ut-20260808-manifest-remaining（本报告主口径）</b></td><td><b>6,080</b></td><td>failed 3,095 / error 810 / ignored 2,170 / retriable 5</td></tr>
+  <tr><td>dataset 8/20 更新</td><td>4,456 + 1,624 pending</td><td>1,624 条被 pending 化</td></tr>
+</table>
+
+<h2>1. 兼容性问题总结分析</h2>
+<h3>1.1 总体结论</h3>
+<table>
+  <tr><th>类别</th><th>数量</th><th>占比(非passed)</th><th>性质</th></tr>
+  <tr><td><b>A. 版本配套兼容性问题</b></td><td><b>2,122</b></td><td>34.9%</td><td>vllm 0.13.0 与 torch 2.5.1 / triton 3.5.0 不配套，<b>与芯片无关</b></td></tr>
+  <tr><td>B. 环境类（模型缺失/网络）</td><td>1,301</td><td>21.4%</td><td>离线缺模型/无下载权限，补缓存可救</td></tr>
+  <tr><td>C. timeout 连坐（executor 层）</td><td>1,787</td><td>29.4%</td><td>watchdog SIGKILL/JUnit 未回写，重跑可救</td></tr>
+  <tr><td>D. 其他（断言/多卡/executor 崩溃等）</td><td>870</td><td>14.3%</td><td>含真断言失败 214、多卡环境 17、可重试 5</td></tr>
+</table>
+
+<h3>1.2 兼容性问题根因细分（A 类，2,122 条）</h3>
+<table>
+  <tr><th>根因</th><th>数量</th><th>归因</th><th>修复难度</th></tr>
+  <tr><td><b>marlin 算子缺失</b>（gptq_marlin_gemm/repack/moe_wna16/marlin_int4_fp8 + opcheck）</td><td><b>841</b></td><td>构建时 CUDA arch 配置 sm52，marlin 内核（需 8.0+PTX）0 个编译</td><td><span class="tag t-easy">easy</span></td></tr>
+  <tr><td><b>triton_key 接口不兼容</b></td><td>519</td><td>vllm 0.13.0 调用 triton.compiler.compiler.triton_key，triton 3.5.0 已移除该接口</td><td><span class="tag t-med">medium</span></td></tr>
+  <tr><td><b>cat_cuda 不支持 Float8_e4m3fn</b></td><td>225</td><td>torch 2.5.1 的 cat_cuda 内核未实现 FP8 类型 cat</td><td><span class="tag t-med">medium</span></td></tr>
+  <tr><td>engine 初始化失败</td><td>181</td><td>deep_gemm/triton/FP8 上游缺失传导到 engine 启动</td><td><span class="tag t-med">medium</span></td></tr>
+  <tr><td>deep_gemm 版本不配套</td><td>133</td><td>vllm 0.13.0 需要新版 deep_gemm，容器缺失/过旧</td><td><span class="tag t-easy">easy</span></td></tr>
+  <tr><td>torch 无 float8_e8m0fnu</td><td>80</td><td>torch ≥2.7 新增数据类型，2.5.1 无此属性</td><td><span class="tag t-diff">difficult</span></td></tr>
+  <tr><td>triton 不可用/过旧</td><td>69</td><td>Cannot find a working triton installation</td><td><span class="tag t-easy">easy</span></td></tr>
+  <tr><td>flash_attn head_size 限制</td><td>64</td><td>head_size should be a multiple of 16</td><td><span class="tag t-med">medium</span></td></tr>
+  <tr><td>opcheck 算子检查失败</td><td>64</td><td>marlin 内核缺失导致 opcheck test_schema 失败</td><td><span class="tag t-easy">easy</span></td></tr>
+  <tr><td>cuDNN 错误</td><td>8</td><td>CUDNN_STATUS_NOT_INITIALIZED（mamba causal_conv1d）</td><td><span class="tag t-med">medium</span></td></tr>
+  <tr><td>inductor 分区仅支持 torch≥2.9</td><td>2</td><td>use_inductor_graph_partition 参数校验失败</td><td><span class="tag t-easy">easy</span></td></tr>
+</table>
+
+<h3>1.2.1 marlin 算子缺失根因证据链（已验证）</h3>
+<div class="evid">
+  <div>1️⃣ <b>现象</b>：<code>NotImplementedError: Could not run '_C::gptq_marlin_gemm'</code>（479）+ repack（292）+ opcheck（64）≈ 841 条</div>
+  <div>2️⃣ <b>二进制符号</b>：<code>nm -D vllm/_C.abi3.so | grep -ic marlin</code> → <b>0 个 marlin 符号</b></div>
+  <div>3️⃣ <b>构建配置</b>：CMakeCache.txt 中 <code>CMAKE_CUDA_ARCHITECTURES:STRING=52</code>（sm_52），marlin 编译条件为 <code>MARLIN_ARCHS = 8.0+PTX ∩ CUDA_ARCHS</code> → <b>交集为空，marlin 0 个编译</b></div>
+  <div>4️⃣ <b>H20 架构</b>：nvidia-smi 显示 H20 compute_cap = <b>9.0</b>（sm_90），在 marlin 支持范围内 → <b>芯片支持但构建产物缺失</b></div>
+  <div>5️⃣ <b>佐证</b>：_moe_C.abi3.so 8/7 重编后 moe marlin 失败从大量降至 4 条 → 重新编译即可解决</div>
+  <div>✅ <b>结论</b>：非芯片问题，是构建 arch 配置错误。修复 = <code>TORCH_CUDA_ARCH_LIST="9.0"</code> 重新编译，<b>收益 841 条</b></div>
+</div>
+
+<h3>1.2.2 triton_key 接口不兼容证据链（已验证）</h3>
+<div class="evid">
+  <div>1️⃣ <b>现象</b>：<code>ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler'</code>（495 + 24 条）</div>
+  <div>2️⃣ <b>实测复现</b>：容器内 <code>from triton.compiler.compiler import triton_key</code> → <b>同样 ImportError</b></div>
+  <div>3️⃣ <b>环境</b>：容器 triton 3.5.0，python3.12</div>
+  <div>✅ <b>归因</b>：triton 版本与 vllm 0.13.0 不配套（接口已重构），非芯片问题。修复：锁配套 triton 版本或 patch 接口</div>
+</div>
+
+<h3>1.2.3 torch 2.5.1 能力边界（FP8 不完整）</h3>
+<div class="evid">
+  <div>• <code>cat_cuda not implemented for 'Float8_e4m3fn'</code>（225 条）：torch 2.5.1 cat 内核不支持 FP8，集中在 test_batched_moe.py(192)</div>
+  <div>• <code>module 'torch' has no attribute 'float8_e8m0fnu'</code>（80 条）：E8M0 格式为 torch 2.7+ 新增，<b>vllm 0.13.0 代码已引用 → 直接证明 vllm 0.13.0 开发基线高于 torch 2.5.1</b></div>
+  <div>• 这两类合计 305 条，是「torch 2.5.1 已落后于 vllm 0.13.0」的硬证据，FP8 是 H20 关键能力</div>
+</div>
+
+<h3>1.3 环境类（B 类，~1,314 条）—— 非兼容性，补缓存可救</h3>
+<table>
+  <tr><th>根因</th><th>failed</th><th>error</th><th>合计</th></tr>
+  <tr><td>HF 模型缓存缺失</td><td>378</td><td>529</td><td>907</td></tr>
+  <tr><td>HF 连接失败/离线</td><td>39</td><td>98</td><td>137</td></tr>
+  <tr><td>无效 repo ID（ValidationError）</td><td>253</td><td>7</td><td>260</td></tr>
+  <tr><td>Harmony vocab 加载失败</td><td>7</td><td>3</td><td>10</td></tr>
+</table>
+<p><b>缺失模型 TOP</b>：<code>deepseek-ai/DeepSeek-R1</code>(48) · <code>meta-llama/Meta-Llama-3-8B-Instruct</code>(46) · <code>meta-llama/Meta-Llama-3-8B</code>(31) · <code>microsoft/Phi-3.5-vision-instruct</code>(24) · Qwen-VL 系列 · GLM-4.1V 等（共 29 个模型）。meta-llama 为 gated repo 需授权 token。</p>
+
+<h3>1.4 timeout 连坐（C 类，1,787 条）</h3>
+<table>
+  <tr><th>子类</th><th>数量</th><th>说明</th></tr>
+  <tr><td>JUnit XML unparseable（SIGKILL mid-flush）</td><td>1,038</td><td>watchdog 杀进程时 XML 写了一半</td></tr>
+  <tr><td>JUnit XML missing</td><td>488</td><td>进程被杀无 XML 产出</td></tr>
+  <tr><td>JUnit XML 无 testcase</td><td>229</td><td>收集后未执行即被杀</td></tr>
+  <tr><td>其他 timeout</td><td>32</td><td>显式 pytest-timeout</td></tr>
+</table>
+<p><b>文件热点</b>：<code>test_detokenize.py</code>(902) · test_attention.py(135) · test_chat_utils.py(41) · test_config.py(38) · test_spec_decode.py(34)。<b>归因</b>：executor watchdog 超时（bifrost 180s 假活 + 重型用例耗时），非断言失败、非兼容性，重跑（加大 timeout）可救。</p>
+
+<div class="warn">⚠️ detokenize 902 条中可能混有 triton/FP8 编译耗时导致的超时（与 A 类重叠），无法完全剥离 —— <b>部分归因，留人工确认</b>（见 §4）</div>
+
+<h3>1.5 其他（D 类，870 条）</h3>
+<table>
+  <tr><th>子类</th><th>数量</th><th>归因</th></tr>
+  <tr><td>真断言失败</td><td>214</td><td>模型行为/数值断言不匹配 —— <b>留人工</b></td></tr>
+  <tr><td>pytest skipped</td><td>246</td><td>主动跳过（非失败）</td></tr>
+  <tr><td>ignored 空消息</td><td>120</td><td>无 error_message —— <b>留人工</b></td></tr>
+  <tr><td>多卡环境不支持</td><td>17</td><td>hybrid_lb_dp/internal_lb_dp 需多机，单机跑不了</td></tr>
+  <tr><td>server/engine 退出</td><td>168</td><td>与 A 类 engine 181 部分重叠</td></tr>
+  <tr><td>retriable_error</td><td>5</td><td>单引号命令构造 bug 3 + bifrost 超时 2 —— 可重试</td></tr>
+  <tr><td>杂项（TypeError/ValueError/KeyError 等）</td><td>~101</td><td>分散小簇 —— <b>留人工逐条</b></td></tr>
+</table>
+
+<h3>1.6 文件热点（兼容性问题集中地）</h3>
+<table>
+  <tr><th>测试文件</th><th>失败数</th><th>主要根因</th></tr>
+  <tr><td>test_marlin_gemm.py</td><td>605</td><td>marlin 算子缺失</td></tr>
+  <tr><td>test_block_fp8.py</td><td>391+</td><td>triton_key + deep_gemm + FP8</td></tr>
+  <tr><td>test_moe.py</td><td>316</td><td>marlin_moe + FP8</td></tr>
+  <tr><td>test_batched_moe.py</td><td>288</td><td>cat_cuda Float8 + triton_key</td></tr>
+  <tr><td>test_initialization.py</td><td>158</td><td>engine 初始化</td></tr>
+  <tr><td>test_grouped_topk.py</td><td>96</td><td>triton_key</td></tr>
+  <tr><td>test_flash_attn.py</td><td>68</td><td>head_size 限制</td></tr>
+</table>
+
+<h2>2. 已提交至 vllm 的修复总结（2.5.1_ut_verify 分支，30 个 commit）</h2>
+<h3>2.1 本地适配修复（13 个 commit）</h3>
+<table>
+  <tr><th>Commit</th><th>日期</th><th>修复内容</th><th>对应错误</th></tr>
+  <tr><td><code>17190b075</code></td><td>06-26</td><td>PyTorch 2.5.1 兼容层（requirements/CMakeLists 大改）</td><td>基础层</td></tr>
+  <tr><td><code>d343dc8e0</code></td><td>06-29</td><td>补 compilation/torch_compat.py</td><td>基础层</td></tr>
+  <tr><td><code>bf867df43</code></td><td>06-29</td><td>MemPool.snapshot 兼容 stub</td><td>AttributeError: MemPool snapshot</td></tr>
+  <tr><td><code>284316193</code></td><td>06-24</td><td>torch._dynamo.config.recompile_limit 兼容</td><td>torch≥2.6 才有</td></tr>
+  <tr><td><code>04cd1dffb</code></td><td>05-28</td><td>list[torch.Tensor] → List[torch.Tensor]</td><td>infer_schema 兼容</td></tr>
+  <tr><td><code>15565df57</code></td><td>05-29</td><td>DeepSeek torch_compile dynamic_arg_dims 加引号</td><td>compile 路径</td></tr>
+  <tr><td><code>f4f1077c9</code></td><td>07-28</td><td>Response API inline_call 回退 4 参数 + enforce-eager</td><td>InternalTorchDynamoError</td></tr>
+  <tr><td><code>73810b8ff</code>/<code>480f106b1</code>/<code>0969c54a1</code>/<code>3bf7e2f08</code>/<code>755a5000f</code></td><td>06-29~07-02</td><td>替换 meta-llama/Hermes 不可用模型 + 替换脚本 + LoRA 本地路径</td><td>HF gated 模型</td></tr>
+  <tr><td><code>e0b23b56c</code></td><td>08-03</td><td>run_collect.sh 收集后校验</td><td>工具</td></tr>
+</table>
+<h3>2.2 上游同步修复（17 个 commit，vllm 官方）</h3>
+<p>Attention（PrefixLM/FlexAttention/mm_prefix）· DeepEP/DeepGEMM（workspace 分配）· 内存尖峰 · CPU/ROCm/XPU 修复 · Jais2 支持 · CI flaky 修复 · ApplyRotaryEmb CustomOp 等。</p>
+<h3>2.3 修复覆盖度评估</h3>
+<table>
+  <tr><th>错误</th><th>状态</th></tr>
+  <tr><td>MemPool.snapshot / recompile_limit / inline_call / list[torch.Tensor] / meta-llama 模型</td><td>✅ 已修（代码 patch 或模型替换）</td></tr>
+  <tr><td><b>marlin 算子缺失（841）</b></td><td>❌ <b>未修</b> —— 需重新编译（arch 配置错误）</td></tr>
+  <tr><td><b>triton_key（519）</b></td><td>❌ <b>未修</b> —— triton 版本不配套</td></tr>
+  <tr><td><b>cat_cuda Float8（225）/ float8_e8m0fnu（80）</b></td><td>❌ 未修 —— torch 2.5.1 能力边界</td></tr>
+</table>
+<p><b>结论</b>：本地修复覆盖了 torch API 变更类（B 类）大部分，但 <b>算子缺失类（marlin/triton/FP8）是构建与版本配套问题，尚未通过代码修复解决</b> —— 这是剩余兼容性问题的大头。</p>
+
+<h2>3. 除兼容性问题外需要关注的问题</h2>
+<ol>
+  <li><b>构建链 arch 配置错误（最优先）</b>：_C.abi3.so 用 sm52 编译致 marlin 内核全缺失 —— 构建/发布流程缺陷，不升级 torch 也应修复（重编即得 841 条）</li>
+  <li><b>triton 版本锁定缺失</b>：容器 triton 3.5.0 与 vllm 0.13.0 不配套，建议环境声明锁定匹配版本</li>
+  <li><b>HF 模型离线准备不完整</b>：29 个模型缺失致 ~1,300 条失败；gated 模型需授权，未授权用 model_replacement.py 替换</li>
+  <li><b>executor timeout 机制</b>：1,787 条连坐中 detokenize 902；需区分真超时（用例慢）vs 假超时（executor 层）</li>
+  <li><b>多卡测试环境</b>：17 条需多机，单机无法覆盖 —— 环境限制</li>
+  <li><b>retriable_error 命令构造 bug</b>：3 条因单引号被 bash -c 破坏 —— apmm 框架缺陷</li>
+  <li><b>GPU1 硬件异常残留</b>：历史 Xid31 已 exclude_gpus=[1] 规避；本轮 8 条 cuDNN 需在健康卡上复验</li>
+</ol>
+
+<h2>4. 无法充分归因、留人工处理的用例</h2>
+<table>
+  <tr><th>分组</th><th>数量</th><th>原因</th></tr>
+  <tr><td><span class="tag t-manual">人工</span> 真断言失败</td><td>214</td><td>无法区分模型行为差异 vs vllm bug vs FP8 精度</td></tr>
+  <tr><td><span class="tag t-manual">人工</span> ignored 空消息</td><td>120</td><td>无 error_message，需查原始日志</td></tr>
+  <tr><td><span class="tag t-manual">人工</span> detokenize timeout 部分</td><td>~200-300</td><td>无法剥离编译耗时超时与真超时</td></tr>
+  <tr><td><span class="tag t-manual">人工</span> engine init 部分</td><td>~50</td><td>上游修复后需复验</td></tr>
+  <tr><td><span class="tag t-manual">人工</span> 杂项小簇</td><td>~101</td><td>分散，需逐条确认是否版本相关</td></tr>
+  <tr><td><span class="tag t-manual">人工</span> entrypoint 行为断言</td><td>~6</td><td>测试期望与实现差异</td></tr>
+  <tr><td><b>合计留人工</b></td><td><b>~690-790</b></td><td>占非 passed 11-13%</td></tr>
+</table>
+
+<h2>5. 报告小结：兼容问题总体评估与升级建议</h2>
+<div class="concl">
+  <div class="big">总体评估</div>
+  <div>通过率 26,875/32,955 = <b>81.5%</b>；非 passed 6,080 中<b>核心兼容性问题 2,122（34.9%）</b>。兼容性问题<b>非芯片问题</b>：marlin 构建缺失（arch 配置错误）+ triton 版本不配套 + torch 2.5.1 能力边界（FP8 不完整）。</div>
+  <div style="margin-top:8px">可救性：兼容性问题中 easy 修复 ~1,043（49%）· medium ~550 · difficult ~80；环境类 1,301 补模型缓存即救；timeout 1,787 重跑可救。</div>
+</div>
+
+<div class="concl">
+  <div class="big">是否升级 torch？—— 建议：有条件地升级，或至少先修复构建问题</div>
+  <div><b>支持升级（torch 2.6+/2.7+）</b>：① vllm 0.13.0 已引用 torch 2.7+ API（float8_e8m0fnu 80 条）；② torch 2.5.1 FP8 支持不完整（cat_cuda 225 条），而 FP8 是 H20 关键能力；③ 上游 vllm main 已要求 torch 2.11.0，长期停留 2.5.1 无法跟进上游；④ triton 配套问题在旧版本矩阵更难对齐。</div>
+  <div style="margin-top:8px"><b>支持暂不升级</b>：① marlin 841 是构建问题非版本问题，重编即可；② 环境 1,301 + timeout 1,787 + 可重试 5 ≈ 3,093 条与 torch 版本无关；③ 若目标芯片已有 2.5.1 配套算子适配，升级需全量重验证。</div>
+</div>
+
+<h3>行动建议（优先级排序）</h3>
+<table>
+  <tr><th>优先级</th><th>行动</th><th>预计收益</th></tr>
+  <tr><td><b>P0</b></td><td>用 TORCH_CUDA_ARCH_LIST="9.0" 重新编译 vllm 扩展（修复 marlin）</td><td>+841 条</td></tr>
+  <tr><td><b>P0</b></td><td>锁定/安装与 vllm 0.13.0 配套的 triton（或 patch triton_key）</td><td>+519 条</td></tr>
+  <tr><td><b>P1</b></td><td>补齐 HF 模型缓存（含 gated 授权）或用替代模型</td><td>+~1,300 条</td></tr>
+  <tr><td><b>P1</b></td><td>修复 executor timeout 机制（区分真假超时）</td><td>+~1,500 条</td></tr>
+  <tr><td><b>P2</b></td><td>评估 torch 2.6/2.7 升级（重点验证 FP8：cat_cuda/float8_e8m0fnu）</td><td>+~305 条</td></tr>
+  <tr><td><b>P2</b></td><td>人工处理留存 ~690-790 条（断言/空消息/杂项）</td><td>定性收尾</td></tr>
+</table>
+
+<div class="concl" style="border-color: rgba(56,189,248,.5);">
+  <div class="big">一句话结论</div>
+  <div>vllm 0.13.0 + torch 2.5.1 在 H20 上的兼容性问题：<b>约 1/3 是构建与版本配套缺陷（可低成本修复）</b>，<b>约 1/4 是 torch 2.5.1 自身能力边界（FP8 不完整、缺 2.7 API）</b>。若目标芯片对 FP8 有硬需求，建议升级 torch 至 2.6+（或跟随 vllm 官方版本）；无论是否升级，都需先修复 marlin 构建问题。</div>
+</div>
+
+<div class="foot">
+  数据源：runs/ut-20260808-manifest-remaining/manifest.json（32,955 条）· 辅助：ut_logs.db ｜ 方法：error_message 正则根因聚类 + 二进制/环境实测验证 ｜ 修复难度：easy=配置/环境修复 · medium=代码 patch/版本对齐 · difficult=需升级依赖或上游支持 ｜ 分支：summary/non-passed ｜ 2026-08-22
+</div>
+
+</div>
+</body>
+</html>

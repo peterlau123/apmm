@@ -1,0 +1,8 @@
+IGNORED        tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[False-True] (gpu=0, Nonems, exit=0)
+PASSED         tests/compile/fullgraph/test_simple.py::test_simple_piecewise_compile[inductor] (gpu=1, 8711ms, exit=0)
+PASSED         tests/compile/fullgraph/test_simple.py::test_simple_piecewise_compile[eager] (gpu=2, 8655ms, exit=0)
+PASSED         tests/compile/fullgraph/test_simple.py::test_simple_inductor_graph_partition (gpu=3, 146ms, exit=0)
+IGNORED        tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[eager-False] (gpu=4, Nonems, exit=0)
+PASSED         tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[inductor-False] (gpu=5, 8795ms, exit=0)
+PASSED         tests/compile/fullgraph/test_toy_llama.py::test_toy_llama[inductor-True] (gpu=6, 8976ms, exit=0)
+PASSED         tests/compile/test_aot_compile.py::test_no_dynamo_cache_entry (gpu=7, 0ms, exit=0)

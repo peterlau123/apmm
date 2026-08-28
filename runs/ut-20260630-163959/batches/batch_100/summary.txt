@@ -1,0 +1,8 @@
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_tool_message_with_empty_content (gpu=0, 117ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_tool_message_with_none_content (gpu=1, 121ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_no_analysis_messages (gpu=2, 117ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_only_analysis_message (gpu=3, 117ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_multiple_analysis_messages_without_final_message (gpu=4, 117ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_only_final_message (gpu=5, 117ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_drops_one_analysis_messages_before_final_message (gpu=6, 121ms, exit=0)
+PASSED         tests/entrypoints/openai/parser/test_harmony_utils.py::TestAutoDropAnalysisMessages::test_drops_all_analysis_messages_before_final_message (gpu=7, 117ms, exit=0)

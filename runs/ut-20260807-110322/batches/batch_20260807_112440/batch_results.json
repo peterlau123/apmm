@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_112440",
+  "started_at": "2026-08-07T03:24:40Z",
+  "finished_at": "2026-08-07T03:25:23Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440.log",
+    "size_bytes": 905004,
+    "captured_at": "2026-08-07T03:25:23Z"
+  },
+  "tests": [
+    {
+      "id": 20108,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-128-4096-block_size102-out_dtype102-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2664,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_4096_block_size102_out_dtype102_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_4096_block_size102_out_dtype102_0.xml"
+    },
+    {
+      "id": 20109,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-128-13824-block_size103-out_dtype103-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1988,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_13824_block_size103_out_dtype103_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_13824_block_size103_out_dtype103_0.xml"
+    },
+    {
+      "id": 20110,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-128-16384-block_size104-out_dtype104-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2598,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_16384_block_size104_out_dtype104_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_128_16384_block_size104_out_dtype104_0.xml"
+    },
+    {
+      "id": 20111,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-512-256-block_size105-out_dtype105-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2671,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_256_block_size105_out_dtype105_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_256_block_size105_out_dtype105_0.xml"
+    },
+    {
+      "id": 20112,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-512-3884-block_size106-out_dtype106-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1560,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_3884_block_size106_out_dtype106_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_3884_block_size106_out_dtype106_0.xml"
+    },
+    {
+      "id": 20113,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-512-4096-block_size107-out_dtype107-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2580,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_4096_block_size107_out_dtype107_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_4096_block_size107_out_dtype107_0.xml"
+    },
+    {
+      "id": 20114,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-512-13824-block_size108-out_dtype108-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1484,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_13824_block_size108_out_dtype108_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_13824_block_size108_out_dtype108_0.xml"
+    },
+    {
+      "id": 20115,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[84-512-16384-block_size109-out_dtype109-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1529,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/pytest_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_16384_block_size109_out_dtype109_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_112440/result_batch_20260807_112440_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_84_512_16384_block_size109_out_dtype109_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_153634",
+  "started_at": "2026-08-07T07:36:35Z",
+  "finished_at": "2026-08-07T07:37:49Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634.log",
+    "size_bytes": 239224,
+    "captured_at": "2026-08-07T07:37:49Z"
+  },
+  "tests": [
+    {
+      "id": 24122,
+      "test_node": "tests/kernels/test_shuffle_rows.py::test_shuffle_rows_contiguous_output",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 447,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_kernels_test_shuffle_rows_py_test_shuffle_rows_contiguous_output.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_kernels_test_shuffle_rows_py_test_shuffle_rows_contiguous_output.xml"
+    },
+    {
+      "id": 24154,
+      "test_node": "tests/lora/test_add_lora.py::test_add_lora",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 324,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_add_lora_py_test_add_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_add_lora_py_test_add_lora.xml"
+    },
+    {
+      "id": 24155,
+      "test_node": "tests/lora/test_chatglm3_tp.py::test_chatglm3_lora",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 514,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora.xml"
+    },
+    {
+      "id": 24156,
+      "test_node": "tests/lora/test_chatglm3_tp.py::test_chatglm3_lora_tp4",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora_tp4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora_tp4.xml"
+    },
+    {
+      "id": 24157,
+      "test_node": "tests/lora/test_chatglm3_tp.py::test_chatglm3_lora_tp4_fully_sharded_loras",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora_tp4_fully_sharded_loras.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_chatglm3_tp_py_test_chatglm3_lora_tp4_fully_sharded_loras.xml"
+    },
+    {
+      "id": 24158,
+      "test_node": "tests/lora/test_deepseekv2_tp.py::test_deepseekv2_lora",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 58872,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2_lora.xml"
+    },
+    {
+      "id": 24159,
+      "test_node": "tests/lora/test_deepseekv2_tp.py::test_deepseekv2",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 48110,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2.xml"
+    },
+    {
+      "id": 24160,
+      "test_node": "tests/lora/test_deepseekv2_tp.py::test_deepseekv2_tp2",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/pytest_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2_tp2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_153634/result_batch_20260807_153634_tests_lora_test_deepseekv2_tp_py_test_deepseekv2_tp2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

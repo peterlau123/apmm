@@ -1,0 +1,8 @@
+FAILED         tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0] (gpu=0, 240808ms, exit=1)
+FAILED         tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4] (gpu=1, 241473ms, exit=1)
+FAILED         tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0] (gpu=2, 240825ms, exit=1)
+FAILED         tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4] (gpu=3, 241495ms, exit=1)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8] (gpu=0, 0ms, exit=0)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1-+quant_fp8] (gpu=1, 0ms, exit=0)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs2-AttentionBackendEnum.TRITON_ATTN-matches2--quant_fp8] (gpu=2, 0ms, exit=0)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs3-AttentionBackendEnum.TRITON_ATTN-matches3-+quant_fp8] (gpu=3, 0ms, exit=0)

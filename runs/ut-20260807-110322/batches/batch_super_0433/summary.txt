@@ -1,0 +1,8 @@
+PASSED         tests/multimodal/test_processing.py::test_find_token_matches[PromptReplacement-prompt1-target_by_key1-expected_by_key1] (gpu=0, 171ms, exit=0)
+PASSED         tests/multimodal/test_processing.py::test_find_token_matches[PromptReplacement-prompt2-target_by_key2-expected_by_key2] (gpu=2, 175ms, exit=0)
+PASSED         tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion--target_by_key0-expected_by_key0] (gpu=3, 184ms, exit=0)
+IGNORED        tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-<image><image><image><image>-target_by_key1-expected_by_key1] (gpu=4, Nonems, exit=2)
+IGNORED        tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-Image:<image><image><image>Image:<image><image>!-target_by_key2-expected_by_key2] (gpu=5, Nonems, exit=2)
+IGNORED        tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-<|image|><image><|image|><image>-target_by_key3-expected_by_key3] (gpu=6, Nonems, exit=2)
+PASSED         tests/multimodal/test_processing.py::test_find_text_matches[PromptReplacement--target_by_key0-expected_by_key0] (gpu=0, 223ms, exit=0)
+IGNORED        tests/multimodal/test_processing.py::test_find_text_matches[PromptReplacement-<image><image><image><image>-target_by_key1-expected_by_key1] (gpu=2, Nonems, exit=2)

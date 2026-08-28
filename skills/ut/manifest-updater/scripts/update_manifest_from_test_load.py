@@ -54,7 +54,7 @@ def update_manifest_from_test_load(manifest_path: Path, test_load_path: Path):
         if tn in manifest_tests:
             mt = manifest_tests[tn]
             mt["status"] = tl_test.get("status", "pending")
-            for field in ("retry_count", "ignore_reason", "error_type", "error_message",
+            for field in ("retry_count", "ignored_reason", "error_type", "error_message",
                           "last_batch_id", "commit", "errors", "failures",
                           "duration_ms", "exit_code", "log_file", "run_at"):
                 if field in tl_test:

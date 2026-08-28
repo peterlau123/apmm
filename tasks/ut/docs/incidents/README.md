@@ -11,6 +11,15 @@
 | 2026-06-23 | [L4 PASS 后的 3 项产品问题复盘与修复设计 (run `ut-20260623-105441`)](2026-06-23-l4-postmortem-and-fixes.md) | Intent 分类 / Bastion OTP 自动化 / fixer→resolver 断链 | 📐 设计阶段 |
 | 2026-07-18 | [Phase 1 启动连环 bug + pi auto-checkpoint 回退事故 (run `ut-20260718-164107`)](2026-07-18-phase1-startup-bugs-and-auto-checkpoint-rollback.md) | auto-checkpoint stash 回退 / batch_id schema / GBK 编码 / torchrun 命令 / manifest 失效 | ✅ 已闭环 |
 | 2026-07-19 | [generate_batch 批次装填率过低事故（manifest 状态冻结）](2026-07-19-generate-batch-normal-starvation-incident.md) | Phase 1 batch 装填率仅 25%，manifest 状态冻结导致重复选 + normal 候选不足 | 📐 待修复 |
+| 2026-07-19 | [triton 3.5.0 与 torch 2.5.1 版本冲突事故（vllm vs inductor）](2026-07-19-triton-torch-version-conflict-incident.md) | 19 个 test_fusion_attn 恒定 failed，vllm 需 triton 3.5.0 / torch 2.5.1 需 triton 3.1.0，依赖冲突 | 📐 待评估 |
+| 2026-07-19 | [flashmla FP8 kernel 在 H20 上输出错误事故（C++ 扩展非 triton）](2026-07-19-flashmla-fp8-h20-incorrect-output-incident.md) | 48 个 test_flashmla FP8 参数化恒定 failed，_flashmla_extension_C 的 FP8 kernel 在 H20 部分位置输出错误大值/nan，平台兼容问题 | 📐 待排查 |
+| 2026-07-19 | [HF 模型缓存缺失事故（16 个 failed，3 个模型未离线缓存）](2026-07-19-hf-model-cache-missing-incident.md) | 16 个测试因 HF 模型未缓存失败，涉及 TinyLlama/meta-llama/hmellor 3 模型 | ✅ 已修复 |
+| 2026-07-19 | [vLLM server 启动超时/退出事故（compile 超时 + 模型缓存缺失）](2026-07-19-vllm-server-startup-timeout-incident.md) | 5 个 failed：4 个 mode:3 compile >240s 被内层 timeout 杀，1 个 whisper-small 缓存缺失致 server 崩溃 | 📐 待修复 |
+| 2026-07-19 | [Response API 测试 torch.compile + DeepGEMM 崩溃事故（torch 2.5.1 API 不匹配）](2026-07-19-response-api-torch-compile-deepgemm-crash-incident.md) | 7 个 test_response_api_*.py error，vllm eef921f45 AOT compile 重构与 torch 2.5.1 不匹配（inline_call/VllmBackend）+ deep_gemm._C 未编译 warmup 崩 | ✅ 已闭环 |
+| 2026-07-19 | [content_format 断言失败事故（上游测试期望与检测逻辑不一致）](2026-07-19-content-format-test-expectation-mismatch-incident.md) | 3 个 test_chat_utils failed，上游测试参数表期望过时（fallbacks Qwen2-VL 期望 string 实为 openai，hf_defined LLAMA_GUARD 期望 openai 实为 string） | 📐 待评估 |
+| 2026-08-03 | [测试清单数量溯因事故（test_async_llm 22 条静默丢失）](2026-08-03-test-list-count-loss-incident.md) | hf_hub/hf_hub/hub 混淆致 TinyLlama 缓存结构损坏 → collect ERROR → 22 条用例静默丢失（32964→32933） | ✅ 已修复 |
+| 2026-08-05 | [CUDA_VISIBLE_DEVICES 单卡导致 kernel 参数化节点 not found 事故](2026-08-05-kernel-cuda-visible-devices-param-notfound-incident.md) | 962 个 kernel 测试（test_cache/prefix_prefill/fused_quant_layernorm）Phase 1 起被误判 ignored：单卡 env 致参数化只生成 cuda:0，cuda:1 节点 not found → 收集 0 | ✅ 已修复（专项串行重跑，315 passed + 241 skipped） |
+| 2026-08-05 | [H20 GPU 1 卡硬件异常事故（GPC1 MMU Fault）](2026-08-05-gpu1-hardware-fault-incident.md) | 403 个 fused_quant_layernorm 全失败的根因：卡 1 GPC1 硬件单元故障（Xid 31 ×9），一度误判为 kernel bug | 🟡 测试侧已闭环（device 映射 400 全过 + exclude_gpus），硬件待维修（上报管理员） |
 
 ## 相关入口
 

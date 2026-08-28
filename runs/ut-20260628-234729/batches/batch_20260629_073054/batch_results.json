@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260629_073054",
+  "started_at": "2026-06-28T23:30:56Z",
+  "finished_at": "2026-06-28T23:32:16Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/pytest_batch_20260629_073054.log",
+    "size_bytes": 56412,
+    "captured_at": "2026-06-28T23:32:16Z"
+  },
+  "tests": [
+    {
+      "id": 1343,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_user_message_with_empty_content",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 115,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/pytest_batch_20260629_073054_tests_entrypoints_openai_parser_test_harmony_utils_py_TestParseChatInputToHarmonyMessage_test_user_message_with_empty_content.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/result_batch_20260629_073054_tests_entrypoints_openai_parser_test_harmony_utils_py_TestParseChatInputToHarmonyMessage_test_user_message_with_empty_content.xml"
+    },
+    {
+      "id": 1344,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_user_message_with_none_content",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 112,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/pytest_batch_20260629_073054_tests_entrypoints_openai_parser_test_harmony_utils_py_TestParseChatInputToHarmonyMessage_test_user_message_with_none_content.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/result_batch_20260629_073054_tests_entrypoints_openai_parser_test_harmony_utils_py_TestParseChatInputToHarmonyMessage_test_user_message_with_none_content.xml"
+    },
+    {
+      "id": 32401,
+      "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_too_many_completion_logprobs[server0-facebook/opt-125m]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18068,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/pytest_batch_20260629_073054_tests_v1_entrypoints_openai_test_completion_py_test_too_many_completion_logprobs_server0_facebook_opt_125m.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/result_batch_20260629_073054_tests_v1_entrypoints_openai_test_completion_py_test_too_many_completion_logprobs_server0_facebook_opt_125m.xml"
+    },
+    {
+      "id": 32402,
+      "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_prompt_logprobs_completion[server0-facebook/opt-125m--1]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18070,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/pytest_batch_20260629_073054_tests_v1_entrypoints_openai_test_completion_py_test_prompt_logprobs_completion_server0_facebook_opt_125m_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_073054/result_batch_20260629_073054_tests_v1_entrypoints_openai_test_completion_py_test_prompt_logprobs_completion_server0_facebook_opt_125m_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 2,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

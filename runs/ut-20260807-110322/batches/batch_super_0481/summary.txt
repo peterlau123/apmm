@@ -1,0 +1,8 @@
+IGNORED        tests/test_config.py::test_is_prefix_caching_supported[Qwen/Qwen3-Next-80B-A3B-Instruct-hybrid-False-Hybrid models does not support prefix caching since the feature is still experimental.] (gpu=0, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_prefix_caching_supported[ibm-granite/granite-4.0-h-small-hybrid-False-Hybrid models does not support prefix caching since the feature is still experimental.] (gpu=2, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_prefix_caching_supported[state-spaces/mamba-130m-hf-attention_free-False-Attention free models does not support prefix caching since the feature is still experimental.] (gpu=3, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_prefix_caching_supported[openai/whisper-small-encoder_decoder-False-Encoder decoder models does not support prefix caching.] (gpu=4, Nonems, exit=4)
+PASSED         tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops0-True] (gpu=5, 237ms, exit=0)
+PASSED         tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops1-True] (gpu=6, 212ms, exit=0)
+PASSED         tests/test_config.py::test_is_custom_op_enabled[eager-custom_ops2-False] (gpu=0, 157ms, exit=0)
+PASSED         tests/test_config.py::test_is_custom_op_enabled[inductor-custom_ops3-False] (gpu=2, 151ms, exit=0)

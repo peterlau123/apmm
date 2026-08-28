@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_092509",
+ "started_at": "2026-08-04T15:24:20Z",
+ "finished_at": "2026-08-04T15:24:34Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0168/pytest_batch_super_0168.log",
+  "size_bytes": 83160,
+  "captured_at": "2026-08-04T15:24:34Z"
+ },
+ "tests": [
+  {
+   "id": 4692,
+   "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-256-16-40-num_heads1-seq_lens1-False]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: head_size should be a multiple of 16",
+   "duration_ms": 586,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0168/pytest_batch_super_0168_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_256_16_40_num_heads1_seq_lens1_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0168/result_batch_super_0168_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_256_16_40_num_heads1_seq_lens1_False.xml"
+  },
+  {
+   "id": 4693,
+   "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-256-16-72-num_heads0-seq_lens0-True]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: head_size should be a multiple of 16",
+   "duration_ms": 840,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0168/pytest_batch_super_0168_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_256_16_72_num_heads0_seq_lens0_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0168/result_batch_super_0168_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_256_16_72_num_heads0_seq_lens0_True.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 0,
+  "failed": 2,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0340",
+  "started_at": "2026-08-07T19:43:22Z",
+  "finished_at": "2026-08-07T19:58:36Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340.log",
+    "size_bytes": 235670,
+    "captured_at": "2026-08-07T19:58:36Z"
+  },
+  "tests": [
+    {
+      "id": 28846,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_serialize_and_serve_entrypoints",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "subprocess.CalledProcessError: Command '['/usr/bin/python3', '/gpfs/gcsp/M2.7_verify/vllm/examples/others/tensorize_vllm_model.py', '--model', 'facebook/opt-125m', 'serialize', '--serialized-directory', '/tmp/pytest-of-root/pytest-633/test_serialize_and_serve_entry0', '--suffix', 'test', '--serialization-kwargs', '{\"limit_cpu_concurrency\": 4}']' returned non-zero exit status 1.",
+      "duration_ms": 13205,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_serialize_and_serve_entrypoints.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_serialize_and_serve_entrypoints.xml"
+    },
+    {
+      "id": 28847,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[device]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5352,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_device.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_device.xml"
+    },
+    {
+      "id": 28848,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[mode]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5412,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_mode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_mode.xml"
+    },
+    {
+      "id": 28849,
+      "test_node": "tests/model_executor/model_loader/tensorizer_loader/test_tensorizer.py::test_blacklisted_parameter_for_loading[dtype]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5303,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_dtype.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_tensorizer_loader_test_tensorizer_py_test_blacklisted_parameter_for_loading_dtype.xml"
+    },
+    {
+      "id": 28850,
+      "test_node": "tests/model_executor/model_loader/test_registry.py::test_register_model_loader",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 136,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_test_registry_py_test_register_model_loader.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_test_registry_py_test_register_model_loader.xml"
+    },
+    {
+      "id": 28851,
+      "test_node": "tests/model_executor/model_loader/test_registry.py::test_invalid_model_loader",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 135,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_test_registry_py_test_invalid_model_loader.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_test_registry_py_test_invalid_model_loader.xml"
+    },
+    {
+      "id": 28852,
+      "test_node": "tests/model_executor/model_loader/test_sharded_state_loader.py::test_filter_subtensors",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 153,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_test_sharded_state_loader_py_test_filter_subtensors.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_test_sharded_state_loader_py_test_filter_subtensors.xml"
+    },
+    {
+      "id": 28853,
+      "test_node": "tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": null,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/pytest_batch_super_0340_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0340/result_batch_super_0340_tests_model_executor_model_loader_test_sharded_state_loader_py_test_sharded_state_loader_1_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

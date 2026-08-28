@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_125521",
+  "started_at": "2026-08-06T04:55:21Z",
+  "finished_at": "2026-08-06T04:55:49Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521.log",
+    "size_bytes": 19932,
+    "captured_at": "2026-08-06T04:55:49Z"
+  },
+  "tests": [
+    {
+      "id": 13172,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-1-128-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2972,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_128_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_128_128.xml"
+    },
+    {
+      "id": 13173,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-1-128-7168]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2500,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_128_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_128_7168.xml"
+    },
+    {
+      "id": 13174,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-1-1024-7168]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2409,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_1024_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_1024_7168.xml"
+    },
+    {
+      "id": 13175,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-1-4096-512]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2061,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_4096_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_4096_512.xml"
+    },
+    {
+      "id": 13176,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-1-4096-7168]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2832,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_4096_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_1_4096_7168.xml"
+    },
+    {
+      "id": 13177,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-33-512-512]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2074,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_512_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_512_512.xml"
+    },
+    {
+      "id": 13178,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-33-128-7168]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1639,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_128_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_128_7168.xml"
+    },
+    {
+      "id": 13179,
+      "test_node": "tests/kernels/moe/test_block_int8.py::test_w8a8_block_int8_fused_moe[0-dtype0-block_size0-2-8-33-1024-7168]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1996,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/pytest_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_1024_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_125521/result_batch_20260806_125521_tests_kernels_moe_test_block_int8_py_test_w8a8_block_int8_fused_moe_0_dtype0_block_size0_2_8_33_1024_7168.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

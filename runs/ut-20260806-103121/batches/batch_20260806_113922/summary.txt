@@ -1,0 +1,8 @@
+PASSED         tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_cont_batch[seq_len_chunk_size_cases6-32-8-itype0] (gpu=0, 10802ms, exit=0)
+PASSED         tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_cont_batch_prefill_chunking[seqlens0-8] (gpu=2, 41400ms, exit=0)
+PASSED         tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_cont_batch_prefill_chunking[seqlens0-256] (gpu=3, 38662ms, exit=0)
+PASSED         tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_cont_batch_prefill_chunking[seqlens1-8] (gpu=4, 41781ms, exit=0)
+PASSED         tests/kernels/mamba/test_mamba_ssm_ssd.py::test_mamba_chunk_scan_cont_batch_prefill_chunking[seqlens1-256] (gpu=5, 38620ms, exit=0)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[2-512-128-256-16] (gpu=6, 2043ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[2-512-128-256-32] (gpu=0, 1720ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[2-512-128-512-16] (gpu=2, 1736ms, exit=1)

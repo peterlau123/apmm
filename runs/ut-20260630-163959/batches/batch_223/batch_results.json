@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260701_154659",
+  "started_at": "2026-07-01T07:47:27Z",
+  "finished_at": "2026-07-01T07:48:52Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/pytest_batch_20260701_154659.log",
+    "size_bytes": 147993,
+    "captured_at": "2026-07-01T07:48:52Z"
+  },
+  "tests": [
+    {
+      "id": 1576,
+      "test_node": "tests/entrypoints/openai/test_models.py::test_check_models",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/pytest_batch_20260701_154659_tests_entrypoints_openai_test_models_py_test_check_models.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/result_batch_20260701_154659_tests_entrypoints_openai_test_models_py_test_check_models.xml"
+    },
+    {
+      "id": 1577,
+      "test_node": "tests/entrypoints/openai/test_oot_registration.py::test_oot_registration_for_api_server",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 152,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/pytest_batch_20260701_154659_tests_entrypoints_openai_test_oot_registration_py_test_oot_registration_for_api_server.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/result_batch_20260701_154659_tests_entrypoints_openai_test_oot_registration_py_test_oot_registration_for_api_server.xml"
+    },
+    {
+      "id": 1578,
+      "test_node": "tests/entrypoints/openai/test_openai_schema.py::test_openapi_stateless",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/pytest_batch_20260701_154659_tests_entrypoints_openai_test_openai_schema_py_test_openapi_stateless.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/result_batch_20260701_154659_tests_entrypoints_openai_test_openai_schema_py_test_openapi_stateless.xml"
+    },
+    {
+      "id": 1579,
+      "test_node": "tests/entrypoints/openai/test_optional_middleware.py::test_no_api_token",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21082,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/pytest_batch_20260701_154659_tests_entrypoints_openai_test_optional_middleware_py_test_no_api_token.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_154659/result_batch_20260701_154659_tests_entrypoints_openai_test_optional_middleware_py_test_no_api_token.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

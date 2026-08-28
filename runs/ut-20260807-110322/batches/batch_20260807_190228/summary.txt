@@ -1,0 +1,8 @@
+FAILED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_abort_timeout_on_prefiller[ray] (gpu=0, 26172ms, exit=1)
+FAILED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_abort_timeout_on_prefiller[None] (gpu=2, 12315ms, exit=1)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_register_kv_caches[FLASH_ATTN] (gpu=3, 538ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_register_kv_caches[ROCM_ATTN] (gpu=4, 0ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_register_kv_caches[TRITON_ATTN] (gpu=5, 598ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_kv_buffer_to_nixl_memory_types[oot-VRAM] (gpu=6, 726ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_shutdown_cleans_up_resources (gpu=0, 886ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_nixl_connector.py::test_aborted_request_removed_from_worker_in_batch (gpu=2, 945ms, exit=0)

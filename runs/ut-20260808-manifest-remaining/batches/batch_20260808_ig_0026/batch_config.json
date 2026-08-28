@@ -1,0 +1,1243 @@
+{
+ "batch_id": "batch_20260808_ig_0026",
+ "batch_type": "normal",
+ "tests": [
+  {
+   "id": 31256,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls[xml-parallel_tools]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls[xml-parallel_tools]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0030",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:53.942665",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254100"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770472"
+    }
+   ]
+  },
+  {
+   "id": 31257,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls[xml-tool_with_typed_params]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls[xml-tool_with_typed_params]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": "batch_20260702_195027",
+   "last_batch_id": "batch_20260702_195027",
+   "run_count": 1,
+   "retry_count": 0,
+   "max_retry": 2,
+   "last_run_at": "2026-07-02T11:52:17Z",
+   "last_duration_ms": 3,
+   "last_exit_code": 0,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_195027/pytest_batch_20260702_195027_tests_tool_parsers_test_qwen3coder_tool_parser_py_test_extract_tool_calls_xml_tool_with_typed_params.log",
+   "errors": [],
+   "failures": []
+  },
+  {
+   "id": 31258,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_fallback_no_tags[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_fallback_no_tags[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0030",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:53.942667",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254103"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770475"
+    }
+   ]
+  },
+  {
+   "id": 31259,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_type_conversion[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_type_conversion[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0030",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:53.942669",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254105"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770478"
+    }
+   ]
+  },
+  {
+   "id": 31260,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-no_tools]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-no_tools]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0030",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:53.942671",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254107"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770480"
+    }
+   ]
+  },
+  {
+   "id": 31261,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-single_tool]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-single_tool]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:53.942674",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254109"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770483"
+    }
+   ]
+  },
+  {
+   "id": 31262,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-single_tool_with_content]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-single_tool_with_content]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061190",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254112"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770485"
+    }
+   ]
+  },
+  {
+   "id": 31263,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-single_tool_multiline_param]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-single_tool_multiline_param]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061208",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254114"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770488"
+    }
+   ]
+  },
+  {
+   "id": 31264,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-parallel_tools]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-parallel_tools]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061215",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254116"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770490"
+    }
+   ]
+  },
+  {
+   "id": 31265,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming[xml-tool_with_typed_params]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming[xml-tool_with_typed_params]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061218",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254119"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770492"
+    }
+   ]
+  },
+  {
+   "id": 31266,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_missing_closing_parameter_tag[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_missing_closing_parameter_tag[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061221",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254122"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770495"
+    }
+   ]
+  },
+  {
+   "id": 31267,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming_missing_closing_tag[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming_missing_closing_tag[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061223",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254124"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770497"
+    }
+   ]
+  },
+  {
+   "id": 31268,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming_incremental[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming_incremental[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0031",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061225",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254126"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770500"
+    }
+   ]
+  },
+  {
+   "id": 31269,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_complex_type_with_single_quote[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_complex_type_with_single_quote[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:48:59.061228",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254128"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770502"
+    }
+   ]
+  },
+  {
+   "id": 31270,
+   "test_node": "tests/tool_parsers/test_qwen3coder_tool_parser.py::test_extract_tool_calls_streaming_missing_opening_tag[xml]",
+   "test_file": "tests/tool_parsers/test_qwen3coder_tool_parser.py",
+   "test_name": "test_extract_tool_calls_streaming_missing_opening_tag[xml]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386339",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254130"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770505"
+    }
+   ]
+  },
+  {
+   "id": 31271,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_extract_tool_calls_no_tools",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_extract_tool_calls_no_tools",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386359",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254133"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770508"
+    }
+   ]
+  },
+  {
+   "id": 31272,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_extract_tool_calls[tool_call_0_thinking_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_extract_tool_calls[tool_call_0_thinking_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386365",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254135"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770510"
+    }
+   ]
+  },
+  {
+   "id": 31273,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_extract_tool_calls[tool_call_512_thinkg_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_extract_tool_calls[tool_call_512_thinkg_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386369",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254138"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770512"
+    }
+   ]
+  },
+  {
+   "id": 31274,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_extract_tool_calls[tool_call_unlimited_thinking_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_extract_tool_calls[tool_call_unlimited_thinking_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386371",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254140"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770515"
+    }
+   ]
+  },
+  {
+   "id": 31275,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_streaming_tool_calls_no_tools",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_streaming_tool_calls_no_tools",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386374",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254143"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770517"
+    }
+   ]
+  },
+  {
+   "id": 31276,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_streaming_tool_calls[tool_call_0_thinking_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_streaming_tool_calls[tool_call_0_thinking_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0032",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386376",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254146"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770520"
+    }
+   ]
+  },
+  {
+   "id": 31277,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_streaming_tool_calls[tool_call_512_thinkg_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_streaming_tool_calls[tool_call_512_thinkg_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:03.386379",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254150"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770522"
+    }
+   ]
+  },
+  {
+   "id": 31278,
+   "test_node": "tests/tool_parsers/test_seed_oss_tool_parser.py::test_streaming_tool_calls[tool_call_unlimited_thinking_budget]",
+   "test_file": "tests/tool_parsers/test_seed_oss_tool_parser.py",
+   "test_name": "test_streaming_tool_calls[tool_call_unlimited_thinking_budget]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566367",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254152"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770525"
+    }
+   ]
+  },
+  {
+   "id": 31279,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls_no_tools",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls_no_tools",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566387",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254154"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770528"
+    }
+   ]
+  },
+  {
+   "id": 31280,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls[parallel_tool_calls]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls[parallel_tool_calls]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566393",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254157"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770530"
+    }
+   ]
+  },
+  {
+   "id": 31281,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls[single_tool_with_think_tag]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls[single_tool_with_think_tag]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566396",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254159"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770532"
+    }
+   ]
+  },
+  {
+   "id": 31282,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls[single_tool_with_json_code_block]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls[single_tool_with_json_code_block]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566398",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254161"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770535"
+    }
+   ]
+  },
+  {
+   "id": 31283,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls[single_tool_with_tool_calls_tag]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls[single_tool_with_tool_calls_tag]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566400",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254163"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770537"
+    }
+   ]
+  },
+  {
+   "id": 31284,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls[single_tool_with_tool_call_xml_tags]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls[single_tool_with_tool_call_xml_tags]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0033",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566402",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254166"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770540"
+    }
+   ]
+  },
+  {
+   "id": 31285,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_extract_tool_calls_list_structure[list_structured_tool_call]",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_extract_tool_calls_list_structure[list_structured_tool_call]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0034",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:22.566406",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254168"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770542"
+    }
+   ]
+  },
+  {
+   "id": 31286,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_preprocess_model_output",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_preprocess_model_output",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0034",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:24.977516",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254170"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770545"
+    }
+   ]
+  },
+  {
+   "id": 31287,
+   "test_node": "tests/tool_parsers/test_xlam_tool_parser.py::test_streaming_with_list_structure",
+   "test_file": "tests/tool_parsers/test_xlam_tool_parser.py",
+   "test_name": "test_streaming_with_list_structure",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260808_ig_0034",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3,
+   "exit_code": 1,
+   "run_at": "2026-08-07T18:49:24.977535",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T12:06:07.254173"
+    },
+    {
+     "batch_id": null,
+     "status": "error",
+     "executed_at": "2026-08-08T18:18:18.770548"
+    }
+   ]
+  }
+ ],
+ "distributed_count": 0,
+ "requires_multi_gpu": false,
+ "gpu_per_test": 1,
+ "generated_at": "2026-08-09T09:08:32.134860"
+}

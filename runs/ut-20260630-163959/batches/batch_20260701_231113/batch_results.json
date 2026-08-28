@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_231113",
+  "started_at": "2026-07-01T15:11:55Z",
+  "finished_at": "2026-07-01T15:13:23Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113.log",
+    "size_bytes": 124249,
+    "captured_at": "2026-07-01T15:13:23Z"
+  },
+  "tests": [
+    {
+      "id": 1676,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_calling_full_history[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_full_history_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_full_history_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1677,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_calling_with_stream[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_with_stream_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_calling_with_stream_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1678,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_output_messages_enabled[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_output_messages_enabled_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_output_messages_enabled_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1679,
+      "test_node": "tests/entrypoints/openai/test_response_api_with_harmony.py::test_function_call_with_previous_input_messages[openai/gpt-oss-20b]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_call_with_previous_input_messages_openai_gpt_oss_20b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_response_api_with_harmony_py_test_function_call_with_previous_input_messages_openai_gpt_oss_20b.xml"
+    },
+    {
+      "id": 1680,
+      "test_node": "tests/entrypoints/openai/test_responses_error.py::test_raise_if_error_raises_generation_error",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_raise_if_error_raises_generation_error.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_raise_if_error_raises_generation_error.xml"
+    },
+    {
+      "id": 1681,
+      "test_node": "tests/entrypoints/openai/test_responses_error.py::test_convert_generation_error_to_response",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_convert_generation_error_to_response.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_convert_generation_error_to_response.xml"
+    },
+    {
+      "id": 1682,
+      "test_node": "tests/entrypoints/openai/test_responses_error.py::test_convert_generation_error_to_streaming_response",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_convert_generation_error_to_streaming_response.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_responses_error_py_test_convert_generation_error_to_streaming_response.xml"
+    },
+    {
+      "id": 1683,
+      "test_node": "tests/entrypoints/openai/test_responses_function_call_parsing.py::test_function_call_dict_converted_to_object",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 116,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/pytest_batch_20260701_231113_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_dict_converted_to_object.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_231113/result_batch_20260701_231113_tests_entrypoints_openai_test_responses_function_call_parsing_py_test_function_call_dict_converted_to_object.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

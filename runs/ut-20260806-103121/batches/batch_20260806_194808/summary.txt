@@ -1,0 +1,8 @@
+PASSED         tests/kernels/moe/test_silu_mul_per_token_group_quant_fp8_colmajor.py::test_silu_mul_fp8_quant_deep_gemm[14336-128] (gpu=0, 1404ms, exit=0)
+PASSED         tests/kernels/moe/test_silu_mul_per_token_group_quant_fp8_colmajor.py::test_silu_mul_fp8_quant_deep_gemm[14336-256] (gpu=2, 1819ms, exit=0)
+PASSED         tests/kernels/moe/test_silu_mul_per_token_group_quant_fp8_colmajor.py::test_silu_mul_fp8_quant_deep_gemm[14336-512] (gpu=3, 1736ms, exit=0)
+PASSED         tests/kernels/moe/test_triton_moe_ptpc_fp8.py::test_w8a8_fp8_fused_moe[1-128-256-8-2-dtype0-0] (gpu=4, 2150ms, exit=0)
+PASSED         tests/kernels/moe/test_triton_moe_ptpc_fp8.py::test_w8a8_fp8_fused_moe[1-128-256-8-2-dtype1-0] (gpu=5, 2425ms, exit=0)
+PASSED         tests/kernels/moe/test_triton_moe_ptpc_fp8.py::test_w8a8_fp8_fused_moe[1-128-256-8-6-dtype2-0] (gpu=6, 2186ms, exit=0)
+PASSED         tests/kernels/moe/test_triton_moe_ptpc_fp8.py::test_w8a8_fp8_fused_moe[1-128-256-8-6-dtype3-0] (gpu=0, 1310ms, exit=0)
+PASSED         tests/kernels/moe/test_triton_moe_ptpc_fp8.py::test_w8a8_fp8_fused_moe[1-128-4096-8-2-dtype4-0] (gpu=2, 1116ms, exit=0)

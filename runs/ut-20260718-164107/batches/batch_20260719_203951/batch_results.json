@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_203951",
+ "started_at": "2026-08-04T16:45:31Z",
+ "finished_at": "2026-08-04T16:45:42Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0246/pytest_batch_super_0246.log",
+  "size_bytes": 5080,
+  "captured_at": "2026-08-04T16:45:42Z"
+ },
+ "tests": [
+  {
+   "id": 6045,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8_e5m2-dtype0-128-64-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0246/pytest_batch_super_0246_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_128_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0246/result_batch_super_0246_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_128_64_64.xml"
+  },
+  {
+   "id": 6046,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:1-auto-dtype0-24-1-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0246/pytest_batch_super_0246_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_1_auto_dtype0_24_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0246/result_batch_super_0246_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_1_auto_dtype0_24_1_64.xml"
+  },
+  {
+   "id": 6039,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8-dtype0-24-64-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_24_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_24_64_64.xml"
+  },
+  {
+   "id": 6040,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8-dtype0-128-1-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_128_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_128_1_64.xml"
+  },
+  {
+   "id": 6041,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8-dtype0-128-64-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_128_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_dtype0_128_64_64.xml"
+  },
+  {
+   "id": 6042,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8_e5m2-dtype0-24-1-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_24_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_24_1_64.xml"
+  },
+  {
+   "id": 6043,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8_e5m2-dtype0-24-64-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_24_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_24_64_64.xml"
+  },
+  {
+   "id": 6044,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_f32[chunked_prefill_paged_decode-2048-cuda:0-fp8_e5m2-dtype0-128-1-64]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/pytest_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_128_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0245/result_batch_super_0245_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_f32_chunked_prefill_paged_decode_2048_cuda_0_fp8_e5m2_dtype0_128_1_64.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 1
+ }
+}

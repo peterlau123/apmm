@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_092450",
+ "started_at": "2026-08-04T15:22:21Z",
+ "finished_at": "2026-08-04T15:22:50Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0166/pytest_batch_super_0166.log",
+  "size_bytes": 90768,
+  "captured_at": "2026-08-04T15:22:50Z"
+ },
+ "tests": [
+  {
+   "id": 4678,
+   "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-256-num_heads0-seq_lens0-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1079,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0166/pytest_batch_super_0166_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_256_num_heads0_seq_lens0_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0166/result_batch_super_0166_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_256_num_heads0_seq_lens0_False.xml"
+  },
+  {
+   "id": 4679,
+   "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-256-num_heads0-seq_lens1-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1142,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0166/pytest_batch_super_0166_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_256_num_heads0_seq_lens1_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0166/result_batch_super_0166_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_256_num_heads0_seq_lens1_True.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185321",
+  "started_at": "2026-08-07T10:53:21Z",
+  "finished_at": "2026-08-07T10:53:23Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:53:23Z"
+  },
+  "tests": [
+    {
+      "id": 31709,
+      "test_node": "tests/v1/attention/test_attention_backends.py::test_sliding_window_backend_correctness[4-microsoft/Phi-tiny-MoE-instruct-mixed_large]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_py_test_sliding_window_backend_correctness_4_microsoft_Phi_tiny_MoE_instruct_mixed_large.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_py_test_sliding_window_backend_correctness_4_microsoft_Phi_tiny_MoE_instruct_mixed_large.xml"
+    },
+    {
+      "id": 31710,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_get_attn_backend[MambaMixer-init_kwargs0-Mamba1AttentionBackend-mamba1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MambaMixer_init_kwargs0_Mamba1AttentionBackend_mamba1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MambaMixer_init_kwargs0_Mamba1AttentionBackend_mamba1.xml"
+    },
+    {
+      "id": 31711,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_get_attn_backend[MambaMixer2-init_kwargs1-Mamba2AttentionBackend-mamba2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MambaMixer2_init_kwargs1_Mamba2AttentionBackend_mamba2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MambaMixer2_init_kwargs1_Mamba2AttentionBackend_mamba2.xml"
+    },
+    {
+      "id": 31712,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_get_attn_backend[MiniMaxText01LinearAttention-init_kwargs2-LinearAttentionBackend-linear_attention]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MiniMaxText01LinearAttention_init_kwargs2_LinearAttentionBackend_linear_attention.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_MiniMaxText01LinearAttention_init_kwargs2_LinearAttentionBackend_linear_attention.xml"
+    },
+    {
+      "id": 31713,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_get_attn_backend[ShortConv-init_kwargs3-ShortConvAttentionBackend-short_conv]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_ShortConv_init_kwargs3_ShortConvAttentionBackend_short_conv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_get_attn_backend_ShortConv_init_kwargs3_ShortConvAttentionBackend_short_conv.xml"
+    },
+    {
+      "id": 31714,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_have_unified_interface[MambaMixer-Mamba1AttentionBackend-mamba1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MambaMixer_Mamba1AttentionBackend_mamba1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MambaMixer_Mamba1AttentionBackend_mamba1.xml"
+    },
+    {
+      "id": 31715,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_have_unified_interface[MambaMixer2-Mamba2AttentionBackend-mamba2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MambaMixer2_Mamba2AttentionBackend_mamba2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MambaMixer2_Mamba2AttentionBackend_mamba2.xml"
+    },
+    {
+      "id": 31716,
+      "test_node": "tests/v1/attention/test_attention_backends_selection.py::test_mamba_layers_have_unified_interface[MiniMaxText01LinearAttention-LinearAttentionBackend-linear_attention]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/pytest_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MiniMaxText01LinearAttention_LinearAttentionBackend_linear_attention.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185321/result_batch_20260807_185321_tests_v1_attention_test_attention_backends_selection_py_test_mamba_layers_have_unified_interface_MiniMaxText01LinearAttention_LinearAttentionBackend_linear_attention.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

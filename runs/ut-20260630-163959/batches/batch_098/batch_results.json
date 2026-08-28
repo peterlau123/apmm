@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_042241",
+  "started_at": "2026-06-30T20:23:11Z",
+  "finished_at": "2026-06-30T20:24:46Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241.log",
+    "size_bytes": 21328,
+    "captured_at": "2026-06-30T20:24:46Z"
+  },
+  "tests": [
+    {
+      "id": 1330,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_user_message_with_array_content[parse_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_user_message_with_array_content_parse_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_user_message_with_array_content_parse_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1331,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_assistant_message_with_string_content[parse_chat_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 116,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_assistant_message_with_string_content_parse_chat_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_assistant_message_with_string_content_parse_chat_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1332,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_assistant_message_with_string_content[parse_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_assistant_message_with_string_content_parse_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_assistant_message_with_string_content_parse_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1333,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_pydantic_model_input[parse_chat_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_pydantic_model_input_parse_chat_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_pydantic_model_input_parse_chat_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1334,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_pydantic_model_input[parse_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_pydantic_model_input_parse_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_pydantic_model_input_parse_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1335,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_tool_call_with_missing_function_fields[parse_chat_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_tool_call_with_missing_function_fields_parse_chat_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_tool_call_with_missing_function_fields_parse_chat_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1336,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_tool_call_with_missing_function_fields[parse_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_tool_call_with_missing_function_fields_parse_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_tool_call_with_missing_function_fields_parse_input_to_harmony_message.xml"
+    },
+    {
+      "id": 1337,
+      "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestCommonParseInputToHarmonyMessage::test_array_content_with_missing_text[parse_chat_input_to_harmony_message]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/pytest_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_array_content_with_missing_text_parse_chat_input_to_harmony_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_042241/result_batch_20260701_042241_tests_entrypoints_openai_parser_test_harmony_utils_py_TestCommonParseInputToHarmonyMessage_test_array_content_with_missing_text_parse_chat_input_to_harmony_message.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs8-AttentionBackendEnum.FLASHINFER-matches8--rms_norm] (gpu=0, 412ms, exit=0)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs9-AttentionBackendEnum.FLASHINFER-matches9-+rms_norm] (gpu=1, 378ms, exit=0)
+FAILED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs10-AttentionBackendEnum.TRITON_ATTN-matches10--rms_norm] (gpu=2, 424ms, exit=1)
+FAILED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-meta-llama/Meta-Llama-3-8B-Instruct-model_kwargs11-AttentionBackendEnum.TRITON_ATTN-matches11-+rms_norm] (gpu=3, 414ms, exit=1)
+FAILED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs12-AttentionBackendEnum.TRITON_ATTN-matches12--rms_norm] (gpu=0, 1172772ms, exit=None)
+FAILED         tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs13-AttentionBackendEnum.TRITON_ATTN-matches13-+rms_norm] (gpu=1, 1181650ms, exit=None)
+PASSED         tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[True-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm] (gpu=2, 214ms, exit=0)
+FAILED         tests/compile/distributed/test_fusions_e2e.py::test_rms_group_quant[False-Qwen/Qwen3-30B-A3B-FP8-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0-+quant_fp8,+rms_norm] (gpu=3, 260ms, exit=1)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_041051",
+  "started_at": "2026-06-30T20:13:01Z",
+  "finished_at": "2026-06-30T20:15:01Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051.log",
+    "size_bytes": 282089,
+    "captured_at": "2026-06-30T20:15:01Z"
+  },
+  "tests": [
+    {
+      "id": 1306,
+      "test_node": "tests/entrypoints/llm/test_collective_rpc.py::test_collective_rpc[ray-2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_collective_rpc_py_test_collective_rpc_ray_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_collective_rpc_py_test_collective_rpc_ray_2.xml"
+    },
+    {
+      "id": 1307,
+      "test_node": "tests/entrypoints/llm/test_generate.py::test_multiple_sampling_params",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}\"",
+      "duration_ms": 3855,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_multiple_sampling_params.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_multiple_sampling_params.xml"
+    },
+    {
+      "id": 1308,
+      "test_node": "tests/entrypoints/llm/test_generate.py::test_multiple_priority",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}\"",
+      "duration_ms": 3815,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_multiple_priority.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_multiple_priority.xml"
+    },
+    {
+      "id": 1309,
+      "test_node": "tests/entrypoints/llm/test_generate.py::test_max_model_len",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_max_model_len.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_max_model_len.xml"
+    },
+    {
+      "id": 1310,
+      "test_node": "tests/entrypoints/llm/test_generate.py::test_log_stats",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6168,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_log_stats.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_generate_py_test_log_stats.xml"
+    },
+    {
+      "id": 1311,
+      "test_node": "tests/entrypoints/llm/test_gpu_utilization.py::test_gpu_memory_utilization",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 4400,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_gpu_utilization_py_test_gpu_memory_utilization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_gpu_utilization_py_test_gpu_memory_utilization.xml"
+    },
+    {
+      "id": 1312,
+      "test_node": "tests/entrypoints/llm/test_prompt_validation.py::test_empty_prompt",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 138,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_prompt_validation_py_test_empty_prompt.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_prompt_validation_py_test_empty_prompt.xml"
+    },
+    {
+      "id": 1313,
+      "test_node": "tests/entrypoints/llm/test_prompt_validation.py::test_out_of_vocab_token",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 133,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/pytest_batch_20260701_041051_tests_entrypoints_llm_test_prompt_validation_py_test_out_of_vocab_token.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_041051/result_batch_20260701_041051_tests_entrypoints_llm_test_prompt_validation_py_test_out_of_vocab_token.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 4,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

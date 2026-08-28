@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0437",
+  "started_at": "2026-08-07T22:07:20Z",
+  "finished_at": "2026-08-07T22:07:44Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437.log",
+    "size_bytes": 35067,
+    "captured_at": "2026-08-07T22:07:44Z"
+  },
+  "tests": [
+    {
+      "id": 29625,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_dummy[2-2-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 142,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_dummy_2_2_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_dummy_2_2_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29626,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[0-0-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 175,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_0_0_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_0_0_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29627,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[0-1-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 224,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_0_1_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_0_1_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29628,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[1-0-False-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 206,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_0_False_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_0_False_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29629,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[1-1-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 172,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_1_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_1_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29630,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[1-2-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 136,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_2_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_1_2_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29631,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[2-1-False-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 144,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_2_1_False_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_2_1_False_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    },
+    {
+      "id": 29632,
+      "test_node": "tests/multimodal/test_processing.py::test_limit_mm_per_prompt_apply[2-2-True-llava-hf/llava-v1.6-mistral-7b-hf]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-v1.6-mistral-7b-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_er",
+      "duration_ms": 136,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/pytest_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_2_2_True_llava_hf_llava_v1_6_mistral_7b_hf.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0437/result_batch_super_0437_tests_multimodal_test_processing_py_test_limit_mm_per_prompt_apply_2_2_True_llava_hf_llava_v1_6_mistral_7b_hf.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

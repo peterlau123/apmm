@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_014101",
+ "started_at": "2026-08-05T02:36:48Z",
+ "finished_at": "2026-08-05T02:41:05Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0444/pytest_batch_super_0444.log",
+  "size_bytes": 43137,
+  "captured_at": "2026-08-05T02:41:05Z"
+ },
+ "tests": [
+  {
+   "id": 1210,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-parallel_setup18-mp-auto-test_options18]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241432,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0444/pytest_batch_super_0444_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup18_mp_auto_test_options18.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0444/result_batch_super_0444_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup18_mp_auto_test_options18.xml"
+  },
+  {
+   "id": 1206,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup14-mp-auto-test_options14]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 312,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/pytest_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup14_mp_auto_test_options14.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/result_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup14_mp_auto_test_options14.xml"
+  },
+  {
+   "id": 1207,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup15-ray-auto-test_options15]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 372,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/pytest_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup15_ray_auto_test_options15.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/result_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup15_ray_auto_test_options15.xml"
+  },
+  {
+   "id": 1208,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-parallel_setup16-mp-auto-test_options16]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241646,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/pytest_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup16_mp_auto_test_options16.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/result_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup16_mp_auto_test_options16.xml"
+  },
+  {
+   "id": 1209,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-parallel_setup17-ray-auto-test_options17]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241571,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/pytest_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup17_ray_auto_test_options17.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0443/result_batch_super_0443_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_parallel_setup17_ray_auto_test_options17.xml"
+  },
+  {
+   "id": 1203,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup11-ray-auto-test_options11]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241035,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup11_ray_auto_test_options11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup11_ray_auto_test_options11.xml"
+  },
+  {
+   "id": 1204,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup12-mp-auto-test_options12]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 346,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup12_mp_auto_test_options12.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup12_mp_auto_test_options12.xml"
+  },
+  {
+   "id": 1205,
+   "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup13-ray-auto-test_options13]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 376,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup13_ray_auto_test_options13.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup13_ray_auto_test_options13.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 4,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

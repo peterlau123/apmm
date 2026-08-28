@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0381",
+  "started_at": "2026-08-07T21:08:15Z",
+  "finished_at": "2026-08-07T21:08:45Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381.log",
+    "size_bytes": 56765,
+    "captured_at": "2026-08-07T21:08:45Z"
+  },
+  "tests": [
+    {
+      "id": 29176,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[MiDashengLMModel]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 278,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_MiDashengLMModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_MiDashengLMModel.xml"
+    },
+    {
+      "id": 29177,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen2_5_VLForConditionalGeneration]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 7773,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen2_5_VLForConditionalGeneration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen2_5_VLForConditionalGeneration.xml"
+    },
+    {
+      "id": 29178,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[RobertaForSequenceClassification]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 289,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_RobertaForSequenceClassification.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_RobertaForSequenceClassification.xml"
+    },
+    {
+      "id": 29179,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[GPT2LMHeadModel]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 301,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_GPT2LMHeadModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_GPT2LMHeadModel.xml"
+    },
+    {
+      "id": 29180,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[LongcatFlashForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 320,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_LongcatFlashForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_LongcatFlashForCausalLM.xml"
+    },
+    {
+      "id": 29181,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[DbrxForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4654,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_DbrxForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_DbrxForCausalLM.xml"
+    },
+    {
+      "id": 29182,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[ExaoneForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 305,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_ExaoneForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_ExaoneForCausalLM.xml"
+    },
+    {
+      "id": 29183,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen3ForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 3759,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/pytest_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0381/result_batch_super_0381_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3ForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

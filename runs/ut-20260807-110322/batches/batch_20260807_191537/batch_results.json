@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_191537",
+  "started_at": "2026-08-07T11:15:38Z",
+  "finished_at": "2026-08-07T11:16:13Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537.log",
+    "size_bytes": 19046,
+    "captured_at": "2026-08-07T11:16:13Z"
+  },
+  "tests": [
+    {
+      "id": 32693,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_deterministic_when_seeded[20-0.5-8-1000-5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1625,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_deterministic_when_seeded_20_0_5_8_1000_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_deterministic_when_seeded_20_0_5_8_1000_5.xml"
+    },
+    {
+      "id": 32694,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_rejection_sampling_approximates_target_distribution",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 22746,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_rejection_sampling_approximates_target_distribution.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_rejection_sampling_approximates_target_distribution.xml"
+    },
+    {
+      "id": 32695,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_k[1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1865,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_1.xml"
+    },
+    {
+      "id": 32696,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_k[5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1859,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_5.xml"
+    },
+    {
+      "id": 32697,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_k[99]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1870,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_99.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_k_99.xml"
+    },
+    {
+      "id": 32698,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_p[0.5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1823,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_5.xml"
+    },
+    {
+      "id": 32699,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_p[0.9]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1220,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_9.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_9.xml"
+    },
+    {
+      "id": 32700,
+      "test_node": "tests/v1/sample/test_rejection_sampler.py::test_top_p[0.99]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1146,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/pytest_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_99.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191537/result_batch_20260807_191537_tests_v1_sample_test_rejection_sampler_py_test_top_p_0_99.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

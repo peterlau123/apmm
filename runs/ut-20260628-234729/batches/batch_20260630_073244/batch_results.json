@@ -1,0 +1,85 @@
+{
+  "batch_id": "batch_20260630_073244",
+  "started_at": "2026-06-29T23:32:50Z",
+  "finished_at": "2026-06-29T23:33:43Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244.log",
+    "size_bytes": 10651,
+    "captured_at": "2026-06-29T23:33:43Z"
+  },
+  "tests": [
+    {
+      "id": 68,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[5.0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 127,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_5_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/result_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_5_0_1.xml"
+    },
+    {
+      "id": 69,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[10.0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 127,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_10_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/result_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_10_0_1.xml"
+    },
+    {
+      "id": 70,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[1.0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_1_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/result_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_numeric_1_0_1.xml"
+    },
+    {
+      "id": 71,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_inf_float",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 127,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_inf_float.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/result_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_equal_to_inf_float.xml"
+    },
+    {
+      "id": 72,
+      "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[5.0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 127,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/pytest_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_not_equal_to_numeric_5_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_073244/result_batch_20260630_073244_tests_benchmarks_test_plot_filters_py_TestPlotFilters_test_not_equal_to_numeric_5_0_4.xml"
+    }
+  ],
+  "statistics": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

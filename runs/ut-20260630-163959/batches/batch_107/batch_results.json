@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_050008",
+  "started_at": "2026-06-30T21:01:11Z",
+  "finished_at": "2026-06-30T21:02:46Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008.log",
+    "size_bytes": 350361,
+    "captured_at": "2026-06-30T21:02:46Z"
+  },
+  "tests": [
+    {
+      "id": 1412,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_prompt_logprobs_chat[HuggingFaceH4/zephyr-7b-beta--1]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta_1.xml"
+    },
+    {
+      "id": 1413,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_prompt_logprobs_chat[HuggingFaceH4/zephyr-7b-beta-None]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta_None.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta_None.xml"
+    },
+    {
+      "id": 1414,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_more_than_one_prompt_logprobs_chat[HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_more_than_one_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_more_than_one_prompt_logprobs_chat_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1415,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_single_chat_session[HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_single_chat_session_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_single_chat_session_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1416,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_single_chat_session[zephyr-lora]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_single_chat_session_zephyr_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_single_chat_session_zephyr_lora.xml"
+    },
+    {
+      "id": 1417,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_chat_streaming[HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_streaming_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_streaming_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1418,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_chat_streaming[zephyr-lora]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_streaming_zephyr_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_streaming_zephyr_lora.xml"
+    },
+    {
+      "id": 1419,
+      "test_node": "tests/entrypoints/openai/test_chat.py::test_chat_completion_stream_options[HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/pytest_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_completion_stream_options_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_050008/result_batch_20260701_050008_tests_entrypoints_openai_test_chat_py_test_chat_completion_stream_options_HuggingFaceH4_zephyr_7b_beta.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 8,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

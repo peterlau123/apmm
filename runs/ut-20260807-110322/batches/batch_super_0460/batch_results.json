@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0460",
+  "started_at": "2026-08-07T22:34:27Z",
+  "finished_at": "2026-08-07T22:35:10Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460.log",
+    "size_bytes": 284879,
+    "captured_at": "2026-08-07T22:35:10Z"
+  },
+  "tests": [
+    {
+      "id": 29810,
+      "test_node": "tests/quantization/test_fp8.py::test_model_load_and_run[False-True-neuralmagic/Meta-Llama-3-8B-Instruct-FP8-KV]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 270,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_model_load_and_run_False_True_neuralmagic_Meta_Llama_3_8B_Instruct_FP8_KV.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_model_load_and_run_False_True_neuralmagic_Meta_Llama_3_8B_Instruct_FP8_KV.xml"
+    },
+    {
+      "id": 29811,
+      "test_node": "tests/quantization/test_fp8.py::test_model_load_and_run[False-True-nm-testing/Qwen2-0.5B-Instruct-FP8-SkipQKV]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_model_load_and_run_False_True_nm_testing_Qwen2_0_5B_Instruct_FP8_SkipQKV.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_model_load_and_run_False_True_nm_testing_Qwen2_0_5B_Instruct_FP8_SkipQKV.xml"
+    },
+    {
+      "id": 29812,
+      "test_node": "tests/quantization/test_fp8.py::test_kv_cache_model_load_and_run[False-nm-testing/Qwen2-1.5B-Instruct-FP8-K-V]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_kv_cache_model_load_and_run_False_nm_testing_Qwen2_1_5B_Instruct_FP8_K_V.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_kv_cache_model_load_and_run_False_nm_testing_Qwen2_1_5B_Instruct_FP8_K_V.xml"
+    },
+    {
+      "id": 29813,
+      "test_node": "tests/quantization/test_fp8.py::test_load_fp16_model[False-False-auto]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5096,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_False_auto.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_False_auto.xml"
+    },
+    {
+      "id": 29814,
+      "test_node": "tests/quantization/test_fp8.py::test_load_fp16_model[False-False-fp8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 4704,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_False_fp8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_False_fp8.xml"
+    },
+    {
+      "id": 29815,
+      "test_node": "tests/quantization/test_fp8.py::test_load_fp16_model[False-True-auto]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 3536,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_True_auto.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_True_auto.xml"
+    },
+    {
+      "id": 29816,
+      "test_node": "tests/quantization/test_fp8.py::test_load_fp16_model[False-True-fp8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 3081,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_True_fp8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_load_fp16_model_False_True_fp8.xml"
+    },
+    {
+      "id": 29817,
+      "test_node": "tests/quantization/test_fp8.py::test_scaled_fp8_quant[dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 706,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/pytest_batch_super_0460_tests_quantization_test_fp8_py_test_scaled_fp8_quant_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0460/result_batch_super_0460_tests_quantization_test_fp8_py_test_scaled_fp8_quant_dtype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

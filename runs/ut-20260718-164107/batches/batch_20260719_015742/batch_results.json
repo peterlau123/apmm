@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_015742",
+  "started_at": "2026-07-18T17:58:53Z",
+  "finished_at": "2026-07-18T18:01:25Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_015742/pytest_batch_20260719_015742.log",
+    "size_bytes": 76827,
+    "captured_at": "2026-07-18T18:01:25Z"
+  },
+  "tests": [
+    {
+      "id": 1285,
+      "test_node": "tests/entrypoints/llm/test_accuracy.py::test_lm_eval_accuracy_v1_engine[hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 577,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_015742/pytest_batch_20260719_015742_tests_entrypoints_llm_test_accuracy_py_test_lm_eval_accuracy_v1_engine_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_015742/result_batch_20260719_015742_tests_entrypoints_llm_test_accuracy_py_test_lm_eval_accuracy_v1_engine_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 1309,
+      "test_node": "tests/entrypoints/openai/correctness/test_transcription_api_correctness.py::test_wer_correctness[12.74498-D4nt3/esb-datasets-earnings22-validation-tiny-filtered-openai/whisper-small]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server exited unexpectedly.",
+      "duration_ms": 21915,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_015742/pytest_batch_20260719_015742_tests_entrypoints_openai_correctness_test_transcription_api_correctness_py_test_wer_correctness_12_74498_D4nt3_esb_datasets_earnings22_validation_tiny_filtered_openai_whisper_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_015742/result_batch_20260719_015742_tests_entrypoints_openai_correctness_test_transcription_api_correctness_py_test_wer_correctness_12_74498_D4nt3_esb_datasets_earnings22_validation_tiny_filtered_openai_whisper_small.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

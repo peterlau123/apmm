@@ -112,6 +112,10 @@ config:
     HF_DATASETS_CACHE: "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub/datasets"
     # GPU 配置
     CUDA_VISIBLE_DEVICES: "0,1,2,3,4,5,6,7"
+    # DeepGEMM warmup 跳过: deep_gemm._C 未编译(无 .so), is_deep_gemm_supported() 误判 True
+    # 导致 warmup 调 _missing() 抛 RuntimeError, 任何启动引擎的测试都会崩.
+    # 跳过 warmup 无损(deep_gemm 本就不可用). 详见 incident 2026-07-19 Type A.
+    VLLM_DEEP_GEMM_WARMUP: "skip"
 
   # ✍️：pytest参数和批次大小
   pytest_args: "-q --tb=long"

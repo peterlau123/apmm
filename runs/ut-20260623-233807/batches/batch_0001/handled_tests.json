@@ -1,0 +1,93 @@
+{
+  "batch_id": "batch_0001",
+  "run_id": "ut-20260623-233807",
+  "processed_at": "2026-06-23T23:53:00Z",
+  "tests": [
+    {
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "test_name": "test_bench_latency",
+      "original_status": "pending",
+      "final_status": "ignored",
+      "error_type": "network",
+      "error_category": "N",
+      "ignored": true,
+      "ignored_reason": "offline_env_timeout: huggingface.co timeout in offline mode (HF_HUB_OFFLINE=1), model meta-llama/Llama-3.2-1B-Instruct not accessible",
+      "resolution": {
+        "status": "ignored",
+        "action": "skip",
+        "dependency_hint": "meta-llama/Llama-3.2-1B-Instruct",
+        "classification": "dep_stall",
+        "evidence": "Connection to huggingface.co timed out"
+      },
+      "retry_count": 0,
+      "retry_history": [],
+      "duration_seconds": 92.31,
+      "log_excerpt": "Connection to huggingface.co timed out. HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded",
+      "pytest_output": "FAILED tests/benchmarks/test_latency_cli.py::test_bench_latency - AssertionError: Benchmark failed"
+    },
+    {
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_name": "test_mrope[GLM-4.1V-9B-Thinking]",
+      "original_status": "pending",
+      "final_status": "ignored",
+      "error_type": "download_error",
+      "error_category": "M",
+      "ignored": true,
+      "ignored_reason": "offline_env_model_missing: Model zai-org/GLM-4.1V-9B-Thinking not found in HF cache (HF_HUB_OFFLINE=1 prevents download)",
+      "resolution": {
+        "status": "ignored",
+        "action": "skip",
+        "dependency_hint": "zai-org/GLM-4.1V-9B-Thinking",
+        "classification": "dep_stall",
+        "evidence": "Invalid repository ID or local directory specified: 'zai-org/GLM-4.1V-9B-Thinking'. Model not found in HF cache."
+      },
+      "retry_count": 0,
+      "retry_history": [],
+      "duration_seconds": 0.53,
+      "log_excerpt": "Invalid repository ID or local directory specified: 'zai-org/GLM-4.1V-9B-Thinking'. Model not found in HF cache.",
+      "pytest_output": "FAILED tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking] - ValueError"
+    },
+    {
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct]",
+      "test_name": "test_mrope[Qwen2-VL-7B-Instruct]",
+      "original_status": "pending",
+      "final_status": "ignored",
+      "error_type": "download_error",
+      "error_category": "M",
+      "ignored": true,
+      "ignored_reason": "offline_env_model_missing: Model Qwen/Qwen2-VL-7B-Instruct not found in HF cache (HF_HUB_OFFLINE=1 prevents download)",
+      "resolution": {
+        "status": "ignored",
+        "action": "skip",
+        "dependency_hint": "Qwen/Qwen2-VL-7B-Instruct",
+        "classification": "dep_stall",
+        "evidence": "Invalid repository ID or local directory specified: 'Qwen/Qwen2-VL-7B-Instruct'. Model not found in HF cache."
+      },
+      "retry_count": 0,
+      "retry_history": [],
+      "duration_seconds": 0.48,
+      "log_excerpt": "Invalid repository ID or local directory specified: 'Qwen/Qwen2-VL-7B-Instruct'. Model not found in HF cache.",
+      "pytest_output": "FAILED tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info1-Qwen/Qwen2-VL-7B-Instruct] - ValueError"
+    }
+  ],
+  "stats": {
+    "total": 3,
+    "passed": 0,
+    "fixed_pending_verify": 0,
+    "failed": 0,
+    "ignored": 3,
+    "pending": 0
+  },
+  "error_summary": {
+    "network": 1,
+    "download_error": 2,
+    "dependency_error": 0,
+    "gpu_oom": 0,
+    "version_incompat": 0,
+    "functional": 0,
+    "unknown": 0
+  },
+  "classification_method": "rule-based",
+  "fixer_session_id": "20260623_235300_fixer",
+  "branch_verified": "2.5.1_ut_verify"
+}

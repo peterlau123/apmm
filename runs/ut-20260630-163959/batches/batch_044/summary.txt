@@ -1,0 +1,8 @@
+PASSED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[True-backed-1] (gpu=0, 132ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[True-backed_size_oblivious-0] (gpu=1, 1036ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[True-backed_size_oblivious-1] (gpu=2, 1032ms, exit=0)
+FAILED         tests/compile/test_functionalization.py::test_fix_functionalization[True-TestSiluMul-dtype0] (gpu=3, 439ms, exit=0)
+FAILED         tests/compile/test_functionalization.py::test_fix_functionalization[True-TestSiluMul-dtype1] (gpu=4, 465ms, exit=0)
+FAILED         tests/compile/test_functionalization.py::test_fix_functionalization[True-TestFusedAddRMSNorm-dtype0] (gpu=5, 462ms, exit=0)
+FAILED         tests/compile/test_functionalization.py::test_fix_functionalization[True-TestFusedAddRMSNorm-dtype1] (gpu=6, 438ms, exit=0)
+FAILED         tests/compile/test_functionalization.py::test_fix_functionalization[True-TestRotaryEmbedding-dtype0] (gpu=7, 451ms, exit=0)

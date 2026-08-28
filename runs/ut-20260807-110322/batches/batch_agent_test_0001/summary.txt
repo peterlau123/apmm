@@ -1,0 +1,8 @@
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_rank-config_change0-is greater than max_lora_rank] (gpu=0, Nonems, exit=1)
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_dora-config_change1-does not yet support DoRA] (gpu=2, Nonems, exit=1)
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_modules_to_save-config_change2-only supports modules_to_save being None] (gpu=3, Nonems, exit=1)
+IGNORED        tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-False] (gpu=4, Nonems, exit=1)
+IGNORED        tests/model_executor/model_loader/test_sharded_state_loader.py::test_sharded_state_loader[1-True] (gpu=5, Nonems, exit=1)
+IGNORED        tests/models/quantization/test_bitsandbytes.py::test_load_4bit_bnb_model[facebook/opt-125m-quantize opt model inflight] (gpu=6, Nonems, exit=1)
+IGNORED        tests/models/quantization/test_bitsandbytes.py::test_load_4bit_bnb_model[mistralai/Mistral-7B-Instruct-v0.3-quantize inflight model with both HF and Mistral format weights] (gpu=0, Nonems, exit=1)
+IGNORED        tests/models/quantization/test_bitsandbytes.py::test_load_pre_quant_4bit_bnb_model[PrunaAI/Einstein-v6.1-Llama3-8B-bnb-4bit-smashed-read pre-quantized 4-bit FP4 model] (gpu=2, Nonems, exit=1)

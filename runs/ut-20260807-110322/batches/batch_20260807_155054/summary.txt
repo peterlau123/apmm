@@ -1,0 +1,8 @@
+PASSED         tests/lora/test_lora_checkpoints.py::test_load_checkpoints[baichuan7B-zero-regex] (gpu=0, 931ms, exit=0)
+PASSED         tests/lora/test_lora_checkpoints.py::test_load_checkpoints[chatglm3-6b] (gpu=2, 375ms, exit=0)
+PASSED         tests/lora/test_lora_checkpoints.py::test_lora_weights_mapping (gpu=3, 1855ms, exit=0)
+FAILED         tests/lora/test_lora_functions.py::test_lora_functions_sync (gpu=4, 5986ms, exit=1)
+FAILED         tests/lora/test_lora_functions.py::test_lora_functions_async (gpu=5, 5800ms, exit=1)
+PASSED         tests/lora/test_lora_huggingface.py::test_load_checkpoints_from_huggingface[llama32_lora_files] (gpu=6, 1263ms, exit=0)
+PASSED         tests/lora/test_lora_huggingface.py::test_load_checkpoints_from_huggingface[llama32_lora_huggingface_id] (gpu=0, 654ms, exit=0)
+PASSED         tests/lora/test_lora_manager.py::test_from_lora_tensors[cuda:0] (gpu=2, 717ms, exit=0)

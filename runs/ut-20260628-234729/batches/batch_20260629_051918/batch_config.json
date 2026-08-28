@@ -1,0 +1,45 @@
+{
+  "batch_id": "batch_20260629_051918",
+  "created_at": "2026-06-28T21:19:18Z",
+  "size": 4,
+  "tests": [
+    {
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+      "test_file": "tests/basic_correctness/test_basic_correctness.py",
+      "status": "pending",
+      "max_retry": 2,
+      "retry_count": 0
+    },
+    {
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "test_file": "tests/basic_correctness/test_basic_correctness.py",
+      "status": "pending",
+      "max_retry": 2,
+      "retry_count": 0
+    },
+    {
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+      "test_file": "tests/basic_correctness/test_basic_correctness.py",
+      "status": "pending",
+      "max_retry": 2,
+      "retry_count": 0
+    },
+    {
+      "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "test_file": "tests/basic_correctness/test_basic_correctness.py",
+      "status": "pending",
+      "max_retry": 2,
+      "retry_count": 0
+    }
+  ],
+  "config": {
+    "remote_server": "t_h20",
+    "docker_container": "v0.13.0_torch2.5.1_compile",
+    "pytest_args": "-q --tb=long",
+    "timeout": 300,
+    "hf_env": {
+      "HF_HOME": "/gpfs/gcsp/M2.7_verify/pytorch_verify/2.5.1/ut/hf_hub",
+      "HF_HUB_OFFLINE": "1"
+    }
+  }
+}

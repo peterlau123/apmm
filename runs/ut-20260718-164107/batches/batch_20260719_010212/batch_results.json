@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_010212",
+ "started_at": "2026-08-05T01:45:36Z",
+ "finished_at": "2026-08-05T01:50:07Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426.log",
+  "size_bytes": 73363,
+  "captured_at": "2026-08-05T01:50:07Z"
+ },
+ "tests": [
+  {
+   "id": 1141,
+   "test_node": "tests/distributed/test_pp_cudagraph.py::test_pp_cudagraph[FLASH_ATTN-2-hmellor/tiny-random-LlamaForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 240948,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_distributed_test_pp_cudagraph_py_test_pp_cudagraph_FLASH_ATTN_2_hmellor_tiny_random_LlamaForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_distributed_test_pp_cudagraph_py_test_pp_cudagraph_FLASH_ATTN_2_hmellor_tiny_random_LlamaForCausalLM.xml"
+  },
+  {
+   "id": 1142,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 147,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl.xml"
+  },
+  {
+   "id": 1143,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_multiple_allreduce",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl_multiple_allreduce.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl_multiple_allreduce.xml"
+  },
+  {
+   "id": 1144,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_multiple_allreduce_with_vllm",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl_multiple_allreduce_with_vllm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_distributed_test_pynccl_py_test_pynccl_multiple_allreduce_with_vllm.xml"
+  },
+  {
+   "id": 1137,
+   "test_node": "tests/distributed/test_pipeline_partition.py::test_uneven_auto_partition[4-3-2-indices9]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 186,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_4_3_2_indices9.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_4_3_2_indices9.xml"
+  },
+  {
+   "id": 1138,
+   "test_node": "tests/distributed/test_pipeline_partition.py::test_uneven_auto_partition[5-3-0-indices10]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 148,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_0_indices10.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_0_indices10.xml"
+  },
+  {
+   "id": 1139,
+   "test_node": "tests/distributed/test_pipeline_partition.py::test_uneven_auto_partition[5-3-1-indices11]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 139,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_1_indices11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_1_indices11.xml"
+  },
+  {
+   "id": 1140,
+   "test_node": "tests/distributed/test_pipeline_partition.py::test_uneven_auto_partition[5-3-2-indices12]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 214,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/pytest_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_2_indices12.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0425/result_batch_super_0425_tests_distributed_test_pipeline_partition_py_test_uneven_auto_partition_5_3_2_indices12.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

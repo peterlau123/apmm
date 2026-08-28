@@ -1,0 +1,52 @@
+{
+  "batch_id": "batch_001",
+  "started_at": "2026-06-23T01:15:47Z",
+  "finished_at": "2026-06-23T01:15:48Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_001/raw_log.txt",
+    "size_bytes": 17,
+    "captured_at": "2026-06-23T01:15:48Z"
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 4,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0
+  }
+}

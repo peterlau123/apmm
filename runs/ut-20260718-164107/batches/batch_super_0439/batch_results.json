@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0439",
+  "started_at": "2026-08-05T02:12:18Z",
+  "finished_at": "2026-08-05T02:16:34Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439.log",
+    "size_bytes": 61869,
+    "captured_at": "2026-08-05T02:16:34Z"
+  },
+  "tests": [
+    {
+      "id": 1195,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup3-ray-auto-test_options3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 241212,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.xml"
+    },
+    {
+      "id": 1196,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup4-mp-auto-test_options4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 392,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.xml"
+    },
+    {
+      "id": 1197,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup5-ray-auto-test_options5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 286,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.xml"
+    },
+    {
+      "id": 1198,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-False-hmellor/tiny-random-LlamaForCausalLM-parallel_setup6-mp-auto-test_options6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 227,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_False_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 3,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

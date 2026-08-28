@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_124838",
+  "started_at": "2026-08-06T04:48:38Z",
+  "finished_at": "2026-08-06T04:49:03Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838.log",
+    "size_bytes": 34504,
+    "captured_at": "2026-08-06T04:49:03Z"
+  },
+  "tests": [
+    {
+      "id": 13075,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-1-16-2048-4608-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 233,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_1_16_2048_4608_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_1_16_2048_4608_7168.xml"
+    },
+    {
+      "id": 13076,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-128-128-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 184,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_128_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_128_128.xml"
+    },
+    {
+      "id": 13077,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-128-128-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 152,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_128_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_128_7168.xml"
+    },
+    {
+      "id": 13078,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-128-1024-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 178,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_1024_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_1024_7168.xml"
+    },
+    {
+      "id": 13079,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-128-4608-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 177,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_4608_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_4608_128.xml"
+    },
+    {
+      "id": 13080,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-128-4608-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 183,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_4608_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_128_4608_7168.xml"
+    },
+    {
+      "id": 13081,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-192-512-512]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 156,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_192_512_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_192_512_512.xml"
+    },
+    {
+      "id": 13082,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_fused_moe[0-2-2-192-1024-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 176,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/pytest_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_192_1024_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_124838/result_batch_20260806_124838_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_fused_moe_0_2_2_192_1024_7168.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

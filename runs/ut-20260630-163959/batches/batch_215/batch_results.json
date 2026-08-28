@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260701_150830",
+  "started_at": "2026-07-01T07:08:55Z",
+  "finished_at": "2026-07-01T07:10:22Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/pytest_batch_20260701_150830.log",
+    "size_bytes": 206280,
+    "captured_at": "2026-07-01T07:10:22Z"
+  },
+  "tests": [
+    {
+      "id": 1544,
+      "test_node": "tests/entrypoints/openai/test_lora_resolvers.py::test_serving_completion_resolver_add_lora_fails",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/pytest_batch_20260701_150830_tests_entrypoints_openai_test_lora_resolvers_py_test_serving_completion_resolver_add_lora_fails.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/result_batch_20260701_150830_tests_entrypoints_openai_test_lora_resolvers_py_test_serving_completion_resolver_add_lora_fails.xml"
+    },
+    {
+      "id": 1545,
+      "test_node": "tests/entrypoints/openai/test_lora_resolvers.py::test_serving_completion_flag_not_set",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 130,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/pytest_batch_20260701_150830_tests_entrypoints_openai_test_lora_resolvers_py_test_serving_completion_flag_not_set.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/result_batch_20260701_150830_tests_entrypoints_openai_test_lora_resolvers_py_test_serving_completion_flag_not_set.xml"
+    },
+    {
+      "id": 1546,
+      "test_node": "tests/entrypoints/openai/test_messages.py::test_simple_messages",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 20584,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/pytest_batch_20260701_150830_tests_entrypoints_openai_test_messages_py_test_simple_messages.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/result_batch_20260701_150830_tests_entrypoints_openai_test_messages_py_test_simple_messages.xml"
+    },
+    {
+      "id": 1547,
+      "test_node": "tests/entrypoints/openai/test_messages.py::test_system_message",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21568,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/pytest_batch_20260701_150830_tests_entrypoints_openai_test_messages_py_test_system_message.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_150830/result_batch_20260701_150830_tests_entrypoints_openai_test_messages_py_test_system_message.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

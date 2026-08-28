@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_180618",
+ "started_at": "2026-08-07T15:27:44Z",
+ "finished_at": "2026-08-07T15:28:13Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132.log",
+  "size_bytes": 19546,
+  "captured_at": "2026-08-07T15:28:13Z"
+ },
+ "tests": [
+  {
+   "id": 27181,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-448-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2266,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_448_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_448_32_4_4.xml"
+  },
+  {
+   "id": 27182,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-4032-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2419,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_4032_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_4032_32_4_4.xml"
+  },
+  {
+   "id": 27183,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-960-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2313,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_960_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_960_32_4_4.xml"
+  },
+  {
+   "id": 27184,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-6400-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2399,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_6400_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_6400_32_4_4.xml"
+  },
+  {
+   "id": 27185,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-462-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2347,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_462_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_462_32_4_4.xml"
+  },
+  {
+   "id": 27186,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-464-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2376,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_464_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_464_32_4_4.xml"
+  },
+  {
+   "id": 27187,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-14848-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1484,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_14848_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_14848_32_4_4.xml"
+  },
+  {
+   "id": 27188,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[shrink-0-cuda:0-dtype1-2-64000-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1522,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/pytest_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_64000_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0132/result_batch_super_0132_tests_lora_test_punica_ops_py_test_kernels_hidden_size_shrink_0_cuda_0_dtype1_2_64000_32_4_4.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

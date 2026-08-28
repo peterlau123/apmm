@@ -1,0 +1,52 @@
+{
+  "workflow": {
+    "name": "E2E Bugfix Validation",
+    "version": "test",
+    "test_name": "ut",
+    "started_at": "2026-06-24T00:00:00Z",
+    "status": "stopped"
+  },
+  "current_stage": "execute",
+  "iteration": 1,
+  "paths": {
+    "run_dir": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624",
+    "workflow_yaml": null,
+    "manifest": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624\\manifest.json",
+    "test_list": null,
+    "manifest_schema": "D:\\workspace\\apmm\\skills\\ut\\shared\\manifest_schema.json",
+    "batches_dir": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624\\batches",
+    "logs_dir": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624\\logs",
+    "reports_dir": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624\\reports",
+    "workflow_state": "D:\\workspace\\apmm\\runs\\ut-e2e-bugfix-20260624\\workflow_state.json"
+  },
+  "stats": {
+    "total_tests": 1,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 0,
+    "pending": 1,
+    "error_rate": 0.0
+  },
+  "current_batch": {
+    "batch_id": "batch_e2e_bugfix_validation",
+    "size": 1,
+    "started_at": null,
+    "completed_at": null,
+    "status": "pending"
+  },
+  "flags": {
+    "stop_requested": true,
+    "pause_requested": false,
+    "pause_reason": null,
+    "consecutive_failures": 0
+  },
+  "last_update": "2026-06-24T08:30:00Z",
+  "config": {
+    "remote_server": "t_h20",
+    "docker_container": "v0.13.0_torch2.5.1_compile",
+    "pytest_args": "-v --tb=long",
+    "timeout": 300,
+    "remote_log_dir": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs"
+  }
+}

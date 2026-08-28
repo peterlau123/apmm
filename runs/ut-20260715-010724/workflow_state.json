@@ -1,0 +1,104 @@
+{
+  "workflow": {
+    "name": "UT Test Workflow",
+    "version": "2.2",
+    "test_name": "ut",
+    "started_at": "2026-07-14T17:07:24.338801+00:00",
+    "status": "running"
+  },
+  "current_stage": "collect",
+  "iteration": 0,
+  "paths": {
+    "run_dir": "D:\\workspace\\apmm\\runs\\ut-20260715-010724",
+    "workflow_yaml": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\workflow.yaml",
+    "manifest": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\manifest.json",
+    "test_list": null,
+    "manifest_schema": "D:\\workspace\\apmm\\skills\\ut\\shared\\manifest_schema.json",
+    "batches_dir": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\batches",
+    "logs_dir": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\logs",
+    "reports_dir": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\reports",
+    "workflow_state": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\workflow_state.json",
+    "test_load": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\test_load_8_20260715_010831.json"
+  },
+  "stats": {
+    "total_tests": 32964,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 0,
+    "pending": 24403,
+    "error_rate": 0.0
+  },
+  "current_batch": {
+    "batch_id": "batch_20260715_011050",
+    "size": 8,
+    "started_at": "2026-07-14T17:11:12Z"
+  },
+  "flags": {
+    "stop_requested": false,
+    "pause_requested": false,
+    "pause_reason": null,
+    "consecutive_failures": 0
+  },
+  "last_update": "2026-07-15T01:12:04.338561",
+  "last_worker_result": {
+    "stats": {
+      "passed": 0,
+      "failed": 0,
+      "error": 0,
+      "ignored": 0,
+      "pending": 0
+    },
+    "next_action": "continue",
+    "error": null,
+    "blocked_reason": null
+  },
+  "bastion": {
+    "status": "waiting_for_otp",
+    "profile": "t_h20",
+    "last_heartbeat_at": "2026-07-14T17:08:57.632971+00:00",
+    "otp_request_id": "otp-20260715-ce9f81"
+  },
+  "batches": {
+    "batch_20260715_011050": {
+      "status": "completed",
+      "batch_size": 8,
+      "gpu_pool": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "created_at": "2026-07-15T01:10:50.326577",
+      "started_at": "2026-07-14T17:11:12Z",
+      "completed_at": "2026-07-15T01:12:04.338553",
+      "config_path": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\batches\\batch_20260715_011050\\batch_config.json",
+      "results_path": "D:\\workspace\\apmm\\runs\\ut-20260715-010724\\batches\\batch_20260715_011050\\batch_results.json",
+      "stats": {}
+    }
+  },
+  "test_stats": {
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "ignored": 8,
+    "pending": 0
+  },
+  "batch_stats": {
+    "generated": 0,
+    "running": 0,
+    "completed": 1,
+    "failed": 0
+  },
+  "resume_info": {
+    "last_batch_id": "batch_20260715_011050",
+    "last_batch_status": "completed",
+    "pending_batches_count": -1,
+    "can_resume": true,
+    "resume_recommendation": "生成新batch继续执行"
+  }
+}

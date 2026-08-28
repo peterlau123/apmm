@@ -68,11 +68,10 @@ def update_test_load(test_load_path: Path, batch_results: dict, handled_tests: d
     # 更新时间戳
     test_load['updated_at'] = datetime.now().isoformat()
 
-    # 写回
-    test_load_path.write_text(
-        json.dumps(test_load, indent=2, ensure_ascii=False),
-        encoding='utf-8'
-    )
+    # 写回 (2026-08-09 修复: 直接 write_text 在中断/并发时写坏 JSON — 改原子写)
+    tmp = test_load_path.with_suffix(test_load_path.suffix + ".tmp")
+    tmp.write_text(json.dumps(test_load, indent=2, ensure_ascii=False), encoding='utf-8')
+    tmp.replace(test_load_path)
 
     stats = test_load.get('statistics', {})
     print(f'[OK] test_load updated: {updated_count} tests')
@@ -131,8 +130,19 @@ def main():
     if ht_path.exists():
         handled_tests = json.loads(ht_path.read_text(encoding='utf-8'))
 
-    # 1. 更新test_load
+    # 1. 更新test_load (路径可能含 Windows 反斜杠, 如 "runs\\ut-xxx\\test_load.json")
     test_load_path = paths.get('test_load', '')
+    if test_load_path:
+        test_load_path = test_load_path.replace("\\", "/")
+        tl = Path(test_load_path)
+        if not tl.is_absolute():
+            if tl.parts and tl.parts[0] == "runs":
+                # repo-relative → 锚定项目根
+                _apmm_root = Path(__file__).resolve().parent.parent.parent.parent
+                tl = _apmm_root / tl
+            else:
+                tl = workflow_state_path.parent / tl
+        test_load_path = str(tl)
     if test_load_path and Path(test_load_path).exists():
         update_test_load(Path(test_load_path), batch_results, handled_tests)
     else:

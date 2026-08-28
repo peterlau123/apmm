@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_031059",
+  "started_at": "2026-06-30T19:12:09Z",
+  "finished_at": "2026-06-30T19:13:58Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059.log",
+    "size_bytes": 1017893,
+    "captured_at": "2026-06-30T19:13:58Z"
+  },
+  "tests": [
+    {
+      "id": 888,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-False-False-1e-05]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 543,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_False_1e_05.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_False_1e_05.xml"
+    },
+    {
+      "id": 889,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-False-False-1e-06]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 539,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_False_1e_06.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_False_1e_06.xml"
+    },
+    {
+      "id": 891,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype0-128-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f7117166f30>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 128], stride=[128, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 796,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_128_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_128_64.xml"
+    },
+    {
+      "id": 892,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype0-256-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7fa384c927b0>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 256], stride=[256, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 783,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_256_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_256_32.xml"
+    },
+    {
+      "id": 893,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype0-256-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f6f995cf710>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 256], stride=[256, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 780,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_256_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype0_256_64.xml"
+    },
+    {
+      "id": 894,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype1-128-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7fb5389a7050>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 128], stride=[128, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 777,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_128_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_128_32.xml"
+    },
+    {
+      "id": 895,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype1-128-64]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f26d84d7f50>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 128], stride=[128, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 804,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_128_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_128_64.xml"
+    },
+    {
+      "id": 896,
+      "test_node": "tests/compile/test_silu_mul_quant_fusion.py::test_fusion_silu_and_mul_quant[TestSiluMulFp8QuantModel-True-True-True-dtype1-256-32]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='<tests.compile.backend.TestBackend object at 0x7f201aacfe30>' raised:\nLoweringException: ImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n  target: aten._scaled_mm.default\n  args[0]: TensorBox(StorageBox(\n    ComputedBuffer(name='buf0', layout=FixedLayout('cuda', torch.float8_e4m3fn, size=[s0, 256], stride=[256, 1]), data=Pointwise(\n      'cuda',\n   ",
+      "duration_ms": 808,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/pytest_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_256_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_031059/result_batch_20260701_031059_tests_compile_test_silu_mul_quant_fusion_py_test_fusion_silu_and_mul_quant_TestSiluMulFp8QuantModel_True_True_True_dtype1_256_32.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

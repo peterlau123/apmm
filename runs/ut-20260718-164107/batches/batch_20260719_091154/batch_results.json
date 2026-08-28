@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_091154",
+ "started_at": "2026-08-04T14:24:22Z",
+ "finished_at": "2026-08-04T14:24:47Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0075/pytest_batch_super_0075.log",
+  "size_bytes": 15129,
+  "captured_at": "2026-08-04T14:24:47Z"
+ },
+ "tests": [
+  {
+   "id": 3971,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype0-128-num_heads0-seq_lens_and_common_prefix0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 773,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0075/pytest_batch_super_0075_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype0_128_num_heads0_seq_lens_and_common_prefix0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0075/result_batch_super_0075_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype0_128_num_heads0_seq_lens_and_common_prefix0.xml"
+  },
+  {
+   "id": 3972,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[2-2048-None-16-dtype0-128-num_heads0-seq_lens_and_common_prefix1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 521,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0075/pytest_batch_super_0075_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype0_128_num_heads0_seq_lens_and_common_prefix1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0075/result_batch_super_0075_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_2_2048_None_16_dtype0_128_num_heads0_seq_lens_and_common_prefix1.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

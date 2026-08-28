@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183045",
+ "started_at": "2026-08-07T21:53:18Z",
+ "finished_at": "2026-08-07T21:53:46Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423.log",
+  "size_bytes": 121432,
+  "captured_at": "2026-08-07T21:53:46Z"
+ },
+ "tests": [
+  {
+   "id": 29513,
+   "test_node": "tests/models/test_transformers.py::test_embed_loading[Qwen/Qwen3-Embedding-0.6B]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 14139,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_transformers_py_test_embed_loading_Qwen_Qwen3_Embedding_0_6B.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_transformers_py_test_embed_loading_Qwen_Qwen3_Embedding_0_6B.xml"
+  },
+  {
+   "id": 29514,
+   "test_node": "tests/models/test_transformers.py::test_embed_loading[TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 13134,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_transformers_py_test_embed_loading_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_transformers_py_test_embed_loading_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+  },
+  {
+   "id": 29515,
+   "test_node": "tests/models/test_transformers.py::test_pooling[TransformersEmbeddingModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 247,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_transformers_py_test_pooling_TransformersEmbeddingModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_transformers_py_test_pooling_TransformersEmbeddingModel.xml"
+  },
+  {
+   "id": 29516,
+   "test_node": "tests/models/test_transformers.py::test_pooling[TransformersForSequenceClassification]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 246,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_transformers_py_test_pooling_TransformersForSequenceClassification.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_transformers_py_test_pooling_TransformersForSequenceClassification.xml"
+  },
+  {
+   "id": 29517,
+   "test_node": "tests/models/test_utils.py::test_module_with_batchnorm_can_load",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 149,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_utils_py_test_module_with_batchnorm_can_load.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_utils_py_test_module_with_batchnorm_can_load.xml"
+  },
+  {
+   "id": 29518,
+   "test_node": "tests/models/test_utils.py::test_module_with_child_containing_batchnorm_can_autoload",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 183,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_utils_py_test_module_with_child_containing_batchnorm_can_autoload.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_utils_py_test_module_with_child_containing_batchnorm_can_autoload.xml"
+  },
+  {
+   "id": 29519,
+   "test_node": "tests/models/test_utils.py::test_module_skip_prefix",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 209,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_utils_py_test_module_skip_prefix.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_utils_py_test_module_skip_prefix.xml"
+  },
+  {
+   "id": 29520,
+   "test_node": "tests/models/test_utils.py::test_module_skip_substr",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 166,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/pytest_batch_super_0423_tests_models_test_utils_py_test_module_skip_substr.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0423/result_batch_super_0423_tests_models_test_utils_py_test_module_skip_substr.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -116,3 +116,129 @@ def test_batch_config_json_output(tmp_path):
     assert cfg["run_id"] == "ut"
     assert cfg["selected_count"] == 2
     assert all("selected_reason" in t for t in cfg["tests"])
+
+
+# --- D1-3 防回归：manifest 冻结 / 不重复选（incident 2026-07-19）----------
+# incident 根因：generate_batch 误从冻结的 manifest 选，已跑过的测试在 manifest
+# 里仍 pending -> 被反复选中（378 次重复）。方案 A 修复：从 test_load（实时工作集）
+# 选，已处理(passed/ignored)的 status 已变 -> select_batch 过滤掉。以下测试锁定该行为。
+
+def _make_full_test(test_id, status, test_file="tests/a.py"):
+    """manifest/test_load schema 完整测试项（generate_batch 需 test_node/test_file 等）"""
+    return {
+        "id": test_id,
+        "test_node": f"{test_file}::test_{test_id}",
+        "test_file": test_file,
+        "test_name": f"test_{test_id}",
+        "status": status,
+    }
+
+
+def _write_test_load(tests, tmp_path, name="test_load.json"):
+    """写一个符合 manifest schema 的 test_load 文件"""
+    data = {
+        "version": "2.0",
+        "generated_at": "2026-07-19T00:00:00Z",
+        "source": "manual",
+        "tests": tests,
+        "statistics": {
+            "total": len(tests),
+            "pending": sum(1 for t in tests if t["status"] == "pending"),
+        },
+    }
+    p = tmp_path / name
+    p.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    return p
+
+
+def test_processed_tests_not_reselected(tmp_path):
+    """D1-3: generate_batch 从 test_load 选，已处理(passed)的不被重复选中。
+
+    构造 test_load 含 3 passed + 7 pending。若从冻结 manifest 选会重选 passed；
+    从 test_load 选则 passed 被 _is_selectable 过滤，只选 7 个 pending。
+    """
+    tests = (
+        [_make_full_test(i, "passed") for i in range(1, 4)] +      # 3 已跑过
+        [_make_full_test(i, "pending") for i in range(4, 11)]      # 7 待跑
+    )
+    test_load = _write_test_load(tests, tmp_path)
+    batch_dir = tmp_path / "batches"
+
+    result = generate_batch_mod.generate_batch(
+        manifest_path=test_load,
+        batch_dir=batch_dir,
+        batch_size=8,
+        batch_id="batch_20260719_120000",
+    )
+
+    cfg_path = batch_dir / "batch_20260719_120000" / "batch_config.json"
+    assert cfg_path.exists(), f"batch_config not written: {result}"
+    cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+    selected_nodes = [t["test_node"] for t in cfg["tests"]]
+    # 只选 7 个 pending，3 个 passed 不应出现
+    assert len(selected_nodes) == 7, f"expected 7 pending, got {selected_nodes}"
+    for i in range(1, 4):
+        assert f"tests/a.py::test_{i}" not in selected_nodes, "passed test re-selected!"
+    for i in range(4, 11):
+        assert f"tests/a.py::test_{i}" in selected_nodes
+
+
+def test_ignored_tests_not_reselected(tmp_path):
+    """D1-3: ignored（超时/无结果）同样不被重复选中。"""
+    tests = (
+        [_make_full_test(i, "ignored") for i in range(1, 3)] +     # 2 已超时
+        [_make_full_test(i, "pending") for i in range(3, 11)]      # 8 待跑
+    )
+    test_load = _write_test_load(tests, tmp_path)
+    batch_dir = tmp_path / "batches"
+
+    generate_batch_mod.generate_batch(
+        manifest_path=test_load,
+        batch_dir=batch_dir,
+        batch_size=8,
+        batch_id="batch_20260719_120001",
+    )
+
+    cfg_path = batch_dir / "batch_20260719_120001" / "batch_config.json"
+    cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+    selected_nodes = [t["test_node"] for t in cfg["tests"]]
+    assert len(selected_nodes) == 8, f"expected 8 pending, got {selected_nodes}"
+    for i in range(1, 3):
+        assert f"tests/a.py::test_{i}" not in selected_nodes, "ignored test re-selected!"
+
+
+def test_no_duplicate_when_reseltilizing_after_partial_run(tmp_path):
+    """D1-3: 模拟两轮 generate_batch。首轮选走前 8 pending，第二轮不应重选它们。
+
+    防回归核心：test_load 状态在 execute_batch 后更新（首轮 8 个变 passed），
+    第二轮 generate_batch 从更新后的 test_load 选 -> 不重复。这锁定"选择源
+    必须是实时 test_load 而非冻结 manifest"。
+    """
+    tests = [_make_full_test(i, "pending") for i in range(1, 21)]  # 20 pending
+    test_load = _write_test_load(tests, tmp_path)
+    batch_dir = tmp_path / "batches"
+
+    # 第一轮：选前 8
+    generate_batch_mod.generate_batch(
+        manifest_path=test_load, batch_dir=batch_dir, batch_size=8,
+        batch_id="batch_20260719_120000",
+    )
+    cfg1 = json.loads((batch_dir / "batch_20260719_120000" / "batch_config.json").read_text(encoding="utf-8"))
+    round1_nodes = {t["test_node"] for t in cfg1["tests"]}
+    assert len(round1_nodes) == 8
+
+    # 模拟 execute_batch 后 test_load 更新：首轮 8 个变 passed
+    for t in tests:
+        if t["test_node"] in round1_nodes:
+            t["status"] = "passed"
+    test_load = _write_test_load(tests, tmp_path)
+
+    # 第二轮：从更新后的 test_load 选，不应重选首轮的 8 个
+    generate_batch_mod.generate_batch(
+        manifest_path=test_load, batch_dir=batch_dir, batch_size=8,
+        batch_id="batch_20260719_120100",
+    )
+    cfg2 = json.loads((batch_dir / "batch_20260719_120100" / "batch_config.json").read_text(encoding="utf-8"))
+    round2_nodes = {t["test_node"] for t in cfg2["tests"]}
+    assert len(round2_nodes) == 8
+    assert round1_nodes.isdisjoint(round2_nodes), "第二轮重选了首轮已处理的测试！选择源脱节回归"

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0165",
+  "started_at": "2026-08-04T15:20:37Z",
+  "finished_at": "2026-08-04T15:21:05Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165.log",
+    "size_bytes": 166224,
+    "captured_at": "2026-08-04T15:21:05Z"
+  },
+  "tests": [
+    {
+      "id": 4650,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-40-num_heads1-seq_lens0-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 966,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens0_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens0_False.xml"
+    },
+    {
+      "id": 4651,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-40-num_heads1-seq_lens1-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 1066,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens1_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens1_True.xml"
+    },
+    {
+      "id": 4652,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-40-num_heads1-seq_lens1-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 1022,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens1_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_40_num_heads1_seq_lens1_False.xml"
+    },
+    {
+      "id": 4653,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-72-num_heads0-seq_lens0-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 831,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens0_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens0_True.xml"
+    },
+    {
+      "id": 4654,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-72-num_heads0-seq_lens0-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 717,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens0_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens0_False.xml"
+    },
+    {
+      "id": 4655,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-72-num_heads0-seq_lens1-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 713,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens1_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens1_True.xml"
+    },
+    {
+      "id": 4656,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-72-num_heads0-seq_lens1-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 719,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens1_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads0_seq_lens1_False.xml"
+    },
+    {
+      "id": 4657,
+      "test_node": "tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[q_dtype1-3-32768-None-dtype0-None-16-72-num_heads1-seq_lens0-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: head_size should be a multiple of 16",
+      "duration_ms": 738,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/pytest_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads1_seq_lens0_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0165/result_batch_super_0165_tests_kernels_attention_test_flash_attn_py_test_varlen_with_paged_kv_q_dtype1_3_32768_None_dtype0_None_16_72_num_heads1_seq_lens0_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

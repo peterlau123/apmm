@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182408",
+ "started_at": "2026-08-07T20:17:02Z",
+ "finished_at": "2026-08-07T20:17:27Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344.log",
+  "size_bytes": 19540,
+  "captured_at": "2026-08-07T20:17:27Z"
+ },
+ "tests": [
+  {
+   "id": 28879,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops[none,+relu3-3-inductor-ops_enabled14-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 252,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_none_relu3_3_inductor_ops_enabled14_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_none_relu3_3_inductor_ops_enabled14_False.xml"
+  },
+  {
+   "id": 28880,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops[all,-rms_norm-3-inductor-ops_enabled15-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 219,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_all_rms_norm_3_inductor_ops_enabled15_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_all_rms_norm_3_inductor_ops_enabled15_True.xml"
+  },
+  {
+   "id": 28881,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[all,none]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 220,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_all_none.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_all_none.xml"
+  },
+  {
+   "id": 28882,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[all,+rms_norm,all]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 134,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_all_rms_norm_all.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_all_rms_norm_all.xml"
+  },
+  {
+   "id": 28883,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_enabled_ops_invalid[+rms_norm,-rms_norm]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 225,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_rms_norm_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_enabled_ops_invalid_rms_norm_rms_norm.xml"
+  },
+  {
+   "id": 28884,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_topk_dispatch[False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 243,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_topk_dispatch_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_topk_dispatch_False.xml"
+  },
+  {
+   "id": 28885,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[True-dtype0-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_True_dtype0_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_True_dtype0_True.xml"
+  },
+  {
+   "id": 28886,
+   "test_node": "tests/model_executor/test_enabled_custom_ops.py::test_rms_norm_dispatch[True-dtype0-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/pytest_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_True_dtype0_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0344/result_batch_super_0344_tests_model_executor_test_enabled_custom_ops_py_test_rms_norm_dispatch_True_dtype0_False.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

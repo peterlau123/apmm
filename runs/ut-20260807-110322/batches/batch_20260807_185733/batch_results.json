@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185733",
+  "started_at": "2026-08-07T10:57:34Z",
+  "finished_at": "2026-08-07T10:57:38Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:57:38Z"
+  },
+  "tests": [
+    {
+      "id": 32215,
+      "test_node": "tests/v1/distributed/test_async_llm_dp.py::test_load[False-ray-RequestOutputKind.FINAL_ONLY-ibm-research/PowerMoE-3b]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_async_llm_dp_py_test_load_False_ray_RequestOutputKind_FINAL_ONLY_ibm_research_PowerMoE_3b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_async_llm_dp_py_test_load_False_ray_RequestOutputKind_FINAL_ONLY_ibm_research_PowerMoE_3b.xml"
+    },
+    {
+      "id": 32216,
+      "test_node": "tests/v1/distributed/test_async_llm_dp.py::test_load[False-ray-RequestOutputKind.FINAL_ONLY-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_async_llm_dp_py_test_load_False_ray_RequestOutputKind_FINAL_ONLY_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_async_llm_dp_py_test_load_False_ray_RequestOutputKind_FINAL_ONLY_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32217,
+      "test_node": "tests/v1/distributed/test_dbo.py::test_dbo_dp_ep_gsm8k[deepep_low_latency]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_dbo_py_test_dbo_dp_ep_gsm8k_deepep_low_latency.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_dbo_py_test_dbo_dp_ep_gsm8k_deepep_low_latency.xml"
+    },
+    {
+      "id": 32218,
+      "test_node": "tests/v1/distributed/test_dbo.py::test_dbo_dp_ep_gsm8k[deepep_high_throughput]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_dbo_py_test_dbo_dp_ep_gsm8k_deepep_high_throughput.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_dbo_py_test_dbo_dp_ep_gsm8k_deepep_high_throughput.xml"
+    },
+    {
+      "id": 32219,
+      "test_node": "tests/v1/distributed/test_eagle_dp.py::test_run_eagle_dp",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_eagle_dp_py_test_run_eagle_dp.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_eagle_dp_py_test_run_eagle_dp.xml"
+    },
+    {
+      "id": 32220,
+      "test_node": "tests/v1/distributed/test_external_lb_dp.py::test_external_lb_server_info[1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_server_info_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_server_info_1.xml"
+    },
+    {
+      "id": 32221,
+      "test_node": "tests/v1/distributed/test_external_lb_dp.py::test_external_lb_single_completion[1-ibm-research/PowerMoE-3b]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_single_completion_1_ibm_research_PowerMoE_3b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_single_completion_1_ibm_research_PowerMoE_3b.xml"
+    },
+    {
+      "id": 32222,
+      "test_node": "tests/v1/distributed/test_external_lb_dp.py::test_external_lb_completion_streaming[1-ibm-research/PowerMoE-3b]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/pytest_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_completion_streaming_1_ibm_research_PowerMoE_3b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185733/result_batch_20260807_185733_tests_v1_distributed_test_external_lb_dp_py_test_external_lb_completion_streaming_1_ibm_research_PowerMoE_3b.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

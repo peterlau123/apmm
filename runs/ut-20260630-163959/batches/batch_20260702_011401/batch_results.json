@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_011401",
+  "started_at": "2026-07-01T17:16:38Z",
+  "finished_at": "2026-07-01T17:18:47Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401.log",
+    "size_bytes": 216573,
+    "captured_at": "2026-07-01T17:18:47Z"
+  },
+  "tests": [
+    {
+      "id": 1780,
+      "test_node": "tests/entrypoints/openai/test_token_in_token_out.py::test_token_in_token_out_and_logprobs",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_token_in_token_out_py_test_token_in_token_out_and_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_token_in_token_out_py_test_token_in_token_out_and_logprobs.xml"
+    },
+    {
+      "id": 1781,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenize_completions[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_completions_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_completions_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1782,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenize_chat[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_chat_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_chat_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1783,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenize_chat_with_tools[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_chat_with_tools_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_chat_with_tools_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1784,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenize_with_return_token_strs[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_with_return_token_strs_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenize_with_return_token_strs_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1785,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_detokenize[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_detokenize_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_detokenize_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1786,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenizer_info_basic[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenizer_info_basic_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenizer_info_basic_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.xml"
+    },
+    {
+      "id": 1787,
+      "test_node": "tests/entrypoints/openai/test_tokenization.py::test_tokenizer_info_schema",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 31,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/pytest_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenizer_info_schema.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011401/result_batch_20260702_011401_tests_entrypoints_openai_test_tokenization_py_test_tokenizer_info_schema.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 7,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185411",
+  "started_at": "2026-08-07T10:54:11Z",
+  "finished_at": "2026-08-07T10:54:15Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:54:15Z"
+  },
+  "tests": [
+    {
+      "id": 31797,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-large_decode]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_large_decode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_large_decode.xml"
+    },
+    {
+      "id": 31798,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-large_prefill]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_large_prefill.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_large_prefill.xml"
+    },
+    {
+      "id": 31799,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-single_decode]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_single_decode.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_single_decode.xml"
+    },
+    {
+      "id": 31800,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-single_prefill]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_single_prefill.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_single_prefill.xml"
+    },
+    {
+      "id": 31801,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-spec_decode_small]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_spec_decode_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_spec_decode_small.xml"
+    },
+    {
+      "id": 31802,
+      "test_node": "tests/v1/attention/test_mla_backends.py::test_backend_correctness[16-deepseek-ai/DeepSeek-R1-spec_decode_medium]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_spec_decode_medium.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_mla_backends_py_test_backend_correctness_16_deepseek_ai_DeepSeek_R1_spec_decode_medium.xml"
+    },
+    {
+      "id": 31803,
+      "test_node": "tests/v1/attention/test_sparse_mla_backends.py::test_sparse_backend_decode_correctness[1-fp8_ds_mla-mixed_small]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_sparse_mla_backends_py_test_sparse_backend_decode_correctness_1_fp8_ds_mla_mixed_small.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_sparse_mla_backends_py_test_sparse_backend_decode_correctness_1_fp8_ds_mla_mixed_small.xml"
+    },
+    {
+      "id": 31804,
+      "test_node": "tests/v1/attention/test_sparse_mla_backends.py::test_sparse_backend_decode_correctness[1-fp8_ds_mla-mixed_medium]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/pytest_batch_20260807_185411_tests_v1_attention_test_sparse_mla_backends_py_test_sparse_backend_decode_correctness_1_fp8_ds_mla_mixed_medium.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185411/result_batch_20260807_185411_tests_v1_attention_test_sparse_mla_backends_py_test_sparse_backend_decode_correctness_1_fp8_ds_mla_mixed_medium.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

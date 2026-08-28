@@ -1,0 +1,8 @@
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[4-1024-128-512-32] (gpu=0, 2648ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[4-1024-256-256-16] (gpu=2, 2654ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[4-1024-256-256-32] (gpu=3, 2633ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[4-1024-256-512-16] (gpu=4, 2578ms, exit=1)
+FAILED         tests/kernels/moe/test_batched_deepgemm.py::test_batched_deepgemm_vs_triton[4-1024-256-512-32] (gpu=5, 2140ms, exit=1)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype0-128-128-32-8] (gpu=6, 2342ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype0-128-128-32-32] (gpu=0, 1024ms, exit=0)
+PASSED         tests/kernels/moe/test_batched_moe.py::test_batched_mm[False-None-dtype0-128-128-224-8] (gpu=2, 1089ms, exit=0)

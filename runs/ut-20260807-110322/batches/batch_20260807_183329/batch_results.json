@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183329",
+ "started_at": "2026-08-07T22:27:55Z",
+ "finished_at": "2026-08-07T22:28:23Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452.log",
+  "size_bytes": 107501,
+  "captured_at": "2026-08-07T22:28:23Z"
+ },
+ "tests": [
+  {
+   "id": 29746,
+   "test_node": "tests/plugins_tests/test_io_processor_plugins.py::test_prithvi_mae_plugin_offline[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 287,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_io_processor_plugins_py_test_prithvi_mae_plugin_offline_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_io_processor_plugins_py_test_prithvi_mae_plugin_offline_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.xml"
+  },
+  {
+   "id": 29747,
+   "test_node": "tests/plugins_tests/test_platform_plugins.py::test_platform_plugins",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected DummyDevice, got cuda, possibly because current_platform is imported before the plugin is loaded. The first import:\n    File \"<frozen runpy>\", line 198, in _run_module_as_main\n    File \"<frozen runpy>\", line 88, in _run_code\n    File \"/usr/local/lib/python3.12/dist-packages/pytest/__main__.py\", line 9, in <module>\n      raise SystemExit(pytest.console_main())\n    File \"/usr/local/lib/python3.12/dist-packages/_pytest/config/__init__.py\", line 223, in console_main\n      co",
+   "duration_ms": 173,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_platform_plugins_py_test_platform_plugins.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_platform_plugins_py_test_platform_plugins.xml"
+  },
+  {
+   "id": 29748,
+   "test_node": "tests/plugins_tests/test_platform_plugins.py::test_oot_custom_op",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected DummyRotaryEmbedding, got RotaryEmbedding, possibly because the custom op is not registered correctly.\nassert 'RotaryEmbedding' == 'DummyRotaryEmbedding'\n  \n  - DummyRotaryEmbedding\n  ? -----\n  + RotaryEmbedding",
+   "duration_ms": 206,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_platform_plugins_py_test_oot_custom_op.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_platform_plugins_py_test_oot_custom_op.xml"
+  },
+  {
+   "id": 29749,
+   "test_node": "tests/plugins_tests/test_scheduler_plugins.py::test_scheduler_plugins_v1",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: assert 'DeepGEMM bac... FP8 kernels.' == 'Exception ra...myV1Scheduler'\n  \n  - Exception raised by DummyV1Scheduler\n  + DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+   "duration_ms": 4043,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_scheduler_plugins_py_test_scheduler_plugins_v1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_scheduler_plugins_py_test_scheduler_plugins_v1.xml"
+  },
+  {
+   "id": 29750,
+   "test_node": "tests/plugins_tests/test_stats_logger_plugins.py::test_stat_logger_plugin_is_discovered",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 173,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_stat_logger_plugin_is_discovered.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_stat_logger_plugin_is_discovered.xml"
+  },
+  {
+   "id": 29751,
+   "test_node": "tests/plugins_tests/test_stats_logger_plugins.py::test_no_plugins_loaded_if_env_empty",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 171,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_no_plugins_loaded_if_env_empty.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_no_plugins_loaded_if_env_empty.xml"
+  },
+  {
+   "id": 29752,
+   "test_node": "tests/plugins_tests/test_stats_logger_plugins.py::test_invalid_stat_logger_plugin_raises",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 111,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_invalid_stat_logger_plugin_raises.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_invalid_stat_logger_plugin_raises.xml"
+  },
+  {
+   "id": 29753,
+   "test_node": "tests/plugins_tests/test_stats_logger_plugins.py::test_stat_logger_plugin_integration_with_engine",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 4487,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/pytest_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_stat_logger_plugin_integration_with_engine.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0452/result_batch_super_0452_tests_plugins_tests_test_stats_logger_plugins_py_test_stat_logger_plugin_integration_with_engine.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

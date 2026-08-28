@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_132904",
+  "started_at": "2026-08-06T05:29:05Z",
+  "finished_at": "2026-08-06T05:29:46Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904.log",
+    "size_bytes": 25250,
+    "captured_at": "2026-08-06T05:29:46Z"
+  },
+  "tests": [
+    {
+      "id": 13808,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-32-128-1024-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_32_128_1024_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_32_128_1024_dtype0.xml"
+    },
+    {
+      "id": 13809,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-32-128-1024-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_32_128_1024_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_32_128_1024_dtype1.xml"
+    },
+    {
+      "id": 13810,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-45-512-2048-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_45_512_2048_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_45_512_2048_dtype0.xml"
+    },
+    {
+      "id": 13811,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-45-512-2048-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_45_512_2048_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_45_512_2048_dtype1.xml"
+    },
+    {
+      "id": 13812,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-64-1024-1024-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_64_1024_1024_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_64_1024_1024_dtype0.xml"
+    },
+    {
+      "id": 13813,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-64-1024-1024-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_64_1024_1024_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_64_1024_1024_dtype1.xml"
+    },
+    {
+      "id": 13814,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-222-1024-2048-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_222_1024_2048_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_222_1024_2048_dtype0.xml"
+    },
+    {
+      "id": 13815,
+      "test_node": "tests/kernels/moe/test_deepep_moe.py::test_deep_ep_moe[False-world_dp_size0-6-32-222-1024-2048-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/pytest_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_222_1024_2048_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_132904/result_batch_20260806_132904_tests_kernels_moe_test_deepep_moe_py_test_deep_ep_moe_False_world_dp_size0_6_32_222_1024_2048_dtype1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

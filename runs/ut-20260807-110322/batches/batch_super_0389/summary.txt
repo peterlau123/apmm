@@ -1,0 +1,8 @@
+FAILED         tests/models/test_initialization.py::test_implicit_converted_models[LlamaForSequenceClassification] (gpu=0, 310ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_implicit_converted_models[Qwen2ForSequenceClassification] (gpu=2, 4928ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_implicit_converted_models[Qwen3ForSequenceClassification] (gpu=3, 4043ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_implicit_converted_models[Qwen3ForTokenClassification] (gpu=4, 311ms, exit=1)
+ERROR          tests/models/test_oot_registration.py::test_plugin (gpu=5, 0ms, exit=4)
+ERROR          tests/models/test_oot_registration.py::test_oot_registration_text_generation (gpu=6, 0ms, exit=4)
+ERROR          tests/models/test_oot_registration.py::test_oot_registration_embedding (gpu=0, 0ms, exit=4)
+ERROR          tests/models/test_oot_registration.py::test_oot_registration_multimodal (gpu=2, 0ms, exit=4)

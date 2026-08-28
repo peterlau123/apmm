@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_005846",
+ "started_at": "2026-08-04T23:25:38Z",
+ "finished_at": "2026-08-04T23:25:53Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0405/pytest_batch_super_0405.log",
+  "size_bytes": 10422,
+  "captured_at": "2026-08-04T23:25:53Z"
+ },
+ "tests": [
+  {
+   "id": 1079,
+   "test_node": "tests/distributed/test_events.py::test_topic_filtering",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1149,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0405/pytest_batch_super_0405_tests_distributed_test_events_py_test_topic_filtering.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0405/result_batch_super_0405_tests_distributed_test_events_py_test_topic_filtering.xml"
+  },
+  {
+   "id": 1080,
+   "test_node": "tests/distributed/test_events.py::test_high_volume",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1672,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0405/pytest_batch_super_0405_tests_distributed_test_events_py_test_high_volume.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0405/result_batch_super_0405_tests_distributed_test_events_py_test_high_volume.xml"
+  },
+  {
+   "id": 1076,
+   "test_node": "tests/distributed/test_events.py::test_multiple_events",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 256,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/pytest_batch_super_0404_tests_distributed_test_events_py_test_multiple_events.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/result_batch_super_0404_tests_distributed_test_events_py_test_multiple_events.xml"
+  },
+  {
+   "id": 1077,
+   "test_node": "tests/distributed/test_events.py::test_replay_mechanism",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1820,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/pytest_batch_super_0404_tests_distributed_test_events_py_test_replay_mechanism.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/result_batch_super_0404_tests_distributed_test_events_py_test_replay_mechanism.xml"
+  },
+  {
+   "id": 1078,
+   "test_node": "tests/distributed/test_events.py::test_buffer_limit",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1747,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/pytest_batch_super_0404_tests_distributed_test_events_py_test_buffer_limit.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0404/result_batch_super_0404_tests_distributed_test_events_py_test_buffer_limit.xml"
+  },
+  {
+   "id": 1073,
+   "test_node": "tests/distributed/test_eplb_spec_decode.py::test_eplb_spec_decode[llama4_eagle]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/pytest_batch_super_0403_tests_distributed_test_eplb_spec_decode_py_test_eplb_spec_decode_llama4_eagle.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/result_batch_super_0403_tests_distributed_test_eplb_spec_decode_py_test_eplb_spec_decode_llama4_eagle.xml"
+  },
+  {
+   "id": 1074,
+   "test_node": "tests/distributed/test_eplb_spec_decode.py::test_eplb_spec_decode_qwen3_next_mtp_async",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Model architectures ['Qwen3NextForCausalLM'] failed to be inspected. Please check the logs for more details. [type=value_error, input_value=ArgsKwargs((), {'model': ...rocessor_plugin': None}), input_type=ArgsKwargs]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error",
+   "duration_ms": 7810,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/pytest_batch_super_0403_tests_distributed_test_eplb_spec_decode_py_test_eplb_spec_decode_qwen3_next_mtp_async.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/result_batch_super_0403_tests_distributed_test_eplb_spec_decode_py_test_eplb_spec_decode_qwen3_next_mtp_async.xml"
+  },
+  {
+   "id": 1075,
+   "test_node": "tests/distributed/test_events.py::test_basic_publishing",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 252,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/pytest_batch_super_0403_tests_distributed_test_events_py_test_basic_publishing.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0403/result_batch_super_0403_tests_distributed_test_events_py_test_basic_publishing.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 1,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

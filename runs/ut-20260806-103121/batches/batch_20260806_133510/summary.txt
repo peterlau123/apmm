@@ -1,0 +1,8 @@
+PASSED         tests/kernels/moe/test_gpt_oss_triton_kernels.py::test_unit_shuffle (gpu=0, 1604ms, exit=0)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-1024-1] (gpu=2, 1640ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-1024-33] (gpu=3, 2359ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-1024-64] (gpu=4, 2357ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-2048-1] (gpu=5, 2112ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-2048-33] (gpu=6, 1906ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-True-2-16-2048-64] (gpu=0, 1472ms, exit=1)
+FAILED         tests/kernels/moe/test_grouped_topk.py::test_grouped_topk[dtype0-1.0-softmax-2-8-False-2-16-1024-1] (gpu=2, 1291ms, exit=1)

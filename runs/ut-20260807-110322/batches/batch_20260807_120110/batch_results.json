@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_120110",
+  "started_at": "2026-08-07T04:01:11Z",
+  "finished_at": "2026-08-07T04:01:55Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110.log",
+    "size_bytes": 20676,
+    "captured_at": "2026-08-07T04:01:55Z"
+  },
+  "tests": [
+    {
+      "id": 20644,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape0-512-24576-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1670,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape0_512_24576_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape0_512_24576_128.xml"
+    },
+    {
+      "id": 20645,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-1-256-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1627,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_256_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_256_128.xml"
+    },
+    {
+      "id": 20646,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-1-16384-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1376,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_16384_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_16384_1024.xml"
+    },
+    {
+      "id": 20647,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-1-24576-496]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1641,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_24576_496.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_1_24576_496.xml"
+    },
+    {
+      "id": 20648,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-16-256-496]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1664,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_256_496.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_256_496.xml"
+    },
+    {
+      "id": 20649,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-16-16384-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1655,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_16384_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_16384_128.xml"
+    },
+    {
+      "id": 20650,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-16-24576-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 825,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_24576_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_16_24576_4096.xml"
+    },
+    {
+      "id": 20651,
+      "test_node": "tests/kernels/quantization/test_cutlass_scaled_mm.py::test_cutlass_int8_gemm[True-b_scale_group_shape0-a_scale_group_shape1-32-8192-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 895,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/pytest_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_32_8192_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_120110/result_batch_20260807_120110_tests_kernels_quantization_test_cutlass_scaled_mm_py_test_cutlass_int8_gemm_True_b_scale_group_shape0_a_scale_group_shape1_32_8192_4096.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

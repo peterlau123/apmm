@@ -3,8 +3,8 @@
 # 最后更新：2026-06-29
 
 filter_rules:
-  updated_at: "2026-06-29T00:00:00"
-  version: "1.0"
+  updated_at: "2026-07-19T00:00:00"
+  version: "1.1"
 
   rules:
     # === 硬件平台（排除） ===
@@ -48,6 +48,10 @@ filter_rules:
     - pattern: "tests/**/*whisper*"
       type: "exclude"
       reason: "Whisper 模型"
+
+    - pattern: "tests/entrypoints/openai/test_translation_validation.py"
+      type: "exclude"
+      reason: "音频翻译测试，需 whisper/Gemma2 音频模型，离线环境无缓存"
 
     - pattern: "tests/**/**multi_modal**"
       type: "exclude"
@@ -215,6 +219,6 @@ filter_rules:
 
   # === 统计 ===
   stats:
-    total_rules: 50
-    exclude_rules: 43
+    total_rules: 51
+    exclude_rules: 44
     distributed_rules: 7

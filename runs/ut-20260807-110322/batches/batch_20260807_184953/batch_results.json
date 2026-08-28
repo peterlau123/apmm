@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_184953",
+  "started_at": "2026-08-07T10:50:08Z",
+  "finished_at": "2026-08-07T10:50:09Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:50:09Z"
+  },
+  "tests": [
+    {
+      "id": 31323,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_and_choice[llama4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_llama4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_llama4.xml"
+    },
+    {
+      "id": 31324,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_with_results[llama4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_llama4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_llama4.xml"
+    },
+    {
+      "id": 31330,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_and_choice[llama4_json]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_llama4_json.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_llama4_json.xml"
+    },
+    {
+      "id": 31331,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_with_results[llama4_json]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_llama4_json.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_llama4_json.xml"
+    },
+    {
+      "id": 31337,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_and_choice[mistral-7b]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_mistral_7b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_mistral_7b.xml"
+    },
+    {
+      "id": 31338,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_with_results[mistral-7b]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_mistral_7b.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_mistral_7b.xml"
+    },
+    {
+      "id": 31344,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_and_choice[mistral-small-3.2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_mistral_small_3_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_and_choice_mistral_small_3_2.xml"
+    },
+    {
+      "id": 31345,
+      "test_node": "tests/tool_use/test_tool_calls.py::test_tool_call_with_results[mistral-small-3.2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/pytest_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_mistral_small_3_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184953/result_batch_20260807_184953_tests_tool_use_test_tool_calls_py_test_tool_call_with_results_mistral_small_3_2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

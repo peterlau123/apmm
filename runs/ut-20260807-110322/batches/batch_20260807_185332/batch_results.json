@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185332",
+  "started_at": "2026-08-07T10:53:33Z",
+  "finished_at": "2026-08-07T10:53:36Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:53:36Z"
+  },
+  "tests": [
+    {
+      "id": 31733,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_split_decodes_and_prefills_uniform_all_prefills",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_all_prefills.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_all_prefills.xml"
+    },
+    {
+      "id": 31734,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_split_decodes_and_prefills_uniform_mixed_batch_all_uniform_decodes",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_mixed_batch_all_uniform_decodes.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_mixed_batch_all_uniform_decodes.xml"
+    },
+    {
+      "id": 31735,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_split_decodes_and_prefills_uniform_mixed_batch_non_uniform_decodes",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_mixed_batch_non_uniform_decodes.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_mixed_batch_non_uniform_decodes.xml"
+    },
+    {
+      "id": 31736,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_split_decodes_and_prefills_uniform_padded_batch_all_same",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_padded_batch_all_same.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_split_decodes_and_prefills_uniform_padded_batch_all_same.xml"
+    },
+    {
+      "id": 31737,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_prefill_split_across_ubatches[seq_lens0-query_lens0-12-2-1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_prefill_split_across_ubatches_seq_lens0_query_lens0_12_2_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_prefill_split_across_ubatches_seq_lens0_query_lens0_12_2_1.xml"
+    },
+    {
+      "id": 31738,
+      "test_node": "tests/v1/attention/test_attention_splitting.py::test_prefill_split_across_ubatches[seq_lens1-query_lens1-4-1-2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_prefill_split_across_ubatches_seq_lens1_query_lens1_4_1_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_attention_splitting_py_test_prefill_split_across_ubatches_seq_lens1_query_lens1_4_1_2.xml"
+    },
+    {
+      "id": 31739,
+      "test_node": "tests/v1/attention/test_batch_reordering.py::test_reorder_batch_to_split_decodes_and_prefills[all_decodes]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_batch_reordering_py_test_reorder_batch_to_split_decodes_and_prefills_all_decodes.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_batch_reordering_py_test_reorder_batch_to_split_decodes_and_prefills_all_decodes.xml"
+    },
+    {
+      "id": 31740,
+      "test_node": "tests/v1/attention/test_batch_reordering.py::test_reorder_batch_to_split_decodes_and_prefills[all_prefills]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/pytest_batch_20260807_185332_tests_v1_attention_test_batch_reordering_py_test_reorder_batch_to_split_decodes_and_prefills_all_prefills.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185332/result_batch_20260807_185332_tests_v1_attention_test_batch_reordering_py_test_reorder_batch_to_split_decodes_and_prefills_all_prefills.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_092828",
+ "started_at": "2026-08-04T15:38:38Z",
+ "finished_at": "2026-08-04T15:38:51Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0193/pytest_batch_super_0193.log",
+  "size_bytes": 10176,
+  "captured_at": "2026-08-04T15:38:51Z"
+ },
+ "tests": [
+  {
+   "id": 4908,
+   "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_prefill_with_paged_fp8_kv[None-dtype0-32-256-num_heads1-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 221,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0193/pytest_batch_super_0193_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_fp8_kv_None_dtype0_32_256_num_heads1_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0193/result_batch_super_0193_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_fp8_kv_None_dtype0_32_256_num_heads1_seq_lens0.xml"
+  },
+  {
+   "id": 4909,
+   "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_prefill_with_paged_fp8_kv[30.0-dtype0-16-128-num_heads0-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 203,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0193/pytest_batch_super_0193_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_fp8_kv_30_0_dtype0_16_128_num_heads0_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0193/result_batch_super_0193_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_fp8_kv_30_0_dtype0_16_128_num_heads0_seq_lens0.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

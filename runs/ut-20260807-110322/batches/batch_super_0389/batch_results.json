@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0389",
+  "started_at": "2026-08-07T21:16:25Z",
+  "finished_at": "2026-08-07T21:17:32Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389.log",
+    "size_bytes": 302052,
+    "captured_at": "2026-08-07T21:17:32Z"
+  },
+  "tests": [
+    {
+      "id": 29240,
+      "test_node": "tests/models/test_initialization.py::test_implicit_converted_models[LlamaForSequenceClassification]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 310,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_LlamaForSequenceClassification.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_LlamaForSequenceClassification.xml"
+    },
+    {
+      "id": 29241,
+      "test_node": "tests/models/test_initialization.py::test_implicit_converted_models[Qwen2ForSequenceClassification]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4928,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen2ForSequenceClassification.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen2ForSequenceClassification.xml"
+    },
+    {
+      "id": 29242,
+      "test_node": "tests/models/test_initialization.py::test_implicit_converted_models[Qwen3ForSequenceClassification]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4043,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen3ForSequenceClassification.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen3ForSequenceClassification.xml"
+    },
+    {
+      "id": 29243,
+      "test_node": "tests/models/test_initialization.py::test_implicit_converted_models[Qwen3ForTokenClassification]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 311,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen3ForTokenClassification.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_initialization_py_test_implicit_converted_models_Qwen3ForTokenClassification.xml"
+    },
+    {
+      "id": 29244,
+      "test_node": "tests/models/test_oot_registration.py::test_plugin",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "collection failure",
+      "duration_ms": 0,
+      "exit_code": 4,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_oot_registration_py_test_plugin.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_oot_registration_py_test_plugin.xml"
+    },
+    {
+      "id": 29245,
+      "test_node": "tests/models/test_oot_registration.py::test_oot_registration_text_generation",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "collection failure",
+      "duration_ms": 0,
+      "exit_code": 4,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_text_generation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_text_generation.xml"
+    },
+    {
+      "id": 29246,
+      "test_node": "tests/models/test_oot_registration.py::test_oot_registration_embedding",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "collection failure",
+      "duration_ms": 0,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_embedding.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_embedding.xml"
+    },
+    {
+      "id": 29247,
+      "test_node": "tests/models/test_oot_registration.py::test_oot_registration_multimodal",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "collection failure",
+      "duration_ms": 0,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/pytest_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_multimodal.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0389/result_batch_super_0389_tests_models_test_oot_registration_py_test_oot_registration_multimodal.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 2,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

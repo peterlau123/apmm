@@ -1,0 +1,5 @@
+IGNORED        tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate>10.0-request_rate-10.0-PlotGreaterThan] (gpu=0, Nonems, exit=0)
+IGNORED        tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate>=10.0-request_rate-10.0-PlotGreaterThanOrEqualTo] (gpu=1, Nonems, exit=0)
+PASSED         tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate==inf-request_rate-inf-PlotEqualTo] (gpu=2, 125ms, exit=0)
+RETRIABLE_ERROR tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate!='inf'-request_rate-inf-PlotNotEqualTo] (gpu=3, Nonems, exit=None)
+PASSED         tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str_inf_edge_case (gpu=4, 130ms, exit=0)

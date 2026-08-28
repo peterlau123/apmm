@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_141413",
+  "started_at": "2026-08-07T06:14:14Z",
+  "finished_at": "2026-08-07T06:14:41Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413.log",
+    "size_bytes": 76864,
+    "captured_at": "2026-08-07T06:14:41Z"
+  },
+  "tests": [
+    {
+      "id": 22526,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type397-b_type397-c_type397-1-257-832-1408-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1684,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type397_b_type397_c_type397_1_257_832_1408_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type397_b_type397_c_type397_1_257_832_1408_False_False_False_True.xml"
+    },
+    {
+      "id": 22527,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type398-b_type398-c_type398-1-257-3328-1408-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1054,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type398_b_type398_c_type398_1_257_3328_1408_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type398_b_type398_c_type398_1_257_3328_1408_False_False_False_True.xml"
+    },
+    {
+      "id": 22528,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type399-b_type399-c_type399-1-257-3328-1408-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "NotImplementedError: Could not run '_C::gptq_marlin_repack' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::gptq_marlin_repack' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Funct",
+      "duration_ms": 1624,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type399_b_type399_c_type399_1_257_3328_1408_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type399_b_type399_c_type399_1_257_3328_1408_False_False_False_True.xml"
+    },
+    {
+      "id": 22529,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type400-b_type400-c_type400-2-1-64-128-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1626,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type400_b_type400_c_type400_2_1_64_128_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type400_b_type400_c_type400_2_1_64_128_False_False_False_True.xml"
+    },
+    {
+      "id": 22530,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type401-b_type401-c_type401-2-1-256-128-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1631,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type401_b_type401_c_type401_2_1_256_128_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type401_b_type401_c_type401_2_1_256_128_False_False_False_True.xml"
+    },
+    {
+      "id": 22531,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type402-b_type402-c_type402-2-1-256-1024-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 1604,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type402_b_type402_c_type402_2_1_256_1024_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type402_b_type402_c_type402_2_1_256_1024_False_False_False_True.xml"
+    },
+    {
+      "id": 22532,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type403-b_type403-c_type403-2-1-1024-1024-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 576,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type403_b_type403_c_type403_2_1_1024_1024_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type403_b_type403_c_type403_2_1_1024_1024_False_False_False_True.xml"
+    },
+    {
+      "id": 22533,
+      "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_gptq_marlin_gemm[a_type404-b_type404-c_type404-2-26-2368-1664-False-False-False-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AttributeError: module 'torch' has no attribute 'float8_e8m0fnu'",
+      "duration_ms": 446,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/pytest_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type404_b_type404_c_type404_2_26_2368_1664_False_False_False_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_141413/result_batch_20260807_141413_tests_kernels_quantization_test_marlin_gemm_py_test_gptq_marlin_gemm_a_type404_b_type404_c_type404_2_26_2368_1664_False_False_False_True.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

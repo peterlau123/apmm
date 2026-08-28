@@ -1,0 +1,146 @@
+{
+ "batch_id": "batch_verify_003",
+ "batch_type": "normal",
+ "tests": [
+  {
+   "id": 1776,
+   "test_node": "tests/entrypoints/openai/test_tokenization.py::test_detokenize[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+   "test_file": "tests/entrypoints/openai/test_tokenization.py",
+   "test_name": "test_detokenize[HuggingFaceH4/zephyr-7b-beta-HuggingFaceH4/zephyr-7b-beta]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": "batch_20260702_011929",
+   "last_batch_id": "batch_20260702_011929",
+   "run_count": 3,
+   "retry_count": 0,
+   "max_retry": 2,
+   "last_run_at": "2026-07-01T17:23:44Z",
+   "last_duration_ms": 31,
+   "last_exit_code": 0,
+   "error_type": "collection",
+   "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_011929/pytest_batch_20260702_011929_tests_entrypoints_openai_test_tokenization_py_test_detokenize_HuggingFaceH4_zephyr_7b_beta_HuggingFaceH4_zephyr_7b_beta.log",
+   "errors": [],
+   "failures": []
+  },
+  {
+   "id": 22067,
+   "test_node": "tests/kernels/quantization/test_marlin_gemm.py::test_marlin_int4_fp8_preprocess_without_zp",
+   "test_file": "tests/kernels/quantization/test_marlin_gemm.py",
+   "test_name": "test_marlin_int4_fp8_preprocess_without_zp",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_134140",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "NotImplementedError: Could not run '_C::marlin_int4_fp8_preprocess' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. '_C::marlin_int4_fp8_preprocess' is only available for these backends: [Meta, BackendSelect, Python, FuncTorchDynamicLaye",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 1511,
+   "exit_code": 1,
+   "run_at": "2026-08-07T13:42:32.421239",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.234147"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.750411"
+    }
+   ]
+  },
+  {
+   "id": 31374,
+   "test_node": "tests/tool_use/test_tool_choice_required.py::test_structured_outputs_json[sample_output0-True]",
+   "test_file": "tests/tool_use/test_tool_choice_required.py",
+   "test_name": "test_structured_outputs_json[sample_output0-True]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": "batch_20260702_175842",
+   "last_batch_id": "batch_20260702_175842",
+   "run_count": 1,
+   "retry_count": 0,
+   "max_retry": 2,
+   "last_run_at": "2026-07-02T11:49:12Z",
+   "last_duration_ms": null,
+   "last_exit_code": 0,
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_175842/pytest_batch_20260702_175842_tests_tool_use_test_tool_choice_required_py_test_structured_outputs_json_sample_output0_True.log",
+   "errors": [],
+   "failures": []
+  },
+  {
+   "id": 783,
+   "test_node": "tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8]",
+   "test_file": "tests/compile/test_fusion_attn.py",
+   "test_name": "test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260719_000057",
+   "run_count": 0,
+   "retry_count": 6,
+   "max_retry": 3,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nRuntimeError: Cannot find a working triton installation. Either the package is not installed or it is too old. More information on installing Triton can be found at https://github.com/openai/triton\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 3237,
+   "exit_code": 1,
+   "run_at": "2026-07-19T00:03:15.451730",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T13:53:44.489534"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-05T16:53:39.694074"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T06:59:47.725702"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-06T09:30:16.521431"
+    }
+   ]
+  }
+ ],
+ "distributed_count": 0,
+ "requires_multi_gpu": false,
+ "gpu_per_test": 1,
+ "generated_at": "2026-08-09T00:39:27.147176"
+}

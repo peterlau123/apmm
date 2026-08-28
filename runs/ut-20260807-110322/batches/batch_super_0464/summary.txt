@@ -1,0 +1,8 @@
+PASSED         tests/quantization/test_ptpc_fp8.py::test_ptpc_fp8_rocm[fp8_e4m3-float16] (gpu=0, 0ms, exit=0)
+PASSED         tests/quantization/test_register_quantization_config.py::test_register_quantization_config (gpu=2, 836ms, exit=0)
+FAILED         tests/quantization/test_register_quantization_config.py::test_custom_quant[TinyLlama/TinyLlama-1.1B-Chat-v1.0] (gpu=3, 6021ms, exit=1)
+FAILED         tests/quantization/test_rtn.py::test_model_rtn_startup[10-bfloat16-ai21labs/Jamba-tiny-dev] (gpu=4, 271ms, exit=1)
+PASSED         tests/quantization/test_torchao.py::test_pre_quantized_model (gpu=5, 0ms, exit=0)
+PASSED         tests/quantization/test_torchao.py::test_opt_125m_int8wo_model_loading_with_params[cuda:0] (gpu=6, 0ms, exit=0)
+PASSED         tests/quantization/test_torchao.py::test_opt_125m_int4wo_model_per_module_quant (gpu=0, 0ms, exit=0)
+PASSED         tests/quantization/test_torchao.py::test_qwenvl_int8wo_model_loading_with_params (gpu=2, 0ms, exit=0)

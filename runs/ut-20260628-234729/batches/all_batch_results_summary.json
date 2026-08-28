@@ -1,0 +1,2232 @@
+[
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_vllm_gc_ed",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+    "duration_ms": 1499,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 150,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 150,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 147,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 150,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 147,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 151,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 156,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cpu_offload.py::test_cpu_offload",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "RuntimeError: Server exited unexpectedly.",
+    "duration_ms": 18417,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_python_error",
+    "status": "failed",
+    "error_type": "oom",
+    "error_message": "torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 98.05 GiB. GPU 0 has a total capacity of 140.06 GiB of which 9.11 GiB is free. Process 907882 has 130.64 GiB memory in use. Process 2511464 has 316.00 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory ",
+    "duration_ms": 667,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_basic_cumem",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "AttributeError: 'MemPool' object has no attribute 'snapshot'",
+    "duration_ms": 663,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_cumem_with_cudagraph",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "AttributeError: 'MemPool' object has no attribute 'snapshot'",
+    "duration_ms": 705,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/samplers/test_beam_search.py::test_beam_search_single_input[4-64-half-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 119,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/samplers/test_beam_search.py::test_beam_search_with_concurrency_limit[4-64-half-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+    "duration_ms": 156,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/samplers/test_beam_search.py::test_beam_search_passes_multimodal_data[2-64-half]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='vllm-public-assets.s3.us-west-2.amazonaws.com', port=443): Max retries exceeded with url: /multimodal_asset/mary_had_lamb.ogg (Caused by ConnectTimeoutError(<HTTPSConnection(host='vllm-public-assets.s3.us-west-2.amazonaws.com', port=443) at 0x7fd3617b53a0>, 'Connection to vllm-public-assets.s3.us-west-2.amazonaws.com timed out. (connect timeout=5)'))",
+    "duration_ms": 40387,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/samplers/test_ignore_eos.py::test_ignore_eos[512-half-distilbert/distilgpt2]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+    "duration_ms": 3944,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "AssertionError: Benchmark failed: /usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.\n    warnings.warn(\n  Traceback (most recent call last):\n    File \"/usr/local/bin/vllm\", line 7, in <module>\n      sys.exit(main())\n               ^^^^^^\n    File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/entrypoints/cli/main.py\", line 73, in main\n      args.dispatch_function(args)",
+    "duration_ms": 8688,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_inf_float",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 144,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_inf_float",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 128,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str_inf_edge_case",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 149,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/compile/test_config.py::test_copy_pass",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "collection failure",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/compile/test_config.py::test_stock_torch_compile",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "collection failure",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/test_config.py::test_compile_config_repr_succeeds",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "collection failure",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/test_config.py::test_auto_runner[distilbert/distilgpt2-generate-none]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "collection failure",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-facebook/opt-125m-True-Hello here, this is a simple test]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-facebook/opt-125m-True-vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs. It is designed to be used in production environments, where inference and serving]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/test_chat_utils.py::test_parse_chat_messages_single_image",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-vision-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.",
+    "duration_ms": 191,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/test_chat_utils.py::test_parse_chat_messages_single_image_with_uuid",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-vision-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.",
+    "duration_ms": 177,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseInputToHarmonyMessage::test_message_with_empty_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 119,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseInputToHarmonyMessage::test_tool_message_with_string_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 123,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_single_completion[server0-facebook/opt-125m]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18583,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_no_logprobs[server0-facebook/opt-125m]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18566,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseInputToHarmonyMessage::test_tool_message_with_array_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 123,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseInputToHarmonyMessage::test_tool_message_with_empty_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 114,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_zero_logprobs[server0-facebook/opt-125m]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18070,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_some_logprobs[server0-facebook/opt-125m]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18570,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_user_message_with_empty_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 115,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_user_message_with_none_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 112,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_too_many_completion_logprobs[server0-facebook/opt-125m]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18068,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_prompt_logprobs_completion[server0-facebook/opt-125m--1]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18070,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_assistant_message_with_empty_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 133,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_assistant_message_with_none_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 114,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup0-mp-auto-test_options0]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 218,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup1-ray-auto-test_options1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 216,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_assistant_message_with_content_but_empty_reasoning",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 133,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/entrypoints/openai/parser/test_harmony_utils.py::TestParseChatInputToHarmonyMessage::test_assistant_message_with_reasoning_but_empty_content",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 135,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_prompt_logprobs_completion[server0-facebook/opt-125m-0]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 17572,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/v1/entrypoints/openai/test_completion.py::test_prompt_logprobs_completion[server0-facebook/opt-125m-1]",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+    "duration_ms": 18070,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_failed_model_execution",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cpu_offload.py::test_cpu_offload",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_python_error",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_basic_cumem",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_cumem_with_cudagraph",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[hmellor/tiny-random-LlamaForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[facebook/opt-125m]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_async",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_fp8_kvcache",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[5.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[10.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[1.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_inf_float",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[5.0-4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[1.0-4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_inf_float",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[10.0-2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[50.0-3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[5.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_failed_model_execution",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cpu_offload.py::test_cpu_offload",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_python_error",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_basic_cumem",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_cumem_with_cudagraph",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[hmellor/tiny-random-LlamaForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[facebook/opt-125m]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_async",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_fp8_kvcache",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[5.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[10.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[1.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_inf_float",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[5.0-4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[1.0-4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_inf_float",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[10.0-2]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[50.0-3]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[5.0-1]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 1,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83247,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[True-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-uni-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83258,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-True-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-hmellor/tiny-random-Gemma2ForCausalLM]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83300,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models[False-mp-False-False-5-FLASH_ATTN-meta-llama/Llama-3.2-1B-Instruct]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[True-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env0]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--L4-extra_env2]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--L4-extra_env3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-ray--L4-extra_env4]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-meta-llama/Llama-3.2-1B-Instruct-mp--L4-extra_env5]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-ray--A100-extra_env6]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_models_distributed[False-facebook/opt-125m-mp--A100-extra_env7]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 0,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_basic_correctness.py::test_failed_model_execution",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83294,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cpu_offload.py::test_cpu_offload",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_python_error",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_basic_cumem",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_cumem_with_cudagraph",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[hmellor/tiny-random-LlamaForCausalLM]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[facebook/opt-125m]",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83841,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83838,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_async",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83810,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_fp8_kvcache",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+    "duration_ms": 83473,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+    "status": "failed",
+    "error_type": "assertion",
+    "error_message": "AssertionError: Benchmark failed: '(MaxRetryError(\"HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json (Caused by ConnectTimeoutError(<HTTPSConnection(host='huggingface.co', port=443) at 0x7f50b739d940>, 'Connection to huggingface.co timed out. (connect timeout=10)'))\"), '(Request ID: 40fcdf42-598b-421d-9c96-ddc530a3bf92)')' thrown while requesting HEAD https://huggingface.co/TinyLlama/TinyLlama-1.1B-Ch",
+    "duration_ms": 92128,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[facebook/opt-125m]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_async",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_fp8_kvcache",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[5.0-1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[10.0-1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_numeric[1.0-1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 121,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_equal_to_inf_float",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[5.0-4]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_numeric[1.0-4]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_not_equal_to_inf_float",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 123,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[10.0-2]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 121,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[50.0-3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 124,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than[5.0-1]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 148,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than_or_equal_to[10.0-3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 129,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_less_than_or_equal_to[5.0-2]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 128,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than[10.0-2]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 129,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than[5.0-3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 134,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than_or_equal_to[10.0-3]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 123,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than_or_equal_to[5.0-4]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 125,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate==5.0-request_rate-5.0-PlotEqualTo]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 119,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate!=10.0-request_rate-10.0-PlotNotEqualTo]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 126,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<50.0-request_rate-50.0-PlotLessThan]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<=50.0-request_rate-50.0-PlotLessThanOrEqualTo]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate>10.0-request_rate-10.0-PlotGreaterThan]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate>=10.0-request_rate-10.0-PlotGreaterThanOrEqualTo]",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+    "duration_ms": null,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate==inf-request_rate-inf-PlotEqualTo]",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 125,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate!='inf'-request_rate-inf-PlotNotEqualTo]",
+    "status": "retriable_error",
+    "error_type": "other",
+    "error_message": "executor task crashed: pytest_full_cmd / log_path may not contain single quotes (outer wrap uses bash -c '<...>')",
+    "duration_ms": null,
+    "exit_code": null,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str_inf_edge_case",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 130,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_multiple_filters",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 126,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_empty_filter",
+    "status": "passed",
+    "error_type": null,
+    "error_message": "",
+    "duration_ms": 127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_random_dataset.py::test_random_dataset_same_seed",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+    "duration_ms": 166127,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_random_dataset.py::test_random_dataset_different_seeds",
+    "status": "error",
+    "error_type": "collection",
+    "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+    "duration_ms": 166099,
+    "exit_code": 0,
+    "log_file": null,
+    "run_at": null
+  },
+  {
+    "test_node": "tests/benchmarks/test_random_dataset.py::test_random_mm_same_seed",
+    "status": "ignored",
+    "error_type": "timeout",
+    "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+    "duration_ms": null,
+    "exit_code": 2,
+    "log_file": null,
+    "run_at": null
+  }
+]

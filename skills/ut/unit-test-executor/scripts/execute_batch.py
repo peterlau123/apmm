@@ -273,10 +273,19 @@ def _wrap_with_docker_exec_b64(
     # Outer quoting uses double quotes around a pure-ASCII payload (echo +
     # pipe + base64 chars). No single quotes, no newlines, no shell meta in
     # the encoded chunk → no quoting risk in any hop.
-    return (
+    # 2026-08-04 修复: bifrost 后端 (shell_words 解析, 不经 shell) 下
+    # 无 sh -c 包装的 `sudo ... bash -c "echo | base64 -d | bash"` 提交
+    # 失败 (exit=1/0ms timeout) —— shell_words 把嵌套引号/管道拆坏。
+    # 手动验证: 加 `sh -c '...'` 前缀后 bifrost 提交成功。
+    # 返回自带 sh -c, remote_executor._run_bifrost 检测 startswith("sh -c")
+    # 不会二次包装。
+    inner = (
         f"sudo -n docker exec{env_flags} {docker_container} bash -c "
         f"\"echo {encoded} | base64 -d | bash\""
     )
+    # 外层用单引号包整个命令 (bifrost shell_words 解析后交给 sh -c 执行,
+    # 内部双引号原样保留给 bash -c)。
+    return f"sh -c '{inner}'"
 
 
 # ── Remote call helper ────────────────────────────────────────────────────────
@@ -296,8 +305,13 @@ def run_remote(cmd: str, *, timeout: int = 600, profile: str = "t_h20") -> dict:
         from tools.remote_executor import run_remote as _run_remote
         # Read backend from env (set by workflow config) or default to agent
         backend = os.environ.get("REMOTE_BACKEND", "agent")
+        # DEBUG 2026-08-04: 确认走的后端
+        if os.environ.get("BIFROST_DEBUG_TASK"):
+            print(f"[DBG-backend] remote_executor backend={backend}", flush=True)
         return _run_remote(cmd, timeout=timeout, profile=profile, backend=backend)
     except ImportError:
+        if os.environ.get("BIFROST_DEBUG_TASK"):
+            print("[DBG-backend] remote_executor import FAIL → agent.py fallback", flush=True)
         pass
 
     # Fallback: original agent.py path (unchanged behavior)
@@ -583,6 +597,11 @@ def _detect_free_gpus(
     except ConnectionError:
         raise
     out = res.get("stdout", "") or ""
+    # DEBUG 2026-08-04: 探测命令实际输出
+    import os as _os
+    if _os.environ.get("BIFROST_DEBUG_GPU"):
+        print(f"[DBG-detect] cmd={cmd[:150]}...", flush=True)
+        print(f"[DBG-detect] exit={res.get('exit_code')} stdout={out[:300]!r}", flush=True)
     if res.get("exit_code", 0) != 0 and not out:
         return [], None
 
@@ -841,18 +860,34 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Source: workflow.yaml config.container_env (NOT workflow_state.json)
     # Note: CUDA_VISIBLE_DEVICES is excluded here and set per-test in pytest_full_cmd
     import yaml
-    # When exec_config is provided (unit tests), skip reading workflow_state.json
-    if exec_config is not None:
-        container_env_raw = {}
-    else:
+    # Container env 读取不因 exec_config 存在而跳过 (2026-08-04 修复:
+    # retry 脚本传 --timeout → exec_config 非 None → 原逻辑直接给 {} →
+    # HF_HUB_OFFLINE 等变量丢失 → 容器内测试联网 huggingface.co 失败)。
+    # exec_config 显式提供 container_env 时优先 (unit tests 注入用)。
+    if exec_config is not None and exec_config.get("container_env"):
+        container_env_raw = exec_config["container_env"]
+    elif workflow_state_path.exists():
         state_raw = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+        # paths.workflow_yaml 可能是 Windows 反斜杠相对路径
+        # (如 "runs\\ut-xxx\\workflow.yaml") → 归一化 + 锚定 (与
+        # _resolve_test_load_path 同规则: runs/ 前缀 → 项目根, 否则 → run_dir)。
         workflow_yaml_str = state_raw.get("paths", {}).get("workflow_yaml", "")
-        workflow_yaml_path = Path(workflow_yaml_str) if workflow_yaml_str else None
+        workflow_yaml_path = None
+        if workflow_yaml_str:
+            workflow_yaml_str = workflow_yaml_str.replace("\\", "/")
+            workflow_yaml_path = Path(workflow_yaml_str)
+            if not workflow_yaml_path.is_absolute():
+                if workflow_yaml_path.parts and workflow_yaml_path.parts[0] == "runs":
+                    workflow_yaml_path = _project_root / workflow_yaml_path
+                else:
+                    workflow_yaml_path = workflow_state_path.parent / workflow_yaml_path
         if workflow_yaml_path and workflow_yaml_path.is_file():
             wf = yaml.safe_load(workflow_yaml_path.read_text(encoding="utf-8"))
             container_env_raw = wf.get("config", {}).get("container_env", {})
         else:
             container_env_raw = {}
+    else:
+        container_env_raw = {}
     # Exclude CUDA_VISIBLE_DEVICES (per-test GPU assignment overrides global config)
     container_env = {
         k: v for k, v in container_env_raw.items()
@@ -868,11 +903,14 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
     # Read directly from workflow.yaml config
     wf_config = wf.get("config", {}) if 'wf' in dir() and wf else {}
     force_gpu_count = wf_config.get("force_gpu_count", config.get("force_gpu_count", 0))
-    
+    # 2026-08-05: 排除异常卡 (如 GPU 1 illegal memory access), 配置 exclude_gpus=[1]
+    exclude_gpus = wf_config.get("exclude_gpus", config.get("exclude_gpus", []))
+
     if force_gpu_count > 0:
         # Force mode: bypass detection, use specified GPU count
-        gpu_pool = list(range(force_gpu_count))
-        print(f"[INFO] Force GPU mode: using {gpu_pool} (parallelism={len(gpu_pool)})")
+        gpu_pool = [i for i in range(force_gpu_count) if i not in exclude_gpus]
+        print(f"[INFO] Force GPU mode: using {gpu_pool} (parallelism={len(gpu_pool)})"
+              + (f" exclude={exclude_gpus}" if exclude_gpus else ""))
     else:
         try:
             free_ids, fallback_card = _detect_free_gpus(
@@ -882,8 +920,32 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
             return _disconnect_wait(batch_id, remote_server, workflow_state_path, str(e))
 
         if free_ids:
-            gpu_pool = free_ids
-            print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})")
+            gpu_pool = [i for i in free_ids if i not in exclude_gpus]
+            print(f"[INFO] Free GPUs detected: {gpu_pool} (parallelism={len(gpu_pool)})"
+                  + (f" exclude={exclude_gpus}" if exclude_gpus else ""))
+        elif batch_type == "distributed":
+            # 2026-08-04 修复: distributed 需要 ≥ gpu_per_test 卡, 探测到
+            # 0 空闲时 D1 degrade 到单卡 → n_workers=1 → 串行硬跑易崩且
+            # 实际是"上一个 super-batch 的 GPU 未释放"的瞬时状态。
+            # 等待重试探测 (最多 5×30s), GPU 释放后自然恢复并行。
+            import time as _t
+            gpu_pool = [fallback_card if fallback_card is not None else 0]
+            retried = False
+            for attempt in range(5):
+                _t.sleep(30)
+                free_ids, fallback_card = _detect_free_gpus(
+                    container=docker_container, profile=remote_server,
+                )
+                if len(free_ids) >= gpu_per_test:
+                    gpu_pool = free_ids
+                    print(f"[INFO] GPU freed, retry detected: {gpu_pool} "
+                          f"(attempt {attempt+1})")
+                    retried = True
+                    break
+            if not retried:
+                gpu_pool = [fallback_card if fallback_card is not None else 0]
+                print(f"[WARN] 0 free GPU after 5 retries — D1 degrade: "
+                      f"serialize on card {gpu_pool[0]}")
         else:
             # 0-card D1 degradation (design §4.2): serialize on the lowest-usage
             # card. If even fallback is None (detection failed), still try card 0.
@@ -892,9 +954,18 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
 
     if batch_type == "distributed":
         n_workers = len(gpu_pool) // gpu_per_test
+        # 2026-08-04 修复: 探测到 GPU < gpu_per_test 时 n_workers=0 →
+        # ThreadPoolExecutor(0) ValueError → execute_batch 崩溃无结果。
+        # fallback 到 1 (串行), 保证至少能跑。
+        if n_workers < 1:
+            n_workers = 1
+            print(f"[WARN] Free GPUs ({len(gpu_pool)}) < gpu_per_test ({gpu_per_test}), "
+                  f"serialize (n_workers=1)")
         print(f"[INFO] Distributed mode: {n_workers} parallel tests, {gpu_per_test} GPUs each")
     else:
         n_workers = len(gpu_pool)
+        if n_workers < 1:
+            n_workers = 1  # 理论不会发生 (gpu_pool 至少有 fallback), 防御
 
     started_at = _utc_now_iso_z()
 
@@ -939,10 +1010,28 @@ def execute_batch(batch_config_path: Path, workflow_state_path: Path, *, exec_co
         if batch_type == "distributed":
             # Distributed: allocate gpu_per_test contiguous GPUs
             gpu_start = (idx % n_workers) * gpu_per_test
+            # 2026-08-04 修复: D1 degrade (gpu_pool 仅 1 卡) 时
+            # gpu_pool[gpu_start+g] 越界 (list index out of range) →
+            # retriable_error 全批报废。degrade 场景分布式无法跑
+            # (需 ≥ gpu_per_test 卡), 直接抛错走外层重试。
+            if gpu_start + gpu_per_test > len(gpu_pool):
+                raise RuntimeError(
+                    f"insufficient GPUs for distributed test: need {gpu_per_test}, "
+                    f"pool={gpu_pool}"
+                )
             gpu_ids = ",".join(str(gpu_pool[gpu_start + g]) for g in range(gpu_per_test))
+            # Dynamic master_port: torchrun defaults to 29500 which collides
+            # when multiple distributed tests run concurrently (EADDRINUSE).
+            # Port must be GLOBALLY unique (across batches + workers), so we
+            # combine a random base with the worker idx: same idx in two
+            # concurrent batches must never collide.
+            import random
+            port_base = random.randint(20000, 30000)
+            master_port = port_base + (idx % 97)  # spread within a batch
             pytest_full_cmd = (
                 f"cd /gpfs/gcsp/M2.7_verify/vllm && "
                 f"CUDA_VISIBLE_DEVICES={gpu_ids} torchrun --nproc_per_node={gpu_per_test} "
+                f"--master_port={master_port} "
                 f"-m pytest {node} --junit-xml={node_xml} {pytest_args} -o junit_logging=out-err"
             )
         else:
@@ -1244,11 +1333,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Read remote_backend from workflow_state.json and set env for run_remote
+    # 2026-08-04 修复: 优先环境变量 (retry 脚本显式传 REMOTE_BACKEND=bifrost),
+    # workflow_state.json 兜底 —— 否则 config={} 时默认 "agent" 覆盖 env,
+    # run_remote 走 agent.py (paramiko 缺失) → 测试全失败 (exit=1 ignored)。
     try:
         _ws = json.loads(Path(args.workflow_state).read_text(encoding="utf-8"))
         _cfg = _ws.get("config", {})
         _backend = _cfg.get("remote_backend", "agent")
-        os.environ["REMOTE_BACKEND"] = _backend
+        os.environ["REMOTE_BACKEND"] = os.environ.get(
+            "REMOTE_BACKEND", _backend
+        ) or _backend
     except (OSError, json.JSONDecodeError, KeyError):
         pass  # default to "agent"
 

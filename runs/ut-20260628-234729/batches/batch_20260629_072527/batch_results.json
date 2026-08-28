@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_20260629_072527",
+  "started_at": "2026-06-28T23:25:37Z",
+  "finished_at": "2026-06-28T23:26:12Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/pytest_batch_20260629_072527.log",
+    "size_bytes": 10900,
+    "captured_at": "2026-06-28T23:26:12Z"
+  },
+  "tests": [
+    {
+      "id": 30209,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-facebook/opt-125m-True-Hello here, this is a simple test]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/pytest_batch_20260629_072527_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_facebook_opt_125m_True_Hello_here_this_is_a_simple_test.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/result_batch_20260629_072527_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_facebook_opt_125m_True_Hello_here_this_is_a_simple_test.xml"
+    },
+    {
+      "id": 30210,
+      "test_node": "tests/tokenizers_/test_detokenize.py::test_decode_streaming[True-True-True-facebook/opt-125m-True-vLLM is a high-throughput and memory-efficient inference and serving engine for LLMs. It is designed to be used in production environments, where inference and serving]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/pytest_batch_20260629_072527_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_facebook_opt_125m_True_vLLM_is_a_high_throughput_and_memory_efficient_inference_and_serving_engine_for_LLMs_It_is_designed_to_be_used_in_production_environments_where_inference_and_serving.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/result_batch_20260629_072527_tests_tokenizers__test_detokenize_py_test_decode_streaming_True_True_True_facebook_opt_125m_True_vLLM_is_a_high_throughput_and_memory_efficient_inference_and_serving_engine_for_LLMs_It_is_designed_to_be_used_in_production_environments_where_inference_and_serving.xml"
+    },
+    {
+      "id": 2089,
+      "test_node": "tests/entrypoints/test_chat_utils.py::test_parse_chat_messages_single_image",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-vision-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.",
+      "duration_ms": 191,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/pytest_batch_20260629_072527_tests_entrypoints_test_chat_utils_py_test_parse_chat_messages_single_image.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/result_batch_20260629_072527_tests_entrypoints_test_chat_utils_py_test_parse_chat_messages_single_image.xml"
+    },
+    {
+      "id": 2090,
+      "test_node": "tests/entrypoints/test_chat_utils.py::test_parse_chat_messages_single_image_with_uuid",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-vision-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.",
+      "duration_ms": 177,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/pytest_batch_20260629_072527_tests_entrypoints_test_chat_utils_py_test_parse_chat_messages_single_image_with_uuid.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260629_072527/result_batch_20260629_072527_tests_entrypoints_test_chat_utils_py_test_parse_chat_messages_single_image_with_uuid.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_020658",
+  "started_at": "2026-07-18T18:07:00Z",
+  "finished_at": "2026-07-18T18:07:54Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020658/pytest_batch_20260719_020658.log",
+    "size_bytes": 55966,
+    "captured_at": "2026-07-18T18:07:54Z"
+  },
+  "tests": [
+    {
+      "id": 1793,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_audio_prompt[hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 32,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020658/pytest_batch_20260719_020658_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020658/result_batch_20260719_020658_tests_entrypoints_openai_test_translation_validation_py_test_audio_prompt_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 1794,
+      "test_node": "tests/entrypoints/openai/test_translation_validation.py::test_streaming_response[hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 43,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020658/pytest_batch_20260719_020658_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020658/result_batch_20260719_020658_tests_entrypoints_openai_test_translation_validation_py_test_streaming_response_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

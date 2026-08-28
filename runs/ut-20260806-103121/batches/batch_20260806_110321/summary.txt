@@ -1,0 +1,8 @@
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update_with_batch_gather[3-False-4096-4-3-True-False-itype0] (gpu=0, 1992ms, exit=0)
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update_with_batch_gather[3-False-4096-4-3-True-False-itype1] (gpu=2, 2007ms, exit=0)
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update_with_batch_gather[3-False-4096-4-3-True-True-itype0] (gpu=3, 1950ms, exit=0)
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update_with_batch_gather[3-False-4096-4-3-True-True-itype1] (gpu=4, 1961ms, exit=0)
+FAILED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_varlen[4-True-64-8-4-True-True-itype0] (gpu=5, 2714ms, exit=1)
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_varlen[4-True-64-249-4-True-True-itype0] (gpu=6, 2625ms, exit=0)
+PASSED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_varlen[4-True-64-4096-4-True-True-itype0] (gpu=0, 1315ms, exit=0)
+FAILED         tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_varlen[4-True-4096-8-4-True-True-itype0] (gpu=2, 1302ms, exit=1)

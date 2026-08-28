@@ -1,0 +1,5 @@
+PASSED         tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_greater_than_or_equal_to[5.0-4] (gpu=0, 125ms, exit=0)
+PASSED         tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate==5.0-request_rate-5.0-PlotEqualTo] (gpu=1, 119ms, exit=0)
+PASSED         tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate!=10.0-request_rate-10.0-PlotNotEqualTo] (gpu=2, 126ms, exit=0)
+IGNORED        tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<50.0-request_rate-50.0-PlotLessThan] (gpu=3, Nonems, exit=0)
+IGNORED        tests/benchmarks/test_plot_filters.py::TestPlotFilters::test_parse_str[request_rate<=50.0-request_rate-50.0-PlotLessThanOrEqualTo] (gpu=4, Nonems, exit=0)

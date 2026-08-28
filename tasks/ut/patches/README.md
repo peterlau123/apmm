@@ -128,6 +128,42 @@ output_shape: List[int],
 
 ---
 
+## 问题 5: Response API 测试 torch.compile 路径在 torch 2.5.1 崩溃
+
+**错误信息**:
+```
+InternalTorchDynamoError: _support_torch_compile.<locals>.__call__.<locals>.patched_inline_call() takes 1 positional argument but 4 were given
+TypeError: VllmBackend.__call__() got an unexpected keyword argument 'options'
+RuntimeError: Server exited unexpectedly.
+```
+
+**原因**: vllm commit `eef921f45` "AOT Compilation for torch.compile" 重构了 `_support_torch_compile` 的 monkeypatch（`inline_call_` 单参数形式 + `VllmBackend` 签名），为 torch >=2.7 写的。torch 2.5.1 的 `InliningInstructionTranslator.inline_call_` 仍是 4 参数 `(parent, func, args, kwargs)`，monkeypatch 签名不匹配导致 dynamo 编译崩溃。
+
+Response API 测试 (`test_response_api_*.py`) 默认 `enforce_eager=False`（走 compile），命中崩溃。
+
+### 解决方案（双补丁）
+
+1. **`torch25_inline_call_compat.patch`**: 把 `decorators.py` 的 `patched_inline_call` 回退到 4 参数形式（commit `eef921f45` 之前的写法），兼容 torch 2.5.1 的 `inline_call`/`inline_call_` 签名。这是正确的兼容修复，但单独不够（compile 路径还有 `VllmBackend options` 等更多不匹配）。
+
+2. **`response_api_enforce_eager.patch`**: 给 `test_response_api_simple.py` 和 `test_response_api_parsable_context.py` 的 server args 加 `--enforce-eager`，走 eager 路径彻底绕开 torch 2.5.1 不兼容的 compile 路径。
+
+3. **环境变量** `VLLM_DEEP_GEMM_WARMUP=skip`（加到 `workflow.yaml` 的 `container_env`）: `deep_gemm._C` 未编译（无 `.so`），但 `is_deep_gemm_supported()` 误判 True，warmup 调 `_missing()` 抛错。跳过 warmup 绕开（deep_gemm 本就不可用，无损）。
+
+### 验证
+
+```bash
+# Response API 测试（需空闲 GPU + VLLM_DEEP_GEMM_WARMUP=skip）
+sudo docker exec -e CUDA_VISIBLE_DEVICES=1 -e VLLM_DEEP_GEMM_WARMUP=skip \
+  -e HF_HUB_OFFLINE=1 v0.13.0_torch2.5.1_compile bash -lc \
+  'cd /gpfs/gcsp/M2.7_verify/vllm && python3 -m pytest \
+   tests/entrypoints/openai/test_response_api_simple.py -q --tb=short'
+# 预期: 5/7 passed, 2 个为模型行为断言失败(reasoning/mcp 输出类型), 非崩溃
+```
+
+详见 incident 文档 `2026-07-19-generate-batch-normal-starvation-incident.md` Type A 诊断。
+
+---
+
 ## 快速应用补丁
 
 在 vllm 源码根目录下运行:
@@ -191,9 +227,11 @@ python -c "from vllm.compilation.backends import VllmBackend"
 
 ```
 patches/
-├── torch_compat.py                   # 兼容层文件（复制到 vllm/compilation/）
-├── auto_functionalized_compat.patch  # Git patch 文件
-├── setpgrp_compat.patch              # docker exec setpgrp 兼容补丁
+├── torch_compat.py                    # 兼容层文件（复制到 vllm/compilation/）
+├── auto_functionalized_compat.patch   # Git patch 文件
+├── setpgrp_compat.patch               # docker exec setpgrp 兼容补丁
+├── torch25_inline_call_compat.patch   # torch 2.5.1 inline_call 4参数回退补丁
+├── response_api_enforce_eager.patch   # Response API 测试加 --enforce-eager
 ├── apply_auto_functionalized_patch.sh # Shell 脚本
-└── README.md                         # 本文档
+└── README.md                          # 本文档
 ```

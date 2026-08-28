@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183157",
+ "started_at": "2026-08-07T22:03:35Z",
+ "finished_at": "2026-08-07T22:03:48Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433.log",
+  "size_bytes": 12286,
+  "captured_at": "2026-08-07T22:03:48Z"
+ },
+ "tests": [
+  {
+   "id": 29593,
+   "test_node": "tests/multimodal/test_processing.py::test_find_token_matches[PromptReplacement-prompt1-target_by_key1-expected_by_key1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 171,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_token_matches_PromptReplacement_prompt1_target_by_key1_expected_by_key1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_token_matches_PromptReplacement_prompt1_target_by_key1_expected_by_key1.xml"
+  },
+  {
+   "id": 29594,
+   "test_node": "tests/multimodal/test_processing.py::test_find_token_matches[PromptReplacement-prompt2-target_by_key2-expected_by_key2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 175,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_token_matches_PromptReplacement_prompt2_target_by_key2_expected_by_key2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_token_matches_PromptReplacement_prompt2_target_by_key2_expected_by_key2.xml"
+  },
+  {
+   "id": 29595,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion--target_by_key0-expected_by_key0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 184,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_target_by_key0_expected_by_key0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_target_by_key0_expected_by_key0.xml"
+  },
+  {
+   "id": 29596,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-<image><image><image><image>-target_by_key1-expected_by_key1]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": 2,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_image_image_image_image_target_by_key1_expected_by_key1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_image_image_image_image_target_by_key1_expected_by_key1.xml"
+  },
+  {
+   "id": 29597,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-Image:<image><image><image>Image:<image><image>!-target_by_key2-expected_by_key2]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": 2,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_Image_image_image_image_Image_image_image_target_by_key2_expected_by_key2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_Image_image_image_image_Image_image_image_target_by_key2_expected_by_key2.xml"
+  },
+  {
+   "id": 29598,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptInsertion-<|image|><image><|image|><image>-target_by_key3-expected_by_key3]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": 2,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_image_image_image_image_target_by_key3_expected_by_key3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptInsertion_image_image_image_image_target_by_key3_expected_by_key3.xml"
+  },
+  {
+   "id": 29599,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptReplacement--target_by_key0-expected_by_key0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 223,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptReplacement_target_by_key0_expected_by_key0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptReplacement_target_by_key0_expected_by_key0.xml"
+  },
+  {
+   "id": 29600,
+   "test_node": "tests/multimodal/test_processing.py::test_find_text_matches[PromptReplacement-<image><image><image><image>-target_by_key1-expected_by_key1]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": 2,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/pytest_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptReplacement_image_image_image_image_target_by_key1_expected_by_key1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0433/result_batch_super_0433_tests_multimodal_test_processing_py_test_find_text_matches_PromptReplacement_image_image_image_image_target_by_key1_expected_by_key1.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 4
+ }
+}

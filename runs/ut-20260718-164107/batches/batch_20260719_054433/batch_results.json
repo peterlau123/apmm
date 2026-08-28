@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_054433",
+ "started_at": "2026-08-04T13:35:40Z",
+ "finished_at": "2026-08-04T13:36:05Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0052/pytest_batch_super_0052.log",
+  "size_bytes": 16824,
+  "captured_at": "2026-08-04T13:36:05Z"
+ },
+ "tests": [
+  {
+   "id": 3718,
+   "test_node": "tests/kernels/attention/test_cache.py::test_swap_blocks[fp8-cuda:1-0-dtype0-1024-16-256-8-256-direction2]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0052/pytest_batch_super_0052_tests_kernels_attention_test_cache_py_test_swap_blocks_fp8_cuda_1_0_dtype0_1024_16_256_8_256_direction2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0052/result_batch_super_0052_tests_kernels_attention_test_cache_py_test_swap_blocks_fp8_cuda_1_0_dtype0_1024_16_256_8_256_direction2.xml"
+  },
+  {
+   "id": 3719,
+   "test_node": "tests/kernels/attention/test_cache.py::test_swap_blocks[fp8-cuda:1-0-dtype0-1024-32-64-8-256-direction0]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0052/pytest_batch_super_0052_tests_kernels_attention_test_cache_py_test_swap_blocks_fp8_cuda_1_0_dtype0_1024_32_64_8_256_direction0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0052/result_batch_super_0052_tests_kernels_attention_test_cache_py_test_swap_blocks_fp8_cuda_1_0_dtype0_1024_32_64_8_256_direction0.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 0,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 2
+ }
+}

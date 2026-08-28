@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_191900",
+  "started_at": "2026-08-07T11:19:00Z",
+  "finished_at": "2026-08-07T11:19:43Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900.log",
+    "size_bytes": 133406,
+    "captured_at": "2026-08-07T11:19:43Z"
+  },
+  "tests": [
+    {
+      "id": 32785,
+      "test_node": "tests/v1/sample/test_topk_topp_sampler.py::test_topk_impl_equivalence",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 883,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_sample_test_topk_topp_sampler_py_test_topk_impl_equivalence.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_sample_test_topk_topp_sampler_py_test_topk_impl_equivalence.xml"
+    },
+    {
+      "id": 32786,
+      "test_node": "tests/v1/sample/test_topk_topp_sampler.py::test_flashinfer_sampler",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: FlashInfer and Python sampling implementations do not match!\nassert False\n +  where False = <built-in method allclose of type object at 0x7fc41fc5e280>(tensor([[0.0000e+00, 0.0000e+00, 0.0000e+00,  ..., 0.0000e+00, 0.0000e+00,\\n         0.0000e+00],\\n        [9.6653e-06, 5.4938e-06, 6.4949e-06,  ..., 7.5657e-06, 1.1140e-05,\\n         5.9125e-06],\\n        [4.6566e-06, 1.0037e-05, 7.2221e-06,  ..., 1.1135e-05, 9.9782e-06,\\n         7.7679e-06],\\n        ...,\\n        [6.6248e-06, ",
+      "duration_ms": 1079,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_sample_test_topk_topp_sampler_py_test_flashinfer_sampler.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_sample_test_topk_topp_sampler_py_test_flashinfer_sampler.xml"
+    },
+    {
+      "id": 32787,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_async_llm_delete[False-2-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 211,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_False_2_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_False_2_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32788,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_async_llm_delete[False-1-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1507,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_False_1_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_False_1_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32789,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_async_llm_delete[True-2-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 187,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_True_2_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_True_2_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32790,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_async_llm_delete[True-1-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1526,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_True_1_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_async_llm_delete_True_1_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32791,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_llm_delete[False-True-2-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 149,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_llm_delete_False_True_2_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_llm_delete_False_True_2_hmellor_tiny_random_LlamaForCausalLM.xml"
+    },
+    {
+      "id": 32792,
+      "test_node": "tests/v1/shutdown/test_delete.py::test_llm_delete[False-True-1-hmellor/tiny-random-LlamaForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1487,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/pytest_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_llm_delete_False_True_1_hmellor_tiny_random_LlamaForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191900/result_batch_20260807_191900_tests_v1_shutdown_test_delete_py_test_llm_delete_False_True_1_hmellor_tiny_random_LlamaForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

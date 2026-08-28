@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_112025",
+  "started_at": "2026-08-06T03:20:25Z",
+  "finished_at": "2026-08-06T03:20:53Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025.log",
+    "size_bytes": 20367,
+    "captured_at": "2026-08-06T03:20:53Z"
+  },
+  "tests": [
+    {
+      "id": 11883,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-False-False-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2024,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_False_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_False_itype1.xml"
+    },
+    {
+      "id": 11884,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-False-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1433,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_True_itype0.xml"
+    },
+    {
+      "id": 11885,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-False-True-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2043,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_True_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_False_True_itype1.xml"
+    },
+    {
+      "id": 11886,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-True-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2105,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_False_itype0.xml"
+    },
+    {
+      "id": 11887,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-True-False-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2050,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_False_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_False_itype1.xml"
+    },
+    {
+      "id": 11888,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-True-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2029,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_True_itype0.xml"
+    },
+    {
+      "id": 11889,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_heads_with_batch_indices[4096-64-4-True-True-itype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1140,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_True_itype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_heads_with_batch_indices_4096_64_4_True_True_itype1.xml"
+    },
+    {
+      "id": 11890,
+      "test_node": "tests/kernels/mamba/test_mamba_ssm.py::test_selective_state_update_with_num_accepted_tokens[2-2048-16-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1652,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/pytest_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_num_accepted_tokens_2_2048_16_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_112025/result_batch_20260806_112025_tests_kernels_mamba_test_mamba_ssm_py_test_selective_state_update_with_num_accepted_tokens_2_2048_16_False_itype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

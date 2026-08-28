@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_003212",
+  "started_at": "2026-07-01T16:34:44Z",
+  "finished_at": "2026-07-01T16:36:08Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212.log",
+    "size_bytes": 20105,
+    "captured_at": "2026-07-01T16:36:08Z"
+  },
+  "tests": [
+    {
+      "id": 1740,
+      "test_node": "tests/entrypoints/openai/test_serving_engine.py::test_async_mistral_tokenizer_does_not_block_event_loop",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2123,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_engine_py_test_async_mistral_tokenizer_does_not_block_event_loop.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_engine_py_test_async_mistral_tokenizer_does_not_block_event_loop.xml"
+    },
+    {
+      "id": 1741,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_serving_model_name",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_serving_model_name.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_serving_model_name.xml"
+    },
+    {
+      "id": 1742,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_load_lora_adapter_success",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_success.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_success.xml"
+    },
+    {
+      "id": 1743,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_load_lora_adapter_missing_fields",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_missing_fields.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_missing_fields.xml"
+    },
+    {
+      "id": 1744,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_load_lora_adapter_duplicate",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 120,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_duplicate.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_load_lora_adapter_duplicate.xml"
+    },
+    {
+      "id": 1745,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_unload_lora_adapter_success",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_success.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_success.xml"
+    },
+    {
+      "id": 1746,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_unload_lora_adapter_missing_fields",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 120,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_missing_fields.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_missing_fields.xml"
+    },
+    {
+      "id": 1747,
+      "test_node": "tests/entrypoints/openai/test_serving_models.py::test_unload_lora_adapter_not_found",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/pytest_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_not_found.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003212/result_batch_20260702_003212_tests_entrypoints_openai_test_serving_models_py_test_unload_lora_adapter_not_found.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

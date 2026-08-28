@@ -1,0 +1,27 @@
+diff --git a/vllm/compilation/decorators.py b/vllm/compilation/decorators.py
+--- a/vllm/compilation/decorators.py
++++ b/vllm/compilation/decorators.py
+@@ -467,12 +467,12 @@ def _support_torch_compile(
+         # we hijack this function to know all the functions called
+         # during Dynamo tracing, and their corresponding files
+-        inline_call = InliningInstructionTranslator.inline_call_
++        inline_call = InliningInstructionTranslator.inline_call
+ 
+-        def patched_inline_call(self_):
+-            code = self_.f_code
++        def patched_inline_call(parent, func, args, kwargs):
++            code = func.get_code()
+             self.compilation_config.traced_files.add(code.co_filename)
+-            return inline_call(self_)
++            return inline_call(parent, func, args, kwargs)
+ 
+         # Disable the C++ compilation of symbolic shape guards. C++-fication
+         # of symbolic shape guards can improve guard overhead. But, since
+@@ -502,7 +502,7 @@ def _support_torch_compile(
+         with (
+             patch.object(
+-                InliningInstructionTranslator, "inline_call_", patched_inline_call
++                InliningInstructionTranslator, "inline_call", patched_inline_call
+             ),
+             torch._dynamo.config.patch(**dynamo_config_patches),
+             maybe_use_cudagraph_partition_wrapper(self.vllm_config),

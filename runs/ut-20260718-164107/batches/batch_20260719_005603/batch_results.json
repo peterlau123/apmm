@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_005603",
+ "started_at": "2026-08-04T21:19:38Z",
+ "finished_at": "2026-08-04T21:30:10Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/pytest_batch_super_0392.log",
+  "size_bytes": 24226,
+  "captured_at": "2026-08-04T21:30:10Z"
+ },
+ "tests": [
+  {
+   "id": 1037,
+   "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[Qwen/Qwen2.5-1.5B-Instruct-parallel_setup2-mp-auto-test_options2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1096,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/pytest_batch_super_0392_tests_distributed_test_context_parallel_py_test_cp_generation_Qwen_Qwen2_5_1_5B_Instruct_parallel_setup2_mp_auto_test_options2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/result_batch_super_0392_tests_distributed_test_context_parallel_py_test_cp_generation_Qwen_Qwen2_5_1_5B_Instruct_parallel_setup2_mp_auto_test_options2.xml"
+  },
+  {
+   "id": 1038,
+   "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[Qwen/Qwen2.5-1.5B-Instruct-parallel_setup3-mp-auto-test_options3]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1126,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/pytest_batch_super_0392_tests_distributed_test_context_parallel_py_test_cp_generation_Qwen_Qwen2_5_1_5B_Instruct_parallel_setup3_mp_auto_test_options3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/result_batch_super_0392_tests_distributed_test_context_parallel_py_test_cp_generation_Qwen_Qwen2_5_1_5B_Instruct_parallel_setup3_mp_auto_test_options3.xml"
+  },
+  {
+   "id": 1039,
+   "test_node": "tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target0-1-2]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/pytest_batch_super_0392_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target0_1_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/result_batch_super_0392_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target0_1_2.xml"
+  },
+  {
+   "id": 1040,
+   "test_node": "tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target0-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 210,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/pytest_batch_super_0392_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target0_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0392/result_batch_super_0392_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target0_2_2.xml"
+  },
+  {
+   "id": 1033,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target3-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target3_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target3_2_2.xml"
+  },
+  {
+   "id": 1034,
+   "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target4-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target4_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target4_2_2.xml"
+  },
+  {
+   "id": 1035,
+   "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[deepseek-ai/DeepSeek-V2-Lite-parallel_setup0-mp-auto-test_options0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 795,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup0_mp_auto_test_options0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup0_mp_auto_test_options0.xml"
+  },
+  {
+   "id": 1036,
+   "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[deepseek-ai/DeepSeek-V2-Lite-parallel_setup1-mp-auto-test_options1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 640,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup1_mp_auto_test_options1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup1_mp_auto_test_options1.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 1
+ }
+}

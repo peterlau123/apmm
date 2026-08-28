@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260702_003937",
+  "started_at": "2026-07-01T16:41:57Z",
+  "finished_at": "2026-07-01T16:43:41Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937.log",
+    "size_bytes": 54317,
+    "captured_at": "2026-07-01T16:43:41Z"
+  },
+  "tests": [
+    {
+      "id": 1748,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::test_extract_tool_types",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 113,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_test_extract_tool_types.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_test_extract_tool_types.xml"
+    },
+    {
+      "id": 1749,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestInitializeToolSessions::test_initialize_tool_sessions",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestInitializeToolSessions_test_initialize_tool_sessions.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestInitializeToolSessions_test_initialize_tool_sessions.xml"
+    },
+    {
+      "id": 1750,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestInitializeToolSessions::test_validate_create_responses_input",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 122,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestInitializeToolSessions_test_validate_create_responses_input.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestInitializeToolSessions_test_validate_create_responses_input.xml"
+    },
+    {
+      "id": 1751,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestValidateGeneratorInput::test_validate_generator_input",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 121,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestValidateGeneratorInput_test_validate_generator_input.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestValidateGeneratorInput_test_validate_generator_input.xml"
+    },
+    {
+      "id": 1752,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestExtractAllowedToolsFromMcpRequests::test_extract_allowed_tools_basic_formats",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_basic_formats.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_basic_formats.xml"
+    },
+    {
+      "id": 1753,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestExtractAllowedToolsFromMcpRequests::test_extract_allowed_tools_star_normalization",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_star_normalization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_star_normalization.xml"
+    },
+    {
+      "id": 1754,
+      "test_node": "tests/entrypoints/openai/test_serving_responses.py::TestExtractAllowedToolsFromMcpRequests::test_extract_allowed_tools_filters_non_mcp",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 119,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_filters_non_mcp.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_responses_py_TestExtractAllowedToolsFromMcpRequests_test_extract_allowed_tools_filters_non_mcp.xml"
+    },
+    {
+      "id": 1755,
+      "test_node": "tests/entrypoints/openai/test_serving_tokens.py::test_generate_endpoint",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 21069,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/pytest_batch_20260702_003937_tests_entrypoints_openai_test_serving_tokens_py_test_generate_endpoint.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260702_003937/result_batch_20260702_003937_tests_entrypoints_openai_test_serving_tokens_py_test_generate_endpoint.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 0,
+    "error": 1,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

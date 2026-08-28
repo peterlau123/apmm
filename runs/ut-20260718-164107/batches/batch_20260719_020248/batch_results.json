@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_20260719_020248",
+  "started_at": "2026-07-18T18:02:50Z",
+  "finished_at": "2026-07-18T18:04:09Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020248/pytest_batch_20260719_020248.log",
+    "size_bytes": 109020,
+    "captured_at": "2026-07-18T18:04:09Z"
+  },
+  "tests": [
+    {
+      "id": 1639,
+      "test_node": "tests/entrypoints/openai/test_response_api_parsable_context.py::test_function_call_first_turn[Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 24603,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020248/pytest_batch_20260719_020248_tests_entrypoints_openai_test_response_api_parsable_context_py_test_function_call_first_turn_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020248/result_batch_20260719_020248_tests_entrypoints_openai_test_response_api_parsable_context_py_test_function_call_first_turn_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 1640,
+      "test_node": "tests/entrypoints/openai/test_response_api_parsable_context.py::test_mcp_tool_call[Qwen/Qwen3-0.6B]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 24604,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020248/pytest_batch_20260719_020248_tests_entrypoints_openai_test_response_api_parsable_context_py_test_mcp_tool_call_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_020248/result_batch_20260719_020248_tests_entrypoints_openai_test_response_api_parsable_context_py_test_mcp_tool_call_Qwen_Qwen3_0_6B.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 0,
+    "error": 2,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

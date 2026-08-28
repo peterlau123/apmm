@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_super_0454",
+  "started_at": "2026-08-05T09:26:49Z",
+  "finished_at": "2026-08-05T09:57:28Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454.log",
+    "size_bytes": 74017,
+    "captured_at": "2026-08-05T09:57:28Z"
+  },
+  "tests": [
+    {
+      "id": 150,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-nvidia/Llama-3.1-8B-Instruct-FP4-model_kwargs4-AttentionBackendEnum.FLASHINFER-matches4-]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs4_AttentionBackendEnum_FLASHINFER_matches4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_nvidia_Llama_3_1_8B_Instruct_FP4_model_kwargs4_AttentionBackendEnum_FLASHINFER_matches4.xml"
+    },
+    {
+      "id": 151,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1191614,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.xml"
+    },
+    {
+      "id": 152,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[False-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1-+quant_fp8]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1199561,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/pytest_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0454/result_batch_super_0454_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_False_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 1,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

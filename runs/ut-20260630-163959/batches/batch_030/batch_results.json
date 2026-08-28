@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_001540",
+  "started_at": "2026-06-30T16:16:04Z",
+  "finished_at": "2026-06-30T16:19:27Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540.log",
+    "size_bytes": 270886,
+    "captured_at": "2026-06-30T16:19:27Z"
+  },
+  "tests": [
+    {
+      "id": 474,
+      "test_node": "tests/compile/fullgraph/test_full_graph.py::test_fp8_kv_scale_compile[deepseek-ai/DeepSeek-V2-Lite-AttentionBackendEnum.FLASHINFER_MLA-0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_full_graph_py_test_fp8_kv_scale_compile_deepseek_ai_DeepSeek_V2_Lite_AttentionBackendEnum_FLASHINFER_MLA_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_full_graph_py_test_fp8_kv_scale_compile_deepseek_ai_DeepSeek_V2_Lite_AttentionBackendEnum_FLASHINFER_MLA_0.xml"
+    },
+    {
+      "id": 475,
+      "test_node": "tests/compile/fullgraph/test_full_graph.py::test_fp8_kv_scale_compile[deepseek-ai/DeepSeek-V2-Lite-AttentionBackendEnum.FLASHINFER_MLA-3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_full_graph_py_test_fp8_kv_scale_compile_deepseek_ai_DeepSeek_V2_Lite_AttentionBackendEnum_FLASHINFER_MLA_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_full_graph_py_test_fp8_kv_scale_compile_deepseek_ai_DeepSeek_V2_Lite_AttentionBackendEnum_FLASHINFER_MLA_3.xml"
+    },
+    {
+      "id": 476,
+      "test_node": "tests/compile/fullgraph/test_multimodal_compile.py::test_compile",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_compile.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_compile.xml"
+    },
+    {
+      "id": 477,
+      "test_node": "tests/compile/fullgraph/test_multimodal_compile.py::test_qwen2_5_vl_compilation",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "vllm_runner = <class 'tests.conftest.VllmRunner'>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fce2ab43560>\n\n    @pytest.mark.forked\n    @pytest.mark.skipif(not current_platform.is_cuda(), reason=\"Skip if not cuda\")\n    def test_qwen2_5_vl_compilation(vllm_runner, monkeypatch):\n        \"\"\"Test that Qwen2.5-VL vision submodules are compiled.\n    \n        This test verifies that the 3 vision submodules (Qwen2_5_VisionPatchEmbed,\n        Qwen2_5_VisionBlock, and Qwen2_5_VisionPatchMe",
+      "duration_ms": 2396,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_qwen2_5_vl_compilation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_qwen2_5_vl_compilation.xml"
+    },
+    {
+      "id": 478,
+      "test_node": "tests/compile/fullgraph/test_multimodal_compile.py::test_qwen2_5_vl_no_vit_compilation",
+      "status": "failed",
+      "error_type": "oom",
+      "error_message": "vllm_runner = <class 'tests.conftest.VllmRunner'>\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f782f5432c0>\n\n    @pytest.mark.forked\n    @pytest.mark.skipif(not current_platform.is_cuda(), reason=\"Skip if not cuda\")\n    def test_qwen2_5_vl_no_vit_compilation(vllm_runner, monkeypatch):\n        \"\"\"Test that Qwen2.5-VL vision submodules are not compiled when the\n        config is passed off\n        \"\"\"\n        # Disable multiprocessing so that the counter is in the same process\n     ",
+      "duration_ms": 34267,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_qwen2_5_vl_no_vit_compilation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multimodal_compile_py_test_qwen2_5_vl_no_vit_compilation.xml"
+    },
+    {
+      "id": 479,
+      "test_node": "tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[True-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9060,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_True_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_True_False.xml"
+    },
+    {
+      "id": 480,
+      "test_node": "tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[True-True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_True_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_True_True.xml"
+    },
+    {
+      "id": 481,
+      "test_node": "tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[False-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8892,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/pytest_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_False_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_001540/result_batch_20260701_001540_tests_compile_fullgraph_test_multiple_graphs_py_test_multi_graph_piecewise_compile_False_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 3,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

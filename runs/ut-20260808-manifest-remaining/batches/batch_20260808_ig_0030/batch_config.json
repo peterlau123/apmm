@@ -1,0 +1,127 @@
+{
+ "batch_id": "batch_20260808_ig_0030",
+ "batch_type": "normal",
+ "tests": [
+  {
+   "id": 32897,
+   "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[llama3-eagle3-speculator]",
+   "test_file": "tests/v1/spec_decode/test_speculators_eagle3.py",
+   "test_name": "test_eagle3_speculators_model[llama3-eagle3-speculator]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_192855",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 191,
+   "exit_code": 1,
+   "run_at": "2026-08-07T19:29:33.033795",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.257683"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.774154"
+    }
+   ]
+  },
+  {
+   "id": 32898,
+   "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[qwen3-eagle3-speculator]",
+   "test_file": "tests/v1/spec_decode/test_speculators_eagle3.py",
+   "test_name": "test_eagle3_speculators_model[qwen3-eagle3-speculator]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_192855",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 224,
+   "exit_code": 1,
+   "run_at": "2026-08-07T19:29:33.033814",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.257685"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.774156"
+    }
+   ]
+  },
+  {
+   "id": 32899,
+   "test_node": "tests/v1/spec_decode/test_speculators_eagle3.py::test_eagle3_speculators_model[qwen3-eagle3-speculator-w4a16-verifier]",
+   "test_file": "tests/v1/spec_decode/test_speculators_eagle3.py",
+   "test_name": "test_eagle3_speculators_model[qwen3-eagle3-speculator-w4a16-verifier]",
+   "status": "pending",
+   "priority": "P2",
+   "batch_id": null,
+   "last_batch_id": "batch_20260807_192855",
+   "run_count": 0,
+   "retry_count": 1,
+   "max_retry": 2,
+   "last_run_at": null,
+   "last_duration_ms": null,
+   "last_exit_code": null,
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "ignored_reason": null,
+   "fix_applied": false,
+   "fix_details": null,
+   "log_file": null,
+   "errors": [],
+   "failures": [],
+   "duration_ms": 256,
+   "exit_code": 1,
+   "run_at": "2026-08-07T19:29:33.033820",
+   "batch_history": [
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T12:06:07.257689"
+    },
+    {
+     "batch_id": null,
+     "status": "failed",
+     "executed_at": "2026-08-08T18:18:18.774158"
+    }
+   ]
+  }
+ ],
+ "distributed_count": 0,
+ "requires_multi_gpu": false,
+ "gpu_per_test": 1,
+ "generated_at": "2026-08-09T09:14:31.158446"
+}

@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_005642",
+ "started_at": "2026-08-04T21:42:15Z",
+ "finished_at": "2026-08-04T21:42:42Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394.log",
+  "size_bytes": 20954,
+  "captured_at": "2026-08-04T21:42:42Z"
+ },
+ "tests": [
+  {
+   "id": 1045,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_single_gpu_case",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 213,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_single_gpu_case.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_single_gpu_case.xml"
+  },
+  {
+   "id": 1046,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_equal_weights",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 183,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_equal_weights.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_equal_weights.xml"
+  },
+  {
+   "id": 1047,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_extreme_weight_imbalance",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 211,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_extreme_weight_imbalance.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_extreme_weight_imbalance.xml"
+  },
+  {
+   "id": 1048,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_multiple_layers",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 182,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_multiple_layers.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_multiple_layers.xml"
+  },
+  {
+   "id": 1041,
+   "test_node": "tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target1-1-2]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/pytest_batch_super_0393_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target1_1_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/result_batch_super_0393_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target1_1_2.xml"
+  },
+  {
+   "id": 1042,
+   "test_node": "tests/distributed/test_custom_all_reduce.py::test_custom_allreduce[test_target1-2-2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 250,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/pytest_batch_super_0393_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target1_2_2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/result_batch_super_0393_tests_distributed_test_custom_all_reduce_py_test_custom_allreduce_test_target1_2_2.xml"
+  },
+  {
+   "id": 1043,
+   "test_node": "tests/distributed/test_distributed_oot.py::test_distributed_oot",
+   "status": "error",
+   "error_type": "collection",
+   "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+   "duration_ms": 238,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/pytest_batch_super_0393_tests_distributed_test_distributed_oot_py_test_distributed_oot.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/result_batch_super_0393_tests_distributed_test_distributed_oot_py_test_distributed_oot.xml"
+  },
+  {
+   "id": 1044,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_basic_rebalance",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 168,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/pytest_batch_super_0393_tests_distributed_test_eplb_algo_py_test_basic_rebalance.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0393/result_batch_super_0393_tests_distributed_test_eplb_algo_py_test_basic_rebalance.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 0,
+  "error": 1,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 1
+ }
+}

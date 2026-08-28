@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0430",
+  "started_at": "2026-08-05T01:53:26Z",
+  "finished_at": "2026-08-05T01:53:56Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/pytest_batch_super_0430.log",
+    "size_bytes": 25586,
+    "captured_at": "2026-08-05T01:53:56Z"
+  },
+  "tests": [
+    {
+      "id": 1153,
+      "test_node": "tests/distributed/test_pynccl.py::test_ncclGetUniqueId",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 130,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/pytest_batch_super_0430_tests_distributed_test_pynccl_py_test_ncclGetUniqueId.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/result_batch_super_0430_tests_distributed_test_pynccl_py_test_ncclGetUniqueId.xml"
+    },
+    {
+      "id": 1154,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-FP]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/pytest_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_FP.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/result_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_FP.xml"
+    },
+    {
+      "id": 1155,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-INT8]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/pytest_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/result_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT8.xml"
+    },
+    {
+      "id": 1156,
+      "test_node": "tests/distributed/test_quick_all_reduce.py::test_custom_quick_allreduce[test_target0-1-2-INT6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/pytest_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0430/result_batch_super_0430_tests_distributed_test_quick_all_reduce_py_test_custom_quick_allreduce_test_target0_1_2_INT6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

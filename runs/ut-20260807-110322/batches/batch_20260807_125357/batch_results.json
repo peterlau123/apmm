@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_125357",
+  "started_at": "2026-08-07T04:53:58Z",
+  "finished_at": "2026-08-07T04:54:23Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357.log",
+    "size_bytes": 17439,
+    "captured_at": "2026-08-07T04:54:23Z"
+  },
+  "tests": [
+    {
+      "id": 21404,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[True-42-64-1024-64]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1782,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_64_1024_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_64_1024_64.xml"
+    },
+    {
+      "id": 21405,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[True-42-128-2048-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1777,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_128_2048_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_128_2048_128.xml"
+    },
+    {
+      "id": 21406,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[True-42-8-513-64]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1408,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_8_513_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_True_42_8_513_64.xml"
+    },
+    {
+      "id": 21407,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[False-42-16-256-32]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1158,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_16_256_32.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_16_256_32.xml"
+    },
+    {
+      "id": 21408,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[False-42-64-1024-64]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1780,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_64_1024_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_64_1024_64.xml"
+    },
+    {
+      "id": 21409,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[False-42-128-2048-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1773,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_128_2048_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_128_2048_128.xml"
+    },
+    {
+      "id": 21410,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_functionality[False-42-8-513-64]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 526,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_8_513_64.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_functionality_False_42_8_513_64.xml"
+    },
+    {
+      "id": 21411,
+      "test_node": "tests/kernels/quantization/test_fp8_quant_group.py::test_quantfp8_group_multidimensional[True-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 550,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/pytest_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_multidimensional_True_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125357/result_batch_20260807_125357_tests_kernels_quantization_test_fp8_quant_group_py_test_quantfp8_group_multidimensional_True_42.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

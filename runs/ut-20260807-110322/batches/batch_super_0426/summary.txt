@@ -1,0 +1,8 @@
+PASSED         tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model_uneven_load (gpu=0, 0ms, exit=0)
+PASSED         tests/models/test_vision.py::test_simple_mrope_vision_model_spatial_merge[2] (gpu=2, 944ms, exit=0)
+PASSED         tests/models/test_vision.py::test_simple_mrope_vision_model_spatial_merge[4] (gpu=3, 927ms, exit=0)
+PASSED         tests/multimodal/test_cache.py::test_cache_item_size[item0-100] (gpu=4, 154ms, exit=0)
+PASSED         tests/multimodal/test_cache.py::test_cache_item_size[item1-210] (gpu=5, 157ms, exit=0)
+PASSED         tests/multimodal/test_cache.py::test_cache_item_size[item2-460] (gpu=6, 158ms, exit=0)
+FAILED         tests/multimodal/test_cache.py::test_ipc_enable_disable_consistency[1] (gpu=0, 149ms, exit=1)
+FAILED         tests/multimodal/test_cache.py::test_ipc_enable_disable_consistency[2] (gpu=2, 142ms, exit=1)

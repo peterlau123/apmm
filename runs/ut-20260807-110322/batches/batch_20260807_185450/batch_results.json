@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185450",
+  "started_at": "2026-08-07T10:54:51Z",
+  "finished_at": "2026-08-07T10:54:54Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:54:54Z"
+  },
+  "tests": [
+    {
+      "id": 31861,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_stop_by_max_tokens[3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_stop_by_max_tokens_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_stop_by_max_tokens_3.xml"
+    },
+    {
+      "id": 31862,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_stop_by_max_tokens[5]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_stop_by_max_tokens_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_stop_by_max_tokens_5.xml"
+    },
+    {
+      "id": 31863,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_abort",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_abort.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_abort.xml"
+    },
+    {
+      "id": 31864,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_preempt",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_preempt.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_preempt.xml"
+    },
+    {
+      "id": 31865,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_prefix_caching_for_prefill_dedup",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_prefix_caching_for_prefill_dedup.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_prefix_caching_for_prefill_dedup.xml"
+    },
+    {
+      "id": 31866,
+      "test_node": "tests/v1/core/test_async_scheduler.py::test_prefix_caching_for_multi_turn",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_prefix_caching_for_multi_turn.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_async_scheduler_py_test_prefix_caching_for_multi_turn.xml"
+    },
+    {
+      "id": 31867,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_basic_allocate_and_reuse",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_encoder_cache_manager_py_test_basic_allocate_and_reuse.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_encoder_cache_manager_py_test_basic_allocate_and_reuse.xml"
+    },
+    {
+      "id": 31868,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_freeing_decreases_refcount_and_moves_to_freeable",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/pytest_batch_20260807_185450_tests_v1_core_test_encoder_cache_manager_py_test_freeing_decreases_refcount_and_moves_to_freeable.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185450/result_batch_20260807_185450_tests_v1_core_test_encoder_cache_manager_py_test_freeing_decreases_refcount_and_moves_to_freeable.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

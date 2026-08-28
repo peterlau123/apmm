@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182521",
+ "started_at": "2026-08-07T20:42:31Z",
+ "finished_at": "2026-08-07T20:43:17Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358.log",
+  "size_bytes": 50559,
+  "captured_at": "2026-08-07T20:43:17Z"
+ },
+ "tests": [
+  {
+   "id": 28992,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[LlavaForConditionalGeneration]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 7251,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_LlavaForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_LlavaForConditionalGeneration.xml"
+  },
+  {
+   "id": 28993,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[Llama4ForConditionalGeneration]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 336,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_Llama4ForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_Llama4ForConditionalGeneration.xml"
+  },
+  {
+   "id": 28994,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[BertForSequenceClassification]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 5148,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_BertForSequenceClassification.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_BertForSequenceClassification.xml"
+  },
+  {
+   "id": 28995,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[Gemma3nForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 337,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_Gemma3nForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_Gemma3nForCausalLM.xml"
+  },
+  {
+   "id": 28996,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[JinaVLForRanking]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 284,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_JinaVLForRanking.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_JinaVLForRanking.xml"
+  },
+  {
+   "id": 28997,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[InternVLChatModel]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 278,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_InternVLChatModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_InternVLChatModel.xml"
+  },
+  {
+   "id": 28998,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[InternLM2ForRewardModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 4298,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_InternLM2ForRewardModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_InternLM2ForRewardModel.xml"
+  },
+  {
+   "id": 28999,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_small_subset[TransformersMultiModalForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 14032,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/pytest_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_TransformersMultiModalForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0358/result_batch_super_0358_tests_models_test_initialization_py_test_can_initialize_small_subset_TransformersMultiModalForCausalLM.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 4,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

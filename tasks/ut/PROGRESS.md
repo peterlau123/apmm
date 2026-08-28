@@ -1,71 +1,89 @@
 # 单元测试进度追踪
 
-> **vLLM v0.13.0 + PyTorch 2.5.1 pytest 测试进度**
+> **只记录测试用例运行进度**，每周更新一次，每次标记时间戳。
+> 兼容性问题/事故/工作记录见 [docs/incidents/](docs/incidents/) 与 [docs/reports/](docs/reports/)。
 
 ---
 
-## 最新统计
+## 2026-08-06（run ut-20260806-103121：8000 cases 全量）
 
 | 指标 | 数值 |
 |------|:----:|
-| 总测试用例数 | 32,964 |
-| 已执行用例数 | 32,964 |
-| 进度 | 19.45% |
-| 通过数 | 6,411 |
+| 总测试用例数 | 8,000 |
+| ✅ passed | 6,871 |
+| ❌ failed | 1,129 |
+| ⚠️ error | 0 |
+| ⏸️ ignored | 0 |
+| **通过率** | **85.9%** |
+
+**本周进展**：8000 cases 全量执行完成（0 ignored——排除坏卡 GPU1 + 7 卡并行）。
+**marlin 算子修复成功**（2026-08-07）：`_moe_C` 扩展 JIT 完整重编译（11 个编译
+blocker 攻破），2,638 个用例救回，通过率 **52.9% → 85.9%**。剩余 1,129 确定性
+失败（inductor 编译 402 + FP8 cat 208 + DeepGEMM 127 + float8_e8m0fnu 72 + 其他）。
+manifest 同步：progress 35.1% → **59.4%**（executed 19,562 / passed 17,398 /
+pending 12,505）。详见
+[docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md)。
+
+## 2026-08-07/08（run ut-20260807-110322：pending 12,185 全量）
+
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | 12,185 |
+| ✅ passed | 8,613 |
+| ❌ failed | 1,253 |
+| ⚠️ error | 333 |
+| ⏸️ ignored | 1,984（**待办重跑**） |
+| **通过率** | **70.7%** |
+
+**本周进展**：manifest 剩余 pending 12,185 全量执行（marlin 已修复基础上）。
+ignored 1,984 分类（detokenize 模型类 904 + peft ~250 + 慢测试 ~800 + distributed 17）；
+**execute_batch 层不稳定**（部分批次挂起——GPU 空闲 CPU 0）已记录待办。
+**manifest 同步：progress 59.4% → 90.3%**（executed 29,763 / passed 26,011 /
+pending 320=cuda:1 坏卡）。详见
+[docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md)。
+
+## TODO（待办项）
+
+- [ ] **工作日处理**（2026-08-09 收尾）：剩余 pending 5,060（other 未跑 + timeout 1,717 未跑）决策 + ignored 241/models 931 记录跳过 + 兼容性 2,063（torch 2.8 评估）
+- [ ] **bifrost tokio 执行层专项**（假活根治——H20 时钟环境——探针兜底中）
+- [ ] **模型下载**（gated 模型——需 token/授权——models 931 依赖）
+- [x] ~~12,185 run 落盘（9,157/75.1%——2026-08-08）~~
+- [x] ~~manifest 分组重跑（skipped/models/other/timeout——passed +61——2026-08-09 中断收尾）~~
+- [x] ~~error 333~~ ✅ **已定性**（stale 节点——代码演进——下次 run 定向 collect）
+- [x] ~~cuda:1 320~~ ✅ **全部通过**（device-map + bifrost 修复）
+- [ ] **stale 591 定向 collect**（下次 run：--collect-only 校验——测试还在则更新节点 pending 跑，已删则移除）
+- [ ] **detokenize 大模型测试优化**：小批量（4/批）+ 更长超时
 
 ---
 
-## Skills 版本
+## 2026-08-05（run ut-20260718-164107 收官）
 
-| Stage | Skill | 版本 |
-|:-----:|-------|:----:|
-| 1 | unit-test-collector | v2.1 |
-| 2 | batch-selector | v2.2 |
-| 3 | unit-test-executor | v5.0 |
-| 4 | failure-handler | v3.0 |
-| 5 | manifest-updater | v3.2 |
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | 4,000 |
+| ✅ passed | 3,454 |
+| ❌ failed | 251 |
+| ⚠️ error | 8 |
+| ⏸️ ignored | 287 |
+| **通过率** | **86.4%** |
 
----
-
-## 里程碑
-
-| 日期 | 里程碑 | 详情 |
-|------|--------|------|
-| 2026-06-26 | Phase 4 启动 + SKILL v5.0 | 集成测试骨架 · unit-test-executor v5.0版本统一 |
-| 2026-06-26 | Manifest Dedupe Fix | 过滤69个伪测试（pytest警告源行无::分隔符）→ 32,964 unique tests |
-| 2026-06-26 | Documentation Cleanup + Reports Reorganization | tasks/ut/dataset/ · tests/ut/reports/framework_test_20260626_150633 · manifest合并准备 |
-| 2026-06-13 | Skills Review | [worklog/2026-06-13/skills-review.md](worklog/2026-06-13/skills-review.md) |
-| 2026-06-12 | Kanban Phase 1 | docs/kanban/README.md |
-| 2026-06-11 | Schema 统一 | skills/ut/ut_common/ |
+**本周进展**：Phase 2 三轮重跑（全量 727 batch / kernel 556 / fql 403）完成，
+通过率 35.5% → 86.4%（+2,036 用例）。详见
+[docs/reports/2026-08-05-phase2-retry-final-summary.md](docs/reports/2026-08-05-phase2-retry-final-summary.md)。
 
 ---
 
-## Hermes Kanban 集成
+<!-- 每周更新模板：
+## YYYY-MM-DD（本周）
 
-| Phase | 状态 |
-|:-----:|:----:|
-| 1 基础设施 | ✅ |
-| 2 方案集成 | ✅ |
-| 3 真实验证 | ✅ |
-| 4 生产化 | 🔄 进行中 |
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | {TOTAL} |
+| ✅ passed | {PASSED} |
+| ❌ failed | {FAILED} |
+| ⚠️ error | {ERROR} |
+| ⏸️ ignored | {IGNORED} |
+| **通过率** | **{PCT}%** |
 
----
-
-## 待完成工作
-
-- Workflow 集成测试骨架（已创建）
-- Kanban Phase 4 生产化 profiles（待填充）
-
----
-
-## 更新模板
-
-> 复制以下模板添加新里程碑
-
-```markdown
-| YYYY-MM-DD | <里程碑名> | [worklog/YYYY-MM-DD/<file>.md](...) |
-```
-
----
-
-*最后更新: 2026-06-26*
+**本周进展**：{一句话总结}。详见 {报告链接}。
+-->

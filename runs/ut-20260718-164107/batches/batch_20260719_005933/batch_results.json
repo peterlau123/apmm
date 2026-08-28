@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_005933",
+ "started_at": "2026-08-04T23:36:08Z",
+ "finished_at": "2026-08-04T23:46:23Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/pytest_batch_super_0410.log",
+  "size_bytes": 18396,
+  "captured_at": "2026-08-04T23:46:23Z"
+ },
+ "tests": [
+  {
+   "id": 1093,
+   "test_node": "tests/distributed/test_kvlayout.py::test_get_kv_connector_cache_layout_with_nixl_connector",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 224,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/pytest_batch_super_0410_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_nixl_connector.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/result_batch_super_0410_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_nixl_connector.xml"
+  },
+  {
+   "id": 1094,
+   "test_node": "tests/distributed/test_kvlayout.py::test_get_kv_connector_cache_layout_with_multi_connector",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 745,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/pytest_batch_super_0410_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_multi_connector.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/result_batch_super_0410_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_multi_connector.xml"
+  },
+  {
+   "id": 1095,
+   "test_node": "tests/distributed/test_multi_node_assignment.py::test_multi_node_assignment",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/pytest_batch_super_0410_tests_distributed_test_multi_node_assignment_py_test_multi_node_assignment.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/result_batch_super_0410_tests_distributed_test_multi_node_assignment_py_test_multi_node_assignment.xml"
+  },
+  {
+   "id": 1096,
+   "test_node": "tests/distributed/test_multiproc_executor.py::test_multiproc_executor_initialization",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/pytest_batch_super_0410_tests_distributed_test_multiproc_executor_py_test_multiproc_executor_initialization.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0410/result_batch_super_0410_tests_distributed_test_multiproc_executor_py_test_multiproc_executor_initialization.xml"
+  },
+  {
+   "id": 1089,
+   "test_node": "tests/distributed/test_expert_placement.py::test_expert_placement_edge_cases[4-round_robin]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 214,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/pytest_batch_super_0409_tests_distributed_test_expert_placement_py_test_expert_placement_edge_cases_4_round_robin.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/result_batch_super_0409_tests_distributed_test_expert_placement_py_test_expert_placement_edge_cases_4_round_robin.xml"
+  },
+  {
+   "id": 1090,
+   "test_node": "tests/distributed/test_expert_placement.py::test_determine_expert_map_comprehensive",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 206,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/pytest_batch_super_0409_tests_distributed_test_expert_placement_py_test_determine_expert_map_comprehensive.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/result_batch_super_0409_tests_distributed_test_expert_placement_py_test_determine_expert_map_comprehensive.xml"
+  },
+  {
+   "id": 1091,
+   "test_node": "tests/distributed/test_kvlayout.py::test_get_kv_connector_cache_layout_without_kv_connector",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 186,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/pytest_batch_super_0409_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_without_kv_connector.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/result_batch_super_0409_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_without_kv_connector.xml"
+  },
+  {
+   "id": 1092,
+   "test_node": "tests/distributed/test_kvlayout.py::test_get_kv_connector_cache_layout_with_lmcache_connector",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 173,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/pytest_batch_super_0409_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_lmcache_connector.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0409/result_batch_super_0409_tests_distributed_test_kvlayout_py_test_get_kv_connector_cache_layout_with_lmcache_connector.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 1
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_192933",
+  "started_at": "2026-08-07T11:29:33Z",
+  "finished_at": "2026-08-07T11:30:10Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933.log",
+    "size_bytes": 34480,
+    "captured_at": "2026-08-07T11:30:10Z"
+  },
+  "tests": [
+    {
+      "id": 32905,
+      "test_node": "tests/v1/test_serial_utils.py::test_dict_serialization",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 153,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_test_serial_utils_py_test_dict_serialization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_test_serial_utils_py_test_dict_serialization.xml"
+    },
+    {
+      "id": 32906,
+      "test_node": "tests/v1/test_serial_utils.py::test_tensor_serialization",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 192,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_test_serial_utils_py_test_tensor_serialization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_test_serial_utils_py_test_tensor_serialization.xml"
+    },
+    {
+      "id": 32907,
+      "test_node": "tests/v1/test_serial_utils.py::test_numpy_array_serialization",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_test_serial_utils_py_test_numpy_array_serialization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_test_serial_utils_py_test_numpy_array_serialization.xml"
+    },
+    {
+      "id": 32908,
+      "test_node": "tests/v1/test_serial_utils.py::test_custom_class_serialization_allowed_with_pickle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 186,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_test_serial_utils_py_test_custom_class_serialization_allowed_with_pickle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_test_serial_utils_py_test_custom_class_serialization_allowed_with_pickle.xml"
+    },
+    {
+      "id": 32909,
+      "test_node": "tests/v1/test_serial_utils.py::test_custom_class_serialization_disallowed_without_pickle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 148,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_test_serial_utils_py_test_custom_class_serialization_disallowed_without_pickle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_test_serial_utils_py_test_custom_class_serialization_disallowed_without_pickle.xml"
+    },
+    {
+      "id": 32910,
+      "test_node": "tests/v1/tracing/test_tracing.py::test_traces",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ModuleNotFoundError: No module named 'opentelemetry.exporter.otlp'",
+      "duration_ms": 461,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_tracing_test_tracing_py_test_traces.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_tracing_test_tracing_py_test_traces.xml"
+    },
+    {
+      "id": 32911,
+      "test_node": "tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[1-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 592,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_worker_test_gpu_input_batch_py_test_sampling_metadata_in_input_batch_1_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_worker_test_gpu_input_batch_py_test_sampling_metadata_in_input_batch_1_cuda_0.xml"
+    },
+    {
+      "id": 32913,
+      "test_node": "tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[2-cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 632,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/pytest_batch_20260807_192933_tests_v1_worker_test_gpu_input_batch_py_test_sampling_metadata_in_input_batch_2_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192933/result_batch_20260807_192933_tests_v1_worker_test_gpu_input_batch_py_test_sampling_metadata_in_input_batch_2_cuda_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

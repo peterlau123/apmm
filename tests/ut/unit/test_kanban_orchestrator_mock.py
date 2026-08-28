@@ -254,7 +254,7 @@ class TestOrchestratorRoundDependencyChains:
         manifest = json.loads(manifest_path.read_text())
         t1 = next(t for t in manifest["tests"] if t["test_id"] == "t1")
         assert t1["status"] == "ignored"
-        assert t1["ignore_reason"] == "manually ignored"
+        assert t1["ignored_reason"] == "manually ignored"
         assert result["next_batch"]["selected_count"] == 1
         assert result["next_batch"]["tests"][0]["test_id"] == "t2"
 

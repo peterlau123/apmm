@@ -1,0 +1,8 @@
+ERROR          tests/entrypoints/pooling/embed/test_online.py::test_pooling_not_supported[token_classify-intfloat/multilingual-e5-small] (gpu=0, 20074ms, exit=0)
+IGNORED        tests/entrypoints/pooling/embed/test_online.py::test_pooling_not_supported[plugin-intfloat/multilingual-e5-small] (gpu=1, Nonems, exit=0)
+ERROR          tests/entrypoints/pooling/embed/test_online_dimensions.py::test_matryoshka[model_info0-bfloat16] (gpu=2, 20074ms, exit=0)
+ERROR          tests/entrypoints/pooling/embed/test_online_dimensions.py::test_matryoshka[model_info1-bfloat16] (gpu=3, 34ms, exit=0)
+IGNORED        tests/entrypoints/pooling/embed/test_online_long_text.py::test_long_text_embedding_1500_chars[intfloat/multilingual-e5-small] (gpu=4, Nonems, exit=0)
+ERROR          tests/entrypoints/pooling/embed/test_online_long_text.py::test_long_text_embedding_2500_chars[intfloat/multilingual-e5-small] (gpu=5, 20075ms, exit=0)
+IGNORED        tests/entrypoints/pooling/embed/test_online_long_text.py::test_batch_long_text_embedding[intfloat/multilingual-e5-small] (gpu=6, Nonems, exit=0)
+IGNORED        tests/entrypoints/pooling/embed/test_online_long_text.py::test_chunked_vs_normal_consistency[intfloat/multilingual-e5-small] (gpu=7, Nonems, exit=0)

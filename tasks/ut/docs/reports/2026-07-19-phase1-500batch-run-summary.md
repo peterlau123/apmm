@@ -91,14 +91,17 @@ Phase 1 跨 6 轮执行，中途发现并修复了多个 bug：
 | 3 | tests/compile/fullgraph/test_full_graph.py |
 | 3 | tests/entrypoints/test_chat_utils.py |
 
-**根因抽样**：91 个 failed 中，多数实际错误信息是：
+**根因精确分类**（全量，详见 [HF 缓存缺失事故](../incidents/2026-07-19-hf-model-cache-missing-incident.md) 附录）：
 
-```
-OSError: We couldn't connect to 'https://huggingface.co' to load the files,
-and couldn't find them in the cached files. Check your internet connection
-```
+| 类别 | 数量 | 文件 | 根因 |
+|------|------|------|------|
+| 数值断言失败 | 48 | test_flashmla.py | assert 0.98 < 0.0001（数值不对，另见 flashmla incident） |
+| triton 版本冲突 | 19 | test_fusion_attn.py | triton 3.5.0 与 torch 2.5.1 不兼容 |
+| HF 模型缓存缺失 | 16 | test_basic_correctness / test_async_tp / test_fusions_e2e / test_full_graph / test_accuracy | 模型未离线缓存（3 个模型已补齐） |
+| server 启动失败 | 5 | test_async_tp / test_sequence_parallel | RuntimeError: Server failed to start |
+| 其他断言 | 3 | test_chat_utils.py | assert 'string' == 'openai' |
 
-> ⚠️ 这些被分类为 `assertion`，但实际是 **HuggingFace 网络连接失败**。尽管 `container_env.HF_HUB_OFFLINE=1`，部分测试仍尝试联网下载模型。建议：Phase 2 重新分类为 `network`/`download_error`，并检查模型缓存是否齐全。
+> ✅ 16 个 HF 缓存缺失已补齐（3 个模型已下载至容器缓存，详见 incident）。本节初版「多数 HF 网络错误」为抽样误判，实际 HF 仅 16 个，真正大头是 48 个 flashmla 数值断言失败。
 
 ### 4.2 error（12 个，error_type=collection）
 
@@ -208,19 +211,21 @@ kernels/attention 类测试整体通过率高。
 
 ### 9.1 Phase 2 处理优先级
 
-1. **failed 重新分类**：91 个 failed 中多数是 HF 网络错误，应重分类为 `network`/`download_error` 并重试（非真正断言失败）
-2. **error（12 个）**：openai entrypoints collection 错误，排查依赖
-3. **ignored 重跑**：2479 个 ignored，提高 wall_timeout（如 600s）可能让部分 distributed 测试跑完
+> 最新状态见 [`2026-07-19-phase1-pending-todos.md`](2026-07-19-phase1-pending-todos.md)。以下为初版建议 + 完成情况。
+
+1. ~~**failed 重新分类**~~：已手动全量分类（见 §4.1 / HF 缓存 incident 附录）：flashmla 数值断言 48 / triton 版本冲突 19 / HF 缓存缺失 16（已补齐）/ server 启动 5 / 其他 3。自动分类逻辑（execute_batch）可选，见 P1-3
+2. ~~**error（12 个）排查**~~：已完成（P1-4）-- 5 个 filter（test_translation_validation）+ 7 个 fix（Response API torch.compile+deep_gemm）
+3. **ignored 重跑**：2479 个 ignored，wall_timeout 已提至 600s（P1-2 完成），Phase 2 启动时重置 ignored -> pending 重跑（P1-5）
 
 ### 9.2 效率优化
 
-- **提高 wall_timeout**：distributed e2e 测试 300s 不够，建议 600-900s
-- **跳过 HF 网络测试**：离线环境下联网测试必失败，可在 filter_rules 中排除
+- ~~**提高 wall_timeout**~~：已提至 600s（workflow.yaml Stage 3 `timeout: 600`，P1-2 完成）
+- ~~**跳过 HF 网络测试**~~：评估后无需做（P1-1）-- 91 failed 里 HF 16 个全是模型缓存问题，已补齐（E1-1），无纯联网测试
 - **generate_batch 已修复**：装填率 100%，无需再优化
 
-### 9.3 已修复的 bug 需提交
+### 9.3 已修复的 bug 提交状态
 
-本次修复的 3 个文件（`auto_run_batches_two_phase.py`、`execute_batch.py`、`generate_batch.py`）当前带 skip-worktree 标记，需 `--no-skip-worktree` 后 commit。
+本次修复的 3 个文件（`auto_run_batches_two_phase.py`、`execute_batch.py`、`generate_batch.py`）已提交至 commit `4154db4`（`fix(ut): Phase 1 启动连环 bug 修复 + generate_batch 装填率优化`），skip-worktree 标记已移除，工作区干净。
 
 ---
 

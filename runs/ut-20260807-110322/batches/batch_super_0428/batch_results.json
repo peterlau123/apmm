@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0428",
+  "started_at": "2026-08-07T21:57:33Z",
+  "finished_at": "2026-08-07T21:57:57Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428.log",
+    "size_bytes": 19243,
+    "captured_at": "2026-08-07T21:57:57Z"
+  },
+  "tests": [
+    {
+      "id": 29553,
+      "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_tensor_shape[dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_collision_tensor_shape_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_collision_tensor_shape_dtype1.xml"
+    },
+    {
+      "id": 29554,
+      "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_array_shape",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_collision_array_shape.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_collision_array_shape.xml"
+    },
+    {
+      "id": 29555,
+      "test_node": "tests/multimodal/test_hasher.py::test_hash_non_contiguous_array",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 163,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_non_contiguous_array.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_non_contiguous_array.xml"
+    },
+    {
+      "id": 29556,
+      "test_node": "tests/multimodal/test_hasher.py::test_hash_image_exif_id",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 161,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_image_exif_id.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_hasher_py_test_hash_image_exif_id.xml"
+    },
+    {
+      "id": 29557,
+      "test_node": "tests/multimodal/test_processing.py::test_iter_token_matches[0-token_ids0-match_ids0-expected0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 155,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids0_match_ids0_expected0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids0_match_ids0_expected0.xml"
+    },
+    {
+      "id": 29558,
+      "test_node": "tests/multimodal/test_processing.py::test_iter_token_matches[0-token_ids1-match_ids1-expected1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids1_match_ids1_expected1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids1_match_ids1_expected1.xml"
+    },
+    {
+      "id": 29559,
+      "test_node": "tests/multimodal/test_processing.py::test_iter_token_matches[0-token_ids2-match_ids2-expected2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 137,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids2_match_ids2_expected2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids2_match_ids2_expected2.xml"
+    },
+    {
+      "id": 29560,
+      "test_node": "tests/multimodal/test_processing.py::test_iter_token_matches[0-token_ids3-match_ids3-expected3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 141,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids3_match_ids3_expected3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_multimodal_test_processing_py_test_iter_token_matches_0_token_ids3_match_ids3_expected3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

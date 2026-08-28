@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_004841",
+  "started_at": "2026-06-30T16:49:06Z",
+  "finished_at": "2026-06-30T16:50:38Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841.log",
+    "size_bytes": 20098,
+    "captured_at": "2026-06-30T16:50:38Z"
+  },
+  "tests": [
+    {
+      "id": 572,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-backed-gpt2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_gpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_gpt2.xml"
+    },
+    {
+      "id": 573,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-backed-Qwen/Qwen2-7B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_Qwen_Qwen2_7B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_Qwen_Qwen2_7B_Instruct.xml"
+    },
+    {
+      "id": 574,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-backed-meta-llama/Llama-3.1-8B]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_meta_llama_Llama_3_1_8B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_meta_llama_Llama_3_1_8B.xml"
+    },
+    {
+      "id": 575,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-unbacked-gpt2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_gpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_gpt2.xml"
+    },
+    {
+      "id": 576,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-unbacked-Qwen/Qwen2-7B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_Qwen_Qwen2_7B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_Qwen_Qwen2_7B_Instruct.xml"
+    },
+    {
+      "id": 577,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-unbacked-meta-llama/Llama-3.1-8B]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_meta_llama_Llama_3_1_8B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_unbacked_meta_llama_Llama_3_1_8B.xml"
+    },
+    {
+      "id": 578,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-backed_size_oblivious-gpt2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_size_oblivious_gpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_size_oblivious_gpt2.xml"
+    },
+    {
+      "id": 579,
+      "test_node": "tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-True-1-backed_size_oblivious-Qwen/Qwen2-7B-Instruct]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/pytest_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_size_oblivious_Qwen_Qwen2_7B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_004841/result_batch_20260701_004841_tests_compile_test_dynamic_shapes_compilation_py_test_dynamic_shapes_compilation_True_True_1_backed_size_oblivious_Qwen_Qwen2_7B_Instruct.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

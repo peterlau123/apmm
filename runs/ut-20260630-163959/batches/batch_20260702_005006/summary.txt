@@ -1,0 +1,8 @@
+ERROR          tests/entrypoints/openai/test_serving_tokens.py::test_same_response_as_chat_completions (gpu=0, 21418ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_serving_tokens.py::test_stop_string_workflow (gpu=1, Nonems, exit=0)
+ERROR          tests/entrypoints/openai/test_serving_tokens.py::test_generate_with_lora_adapter[server0] (gpu=2, 21412ms, exit=0)
+IGNORED        tests/entrypoints/openai/test_shutdown.py::test_shutdown_on_engine_failure (gpu=3, Nonems, exit=0)
+IGNORED        tests/entrypoints/openai/test_sleep.py::test_sleep_mode (gpu=4, Nonems, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_valid_dense_tensor_accepted (gpu=5, 150ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_valid_sparse_tensor_accepted (gpu=6, 305ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_malicious_sparse_tensor_rejected (gpu=7, 309ms, exit=0)

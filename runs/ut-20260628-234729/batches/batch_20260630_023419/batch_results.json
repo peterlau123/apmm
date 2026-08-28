@@ -1,0 +1,85 @@
+{
+  "batch_id": "batch_20260630_023419",
+  "started_at": "2026-06-29T18:35:43Z",
+  "finished_at": "2026-06-29T18:46:06Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419.log",
+    "size_bytes": null,
+    "captured_at": "2026-06-29T18:46:06Z"
+  },
+  "tests": [
+    {
+      "id": 40,
+      "test_node": "tests/basic_correctness/test_cumem.py::test_end_to_end[facebook/opt-125m]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 83841,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_end_to_end_facebook_opt_125m.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/result_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_end_to_end_facebook_opt_125m.xml"
+    },
+    {
+      "id": 41,
+      "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 83838,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/result_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep.xml"
+    },
+    {
+      "id": 42,
+      "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_async",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 83810,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep_async.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/result_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep_async.xml"
+    },
+    {
+      "id": 43,
+      "test_node": "tests/basic_correctness/test_cumem.py::test_deep_sleep_fp8_kvcache",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 83473,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep_fp8_kvcache.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/result_batch_20260630_023419_tests_basic_correctness_test_cumem_py_test_deep_sleep_fp8_kvcache.xml"
+    },
+    {
+      "id": 44,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Benchmark failed: '(MaxRetryError(\"HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json (Caused by ConnectTimeoutError(<HTTPSConnection(host='huggingface.co', port=443) at 0x7f50b739d940>, 'Connection to huggingface.co timed out. (connect timeout=10)'))\"), '(Request ID: 40fcdf42-598b-421d-9c96-ddc530a3bf92)')' thrown while requesting HEAD https://huggingface.co/TinyLlama/TinyLlama-1.1B-Ch",
+      "duration_ms": 92128,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/pytest_batch_20260630_023419_tests_benchmarks_test_latency_cli_py_test_bench_latency.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_023419/result_batch_20260630_023419_tests_benchmarks_test_latency_cli_py_test_bench_latency.xml"
+    }
+  ],
+  "statistics": {
+    "total": 5,
+    "passed": 0,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

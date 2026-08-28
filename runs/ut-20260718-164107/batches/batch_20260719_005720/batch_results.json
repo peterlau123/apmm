@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_005720",
+ "started_at": "2026-08-04T21:43:56Z",
+ "finished_at": "2026-08-04T21:54:11Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/pytest_batch_super_0396.log",
+  "size_bytes": 15072,
+  "captured_at": "2026-08-04T21:54:11Z"
+ },
+ "tests": [
+  {
+   "id": 1053,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_device_compatibility[cuda]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 561,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/pytest_batch_super_0396_tests_distributed_test_eplb_algo_py_test_device_compatibility_cuda.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/result_batch_super_0396_tests_distributed_test_eplb_algo_py_test_device_compatibility_cuda.xml"
+  },
+  {
+   "id": 1054,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_additional_cases",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 242,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/pytest_batch_super_0396_tests_distributed_test_eplb_algo_py_test_additional_cases.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/result_batch_super_0396_tests_distributed_test_eplb_algo_py_test_additional_cases.xml"
+  },
+  {
+   "id": 1055,
+   "test_node": "tests/distributed/test_eplb_execute.py::test_rearrange_expert_weights_with_redundancy[2-1-2-3]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/pytest_batch_super_0396_tests_distributed_test_eplb_execute_py_test_rearrange_expert_weights_with_redundancy_2_1_2_3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/result_batch_super_0396_tests_distributed_test_eplb_execute_py_test_rearrange_expert_weights_with_redundancy_2_1_2_3.xml"
+  },
+  {
+   "id": 1056,
+   "test_node": "tests/distributed/test_eplb_execute.py::test_rearrange_expert_weights_with_redundancy[2-2-3-4]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/pytest_batch_super_0396_tests_distributed_test_eplb_execute_py_test_rearrange_expert_weights_with_redundancy_2_2_3_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0396/result_batch_super_0396_tests_distributed_test_eplb_execute_py_test_rearrange_expert_weights_with_redundancy_2_2_3_4.xml"
+  },
+  {
+   "id": 1049,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_parameter_validation",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 208,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/pytest_batch_super_0395_tests_distributed_test_eplb_algo_py_test_parameter_validation.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/result_batch_super_0395_tests_distributed_test_eplb_algo_py_test_parameter_validation.xml"
+  },
+  {
+   "id": 1050,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_small_scale_hierarchical",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 198,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/pytest_batch_super_0395_tests_distributed_test_eplb_algo_py_test_small_scale_hierarchical.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/result_batch_super_0395_tests_distributed_test_eplb_algo_py_test_small_scale_hierarchical.xml"
+  },
+  {
+   "id": 1051,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_global_load_balance_fallback",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 232,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/pytest_batch_super_0395_tests_distributed_test_eplb_algo_py_test_global_load_balance_fallback.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/result_batch_super_0395_tests_distributed_test_eplb_algo_py_test_global_load_balance_fallback.xml"
+  },
+  {
+   "id": 1052,
+   "test_node": "tests/distributed/test_eplb_algo.py::test_device_compatibility[cpu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 281,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/pytest_batch_super_0395_tests_distributed_test_eplb_algo_py_test_device_compatibility_cpu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0395/result_batch_super_0395_tests_distributed_test_eplb_algo_py_test_device_compatibility_cpu.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 2
+ }
+}

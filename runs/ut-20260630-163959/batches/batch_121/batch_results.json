@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_055831",
+  "started_at": "2026-06-30T21:59:04Z",
+  "finished_at": "2026-06-30T22:00:39Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831.log",
+    "size_bytes": 20798,
+    "captured_at": "2026-06-30T22:00:39Z"
+  },
+  "tests": [
+    {
+      "id": 1524,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_json_validity_comprehensive[tools4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 123,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools4.xml"
+    },
+    {
+      "id": 1525,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_json_validity_comprehensive[tools5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools5.xml"
+    },
+    {
+      "id": 1526,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_json_validity_comprehensive[tools6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools6.xml"
+    },
+    {
+      "id": 1527,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_json_validity_comprehensive[tools7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_json_validity_comprehensive_tools7.xml"
+    },
+    {
+      "id": 1528,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_error_handling_invalid_tool_server",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 117,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_error_handling_invalid_tool_server.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_error_handling_invalid_tool_server.xml"
+    },
+    {
+      "id": 1529,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_concurrent_requests_isolation",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 112,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_concurrent_requests_isolation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_concurrent_requests_isolation.xml"
+    },
+    {
+      "id": 1530,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_tag_format_consistency",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 146,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_tag_format_consistency.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_tag_format_consistency.xml"
+    },
+    {
+      "id": 1531,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_trigger_configuration",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/pytest_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_trigger_configuration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055831/result_batch_20260701_055831_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_trigger_configuration.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

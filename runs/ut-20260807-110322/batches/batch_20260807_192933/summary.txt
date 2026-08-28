@@ -1,0 +1,8 @@
+PASSED         tests/v1/test_serial_utils.py::test_dict_serialization (gpu=0, 153ms, exit=0)
+PASSED         tests/v1/test_serial_utils.py::test_tensor_serialization (gpu=2, 192ms, exit=0)
+PASSED         tests/v1/test_serial_utils.py::test_numpy_array_serialization (gpu=3, 157ms, exit=0)
+PASSED         tests/v1/test_serial_utils.py::test_custom_class_serialization_allowed_with_pickle (gpu=4, 186ms, exit=0)
+PASSED         tests/v1/test_serial_utils.py::test_custom_class_serialization_disallowed_without_pickle (gpu=5, 148ms, exit=0)
+FAILED         tests/v1/tracing/test_tracing.py::test_traces (gpu=6, 461ms, exit=1)
+PASSED         tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[1-cuda:0] (gpu=0, 592ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[2-cuda:0] (gpu=2, 632ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0348",
+  "started_at": "2026-08-07T20:21:52Z",
+  "finished_at": "2026-08-07T20:23:15Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348.log",
+    "size_bytes": 619922,
+    "captured_at": "2026-08-07T20:23:15Z"
+  },
+  "tests": [
+    {
+      "id": 28911,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 22444,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 28912,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Qwen/Qwen2.5-1.5B-Instruct0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 35180,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct0.xml"
+    },
+    {
+      "id": 28913,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-facebook/opt-125m2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+      "duration_ms": 224,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m2.xml"
+    },
+    {
+      "id": 28914,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-hmellor/tiny-random-LlamaForCausalLM0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 13089,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_LlamaForCausalLM0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_LlamaForCausalLM0.xml"
+    },
+    {
+      "id": 28915,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Qwen/Qwen2.5-1.5B-Instruct1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 35475,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct1.xml"
+    },
+    {
+      "id": 28916,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Qwen/Qwen2.5-0.5B-Instruct]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 242,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_0_5B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_0_5B_Instruct.xml"
+    },
+    {
+      "id": 28917,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Qwen/Qwen3-0.6B]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 26951,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen3_0_6B.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen3_0_6B.xml"
+    },
+    {
+      "id": 28918,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Qwen/Qwen2.5-1.5B-Instruct2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 26223,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/pytest_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0348/result_batch_super_0348_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Qwen_Qwen2_5_1_5B_Instruct2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

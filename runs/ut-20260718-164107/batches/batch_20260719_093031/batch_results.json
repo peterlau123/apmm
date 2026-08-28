@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_093031",
+ "started_at": "2026-08-04T15:47:23Z",
+ "finished_at": "2026-08-04T15:47:37Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0205/pytest_batch_super_0205.log",
+  "size_bytes": 9950,
+  "captured_at": "2026-08-04T15:47:37Z"
+ },
+ "tests": [
+  {
+   "id": 4978,
+   "test_node": "tests/kernels/attention/test_flashmla.py::test_flash_mla[torch_dtype0-True-True-64-512-576-1-16-16384-2-128]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2209,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0205/pytest_batch_super_0205_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype0_True_True_64_512_576_1_16_16384_2_128.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0205/result_batch_super_0205_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype0_True_True_64_512_576_1_16_16384_2_128.xml"
+  },
+  {
+   "id": 4979,
+   "test_node": "tests/kernels/attention/test_flashmla.py::test_flash_mla[torch_dtype0-True-True-64-512-576-1-32-4096-1-128]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1601,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0205/pytest_batch_super_0205_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype0_True_True_64_512_576_1_32_4096_1_128.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0205/result_batch_super_0205_tests_kernels_attention_test_flashmla_py_test_flash_mla_torch_dtype0_True_True_64_512_576_1_32_4096_1_128.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

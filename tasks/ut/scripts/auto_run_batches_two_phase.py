@@ -473,7 +473,7 @@ def phase1_batch_loop(
         tl_count = config.get("workflow", {}).get("test_load", {}).get("count", 1000)
         gtl_cmd = [
             sys.executable,
-            str(_project_root / "tasks" / "ut" / "scripts" / "generate_test_load.py"),
+            str(_project_root / "skills" / "ut" / "ut_common" / "scripts" / "generate_test_load.py"),
             "--manifest-path", str(manifest_path),
             "--count", str(tl_count),
             "--output-dir", str(paths["run_dir"]),
@@ -522,8 +522,33 @@ def phase1_batch_loop(
     print(f"[Phase 1] Auto create batches: {auto_create_batches}")
     print(f"[Phase 1] Auto execute: {auto_execute}")
 
+    # D1-2 防回归：跨 batch 重复选中检测（incident 2026-07-19-generate-batch-normal-starvation）
+    # generate_batch 从 test_load（实时工作集）选，已跑过的测试 status 变
+    # passed/ignored 不会被重选。若 test_load 更新失效或误从 manifest 选，
+    # 同一 test_node 会出现在多个 batch -> 此处告警。
+    seen_test_nodes = set()
+
     for i in range(start_index, batch_group_size):
         batch_id = create_batch_id(i)
+
+        # 用户命令检查: 每 batch 前读 workflow_state flags.
+        # 支持 stop_requested / pause_requested (由 supervisor 写入),
+        # Phase1 是长循环, 无此检查则启动后无法中途停止 (2026-08-04 审查).
+        try:
+            _ws_now = json.loads(workflow_state_path.read_text(encoding="utf-8"))
+            _flags = _ws_now.get("flags", {})
+            if _flags.get("stop_requested"):
+                print(f"\n[Phase 1] stop_requested detected at batch {i+1}, stopping...")
+                # 保留已完成的 batch 结果, 状态机交给 supervisor 处理
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+            if _flags.get("pause_requested"):
+                print(f"\n[Phase 1] pause_requested detected at batch {i+1}, pausing...")
+                write_checkpoint_file(checkpoint_log, run_dir)
+                break
+        except Exception as _e:
+            # 读 flags 失败不阻塞执行 (可能并发写, 下次循环再查)
+            print(f"  [WARN] flags check failed: {_e}")
 
         print(f"\n[Batch {i+1}/{batch_group_size}] {batch_id}")
 
@@ -534,6 +559,15 @@ def phase1_batch_loop(
             config_path = create_batch_config(
                 batch_id, manifest_path, batches_dir, batch_size, workflow_state_path
             )
+
+            # D1-2 防回归：重复选中告警 -- 同一 test_node 被 >1 batch 选中 = 异常
+            _batch_cfg = json.loads(config_path.read_text(encoding="utf-8"))
+            for _t in _batch_cfg.get("tests", []):
+                _node = _t.get("test_node") or _t.get("test_id")
+                if _node in seen_test_nodes:
+                    print(f"[WARN] duplicate selection: {_node} already in a prior batch "
+                          "(选择源可能脱节，检查 test_load 是否实时更新而非 manifest)")
+                seen_test_nodes.add(_node)
 
             # Batch directory is batches_dir / batch_id
             batch_dir = batches_dir / batch_id
@@ -609,6 +643,9 @@ def phase1_batch_loop(
     phase1_report = generate_phase1_summary(checkpoint_log)
     write_report(phase1_report, "phase1_summary.json", run_dir)
 
+    # F1+F2: Update workflow_state - refresh stats + transition to phase1_complete
+    _finalize_phase1_state(run_dir)
+
     print(f"\n[Phase 1 Complete] Summary:")
     print(f"  Total batches: {phase1_report['total_batches']}")
     print(f"  Successful: {phase1_report['successful_batches']}")
@@ -616,7 +653,79 @@ def phase1_batch_loop(
     print(f"  Success rate: {phase1_report['success_rate']}%")
     print(f"  Report: {run_dir / 'phase1_summary.json'}")
 
+    # F3: Auto-trigger Phase 2 Stage 1 (statistical analysis)
+    _trigger_phase2_stage1(run_dir)
+
     return checkpoint_log
+
+
+def _finalize_phase1_state(run_dir: Path):
+    """F1+F2: Refresh test_load stats into workflow_state + mark phase1 complete."""
+    ws_path = run_dir / "workflow_state.json"
+    if not ws_path.exists():
+        return
+    state = json.loads(ws_path.read_text(encoding="utf-8"))
+
+    # F1: Tally test_load stats into workflow_state
+    # NOTE: paths.test_load may be Windows-style backslash relative path
+    # (e.g. "runs\\ut-xxx\\test_load.json"). Resolve against run_dir:
+    # 1. normalize backslashes to '/'
+    # 2. if the result already starts with the run_dir basename, it is a
+    #    repo-relative path -> anchor at project root; otherwise it is a
+    #    filename relative to run_dir -> anchor at run_dir.
+    tl_path = state.get("paths", {}).get("test_load", "")
+    if tl_path:
+        tl_path = tl_path.replace("\\", "/")
+        tl = Path(tl_path)
+        if not tl.is_absolute():
+            # Repo-relative like "runs/ut-xxx/test_load.json"?
+            # run_dir.name == "ut-xxx", so a path containing "/ut-xxx/"
+            # before the filename is repo-relative.
+            if tl.parts and tl.parts[0] == "runs":
+                tl = _project_root / tl
+            else:
+                tl = run_dir / tl
+        if tl.exists():
+            test_load = json.loads(tl.read_text(encoding="utf-8"))
+            stats = {}
+            for t in test_load.get("tests", []):
+                st = t.get("status", "pending")
+                stats[st] = stats.get(st, 0) + 1
+            state["stats"] = {
+                "total_tests": len(test_load.get("tests", [])),
+                "passed": stats.get("passed", 0),
+                "failed": stats.get("failed", 0),
+                "error": stats.get("error", 0),
+                "ignored": stats.get("ignored", 0),
+                "pending": stats.get("pending", 0),
+                "error_rate": 0.0,
+            }
+            state["test_load_stats"] = stats
+
+    # F2: Transition workflow state to phase1_complete
+    state["workflow"]["status"] = "phase1_complete"
+    state["current_stage"] = "phase2"
+    state["last_update"] = datetime.now(timezone.utc).isoformat()
+
+    ws_path.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"[Phase 1] workflow_state updated: status=phase1_complete, current_stage=phase2")
+
+
+def _trigger_phase2_stage1(run_dir: Path):
+    """F3: Auto-run Phase 2 Stage 1 statistical analysis after Phase 1 completes."""
+    stage1_script = _project_root / "skills" / "ut" / "ut_common" / "two-phase-handler" / "scripts" / "phase2_stage1.py"
+    if not stage1_script.exists():
+        print(f"[WARN] Phase 2 Stage 1 script not found: {stage1_script}")
+        return
+    print(f"\n[Phase 2] Auto-triggering Stage 1 statistical analysis...")
+    result = subprocess.run(
+        [sys.executable, str(stage1_script), "--run-dir", str(run_dir)],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        print(f"[Phase 2] Stage 1 complete: {run_dir / 'phase2_stage1_report.json'}")
+    else:
+        print(f"[Phase 2] Stage 1 failed: {result.stderr.strip()[:200]}")
 
 
 # ============================================================================

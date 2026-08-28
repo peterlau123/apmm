@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_091719",
+ "started_at": "2026-08-04T14:53:25Z",
+ "finished_at": "2026-08-04T14:53:37Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0119/pytest_batch_super_0119.log",
+  "size_bytes": 10182,
+  "captured_at": "2026-08-04T14:53:37Z"
+ },
+ "tests": [
+  {
+   "id": 4132,
+   "test_node": "tests/kernels/attention/test_cutlass_mla_decode.py::test_cutlass_mla_decode[torch_dtype0-True-True-64-512-576-1-32-16384-1-128]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0119/pytest_batch_super_0119_tests_kernels_attention_test_cutlass_mla_decode_py_test_cutlass_mla_decode_torch_dtype0_True_True_64_512_576_1_32_16384_1_128.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0119/result_batch_super_0119_tests_kernels_attention_test_cutlass_mla_decode_py_test_cutlass_mla_decode_torch_dtype0_True_True_64_512_576_1_32_16384_1_128.xml"
+  },
+  {
+   "id": 4133,
+   "test_node": "tests/kernels/attention/test_cutlass_mla_decode.py::test_cutlass_mla_decode[torch_dtype0-True-True-64-512-576-1-64-4096-1-128]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0119/pytest_batch_super_0119_tests_kernels_attention_test_cutlass_mla_decode_py_test_cutlass_mla_decode_torch_dtype0_True_True_64_512_576_1_64_4096_1_128.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0119/result_batch_super_0119_tests_kernels_attention_test_cutlass_mla_decode_py_test_cutlass_mla_decode_torch_dtype0_True_True_64_512_576_1_64_4096_1_128.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

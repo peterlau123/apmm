@@ -1,0 +1,8 @@
+PASSED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TRITON_ATTN-10] (gpu=0, 244ms, exit=0)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TREE_ATTN-1] (gpu=2, 296ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TREE_ATTN-3] (gpu=3, 291ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TREE_ATTN-10] (gpu=4, 308ms, exit=1)
+FAILED         tests/v1/spec_decode/test_mtp.py::test_mtp_load_model_unified (gpu=5, 208ms, exit=1)
+FAILED         tests/v1/spec_decode/test_mtp.py::test_mtp_propose[1] (gpu=6, 138ms, exit=1)
+PASSED         tests/v1/spec_decode/test_ngram.py::test_find_longest_matched_ngram_and_propose_tokens (gpu=0, 800ms, exit=0)
+PASSED         tests/v1/spec_decode/test_ngram.py::test_ngram_proposer (gpu=2, 3644ms, exit=0)

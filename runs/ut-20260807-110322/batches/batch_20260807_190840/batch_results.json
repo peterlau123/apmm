@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190840",
+  "started_at": "2026-08-07T11:08:40Z",
+  "finished_at": "2026-08-07T11:09:26Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840.log",
+    "size_bytes": 57258,
+    "captured_at": "2026-08-07T11:09:26Z"
+  },
+  "tests": [
+    {
+      "id": 32621,
+      "test_node": "tests/v1/metrics/test_metrics_reader.py::test_histogram_metric[4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 146,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_histogram_metric_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_histogram_metric_4.xml"
+    },
+    {
+      "id": 32622,
+      "test_node": "tests/v1/metrics/test_metrics_reader.py::test_vector_metric[1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 135,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_vector_metric_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_vector_metric_1.xml"
+    },
+    {
+      "id": 32623,
+      "test_node": "tests/v1/metrics/test_metrics_reader.py::test_vector_metric[4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 145,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_vector_metric_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_metrics_reader_py_test_vector_metric_4.xml"
+    },
+    {
+      "id": 32624,
+      "test_node": "tests/v1/metrics/test_ray_metrics.py::test_engine_log_metrics_ray[16-half-distilbert/distilgpt2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ray.exceptions.RayTaskError(RuntimeError): #x1B[36mray::EngineTestActor.run()#x1B[39m (pid=3086725, ip=10.10.154.13, actor_id=32cd82b4d9746b746685008601000000, repr=<test_ray_metrics.EngineTestActor object at 0x7f40e977fa10>)\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 456, in result\n    return self.__get_result()\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/concurrent/futures/_base.py\", line 401, in __get_result\n    raise self._exception\n           ^^^^^^^^^^^^^",
+      "duration_ms": 24006,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_ray_metrics_py_test_engine_log_metrics_ray_16_half_distilbert_distilgpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_ray_metrics_py_test_engine_log_metrics_ray_16_half_distilbert_distilgpt2.xml"
+    },
+    {
+      "id": 32625,
+      "test_node": "tests/v1/metrics/test_ray_metrics.py::test_sanitized_opentelemetry_name",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 219,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_ray_metrics_py_test_sanitized_opentelemetry_name.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_ray_metrics_py_test_sanitized_opentelemetry_name.xml"
+    },
+    {
+      "id": 32626,
+      "test_node": "tests/v1/metrics/test_stats.py::test_iteration_stats_repr",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 135,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_iteration_stats_repr.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_iteration_stats_repr.xml"
+    },
+    {
+      "id": 32627,
+      "test_node": "tests/v1/metrics/test_stats.py::test_prefill_kv_computed_with_cache",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 138,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_prefill_kv_computed_with_cache.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_prefill_kv_computed_with_cache.xml"
+    },
+    {
+      "id": 32628,
+      "test_node": "tests/v1/metrics/test_stats.py::test_prefill_kv_computed_no_cache",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 143,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/pytest_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_prefill_kv_computed_no_cache.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190840/result_batch_20260807_190840_tests_v1_metrics_test_stats_py_test_prefill_kv_computed_no_cache.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

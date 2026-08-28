@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260704_220332",
+  "started_at": "2026-07-04T14:03:33Z",
+  "finished_at": "2026-07-04T14:05:17Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332.log",
+    "size_bytes": 19803,
+    "captured_at": "2026-07-04T14:05:17Z"
+  },
+  "tests": [
+    {
+      "id": 2675,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-8-64-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 830,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_8_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_8_64_8_42.xml"
+    },
+    {
+      "id": 2677,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-8-256-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 561,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_8_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_8_256_8_42.xml"
+    },
+    {
+      "id": 2678,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-16-64-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 793,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_64_8_42.xml"
+    },
+    {
+      "id": 2679,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-16-80-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 587,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_80_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_80_8_42.xml"
+    },
+    {
+      "id": 2680,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-16-256-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 594,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_16_256_8_42.xml"
+    },
+    {
+      "id": 2681,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-32-64-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 861,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_64_8_42.xml"
+    },
+    {
+      "id": 2682,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-32-80-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 583,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_80_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_80_8_42.xml"
+    },
+    {
+      "id": 2683,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache[auto-cuda:0-0-dtype0-10000-32-256-8-42]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 560,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/pytest_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260704_220332/result_batch_20260704_220332_tests_kernels_attention_test_cache_py_test_reshape_and_cache_auto_cuda_0_0_dtype0_10000_32_256_8_42.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

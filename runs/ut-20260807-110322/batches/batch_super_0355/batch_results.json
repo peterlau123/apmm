@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0355",
+  "started_at": "2026-08-07T20:38:29Z",
+  "finished_at": "2026-08-07T20:38:54Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355.log",
+    "size_bytes": 219113,
+    "captured_at": "2026-08-07T20:38:54Z"
+  },
+  "tests": [
+    {
+      "id": 28967,
+      "test_node": "tests/models/quantization/test_gguf.py::test_models[1-5-32-bfloat16-model5]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 147,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gguf_py_test_models_1_5_32_bfloat16_model5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gguf_py_test_models_1_5_32_bfloat16_model5.xml"
+    },
+    {
+      "id": 28968,
+      "test_node": "tests/models/quantization/test_gguf.py::test_models[1-5-32-bfloat16-model6]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 258,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gguf_py_test_models_1_5_32_bfloat16_model6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gguf_py_test_models_1_5_32_bfloat16_model6.xml"
+    },
+    {
+      "id": 28970,
+      "test_node": "tests/models/quantization/test_gpt_oss_attn_quantization.py::test_gpt_oss_attention_quantization[arc_challenge-0.2-amd/gpt-oss-20b-customized-attention-quantization]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gpt_oss_attn_quantization_py_test_gpt_oss_attention_quantization_arc_challenge_0_2_amd_gpt_oss_20b_customized_attention_quantization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gpt_oss_attn_quantization_py_test_gpt_oss_attention_quantization_arc_challenge_0_2_amd_gpt_oss_20b_customized_attention_quantization.xml"
+    },
+    {
+      "id": 28971,
+      "test_node": "tests/models/quantization/test_gptq_bitblas.py::test_models[5-32-half-model_pair0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gptq_bitblas_py_test_models_5_32_half_model_pair0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gptq_bitblas_py_test_models_5_32_half_model_pair0.xml"
+    },
+    {
+      "id": 28972,
+      "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-half-model0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 210,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model0.xml"
+    },
+    {
+      "id": 28973,
+      "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-half-model1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 201,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model1.xml"
+    },
+    {
+      "id": 28974,
+      "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-half-model2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 193,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_half_model2.xml"
+    },
+    {
+      "id": 28975,
+      "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-bfloat16-model0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 185,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/pytest_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0355/result_batch_super_0355_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_205615",
+ "started_at": "2026-08-04T18:30:59Z",
+ "finished_at": "2026-08-04T18:31:41Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334.log",
+  "size_bytes": 19567,
+  "captured_at": "2026-08-04T18:31:41Z"
+ },
+ "tests": [
+  {
+   "id": 6853,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype1-13824-2048-mul_and_silu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1151,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_mul_and_silu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_mul_and_silu.xml"
+  },
+  {
+   "id": 6854,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype1-13824-2048-gelu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1173,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_gelu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_gelu.xml"
+  },
+  {
+   "id": 6855,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype1-13824-2048-gelu_tanh]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1089,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_gelu_tanh.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_gelu_tanh.xml"
+  },
+  {
+   "id": 6856,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype1-13824-2048-fatrelu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1100,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_fatrelu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_fatrelu.xml"
+  },
+  {
+   "id": 6857,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype1-13824-2048-swigluoai_and_mul]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 875,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_swigluoai_and_mul.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype1_13824_2048_swigluoai_and_mul.xml"
+  },
+  {
+   "id": 6888,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype2-13824-2048-silu_and_mul]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 874,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_silu_and_mul.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_silu_and_mul.xml"
+  },
+  {
+   "id": 6889,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype2-13824-2048-mul_and_silu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 830,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_mul_and_silu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_mul_and_silu.xml"
+  },
+  {
+   "id": 6890,
+   "test_node": "tests/kernels/core/test_activation.py::test_act_and_mul[cuda:0-0-dtype2-13824-2048-gelu]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 906,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_gelu.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_kernels_core_test_activation_py_test_act_and_mul_cuda_0_0_dtype2_13824_2048_gelu.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

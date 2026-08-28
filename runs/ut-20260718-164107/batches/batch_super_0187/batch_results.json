@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0187",
+  "started_at": "2026-08-04T15:36:07Z",
+  "finished_at": "2026-08-04T15:36:21Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/pytest_batch_super_0187.log",
+    "size_bytes": 10172,
+    "captured_at": "2026-08-04T15:36:21Z"
+  },
+  "tests": [
+    {
+      "id": 4866,
+      "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_decode_with_paged_kv[64-30.0-dtype0-32-256-num_heads0-kv_lens1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 736,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/pytest_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_decode_with_paged_kv_64_30_0_dtype0_32_256_num_heads0_kv_lens1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/result_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_decode_with_paged_kv_64_30_0_dtype0_32_256_num_heads0_kv_lens1.xml"
+    },
+    {
+      "id": 4869,
+      "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_prefill_with_paged_kv[None-None-dtype0-16-128-num_heads0-seq_lens0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 693,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/pytest_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_16_128_num_heads0_seq_lens0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/result_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_16_128_num_heads0_seq_lens0.xml"
+    },
+    {
+      "id": 4871,
+      "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_prefill_with_paged_kv[None-None-dtype0-16-256-num_heads0-seq_lens0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 760,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/pytest_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_16_256_num_heads0_seq_lens0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/result_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_16_256_num_heads0_seq_lens0.xml"
+    },
+    {
+      "id": 4873,
+      "test_node": "tests/kernels/attention/test_flashinfer.py::test_flashinfer_prefill_with_paged_kv[None-None-dtype0-32-128-num_heads0-seq_lens0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 672,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/pytest_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_32_128_num_heads0_seq_lens0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0187/result_batch_super_0187_tests_kernels_attention_test_flashinfer_py_test_flashinfer_prefill_with_paged_kv_None_None_dtype0_32_128_num_heads0_seq_lens0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

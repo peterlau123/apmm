@@ -1,0 +1,8 @@
+FAILED         tests/models/test_initialization.py::test_can_initialize_small_subset[PrithviGeoSpatialMAE] (gpu=0, 312ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_small_subset[UltravoxModel] (gpu=2, 342ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_small_subset[DeepSeekMTPModel] (gpu=3, 363ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_small_subset[XLMRobertaModel] (gpu=4, 4394ms, exit=0)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[BloomForCausalLM] (gpu=5, 4084ms, exit=0)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[Glm4ForCausalLM] (gpu=6, 338ms, exit=1)
+FAILED         tests/models/test_initialization.py::test_can_initialize_large_subset[DeepseekOCRForCausalLM] (gpu=0, 257ms, exit=1)
+PASSED         tests/models/test_initialization.py::test_can_initialize_large_subset[MiniCPM3ForCausalLM] (gpu=2, 4451ms, exit=0)

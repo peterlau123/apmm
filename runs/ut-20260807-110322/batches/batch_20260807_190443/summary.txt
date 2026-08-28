@@ -1,0 +1,8 @@
+PASSED         tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_no_spurious_prefix_caching (gpu=0, 453ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_full_block_prompt (gpu=2, 502ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_cannot_schedule_after_recv (gpu=3, 429ms, exit=0)
+PASSED         tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_cannot_recv (gpu=4, 426ms, exit=0)
+FAILED         tests/v1/kv_offload/test_cpu_gpu.py::test_transfer[cuda:0-0-dtype0-4-256-64-1-16-8-64-3-True] (gpu=5, 716ms, exit=1)
+PASSED         tests/v1/kv_offload/test_cpu_gpu.py::test_transfer[cuda:0-0-dtype0-4-256-64-1-16-8-64-3-False] (gpu=6, 663ms, exit=0)
+FAILED         tests/v1/kv_offload/test_cpu_gpu.py::test_transfer[cuda:0-0-dtype0-4-256-64-3-16-8-64-3-True] (gpu=0, 452ms, exit=1)
+PASSED         tests/v1/kv_offload/test_cpu_gpu.py::test_transfer[cuda:0-0-dtype0-4-256-64-3-16-8-64-3-False] (gpu=2, 512ms, exit=0)

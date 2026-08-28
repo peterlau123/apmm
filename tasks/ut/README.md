@@ -4,6 +4,16 @@
 
 ---
 
+## 🎯 目标
+
+- **主目标**：运行针对 **Minimax-M2.7** 的全量单元测试，**暴露所有 vLLM 0.13.0 + torch 2.5.1 的兼容性问题**（H20 环境）
+- 发现代码 bug 后在 vLLM 源码修复并提交；无法修复的归类记录（见 [docs/incidents/README.md](docs/incidents/README.md)）
+- **测试环境**：t_h20，容器 `v0.13.0_torch2.5.1_compile`（vLLM 0.13.0 + torch 2.5.1+cu124，详见 [docs/guides/troubleshooting.md](docs/guides/troubleshooting.md)）
+- **测试范围**：过滤规则见 [skills/ut/ut_common/filter_rules.yaml](../../skills/ut/ut_common/filter_rules.yaml)
+- **进度追踪**：[PROGRESS.md](PROGRESS.md)（每周更新，只记录测试用例运行进度）
+
+---
+
 ## 我想干嘛？
 
 ### 启动路由
@@ -240,6 +250,42 @@ Phase 1完成后，调用`two-phase-handler` skill处理失败batch：
 | `workflow_state.json` | `runs/<run_id>/workflow_state.json` | 每次循环 |
 
 Manifest schema 定义见 [skills/ut/ut_common/manifest_schema.json](../../skills/ut/ut_common/manifest_schema.json)。
+
+---
+
+## 远程执行后端对比
+
+UT Workflow 的远程命令执行支持两种后端，通过 `workflow.yaml` 的 `config.remote_backend` 切换：
+
+| 维度 | `agent`（默认） | `bifrost` |
+|------|----------------|-----------|
+| **传输方式** | SSH over Bastion（paramiko 双跳隧道） | GPFS 共享存储文件交换（inotify） |
+| **链路** | 本地 → Bastion(OTP) → t_h20 → Docker | 本机写 GPFS → H20 daemon 读 GPFS → 执行 → 写回 → 本机读 |
+| **认证** | 双因子 OTP，daemon 挂了需人工介入 | 无认证（依赖 GPFS 权限） |
+| **并发** | 单连接串行（一个 batch 跑完才下一个） | daemon 并发 10 任务 |
+| **可靠性** | SSH 会话易断连，长跑不稳定 | 无连接概念，断电重启不丢已提交任务 |
+| **故障恢复** | 需人工 OTP 重启 daemon | 自愈（fallback scan + .processing 去重） |
+| **状态追踪** | 无（fire-and-forget） | task_id 全生命周期追踪 |
+| **多客户端** | 单租户（一个 daemon） | 天然多客户端（MCP 无状态） |
+| **文件传输** | 支持 upload/download | 仅命令执行（文件走 GPFS） |
+| **配置** | `.bastion_creds` + `agent.py serve` | `BIFROST_CONFIG` 环境变量 + H20 上 `bifrost server` |
+
+### 切换方式
+
+```yaml
+# workflow.yaml
+config:
+  remote_backend: "bifrost"   # 从 "agent" 切到 "bifrost"
+```
+
+bifrost 模式需先在 H20 启动 server：
+```bash
+bifrost server -c /gpfs/gcsp/liuxin/bifrost_test/settings.json
+```
+
+适配层代码见 [tools/remote_executor.py](../../tools/remote_executor.py)，`execute_batch.py` 的 `run_remote()` 自动分发到对应后端。
+
+> **建议**：大规模 two-phase 重试场景优先使用 bifrost，避免 SSH 断连和串行瓶颈。
 
 ---
 

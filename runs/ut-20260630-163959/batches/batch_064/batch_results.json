@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_020948",
+  "started_at": "2026-06-30T18:10:12Z",
+  "finished_at": "2026-06-30T18:11:57Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948.log",
+    "size_bytes": 28492,
+    "captured_at": "2026-06-30T18:11:57Z"
+  },
+  "tests": [
+    {
+      "id": 764,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape3-1e-05-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 309,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_05_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_05_257_256_dtype1.xml"
+    },
+    {
+      "id": 765,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape3-1e-06-257-256-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 301,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_06_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_06_257_256_dtype0.xml"
+    },
+    {
+      "id": 766,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestModel-False-False-group_shape3-1e-06-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 303,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_06_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestModel_False_False_group_shape3_1e_06_257_256_dtype1.xml"
+    },
+    {
+      "id": 767,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape0-1e-05-257-256-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 146,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_05_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_05_257_256_dtype0.xml"
+    },
+    {
+      "id": 768,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape0-1e-05-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_05_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_05_257_256_dtype1.xml"
+    },
+    {
+      "id": 769,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape0-1e-06-257-256-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_06_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_06_257_256_dtype0.xml"
+    },
+    {
+      "id": 770,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape0-1e-06-257-256-dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_06_257_256_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape0_1e_06_257_256_dtype1.xml"
+    },
+    {
+      "id": 771,
+      "test_node": "tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape1-1e-05-257-256-dtype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/pytest_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape1_1e_05_257_256_dtype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_020948/result_batch_20260701_020948_tests_compile_test_fusion_py_test_fusion_rmsnorm_quant_False_TestRmsnormGroupFp8QuantModel_False_False_group_shape1_1e_05_257_256_dtype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

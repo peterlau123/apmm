@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0097",
+  "started_at": "2026-08-04T14:39:36Z",
+  "finished_at": "2026-08-04T14:39:48Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0097/pytest_batch_super_0097.log",
+    "size_bytes": 5110,
+    "captured_at": "2026-08-04T14:39:48Z"
+  },
+  "tests": [
+    {
+      "id": 4058,
+      "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[3-2048-None-16-dtype0-256-num_heads1-seq_lens_and_common_prefix1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 544,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0097/pytest_batch_super_0097_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_3_2048_None_16_dtype0_256_num_heads1_seq_lens_and_common_prefix1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0097/result_batch_super_0097_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_3_2048_None_16_dtype0_256_num_heads1_seq_lens_and_common_prefix1.xml"
+    },
+    {
+      "id": 4059,
+      "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_cascade[3-2048-None-16-dtype0-256-num_heads2-seq_lens_and_common_prefix0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 506,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0097/pytest_batch_super_0097_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_3_2048_None_16_dtype0_256_num_heads2_seq_lens_and_common_prefix0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0097/result_batch_super_0097_tests_kernels_attention_test_cascade_flash_attn_py_test_cascade_3_2048_None_16_dtype0_256_num_heads2_seq_lens_and_common_prefix0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

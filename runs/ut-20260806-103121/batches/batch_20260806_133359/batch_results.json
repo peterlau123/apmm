@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_133359",
+  "started_at": "2026-08-06T05:33:59Z",
+  "finished_at": "2026-08-06T05:34:27Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359.log",
+    "size_bytes": 45442,
+    "captured_at": "2026-08-06T05:34:27Z"
+  },
+  "tests": [
+    {
+      "id": 13872,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-256-8192-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 502,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_256_8192_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_256_8192_5120.xml"
+    },
+    {
+      "id": 13873,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-127-4096-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 542,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_127_4096_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_127_4096_5120.xml"
+    },
+    {
+      "id": 13874,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-10-8192-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 549,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_10_8192_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_10_8192_5120.xml"
+    },
+    {
+      "id": 13875,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-10-4096-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 498,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_10_4096_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_10_4096_5120.xml"
+    },
+    {
+      "id": 13876,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-1-8192-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 445,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_1_8192_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_1_8192_5120.xml"
+    },
+    {
+      "id": 13877,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[silu-1-16-1-4096-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1010,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_1_4096_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_silu_1_16_1_4096_5120.xml"
+    },
+    {
+      "id": 13878,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[relu2_no_mul-1-16-256-8192-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 430,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_relu2_no_mul_1_16_256_8192_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_relu2_no_mul_1_16_256_8192_5120.xml"
+    },
+    {
+      "id": 13879,
+      "test_node": "tests/kernels/moe/test_flashinfer.py::test_flashinfer_cutlass_moe_fp8_no_graph[relu2_no_mul-1-16-127-4096-5120]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 438,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/pytest_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_relu2_no_mul_1_16_127_4096_5120.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_133359/result_batch_20260806_133359_tests_kernels_moe_test_flashinfer_py_test_flashinfer_cutlass_moe_fp8_no_graph_relu2_no_mul_1_16_127_4096_5120.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

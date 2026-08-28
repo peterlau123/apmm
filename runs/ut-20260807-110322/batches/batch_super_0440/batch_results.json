@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0440",
+  "started_at": "2026-08-07T22:09:50Z",
+  "finished_at": "2026-08-07T22:10:33Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440.log",
+    "size_bytes": 151468,
+    "captured_at": "2026-08-07T22:10:33Z"
+  },
+  "tests": [
+    {
+      "id": 29649,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestSparseTensorValidationContextManager::test_out_of_bounds_indices_rejected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 476,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_out_of_bounds_indices_rejected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_out_of_bounds_indices_rejected.xml"
+    },
+    {
+      "id": 29650,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestSparseTensorValidationContextManager::test_negative_indices_rejected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 697,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_negative_indices_rejected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_negative_indices_rejected.xml"
+    },
+    {
+      "id": 29651,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestSparseTensorValidationContextManager::test_without_context_manager_allows_invalid",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 129,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_without_context_manager_allows_invalid.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_without_context_manager_allows_invalid.xml"
+    },
+    {
+      "id": 29652,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestTorchLoadWithValidation::test_load_valid_sparse_tensor_with_validation",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 533,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_valid_sparse_tensor_with_validation.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_valid_sparse_tensor_with_validation.xml"
+    },
+    {
+      "id": 29653,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestTorchLoadWithValidation::test_load_invalid_sparse_tensor_rejected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 652,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_invalid_sparse_tensor_rejected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_invalid_sparse_tensor_rejected.xml"
+    },
+    {
+      "id": 29654,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestTorchLoadWithValidation::test_load_dense_tensor_unaffected",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 148,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_dense_tensor_unaffected.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_sparse_tensor_validation_unit_py_TestTorchLoadWithValidation_test_load_dense_tensor_unaffected.xml"
+    },
+    {
+      "id": 29655,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_http[2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=43323): Read timed out. (read timeout=5)",
+      "duration_ms": 5335,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_utils_py_test_fetch_image_http_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_utils_py_test_fetch_image_http_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.xml"
+    },
+    {
+      "id": 29656,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_http[Grayscale_8bits_palette_sample_image.png]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=46391): Read timed out. (read timeout=5)",
+      "duration_ms": 5335,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/pytest_batch_super_0440_tests_multimodal_test_utils_py_test_fetch_image_http_Grayscale_8bits_palette_sample_image_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0440/result_batch_super_0440_tests_multimodal_test_utils_py_test_fetch_image_http_Grayscale_8bits_palette_sample_image_png.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT-spec_dec] (gpu=0, 6458ms, exit=1)
+PASSED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN-pooling] (gpu=2, 3367ms, exit=0)
+PASSED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN-spec_dec] (gpu=3, 3573ms, exit=0)
+PASSED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS-pooling] (gpu=4, 3382ms, exit=0)
+PASSED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS-spec_dec] (gpu=5, 3449ms, exit=0)
+ERROR          tests/v1/logits_processors/test_custom_online.py::test_custom_logitsprocs[server0-facebook/opt-125m] (gpu=6, 6845ms, exit=1)
+ERROR          tests/v1/logits_processors/test_custom_online.py::test_custom_logitsprocs[server1-facebook/opt-125m] (gpu=0, 12359ms, exit=1)
+ERROR          tests/v1/logits_processors/test_custom_online.py::test_invalid_custom_logitsproc_arg[server0-facebook/opt-125m] (gpu=2, 4833ms, exit=1)

@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_024514",
+ "started_at": "2026-08-04T12:10:06Z",
+ "finished_at": "2026-08-04T12:10:31Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0023/pytest_batch_super_0023.log",
+  "size_bytes": 19404,
+  "captured_at": "2026-08-04T12:10:31Z"
+ },
+ "tests": [
+  {
+   "id": 3083,
+   "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[cuda-HND-fp8-cuda:1-0-dtype1-10000-16-64-8-42]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0023/pytest_batch_super_0023_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_cuda_HND_fp8_cuda_1_0_dtype1_10000_16_64_8_42.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0023/result_batch_super_0023_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_cuda_HND_fp8_cuda_1_0_dtype1_10000_16_64_8_42.xml"
+  },
+  {
+   "id": 3084,
+   "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[cuda-HND-fp8-cuda:1-0-dtype1-10000-16-80-8-42]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0023/pytest_batch_super_0023_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_cuda_HND_fp8_cuda_1_0_dtype1_10000_16_80_8_42.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0023/result_batch_super_0023_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_cuda_HND_fp8_cuda_1_0_dtype1_10000_16_80_8_42.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 0,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 2
+ }
+}

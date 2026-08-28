@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_010236",
+ "started_at": "2026-08-05T01:53:11Z",
+ "finished_at": "2026-08-05T01:53:25Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429.log",
+  "size_bytes": 10482,
+  "captured_at": "2026-08-05T01:53:25Z"
+ },
+ "tests": [
+  {
+   "id": 1151,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_multiple_send_recv",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/result_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.xml"
+  },
+  {
+   "id": 1152,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_broadcast",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_broadcast.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/result_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_broadcast.xml"
+  },
+  {
+   "id": 1148,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_reduce_scatterv",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 192,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatterv.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatterv.xml"
+  },
+  {
+   "id": 1149,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_with_cudagraph",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 165,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_with_cudagraph.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_with_cudagraph.xml"
+  },
+  {
+   "id": 1150,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_send_recv",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 151,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/pytest_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_send_recv.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0428/result_batch_super_0428_tests_distributed_test_pynccl_py_test_pynccl_send_recv.xml"
+  },
+  {
+   "id": 1145,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_all_gather",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 172,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_all_gather.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_all_gather.xml"
+  },
+  {
+   "id": 1146,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_all_gatherv",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 187,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_all_gatherv.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_all_gatherv.xml"
+  },
+  {
+   "id": 1147,
+   "test_node": "tests/distributed/test_pynccl.py::test_pynccl_reduce_scatter",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "TypeError: fork_exec expected 23 arguments, got 21",
+   "duration_ms": 184,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatter.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_distributed_test_pynccl_py_test_pynccl_reduce_scatter.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 2,
+  "failed": 6,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0451",
+  "started_at": "2026-08-07T22:27:09Z",
+  "finished_at": "2026-08-07T22:27:54Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451.log",
+    "size_bytes": 386651,
+    "captured_at": "2026-08-07T22:27:54Z"
+  },
+  "tests": [
+    {
+      "id": 29737,
+      "test_node": "tests/multimodal/test_utils.py::test_allowed_media_domains[32-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f14d3b0b5c0>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+      "duration_ms": 30226,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_32_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_32_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+    },
+    {
+      "id": 29738,
+      "test_node": "tests/multimodal/test_utils.py::test_allowed_media_domains[32-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f0e6b1437d0>, 'Connection to github.com timed out. (connect timeout=30)'))",
+      "duration_ms": 30231,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_32_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_32_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+    },
+    {
+      "id": 29739,
+      "test_node": "tests/multimodal/test_utils.py::test_allowed_media_domains[1800-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f759edc3950>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+      "duration_ms": 30234,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+    },
+    {
+      "id": 29740,
+      "test_node": "tests/multimodal/test_utils.py::test_allowed_media_domains[1800-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f9d57b23410>, 'Connection to github.com timed out. (connect timeout=30)'))",
+      "duration_ms": 30208,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_multimodal_test_utils_py_test_allowed_media_domains_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+    },
+    {
+      "id": 29741,
+      "test_node": "tests/plugins/lora_resolvers/test_filesystem_resolver.py::test_filesystem_resolver",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 5,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_plugins_lora_resolvers_test_filesystem_resolver_py_test_filesystem_resolver.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_plugins_lora_resolvers_test_filesystem_resolver_py_test_filesystem_resolver.xml"
+    },
+    {
+      "id": 29743,
+      "test_node": "tests/plugins/lora_resolvers/test_filesystem_resolver.py::test_nonlora_adapter",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 3,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_plugins_lora_resolvers_test_filesystem_resolver_py_test_nonlora_adapter.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_plugins_lora_resolvers_test_filesystem_resolver_py_test_nonlora_adapter.xml"
+    },
+    {
+      "id": 29744,
+      "test_node": "tests/plugins_tests/test_io_processor_plugins.py::test_loading_missing_plugin",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 168,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_plugins_tests_test_io_processor_plugins_py_test_loading_missing_plugin.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_plugins_tests_test_io_processor_plugins_py_test_loading_missing_plugin.xml"
+    },
+    {
+      "id": 29745,
+      "test_node": "tests/plugins_tests/test_io_processor_plugins.py::test_prithvi_mae_plugin_online[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.\"",
+      "duration_ms": 270,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/pytest_batch_super_0451_tests_plugins_tests_test_io_processor_plugins_py_test_prithvi_mae_plugin_online_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0451/result_batch_super_0451_tests_plugins_tests_test_io_processor_plugins_py_test_prithvi_mae_plugin_online_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 4,
+    "error": 3,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

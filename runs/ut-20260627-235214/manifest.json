@@ -1,0 +1,103 @@
+{
+  "version": "2.0",
+  "generated_at": "2026-06-28T09:16:14.764501",
+  "source": "test_list_file",
+  "tests": [
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_090145",
+      "duration_ms": 133,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260628_090145/pytest_batch_20260628_090145_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.log",
+      "updated_at": "2026-06-28T01:02:21Z"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict1---compilation-config.use_inductor_graph_partition=true]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_090145",
+      "duration_ms": 134,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260628_090145/pytest_batch_20260628_090145_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict1_compilation_config_use_inductor_graph_partition_true.log",
+      "updated_at": "2026-06-28T01:02:21Z"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_090145",
+      "duration_ms": 116,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260628_090145/pytest_batch_20260628_090145_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.log",
+      "updated_at": "2026-06-28T01:02:21Z"
+    },
+    {
+      "id": 4,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict1---enable-prefix-caching]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_091543",
+      "updated_at": "2026-06-28T01:16:10Z"
+    },
+    {
+      "id": 5,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+      "test_file": "tests/benchmarks/test_param_sweep.py",
+      "test_name": "TestParameterSweepItem",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_091543",
+      "updated_at": "2026-06-28T01:16:10Z"
+    },
+    {
+      "id": 6,
+      "test_node": "tests/config/test_config_utils.py::test_hash_factors_deterministic",
+      "test_file": "tests/config/test_config_utils.py",
+      "test_name": "test_hash_factors_deterministic",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_091543",
+      "updated_at": "2026-06-28T01:16:10Z"
+    },
+    {
+      "id": 7,
+      "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None]",
+      "test_file": "tests/config/test_config_utils.py",
+      "test_name": "test_normalize_value_matrix[None-None]",
+      "status": "passed",
+      "last_batch_id": "batch_20260628_091543",
+      "updated_at": "2026-06-28T01:16:10Z"
+    },
+    {
+      "id": 8,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "test_file": "tests/kernels/core/test_mrope.py",
+      "test_name": "test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "failed",
+      "last_batch_id": "batch_20260628_091543",
+      "updated_at": "2026-06-28T01:16:10Z",
+      "error_type": "network",
+      "error_message": "huggingface.co connection timeout"
+    }
+  ],
+  "statistics": {
+    "pending": 0,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "ignored": 0,
+    "total": 8,
+    "executed": 8,
+    "progress": 100.0
+  }
+}

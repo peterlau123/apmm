@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_133248",
+  "started_at": "2026-08-07T05:32:49Z",
+  "finished_at": "2026-08-07T05:33:34Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248.log",
+    "size_bytes": 19659,
+    "captured_at": "2026-08-07T05:33:34Z"
+  },
+  "tests": [
+    {
+      "id": 21941,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types2-64x4096x4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1339,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_64x4096x4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_64x4096x4096.xml"
+    },
+    {
+      "id": 21942,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types2-64x8192x28672]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 5239,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_64x8192x28672.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_64x8192x28672.xml"
+    },
+    {
+      "id": 21943,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types2-257x128x4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1265,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_257x128x4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_257x128x4096.xml"
+    },
+    {
+      "id": 21944,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types2-257x4224x4160]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1406,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_257x4224x4160.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_257x4224x4160.xml"
+    },
+    {
+      "id": 21945,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types2-1024x8192x4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1700,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_1024x8192x4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types2_1024x8192x4096.xml"
+    },
+    {
+      "id": 21946,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types3-1x128x128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1316,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_1x128x128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_1x128x128.xml"
+    },
+    {
+      "id": 21947,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types3-1x8192x28672]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4707,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_1x8192x28672.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_1x8192x28672.xml"
+    },
+    {
+      "id": 21948,
+      "test_node": "tests/kernels/quantization/test_machete_mm.py::test_machete_all_schedules[types3-13x8192x4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1272,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/pytest_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_13x8192x4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_133248/result_batch_20260807_133248_tests_kernels_quantization_test_machete_mm_py_test_machete_all_schedules_types3_13x8192x4096.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

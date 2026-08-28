@@ -98,6 +98,9 @@ def _run_bifrost(
     if not _BIFROST_BIN.exists():
         raise FileNotFoundError(f"bifrost binary not found: {_BIFROST_BIN}")
 
+    # E2E timing: submit (t0) -> result fetched (t1)
+    t0 = time.monotonic()
+
     # bifrost doesn't interpret shell features; wrap complex commands.
     # Heuristic: if the command contains shell metacharacters, wrap in sh -c.
     shell_chars = any(c in cmd for c in "&&|><$;`()")
@@ -135,25 +138,27 @@ def _run_bifrost(
         raise ConnectionError(
             f"bifrost submit returned no task_id: {r.stdout[:200]}"
         )
+    # DEBUG 2026-08-04: 打印 task_id 定位任务去向
+    if os.environ.get("BIFROST_DEBUG_TASK"):
+        print(f"[DBG-task] submitted {task_id} storage={_get_bifrost_shared_storage()} "
+              f"cmd={cmd[:80]}", flush=True)
 
-    # Poll until terminal state
+    # Poll until terminal state: watch the result file directly on GPFS.
+    # A local stat() on GPFS is ~1ms (vs spawning `bifrost client status`,
+    # which costs ~30ms + process startup each poll). Tight interval keeps
+    # e2e latency ≈ server execution time, not poll cadence.
     deadline = time.monotonic() + timeout + 120  # generous margin
-    poll_interval = 2  # seconds
+    poll_interval = 0.2  # seconds - GPFS stat is cheap
+    shared_storage = _get_bifrost_shared_storage()
+    result_file = shared_storage / "results" / f"{task_id}_result.json"
 
     while time.monotonic() < deadline:
-        sr = subprocess.run(
-            [str(_BIFROST_BIN), "client", "status", task_id],
-            capture_output=True, text=True, timeout=10,
-            env=_bifrost_env(),
-        )
-        output = (sr.stdout or "") + "\n" + (sr.stderr or "")
-        status_lower = output.lower()
-
-        # Terminal states
-        if "completed" in status_lower or "failed" in status_lower or "timeout" in status_lower:
+        if result_file.exists():
             # Read result file directly from GPFS (bifrost writes results/<id>_result.json)
-            return _fetch_bifrost_result(task_id, sr.stdout.strip())
-
+            result = _fetch_bifrost_result(task_id, "")
+            # E2E timing: total wall-clock from submit to result fetched
+            result["e2e_duration_ms"] = int((time.monotonic() - t0) * 1000)
+            return result
         time.sleep(poll_interval)
 
     raise TimeoutError(f"bifrost task {task_id} did not complete within {timeout + 120}s")
@@ -254,6 +259,35 @@ def _run_agent_py(
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
+_H20_HOST = "infra-gpu-h20-022.host.shzhisuan.com"  # SSH 免密直连
+
+def _run_ssh(cmd: str, *, timeout: int = 600, host: Optional[str] = None,
+             user: str = "root", key_filename: Optional[str] = None) -> dict:
+    """SSH 直连执行 (paramiko 免密 key 认证) — 绕过 bifrost daemon / agent bastion.
+
+    2026-08-08: bifrost daemon 假活 + agent 需 bastion 密码, 加此 backend 作为
+    可靠直连路径 (H20 SSH 免密已配置).
+    """
+    import paramiko
+
+    host = host or _H20_HOST
+    key_filename = key_filename or "/root/.ssh/id_rsa"  # Hermes 改 HOME, 不能用 expanduser
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    try:
+        client.connect(host, username=user, key_filename=key_filename,
+                       timeout=15, banner_timeout=15, auth_timeout=15)
+        stdin, stdout, stderr = client.exec_command(cmd, timeout=timeout)
+        out = stdout.read().decode("utf-8", errors="replace")
+        err = stderr.read().decode("utf-8", errors="replace")
+        rc = stdout.channel.recv_exit_status()
+        return {"exit_code": rc, "stdout": out, "stderr": err, "size_bytes": len(out)}
+    except Exception as e:  # noqa: BLE001
+        return {"exit_code": 1, "stdout": "", "stderr": f"SSH error: {e}", "size_bytes": 0}
+    finally:
+        client.close()
+
+
 def run_remote(
     cmd: str,
     *,
@@ -283,8 +317,90 @@ def run_remote(
 
     if backend == "bifrost":
         return _run_bifrost(cmd, timeout=timeout, profile=profile, working_dir=working_dir)
+    elif backend == "ssh":
+        return _run_ssh(cmd, timeout=timeout)
     else:
         return _run_agent_py(cmd, timeout=timeout, profile=profile)
+
+
+# ── GPU 探查与动态并行度 ────────────────────────────────────────────────────
+
+# GPU 空闲判定阈值: 利用率 < 5% 且显存占用 < 500MB 视为空闲
+_GPU_IDLE_UTIL_PCT = 5.0
+_GPU_IDLE_MEM_MIB = 500
+
+
+def probe_gpus(timeout: int = 60, backend: str = "bifrost") -> dict:
+    """Probe GPU availability on the remote node.
+
+    Runs ``nvidia-smi`` remotely and parses per-GPU utilization/memory.
+    Returns:
+        {
+          "total": int,          # total GPU count
+          "idle": int,           # idle (free) GPU count
+          "busy": int,           # busy GPU count
+          "gpus": [{"index": int, "util_pct": float, "mem_used_mib": int, "idle": bool}, ...]
+        }
+    """
+    cmd = (
+        "nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader"
+    )
+    result = run_remote(cmd, timeout=timeout, backend=backend)
+    if result["exit_code"] != 0:
+        raise ConnectionError(
+            f"GPU probe failed (exit {result['exit_code']}): {result['stderr'][:300]}"
+        )
+
+    gpus = []
+    for line in (result["stdout"] or "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        parts = [p.strip() for p in line.split(",")]
+        if len(parts) < 3:
+            continue
+        try:
+            idx = int(parts[0])
+            util = float(parts[1].rstrip("%"))
+            mem = int(parts[2].split()[0])  # "0 MiB" -> 0
+        except ValueError:
+            continue
+        idle = util < _GPU_IDLE_UTIL_PCT and mem < _GPU_IDLE_MEM_MIB
+        gpus.append({"index": idx, "util_pct": util, "mem_used_mib": mem, "idle": idle})
+
+    idle = sum(1 for g in gpus if g["idle"])
+    return {
+        "total": len(gpus),
+        "idle": idle,
+        "busy": len(gpus) - idle,
+        "gpus": gpus,
+    }
+
+
+def compute_parallelism(
+    *,
+    probe_result: Optional[dict] = None,
+    max_parallel: int = 10,
+    backend: str = "bifrost",
+) -> int:
+    """Determine parallelism from GPU availability.
+
+    Priority:
+      1. explicit probe_result (if given, no remote call)
+      2. remote GPU probe (idle GPU count)
+      3. fallback to max_parallel if probe fails
+
+    Result is clamped to [1, max_parallel].
+    """
+    try:
+        if probe_result is None:
+            probe_result = probe_gpus(backend=backend)
+        idle = probe_result.get("idle", 0)
+        parallelism = idle if idle > 0 else 1
+    except (ConnectionError, FileNotFoundError):
+        parallelism = max_parallel
+
+    return max(1, min(parallelism, max_parallel))
 
 
 # ── Self-test ────────────────────────────────────────────────────────────────

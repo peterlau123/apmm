@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182701",
+ "started_at": "2026-08-07T21:04:29Z",
+ "finished_at": "2026-08-07T21:05:13Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378.log",
+  "size_bytes": 39147,
+  "captured_at": "2026-08-07T21:05:13Z"
+ },
+ "tests": [
+  {
+   "id": 29152,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen3MoeForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 4393,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3MoeForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3MoeForCausalLM.xml"
+  },
+  {
+   "id": 29153,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[AudioFlamingo3ForConditionalGeneration]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 292,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_AudioFlamingo3ForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_AudioFlamingo3ForConditionalGeneration.xml"
+  },
+  {
+   "id": 29154,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[DeepseekVLV2ForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 278,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_DeepseekVLV2ForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_DeepseekVLV2ForCausalLM.xml"
+  },
+  {
+   "id": 29155,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[ChatGLMModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 290,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_ChatGLMModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_ChatGLMModel.xml"
+  },
+  {
+   "id": 29156,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Glm4MoeForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 330,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Glm4MoeForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Glm4MoeForCausalLM.xml"
+  },
+  {
+   "id": 29157,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Cohere2VisionForConditionalGeneration]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 311,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Cohere2VisionForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_Cohere2VisionForConditionalGeneration.xml"
+  },
+  {
+   "id": 29158,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[ArcticForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 4683,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_ArcticForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_ArcticForCausalLM.xml"
+  },
+  {
+   "id": 29159,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[MantisForConditionalGeneration]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 238,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/pytest_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_MantisForConditionalGeneration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0378/result_batch_super_0378_tests_models_test_initialization_py_test_can_initialize_large_subset_MantisForConditionalGeneration.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 6,
+  "failed": 2,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

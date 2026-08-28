@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0426",
+  "started_at": "2026-08-07T21:55:42Z",
+  "finished_at": "2026-08-07T21:56:06Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426.log",
+    "size_bytes": 22846,
+    "captured_at": "2026-08-07T21:56:06Z"
+  },
+  "tests": [
+    {
+      "id": 29537,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_mrope_vision_model_uneven_load",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_uneven_load.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_models_test_vision_py_test_run_dp_sharded_mrope_vision_model_uneven_load.xml"
+    },
+    {
+      "id": 29538,
+      "test_node": "tests/models/test_vision.py::test_simple_mrope_vision_model_spatial_merge[2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 944,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_models_test_vision_py_test_simple_mrope_vision_model_spatial_merge_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_models_test_vision_py_test_simple_mrope_vision_model_spatial_merge_2.xml"
+    },
+    {
+      "id": 29539,
+      "test_node": "tests/models/test_vision.py::test_simple_mrope_vision_model_spatial_merge[4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 927,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_models_test_vision_py_test_simple_mrope_vision_model_spatial_merge_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_models_test_vision_py_test_simple_mrope_vision_model_spatial_merge_4.xml"
+    },
+    {
+      "id": 29540,
+      "test_node": "tests/multimodal/test_cache.py::test_cache_item_size[item0-100]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 154,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item0_100.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item0_100.xml"
+    },
+    {
+      "id": 29541,
+      "test_node": "tests/multimodal/test_cache.py::test_cache_item_size[item1-210]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item1_210.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item1_210.xml"
+    },
+    {
+      "id": 29542,
+      "test_node": "tests/multimodal/test_cache.py::test_cache_item_size[item2-460]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 158,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item2_460.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_multimodal_test_cache_py_test_cache_item_size_item2_460.xml"
+    },
+    {
+      "id": 29543,
+      "test_node": "tests/multimodal/test_cache.py::test_ipc_enable_disable_consistency[1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-onevision-qwen2-0.5b-ov-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=",
+      "duration_ms": 149,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_1.xml"
+    },
+    {
+      "id": 29544,
+      "test_node": "tests/multimodal/test_cache.py::test_ipc_enable_disable_consistency[2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-onevision-qwen2-0.5b-ov-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=",
+      "duration_ms": 142,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/pytest_batch_super_0426_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0426/result_batch_super_0426_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_204335",
+ "started_at": "2026-08-04T17:21:40Z",
+ "finished_at": "2026-08-04T17:22:18Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268.log",
+  "size_bytes": 19792,
+  "captured_at": "2026-08-04T17:22:18Z"
+ },
+ "tests": [
+  {
+   "id": 6167,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-auto-dtype0-24-64-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_24_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_24_64_64.xml"
+  },
+  {
+   "id": 6168,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-auto-dtype0-128-1-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_128_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_128_1_64.xml"
+  },
+  {
+   "id": 6169,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-auto-dtype0-128-64-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_128_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_auto_dtype0_128_64_64.xml"
+  },
+  {
+   "id": 6170,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-fp8-dtype0-24-1-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_24_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_24_1_64.xml"
+  },
+  {
+   "id": 6171,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-fp8-dtype0-24-64-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_24_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_24_64_64.xml"
+  },
+  {
+   "id": 6172,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-fp8-dtype0-128-1-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_128_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_128_1_64.xml"
+  },
+  {
+   "id": 6173,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-fp8-dtype0-128-64-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_128_64_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_dtype0_128_64_64.xml"
+  },
+  {
+   "id": 6174,
+   "test_node": "tests/kernels/attention/test_prefix_prefill.py::test_contexted_kv_attention_alibi_f32[context_attention_fwd-cuda:1-fp8_e5m2-dtype0-24-1-64]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+   "duration_ms": null,
+   "exit_code": 4,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/pytest_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_e5m2_dtype0_24_1_64.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0268/result_batch_super_0268_tests_kernels_attention_test_prefix_prefill_py_test_contexted_kv_attention_alibi_f32_context_attention_fwd_cuda_1_fp8_e5m2_dtype0_24_1_64.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 8
+ }
+}

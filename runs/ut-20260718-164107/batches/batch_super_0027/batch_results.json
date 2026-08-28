@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0027",
+  "started_at": "2026-08-04T12:21:38Z",
+  "finished_at": "2026-08-04T12:22:17Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027.log",
+    "size_bytes": 19423,
+    "captured_at": "2026-08-04T12:22:17Z"
+  },
+  "tests": [
+    {
+      "id": 3151,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-1024-32-256-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_1024_32_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_1024_32_256_8_42.xml"
+    },
+    {
+      "id": 3152,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-8-64-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_64_8_42.xml"
+    },
+    {
+      "id": 3153,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-8-80-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_80_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_80_8_42.xml"
+    },
+    {
+      "id": 3154,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-8-256-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_8_256_8_42.xml"
+    },
+    {
+      "id": 3155,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-16-64-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_64_8_42.xml"
+    },
+    {
+      "id": 3156,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-16-80-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_80_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_80_8_42.xml"
+    },
+    {
+      "id": 3157,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-16-256-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_256_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_16_256_8_42.xml"
+    },
+    {
+      "id": 3158,
+      "test_node": "tests/kernels/attention/test_cache.py::test_reshape_and_cache_flash[triton-NHD-auto-cuda:1-0-dtype1-10000-32-64-8-42]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/pytest_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_32_64_8_42.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0027/result_batch_super_0027_tests_kernels_attention_test_cache_py_test_reshape_and_cache_flash_triton_NHD_auto_cuda_1_0_dtype1_10000_32_64_8_42.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

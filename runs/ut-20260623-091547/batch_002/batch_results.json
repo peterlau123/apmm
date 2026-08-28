@@ -1,0 +1,52 @@
+{
+  "batch_id": "batch_002",
+  "started_at": "2026-06-23T01:15:49Z",
+  "finished_at": "2026-06-23T01:15:50Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/raw_log.txt",
+    "size_bytes": 17,
+    "captured_at": "2026-06-23T01:15:50Z"
+  },
+  "tests": [
+    {
+      "id": 5,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict2---no-disable-log-stats]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 6,
+      "test_node": "tests/config/test_config_utils.py::test_hash_factors_deterministic",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 7,
+      "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[None-None]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    },
+    {
+      "id": 8,
+      "test_node": "tests/config/test_config_utils.py::test_normalize_value_matrix[True-True]",
+      "status": "error",
+      "error_type": "other",
+      "duration_ms": 0
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0
+  }
+}

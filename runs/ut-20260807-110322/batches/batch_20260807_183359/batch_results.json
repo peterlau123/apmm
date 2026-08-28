@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183359",
+ "started_at": "2026-08-07T22:32:48Z",
+ "finished_at": "2026-08-07T22:33:29Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458.log",
+  "size_bytes": 27485,
+  "captured_at": "2026-08-07T22:33:29Z"
+ },
+ "tests": [
+  {
+   "id": 29794,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == gptq_marlin for LnL-AI/TinyLlama-1.1B-Chat-v1.0-GPTQ-4bit, but found ERROR for no --quantization None case\nassert 'ERROR' == 'gptq_marlin'\n  \n  - gptq_marlin\n  + ERROR",
+   "duration_ms": 196,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype4.xml"
+  },
+  {
+   "id": 29795,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype5]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == gptq_marlin for LnL-AI/TinyLlama-1.1B-Chat-v1.0-GPTQ-4bit, but found ERROR for no --quantization marlin case\nassert 'ERROR' == 'gptq_marlin'\n  \n  - gptq_marlin\n  + ERROR",
+   "duration_ms": 181,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype5.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype5.xml"
+  },
+  {
+   "id": 29796,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype6]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == gptq for LnL-AI/TinyLlama-1.1B-Chat-v1.0-GPTQ-4bit, but found ERROR for no --quantization gptq case\nassert 'ERROR' == 'gptq'\n  \n  - gptq\n  + ERROR",
+   "duration_ms": 218,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype6.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype6.xml"
+  },
+  {
+   "id": 29797,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype7]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 110,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype7.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype7.xml"
+  },
+  {
+   "id": 29798,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == awq_marlin for TheBloke/OpenHermes-2.5-Mistral-7B-AWQ, but found ERROR for no --quantization None case\nassert 'ERROR' == 'awq_marlin'\n  \n  - awq_marlin\n  + ERROR",
+   "duration_ms": 187,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype8.xml"
+  },
+  {
+   "id": 29799,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype9]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == awq for TheBloke/OpenHermes-2.5-Mistral-7B-AWQ, but found ERROR for no --quantization awq case\nassert 'ERROR' == 'awq'\n  \n  - awq\n  + ERROR",
+   "duration_ms": 212,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype9.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype9.xml"
+  },
+  {
+   "id": 29800,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype10]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Expected quant_type == awq_marlin for TheBloke/OpenHermes-2.5-Mistral-7B-AWQ, but found ERROR for no --quantization marlin case\nassert 'ERROR' == 'awq_marlin'\n  \n  - awq_marlin\n  + ERROR",
+   "duration_ms": 117,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype10.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype10.xml"
+  },
+  {
+   "id": 29801,
+   "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype11]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 118,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/pytest_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0458/result_batch_super_0458_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype11.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 2,
+  "failed": 6,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

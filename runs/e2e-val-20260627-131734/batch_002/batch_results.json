@@ -1,0 +1,72 @@
+{
+  "batch_id": "batch_002",
+  "started_at": "2026-06-27T05:17:42Z",
+  "finished_at": "2026-06-27T05:17:48Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/pytest_batch_002.log",
+    "size_bytes": null,
+    "captured_at": "2026-06-27T05:17:48Z"
+  },
+  "tests": [
+    {
+      "id": 5,
+      "test_node": "tests/kernels/core/test_mrope.py::test_mrope[11-dtype0-1-model_info0-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/pytest_batch_002_tests_kernels_core_test_mrope_py_test_mrope_11_dtype0_1_model_info0_zai_org_GLM_4_1V_9B_Thinking.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/result_batch_002_tests_kernels_core_test_mrope_py_test_mrope_11_dtype0_1_model_info0_zai_org_GLM_4_1V_9B_Thinking.xml"
+    },
+    {
+      "id": 1,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_nested_boolean_params[input_dict0---compilation-config.use_inductor_graph_partition=false]",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/pytest_batch_002_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/result_batch_002_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_nested_boolean_params_input_dict0_compilation_config_use_inductor_graph_partition_false.xml"
+    },
+    {
+      "id": 2,
+      "test_node": "tests/benchmarks/test_param_sweep.py::TestParameterSweepItem::test_non_nested_boolean_params[input_dict0---no-enable-prefix-caching]",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/pytest_batch_002_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/result_batch_002_tests_benchmarks_test_param_sweep_py_TestParameterSweepItem_test_non_nested_boolean_params_input_dict0_no_enable_prefix_caching.xml"
+    },
+    {
+      "id": 3,
+      "test_node": "tests/benchmarks/test_latency_cli.py::test_bench_latency",
+      "status": "retriable_error",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/pytest_batch_002_tests_benchmarks_test_latency_cli_py_test_bench_latency.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_002/result_batch_002_tests_benchmarks_test_latency_cli_py_test_bench_latency.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 4
+  }
+}

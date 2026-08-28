@@ -1,0 +1,8 @@
+FAILED         tests/lora/test_llama_tp.py::test_llama_lora[False] (gpu=0, 510ms, exit=1)
+PASSED         tests/lora/test_llama_tp.py::test_llama_lora_tp4 (gpu=2, 0ms, exit=0)
+PASSED         tests/lora/test_llama_tp.py::test_llama_lora_tp4_fully_sharded_loras (gpu=3, 0ms, exit=0)
+PASSED         tests/lora/test_llama_tp.py::test_tp2_serialize_and_deserialize_lora (gpu=4, 0ms, exit=0)
+PASSED         tests/lora/test_llm_with_multi_loras.py::test_multi_loras_with_tp_sync (gpu=5, 0ms, exit=0)
+FAILED         tests/lora/test_llm_with_multi_loras.py::test_multiple_lora_requests (gpu=6, 5518ms, exit=1)
+PASSED         tests/lora/test_lora_checkpoints.py::test_load_checkpoints[baichuan7B] (gpu=0, 1639ms, exit=0)
+PASSED         tests/lora/test_lora_checkpoints.py::test_load_checkpoints[baichuan7B-zero] (gpu=2, 822ms, exit=0)

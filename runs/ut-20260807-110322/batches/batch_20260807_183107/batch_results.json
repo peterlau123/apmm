@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183107",
+ "started_at": "2026-08-07T21:57:08Z",
+ "finished_at": "2026-08-07T21:57:31Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427.log",
+  "size_bytes": 23836,
+  "captured_at": "2026-08-07T21:57:31Z"
+ },
+ "tests": [
+  {
+   "id": 29545,
+   "test_node": "tests/multimodal/test_cache.py::test_ipc_enable_disable_consistency[3]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-onevision-qwen2-0.5b-ov-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=",
+   "duration_ms": 212,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_cache_py_test_ipc_enable_disable_consistency_3.xml"
+  },
+  {
+   "id": 29546,
+   "test_node": "tests/multimodal/test_cache.py::test_cache_eviction_lru_cache",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-onevision-qwen2-0.5b-ov-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=",
+   "duration_ms": 208,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_cache_py_test_cache_eviction_lru_cache.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_cache_py_test_cache_eviction_lru_cache.xml"
+  },
+  {
+   "id": 29547,
+   "test_node": "tests/multimodal/test_cache.py::test_cache_eviction_shm_cache",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'llava-hf/llava-onevision-qwen2-0.5b-ov-hf'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=",
+   "duration_ms": 206,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_cache_py_test_cache_eviction_shm_cache.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_cache_py_test_cache_eviction_shm_cache.xml"
+  },
+  {
+   "id": 29548,
+   "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_image_mode[mode_pair0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 121,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_mode_mode_pair0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_mode_mode_pair0.xml"
+  },
+  {
+   "id": 29549,
+   "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_image_mode[mode_pair1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 180,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_mode_mode_pair1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_mode_mode_pair1.xml"
+  },
+  {
+   "id": 29550,
+   "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_image_palette",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 201,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_palette.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_palette.xml"
+  },
+  {
+   "id": 29551,
+   "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_image_transpose",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 128,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_transpose.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_image_transpose.xml"
+  },
+  {
+   "id": 29552,
+   "test_node": "tests/multimodal/test_hasher.py::test_hash_collision_tensor_shape[dtype0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 140,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/pytest_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_tensor_shape_dtype0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0427/result_batch_super_0427_tests_multimodal_test_hasher_py_test_hash_collision_tensor_shape_dtype0.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 5,
+  "failed": 3,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

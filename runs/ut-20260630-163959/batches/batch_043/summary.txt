@@ -1,0 +1,8 @@
+PASSED         tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-gpt2] (gpu=0, 0ms, exit=0)
+IGNORED        tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-Qwen/Qwen2-7B-Instruct] (gpu=1, Nonems, exit=0)
+PASSED         tests/compile/test_dynamic_shapes_compilation.py::test_dynamic_shapes_compilation[True-False-1-backed_size_oblivious-meta-llama/Llama-3.1-8B] (gpu=2, 0ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed-0] (gpu=3, 1087ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed-1] (gpu=4, 1101ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed_size_oblivious-0] (gpu=5, 1101ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[False-backed_size_oblivious-1] (gpu=6, 1078ms, exit=0)
+FAILED         tests/compile/test_dynamic_shapes_compilation.py::test_model_specialization_with_evaluate_guards[True-backed-0] (gpu=7, 1117ms, exit=0)

@@ -1,0 +1,8 @@
+IGNORED        tests/engine/test_arg_utils.py::test_media_io_kwargs_parser[{"video": {"num_frames": 123, "fps": 1.0, "foo": "bar"}, "image": {"foo": "bar"} }-expected2] (gpu=0, Nonems, exit=0)
+IGNORED        tests/engine/test_arg_utils.py::test_composite_arg_parser[{"num_crops": 4}-expected2-mm-processor-kwargs] (gpu=1, Nonems, exit=0)
+IGNORED        tests/engine/test_arg_utils.py::test_composite_arg_parser[{"foo": {"bar": "baz"}}-expected3-mm-processor-kwargs] (gpu=2, Nonems, exit=0)
+FAILED         tests/entrypoints/llm/test_accuracy.py::test_lm_eval_accuracy_v1_engine[Qwen/Qwen3-1.7B] (gpu=3, 392ms, exit=0)
+IGNORED        tests/entrypoints/llm/test_accuracy.py::test_lm_eval_accuracy_v1_engine[google/gemma-3-1b-it] (gpu=4, Nonems, exit=0)
+FAILED         tests/entrypoints/llm/test_accuracy.py::test_lm_eval_accuracy_v1_engine_fp8_kv_cache[Qwen/Qwen3-1.7B] (gpu=5, 403ms, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_chat (gpu=6, 168ms, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_multi_chat (gpu=7, 168ms, exit=0)

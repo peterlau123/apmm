@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260719_010059",
+ "started_at": "2026-08-05T01:39:22Z",
+ "finished_at": "2026-08-05T01:39:38Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419.log",
+  "size_bytes": 29058,
+  "captured_at": "2026-08-05T01:39:38Z"
+ },
+ "tests": [
+  {
+   "id": 1119,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup12-ray-auto-test_options12]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 364,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup12_ray_auto_test_options12.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup12_ray_auto_test_options12.xml"
+  },
+  {
+   "id": 1120,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup13-mp-auto-test_options13]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 378,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup13_mp_auto_test_options13.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup13_mp_auto_test_options13.xml"
+  },
+  {
+   "id": 1116,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup9-mp-auto-test_options9]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 304,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/pytest_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup9_mp_auto_test_options9.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/result_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup9_mp_auto_test_options9.xml"
+  },
+  {
+   "id": 1117,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup10-ray-auto-test_options10]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 295,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/pytest_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup10_ray_auto_test_options10.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/result_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup10_ray_auto_test_options10.xml"
+  },
+  {
+   "id": 1118,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup11-mp-auto-test_options11]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 278,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/pytest_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup11_mp_auto_test_options11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0418/result_batch_super_0418_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup11_mp_auto_test_options11.xml"
+  },
+  {
+   "id": 1113,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup6-ray-auto-test_options6]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 383,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/pytest_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup6_ray_auto_test_options6.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/result_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup6_ray_auto_test_options6.xml"
+  },
+  {
+   "id": 1114,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup7-mp-auto-test_options7]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 224,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/pytest_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup7_mp_auto_test_options7.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/result_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup7_mp_auto_test_options7.xml"
+  },
+  {
+   "id": 1115,
+   "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup8-ray-auto-test_options8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+   "duration_ms": 297,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/pytest_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup8_ray_auto_test_options8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0417/result_batch_super_0417_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup8_ray_auto_test_options8.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 8,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

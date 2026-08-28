@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0463",
+  "started_at": "2026-08-05T12:38:09Z",
+  "finished_at": "2026-08-05T13:08:14Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463.log",
+    "size_bytes": 40625,
+    "captured_at": "2026-08-05T13:08:14Z"
+  },
+  "tests": [
+    {
+      "id": 210,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs12-AttentionBackendEnum.TRITON_ATTN-matches12--rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1172481,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/result_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs12_AttentionBackendEnum_TRITON_ATTN_matches12_rms_norm.xml"
+    },
+    {
+      "id": 211,
+      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_tp2_attn_quant_async_tp[False-Qwen/Qwen3-0.6B-model_kwargs13-AttentionBackendEnum.TRITON_ATTN-matches13-+rms_norm]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 1177382,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/pytest_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0463/result_batch_super_0463_tests_compile_distributed_test_fusions_e2e_py_test_tp2_attn_quant_async_tp_False_Qwen_Qwen3_0_6B_model_kwargs13_AttentionBackendEnum_TRITON_ATTN_matches13_rms_norm.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

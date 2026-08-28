@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0473",
+  "started_at": "2026-08-07T22:47:19Z",
+  "finished_at": "2026-08-07T22:47:45Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473.log",
+    "size_bytes": 19275,
+    "captured_at": "2026-08-07T22:47:45Z"
+  },
+  "tests": [
+    {
+      "id": 29922,
+      "test_node": "tests/test_config.py::test_get_pooling_config_from_args",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2211,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_get_pooling_config_from_args.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_get_pooling_config_from_args.xml"
+    },
+    {
+      "id": 29923,
+      "test_node": "tests/test_config.py::test_default_pooling_type[tomaarsen/Qwen3-Reranker-0.6B-seq-cls-LAST-LAST]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 7535,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_default_pooling_type_tomaarsen_Qwen3_Reranker_0_6B_seq_cls_LAST_LAST.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_default_pooling_type_tomaarsen_Qwen3_Reranker_0_6B_seq_cls_LAST_LAST.xml"
+    },
+    {
+      "id": 29924,
+      "test_node": "tests/test_config.py::test_default_pooling_type[intfloat/e5-small-CLS-MEAN]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 222,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_default_pooling_type_intfloat_e5_small_CLS_MEAN.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_default_pooling_type_intfloat_e5_small_CLS_MEAN.xml"
+    },
+    {
+      "id": 29925,
+      "test_node": "tests/test_config.py::test_default_pooling_type[Qwen/Qwen2.5-Math-RM-72B-ALL-ALL]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 148,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_default_pooling_type_Qwen_Qwen2_5_Math_RM_72B_ALL_ALL.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_default_pooling_type_Qwen_Qwen2_5_Math_RM_72B_ALL_ALL.xml"
+    },
+    {
+      "id": 29926,
+      "test_node": "tests/test_config.py::test_default_pooling_type[Qwen/Qwen2.5-Math-PRM-7B-STEP-STEP]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 177,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_default_pooling_type_Qwen_Qwen2_5_Math_PRM_7B_STEP_STEP.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_default_pooling_type_Qwen_Qwen2_5_Math_PRM_7B_STEP_STEP.xml"
+    },
+    {
+      "id": 29927,
+      "test_node": "tests/test_config.py::test_moe_model_detection[RedHatAI/Qwen3-8B-speculator.eagle3-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 236,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Qwen3_8B_speculator_eagle3_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Qwen3_8B_speculator_eagle3_False.xml"
+    },
+    {
+      "id": 29928,
+      "test_node": "tests/test_config.py::test_moe_model_detection[RedHatAI/Llama-3.1-8B-Instruct-NVFP4-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 444,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_False.xml"
+    },
+    {
+      "id": 29929,
+      "test_node": "tests/test_config.py::test_moe_model_detection[RedHatAI/Llama-3.2-1B-FP8-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 484,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/pytest_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Llama_3_2_1B_FP8_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0473/result_batch_super_0473_tests_test_config_py_test_moe_model_detection_RedHatAI_Llama_3_2_1B_FP8_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

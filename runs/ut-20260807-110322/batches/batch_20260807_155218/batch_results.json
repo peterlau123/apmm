@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_155218",
+  "started_at": "2026-08-07T07:52:19Z",
+  "finished_at": "2026-08-07T07:52:45Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218.log",
+    "size_bytes": 20613,
+    "captured_at": "2026-08-07T07:52:45Z"
+  },
+  "tests": [
+    {
+      "id": 24482,
+      "test_node": "tests/lora/test_minicpmv_tp.py::test_minicpmv_tp4_wo_fully_sharded_loras",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_minicpmv_tp_py_test_minicpmv_tp4_wo_fully_sharded_loras.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_minicpmv_tp_py_test_minicpmv_tp4_wo_fully_sharded_loras.xml"
+    },
+    {
+      "id": 24483,
+      "test_node": "tests/lora/test_minicpmv_tp.py::test_minicpmv_tp4_fully_sharded_loras",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_minicpmv_tp_py_test_minicpmv_tp4_fully_sharded_loras.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_minicpmv_tp_py_test_minicpmv_tp4_fully_sharded_loras.xml"
+    },
+    {
+      "id": 24484,
+      "test_node": "tests/lora/test_mixtral.py::test_mixtral_lora[4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 280,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_mixtral_py_test_mixtral_lora_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_mixtral_py_test_mixtral_lora_4.xml"
+    },
+    {
+      "id": 24485,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-2-64-6-100]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1121,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_100.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_100.xml"
+    },
+    {
+      "id": 24486,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-2-64-6-200]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1104,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_200.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_200.xml"
+    },
+    {
+      "id": 24487,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-2-64-6-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1146,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_1024.xml"
+    },
+    {
+      "id": 24488,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-2-64-6-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1140,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_64_6_4096.xml"
+    },
+    {
+      "id": 24489,
+      "test_node": "tests/lora/test_moe_lora_align_sum.py::test_moe_lora_align_block_size[16-2-128-6-100]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 710,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/pytest_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_128_6_100.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_155218/result_batch_20260807_155218_tests_lora_test_moe_lora_align_sum_py_test_moe_lora_align_block_size_16_2_128_6_100.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

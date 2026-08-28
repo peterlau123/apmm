@@ -1,0 +1,8 @@
+IGNORED        tests/compile/fullgraph/test_full_graph.py::test_fp8_kv_scale_compile[deepseek-ai/DeepSeek-V2-Lite-AttentionBackendEnum.FLASHINFER_MLA-0] (gpu=0, Nonems, exit=0)
+IGNORED        tests/compile/fullgraph/test_full_graph.py::test_fp8_kv_scale_compile[deepseek-ai/DeepSeek-V2-Lite-AttentionBackendEnum.FLASHINFER_MLA-3] (gpu=1, Nonems, exit=0)
+PASSED         tests/compile/fullgraph/test_multimodal_compile.py::test_compile (gpu=2, 117ms, exit=0)
+FAILED         tests/compile/fullgraph/test_multimodal_compile.py::test_qwen2_5_vl_compilation (gpu=3, 2396ms, exit=0)
+FAILED         tests/compile/fullgraph/test_multimodal_compile.py::test_qwen2_5_vl_no_vit_compilation (gpu=4, 34267ms, exit=0)
+PASSED         tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[True-False] (gpu=5, 9060ms, exit=0)
+IGNORED        tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[True-True] (gpu=6, Nonems, exit=0)
+PASSED         tests/compile/fullgraph/test_multiple_graphs.py::test_multi_graph_piecewise_compile[False-False] (gpu=7, 8892ms, exit=0)

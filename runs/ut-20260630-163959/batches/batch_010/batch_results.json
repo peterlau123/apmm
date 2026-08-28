@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260630_230242",
+  "started_at": "2026-06-30T15:03:07Z",
+  "finished_at": "2026-06-30T15:04:54Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242.log",
+    "size_bytes": 25284,
+    "captured_at": "2026-06-30T15:04:54Z"
+  },
+  "tests": [
+    {
+      "id": 314,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[123-10-llm_pair4]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_123_10_llm_pair4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_123_10_llm_pair4.xml"
+    },
+    {
+      "id": 315,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[8-5-llm_pair4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_5_llm_pair4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_5_llm_pair4.xml"
+    },
+    {
+      "id": 316,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[8-30-llm_pair4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_30_llm_pair4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_8_30_llm_pair4.xml"
+    },
+    {
+      "id": 317,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[1-10-llm_pair5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_1_10_llm_pair5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_1_10_llm_pair5.xml"
+    },
+    {
+      "id": 318,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[7-10-llm_pair5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_7_10_llm_pair5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_7_10_llm_pair5.xml"
+    },
+    {
+      "id": 319,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[16-10-llm_pair5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_16_10_llm_pair5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_16_10_llm_pair5.xml"
+    },
+    {
+      "id": 320,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[25-10-llm_pair5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_25_10_llm_pair5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_25_10_llm_pair5.xml"
+    },
+    {
+      "id": 321,
+      "test_node": "tests/compile/fullgraph/test_full_cudagraph.py::TestFullCUDAGraph::test_full_cudagraph[32-10-llm_pair5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/pytest_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_32_10_llm_pair5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260630_230242/result_batch_20260630_230242_tests_compile_fullgraph_test_full_cudagraph_py_TestFullCUDAGraph_test_full_cudagraph_32_10_llm_pair5.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

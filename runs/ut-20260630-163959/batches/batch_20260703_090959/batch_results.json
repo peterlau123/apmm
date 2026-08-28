@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260703_090959",
+  "started_at": "2026-07-03T01:10:28Z",
+  "finished_at": "2026-07-03T01:13:14Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959.log",
+    "size_bytes": 20070,
+    "captured_at": "2026-07-03T01:13:14Z"
+  },
+  "tests": [
+    {
+      "id": 2358,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-False-256-num_heads1-7-v2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 10328,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_False_256_num_heads1_7_v2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_False_256_num_heads1_7_v2.xml"
+    },
+    {
+      "id": 2359,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-32-num_heads0-7-v1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads0_7_v1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads0_7_v1.xml"
+    },
+    {
+      "id": 2360,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-32-num_heads0-7-v2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads0_7_v2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads0_7_v2.xml"
+    },
+    {
+      "id": 2361,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-32-num_heads1-7-v1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9853,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads1_7_v1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads1_7_v1.xml"
+    },
+    {
+      "id": 2362,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-32-num_heads1-7-v2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads1_7_v2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_32_num_heads1_7_v2.xml"
+    },
+    {
+      "id": 2363,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-80-num_heads0-7-v1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9951,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads0_7_v1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads0_7_v1.xml"
+    },
+    {
+      "id": 2364,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-80-num_heads0-7-v2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 10160,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads0_7_v2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads0_7_v2.xml"
+    },
+    {
+      "id": 2365,
+      "test_node": "tests/kernels/attention/test_attention.py::test_paged_attention[cuda:0-0-fp8-dtype0-32-True-80-num_heads1-7-v1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 9923,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/pytest_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads1_7_v1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260703_090959/result_batch_20260703_090959_tests_kernels_attention_test_attention_py_test_paged_attention_cuda_0_0_fp8_dtype0_32_True_80_num_heads1_7_v1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 3
+  }
+}

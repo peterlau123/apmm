@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0429",
+  "started_at": "2026-08-05T01:53:11Z",
+  "finished_at": "2026-08-05T01:53:25Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429.log",
+    "size_bytes": 10482,
+    "captured_at": "2026-08-05T01:53:25Z"
+  },
+  "tests": [
+    {
+      "id": 1151,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_multiple_send_recv",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/result_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_multiple_send_recv.xml"
+    },
+    {
+      "id": 1152,
+      "test_node": "tests/distributed/test_pynccl.py::test_pynccl_broadcast",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/pytest_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_broadcast.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0429/result_batch_super_0429_tests_distributed_test_pynccl_py_test_pynccl_broadcast.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

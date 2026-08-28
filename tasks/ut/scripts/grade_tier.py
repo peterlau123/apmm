@@ -25,7 +25,8 @@ from pathlib import Path
 _THIS = Path(__file__).resolve()
 _REPO = _THIS.parent.parent.parent.parent  # tasks/ut/scripts -> repo root
 _FIXTURES = _REPO / "tests" / "ut" / "integration" / "fixtures"
-_CHECK_EXPECTED = _THIS.parent / "check_expected.py"
+# check_expected.py 已迁移至 ut_common/scripts (2026-08-06 scripts 重组)
+_CHECK_EXPECTED = _REPO / "skills" / "ut" / "ut_common" / "scripts" / "check_expected.py"
 
 
 def _load_check_expected():

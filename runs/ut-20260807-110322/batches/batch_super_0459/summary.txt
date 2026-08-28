@@ -1,0 +1,8 @@
+FAILED         tests/quantization/test_cpu_offload.py::test_cpu_offload_fp8 (gpu=0, 213ms, exit=1)
+FAILED         tests/quantization/test_cpu_offload.py::test_cpu_offload_gptq (gpu=2, 265ms, exit=1)
+FAILED         tests/quantization/test_cpu_offload.py::test_cpu_offload_awq (gpu=3, 243ms, exit=1)
+FAILED         tests/quantization/test_cpu_offload.py::test_cpu_offload_compressed_tensors (gpu=4, 250ms, exit=1)
+FAILED         tests/quantization/test_experts_int8.py::test_model_experts_int8_startup[4-bfloat16-ai21labs/Jamba-tiny-random] (gpu=5, 192ms, exit=1)
+FAILED         tests/quantization/test_experts_int8.py::test_model_experts_int8_startup[4-bfloat16-pfnet/plamo-2-1b] (gpu=6, 188ms, exit=1)
+FAILED         tests/quantization/test_fp8.py::test_model_load_and_run[False-False-neuralmagic/Meta-Llama-3-8B-Instruct-FP8-KV] (gpu=0, 162ms, exit=1)
+PASSED         tests/quantization/test_fp8.py::test_model_load_and_run[False-False-nm-testing/Qwen2-0.5B-Instruct-FP8-SkipQKV] (gpu=2, 0ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0464",
+  "started_at": "2026-08-07T22:38:32Z",
+  "finished_at": "2026-08-07T22:38:55Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464.log",
+    "size_bytes": 101272,
+    "captured_at": "2026-08-07T22:38:55Z"
+  },
+  "tests": [
+    {
+      "id": 29842,
+      "test_node": "tests/quantization/test_ptpc_fp8.py::test_ptpc_fp8_rocm[fp8_e4m3-float16]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_ptpc_fp8_py_test_ptpc_fp8_rocm_fp8_e4m3_float16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_ptpc_fp8_py_test_ptpc_fp8_rocm_fp8_e4m3_float16.xml"
+    },
+    {
+      "id": 29843,
+      "test_node": "tests/quantization/test_register_quantization_config.py::test_register_quantization_config",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 836,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_register_quantization_config_py_test_register_quantization_config.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_register_quantization_config_py_test_register_quantization_config.xml"
+    },
+    {
+      "id": 29844,
+      "test_node": "tests/quantization/test_register_quantization_config.py::test_custom_quant[TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6021,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_register_quantization_config_py_test_custom_quant_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_register_quantization_config_py_test_custom_quant_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 29845,
+      "test_node": "tests/quantization/test_rtn.py::test_model_rtn_startup[10-bfloat16-ai21labs/Jamba-tiny-dev]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 271,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_rtn_py_test_model_rtn_startup_10_bfloat16_ai21labs_Jamba_tiny_dev.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_rtn_py_test_model_rtn_startup_10_bfloat16_ai21labs_Jamba_tiny_dev.xml"
+    },
+    {
+      "id": 29846,
+      "test_node": "tests/quantization/test_torchao.py::test_pre_quantized_model",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_torchao_py_test_pre_quantized_model.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_torchao_py_test_pre_quantized_model.xml"
+    },
+    {
+      "id": 29847,
+      "test_node": "tests/quantization/test_torchao.py::test_opt_125m_int8wo_model_loading_with_params[cuda:0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_torchao_py_test_opt_125m_int8wo_model_loading_with_params_cuda_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_torchao_py_test_opt_125m_int8wo_model_loading_with_params_cuda_0.xml"
+    },
+    {
+      "id": 29848,
+      "test_node": "tests/quantization/test_torchao.py::test_opt_125m_int4wo_model_per_module_quant",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_per_module_quant.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_per_module_quant.xml"
+    },
+    {
+      "id": 29849,
+      "test_node": "tests/quantization/test_torchao.py::test_qwenvl_int8wo_model_loading_with_params",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_quantization_test_torchao_py_test_qwenvl_int8wo_model_loading_with_params.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_quantization_test_torchao_py_test_qwenvl_int8wo_model_loading_with_params.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

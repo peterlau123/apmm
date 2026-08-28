@@ -1,0 +1,49 @@
+{
+ "batch_id": "batch_20260719_090720",
+ "started_at": "2026-08-04T14:17:47Z",
+ "finished_at": "2026-08-04T14:18:12Z",
+ "timeout": 600,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0067/pytest_batch_super_0067.log",
+  "size_bytes": 14675,
+  "captured_at": "2026-08-04T14:18:12Z"
+ },
+ "tests": [
+  {
+   "id": 3925,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_merge_kernel[dtype0-128-num_heads2-16912]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 422,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0067/pytest_batch_super_0067_tests_kernels_attention_test_cascade_flash_attn_py_test_merge_kernel_dtype0_128_num_heads2_16912.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0067/result_batch_super_0067_tests_kernels_attention_test_cascade_flash_attn_py_test_merge_kernel_dtype0_128_num_heads2_16912.xml"
+  },
+  {
+   "id": 3926,
+   "test_node": "tests/kernels/attention/test_cascade_flash_attn.py::test_merge_kernel[dtype0-192-num_heads0-1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 412,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0067/pytest_batch_super_0067_tests_kernels_attention_test_cascade_flash_attn_py_test_merge_kernel_dtype0_192_num_heads0_1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0067/result_batch_super_0067_tests_kernels_attention_test_cascade_flash_attn_py_test_merge_kernel_dtype0_192_num_heads0_1.xml"
+  }
+ ],
+ "statistics": {
+  "total": 2,
+  "passed": 2,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

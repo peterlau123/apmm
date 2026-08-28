@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_055214",
+  "started_at": "2026-06-30T21:52:33Z",
+  "finished_at": "2026-06-30T21:54:37Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214.log",
+    "size_bytes": 154263,
+    "captured_at": "2026-06-30T21:54:37Z"
+  },
+  "tests": [
+    {
+      "id": 1508,
+      "test_node": "tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_prompt_logprobs_raises_error[--disable-frontend-multiprocessing-use-lora]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_completion_with_prompt_embeds_py_test_prompt_logprobs_raises_error_disable_frontend_multiprocessing_use_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_completion_with_prompt_embeds_py_test_prompt_logprobs_raises_error_disable_frontend_multiprocessing_use_lora.xml"
+    },
+    {
+      "id": 1509,
+      "test_node": "tests/entrypoints/openai/test_completion_with_prompt_embeds.py::test_empty_prompt_embeds[--disable-frontend-multiprocessing-use-lora]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.\"",
+      "duration_ms": 2,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_completion_with_prompt_embeds_py_test_empty_prompt_embeds_disable_frontend_multiprocessing_use_lora.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_completion_with_prompt_embeds_py_test_empty_prompt_embeds_disable_frontend_multiprocessing_use_lora.xml"
+    },
+    {
+      "id": 1510,
+      "test_node": "tests/entrypoints/openai/test_enable_force_include_usage.py::test_chat_with_enable_force_include_usage",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18066,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_enable_force_include_usage_py_test_chat_with_enable_force_include_usage.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_enable_force_include_usage_py_test_chat_with_enable_force_include_usage.xml"
+    },
+    {
+      "id": 1511,
+      "test_node": "tests/entrypoints/openai/test_enable_force_include_usage.py::test_transcription_with_enable_force_include_usage",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"RuntimeError: Server exited unexpectedly.\"",
+      "duration_ms": 18097,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_enable_force_include_usage_py_test_transcription_with_enable_force_include_usage.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_enable_force_include_usage_py_test_transcription_with_enable_force_include_usage.xml"
+    },
+    {
+      "id": 1512,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_end_to_end_no_tools",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_end_to_end_no_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_end_to_end_no_tools.xml"
+    },
+    {
+      "id": 1513,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_end_to_end_with_python_tool",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_end_to_end_with_python_tool.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_end_to_end_with_python_tool.xml"
+    },
+    {
+      "id": 1514,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_structured_outputs_params_integration",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_structured_outputs_params_integration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_structured_outputs_params_integration.xml"
+    },
+    {
+      "id": 1515,
+      "test_node": "tests/entrypoints/openai/test_gptoss_structural_tags_integration.py::TestGptOssStructuralTagsIntegration::test_tool_server_interaction_flow[False-False-False-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 118,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/pytest_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_tool_server_interaction_flow_False_False_False_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_055214/result_batch_20260701_055214_tests_entrypoints_openai_test_gptoss_structural_tags_integration_py_TestGptOssStructuralTagsIntegration_test_tool_server_interaction_flow_False_False_False_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 2,
+    "failed": 0,
+    "error": 4,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

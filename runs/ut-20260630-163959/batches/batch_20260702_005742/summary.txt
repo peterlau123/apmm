@@ -1,0 +1,8 @@
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_extremely_large_indices_rejected (gpu=0, 385ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestPromptEmbedsValidation::test_negative_indices_rejected (gpu=1, 395ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestImageEmbedsValidation::test_valid_dense_tensor_accepted (gpu=2, 143ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestImageEmbedsValidation::test_valid_sparse_tensor_accepted (gpu=3, 306ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestImageEmbedsValidation::test_malicious_sparse_tensor_rejected (gpu=4, 291ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestImageEmbedsValidation::test_load_bytes_validates (gpu=5, 341ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestAudioEmbedsValidation::test_valid_dense_tensor_accepted (gpu=6, 145ms, exit=0)
+PASSED         tests/entrypoints/openai/test_sparse_tensor_validation.py::TestAudioEmbedsValidation::test_valid_sparse_tensor_accepted (gpu=7, 298ms, exit=0)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260701_030649",
+  "started_at": "2026-06-30T19:07:09Z",
+  "finished_at": "2026-06-30T19:09:08Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649.log",
+    "size_bytes": 160682,
+    "captured_at": "2026-06-30T19:09:08Z"
+  },
+  "tests": [
+    {
+      "id": 880,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype0-True-False-False-1e-05]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 545,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype0_True_False_False_1e_05.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype0_True_False_False_1e_05.xml"
+    },
+    {
+      "id": 881,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype0-True-False-False-1e-06]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 538,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype0_True_False_False_1e_06.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype0_True_False_False_1e_06.xml"
+    },
+    {
+      "id": 882,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-True-True-1e-05]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 529,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_True_1e_05.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_True_1e_05.xml"
+    },
+    {
+      "id": 883,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-True-True-1e-06]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 520,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_True_1e_06.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_True_1e_06.xml"
+    },
+    {
+      "id": 884,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-True-False-1e-05]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 520,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_False_1e_05.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_False_1e_05.xml"
+    },
+    {
+      "id": 885,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-True-False-1e-06]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 528,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_False_1e_06.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_True_False_1e_06.xml"
+    },
+    {
+      "id": 886,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-False-True-1e-05]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 538,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_True_1e_05.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_True_1e_05.xml"
+    },
+    {
+      "id": 887,
+      "test_node": "tests/compile/test_qk_norm_rope_fusion.py::test_qk_norm_rope_fusion[dtype1-True-False-True-1e-06]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 558,
+      "exit_code": 0,
+      "gpu_id": 7,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/pytest_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_True_1e_06.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260701_030649/result_batch_20260701_030649_tests_compile_test_qk_norm_rope_fusion_py_test_qk_norm_rope_fusion_dtype1_True_False_True_1e_06.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

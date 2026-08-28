@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_super_0448",
+  "started_at": "2026-08-05T02:48:57Z",
+  "finished_at": "2026-08-05T02:49:37Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/pytest_batch_super_0448.log",
+    "size_bytes": 16383,
+    "captured_at": "2026-08-05T02:49:37Z"
+  },
+  "tests": [
+    {
+      "id": 1223,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_large_object_rejection",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 212,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/pytest_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_large_object_rejection.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/result_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_large_object_rejection.xml"
+    },
+    {
+      "id": 1224,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_minimal_put_get_cycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 151,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/pytest_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_minimal_put_get_cycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/result_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_minimal_put_get_cycle.xml"
+    },
+    {
+      "id": 1225,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_put_same_key_twice",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 148,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/pytest_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_put_same_key_twice.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0448/result_batch_super_0448_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_put_same_key_twice.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+IGNORED        tests/entrypoints/llm/test_chat.py::test_chat_multi_image[image_urls0] (gpu=0, Nonems, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_llm_chat_tokenization_no_double_bos (gpu=1, 168ms, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_chat_extra_kwargs[True] (gpu=2, 1888ms, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_chat_extra_kwargs[False] (gpu=3, 1878ms, exit=0)
+ERROR          tests/entrypoints/llm/test_chat.py::test_chat_batch_failure_cleanup (gpu=4, 168ms, exit=0)
+FAILED         tests/entrypoints/llm/test_collective_rpc.py::test_collective_rpc[mp-1] (gpu=5, 3741ms, exit=0)
+PASSED         tests/entrypoints/llm/test_collective_rpc.py::test_collective_rpc[mp-2] (gpu=6, 375ms, exit=0)
+PASSED         tests/entrypoints/llm/test_collective_rpc.py::test_collective_rpc[ray-1] (gpu=7, 375ms, exit=0)

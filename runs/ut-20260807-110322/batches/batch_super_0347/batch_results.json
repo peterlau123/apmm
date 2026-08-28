@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0347",
+  "started_at": "2026-08-07T20:21:09Z",
+  "finished_at": "2026-08-07T20:21:51Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347.log",
+    "size_bytes": 465892,
+    "captured_at": "2026-08-07T20:21:51Z"
+  },
+  "tests": [
+    {
+      "id": 28903,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-facebook/opt-125m0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+      "duration_ms": 321,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m0.xml"
+    },
+    {
+      "id": 28904,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-openai-community/gpt2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 208,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_openai_community_gpt2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_openai_community_gpt2.xml"
+    },
+    {
+      "id": 28905,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Milos/slovak-gpt-j-405M]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 243,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Milos_slovak_gpt_j_405M.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Milos_slovak_gpt_j_405M.xml"
+    },
+    {
+      "id": 28906,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-bigcode/tiny_starcoder_py]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 248,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_bigcode_tiny_starcoder_py.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_bigcode_tiny_starcoder_py.xml"
+    },
+    {
+      "id": 28907,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-facebook/opt-125m1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+      "duration_ms": 316,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m1.xml"
+    },
+    {
+      "id": 28908,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-hmellor/tiny-random-Gemma2ForCausalLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 208,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_Gemma2ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_Gemma2ForCausalLM.xml"
+    },
+    {
+      "id": 28909,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-Alibaba-NLP/gte-modernbert-base]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+      "duration_ms": 231,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Alibaba_NLP_gte_modernbert_base.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_Alibaba_NLP_gte_modernbert_base.xml"
+    },
+    {
+      "id": 28910,
+      "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-zai-org/GLM-4.1V-9B-Thinking]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 170,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/pytest_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_zai_org_GLM_4_1V_9B_Thinking.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0347/result_batch_super_0347_tests_models_language_generation_test_common_py_test_models_True_False_5_32_zai_org_GLM_4_1V_9B_Thinking.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

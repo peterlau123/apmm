@@ -1,117 +1,98 @@
-# vLLM 测试模型下载指南
+# tasks/ut/scripts — run 专用脚本索引
 
-本目录包含从 HuggingFace 和 ModelScope 下载测试所需模型的脚本。
-
----
-
-## 目录结构
-
-```
-ut/
-├── hf_hub/              # HuggingFace 缓存（推荐）
-├── modelscope/          # ModelScope 缓存（备用）
-└── scripts/
-    ├── download_models.sh     # 统一下载脚本 ⭐
-    ├── hf_env.sh              # HF 离线环境配置
-    ├── modelscope_env.sh      # ModelScope 环境配置
-    ├── run_filtered_tests.sh  # 运行过滤测试
-    └── parse_results.py       # 结果解析
-```
+> 本目录存放 UT run 专用的可执行脚本（重试、批处理、清单维护、部署）。
+> **通用库脚本已迁移至 [skills/ut/ut_common/scripts/](../../../skills/ut/ut_common/scripts/)**（2026-08-06 重组）。
 
 ---
 
-## 快速使用
+## 📂 目录分组
 
-### 联网机器下载
+### 🔄 重试脚本
 
-```bash
-cd ut/scripts/
-
-# 从 HF 镜像下载（推荐，国内快）
-./download_models.sh --source hf --level 2   # 小+中等模型 (~10GB)
-
-# 从 ModelScope 下载
-./download_models.sh --source ms --level 2
-
-# 全量下载（包含大模型）
-./download_models.sh --source hf --all
-
-# 检查缺失
-./download_models.sh --check
-```
-
-### 离线机器运行测试
-
-```bash
-cd ut/scripts/
-source hf_env.sh
-pytest tests/test_config.py -v -k 'not 72B and not 80B'
-```
-
----
-
-## download_models.sh 使用说明
-
-```bash
-./download_models.sh [--source hf|ms] [--level N|--all|--check]
-```
-
-| 参数 | 说明 |
+| 脚本 | 用途 |
 |------|------|
-| `--source hf` | 使用 HF 镜像（默认，推荐） |
-| `--source ms` | 使用 ModelScope |
-| `--level N` | 下载级别 1-5（默认 2） |
-| `--all` | 下载全部模型 |
-| `--check` | 仅检查缺失，不下载 |
+| `rerun_selective.py` | **通用选择性重跑器**（batch/ssh 双执行模式；`--run-dir --status --category --match-node --match-error --device-map --limit` 等，见下方用法） |
+| `retry_timeout_batches.py` | 重跑 timeout batch（v5 单进程调度器 + 动态 GPU 切批；`--slow-only` 单跑慢测试） |
+
+### 📦 批处理与清单
+
+| 脚本 | 用途 |
+|------|------|
+| `auto_run_batches_two_phase.py` | Phase 1/2 批处理（生成 test_load → 执行 → 汇总） |
+| `merge_batch_manifests.py` | 合并 batch 执行结果到 manifest |
+| `completion_watcher.py` | run 完成通知（P3 飞书消息） |
+
+### 🏗️ 部署与分级
+
+| 脚本 | 用途 |
+|------|------|
+| `start_hermes_ut_runtime.py` | 启动 L4 测试环境（gateways + supervisor） |
+| `deploy_tier.py` | 安装/验证 Hermes profiles（tier 部署） |
+| `grade_tier.py` | tier verdict 编排（包装 check_expected） |
+| `load_deployment_config.py` | 加载 workflow 部署配置 |
+| `hf_env.sh` / `modelscope_env.sh` | HF / ModelScope 离线环境配置 |
+
+### 📊 报告
+
+| 脚本 | 用途 |
+|------|------|
+| `weekly_compat_report.py` | 每周兼容性问题检查报告（daily 检查 + weekly 汇总） |
 
 ---
 
-## 模型分级
-
-| Level | 模型数 | 大小 | 说明 |
-|-------|--------|------|------|
-| 1 | 15 | ~3GB | 小模型，必需 |
-| 2 | +9 = 24 | ~10GB | 中等模型，推荐 |
-| 3 | +4 = 28 | ~25GB | 较大模型，可选 |
-| 4 | +9 = 37 | ~50GB | 大模型，部分测试需要 |
-| 5 | +7 = 44 | >100GB | 超大模型，不推荐 |
-
----
-
-## 常见问题
-
-### Q: Llama 模型下载报 403 错误？
-
-**原因**: `meta-llama/Llama-*` 在 HF 是受限仓库。
-
-**解决**: ModelScope 上 Llama 是开放的，使用 `--source ms`：
-```bash
-./download_models.sh --source ms --level 2
-```
-
-### Q: 测试时连接超时？
-
-**解决**: 设置离线环境
-```bash
-source hf_env.sh  # 强制 HF 离线
-```
-
-### Q: 如何跳过大模型测试？
+## 🚀 rerun_selective.py 用法速查
 
 ```bash
-pytest tests/test_config.py -v -k 'not 72B and not 80B and not 24B'
+# 重跑 ignored（默认排除兼容性 SKIP 类）
+python3 rerun_selective.py --run-dir runs/ut-20260807-110322 --status ignored
+
+# 重跑 flaky（ProcessRaisedException）
+python3 rerun_selective.py --run-dir runs/ut-20260806-103121 --status failed \
+    --match-error ProcessRaisedException
+
+# 重跑 marlin 算子类
+python3 rerun_selective.py --run-dir runs/ut-20260806-103121 --status failed \
+    --match-error moe_wna16_marlin_gemm
+
+# 补跑前 80 条 pending
+python3 rerun_selective.py --run-dir runs/ut-20260806-103121 --status pending --limit 80
+
+# kernel 串行 SSH 直跑（断点续跑自动: progress 文件 + 已跑 batch 目录跳过）
+python3 rerun_selective.py --run-dir runs/ut-20260718-164107 --status ignored \
+    --match-node tests/kernels/attention/ --executor ssh --tag kernel
+
+# device-map（GPU1 坏卡规避: 运行层 cuda:1→cuda:0, 回写还原）
+python3 rerun_selective.py --run-dir runs/xxx --status failed --device-map cuda:1=cuda:0
 ```
 
 ---
 
-## 完整模型列表 (44个)
+## 🧹 已迁移至 ut_common/scripts（通用库）
 
-**Level 1 (~3GB)**: distilgpt2, opt-125m, e5-small, multilingual-e5-small, bge-base-en, bge-base-en-v1.5, bge-reranker-base, all-MiniLM-L12-v2, ms-marco-MiniLM-L-6-v2, whisper-tiny, clip-vit-base-patch32, siglip-base-patch16-224, mamba-130m-hf, NeuroBERT-NER, xlm-roberta-base-language-detection
+| 脚本 | 新位置 | 说明 |
+|------|--------|------|
+| `check_expected.py` | `skills/ut/ut_common/scripts/` | 通用 run-vs-expected 比较器（被 grade_tier/feishu_api 引用） |
+| `generate_test_load.py` | `skills/ut/ut_common/scripts/` | 从 manifest 抽取 test_load（被 batch-selector/terminal-workflow 引用） |
+| `check_hf_cache_refs.py` | `skills/ut/ut_common/scripts/` | HF 模型缓存预检 |
 
-**Level 2 (+~7GB)**: Qwen2.5-1.5B-Instruct, Qwen3-0.6B, Qwen3-Embedding-0.6B, Qwen3-Reranker-0.6B-seq-cls, Llama-3.2-1B-Instruct, whisper-small, gte-Qwen2-1.5B-instruct, internlm2-1_8b-reward, Qwen2.5-1.5B-apeach
+## 🗑️ 已整合/删除（2026-08-18 重构）
 
-**Level 3 (+~15GB)**: Qwen2.5-Math-PRM-7B, Qwen2-VL-2B-Instruct, DeepSeek-R1-Distill-Qwen-7B, granite-4.0-h-small
+| 原脚本 | 去向 |
+|------|------|
+| `rerun_flaky.py` / `rerun_marlin.py` / `run_remaining_80.py` / `rerun_ignored_remaining.py` | 整合进 `rerun_selective.py`（--match-error/--status pending/--category/--limit 覆盖） |
+| `retry_kernel_tests.py` | 整合进 `rerun_selective.py --executor ssh`（含断点续跑） |
+| `build_marlin_ext.py` / `build_moe_c_full.py` / `build_c_marlin_extra.py` / `verify_*` / `stub_*` / `clean_marlin_build.sh` / `full_rebuild.sh` | 删除（8000 战役残留，算子已修复；git history 可找回） |
+| `analyze_triton_amd.py` | 删除（一次性排障脚本，结论已落报告） |
+| `regenerate_and_merge_manifest.py` | 删除（一次性重建工具；merge_batch_manifests 覆盖持续需求） |
+| `migrate_manifest.py` | 已删除（旧副本，ut_common 已有新版，2026-08-06） |
 
-**Level 4 (+~25GB)**: Qwen1.5-7B, Mistral-7B-v0.1, Mistral-7B-Instruct-v0.2, Meta-Llama-3-8B-Instruct, DeepSeek-V2-Lite, longchat-13b-16k, Llama-3.1-8B-Instruct-NVFP4, Llama-3.2-1B-FP8, Qwen3-8B-speculator.eagle3
+---
 
-**Level 5 (>100GB)**: Qwen2.5-Math-RM-72B, Qwen3-Next-80B-A3B-Instruct, Llama-4-Scout-17B-16E-Instruct, Mixtral-8x7B-Instruct-v0.1, DeepSeek-V2.5-1210-FP8, gpt-oss-20b, Mistral-Small-24B-Instruct-2501-quantized.w8a8
+## ⚠️ 引用更新提示
+
+以下调用方指向的路径请勿改回：
+- `grade_tier.py` → `_CHECK_EXPECTED = <repo>/skills/ut/ut_common/scripts/check_expected.py`
+- `auto_run_batches_two_phase.py` → subprocess 调用 `ut_common/scripts/generate_test_load.py`
+- 单元测试 `test_check_expected.py` / `test_scripts_reorg_migration.py` / `test_rerun_selective.py` 已同步
+
+*更新时间: 2026-08-18*

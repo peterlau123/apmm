@@ -1,0 +1,8 @@
+PASSED         tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape3-1e-05-257-256-dtype1] (gpu=0, 146ms, exit=0)
+PASSED         tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape3-1e-06-257-256-dtype0] (gpu=1, 142ms, exit=0)
+PASSED         tests/compile/test_fusion.py::test_fusion_rmsnorm_quant[False-TestRmsnormGroupFp8QuantModel-False-False-group_shape3-1e-06-257-256-dtype1] (gpu=2, 151ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-nvidia/Llama-4-Scout-17B-16E-Instruct-FP8-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-64-8] (gpu=3, 434ms, exit=0)
+IGNORED        tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-nvidia/Llama-4-Scout-17B-16E-Instruct-FP8-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-7-128-40-8] (gpu=4, Nonems, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-nvidia/Llama-4-Scout-17B-16E-Instruct-FP8-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-64-8] (gpu=5, 443ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-nvidia/Llama-4-Scout-17B-16E-Instruct-FP8-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-256-128-40-8] (gpu=6, 432ms, exit=0)
+FAILED         tests/compile/test_fusion_attn.py::test_attention_quant_pattern[AttentionBackendEnum.TRITON_ATTN-nvidia/Llama-4-Scout-17B-16E-Instruct-FP8-TestAttentionFp8StaticQuantPatternModel-+quant_fp8-dtype0-533-128-64-8] (gpu=7, 432ms, exit=0)

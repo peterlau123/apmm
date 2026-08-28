@@ -1,0 +1,147 @@
+{
+  "batch_id": "batch_20260701_150830",
+  "tests": [
+    {
+      "id": 1544,
+      "test_node": "tests/entrypoints/openai/test_lora_resolvers.py::test_serving_completion_resolver_add_lora_fails",
+      "test_file": "tests/entrypoints/openai/test_lora_resolvers.py",
+      "test_name": "test_serving_completion_resolver_add_lora_fails",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 1545,
+      "test_node": "tests/entrypoints/openai/test_lora_resolvers.py::test_serving_completion_flag_not_set",
+      "test_file": "tests/entrypoints/openai/test_lora_resolvers.py",
+      "test_name": "test_serving_completion_flag_not_set",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 1546,
+      "test_node": "tests/entrypoints/openai/test_messages.py::test_simple_messages",
+      "test_file": "tests/entrypoints/openai/test_messages.py",
+      "test_name": "test_simple_messages",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": 1547,
+      "test_node": "tests/entrypoints/openai/test_messages.py::test_system_message",
+      "test_file": "tests/entrypoints/openai/test_messages.py",
+      "test_name": "test_system_message",
+      "status": "pending",
+      "priority": "P2",
+      "batch_id": null,
+      "last_batch_id": null,
+      "run_count": 0,
+      "retry_count": 0,
+      "max_retry": 2,
+      "last_run_at": null,
+      "last_duration_ms": null,
+      "last_exit_code": null,
+      "error_type": null,
+      "error_message": null,
+      "ignored_reason": null,
+      "fix_applied": false,
+      "fix_details": null,
+      "log_file": null,
+      "errors": [],
+      "failures": []
+    }
+  ],
+  "distributed_count": 400,
+  "requires_multi_gpu": true,
+  "generated_at": "2026-07-01T15:08:30.383240",
+  "distributed_tests": [
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestMMRSModel]",
+      "id": 110
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype0-16-16-8-TestAGMMModel]",
+      "id": 111
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestMMRSModel]",
+      "id": 116
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGMMModel]",
+      "id": 117
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestScaledMMRSModel]",
+      "id": 118
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGScaledMMModel]",
+      "id": 119
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestCutlassScaledMMRSModel]",
+      "id": 120
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[True-dtype1-16-16-8-TestAGCutlassScaledMMModel]",
+      "id": 121
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[False-dtype0-16-16-8-TestMMRSModel]",
+      "id": 122
+    },
+    {
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_replace[False-dtype0-16-16-8-TestAGMMModel]",
+      "id": 123
+    }
+  ],
+  "note": "distributed tests require GPU >= 2"
+}

@@ -1,0 +1,50 @@
+{
+  "run_id": "ut-20260623-233807",
+  "workflow": "L4",
+  "started_at": "2026-06-23T15:38:07Z",
+  "completed_at": "2026-06-23T23:55:00Z",
+  "total_tests": 3,
+  "terminal_state": {
+    "passed": 0,
+    "failed": 0,
+    "ignored": 3,
+    "pending": 0
+  },
+  "batches_processed": 1,
+  "batch_summary": [
+    {
+      "batch_id": "batch_0001",
+      "tests": 3,
+      "executor_result": "all failed (offline network/download errors)",
+      "fixer_result": "all marked ignored (offline-unfixable)"
+    }
+  ],
+  "error_summary": {
+    "network": 1,
+    "download_error": 2
+  },
+  "models_involved": [
+    "meta-llama/Llama-3.2-1B-Instruct",
+    "zai-org/GLM-4.1V-9B-Thinking",
+    "Qwen/Qwen2-VL-7B-Instruct"
+  ],
+  "offline_env_note": "HF_HUB_OFFLINE=1 prevented model downloads; all tests correctly classified as offline-unfixable",
+  "validation_result": {
+    "check_expected_py": {
+      "overall": "FAIL",
+      "hard_pass_count": 6,
+      "hard_fail_count": 1,
+      "fail_detail": "STG-1: no retry_count>0 detected - validation gap for offline-unfixable tests that skip retry loop"
+    },
+    "terminal_state_match": true,
+    "inv_6_pass": true,
+    "fixer_executed": true
+  },
+  "artifacts": {
+    "manifest": "D:/workspace/apmm/runs/ut-20260623-233807/manifest.json",
+    "workflow_state": "D:/workspace/apmm/runs/ut-20260623-233807/workflow_state.json",
+    "batch_results": "D:/workspace/apmm/runs/ut-20260623-233807/batches/batch_0001/batch_results.json",
+    "handled_tests": "D:/workspace/apmm/runs/ut-20260623-233807/batches/batch_0001/handled_tests.json",
+    "validation_json": "generated inline"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185222",
+  "started_at": "2026-08-07T10:52:23Z",
+  "finished_at": "2026-08-07T10:52:24Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:52:24Z"
+  },
+  "tests": [
+    {
+      "id": 31605,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[bfloat16-big]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_bfloat16_big.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_bfloat16_big.xml"
+    },
+    {
+      "id": 31606,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[bfloat16-little]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_bfloat16_little.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_bfloat16_little.xml"
+    },
+    {
+      "id": 31607,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e4m3-native]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_native.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_native.xml"
+    },
+    {
+      "id": 31608,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e4m3-big]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_big.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_big.xml"
+    },
+    {
+      "id": 31609,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e4m3-little]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_little.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e4m3_little.xml"
+    },
+    {
+      "id": 31610,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e5m2-native]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_native.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_native.xml"
+    },
+    {
+      "id": 31611,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e5m2-big]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_big.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_big.xml"
+    },
+    {
+      "id": 31612,
+      "test_node": "tests/utils_/test_serial_utils.py::test_encode_and_decode[fp8_e5m2-little]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/pytest_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_little.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185222/result_batch_20260807_185222_tests_utils__test_serial_utils_py_test_encode_and_decode_fp8_e5m2_little.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

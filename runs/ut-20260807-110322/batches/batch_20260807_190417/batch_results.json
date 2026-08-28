@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_190417",
+  "started_at": "2026-08-07T11:04:17Z",
+  "finished_at": "2026-08-07T11:04:42Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417.log",
+    "size_bytes": 19504,
+    "captured_at": "2026-08-07T11:04:42Z"
+  },
+  "tests": [
+    {
+      "id": 32560,
+      "test_node": "tests/v1/kv_connector/unit/test_nixl_connector.py::test_handshake_decode_errors[metadata_validation_error]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 988,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_nixl_connector_py_test_handshake_decode_errors_metadata_validation_error.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_nixl_connector_py_test_handshake_decode_errors_metadata_validation_error.xml"
+    },
+    {
+      "id": 32561,
+      "test_node": "tests/v1/kv_connector/unit/test_offloading_connector.py::test_offloading_connector",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 295,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_offloading_connector_py_test_offloading_connector.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_offloading_connector_py_test_offloading_connector.xml"
+    },
+    {
+      "id": 32562,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_decode_lifecycle.py::test_basic_lifecycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 414,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_basic_lifecycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_basic_lifecycle.xml"
+    },
+    {
+      "id": 32563,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_decode_lifecycle.py::test_short_prompt_lifecycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 409,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_short_prompt_lifecycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_short_prompt_lifecycle.xml"
+    },
+    {
+      "id": 32564,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_decode_lifecycle.py::test_prefix_cache_lifecycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 400,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_prefix_cache_lifecycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_prefix_cache_lifecycle.xml"
+    },
+    {
+      "id": 32565,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_decode_lifecycle.py::test_abort_during_kv_transfer",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 412,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_abort_during_kv_transfer.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_decode_lifecycle_py_test_abort_during_kv_transfer.xml"
+    },
+    {
+      "id": 32566,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_basic_lifecycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 362,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_prefill_lifecycle_py_test_basic_lifecycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_prefill_lifecycle_py_test_basic_lifecycle.xml"
+    },
+    {
+      "id": 32567,
+      "test_node": "tests/v1/kv_connector/unit/test_remote_prefill_lifecycle.py::test_interleaved_lifecycle",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 389,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/pytest_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_prefill_lifecycle_py_test_interleaved_lifecycle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_190417/result_batch_20260807_190417_tests_v1_kv_connector_unit_test_remote_prefill_lifecycle_py_test_interleaved_lifecycle.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

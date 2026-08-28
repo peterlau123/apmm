@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_183822",
+  "started_at": "2026-08-06T10:38:23Z",
+  "finished_at": "2026-08-06T10:38:50Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822.log",
+    "size_bytes": 19890,
+    "captured_at": "2026-08-06T10:38:50Z"
+  },
+  "tests": [
+    {
+      "id": 18370,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-2048-33]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1623,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_33.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_33.xml"
+    },
+    {
+      "id": 18371,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-2048-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1893,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_1024.xml"
+    },
+    {
+      "id": 18372,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-2048-5000]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2850,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_5000.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_2048_5000.xml"
+    },
+    {
+      "id": 18373,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-7168-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1335,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_1.xml"
+    },
+    {
+      "id": 18374,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-7168-33]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1523,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_33.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_33.xml"
+    },
+    {
+      "id": 18375,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-7168-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1903,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_1024.xml"
+    },
+    {
+      "id": 18376,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-16-7168-5000]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2117,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_5000.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_16_7168_5000.xml"
+    },
+    {
+      "id": 18377,
+      "test_node": "tests/kernels/moe/test_moe_permute_unpermute.py::test_moe_permute_unpermute[128-16-dtype0-6-64-2048-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 772,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/pytest_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_64_2048_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_183822/result_batch_20260806_183822_tests_kernels_moe_test_moe_permute_unpermute_py_test_moe_permute_unpermute_128_16_dtype0_6_64_2048_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

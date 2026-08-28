@@ -1,0 +1,8 @@
+PASSED         tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[32-cuda:0] (gpu=0, 829ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_input_batch.py::test_sampling_metadata_in_input_batch[64-cuda:0] (gpu=2, 911ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_input_batch.py::test_swap_states_in_input_batch[swap_list0-32-cuda:0] (gpu=3, 1040ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_select_common_block_size_prefers_manager_block_size (gpu=4, 247ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_select_common_block_size_uses_largest_shared_int (gpu=5, 252ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_select_common_block_size_no_valid_option (gpu=6, 271ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_update_states_new_request (gpu=0, 801ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_update_states_request_finished (gpu=2, 883ms, exit=0)

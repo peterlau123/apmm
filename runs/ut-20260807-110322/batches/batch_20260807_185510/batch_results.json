@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185510",
+  "started_at": "2026-08-07T10:55:10Z",
+  "finished_at": "2026-08-07T10:55:12Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:55:12Z"
+  },
+  "tests": [
+    {
+      "id": 31869,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_free_request_frees_all_inputs",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_free_request_frees_all_inputs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_free_request_frees_all_inputs.xml"
+    },
+    {
+      "id": 31870,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_eviction_when_cache_is_full",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_eviction_when_cache_is_full.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_eviction_when_cache_is_full.xml"
+    },
+    {
+      "id": 31871,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_get_cached_input_ids",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_get_cached_input_ids.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_get_cached_input_ids.xml"
+    },
+    {
+      "id": 31872,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_has_cache_restores_from_freeable",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_has_cache_restores_from_freeable.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_has_cache_restores_from_freeable.xml"
+    },
+    {
+      "id": 31873,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_get_freed_mm_hashes_clears_freed_list",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_get_freed_mm_hashes_clears_freed_list.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_get_freed_mm_hashes_clears_freed_list.xml"
+    },
+    {
+      "id": 31874,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_schedule_request_multi_images_respect_space_limit",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_schedule_request_multi_images_respect_space_limit.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_schedule_request_multi_images_respect_space_limit.xml"
+    },
+    {
+      "id": 31875,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_schedule_request_multi_images_respect_compute_limit",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_schedule_request_multi_images_respect_compute_limit.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_schedule_request_multi_images_respect_compute_limit.xml"
+    },
+    {
+      "id": 31876,
+      "test_node": "tests/v1/core/test_encoder_cache_manager.py::test_encoder_cache_with_is_embed_mask",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/pytest_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_encoder_cache_with_is_embed_mask.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185510/result_batch_20260807_185510_tests_v1_core_test_encoder_cache_manager_py_test_encoder_cache_with_is_embed_mask.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183036",
+ "started_at": "2026-08-07T21:49:26Z",
+ "finished_at": "2026-08-07T21:49:53Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421.log",
+  "size_bytes": 58690,
+  "captured_at": "2026-08-07T21:49:53Z"
+ },
+ "tests": [
+  {
+   "id": 29496,
+   "test_node": "tests/models/test_registry.py::test_registry_model_property[LlavaForConditionalGeneration-True-True-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 374,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_LlavaForConditionalGeneration_True_True_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_LlavaForConditionalGeneration_True_True_False.xml"
+  },
+  {
+   "id": 29497,
+   "test_node": "tests/models/test_registry.py::test_registry_model_property[BertForSequenceClassification-False-False-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 266,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_BertForSequenceClassification_False_False_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_BertForSequenceClassification_False_False_True.xml"
+  },
+  {
+   "id": 29498,
+   "test_node": "tests/models/test_registry.py::test_registry_model_property[RobertaForSequenceClassification-False-False-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 292,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_RobertaForSequenceClassification_False_False_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_RobertaForSequenceClassification_False_False_True.xml"
+  },
+  {
+   "id": 29499,
+   "test_node": "tests/models/test_registry.py::test_registry_model_property[XLMRobertaForSequenceClassification-False-False-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 283,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_XLMRobertaForSequenceClassification_False_False_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_model_property_XLMRobertaForSequenceClassification_False_False_True.xml"
+  },
+  {
+   "id": 29500,
+   "test_node": "tests/models/test_registry.py::test_registry_is_pp[DeepseekV2ForCausalLM-True-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 273,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_is_pp_DeepseekV2ForCausalLM_True_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_is_pp_DeepseekV2ForCausalLM_True_False.xml"
+  },
+  {
+   "id": 29501,
+   "test_node": "tests/models/test_registry.py::test_registry_is_pp[Qwen2VLForConditionalGeneration-True-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 332,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_registry_is_pp_Qwen2VLForConditionalGeneration_True_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_registry_is_pp_Qwen2VLForConditionalGeneration_True_True.xml"
+  },
+  {
+   "id": 29502,
+   "test_node": "tests/models/test_registry.py::test_hf_registry_coverage",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 173,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_registry_py_test_hf_registry_coverage.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_registry_py_test_hf_registry_coverage.xml"
+  },
+  {
+   "id": 29503,
+   "test_node": "tests/models/test_terratorch.py::test_inference[ibm-nasa-geospatial/Prithvi-EO-2.0-300M-TL-Sen1Floods11]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 183,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/pytest_batch_super_0421_tests_models_test_terratorch_py_test_inference_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0421/result_batch_super_0421_tests_models_test_terratorch_py_test_inference_ibm_nasa_geospatial_Prithvi_EO_2_0_300M_TL_Sen1Floods11.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 1,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

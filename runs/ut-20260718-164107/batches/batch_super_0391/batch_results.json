@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0391",
+  "started_at": "2026-08-04T21:18:52Z",
+  "finished_at": "2026-08-04T21:19:37Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391.log",
+    "size_bytes": 29016,
+    "captured_at": "2026-08-04T21:19:37Z"
+  },
+  "tests": [
+    {
+      "id": 1033,
+      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target3-2-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target3_2_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target3_2_2.xml"
+    },
+    {
+      "id": 1034,
+      "test_node": "tests/distributed/test_comm_ops.py::test_multi_process_tensor_parallel_pipeline_parallel[test_target4-2-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target4_2_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_comm_ops_py_test_multi_process_tensor_parallel_pipeline_parallel_test_target4_2_2.xml"
+    },
+    {
+      "id": 1035,
+      "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[deepseek-ai/DeepSeek-V2-Lite-parallel_setup0-mp-auto-test_options0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 795,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup0_mp_auto_test_options0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup0_mp_auto_test_options0.xml"
+    },
+    {
+      "id": 1036,
+      "test_node": "tests/distributed/test_context_parallel.py::test_cp_generation[deepseek-ai/DeepSeek-V2-Lite-parallel_setup1-mp-auto-test_options1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 640,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/pytest_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup1_mp_auto_test_options1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0391/result_batch_super_0391_tests_distributed_test_context_parallel_py_test_cp_generation_deepseek_ai_DeepSeek_V2_Lite_parallel_setup1_mp_auto_test_options1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

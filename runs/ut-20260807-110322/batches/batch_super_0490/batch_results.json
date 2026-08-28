@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0490",
+  "started_at": "2026-08-07T23:09:45Z",
+  "finished_at": "2026-08-07T23:10:16Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490.log",
+    "size_bytes": 15142,
+    "captured_at": "2026-08-07T23:10:16Z"
+  },
+  "tests": [
+    {
+      "id": 30150,
+      "test_node": "tests/test_routing_simulator.py::test_basic_functionality[4-128-1024-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1607,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_1.xml"
+    },
+    {
+      "id": 30151,
+      "test_node": "tests/test_routing_simulator.py::test_basic_functionality[4-128-1024-16]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1650,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_16.xml"
+    },
+    {
+      "id": 30152,
+      "test_node": "tests/test_routing_simulator.py::test_basic_functionality[4-128-1024-256]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1606,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_basic_functionality_4_128_1024_256.xml"
+    },
+    {
+      "id": 30153,
+      "test_node": "tests/test_routing_simulator.py::test_routing_strategy_integration",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1817,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_routing_strategy_integration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_routing_strategy_integration.xml"
+    },
+    {
+      "id": 30154,
+      "test_node": "tests/test_routing_simulator.py::test_distribution_based_routing_with_custom_strategy",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1635,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_distribution_based_routing_with_custom_strategy.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_distribution_based_routing_with_custom_strategy.xml"
+    },
+    {
+      "id": 30155,
+      "test_node": "tests/test_routing_simulator.py::test_instance_compatibility",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1214,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_routing_simulator_py_test_instance_compatibility.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_routing_simulator_py_test_instance_compatibility.xml"
+    },
+    {
+      "id": 30156,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(-8, 7, ScalarType.int4)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_scalartype_py_test_scalar_type_min_max_8_7_ScalarType_int4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_scalartype_py_test_scalar_type_min_max_8_7_ScalarType_int4.xml"
+    },
+    {
+      "id": 30157,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(0, 15, ScalarType.uint4)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/pytest_batch_super_0490_tests_test_scalartype_py_test_scalar_type_min_max_0_15_ScalarType_uint4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0490/result_batch_super_0490_tests_test_scalartype_py_test_scalar_type_min_max_0_15_ScalarType_uint4.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

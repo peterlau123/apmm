@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185526",
+  "started_at": "2026-08-07T10:55:27Z",
+  "finished_at": "2026-08-07T10:55:30Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:55:30Z"
+  },
+  "tests": [
+    {
+      "id": 31917,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_metrics_empty_stats",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_metrics_empty_stats.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_metrics_empty_stats.xml"
+    },
+    {
+      "id": 31918,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_get_kv_cache_configs_multiple_workers",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_get_kv_cache_configs_multiple_workers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_get_kv_cache_configs_multiple_workers.xml"
+    },
+    {
+      "id": 31919,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_merge_kv_cache_spec",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_merge_kv_cache_spec.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_merge_kv_cache_spec.xml"
+    },
+    {
+      "id": 31920,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_is_kv_cache_spec_uniform",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_is_kv_cache_spec_uniform.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_is_kv_cache_spec_uniform.xml"
+    },
+    {
+      "id": 31921,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_estimate_max_model_len[Qwen/Qwen1.5-7B-16385-16384]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_estimate_max_model_len_Qwen_Qwen1_5_7B_16385_16384.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_estimate_max_model_len_Qwen_Qwen1_5_7B_16385_16384.xml"
+    },
+    {
+      "id": 31922,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_estimate_max_model_len[Qwen/Qwen1.5-7B-16383-16383]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_estimate_max_model_len_Qwen_Qwen1_5_7B_16383_16383.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_estimate_max_model_len_Qwen_Qwen1_5_7B_16383_16383.xml"
+    },
+    {
+      "id": 31923,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_get_max_concurrency_for_kv_cache_config",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_get_max_concurrency_for_kv_cache_config.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_get_max_concurrency_for_kv_cache_config.xml"
+    },
+    {
+      "id": 31924,
+      "test_node": "tests/v1/core/test_kv_cache_utils.py::test_allocate_with_lookahead",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/pytest_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_allocate_with_lookahead.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185526/result_batch_20260807_185526_tests_v1_core_test_kv_cache_utils_py_test_allocate_with_lookahead.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

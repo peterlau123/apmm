@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183313",
+ "started_at": "2026-08-07T22:18:14Z",
+ "finished_at": "2026-08-07T22:20:43Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446.log",
+  "size_bytes": 543652,
+  "captured_at": "2026-08-07T22:20:43Z"
+ },
+ "tests": [
+  {
+   "id": 29697,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[1800-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7fc196144c20>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+   "duration_ms": 120306,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+  },
+  {
+   "id": 29698,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[1800-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7fca6dfe23c0>, 'Connection to github.com timed out. (connect timeout=30)'))",
+   "duration_ms": 120286,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+  },
+  {
+   "id": 29699,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-1-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f003cbb3230>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30222,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+  },
+  {
+   "id": 29700,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-1-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f88331ab560>, 'Connection to github.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30228,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+  },
+  {
+   "id": 29701,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-60-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f39a18df680>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30242,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_60_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_60_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+  },
+  {
+   "id": 29702,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-60-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f278a7bb2f0>, 'Connection to github.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30222,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_60_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_60_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+  },
+  {
+   "id": 29703,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-1800-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f605dcdf5f0>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30208,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1800_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+  },
+  {
+   "id": 29704,
+   "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http_with_dynamic_loader[2-1800-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f3b08d0b650>, 'Connection to github.com timed out. (connect timeout=30)'))",
+   "duration_ms": 30226,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/pytest_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0446/result_batch_super_0446_tests_multimodal_test_utils_py_test_fetch_video_http_with_dynamic_loader_2_1800_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 8,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0424",
+  "started_at": "2026-08-07T21:53:48Z",
+  "finished_at": "2026-08-07T21:54:15Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424.log",
+    "size_bytes": 23661,
+    "captured_at": "2026-08-07T21:54:15Z"
+  },
+  "tests": [
+    {
+      "id": 29521,
+      "test_node": "tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers0-10-10-expected_features0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 178,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers0_10_10_expected_features0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers0_10_10_expected_features0.xml"
+    },
+    {
+      "id": 29522,
+      "test_node": "tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers1-10-10-expected_features1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 178,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers1_10_10_expected_features1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers1_10_10_expected_features1.xml"
+    },
+    {
+      "id": 29523,
+      "test_node": "tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers2-10-20-expected_features2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 229,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers2_10_20_expected_features2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers2_10_20_expected_features2.xml"
+    },
+    {
+      "id": 29524,
+      "test_node": "tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers3-10-20-expected_features3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 211,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers3_10_20_expected_features3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_resolve_visual_encoder_outputs_select_layers3_10_20_expected_features3.xml"
+    },
+    {
+      "id": 29525,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_vision_model[1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_1.xml"
+    },
+    {
+      "id": 29526,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_vision_model[4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_4.xml"
+    },
+    {
+      "id": 29527,
+      "test_node": "tests/models/test_vision.py::test_run_dp_sharded_vision_model[5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 0,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_run_dp_sharded_vision_model_5.xml"
+    },
+    {
+      "id": 29528,
+      "test_node": "tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes0-2-expected_shuffle_indices0-expected_gpu_sample_counts0-expected_grouped_sizes_per_gpu0-empty input]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/pytest_batch_super_0424_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes0_2_expected_shuffle_indices0_expected_gpu_sample_counts0_expected_grouped_sizes_per_gpu0_empty_input.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0424/result_batch_super_0424_tests_models_test_vision_py_test_get_load_balance_assignment_cases_sizes0_2_expected_shuffle_indices0_expected_gpu_sample_counts0_expected_grouped_sizes_per_gpu0_empty_input.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 1
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0435",
+  "started_at": "2026-08-05T01:59:39Z",
+  "finished_at": "2026-08-05T02:00:25Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/pytest_batch_super_0435.log",
+    "size_bytes": 31324,
+    "captured_at": "2026-08-05T02:00:25Z"
+  },
+  "tests": [
+    {
+      "id": 1175,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup3-ray-auto-test_options3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 315,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/pytest_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/result_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup3_ray_auto_test_options3.xml"
+    },
+    {
+      "id": 1176,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup4-mp-auto-test_options4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 343,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/pytest_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/result_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup4_mp_auto_test_options4.xml"
+    },
+    {
+      "id": 1177,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup5-ray-auto-test_options5]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 352,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/pytest_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/result_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup5_ray_auto_test_options5.xml"
+    },
+    {
+      "id": 1178,
+      "test_node": "tests/distributed/test_sequence_parallel.py::test_tp_sp_generation[False-True-hmellor/tiny-random-LlamaForCausalLM-parallel_setup6-mp-auto-test_options6]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 352,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/pytest_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0435/result_batch_super_0435_tests_distributed_test_sequence_parallel_py_test_tp_sp_generation_False_True_hmellor_tiny_random_LlamaForCausalLM_parallel_setup6_mp_auto_test_options6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

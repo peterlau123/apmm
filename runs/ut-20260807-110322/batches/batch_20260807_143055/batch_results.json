@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_143055",
+  "started_at": "2026-08-07T06:30:56Z",
+  "finished_at": "2026-08-07T06:31:37Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055.log",
+    "size_bytes": 20214,
+    "captured_at": "2026-08-07T06:31:37Z"
+  },
+  "tests": [
+    {
+      "id": 22766,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype0-out_dtype0-64-20486-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1559,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_64_20486_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_64_20486_128.xml"
+    },
+    {
+      "id": 22767,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype0-out_dtype0-512-256-496]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2212,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_512_256_496.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_512_256_496.xml"
+    },
+    {
+      "id": 22768,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype0-out_dtype0-512-20486-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2310,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_512_20486_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype0_out_dtype0_512_20486_1024.xml"
+    },
+    {
+      "id": 22769,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype1-out_dtype0-1-256-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1508,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_1_256_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_1_256_128.xml"
+    },
+    {
+      "id": 22770,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype1-out_dtype0-33-256-496]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1943,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_33_256_496.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_33_256_496.xml"
+    },
+    {
+      "id": 22771,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype1-out_dtype0-64-971-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2928,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_64_971_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_64_971_1024.xml"
+    },
+    {
+      "id": 22772,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype1-out_dtype0-64-20486-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1043,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_64_20486_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_64_20486_128.xml"
+    },
+    {
+      "id": 22773,
+      "test_node": "tests/kernels/quantization/test_triton_scaled_mm.py::test_scaled_mm[False-True-True-in_dtype1-out_dtype0-512-256-496]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1566,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/pytest_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_512_256_496.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_143055/result_batch_20260807_143055_tests_kernels_quantization_test_triton_scaled_mm_py_test_scaled_mm_False_True_True_in_dtype1_out_dtype0_512_256_496.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

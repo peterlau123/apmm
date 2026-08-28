@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0447",
+  "started_at": "2026-08-05T02:47:27Z",
+  "finished_at": "2026-08-05T02:47:56Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/pytest_batch_super_0447.log",
+    "size_bytes": 21860,
+    "captured_at": "2026-08-05T02:47:56Z"
+  },
+  "tests": [
+    {
+      "id": 1219,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_blocking_unread_object",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 237,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/pytest_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_blocking_unread_object.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/result_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_blocking_unread_object.xml"
+    },
+    {
+      "id": 1220,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_buffer_overflow_and_cleanup",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 242,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/pytest_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_buffer_overflow_and_cleanup.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/result_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_buffer_overflow_and_cleanup.xml"
+    },
+    {
+      "id": 1221,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_clear_storage",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 248,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/pytest_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_clear_storage.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/result_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_clear_storage.xml"
+    },
+    {
+      "id": 1222,
+      "test_node": "tests/distributed/test_shm_storage.py::TestSingleWriterShmObjectStorage::test_invalid_get_operations",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 252,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/pytest_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_invalid_get_operations.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0447/result_batch_super_0447_tests_distributed_test_shm_storage_py_TestSingleWriterShmObjectStorage_test_invalid_get_operations.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

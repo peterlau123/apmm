@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183654",
+ "started_at": "2026-08-07T23:13:36Z",
+ "finished_at": "2026-08-07T23:14:00Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493.log",
+  "size_bytes": 99523,
+  "captured_at": "2026-08-07T23:14:00Z"
+ },
+ "tests": [
+  {
+   "id": 30176,
+   "test_node": "tests/test_triton_utils.py::test_no_triton_fallback",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 189,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_triton_utils_py_test_no_triton_fallback.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_triton_utils_py_test_no_triton_fallback.xml"
+  },
+  {
+   "id": 30184,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple5-1.1-True]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 195,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple5_1_1_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple5_1_1_True.xml"
+  },
+  {
+   "id": 30185,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple6-1.0-False]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 191,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple6_1_0_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple6_1_0_False.xml"
+  },
+  {
+   "id": 30186,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple7-1.2-False]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 195,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple7_1_2_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple7_1_2_False.xml"
+  },
+  {
+   "id": 30187,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple8-1.-1-True]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 116,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple8_1_1_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple8_1_1_True.xml"
+  },
+  {
+   "id": 30188,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple9-0.9-False]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 191,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple9_0_9_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple9_0_9_False.xml"
+  },
+  {
+   "id": 30189,
+   "test_node": "tests/test_version.py::test_prev_minor_version_was[version_tuple10-0.17-False]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError",
+   "duration_ms": 116,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple10_0_17_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_test_version_py_test_prev_minor_version_was_version_tuple10_0_17_False.xml"
+  },
+  {
+   "id": 30194,
+   "test_node": "tests/tokenizers_/test_basic.py::test_tokenizer_like_protocol",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 202,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/pytest_batch_super_0493_tests_tokenizers__test_basic_py_test_tokenizer_like_protocol.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0493/result_batch_super_0493_tests_tokenizers__test_basic_py_test_tokenizer_like_protocol.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 1,
+  "failed": 7,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

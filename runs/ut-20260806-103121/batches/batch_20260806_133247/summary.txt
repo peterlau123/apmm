@@ -1,0 +1,8 @@
+PASSED         tests/kernels/moe/test_deepep_moe.py::test_low_latency_deep_ep_moe[False-world_dp_size0-6-32-222-1024-2560-dtype0] (gpu=0, 0ms, exit=0)
+PASSED         tests/kernels/moe/test_deepep_moe.py::test_low_latency_deep_ep_moe[False-world_dp_size0-6-32-222-1024-2560-dtype1] (gpu=2, 0ms, exit=0)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-2-1024-768-128] (gpu=3, 2254ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-2-2048-768-512] (gpu=4, 2136ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-2-512-1024-1024] (gpu=5, 2187ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-2-4096-4096-1024] (gpu=6, 2203ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-6-1024-768-128] (gpu=0, 1873ms, exit=1)
+FAILED         tests/kernels/moe/test_deepgemm.py::test_deepgemm_vs_triton[32-6-2048-768-512] (gpu=2, 1779ms, exit=1)

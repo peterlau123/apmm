@@ -1,0 +1,8 @@
+FAILED         tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[1] (gpu=0, 1968ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[3] (gpu=2, 1971ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_ngram_max_len[10] (gpu=3, 1956ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-1] (gpu=4, 245ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-3] (gpu=5, 255ms, exit=1)
+FAILED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[FLASH_ATTN-10] (gpu=6, 247ms, exit=1)
+PASSED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TRITON_ATTN-1] (gpu=0, 165ms, exit=0)
+PASSED         tests/v1/spec_decode/test_max_len.py::test_eagle_max_len[TRITON_ATTN-3] (gpu=2, 162ms, exit=0)

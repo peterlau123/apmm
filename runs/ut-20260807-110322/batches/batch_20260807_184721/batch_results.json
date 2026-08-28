@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_184721",
+  "started_at": "2026-08-07T10:47:22Z",
+  "finished_at": "2026-08-07T10:47:25Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:47:25Z"
+  },
+  "tests": [
+    {
+      "id": 31107,
+      "test_node": "tests/tokenizers_/test_mistral.py::test_prepare_apply_chat_template_tools_and_messages[openai_request3-expected_mistral_output3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_test_prepare_apply_chat_template_tools_and_messages_openai_request3_expected_mistral_output3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_test_prepare_apply_chat_template_tools_and_messages_openai_request3_expected_mistral_output3.xml"
+    },
+    {
+      "id": 31108,
+      "test_node": "tests/tokenizers_/test_mistral.py::test_prepare_apply_chat_template_tools_and_messages_list_content[openai_request0-expected_mistral_output0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_test_prepare_apply_chat_template_tools_and_messages_list_content_openai_request0_expected_mistral_output0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_test_prepare_apply_chat_template_tools_and_messages_list_content_openai_request0_expected_mistral_output0.xml"
+    },
+    {
+      "id": 31110,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_all_special_tokens[mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_all_special_tokens_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_all_special_tokens_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    },
+    {
+      "id": 31111,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_get_added_vocab[mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_get_added_vocab_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_get_added_vocab_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    },
+    {
+      "id": 31112,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_encode[mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_encode_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_encode_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    },
+    {
+      "id": 31113,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_call[mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_call_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_call_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    },
+    {
+      "id": 31114,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_apply_chat_template[openai_request0-True-False-expected_output0-decoded_expected_output0-mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_apply_chat_template_openai_request0_True_False_expected_output0_decoded_expected_output0_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_apply_chat_template_openai_request0_True_False_expected_output0_decoded_expected_output0_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    },
+    {
+      "id": 31115,
+      "test_node": "tests/tokenizers_/test_mistral.py::TestMistralTokenizer::test_apply_chat_template[openai_request1-True-False-expected_output1-decoded_expected_output1-mistralai/Mistral-7B-Instruct-v0.3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/pytest_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_apply_chat_template_openai_request1_True_False_expected_output1_decoded_expected_output1_mistralai_Mistral_7B_Instruct_v0_3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184721/result_batch_20260807_184721_tests_tokenizers__test_mistral_py_TestMistralTokenizer_test_apply_chat_template_openai_request1_True_False_expected_output1_decoded_expected_output1_mistralai_Mistral_7B_Instruct_v0_3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

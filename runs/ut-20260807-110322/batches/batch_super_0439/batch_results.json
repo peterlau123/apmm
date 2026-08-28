@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0439",
+  "started_at": "2026-08-07T22:09:25Z",
+  "finished_at": "2026-08-07T22:09:48Z",
+  "timeout": 1800,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439.log",
+    "size_bytes": 20237,
+    "captured_at": "2026-08-07T22:09:48Z"
+  },
+  "tests": [
+    {
+      "id": 29641,
+      "test_node": "tests/multimodal/test_processing.py::test_hf_processor_call_kwargs[config_kwargs3-inference_kwargs3-expected_kwargs3-Qwen/Qwen2-VL-2B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 196,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_processing_py_test_hf_processor_call_kwargs_config_kwargs3_inference_kwargs3_expected_kwargs3_Qwen_Qwen2_VL_2B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_processing_py_test_hf_processor_call_kwargs_config_kwargs3_inference_kwargs3_expected_kwargs3_Qwen_Qwen2_VL_2B_Instruct.xml"
+    },
+    {
+      "id": 29642,
+      "test_node": "tests/multimodal/test_processing.py::test_hf_processor_call_kwargs[config_kwargs4-inference_kwargs4-expected_kwargs4-Qwen/Qwen2-VL-2B-Instruct]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 242,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_processing_py_test_hf_processor_call_kwargs_config_kwargs4_inference_kwargs4_expected_kwargs4_Qwen_Qwen2_VL_2B_Instruct.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_processing_py_test_hf_processor_call_kwargs_config_kwargs4_inference_kwargs4_expected_kwargs4_Qwen_Qwen2_VL_2B_Instruct.xml"
+    },
+    {
+      "id": 29643,
+      "test_node": "tests/multimodal/test_processing.py::test_apply_matches_no_match_exits_quickly",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 172,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_processing_py_test_apply_matches_no_match_exits_quickly.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_processing_py_test_apply_matches_no_match_exits_quickly.xml"
+    },
+    {
+      "id": 29644,
+      "test_node": "tests/multimodal/test_registry.py::test_supports_multimodal_inputs[Qwen/Qwen2.5-1.5B-Instruct-limit_mm_per_prompt0-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 521,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_5_1_5B_Instruct_limit_mm_per_prompt0_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_5_1_5B_Instruct_limit_mm_per_prompt0_False.xml"
+    },
+    {
+      "id": 29645,
+      "test_node": "tests/multimodal/test_registry.py::test_supports_multimodal_inputs[Qwen/Qwen2-VL-2B-Instruct-limit_mm_per_prompt1-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1228,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt1_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt1_True.xml"
+    },
+    {
+      "id": 29646,
+      "test_node": "tests/multimodal/test_registry.py::test_supports_multimodal_inputs[Qwen/Qwen2-VL-2B-Instruct-limit_mm_per_prompt2-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1149,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt2_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt2_False.xml"
+    },
+    {
+      "id": 29647,
+      "test_node": "tests/multimodal/test_registry.py::test_supports_multimodal_inputs[Qwen/Qwen2-VL-2B-Instruct-limit_mm_per_prompt3-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1202,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt3_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_registry_py_test_supports_multimodal_inputs_Qwen_Qwen2_VL_2B_Instruct_limit_mm_per_prompt3_True.xml"
+    },
+    {
+      "id": 29648,
+      "test_node": "tests/multimodal/test_sparse_tensor_validation_unit.py::TestSparseTensorValidationContextManager::test_valid_sparse_tensor_passes",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 338,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/pytest_batch_super_0439_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_valid_sparse_tensor_passes.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0439/result_batch_super_0439_tests_multimodal_test_sparse_tensor_validation_unit_py_TestSparseTensorValidationContextManager_test_valid_sparse_tensor_passes.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

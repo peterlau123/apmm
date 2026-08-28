@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182517",
+ "started_at": "2026-08-07T20:40:10Z",
+ "finished_at": "2026-08-07T20:40:35Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356.log",
+  "size_bytes": 153372,
+  "captured_at": "2026-08-07T20:40:35Z"
+ },
+ "tests": [
+  {
+   "id": 28976,
+   "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-bfloat16-model1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 248,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model1.xml"
+  },
+  {
+   "id": 28977,
+   "test_node": "tests/models/quantization/test_gptq_marlin.py::test_models[5-32-bfloat16-model2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 160,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_gptq_marlin_py_test_models_5_32_bfloat16_model2.xml"
+  },
+  {
+   "id": 28978,
+   "test_node": "tests/models/quantization/test_gptq_marlin_24.py::test_models[5-8-half-model_pair0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 276,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_gptq_marlin_24_py_test_models_5_8_half_model_pair0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_gptq_marlin_24_py_test_models_5_8_half_model_pair0.xml"
+  },
+  {
+   "id": 28979,
+   "test_node": "tests/models/quantization/test_gptq_marlin_24.py::test_models[5-8-half-model_pair1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 259,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_gptq_marlin_24_py_test_models_5_8_half_model_pair1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_gptq_marlin_24_py_test_models_5_8_half_model_pair1.xml"
+  },
+  {
+   "id": 28980,
+   "test_node": "tests/models/quantization/test_modelopt.py::test_models[nvidia/Llama-3.1-8B-Instruct-FP8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_modelopt_py_test_models_nvidia_Llama_3_1_8B_Instruct_FP8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_modelopt_py_test_models_nvidia_Llama_3_1_8B_Instruct_FP8.xml"
+  },
+  {
+   "id": 28981,
+   "test_node": "tests/models/quantization/test_mxfp4.py::test_models[amd/Llama-2-7b-chat-hf-wmxfp4-amxfp4-kvfp8-scale-uint8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_mxfp4_py_test_models_amd_Llama_2_7b_chat_hf_wmxfp4_amxfp4_kvfp8_scale_uint8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_mxfp4_py_test_models_amd_Llama_2_7b_chat_hf_wmxfp4_amxfp4_kvfp8_scale_uint8.xml"
+  },
+  {
+   "id": 28982,
+   "test_node": "tests/models/quantization/test_nvfp4.py::test_models[nvidia/Llama-3.3-70B-Instruct-FP4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_quantization_test_nvfp4_py_test_models_nvidia_Llama_3_3_70B_Instruct_FP4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_quantization_test_nvfp4_py_test_models_nvidia_Llama_3_3_70B_Instruct_FP4.xml"
+  },
+  {
+   "id": 28983,
+   "test_node": "tests/models/test_gguf_download.py::TestGGUFDownload::test_download_gguf_single_file",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 155,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/pytest_batch_super_0356_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_single_file.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0356/result_batch_super_0356_tests_models_test_gguf_download_py_TestGGUFDownload_test_download_gguf_single_file.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 4,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

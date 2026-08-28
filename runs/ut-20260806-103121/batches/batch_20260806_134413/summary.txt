@@ -1,0 +1,8 @@
+PASSED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype31-quant_config31-PplxPrepareAndFinalize-NaiveBatchedExperts-None-2] (gpu=0, 170ms, exit=0)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype0-None-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1] (gpu=2, 7646ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype1-None-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1] (gpu=3, 8391ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype2-quant_config2-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1] (gpu=4, 647ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype3-quant_config3-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1] (gpu=5, 366ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype4-quant_config4-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1] (gpu=6, 429ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype5-quant_config5-MoEPrepareAndFinalizeNoEP-TritonExperts-16-1] (gpu=0, 256ms, exit=1)
+FAILED         tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype6-quant_config6-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1] (gpu=2, 1337ms, exit=1)

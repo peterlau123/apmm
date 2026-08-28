@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_134240",
+  "started_at": "2026-08-06T05:42:41Z",
+  "finished_at": "2026-08-06T05:43:21Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240.log",
+    "size_bytes": 21788,
+    "captured_at": "2026-08-06T05:43:21Z"
+  },
+  "tests": [
+    {
+      "id": 13992,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype7-quant_config7-PplxPrepareAndFinalize-NaiveBatchedExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 132,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype7_quant_config7_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype7_quant_config7_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.xml"
+    },
+    {
+      "id": 13993,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype8-quant_config8-DeepEPHTPrepareAndFinalize-TritonExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 223,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype8_quant_config8_DeepEPHTPrepareAndFinalize_TritonExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype8_quant_config8_DeepEPHTPrepareAndFinalize_TritonExperts_None_2.xml"
+    },
+    {
+      "id": 13994,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype9-quant_config9-DeepEPHTPrepareAndFinalize-TritonExperts-16-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 181,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype9_quant_config9_DeepEPHTPrepareAndFinalize_TritonExperts_16_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype9_quant_config9_DeepEPHTPrepareAndFinalize_TritonExperts_16_2.xml"
+    },
+    {
+      "id": 13995,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype10-quant_config10-DeepEPLLPrepareAndFinalize-BatchedTritonExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 150,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype10_quant_config10_DeepEPLLPrepareAndFinalize_BatchedTritonExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype10_quant_config10_DeepEPLLPrepareAndFinalize_BatchedTritonExperts_None_2.xml"
+    },
+    {
+      "id": 13996,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype11-quant_config11-DeepEPLLPrepareAndFinalize-NaiveBatchedExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 184,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype11_quant_config11_DeepEPLLPrepareAndFinalize_NaiveBatchedExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype11_quant_config11_DeepEPLLPrepareAndFinalize_NaiveBatchedExperts_None_2.xml"
+    },
+    {
+      "id": 13997,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype12-quant_config12-PplxPrepareAndFinalize-BatchedTritonExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 200,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype12_quant_config12_PplxPrepareAndFinalize_BatchedTritonExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype12_quant_config12_PplxPrepareAndFinalize_BatchedTritonExperts_None_2.xml"
+    },
+    {
+      "id": 13998,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype13-quant_config13-PplxPrepareAndFinalize-NaiveBatchedExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 133,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype13_quant_config13_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype13_quant_config13_PplxPrepareAndFinalize_NaiveBatchedExperts_None_2.xml"
+    },
+    {
+      "id": 13999,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_multigpu[2048-1024-32-dtype14-quant_config14-DeepEPHTPrepareAndFinalize-TritonExperts-None-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 168,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/pytest_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype14_quant_config14_DeepEPHTPrepareAndFinalize_TritonExperts_None_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_134240/result_batch_20260806_134240_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_multigpu_2048_1024_32_dtype14_quant_config14_DeepEPHTPrepareAndFinalize_TritonExperts_None_2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

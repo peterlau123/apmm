@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_145234",
+  "started_at": "2026-08-07T06:52:35Z",
+  "finished_at": "2026-08-07T06:53:18Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234.log",
+    "size_bytes": 19614,
+    "captured_at": "2026-08-07T06:53:18Z"
+  },
+  "tests": [
+    {
+      "id": 23208,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-128-5789]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1219,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_5789.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_5789.xml"
+    },
+    {
+      "id": 23209,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-128-8189]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1487,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_8189.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_8189.xml"
+    },
+    {
+      "id": 23210,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-128-8191]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1080,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_8191.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_8191.xml"
+    },
+    {
+      "id": 23211,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-128-16383]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1200,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_16383.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_16383.xml"
+    },
+    {
+      "id": 23212,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-128-32767]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 948,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_32767.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_128_32767.xml"
+    },
+    {
+      "id": 23213,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-256-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1098,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_1.xml"
+    },
+    {
+      "id": 23214,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-256-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 971,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_7.xml"
+    },
+    {
+      "id": 23215,
+      "test_node": "tests/kernels/test_fla_layernorm_guard.py::test_layer_norm_fwd_basic[False-0-dtype0-256-16]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1025,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/pytest_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_16.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_145234/result_batch_20260807_145234_tests_kernels_test_fla_layernorm_guard_py_test_layer_norm_fwd_basic_False_0_dtype0_256_16.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

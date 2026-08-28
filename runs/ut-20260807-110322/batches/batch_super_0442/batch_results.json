@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0442",
+  "started_at": "2026-08-07T22:11:54Z",
+  "finished_at": "2026-08-07T22:12:50Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442.log",
+    "size_bytes": 556537,
+    "captured_at": "2026-08-07T22:12:50Z"
+  },
+  "tests": [
+    {
+      "id": 29665,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpeg-1280px-Venn_diagram_rgb.svg.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=50041): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5309,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpeg_1280px_Venn_diagram_rgb_svg_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpeg_1280px_Venn_diagram_rgb_svg_png.xml"
+    },
+    {
+      "id": 29666,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpeg-RGBA_comp.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=56479): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5312,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpeg_RGBA_comp_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpeg_RGBA_comp_png.xml"
+    },
+    {
+      "id": 29667,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpg-2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=39345): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5314,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.xml"
+    },
+    {
+      "id": 29668,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpg-Grayscale_8bits_palette_sample_image.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=52061): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5310,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_Grayscale_8bits_palette_sample_image_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_Grayscale_8bits_palette_sample_image_png.xml"
+    },
+    {
+      "id": 29669,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpg-1280px-Venn_diagram_rgb.svg.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=52003): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5313,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_1280px_Venn_diagram_rgb_svg_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_1280px_Venn_diagram_rgb_svg_png.xml"
+    },
+    {
+      "id": 29670,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.jpg-RGBA_comp.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=55721): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5314,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_RGBA_comp_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_jpg_RGBA_comp_png.xml"
+    },
+    {
+      "id": 29671,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.webp-2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=46339): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5317,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_webp_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_webp_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.xml"
+    },
+    {
+      "id": 29672,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_base64[.webp-Grayscale_8bits_palette_sample_image.png]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=48439): Read timed out. (read timeout=5)\"",
+      "duration_ms": 5309,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/pytest_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_webp_Grayscale_8bits_palette_sample_image_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0442/result_batch_super_0442_tests_multimodal_test_utils_py_test_fetch_image_base64_webp_Grayscale_8bits_palette_sample_image_png.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 8,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,8 @@
+PASSED         tests/lora/test_punica_ops.py::test_kernels_hidden_size[expand-0-cuda:0-dtype1-3-508-32-4-4] (gpu=0, 1416ms, exit=0)
+FAILED         tests/lora/test_quant_model.py::test_quant_model_lora[model0] (gpu=2, 343ms, exit=1)
+FAILED         tests/lora/test_quant_model.py::test_quant_model_lora[model1] (gpu=3, 339ms, exit=1)
+PASSED         tests/lora/test_quant_model.py::test_quant_model_tp_equality[model0] (gpu=4, 328ms, exit=0)
+PASSED         tests/lora/test_quant_model.py::test_quant_model_tp_equality[model1] (gpu=5, 324ms, exit=0)
+FAILED         tests/lora/test_qwen2vl.py::test_qwen2vl_lora (gpu=6, 23584ms, exit=1)
+FAILED         tests/lora/test_qwen2vl.py::test_qwen2vl_lora_beam_search (gpu=0, 20725ms, exit=1)
+FAILED         tests/lora/test_qwen2vl.py::test_qwen25vl_lora (gpu=2, 20240ms, exit=1)

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_125632",
+  "started_at": "2026-08-07T04:56:32Z",
+  "finished_at": "2026-08-07T04:57:00Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632.log",
+    "size_bytes": 19017,
+    "captured_at": "2026-08-07T04:57:00Z"
+  },
+  "tests": [
+    {
+      "id": 21444,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_dequantize[6-dtype0-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1758,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_6_dtype0_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_6_dtype0_1024.xml"
+    },
+    {
+      "id": 21445,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_dequantize[8-dtype0-256]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1150,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_8_dtype0_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_8_dtype0_256.xml"
+    },
+    {
+      "id": 21446,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_dequantize[8-dtype0-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1609,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_8_dtype0_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_dequantize_8_dtype0_1024.xml"
+    },
+    {
+      "id": 21447,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_mmvq[29-dtype0-256]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1775,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_29_dtype0_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_29_dtype0_256.xml"
+    },
+    {
+      "id": 21448,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_mmvq[29-dtype0-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2018,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_29_dtype0_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_29_dtype0_1024.xml"
+    },
+    {
+      "id": 21449,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_mmvq[19-dtype0-256]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1489,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_19_dtype0_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_19_dtype0_256.xml"
+    },
+    {
+      "id": 21450,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_mmvq[19-dtype0-1024]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1120,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_19_dtype0_1024.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_19_dtype0_1024.xml"
+    },
+    {
+      "id": 21451,
+      "test_node": "tests/kernels/quantization/test_gguf.py::test_mmvq[22-dtype0-256]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 991,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/pytest_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_22_dtype0_256.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125632/result_batch_20260807_125632_tests_kernels_quantization_test_gguf_py_test_mmvq_22_dtype0_256.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

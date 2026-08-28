@@ -10,7 +10,7 @@
 - 供后续resume/retry使用
 
 用法：
-    python tasks/ut/scripts/generate_test_load.py \\
+    python skills/ut/ut_common/scripts/generate_test_load.py \\
         --manifest-path runs/ut-20260708-123456/manifest.json \\
         --count 1000 \\
         --output-dir runs/ut-20260708-123456

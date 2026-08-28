@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_super_0401",
+  "started_at": "2026-08-04T23:11:38Z",
+  "finished_at": "2026-08-04T23:21:53Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/pytest_batch_super_0401.log",
+    "size_bytes": 78148,
+    "captured_at": "2026-08-04T23:21:53Z"
+  },
+  "tests": [
+    {
+      "id": 1068,
+      "test_node": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml[latency-256-256-256-32-8-2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 1192442,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/pytest_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_latency_256_256_256_32_8_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/result_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_latency_256_256_256_32_8_2.xml"
+    },
+    {
+      "id": 1069,
+      "test_node": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml[latency-256-256-256-32-8-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 191,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/pytest_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_latency_256_256_256_32_8_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/result_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_latency_256_256_256_32_8_4.xml"
+    },
+    {
+      "id": 1070,
+      "test_node": "tests/distributed/test_eplb_fused_moe_layer_dep_nvfp4.py::test_eplb_fml[throughput-256-256-256-32-8-2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError",
+      "duration_ms": 1178394,
+      "exit_code": null,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/pytest_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_throughput_256_256_256_32_8_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0401/result_batch_super_0401_tests_distributed_test_eplb_fused_moe_layer_dep_nvfp4_py_test_eplb_fml_throughput_256_256_256_32_8_2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 1,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

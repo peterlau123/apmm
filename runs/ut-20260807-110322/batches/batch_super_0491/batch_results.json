@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0491",
+  "started_at": "2026-08-07T23:12:31Z",
+  "finished_at": "2026-08-07T23:12:35Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491.log",
+    "size_bytes": 3634,
+    "captured_at": "2026-08-07T23:12:35Z"
+  },
+  "tests": [
+    {
+      "id": 30158,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(-8, 7, ScalarType.uint4b8)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_8_7_ScalarType_uint4b8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_8_7_ScalarType_uint4b8.xml"
+    },
+    {
+      "id": 30159,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(-128, 127, ScalarType.uint8b128)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_128_127_ScalarType_uint8b128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_128_127_ScalarType_uint8b128.xml"
+    },
+    {
+      "id": 30160,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(-6.0, 6.0, ScalarType.float4_e2m1f)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_6_0_6_0_ScalarType_float4_e2m1f.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_6_0_6_0_ScalarType_float4_e2m1f.xml"
+    },
+    {
+      "id": 30161,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(-28.0, 28.0, ScalarType.float6_e3m2f)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_28_0_28_0_ScalarType_float6_e3m2f.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_28_0_28_0_ScalarType_float6_e3m2f.xml"
+    },
+    {
+      "id": 30162,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(torch.int8, ScalarType.int8)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_int8_ScalarType_int8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_int8_ScalarType_int8.xml"
+    },
+    {
+      "id": 30163,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(torch.uint8, ScalarType.uint8)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_uint8_ScalarType_uint8.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_uint8_ScalarType_uint8.xml"
+    },
+    {
+      "id": 30164,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(torch.float8_e5m2, ScalarType.float8_e5m2n)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_float8_e5m2_ScalarType_float8_e5m2n.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_float8_e5m2_ScalarType_float8_e5m2n.xml"
+    },
+    {
+      "id": 30165,
+      "test_node": "tests/test_scalartype.py::test_scalar_type_min_max[(torch.float8_e4m3fn, ScalarType.float8_e4m3fn)]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+      "duration_ms": null,
+      "exit_code": 2,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/pytest_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_float8_e4m3fn_ScalarType_float8_e4m3fn.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0491/result_batch_super_0491_tests_test_scalartype_py_test_scalar_type_min_max_torch_float8_e4m3fn_ScalarType_float8_e4m3fn.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

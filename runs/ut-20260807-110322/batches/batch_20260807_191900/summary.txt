@@ -1,0 +1,8 @@
+PASSED         tests/v1/sample/test_topk_topp_sampler.py::test_topk_impl_equivalence (gpu=0, 883ms, exit=0)
+FAILED         tests/v1/sample/test_topk_topp_sampler.py::test_flashinfer_sampler (gpu=2, 1079ms, exit=1)
+PASSED         tests/v1/shutdown/test_delete.py::test_async_llm_delete[False-2-hmellor/tiny-random-LlamaForCausalLM] (gpu=3, 211ms, exit=0)
+FAILED         tests/v1/shutdown/test_delete.py::test_async_llm_delete[False-1-hmellor/tiny-random-LlamaForCausalLM] (gpu=4, 1507ms, exit=1)
+PASSED         tests/v1/shutdown/test_delete.py::test_async_llm_delete[True-2-hmellor/tiny-random-LlamaForCausalLM] (gpu=5, 187ms, exit=0)
+FAILED         tests/v1/shutdown/test_delete.py::test_async_llm_delete[True-1-hmellor/tiny-random-LlamaForCausalLM] (gpu=6, 1526ms, exit=1)
+PASSED         tests/v1/shutdown/test_delete.py::test_llm_delete[False-True-2-hmellor/tiny-random-LlamaForCausalLM] (gpu=0, 149ms, exit=0)
+FAILED         tests/v1/shutdown/test_delete.py::test_llm_delete[False-True-1-hmellor/tiny-random-LlamaForCausalLM] (gpu=2, 1487ms, exit=1)

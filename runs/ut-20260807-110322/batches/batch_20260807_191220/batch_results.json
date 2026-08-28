@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_191220",
+  "started_at": "2026-08-07T11:12:20Z",
+  "finished_at": "2026-08-07T11:13:19Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220.log",
+    "size_bytes": 571615,
+    "captured_at": "2026-08-07T11:13:19Z"
+  },
+  "tests": [
+    {
+      "id": 32653,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_logprobs_mode[raw_logprobs]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5955,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_raw_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_raw_logprobs.xml"
+    },
+    {
+      "id": 32654,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_logprobs_mode[processed_logits]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 5834,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_processed_logits.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_processed_logits.xml"
+    },
+    {
+      "id": 32655,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_logprobs_mode[processed_logprobs]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6059,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_processed_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_logprobs_mode_processed_logprobs.xml"
+    },
+    {
+      "id": 32656,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[0-model_setup0-raw_logits]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 10259,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_raw_logits.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_raw_logits.xml"
+    },
+    {
+      "id": 32657,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[0-model_setup0-raw_logprobs]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 10950,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_raw_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_raw_logprobs.xml"
+    },
+    {
+      "id": 32658,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[0-model_setup0-processed_logits]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 10325,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_processed_logits.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_processed_logits.xml"
+    },
+    {
+      "id": 32659,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[0-model_setup0-processed_logprobs]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 9099,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_processed_logprobs.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_0_model_setup0_processed_logprobs.xml"
+    },
+    {
+      "id": 32660,
+      "test_node": "tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[3-model_setup0-raw_logits]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 9198,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/pytest_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_3_model_setup0_raw_logits.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_191220/result_batch_20260807_191220_tests_v1_sample_test_logprobs_py_test_spec_decode_logprobs_3_model_setup0_raw_logits.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

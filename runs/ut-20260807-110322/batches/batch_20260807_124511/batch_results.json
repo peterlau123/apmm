@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_124511",
+  "started_at": "2026-08-07T04:45:11Z",
+  "finished_at": "2026-08-07T04:45:37Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511.log",
+    "size_bytes": 51966,
+    "captured_at": "2026-08-07T04:45:37Z"
+  },
+  "tests": [
+    {
+      "id": 21276,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8.py::test_convert_packed_uint4b8_to_signed_int4_inplace[shape11]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1821,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_py_test_convert_packed_uint4b8_to_signed_int4_inplace_shape11.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_py_test_convert_packed_uint4b8_to_signed_int4_inplace_shape11.xml"
+    },
+    {
+      "id": 21277,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1665,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape0.xml"
+    },
+    {
+      "id": 21278,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1703,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape1.xml"
+    },
+    {
+      "id": 21279,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1788,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape2.xml"
+    },
+    {
+      "id": 21280,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 2495,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape3.xml"
+    },
+    {
+      "id": 21281,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1638,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape4.xml"
+    },
+    {
+      "id": 21282,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape5]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 698,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape5.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape5.xml"
+    },
+    {
+      "id": 21283,
+      "test_node": "tests/kernels/quantization/test_cutlass_w4a8_moe.py::test_cutlass_w4a8_moe_mm_end_to_end[True-shape6]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1204,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/pytest_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape6.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_124511/result_batch_20260807_124511_tests_kernels_quantization_test_cutlass_w4a8_moe_py_test_cutlass_w4a8_moe_mm_end_to_end_True_shape6.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

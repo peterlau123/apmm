@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_125055",
+  "started_at": "2026-08-07T04:50:55Z",
+  "finished_at": "2026-08-07T04:51:36Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055.log",
+    "size_bytes": 19743,
+    "captured_at": "2026-08-07T04:51:36Z"
+  },
+  "tests": [
+    {
+      "id": 21364,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_token_fp8_quant[0-False-dtype1-8193-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1795,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_token_fp8_quant_0_False_dtype1_8193_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_token_fp8_quant_0_False_dtype1_8193_7.xml"
+    },
+    {
+      "id": 21365,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_token_fp8_quant[0-False-dtype1-8193-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1791,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_token_fp8_quant_0_False_dtype1_8193_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_token_fp8_quant_0_False_dtype1_8193_4096.xml"
+    },
+    {
+      "id": 21366,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-17-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1717,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_1.xml"
+    },
+    {
+      "id": 21367,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-17-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1801,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_7.xml"
+    },
+    {
+      "id": 21368,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-17-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1761,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_17_4096.xml"
+    },
+    {
+      "id": 21369,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-1024-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1751,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_1.xml"
+    },
+    {
+      "id": 21370,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-1024-7]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 629,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_7.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_7.xml"
+    },
+    {
+      "id": 21371,
+      "test_node": "tests/kernels/quantization/test_fp8_quant.py::test_dynamic_per_tensor_fp8_quant[0-dtype0-1024-4096]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 718,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/pytest_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_4096.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_125055/result_batch_20260807_125055_tests_kernels_quantization_test_fp8_quant_py_test_dynamic_per_tensor_fp8_quant_0_dtype0_1024_4096.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

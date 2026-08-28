@@ -1,0 +1,37 @@
+{
+  "batch_id": "batch_20260806_flaky_01",
+  "started_at": "2026-08-06T15:14:18Z",
+  "finished_at": "2026-08-06T15:14:37Z",
+  "timeout": 900,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_flaky_01/pytest_batch_20260806_flaky_01.log",
+    "size_bytes": 21092,
+    "captured_at": "2026-08-06T15:14:37Z"
+  },
+  "tests": [
+    {
+      "id": 14017,
+      "test_node": "tests/kernels/moe/test_modular_kernel_combinations.py::test_modular_kernel_combinations_singlegpu[2048-1024-32-dtype0-None-MoEPrepareAndFinalizeNoEP-TritonExperts-None-1]",
+      "status": "failed",
+      "error_type": "oom",
+      "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 0 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/kernels/moe/modular_kernel_tools/parallel_utils.py\", line 71, in _worker_parallel_launch\n    torch.distributed.init_process_group(\n  File \"/usr/local/lib/python3.12/dist-packages/torch/distributed/c10d_l",
+      "duration_ms": 7457,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_flaky_01/pytest_batch_20260806_flaky_01_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype0_None_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_flaky_01/result_batch_20260806_flaky_01_tests_kernels_moe_test_modular_kernel_combinations_py_test_modular_kernel_combinations_singlegpu_2048_1024_32_dtype0_None_MoEPrepareAndFinalizeNoEP_TritonExperts_None_1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 1,
+    "passed": 0,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

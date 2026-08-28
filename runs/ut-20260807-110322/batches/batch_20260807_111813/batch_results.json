@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_111813",
+  "started_at": "2026-08-07T03:18:14Z",
+  "finished_at": "2026-08-07T03:18:42Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813.log",
+    "size_bytes": 399510,
+    "captured_at": "2026-08-07T03:18:42Z"
+  },
+  "tests": [
+    {
+      "id": 20019,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7168-13824-block_size13-out_dtype13-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2044,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7168_13824_block_size13_out_dtype13_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7168_13824_block_size13_out_dtype13_0.xml"
+    },
+    {
+      "id": 20020,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7168-16384-block_size14-out_dtype14-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 2277,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7168_16384_block_size14_out_dtype14_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7168_16384_block_size14_out_dtype14_0.xml"
+    },
+    {
+      "id": 20021,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7748-256-block_size15-out_dtype15-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1354,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_256_block_size15_out_dtype15_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_256_block_size15_out_dtype15_0.xml"
+    },
+    {
+      "id": 20022,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7748-3884-block_size16-out_dtype16-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 640,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_3884_block_size16_out_dtype16_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_3884_block_size16_out_dtype16_0.xml"
+    },
+    {
+      "id": 20023,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7748-4096-block_size17-out_dtype17-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1365,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_4096_block_size17_out_dtype17_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_4096_block_size17_out_dtype17_0.xml"
+    },
+    {
+      "id": 20024,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7748-13824-block_size18-out_dtype18-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1341,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_13824_block_size18_out_dtype18_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_13824_block_size18_out_dtype18_0.xml"
+    },
+    {
+      "id": 20025,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-7748-16384-block_size19-out_dtype19-0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 484,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_16384_block_size19_out_dtype19_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_7748_16384_block_size19_out_dtype19_0.xml"
+    },
+    {
+      "id": 20026,
+      "test_node": "tests/kernels/quantization/test_block_fp8.py::test_w8a8_block_fp8_deep_gemm_matmul[1-13824-256-block_size20-out_dtype20-0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1539,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/pytest_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_13824_256_block_size20_out_dtype20_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_111813/result_batch_20260807_111813_tests_kernels_quantization_test_block_fp8_py_test_w8a8_block_fp8_deep_gemm_matmul_1_13824_256_block_size20_out_dtype20_0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

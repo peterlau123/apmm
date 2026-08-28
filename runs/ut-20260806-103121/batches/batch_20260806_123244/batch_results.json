@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_123244",
+  "started_at": "2026-08-06T04:32:44Z",
+  "finished_at": "2026-08-06T04:33:25Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244.log",
+    "size_bytes": 411021,
+    "captured_at": "2026-08-06T04:33:25Z"
+  },
+  "tests": [
+    {
+      "id": 12843,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-True-dtype1-6-64-45-1024-128]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 147,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_45_1024_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_45_1024_128.xml"
+    },
+    {
+      "id": 12844,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-True-dtype1-6-64-64-512-512]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 216,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_64_512_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_64_512_512.xml"
+    },
+    {
+      "id": 12845,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-True-dtype1-6-64-64-1024-2048]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 226,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_64_1024_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_64_1024_2048.xml"
+    },
+    {
+      "id": 12846,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-True-dtype1-6-64-222-128-2048]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 221,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_222_128_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_222_128_2048.xml"
+    },
+    {
+      "id": 12847,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-block_shape1-True-dtype1-6-64-222-1024-2048]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 218,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_222_1024_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_block_shape1_True_dtype1_6_64_222_1024_2048.xml"
+    },
+    {
+      "id": 12848,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_fused_moe[0-dtype0-block_size0-1-2-1-128-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1601,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_128_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_128_128.xml"
+    },
+    {
+      "id": 12849,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_fused_moe[0-dtype0-block_size0-1-2-1-128-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1548,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_128_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_128_7168.xml"
+    },
+    {
+      "id": 12850,
+      "test_node": "tests/kernels/moe/test_block_fp8.py::test_w8a8_block_fp8_fused_moe[0-dtype0-block_size0-1-2-1-1024-7168]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "torch._dynamo.exc.BackendCompilerFailed: backend='inductor' raised:\nImportError: cannot import name 'triton_key' from 'triton.compiler.compiler' (/usr/local/lib/python3.12/dist-packages/triton/compiler/compiler.py)\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True",
+      "duration_ms": 1498,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/pytest_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_1024_7168.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_123244/result_batch_20260806_123244_tests_kernels_moe_test_block_fp8_py_test_w8a8_block_fp8_fused_moe_0_dtype0_block_size0_1_2_1_1024_7168.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 5,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

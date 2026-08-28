@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260718_204040",
-  "started_at": "2026-07-18T12:40:43Z",
-  "finished_at": "2026-07-18T12:51:07Z",
-  "timeout": 300,
-  "exit_code": 0,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040.log",
-    "size_bytes": 150950,
-    "captured_at": "2026-07-18T12:51:07Z"
+ "batch_id": "batch_20260718_204040",
+ "started_at": "2026-08-05T08:54:22Z",
+ "finished_at": "2026-08-05T08:55:32Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/pytest_batch_super_0453.log",
+  "size_bytes": 29036,
+  "captured_at": "2026-08-05T08:55:32Z"
+ },
+ "tests": [
+  {
+   "id": 146,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/pytest_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/result_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.xml"
   },
-  "tests": [
-    {
-      "id": 134,
-      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
-      "duration_ms": 407,
-      "exit_code": 0,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
-    },
-    {
-      "id": 135,
-      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "RuntimeError: Server failed to start in time.",
-      "duration_ms": 241509,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
-    },
-    {
-      "id": 136,
-      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 0,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
-    },
-    {
-      "id": 137,
-      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
-      "status": "failed",
-      "error_type": "assertion",
-      "error_message": "RuntimeError: Server failed to start in time.",
-      "duration_ms": 241234,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
-    },
-    {
-      "id": 146,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs0-AttentionBackendEnum.TRITON_ATTN-matches0--quant_fp8]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 0,
-      "exit_code": 0,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs0_AttentionBackendEnum_TRITON_ATTN_matches0_quant_fp8.xml"
-    },
-    {
-      "id": 147,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1-+quant_fp8]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 0,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.xml"
-    },
-    {
-      "id": 148,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs2-AttentionBackendEnum.TRITON_ATTN-matches2--quant_fp8]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 0,
-      "exit_code": 0,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8.xml"
-    },
-    {
-      "id": 149,
-      "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs3-AttentionBackendEnum.TRITON_ATTN-matches3-+quant_fp8]",
-      "status": "passed",
-      "error_type": null,
-      "error_message": null,
-      "duration_ms": 0,
-      "exit_code": 0,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/pytest_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_204040/result_batch_20260718_204040_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 4,
-    "failed": 3,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 1
+  {
+   "id": 147,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs1-AttentionBackendEnum.TRITON_ATTN-matches1-+quant_fp8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/pytest_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/result_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs1_AttentionBackendEnum_TRITON_ATTN_matches1_quant_fp8.xml"
+  },
+  {
+   "id": 148,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs2-AttentionBackendEnum.TRITON_ATTN-matches2--quant_fp8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/pytest_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/result_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs2_AttentionBackendEnum_TRITON_ATTN_matches2_quant_fp8.xml"
+  },
+  {
+   "id": 149,
+   "test_node": "tests/compile/distributed/test_fusions_e2e.py::test_attn_quant[True-RedHatAI/Llama-3.1-8B-Instruct-NVFP4-model_kwargs3-AttentionBackendEnum.TRITON_ATTN-matches3-+quant_fp8]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/pytest_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0453/result_batch_super_0453_tests_compile_distributed_test_fusions_e2e_py_test_attn_quant_True_RedHatAI_Llama_3_1_8B_Instruct_NVFP4_model_kwargs3_AttentionBackendEnum_TRITON_ATTN_matches3_quant_fp8.xml"
+  },
+  {
+   "id": 134,
+   "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 240817,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+  },
+  {
+   "id": 135,
+   "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241463,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
+  },
+  {
+   "id": 136,
+   "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 240852,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+  },
+  {
+   "id": 137,
+   "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Server failed to start in time.",
+   "duration_ms": 241465,
+   "exit_code": 1,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 4,
+  "failed": 4,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

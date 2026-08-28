@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_184757",
+  "started_at": "2026-08-07T10:47:58Z",
+  "finished_at": "2026-08-07T10:48:02Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:48:02Z"
+  },
+  "tests": [
+    {
+      "id": 31165,
+      "test_node": "tests/tool_parsers/test_jamba_tool_parser.py::test_extract_tool_calls[parallel_tools]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_parallel_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_parallel_tools.xml"
+    },
+    {
+      "id": 31166,
+      "test_node": "tests/tool_parsers/test_jamba_tool_parser.py::test_extract_tool_calls_streaming[no_tools]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_no_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_no_tools.xml"
+    },
+    {
+      "id": 31167,
+      "test_node": "tests/tool_parsers/test_jamba_tool_parser.py::test_extract_tool_calls_streaming[single_tool]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_single_tool.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_single_tool.xml"
+    },
+    {
+      "id": 31168,
+      "test_node": "tests/tool_parsers/test_jamba_tool_parser.py::test_extract_tool_calls_streaming[single_tool_with_content]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_single_tool_with_content.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_single_tool_with_content.xml"
+    },
+    {
+      "id": 31169,
+      "test_node": "tests/tool_parsers/test_jamba_tool_parser.py::test_extract_tool_calls_streaming[parallel_tools]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_parallel_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_jamba_tool_parser_py_test_extract_tool_calls_streaming_parallel_tools.xml"
+    },
+    {
+      "id": 31170,
+      "test_node": "tests/tool_parsers/test_kimi_k2_tool_parser.py::test_extract_tool_calls_no_tools",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_no_tools.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_no_tools.xml"
+    },
+    {
+      "id": 31171,
+      "test_node": "tests/tool_parsers/test_kimi_k2_tool_parser.py::test_extract_tool_calls[tool_call_with_content_before]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_tool_call_with_content_before.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_tool_call_with_content_before.xml"
+    },
+    {
+      "id": 31172,
+      "test_node": "tests/tool_parsers/test_kimi_k2_tool_parser.py::test_extract_tool_calls[multi_tool_call_with_content_before]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/pytest_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_multi_tool_call_with_content_before.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_184757/result_batch_20260807_184757_tests_tool_parsers_test_kimi_k2_tool_parser_py_test_extract_tool_calls_multi_tool_call_with_content_before.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

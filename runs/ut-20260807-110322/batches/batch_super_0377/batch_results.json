@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0377",
+  "started_at": "2026-08-07T21:03:55Z",
+  "finished_at": "2026-08-07T21:04:27Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377.log",
+    "size_bytes": 39054,
+    "captured_at": "2026-08-07T21:04:27Z"
+  },
+  "tests": [
+    {
+      "id": 29144,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[FalconForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4520,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_FalconForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_FalconForCausalLM.xml"
+    },
+    {
+      "id": 29145,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[RobertaForMaskedLM]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 246,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_RobertaForMaskedLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_RobertaForMaskedLM.xml"
+    },
+    {
+      "id": 29146,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[PaliGemmaForConditionalGeneration]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 8525,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_PaliGemmaForConditionalGeneration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_PaliGemmaForConditionalGeneration.xml"
+    },
+    {
+      "id": 29147,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[MPTForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4666,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_MPTForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_MPTForCausalLM.xml"
+    },
+    {
+      "id": 29148,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[TransformersMultiModalEmbeddingModel]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 310,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_TransformersMultiModalEmbeddingModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_TransformersMultiModalEmbeddingModel.xml"
+    },
+    {
+      "id": 29149,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[SiglipModel]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 5015,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_SiglipModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_SiglipModel.xml"
+    },
+    {
+      "id": 29150,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[TransformersMoEForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 222,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_TransformersMoEForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_TransformersMoEForCausalLM.xml"
+    },
+    {
+      "id": 29151,
+      "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[MixtralForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 4151,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/pytest_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_MixtralForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0377/result_batch_super_0377_tests_models_test_initialization_py_test_can_initialize_large_subset_MixtralForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 6,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

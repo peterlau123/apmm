@@ -1,0 +1,61 @@
+{
+  "batch_id": "batch_super_0420",
+  "started_at": "2026-08-05T01:39:39Z",
+  "finished_at": "2026-08-05T01:40:24Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/pytest_batch_super_0420.log",
+    "size_bytes": 57335,
+    "captured_at": "2026-08-05T01:40:24Z"
+  },
+  "tests": [
+    {
+      "id": 1121,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup14-ray-auto-test_options14]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 279,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/pytest_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup14_ray_auto_test_options14.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/result_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup14_ray_auto_test_options14.xml"
+    },
+    {
+      "id": 1122,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[intfloat/e5-small-parallel_setup0-mp-pooling-test_options0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Test test_tp_language_embedding failed when called with args () and kwargs {'model_id': 'intfloat/e5-small', 'parallel_setup': ParallelSetup(tp_size=1, pp_size=2, eager_mode=True), 'distributed_backend': 'mp', 'runner': 'pooling', 'test_options': PPTestOptions(multi_node_only=False, load_format=None), 'num_gpus_available': 2} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  F",
+      "duration_ms": 532,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/pytest_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_intfloat_e5_small_parallel_setup0_mp_pooling_test_options0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/result_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_intfloat_e5_small_parallel_setup0_mp_pooling_test_options0.xml"
+    },
+    {
+      "id": 1123,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_embedding[Alibaba-NLP/gte-modernbert-base-parallel_setup1-mp-pooling-test_options1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'Alibaba-NLP/gte-modernbert-base'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 258,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/pytest_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_Alibaba_NLP_gte_modernbert_base_parallel_setup1_mp_pooling_test_options1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0420/result_batch_super_0420_tests_distributed_test_pipeline_parallel_py_test_tp_language_embedding_Alibaba_NLP_gte_modernbert_base_parallel_setup1_mp_pooling_test_options1.xml"
+    }
+  ],
+  "statistics": {
+    "total": 3,
+    "passed": 0,
+    "failed": 3,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

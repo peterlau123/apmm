@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_154401",
+  "started_at": "2026-08-07T07:44:01Z",
+  "finished_at": "2026-08-07T07:44:32Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401.log",
+    "size_bytes": 19257,
+    "captured_at": "2026-08-07T07:44:32Z"
+  },
+  "tests": [
+    {
+      "id": 24268,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-32000-cuda:0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2903,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_2.xml"
+    },
+    {
+      "id": 24269,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-32000-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2891,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_32000_cuda_0_4.xml"
+    },
+    {
+      "id": 24273,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-64000-cuda:0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2887,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_1.xml"
+    },
+    {
+      "id": 24274,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-64000-cuda:0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2875,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_2.xml"
+    },
+    {
+      "id": 24275,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-64000-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2886,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_64000_cuda_0_4.xml"
+    },
+    {
+      "id": 24279,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-256512-cuda:0-1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2624,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_1.xml"
+    },
+    {
+      "id": 24280,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-256512-cuda:0-2]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2071,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_2.xml"
+    },
+    {
+      "id": 24281,
+      "test_node": "tests/lora/test_layers.py::test_lm_head_logits_processor[True-256512-cuda:0-4]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2060,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/pytest_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_154401/result_batch_20260807_154401_tests_lora_test_layers_py_test_lm_head_logits_processor_True_256512_cuda_0_4.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

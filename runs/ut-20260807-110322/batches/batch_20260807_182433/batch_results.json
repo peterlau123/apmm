@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182433",
+ "started_at": "2026-08-07T20:24:16Z",
+ "finished_at": "2026-08-07T20:24:44Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349.log",
+  "size_bytes": 477822,
+  "captured_at": "2026-08-07T20:24:44Z"
+ },
+ "tests": [
+  {
+   "id": 28919,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-facebook/opt-125m3]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+   "duration_ms": 310,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_facebook_opt_125m3.xml"
+  },
+  {
+   "id": 28920,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-hmellor/tiny-random-LlamaForCausalLM1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 12789,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_LlamaForCausalLM1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_hmellor_tiny_random_LlamaForCausalLM1.xml"
+  },
+  {
+   "id": 28921,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[True-False-5-32-swiss-ai/Apertus-8B-Instruct-2509]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 214,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_swiss_ai_Apertus_8B_Instruct_2509.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_True_False_5_32_swiss_ai_Apertus_8B_Instruct_2509.xml"
+  },
+  {
+   "id": 28922,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[False-False-5-32-facebook/opt-125m0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+   "duration_ms": 336,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_facebook_opt_125m0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_facebook_opt_125m0.xml"
+  },
+  {
+   "id": 28923,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[False-False-5-32-openai-community/gpt2]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 215,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_openai_community_gpt2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_openai_community_gpt2.xml"
+  },
+  {
+   "id": 28924,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[False-False-5-32-Milos/slovak-gpt-j-405M]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 229,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_Milos_slovak_gpt_j_405M.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_Milos_slovak_gpt_j_405M.xml"
+  },
+  {
+   "id": 28925,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[False-False-5-32-bigcode/tiny_starcoder_py]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 144,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_bigcode_tiny_starcoder_py.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_bigcode_tiny_starcoder_py.xml"
+  },
+  {
+   "id": 28926,
+   "test_node": "tests/models/language/generation/test_common.py::test_models[False-False-5-32-facebook/opt-125m1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "ValueError: Due to a serious vulnerability issue in `torch.load`, even with `weights_only=True`, we now require users to upgrade torch to at least v2.6 in order to use the function. This version restriction does not apply when loading files with safetensors.\nSee the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-32434",
+   "duration_ms": 287,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/pytest_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_facebook_opt_125m1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0349/result_batch_super_0349_tests_models_language_generation_test_common_py_test_models_False_False_5_32_facebook_opt_125m1.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 8,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

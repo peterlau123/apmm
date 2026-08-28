@@ -34,6 +34,10 @@ config:
   # 任务洪峰压垮 daemon 队列 (active=10 满 → 卡死)。4 卡减半洪峰,
   # 且 H20 常态 4 卡空闲 (其他用户占 4)。
   force_gpu_count: 4
+  # 2026-08-05: GPU 1 (cuda:1) illegal memory access 硬件异常
+  # (compute-sanitizer 证实同一 kernel cuda:0 正常/cuda:1 悬垂),
+  # 后续 execute_batch 分配 GPU 时排除卡 1。
+  exclude_gpus: [1]
   vllm_dir: /gpfs/gcsp/M2.7_verify/vllm
   ut_logs_dir: /gpfs/gcsp/M2.7_verify/vllm/ut_logs
   container_env:

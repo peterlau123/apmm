@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0422",
+  "started_at": "2026-08-07T21:51:09Z",
+  "finished_at": "2026-08-07T21:52:32Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422.log",
+    "size_bytes": 312333,
+    "captured_at": "2026-08-07T21:52:32Z"
+  },
+  "tests": [
+    {
+      "id": 29504,
+      "test_node": "tests/models/test_terratorch.py::test_inference[mgazz/Prithvi_v2_eo_300_tl_unet_agb]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 201,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_terratorch_py_test_inference_mgazz_Prithvi_v2_eo_300_tl_unet_agb.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_terratorch_py_test_inference_mgazz_Prithvi_v2_eo_300_tl_unet_agb.xml"
+    },
+    {
+      "id": 29505,
+      "test_node": "tests/models/test_transformers.py::test_models[TinyLlama/TinyLlama-1.1B-Chat-v1.0-transformers]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 16958,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_models_TinyLlama_TinyLlama_1_1B_Chat_v1_0_transformers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_models_TinyLlama_TinyLlama_1_1B_Chat_v1_0_transformers.xml"
+    },
+    {
+      "id": 29506,
+      "test_node": "tests/models/test_transformers.py::test_models[hmellor/Ilama-3.2-1B-auto]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 288,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_models_hmellor_Ilama_3_2_1B_auto.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_models_hmellor_Ilama_3_2_1B_auto.xml"
+    },
+    {
+      "id": 29507,
+      "test_node": "tests/models/test_transformers.py::test_models[allenai/OLMoE-1B-7B-0924-transformers]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 272,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_models_allenai_OLMoE_1B_7B_0924_transformers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_models_allenai_OLMoE_1B_7B_0924_transformers.xml"
+    },
+    {
+      "id": 29508,
+      "test_node": "tests/models/test_transformers.py::test_hybrid_attention",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 305,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_hybrid_attention.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_hybrid_attention.xml"
+    },
+    {
+      "id": 29510,
+      "test_node": "tests/models/test_transformers.py::test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-AWQ-quantization_kwargs0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 291,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TheBloke_TinyLlama_1_1B_Chat_v0_3_AWQ_quantization_kwargs0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TheBloke_TinyLlama_1_1B_Chat_v0_3_AWQ_quantization_kwargs0.xml"
+    },
+    {
+      "id": 29511,
+      "test_node": "tests/models/test_transformers.py::test_quantization[5-32-TheBloke/TinyLlama-1.1B-Chat-v0.3-GPTQ-quantization_kwargs1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 169,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TheBloke_TinyLlama_1_1B_Chat_v0_3_GPTQ_quantization_kwargs1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TheBloke_TinyLlama_1_1B_Chat_v0_3_GPTQ_quantization_kwargs1.xml"
+    },
+    {
+      "id": 29512,
+      "test_node": "tests/models/test_transformers.py::test_quantization[5-32-TinyLlama/TinyLlama-1.1B-Chat-v1.0-quantization_kwargs2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+      "duration_ms": 6123,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/pytest_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TinyLlama_TinyLlama_1_1B_Chat_v1_0_quantization_kwargs2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0422/result_batch_super_0422_tests_models_test_transformers_py_test_quantization_5_32_TinyLlama_TinyLlama_1_1B_Chat_v1_0_quantization_kwargs2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

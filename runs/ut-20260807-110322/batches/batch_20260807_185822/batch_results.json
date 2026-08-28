@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185822",
+  "started_at": "2026-08-07T10:58:22Z",
+  "finished_at": "2026-08-07T10:58:26Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:58:26Z"
+  },
+  "tests": [
+    {
+      "id": 32303,
+      "test_node": "tests/v1/e2e/test_spec_decode.py::test_eagle_correctness[TREE_ATTN-llama4_eagle]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_llama4_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_llama4_eagle.xml"
+    },
+    {
+      "id": 32304,
+      "test_node": "tests/v1/e2e/test_spec_decode.py::test_eagle_correctness[TREE_ATTN-llama4_eagle_mm]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_llama4_eagle_mm.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_llama4_eagle_mm.xml"
+    },
+    {
+      "id": 32305,
+      "test_node": "tests/v1/e2e/test_spec_decode.py::test_eagle_correctness[TREE_ATTN-deepseek_eagle]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_deepseek_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_eagle_correctness_TREE_ATTN_deepseek_eagle.xml"
+    },
+    {
+      "id": 32306,
+      "test_node": "tests/v1/e2e/test_spec_decode.py::test_mtp_correctness[mimo]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_mtp_correctness_mimo.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_mtp_correctness_mimo.xml"
+    },
+    {
+      "id": 32307,
+      "test_node": "tests/v1/e2e/test_spec_decode.py::test_mtp_correctness[deepseek]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_mtp_correctness_deepseek.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_e2e_test_spec_decode_py_test_mtp_correctness_deepseek.xml"
+    },
+    {
+      "id": 32308,
+      "test_node": "tests/v1/engine/test_abort_final_step.py::test_abort_during_final_step[False]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_engine_test_abort_final_step_py_test_abort_during_final_step_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_engine_test_abort_final_step_py_test_abort_during_final_step_False.xml"
+    },
+    {
+      "id": 32309,
+      "test_node": "tests/v1/engine/test_abort_final_step.py::test_abort_during_final_step[True]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_engine_test_abort_final_step_py_test_abort_during_final_step_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_engine_test_abort_final_step_py_test_abort_during_final_step_True.xml"
+    },
+    {
+      "id": 32310,
+      "test_node": "tests/v1/engine/test_async_llm.py::test_load[engine_args0-Hello my name is Robert and-RequestOutputKind.DELTA]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/pytest_batch_20260807_185822_tests_v1_engine_test_async_llm_py_test_load_engine_args0_Hello_my_name_is_Robert_and_RequestOutputKind_DELTA.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185822/result_batch_20260807_185822_tests_v1_engine_test_async_llm_py_test_load_engine_args0_Hello_my_name_is_Robert_and_RequestOutputKind_DELTA.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

@@ -1,0 +1,8 @@
+FAILED         tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[3-model_setup0-raw_logprobs] (gpu=0, 10265ms, exit=1)
+FAILED         tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[3-model_setup0-processed_logits] (gpu=2, 9497ms, exit=1)
+FAILED         tests/v1/sample/test_logprobs.py::test_spec_decode_logprobs[3-model_setup0-processed_logprobs] (gpu=3, 10103ms, exit=1)
+FAILED         tests/v1/sample/test_logprobs.py::test_prompt_logprobs_with_chunking_and_preemption (gpu=4, 12300ms, exit=1)
+FAILED         tests/v1/sample/test_logprobs_e2e.py::test_prompt_logprobs_e2e (gpu=5, 2187ms, exit=1)
+FAILED         tests/v1/sample/test_logprobs_e2e.py::test_prompt_logprobs_e2e_server (gpu=6, 19327ms, exit=1)
+PASSED         tests/v1/sample/test_rejection_sampler.py::test_perfect_match (gpu=0, 1417ms, exit=0)
+PASSED         tests/v1/sample/test_rejection_sampler.py::test_early_mismatch (gpu=2, 1034ms, exit=0)

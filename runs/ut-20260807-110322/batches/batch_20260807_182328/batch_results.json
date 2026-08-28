@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182328",
+ "started_at": "2026-08-07T19:22:48Z",
+ "finished_at": "2026-08-07T19:23:28Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336.log",
+  "size_bytes": 20256,
+  "captured_at": "2026-08-07T19:23:28Z"
+ },
+ "tests": [
+  {
+   "id": 28814,
+   "test_node": "tests/lora/test_transformers_model.py::test_ilama_lora_tp4",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_transformers_model_py_test_ilama_lora_tp4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_transformers_model_py_test_ilama_lora_tp4.xml"
+  },
+  {
+   "id": 28815,
+   "test_node": "tests/lora/test_transformers_model.py::test_ilama_lora_tp4_fully_sharded_loras",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_transformers_model_py_test_ilama_lora_tp4_fully_sharded_loras.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_transformers_model_py_test_ilama_lora_tp4_fully_sharded_loras.xml"
+  },
+  {
+   "id": 28816,
+   "test_node": "tests/lora/test_utils.py::test_parse_fine_tuned_lora_name_valid",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 360,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_parse_fine_tuned_lora_name_valid.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_parse_fine_tuned_lora_name_valid.xml"
+  },
+  {
+   "id": 28817,
+   "test_node": "tests/lora/test_utils.py::test_parse_fine_tuned_lora_name_invalid",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 335,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_parse_fine_tuned_lora_name_invalid.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_parse_fine_tuned_lora_name_invalid.xml"
+  },
+  {
+   "id": 28818,
+   "test_node": "tests/lora/test_utils.py::test_replace_submodule",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 377,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_replace_submodule.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_replace_submodule.xml"
+  },
+  {
+   "id": 28819,
+   "test_node": "tests/lora/test_utils.py::test_get_adapter_absolute_path_absolute",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 384,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_absolute.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_absolute.xml"
+  },
+  {
+   "id": 28820,
+   "test_node": "tests/lora/test_utils.py::test_get_adapter_absolute_path_expanduser",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 291,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_expanduser.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_expanduser.xml"
+  },
+  {
+   "id": 28821,
+   "test_node": "tests/lora/test_utils.py::test_get_adapter_absolute_path_local_existing",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 288,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/pytest_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_local_existing.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0336/result_batch_super_0336_tests_lora_test_utils_py_test_get_adapter_absolute_path_local_existing.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

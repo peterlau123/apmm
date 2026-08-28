@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183404",
+ "started_at": "2026-08-07T22:34:00Z",
+ "finished_at": "2026-08-07T22:34:26Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459.log",
+  "size_bytes": 404849,
+  "captured_at": "2026-08-07T22:34:26Z"
+ },
+ "tests": [
+  {
+   "id": 29802,
+   "test_node": "tests/quantization/test_cpu_offload.py::test_cpu_offload_fp8",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 213,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_fp8.xml"
+  },
+  {
+   "id": 29803,
+   "test_node": "tests/quantization/test_cpu_offload.py::test_cpu_offload_gptq",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 265,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_gptq.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_gptq.xml"
+  },
+  {
+   "id": 29804,
+   "test_node": "tests/quantization/test_cpu_offload.py::test_cpu_offload_awq",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 243,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_awq.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_awq.xml"
+  },
+  {
+   "id": 29805,
+   "test_node": "tests/quantization/test_cpu_offload.py::test_cpu_offload_compressed_tensors",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.",
+   "duration_ms": 250,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_compressed_tensors.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_cpu_offload_py_test_cpu_offload_compressed_tensors.xml"
+  },
+  {
+   "id": 29806,
+   "test_node": "tests/quantization/test_experts_int8.py::test_model_experts_int8_startup[4-bfloat16-ai21labs/Jamba-tiny-random]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 192,
+   "exit_code": 1,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_experts_int8_py_test_model_experts_int8_startup_4_bfloat16_ai21labs_Jamba_tiny_random.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_experts_int8_py_test_model_experts_int8_startup_4_bfloat16_ai21labs_Jamba_tiny_random.xml"
+  },
+  {
+   "id": 29807,
+   "test_node": "tests/quantization/test_experts_int8.py::test_model_experts_int8_startup[4-bfloat16-pfnet/plamo-2-1b]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 188,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_experts_int8_py_test_model_experts_int8_startup_4_bfloat16_pfnet_plamo_2_1b.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_experts_int8_py_test_model_experts_int8_startup_4_bfloat16_pfnet_plamo_2_1b.xml"
+  },
+  {
+   "id": 29808,
+   "test_node": "tests/quantization/test_fp8.py::test_model_load_and_run[False-False-neuralmagic/Meta-Llama-3-8B-Instruct-FP8-KV]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 162,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_fp8_py_test_model_load_and_run_False_False_neuralmagic_Meta_Llama_3_8B_Instruct_FP8_KV.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_fp8_py_test_model_load_and_run_False_False_neuralmagic_Meta_Llama_3_8B_Instruct_FP8_KV.xml"
+  },
+  {
+   "id": 29809,
+   "test_node": "tests/quantization/test_fp8.py::test_model_load_and_run[False-False-nm-testing/Qwen2-0.5B-Instruct-FP8-SkipQKV]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/pytest_batch_super_0459_tests_quantization_test_fp8_py_test_model_load_and_run_False_False_nm_testing_Qwen2_0_5B_Instruct_FP8_SkipQKV.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0459/result_batch_super_0459_tests_quantization_test_fp8_py_test_model_load_and_run_False_False_nm_testing_Qwen2_0_5B_Instruct_FP8_SkipQKV.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 1,
+  "failed": 7,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

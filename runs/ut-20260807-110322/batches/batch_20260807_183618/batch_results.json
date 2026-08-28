@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183618",
+ "started_at": "2026-08-07T23:05:44Z",
+ "finished_at": "2026-08-07T23:06:06Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486.log",
+  "size_bytes": 20673,
+  "captured_at": "2026-08-07T23:06:06Z"
+ },
+ "tests": [
+  {
+   "id": 30100,
+   "test_node": "tests/test_logger.py::test_request_logger_log_outputs_with_truncation",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 188,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_with_truncation.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_with_truncation.xml"
+  },
+  {
+   "id": 30101,
+   "test_node": "tests/test_logger.py::test_request_logger_log_outputs_none_values",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 141,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_none_values.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_none_values.xml"
+  },
+  {
+   "id": 30102,
+   "test_node": "tests/test_logger.py::test_request_logger_log_outputs_empty_output",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 172,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_empty_output.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_empty_output.xml"
+  },
+  {
+   "id": 30103,
+   "test_node": "tests/test_logger.py::test_request_logger_log_outputs_integration",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 183,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_integration.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_logger_py_test_request_logger_log_outputs_integration.xml"
+  },
+  {
+   "id": 30114,
+   "test_node": "tests/test_outputs.py::test_request_output_forward_compatible",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 165,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_outputs_py_test_request_output_forward_compatible.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_outputs_py_test_request_output_forward_compatible.xml"
+  },
+  {
+   "id": 30117,
+   "test_node": "tests/test_pooling_params.py::test_embed_dimensions[model_info0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 145,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_pooling_params_py_test_embed_dimensions_model_info0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_pooling_params_py_test_embed_dimensions_model_info0.xml"
+  },
+  {
+   "id": 30118,
+   "test_node": "tests/test_pooling_params.py::test_embed_dimensions[model_info1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'Snowflake/snowflake-arctic-embed-m-v1.5'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=va",
+   "duration_ms": 116,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_pooling_params_py_test_embed_dimensions_model_info1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_pooling_params_py_test_embed_dimensions_model_info1.xml"
+  },
+  {
+   "id": 30125,
+   "test_node": "tests/test_regression.py::test_duplicated_ignored_sequence_group",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/pytest_batch_super_0486_tests_test_regression_py_test_duplicated_ignored_sequence_group.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0486/result_batch_super_0486_tests_test_regression_py_test_duplicated_ignored_sequence_group.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 7,
+  "failed": 1,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

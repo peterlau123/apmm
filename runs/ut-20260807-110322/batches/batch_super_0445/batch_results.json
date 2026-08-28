@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0445",
+  "started_at": "2026-08-07T22:14:48Z",
+  "finished_at": "2026-08-07T22:17:43Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445.log",
+    "size_bytes": 480895,
+    "captured_at": "2026-08-07T22:17:43Z"
+  },
+  "tests": [
+    {
+      "id": 29689,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_local_files[1280px-Venn_diagram_rgb.svg.png]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=35639): Read timed out. (read timeout=5)",
+      "duration_ms": 5327,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_1280px_Venn_diagram_rgb_svg_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_1280px_Venn_diagram_rgb_svg_png.xml"
+    },
+    {
+      "id": 29690,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_local_files[RGBA_comp.png]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=40275): Read timed out. (read timeout=5)",
+      "duration_ms": 5330,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_RGBA_comp_png.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_RGBA_comp_png.xml"
+    },
+    {
+      "id": 29691,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_local_files_with_space_in_name[2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ReadTimeout: HTTPConnectionPool(host='127.0.0.1', port=60309): Read timed out. (read timeout=5)",
+      "duration_ms": 5327,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_with_space_in_name_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_local_files_with_space_in_name_2560px_Gfp_wisconsin_madison_the_nature_boardwalk_jpg.xml"
+    },
+    {
+      "id": 29692,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_image_error_conversion",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 178,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_error_conversion.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_image_error_conversion.xml"
+    },
+    {
+      "id": 29693,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[-1-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f1552de9fd0>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+      "duration_ms": 120719,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_1_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_1_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+    },
+    {
+      "id": 29694,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[-1-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7f797ce29970>, 'Connection to github.com timed out. (connect timeout=30)'))",
+      "duration_ms": 120318,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_1_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_1_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+    },
+    {
+      "id": 29695,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[32-https://www.bogotobogo.com/python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='www.bogotobogo.com', port=443): Max retries exceeded with url: /python/OpenCV_Python/images/mean_shift_tracking/slow_traffic_small.mp4 (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.bogotobogo.com', port=443) at 0x7f906e216180>, 'Connection to www.bogotobogo.com timed out. (connect timeout=30)'))",
+      "duration_ms": 120297,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_32_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_32_https_www_bogotobogo_com_python_OpenCV_Python_images_mean_shift_tracking_slow_traffic_small_mp4.xml"
+    },
+    {
+      "id": 29696,
+      "test_node": "tests/multimodal/test_utils.py::test_fetch_video_http[32-https://github.com/opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='github.com', port=443): Max retries exceeded with url: /opencv/opencv/raw/refs/tags/4.12.0/samples/data/vtest.avi (Caused by ConnectTimeoutError(<HTTPSConnection(host='github.com', port=443) at 0x7fd8666255b0>, 'Connection to github.com timed out. (connect timeout=30)'))",
+      "duration_ms": 120349,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/pytest_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_32_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0445/result_batch_super_0445_tests_multimodal_test_utils_py_test_fetch_video_http_32_https_github_com_opencv_opencv_raw_refs_tags_4_12_0_samples_data_vtest_avi.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 7,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

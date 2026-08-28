@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_192553",
+  "started_at": "2026-08-07T11:25:54Z",
+  "finished_at": "2026-08-07T11:26:21Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553.log",
+    "size_bytes": 47140,
+    "captured_at": "2026-08-07T11:26:21Z"
+  },
+  "tests": [
+    {
+      "id": 32849,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-1-TRITON_ATTN-eagle]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 232,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TRITON_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TRITON_ATTN_eagle.xml"
+    },
+    {
+      "id": 32850,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-1-TRITON_ATTN-eagle3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 290,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TRITON_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TRITON_ATTN_eagle3.xml"
+    },
+    {
+      "id": 32851,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-1-TREE_ATTN-eagle]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 226,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TREE_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TREE_ATTN_eagle.xml"
+    },
+    {
+      "id": 32852,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-1-TREE_ATTN-eagle3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 275,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TREE_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_1_TREE_ATTN_eagle3.xml"
+    },
+    {
+      "id": 32853,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-2-FLASH_ATTN-eagle]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 212,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_FLASH_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_FLASH_ATTN_eagle.xml"
+    },
+    {
+      "id": 32854,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-2-FLASH_ATTN-eagle3]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 292,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_FLASH_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_FLASH_ATTN_eagle3.xml"
+    },
+    {
+      "id": 32855,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-2-TRITON_ATTN-eagle]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 154,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_TRITON_ATTN_eagle.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_TRITON_ATTN_eagle.xml"
+    },
+    {
+      "id": 32856,
+      "test_node": "tests/v1/spec_decode/test_eagle.py::test_load_model[False-False-2-TRITON_ATTN-eagle3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 157,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/pytest_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_TRITON_ATTN_eagle3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_192553/result_batch_20260807_192553_tests_v1_spec_decode_test_eagle_py_test_load_model_False_False_2_TRITON_ATTN_eagle3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

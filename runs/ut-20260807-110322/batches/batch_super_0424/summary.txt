@@ -1,0 +1,8 @@
+PASSED         tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers0-10-10-expected_features0] (gpu=0, 178ms, exit=0)
+PASSED         tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers1-10-10-expected_features1] (gpu=2, 178ms, exit=0)
+PASSED         tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers2-10-20-expected_features2] (gpu=3, 229ms, exit=0)
+PASSED         tests/models/test_vision.py::test_resolve_visual_encoder_outputs[select_layers3-10-20-expected_features3] (gpu=4, 211ms, exit=0)
+PASSED         tests/models/test_vision.py::test_run_dp_sharded_vision_model[1] (gpu=5, 0ms, exit=0)
+PASSED         tests/models/test_vision.py::test_run_dp_sharded_vision_model[4] (gpu=6, 0ms, exit=0)
+PASSED         tests/models/test_vision.py::test_run_dp_sharded_vision_model[5] (gpu=0, 0ms, exit=0)
+IGNORED        tests/models/test_vision.py::test_get_load_balance_assignment_cases[sizes0-2-expected_shuffle_indices0-expected_gpu_sample_counts0-expected_grouped_sizes_per_gpu0-empty input] (gpu=2, Nonems, exit=4)

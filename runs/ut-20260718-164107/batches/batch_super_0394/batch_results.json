@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0394",
+  "started_at": "2026-08-04T21:42:15Z",
+  "finished_at": "2026-08-04T21:42:42Z",
+  "timeout": 600,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394.log",
+    "size_bytes": 20954,
+    "captured_at": "2026-08-04T21:42:42Z"
+  },
+  "tests": [
+    {
+      "id": 1045,
+      "test_node": "tests/distributed/test_eplb_algo.py::test_single_gpu_case",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 213,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_single_gpu_case.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_single_gpu_case.xml"
+    },
+    {
+      "id": 1046,
+      "test_node": "tests/distributed/test_eplb_algo.py::test_equal_weights",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 183,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_equal_weights.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_equal_weights.xml"
+    },
+    {
+      "id": 1047,
+      "test_node": "tests/distributed/test_eplb_algo.py::test_extreme_weight_imbalance",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 211,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_extreme_weight_imbalance.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_extreme_weight_imbalance.xml"
+    },
+    {
+      "id": 1048,
+      "test_node": "tests/distributed/test_eplb_algo.py::test_multiple_layers",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 182,
+      "exit_code": 0,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/pytest_batch_super_0394_tests_distributed_test_eplb_algo_py_test_multiple_layers.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0394/result_batch_super_0394_tests_distributed_test_eplb_algo_py_test_multiple_layers.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183435",
+ "started_at": "2026-08-07T22:38:56Z",
+ "finished_at": "2026-08-07T22:39:33Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465.log",
+  "size_bytes": 19226,
+  "captured_at": "2026-08-07T22:39:33Z"
+ },
+ "tests": [
+  {
+   "id": 29850,
+   "test_node": "tests/quantization/test_torchao.py::test_opt_125m_awq_int4wo_model_loading_with_params",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_awq_int4wo_model_loading_with_params.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_awq_int4wo_model_loading_with_params.xml"
+  },
+  {
+   "id": 29851,
+   "test_node": "tests/quantization/test_torchao.py::test_online_quant_config_dict_json",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_online_quant_config_dict_json.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_online_quant_config_dict_json.xml"
+  },
+  {
+   "id": 29852,
+   "test_node": "tests/quantization/test_torchao.py::test_online_quant_config_file",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_online_quant_config_file.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_online_quant_config_file.xml"
+  },
+  {
+   "id": 29853,
+   "test_node": "tests/quantization/test_torchao.py::test_reload_weights",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_reload_weights.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_reload_weights.xml"
+  },
+  {
+   "id": 29854,
+   "test_node": "tests/quantization/test_torchao.py::test_safetensors_model_loading_with_params",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_safetensors_model_loading_with_params.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_safetensors_model_loading_with_params.xml"
+  },
+  {
+   "id": 29855,
+   "test_node": "tests/quantization/test_torchao.py::test_opt_125m_module_fqn_to_config_regex_model",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_module_fqn_to_config_regex_model.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_module_fqn_to_config_regex_model.xml"
+  },
+  {
+   "id": 29856,
+   "test_node": "tests/quantization/test_torchao.py::test_opt_125m_int4wo_model_running_preshuffled_kernel",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_running_preshuffled_kernel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_running_preshuffled_kernel.xml"
+  },
+  {
+   "id": 29857,
+   "test_node": "tests/quantization/test_torchao.py::test_opt_125m_int4wo_model_running_preshuffled_kernel_online_quant",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 0,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_running_preshuffled_kernel_online_quant.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_quantization_test_torchao_py_test_opt_125m_int4wo_model_running_preshuffled_kernel_online_quant.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

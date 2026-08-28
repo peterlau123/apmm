@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183516",
+ "started_at": "2026-08-07T22:45:49Z",
+ "finished_at": "2026-08-07T22:46:17Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472.log",
+  "size_bytes": 19078,
+  "captured_at": "2026-08-07T22:46:17Z"
+ },
+ "tests": [
+  {
+   "id": 29914,
+   "test_node": "tests/test_config.py::test_pooling_runner[cross-encoder/ms-marco-MiniLM-L-6-v2-pooling-none]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2148,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_pooling_runner_cross_encoder_ms_marco_MiniLM_L_6_v2_pooling_none.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_pooling_runner_cross_encoder_ms_marco_MiniLM_L_6_v2_pooling_none.xml"
+  },
+  {
+   "id": 29915,
+   "test_node": "tests/test_config.py::test_pooling_runner[Qwen/Qwen2.5-Math-RM-72B-pooling-none]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 164,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_pooling_runner_Qwen_Qwen2_5_Math_RM_72B_pooling_none.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_pooling_runner_Qwen_Qwen2_5_Math_RM_72B_pooling_none.xml"
+  },
+  {
+   "id": 29916,
+   "test_node": "tests/test_config.py::test_pooling_runner[openai/whisper-small-pooling-embed]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 269,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_pooling_runner_openai_whisper_small_pooling_embed.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_pooling_runner_openai_whisper_small_pooling_embed.xml"
+  },
+  {
+   "id": 29917,
+   "test_node": "tests/test_config.py::test_draft_runner[Qwen/Qwen2.5-1.5B-Instruct-draft-none]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 244,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_draft_runner_Qwen_Qwen2_5_1_5B_Instruct_draft_none.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_draft_runner_Qwen_Qwen2_5_1_5B_Instruct_draft_none.xml"
+  },
+  {
+   "id": 29918,
+   "test_node": "tests/test_config.py::test_disable_sliding_window[model_id_expected0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 279,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected0.xml"
+  },
+  {
+   "id": 29919,
+   "test_node": "tests/test_config.py::test_disable_sliding_window[model_id_expected1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 274,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected1.xml"
+  },
+  {
+   "id": 29920,
+   "test_node": "tests/test_config.py::test_disable_sliding_window[model_id_expected2]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 141,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected2.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_disable_sliding_window_model_id_expected2.xml"
+  },
+  {
+   "id": 29921,
+   "test_node": "tests/test_config.py::test_get_pooling_config",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2222,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/pytest_batch_super_0472_tests_test_config_py_test_get_pooling_config.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0472/result_batch_super_0472_tests_test_config_py_test_get_pooling_config.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

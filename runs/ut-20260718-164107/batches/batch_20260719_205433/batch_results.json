@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260719_205433",
-  "started_at": "2026-07-19T12:54:35Z",
-  "finished_at": "2026-07-19T12:54:45Z",
-  "timeout": 300,
-  "exit_code": 1,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433.log",
-    "size_bytes": null,
-    "captured_at": "2026-07-19T12:54:45Z"
+ "batch_id": "batch_20260719_205433",
+ "started_at": "2026-08-04T18:21:12Z",
+ "finished_at": "2026-08-04T18:21:54Z",
+ "timeout": 600,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325.log",
+  "size_bytes": 20776,
+  "captured_at": "2026-08-04T18:21:54Z"
+ },
+ "tests": [
+  {
+   "id": 6721,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-32768-50.0-dtype0-256-16-256-num_heads1-seq_lens1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 2207,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_32768_50_0_dtype0_256_16_256_num_heads1_seq_lens1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_32768_50_0_dtype0_256_16_256_num_heads1_seq_lens1.xml"
   },
-  "tests": [
-    {
-      "id": 6721,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-32768-50.0-dtype0-256-16-256-num_heads1-seq_lens1]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_32768_50_0_dtype0_256_16_256_num_heads1_seq_lens1.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_32768_50_0_dtype0_256_16_256_num_heads1_seq_lens1.xml"
-    },
-    {
-      "id": 6722,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads0-seq_lens0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens0.xml"
-    },
-    {
-      "id": 6723,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads0-seq_lens1]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens1.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens1.xml"
-    },
-    {
-      "id": 6724,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads1-seq_lens0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens0.xml"
-    },
-    {
-      "id": 6725,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads1-seq_lens1]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens1.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens1.xml"
-    },
-    {
-      "id": 6726,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads0-seq_lens0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens0.xml"
-    },
-    {
-      "id": 6727,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads0-seq_lens1]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens1.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens1.xml"
-    },
-    {
-      "id": 6728,
-      "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads1-seq_lens0]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
-      "duration_ms": null,
-      "exit_code": 1,
-      "gpu_id": 0,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/pytest_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads1_seq_lens0.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260719_205433/result_batch_20260719_205433_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads1_seq_lens0.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 8
+  {
+   "id": 6722,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads0-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1503,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens0.xml"
+  },
+  {
+   "id": 6723,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads0-seq_lens1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1628,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads0_seq_lens1.xml"
+  },
+  {
+   "id": 6724,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads1-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1393,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens0.xml"
+  },
+  {
+   "id": 6725,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-128-num_heads1-seq_lens1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1442,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_128_num_heads1_seq_lens1.xml"
+  },
+  {
+   "id": 6726,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads0-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1469,
+   "exit_code": 0,
+   "gpu_id": 1,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens0.xml"
+  },
+  {
+   "id": 6727,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads0-seq_lens1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1344,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads0_seq_lens1.xml"
+  },
+  {
+   "id": 6728,
+   "test_node": "tests/kernels/attention/test_triton_unified_attention.py::test_triton_unified_attn[8-q_dtype1-2048-None-dtype0-None-16-256-num_heads1-seq_lens0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1312,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/pytest_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads1_seq_lens0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0325/result_batch_super_0325_tests_kernels_attention_test_triton_unified_attention_py_test_triton_unified_attn_8_q_dtype1_2048_None_dtype0_None_16_256_num_heads1_seq_lens0.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
 }

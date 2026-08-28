@@ -1,0 +1,4 @@
+PASSED         tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[None-3-32768-None-dtype0-None-16-256-num_heads0-seq_lens0-False] (gpu=0, 1521ms, exit=0)
+PASSED         tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[None-3-32768-None-dtype0-None-16-256-num_heads0-seq_lens1-True] (gpu=1, 1399ms, exit=0)
+PASSED         tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[None-3-32768-None-dtype0-None-16-256-num_heads0-seq_lens1-False] (gpu=2, 1488ms, exit=0)
+FAILED         tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[None-3-32768-None-dtype0-256-16-256-num_heads0-seq_lens0-True] (gpu=3, 1590ms, exit=1)

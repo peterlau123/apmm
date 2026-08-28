@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0461",
+  "started_at": "2026-08-07T22:36:11Z",
+  "finished_at": "2026-08-07T22:36:36Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461.log",
+    "size_bytes": 129679,
+    "captured_at": "2026-08-07T22:36:36Z"
+  },
+  "tests": [
+    {
+      "id": 29818,
+      "test_node": "tests/quantization/test_fp8.py::test_scaled_fp8_quant[dtype1]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1212,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_fp8_py_test_scaled_fp8_quant_dtype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_fp8_py_test_scaled_fp8_quant_dtype1.xml"
+    },
+    {
+      "id": 29819,
+      "test_node": "tests/quantization/test_fp8.py::test_fp8_reloading[False-None-True-Fp8LinearMethod]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 822,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_None_True_Fp8LinearMethod.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_None_True_Fp8LinearMethod.xml"
+    },
+    {
+      "id": 29820,
+      "test_node": "tests/quantization/test_fp8.py::test_fp8_reloading[False-None-True-Fp8MoEMethod]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1083,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_None_True_Fp8MoEMethod.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_None_True_Fp8MoEMethod.xml"
+    },
+    {
+      "id": 29821,
+      "test_node": "tests/quantization/test_fp8.py::test_fp8_reloading[False-weight_block_size1-True-Fp8LinearMethod]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1506,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_weight_block_size1_True_Fp8LinearMethod.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_weight_block_size1_True_Fp8LinearMethod.xml"
+    },
+    {
+      "id": 29822,
+      "test_node": "tests/quantization/test_fp8.py::test_fp8_reloading[False-weight_block_size1-True-Fp8MoEMethod]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: DeepGEMM backend is not available or outdated. Please install or update the `deep_gemm` to a newer version to enable FP8 kernels.",
+      "duration_ms": 1680,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_weight_block_size1_True_Fp8MoEMethod.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_fp8_py_test_fp8_reloading_False_weight_block_size1_True_Fp8MoEMethod.xml"
+    },
+    {
+      "id": 29823,
+      "test_node": "tests/quantization/test_gptq_dynamic.py::test_gptq_with_dynamic[ModelCloud/Qwen1.5-1.8B-Chat-GPTQ-4bits-dynamic-cfg-with-lm_head-symTrue-True]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 240,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_gptq_dynamic_py_test_gptq_with_dynamic_ModelCloud_Qwen1_5_1_8B_Chat_GPTQ_4bits_dynamic_cfg_with_lm_head_symTrue_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_gptq_dynamic_py_test_gptq_with_dynamic_ModelCloud_Qwen1_5_1_8B_Chat_GPTQ_4bits_dynamic_cfg_with_lm_head_symTrue_True.xml"
+    },
+    {
+      "id": 29824,
+      "test_node": "tests/quantization/test_gptq_dynamic.py::test_gptq_with_dynamic[ModelCloud/Qwen1.5-1.8B-Chat-GPTQ-4bits-dynamic-cfg-with-lm_head-symFalse-False]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 163,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_gptq_dynamic_py_test_gptq_with_dynamic_ModelCloud_Qwen1_5_1_8B_Chat_GPTQ_4bits_dynamic_cfg_with_lm_head_symFalse_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_gptq_dynamic_py_test_gptq_with_dynamic_ModelCloud_Qwen1_5_1_8B_Chat_GPTQ_4bits_dynamic_cfg_with_lm_head_symFalse_False.xml"
+    },
+    {
+      "id": 29825,
+      "test_node": "tests/quantization/test_gptq_v2.py::test_model_load[XXXXyu/Qwen3-1.7B-w2g64-gptq_v2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 212,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/pytest_batch_super_0461_tests_quantization_test_gptq_v2_py_test_model_load_XXXXyu_Qwen3_1_7B_w2g64_gptq_v2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0461/result_batch_super_0461_tests_quantization_test_gptq_v2_py_test_model_load_XXXXyu_Qwen3_1_7B_w2g64_gptq_v2.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 4,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

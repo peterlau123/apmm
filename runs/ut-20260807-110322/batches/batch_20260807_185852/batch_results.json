@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185852",
+  "started_at": "2026-08-07T10:58:52Z",
+  "finished_at": "2026-08-07T10:58:56Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:58:56Z"
+  },
+  "tests": [
+    {
+      "id": 32351,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_engine_core_client_util_method_nested_structures",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_engine_core_client_util_method_nested_structures.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_engine_core_client_util_method_nested_structures.xml"
+    },
+    {
+      "id": 32352,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_kv_cache_events[True-tcp]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_True_tcp.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_True_tcp.xml"
+    },
+    {
+      "id": 32353,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_kv_cache_events[False-inproc]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_False_inproc.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_False_inproc.xml"
+    },
+    {
+      "id": 32354,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_kv_cache_events_dp[True-tcp]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_dp_True_tcp.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_kv_cache_events_dp_True_tcp.xml"
+    },
+    {
+      "id": 32355,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_startup_failure",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_startup_failure.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_startup_failure.xml"
+    },
+    {
+      "id": 32356,
+      "test_node": "tests/v1/engine/test_engine_core_client.py::test_engine_core_proc_instantiation_cuda_empty",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_engine_core_proc_instantiation_cuda_empty.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_engine_core_client_py_test_engine_core_proc_instantiation_cuda_empty.xml"
+    },
+    {
+      "id": 32357,
+      "test_node": "tests/v1/engine/test_fast_incdec_prefix_err.py::test_fast_inc_detok_invalid_utf8_err_case",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_fast_incdec_prefix_err_py_test_fast_inc_detok_invalid_utf8_err_case.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_fast_incdec_prefix_err_py_test_fast_inc_detok_invalid_utf8_err_case.xml"
+    },
+    {
+      "id": 32358,
+      "test_node": "tests/v1/engine/test_init_error_messaging.py::test_kv_cache_oom_no_memory",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/pytest_batch_20260807_185852_tests_v1_engine_test_init_error_messaging_py_test_kv_cache_oom_no_memory.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185852/result_batch_20260807_185852_tests_v1_engine_test_init_error_messaging_py_test_kv_cache_oom_no_memory.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

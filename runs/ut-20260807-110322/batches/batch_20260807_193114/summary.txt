@@ -1,0 +1,8 @@
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_init_kv_cache_with_kv_sharing_invalid_target_layer_order (gpu=0, 336ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_init_kv_cache_with_kv_sharing_target_layer_not_exist (gpu=2, 295ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_init_kv_cache_with_kv_sharing_target_same_as_current (gpu=3, 266ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_init_kv_cache_without_kv_sharing (gpu=4, 575ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_init_kv_cache_with_kv_sharing_valid (gpu=5, 527ms, exit=0)
+FAILED         tests/v1/worker/test_gpu_model_runner.py::test_hybrid_attention_mamba_tensor_shapes (gpu=6, 333ms, exit=1)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_hybrid_block_table_initialization (gpu=0, 325ms, exit=0)
+PASSED         tests/v1/worker/test_gpu_model_runner.py::test_input_batch_with_kernel_block_sizes (gpu=2, 398ms, exit=0)

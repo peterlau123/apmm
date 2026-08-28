@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_120327",
+  "started_at": "2026-08-06T04:03:27Z",
+  "finished_at": "2026-08-06T04:03:55Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327.log",
+    "size_bytes": 60264,
+    "captured_at": "2026-08-06T04:03:55Z"
+  },
+  "tests": [
+    {
+      "id": 12387,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-2-64-45-1024-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1603,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_45_1024_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_45_1024_128.xml"
+    },
+    {
+      "id": 12388,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-2-64-64-512-512]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1601,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_64_512_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_64_512_512.xml"
+    },
+    {
+      "id": 12389,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-2-64-64-1024-2048]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1605,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_64_1024_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_64_1024_2048.xml"
+    },
+    {
+      "id": 12390,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-2-64-222-128-2048]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1635,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_222_128_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_222_128_2048.xml"
+    },
+    {
+      "id": 12391,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-2-64-222-1024-2048]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1585,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_222_1024_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_2_64_222_1024_2048.xml"
+    },
+    {
+      "id": 12392,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-6-8-1-128-128]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 1538,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_128_128.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_128_128.xml"
+    },
+    {
+      "id": 12393,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-6-8-1-512-512]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 610,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_512_512.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_512_512.xml"
+    },
+    {
+      "id": 12394,
+      "test_node": "tests/kernels/moe/test_batched_moe.py::test_fused_moe_batched_experts[False-None-False-dtype1-6-8-1-1024-2048]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: \"cat_cuda\" not implemented for 'Float8_e4m3fn'",
+      "duration_ms": 646,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/pytest_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_1024_2048.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_120327/result_batch_20260806_120327_tests_kernels_moe_test_batched_moe_py_test_fused_moe_batched_experts_False_None_False_dtype1_6_8_1_1024_2048.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 8,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

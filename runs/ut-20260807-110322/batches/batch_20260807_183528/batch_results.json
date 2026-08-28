@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_183528",
+ "started_at": "2026-08-07T22:51:10Z",
+ "finished_at": "2026-08-07T22:51:49Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476.log",
+  "size_bytes": 19065,
+  "captured_at": "2026-08-07T22:51:49Z"
+ },
+ "tests": [
+  {
+   "id": 29946,
+   "test_node": "tests/test_config.py::test_is_encoder_decoder[openai/whisper-tiny-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 243,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_is_encoder_decoder_openai_whisper_tiny_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_is_encoder_decoder_openai_whisper_tiny_True.xml"
+  },
+  {
+   "id": 29947,
+   "test_node": "tests/test_config.py::test_is_encoder_decoder[TinyLlama/TinyLlama-1.1B-Chat-v1.0-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 199,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_is_encoder_decoder_TinyLlama_TinyLlama_1_1B_Chat_v1_0_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_is_encoder_decoder_TinyLlama_TinyLlama_1_1B_Chat_v1_0_False.xml"
+  },
+  {
+   "id": 29948,
+   "test_node": "tests/test_config.py::test_uses_mrope[facebook/opt-125m-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 135,
+   "exit_code": 0,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_uses_mrope_facebook_opt_125m_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_uses_mrope_facebook_opt_125m_False.xml"
+  },
+  {
+   "id": 29949,
+   "test_node": "tests/test_config.py::test_uses_mrope[Qwen/Qwen2-VL-2B-Instruct-True]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 158,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_uses_mrope_Qwen_Qwen2_VL_2B_Instruct_True.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_uses_mrope_Qwen_Qwen2_VL_2B_Instruct_True.xml"
+  },
+  {
+   "id": 29950,
+   "test_node": "tests/test_config.py::test_generation_config_loading",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 259,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_generation_config_loading.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_generation_config_loading.xml"
+  },
+  {
+   "id": 29951,
+   "test_node": "tests/test_config.py::test_load_config_pt_load_map_location[cuda]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 188,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_load_config_pt_load_map_location_cuda.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_load_config_pt_load_map_location_cuda.xml"
+  },
+  {
+   "id": 29952,
+   "test_node": "tests/test_config.py::test_load_config_pt_load_map_location[pt_load_map_location1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 144,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_load_config_pt_load_map_location_pt_load_map_location1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_load_config_pt_load_map_location_pt_load_map_location1.xml"
+  },
+  {
+   "id": 29953,
+   "test_node": "tests/test_config.py::test_get_and_verify_max_len[BAAI/bge-reranker-base-None-512-False]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 204,
+   "exit_code": 0,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/pytest_batch_super_0476_tests_test_config_py_test_get_and_verify_max_len_BAAI_bge_reranker_base_None_512_False.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0476/result_batch_super_0476_tests_test_config_py_test_get_and_verify_max_len_BAAI_bge_reranker_base_None_512_False.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

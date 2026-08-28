@@ -1,0 +1,49 @@
+{
+  "batch_id": "batch_super_0419",
+  "started_at": "2026-08-05T01:39:22Z",
+  "finished_at": "2026-08-05T01:39:38Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419.log",
+    "size_bytes": 29058,
+    "captured_at": "2026-08-05T01:39:38Z"
+  },
+  "tests": [
+    {
+      "id": 1119,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup12-ray-auto-test_options12]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 364,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup12_ray_auto_test_options12.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup12_ray_auto_test_options12.xml"
+    },
+    {
+      "id": 1120,
+      "test_node": "tests/distributed/test_pipeline_parallel.py::test_tp_language_generation[microsoft/Phi-3.5-MoE-instruct-parallel_setup13-mp-auto-test_options13]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "ValueError: Invalid repository ID or local directory specified: 'microsoft/Phi-3.5-MoE-instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.",
+      "duration_ms": 378,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup13_mp_auto_test_options13.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_distributed_test_pipeline_parallel_py_test_tp_language_generation_microsoft_Phi_3_5_MoE_instruct_parallel_setup13_mp_auto_test_options13.xml"
+    }
+  ],
+  "statistics": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

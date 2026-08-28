@@ -1,0 +1,8 @@
+PASSED         tests/lora/test_olmoe_tp.py::test_olmoe_lora_tp4[True] (gpu=0, 0ms, exit=0)
+PASSED         tests/lora/test_peft_helper.py::test_peft_helper_pass (gpu=2, 2923ms, exit=0)
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_rank-config_change0-is greater than max_lora_rank] (gpu=3, Nonems, exit=4)
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_dora-config_change1-does not yet support DoRA] (gpu=4, Nonems, exit=4)
+IGNORED        tests/lora/test_peft_helper.py::test_peft_helper_error[test_modules_to_save-config_change2-only supports modules_to_save being None] (gpu=5, Nonems, exit=4)
+PASSED         tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-1] (gpu=6, 1392ms, exit=0)
+PASSED         tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-4] (gpu=0, 1345ms, exit=0)
+PASSED         tests/lora/test_punica_ops.py::test_kernels[shrink-0-cuda:0-dtype0-1-2049-1-1-16] (gpu=2, 1349ms, exit=0)

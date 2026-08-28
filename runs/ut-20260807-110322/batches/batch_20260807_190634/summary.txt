@@ -1,0 +1,8 @@
+PASSED         tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test3-50-cuda:0] (gpu=0, 5408ms, exit=0)
+PASSED         tests/v1/logits_processors/test_correctness.py::test_logitsprocs[logitsprocs_under_test4-50-cuda:0] (gpu=2, 38029ms, exit=0)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_NONE] (gpu=3, 6373ms, exit=1)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT] (gpu=4, 6546ms, exit=1)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_FQCN] (gpu=5, 6166ms, exit=1)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_CLASS] (gpu=6, 6461ms, exit=1)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_custom_logitsprocs_req (gpu=0, 5034ms, exit=1)
+FAILED         tests/v1/logits_processors/test_custom_offline.py::test_rejects_custom_logitsprocs[CustomLogitprocSource.LOGITPROC_SOURCE_ENTRYPOINT-pooling] (gpu=2, 3969ms, exit=1)

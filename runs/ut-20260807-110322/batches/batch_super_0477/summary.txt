@@ -1,0 +1,8 @@
+PASSED         tests/test_config.py::test_get_and_verify_max_len[BAAI/bge-reranker-base-256-256-False] (gpu=0, 225ms, exit=0)
+PASSED         tests/test_config.py::test_get_and_verify_max_len[BAAI/bge-reranker-base-513-512-True] (gpu=2, 216ms, exit=0)
+PASSED         tests/test_config.py::test_get_and_verify_max_len[deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-None-131072-False] (gpu=3, 166ms, exit=0)
+PASSED         tests/test_config.py::test_get_and_verify_max_len[deepseek-ai/DeepSeek-R1-Distill-Qwen-7B-131073-131072-True] (gpu=4, 242ms, exit=0)
+IGNORED        tests/test_config.py::test_is_chunked_prefill_supported[jason9693/Qwen2.5-1.5B-apeach-decoder-True-Pooling models with causal attn and last pooling support chunked prefill.] (gpu=5, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_chunked_prefill_supported[Qwen/Qwen3-Embedding-0.6B-decoder-True-Pooling models with causal attn and last pooling support chunked prefill.] (gpu=6, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_chunked_prefill_supported[Qwen/Qwen2.5-Math-PRM-7B-decoder-False-Pooling models with step pooling does not support chunked prefill.] (gpu=0, Nonems, exit=4)
+IGNORED        tests/test_config.py::test_is_chunked_prefill_supported[internlm/internlm2-1_8b-reward-decoder-True-Pooling models with causal attn and all pooling support chunked prefill.] (gpu=2, Nonems, exit=4)

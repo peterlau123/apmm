@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260807_185200",
+  "started_at": "2026-08-07T10:52:16Z",
+  "finished_at": "2026-08-07T10:52:17Z",
+  "timeout": 300,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200.log",
+    "size_bytes": null,
+    "captured_at": "2026-08-07T10:52:17Z"
+  },
+  "tests": [
+    {
+      "id": 31581,
+      "test_node": "tests/utils_/test_import_utils.py::test_placeholder_module_error_handling",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_import_utils_py_test_placeholder_module_error_handling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_import_utils_py_test_placeholder_module_error_handling.xml"
+    },
+    {
+      "id": 31582,
+      "test_node": "tests/utils_/test_jsontree.py::test_json_count_leaves",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_jsontree_py_test_json_count_leaves.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_jsontree_py_test_json_count_leaves.xml"
+    },
+    {
+      "id": 31583,
+      "test_node": "tests/utils_/test_mem_utils.py::test_memory_profiling",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_mem_utils_py_test_memory_profiling.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_mem_utils_py_test_memory_profiling.xml"
+    },
+    {
+      "id": 31584,
+      "test_node": "tests/utils_/test_network_utils.py::test_get_open_port",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_network_utils_py_test_get_open_port.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_network_utils_py_test_get_open_port.xml"
+    },
+    {
+      "id": 31585,
+      "test_node": "tests/utils_/test_network_utils.py::test_split_zmq_path[ipc://some_path-expected0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_ipc_some_path_expected0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_ipc_some_path_expected0.xml"
+    },
+    {
+      "id": 31586,
+      "test_node": "tests/utils_/test_network_utils.py::test_split_zmq_path[tcp://127.0.0.1:5555-expected1]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_tcp_127_0_0_1_5555_expected1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_tcp_127_0_0_1_5555_expected1.xml"
+    },
+    {
+      "id": 31587,
+      "test_node": "tests/utils_/test_network_utils.py::test_split_zmq_path[tcp://[::1]:5555-expected2]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_tcp_1_5555_expected2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_tcp_1_5555_expected2.xml"
+    },
+    {
+      "id": 31588,
+      "test_node": "tests/utils_/test_network_utils.py::test_split_zmq_path[inproc://some_identifier-expected3]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML unparseable (watchdog SIGKILL mid-flush?)",
+      "duration_ms": null,
+      "exit_code": 127,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/pytest_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_inproc_some_identifier_expected3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260807_185200/result_batch_20260807_185200_tests_utils__test_network_utils_py_test_split_zmq_path_inproc_some_identifier_expected3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 8
+  }
+}

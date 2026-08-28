@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0468",
+  "started_at": "2026-08-07T22:41:51Z",
+  "finished_at": "2026-08-07T22:42:27Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468.log",
+    "size_bytes": 543592,
+    "captured_at": "2026-08-07T22:42:27Z"
+  },
+  "tests": [
+    {
+      "id": 29874,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[complete_reasoning]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_complete_reasoning.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_complete_reasoning.xml"
+    },
+    {
+      "id": 29875,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[complete_reasoning_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_complete_reasoning_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_complete_reasoning_streaming.xml"
+    },
+    {
+      "id": 29876,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[no_end_token]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_no_end_token.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_no_end_token.xml"
+    },
+    {
+      "id": 29877,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[no_end_token_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_no_end_token_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_no_end_token_streaming.xml"
+    },
+    {
+      "id": 29878,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[multiple_lines]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_multiple_lines.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_multiple_lines.xml"
+    },
+    {
+      "id": 29879,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[multiple_lines_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_multiple_lines_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_multiple_lines_streaming.xml"
+    },
+    {
+      "id": 29880,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[shortest_reasoning]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_shortest_reasoning.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_shortest_reasoning.xml"
+    },
+    {
+      "id": 29881,
+      "test_node": "tests/reasoning/test_minimax_m2_reasoning_parser.py::test_reasoning[shortest_reasoning_streaming]",
+      "status": "error",
+      "error_type": "collection",
+      "error_message": "failed on setup with \"OSError: We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\"",
+      "duration_ms": 1,
+      "exit_code": 1,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/pytest_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_shortest_reasoning_streaming.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0468/result_batch_super_0468_tests_reasoning_test_minimax_m2_reasoning_parser_py_test_reasoning_shortest_reasoning_streaming.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 0,
+    "failed": 0,
+    "error": 8,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0419",
+  "started_at": "2026-08-07T21:47:13Z",
+  "finished_at": "2026-08-07T21:47:41Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419.log",
+    "size_bytes": 28555,
+    "captured_at": "2026-08-07T21:47:41Z"
+  },
+  "tests": [
+    {
+      "id": 29480,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[MedusaModel]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 235,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_MedusaModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_MedusaModel.xml"
+    },
+    {
+      "id": 29481,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[OpenPanguMTPModel]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 188,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_OpenPanguMTPModel.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_OpenPanguMTPModel.xml"
+    },
+    {
+      "id": 29482,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Qwen3NextMTP]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "assert None is not None",
+      "duration_ms": 465,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_Qwen3NextMTP.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_Qwen3NextMTP.xml"
+    },
+    {
+      "id": 29483,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[SmolLM3ForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 254,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_SmolLM3ForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_SmolLM3ForCausalLM.xml"
+    },
+    {
+      "id": 29484,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[Emu3ForConditionalGeneration]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 263,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_Emu3ForConditionalGeneration.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_Emu3ForConditionalGeneration.xml"
+    },
+    {
+      "id": 29485,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[TransformersForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 271,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersForCausalLM.xml"
+    },
+    {
+      "id": 29486,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[TransformersMoEForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 145,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersMoEForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersMoEForCausalLM.xml"
+    },
+    {
+      "id": 29487,
+      "test_node": "tests/models/test_registry.py::test_registry_imports[TransformersMultiModalForCausalLM]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 199,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/pytest_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersMultiModalForCausalLM.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0419/result_batch_super_0419_tests_models_test_registry_py_test_registry_imports_TransformersMultiModalForCausalLM.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

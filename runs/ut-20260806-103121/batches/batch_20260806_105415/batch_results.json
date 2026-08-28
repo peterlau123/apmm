@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_20260806_105415",
+  "started_at": "2026-08-06T02:54:15Z",
+  "finished_at": "2026-08-06T02:54:43Z",
+  "timeout": 300,
+  "exit_code": 0,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415.log",
+    "size_bytes": 19704,
+    "captured_at": "2026-08-06T02:54:43Z"
+  },
+  "tests": [
+    {
+      "id": 11499,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2048-4-1-False-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2191,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_False_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_False_False_itype0.xml"
+    },
+    {
+      "id": 11500,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2048-4-1-False-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2233,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_False_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_False_True_itype0.xml"
+    },
+    {
+      "id": 11501,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2048-4-1-True-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2471,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_True_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_True_False_itype0.xml"
+    },
+    {
+      "id": 11502,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2048-4-1-True-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2419,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_True_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2048_4_1_True_True_itype0.xml"
+    },
+    {
+      "id": 11503,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2064-4-1-False-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2104,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_False_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_False_False_itype0.xml"
+    },
+    {
+      "id": 11504,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2064-4-1-False-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1676,
+      "exit_code": 0,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_False_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_False_True_itype0.xml"
+    },
+    {
+      "id": 11505,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2064-4-1-True-False-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1088,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_True_False_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_True_False_itype0.xml"
+    },
+    {
+      "id": 11506,
+      "test_node": "tests/kernels/mamba/test_causal_conv1d.py::test_causal_conv1d_update[2064-4-1-True-True-itype0]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 1105,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/pytest_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_True_True_itype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260806_105415/result_batch_20260806_105415_tests_kernels_mamba_test_causal_conv1d_py_test_causal_conv1d_update_2064_4_1_True_True_itype0.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

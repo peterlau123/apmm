@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0475",
+  "started_at": "2026-08-07T22:49:28Z",
+  "finished_at": "2026-08-07T22:50:09Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475.log",
+    "size_bytes": 20669,
+    "captured_at": "2026-08-07T22:50:09Z"
+  },
+  "tests": [
+    {
+      "id": 29938,
+      "test_node": "tests/test_config.py::test_is_quantized[RedHatAI/Mistral-Small-24B-Instruct-2501-quantized.w8a8-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 525,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_Mistral_Small_24B_Instruct_2501_quantized_w8a8_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_Mistral_Small_24B_Instruct_2501_quantized_w8a8_True.xml"
+    },
+    {
+      "id": 29939,
+      "test_node": "tests/test_config.py::test_is_quantized[RedHatAI/gpt-oss-20b-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 2492,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_gpt_oss_20b_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_gpt_oss_20b_True.xml"
+    },
+    {
+      "id": 29940,
+      "test_node": "tests/test_config.py::test_is_quantized[RedHatAI/DeepSeek-V2.5-1210-FP8-True]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 488,
+      "exit_code": 0,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_DeepSeek_V2_5_1210_FP8_True.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_DeepSeek_V2_5_1210_FP8_True.xml"
+    },
+    {
+      "id": 29941,
+      "test_node": "tests/test_config.py::test_is_quantized[RedHatAI/Mixtral-8x7B-Instruct-v0.1-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 133,
+      "exit_code": 0,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_Mixtral_8x7B_Instruct_v0_1_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_is_quantized_RedHatAI_Mixtral_8x7B_Instruct_v0_1_False.xml"
+    },
+    {
+      "id": 29942,
+      "test_node": "tests/test_config.py::test_get_bert_tokenization_sentence_transformer_config",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 153,
+      "exit_code": 0,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_get_bert_tokenization_sentence_transformer_config.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_get_bert_tokenization_sentence_transformer_config.xml"
+    },
+    {
+      "id": 29943,
+      "test_node": "tests/test_config.py::test_rope_customization",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "pydantic_core._pydantic_core.ValidationError: 1 validation error for ModelConfig\n  Value error, Invalid repository ID or local directory specified: 'meta-llama/Meta-Llama-3-8B-Instruct'.\nPlease verify the following requirements:\n1. Provide a valid Hugging Face repository ID.\n2. Specify a local directory that contains a recognized configuration file.\n   - For Hugging Face models: ensure the presence of a 'config.json'.\n   - For Mistral models: ensure the presence of a 'params.json'.\n [type=value_",
+      "duration_ms": 166,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_rope_customization.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_rope_customization.xml"
+    },
+    {
+      "id": 29944,
+      "test_node": "tests/test_config.py::test_nested_hf_overrides",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 173,
+      "exit_code": 0,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_nested_hf_overrides.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_nested_hf_overrides.xml"
+    },
+    {
+      "id": 29945,
+      "test_node": "tests/test_config.py::test_is_encoder_decoder[facebook/opt-125m-False]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 240,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/pytest_batch_super_0475_tests_test_config_py_test_is_encoder_decoder_facebook_opt_125m_False.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0475/result_batch_super_0475_tests_test_config_py_test_is_encoder_decoder_facebook_opt_125m_False.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

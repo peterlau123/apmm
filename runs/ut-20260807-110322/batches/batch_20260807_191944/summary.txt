@@ -1,0 +1,8 @@
+PASSED         tests/v1/shutdown/test_delete.py::test_llm_delete[True-True-2-hmellor/tiny-random-LlamaForCausalLM] (gpu=0, 182ms, exit=0)
+FAILED         tests/v1/shutdown/test_delete.py::test_llm_delete[True-True-1-hmellor/tiny-random-LlamaForCausalLM] (gpu=2, 1725ms, exit=1)
+PASSED         tests/v1/shutdown/test_forward_error.py::test_async_llm_model_error[hmellor/tiny-random-LlamaForCausalLM-2] (gpu=3, 199ms, exit=0)
+FAILED         tests/v1/shutdown/test_forward_error.py::test_async_llm_model_error[hmellor/tiny-random-LlamaForCausalLM-1] (gpu=4, 1660ms, exit=1)
+PASSED         tests/v1/shutdown/test_forward_error.py::test_llm_model_error[hmellor/tiny-random-LlamaForCausalLM-2-True] (gpu=5, 213ms, exit=0)
+FAILED         tests/v1/shutdown/test_forward_error.py::test_llm_model_error[hmellor/tiny-random-LlamaForCausalLM-1-True] (gpu=6, 1687ms, exit=1)
+FAILED         tests/v1/shutdown/test_processor_error.py::test_async_llm_processor_error[meta-llama/Llama-3.2-1B] (gpu=0, 161ms, exit=1)
+PASSED         tests/v1/shutdown/test_startup_error.py::test_async_llm_startup_error[forward-2-hmellor/tiny-random-LlamaForCausalLM] (gpu=2, 185ms, exit=0)

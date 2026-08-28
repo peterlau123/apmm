@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_super_0457",
+  "started_at": "2026-08-07T22:32:24Z",
+  "finished_at": "2026-08-07T22:32:47Z",
+  "timeout": 1800,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457.log",
+    "size_bytes": 86349,
+    "captured_at": "2026-08-07T22:32:47Z"
+  },
+  "tests": [
+    {
+      "id": 29786,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_transforms_perplexity[nm-testing/Llama-3.2-1B-Instruct-spinquantR1R2R4-w4a16-Flat is better than nested.\\nSparse is better than dense.-150.0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_transforms_perplexity_nm_testing_Llama_3_2_1B_Instruct_spinquantR1R2R4_w4a16_Flat_is_better_than_nested_nSparse_is_better_than_dense_150_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_transforms_perplexity_nm_testing_Llama_3_2_1B_Instruct_spinquantR1R2R4_w4a16_Flat_is_better_than_nested_nSparse_is_better_than_dense_150_0.xml"
+    },
+    {
+      "id": 29787,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_transforms_perplexity[nm-testing/Llama-3.2-1B-Instruct-quip-w4a16-Flat is better than nested.\\nSparse is better than dense.-150.0]",
+      "status": "ignored",
+      "error_type": "timeout",
+      "error_message": "JUnit XML has no <testcase> (pytest aborted pre-result)",
+      "duration_ms": null,
+      "exit_code": 4,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_transforms_perplexity_nm_testing_Llama_3_2_1B_Instruct_quip_w4a16_Flat_is_better_than_nested_nSparse_is_better_than_dense_150_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_transforms_perplexity_nm_testing_Llama_3_2_1B_Instruct_quip_w4a16_Flat_is_better_than_nested_nSparse_is_better_than_dense_150_0.xml"
+    },
+    {
+      "id": 29788,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_fp8_block_enabled",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 276,
+      "exit_code": 1,
+      "gpu_id": 3,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_fp8_block_enabled.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_fp8_block_enabled.xml"
+    },
+    {
+      "id": 29789,
+      "test_node": "tests/quantization/test_compressed_tensors.py::test_compressed_tensors_moe_ignore_with_model",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+      "duration_ms": 285,
+      "exit_code": 1,
+      "gpu_id": 4,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_moe_ignore_with_model.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_compressed_tensors_py_test_compressed_tensors_moe_ignore_with_model.xml"
+    },
+    {
+      "id": 29790,
+      "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Expected quant_type == gptq_marlin for TheBloke/Llama-2-7B-Chat-GPTQ, but found ERROR for no --quantization None case\nassert 'ERROR' == 'gptq_marlin'\n  \n  - gptq_marlin\n  + ERROR",
+      "duration_ms": 158,
+      "exit_code": 1,
+      "gpu_id": 5,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype0.xml"
+    },
+    {
+      "id": 29791,
+      "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype1]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Expected quant_type == gptq_marlin for TheBloke/Llama-2-7B-Chat-GPTQ, but found ERROR for no --quantization marlin case\nassert 'ERROR' == 'gptq_marlin'\n  \n  - gptq_marlin\n  + ERROR",
+      "duration_ms": 153,
+      "exit_code": 1,
+      "gpu_id": 6,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype1.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype1.xml"
+    },
+    {
+      "id": 29792,
+      "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype2]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "AssertionError: Expected quant_type == gptq for TheBloke/Llama-2-7B-Chat-GPTQ, but found ERROR for no --quantization gptq case\nassert 'ERROR' == 'gptq'\n  \n  - gptq\n  + ERROR",
+      "duration_ms": 138,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype2.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype2.xml"
+    },
+    {
+      "id": 29793,
+      "test_node": "tests/quantization/test_configs.py::test_auto_gptq[model_arg_exptype3]",
+      "status": "passed",
+      "error_type": null,
+      "error_message": null,
+      "duration_ms": 143,
+      "exit_code": 0,
+      "gpu_id": 2,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/pytest_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype3.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0457/result_batch_super_0457_tests_quantization_test_configs_py_test_auto_gptq_model_arg_exptype3.xml"
+    }
+  ],
+  "statistics": {
+    "total": 8,
+    "passed": 1,
+    "failed": 5,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 2
+  }
+}

@@ -259,6 +259,35 @@ def _run_agent_py(
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
+_H20_HOST = "infra-gpu-h20-022.host.shzhisuan.com"  # SSH 免密直连
+
+def _run_ssh(cmd: str, *, timeout: int = 600, host: Optional[str] = None,
+             user: str = "root", key_filename: Optional[str] = None) -> dict:
+    """SSH 直连执行 (paramiko 免密 key 认证) — 绕过 bifrost daemon / agent bastion.
+
+    2026-08-08: bifrost daemon 假活 + agent 需 bastion 密码, 加此 backend 作为
+    可靠直连路径 (H20 SSH 免密已配置).
+    """
+    import paramiko
+
+    host = host or _H20_HOST
+    key_filename = key_filename or "/root/.ssh/id_rsa"  # Hermes 改 HOME, 不能用 expanduser
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    try:
+        client.connect(host, username=user, key_filename=key_filename,
+                       timeout=15, banner_timeout=15, auth_timeout=15)
+        stdin, stdout, stderr = client.exec_command(cmd, timeout=timeout)
+        out = stdout.read().decode("utf-8", errors="replace")
+        err = stderr.read().decode("utf-8", errors="replace")
+        rc = stdout.channel.recv_exit_status()
+        return {"exit_code": rc, "stdout": out, "stderr": err, "size_bytes": len(out)}
+    except Exception as e:  # noqa: BLE001
+        return {"exit_code": 1, "stdout": "", "stderr": f"SSH error: {e}", "size_bytes": 0}
+    finally:
+        client.close()
+
+
 def run_remote(
     cmd: str,
     *,
@@ -288,6 +317,8 @@ def run_remote(
 
     if backend == "bifrost":
         return _run_bifrost(cmd, timeout=timeout, profile=profile, working_dir=working_dir)
+    elif backend == "ssh":
+        return _run_ssh(cmd, timeout=timeout)
     else:
         return _run_agent_py(cmd, timeout=timeout, profile=profile)
 

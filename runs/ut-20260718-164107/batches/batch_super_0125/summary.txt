@@ -1,0 +1,4 @@
+PASSED         tests/kernels/attention/test_cutlass_mla_decode.py::test_cutlass_mla_decode[torch_dtype1-True-True-64-512-576-1-128-16384-1-128] (gpu=0, 0ms, exit=0)
+FAILED         tests/kernels/attention/test_deepgemm_attention.py::test_deepgemm_fp8_mqa_logits (gpu=1, 867ms, exit=1)
+FAILED         tests/kernels/attention/test_deepgemm_attention.py::test_deepgemm_fp8_paged_mqa_logits (gpu=2, 870ms, exit=1)
+PASSED         tests/kernels/attention/test_flash_attn.py::test_varlen_with_paged_kv[None-2-32768-None-dtype0-None-16-256-num_heads0-seq_lens0-True] (gpu=3, 980ms, exit=0)

@@ -1,0 +1,73 @@
+{
+  "batch_id": "batch_super_0387",
+  "started_at": "2026-08-04T21:01:04Z",
+  "finished_at": "2026-08-04T21:09:39Z",
+  "timeout": 600,
+  "exit_code": 1,
+  "remote_log": {
+    "host": "t_h20",
+    "container": "v0.13.0_torch2.5.1_compile",
+    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387.log",
+    "size_bytes": 165603,
+    "captured_at": "2026-08-04T21:09:39Z"
+  },
+  "tests": [
+    {
+      "id": 134,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 240817,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 135,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[False-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 241463,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_False_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
+    },
+    {
+      "id": 136,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-TinyLlama/TinyLlama-1.1B-Chat-v1.0]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 240852,
+      "exit_code": 1,
+      "gpu_id": 0,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_TinyLlama_TinyLlama_1_1B_Chat_v1_0.xml"
+    },
+    {
+      "id": 137,
+      "test_node": "tests/compile/distributed/test_async_tp.py::test_async_tp_pass_correctness[True-mp-True-2-RedHatAI/Llama-3.1-8B-Instruct-NVFP4]",
+      "status": "failed",
+      "error_type": "assertion",
+      "error_message": "RuntimeError: Server failed to start in time.",
+      "duration_ms": 241465,
+      "exit_code": 1,
+      "gpu_id": 1,
+      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/pytest_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.log",
+      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0387/result_batch_super_0387_tests_compile_distributed_test_async_tp_py_test_async_tp_pass_correctness_True_mp_True_2_RedHatAI_Llama_3_1_8B_Instruct_NVFP4.xml"
+    }
+  ],
+  "statistics": {
+    "total": 4,
+    "passed": 0,
+    "failed": 4,
+    "error": 0,
+    "skipped": 0,
+    "retriable_error": 0,
+    "ignored": 0
+  }
+}

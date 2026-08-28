@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182319",
+ "started_at": "2026-08-07T19:20:41Z",
+ "finished_at": "2026-08-07T19:21:41Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334.log",
+  "size_bytes": 373837,
+  "captured_at": "2026-08-07T19:21:41Z"
+ },
+ "tests": [
+  {
+   "id": 28798,
+   "test_node": "tests/lora/test_punica_ops.py::test_kernels_hidden_size[expand-0-cuda:0-dtype1-3-508-32-4-4]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 1416,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_punica_ops_py_test_kernels_hidden_size_expand_0_cuda_0_dtype1_3_508_32_4_4.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_punica_ops_py_test_kernels_hidden_size_expand_0_cuda_0_dtype1_3_508_32_4_4.xml"
+  },
+  {
+   "id": 28799,
+   "test_node": "tests/lora/test_quant_model.py::test_quant_model_lora[model0]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 343,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_lora_model0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_lora_model0.xml"
+  },
+  {
+   "id": 28800,
+   "test_node": "tests/lora/test_quant_model.py::test_quant_model_lora[model1]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 339,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_lora_model1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_lora_model1.xml"
+  },
+  {
+   "id": 28801,
+   "test_node": "tests/lora/test_quant_model.py::test_quant_model_tp_equality[model0]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 328,
+   "exit_code": 0,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_tp_equality_model0.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_tp_equality_model0.xml"
+  },
+  {
+   "id": 28802,
+   "test_node": "tests/lora/test_quant_model.py::test_quant_model_tp_equality[model1]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 324,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_tp_equality_model1.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_quant_model_py_test_quant_model_tp_equality_model1.xml"
+  },
+  {
+   "id": 28803,
+   "test_node": "tests/lora/test_qwen2vl.py::test_qwen2vl_lora",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 23584,
+   "exit_code": 1,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen2vl_lora.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen2vl_lora.xml"
+  },
+  {
+   "id": 28804,
+   "test_node": "tests/lora/test_qwen2vl.py::test_qwen2vl_lora_beam_search",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 20725,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen2vl_lora_beam_search.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen2vl_lora_beam_search.xml"
+  },
+  {
+   "id": 28805,
+   "test_node": "tests/lora/test_qwen2vl.py::test_qwen25vl_lora",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}",
+   "duration_ms": 20240,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/pytest_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen25vl_lora.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0334/result_batch_super_0334_tests_lora_test_qwen2vl_py_test_qwen25vl_lora.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -1,121 +1,121 @@
 {
-  "batch_id": "batch_20260718_231854",
-  "started_at": "2026-07-18T15:20:04Z",
-  "finished_at": "2026-07-18T15:42:37Z",
-  "timeout": 300,
-  "exit_code": 1,
-  "remote_log": {
-    "host": "t_h20",
-    "container": "v0.13.0_torch2.5.1_compile",
-    "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854.log",
-    "size_bytes": null,
-    "captured_at": "2026-07-18T15:42:37Z"
+ "batch_id": "batch_20260718_231854",
+ "started_at": "2026-08-05T15:42:22Z",
+ "finished_at": "2026-08-05T15:57:26Z",
+ "timeout": 1800,
+ "exit_code": 0,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0467/pytest_batch_super_0467.log",
+  "size_bytes": null,
+  "captured_at": "2026-08-05T15:57:26Z"
+ },
+ "tests": [
+  {
+   "id": 221,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype1-16-16-8-TestAllReduceRMSNormModel--rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 1 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1167345,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0467/pytest_batch_super_0467_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0467/result_batch_super_0467_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
   },
-  "tests": [
-    {
-      "id": 214,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormModel-+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
-    },
-    {
-      "id": 215,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormModel--rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
-    },
-    {
-      "id": 216,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model-+rms_norm,+quant_fp8]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
-    },
-    {
-      "id": 217,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model-+rms_norm,-quant_fp8]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
-    },
-    {
-      "id": 218,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model--rms_norm,+quant_fp8]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
-    },
-    {
-      "id": 219,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model--rms_norm,-quant_fp8]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 3,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
-    },
-    {
-      "id": 220,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype1-16-16-8-TestAllReduceRMSNormModel-+rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 1,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
-    },
-    {
-      "id": 221,
-      "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype1-16-16-8-TestAllReduceRMSNormModel--rms_norm]",
-      "status": "ignored",
-      "error_type": "timeout",
-      "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
-      "duration_ms": null,
-      "exit_code": 2,
-      "gpu_id": 2,
-      "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/pytest_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
-      "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_20260718_231854/result_batch_20260718_231854_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
-    }
-  ],
-  "statistics": {
-    "total": 8,
-    "passed": 0,
-    "failed": 0,
-    "error": 0,
-    "skipped": 0,
-    "retriable_error": 0,
-    "ignored": 8
+  {
+   "id": 219,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model--rms_norm,-quant_fp8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 1 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1121689,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0466/pytest_batch_super_0466_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0466/result_batch_super_0466_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
+  },
+  {
+   "id": 220,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype1-16-16-8-TestAllReduceRMSNormModel-+rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 0 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1170494,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0466/pytest_batch_super_0466_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0466/result_batch_super_0466_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype1_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
+  },
+  {
+   "id": 216,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model-+rms_norm,+quant_fp8]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
+  },
+  {
+   "id": 217,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model-+rms_norm,-quant_fp8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 1 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1164024,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
+  },
+  {
+   "id": 218,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormStaticQuantFP8Model--rms_norm,+quant_fp8]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 1 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1132120,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/pytest_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0465/result_batch_super_0465_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormStaticQuantFP8Model_rms_norm_quant_fp8.xml"
+  },
+  {
+   "id": 214,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormModel-+rms_norm]",
+   "status": "ignored",
+   "error_type": "timeout",
+   "error_message": "JUnit XML missing (watchdog SIGKILL or fetch empty)",
+   "duration_ms": null,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
+  },
+  {
+   "id": 215,
+   "test_node": "tests/compile/distributed/test_sequence_parallelism.py::test_sequence_parallelism_pass[False-True-dtype0-16-16-8-TestAllReduceRMSNormModel--rms_norm]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "torch.multiprocessing.spawn.ProcessRaisedException: \n\n-- Process 1 terminated with the following error:\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.12/dist-packages/torch/multiprocessing/spawn.py\", line 90, in _wrap\n    fn(i, *args)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/compile/distributed/test_sequence_parallelism.py\", line 253, in sequence_parallelism_pass_on_test_model\n    init_distributed_environment()\n  File \"/gpfs/gcsp/M2.7_verify/vllm/vllm/distributed/parallel_st",
+   "duration_ms": 1134697,
+   "exit_code": null,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/pytest_batch_super_0464_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0464/result_batch_super_0464_tests_compile_distributed_test_sequence_parallelism_py_test_sequence_parallelism_pass_False_True_dtype0_16_16_8_TestAllReduceRMSNormModel_rms_norm.xml"
   }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 0,
+  "failed": 6,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 2
+ }
 }

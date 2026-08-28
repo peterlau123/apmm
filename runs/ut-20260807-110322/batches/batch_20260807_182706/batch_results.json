@@ -1,0 +1,121 @@
+{
+ "batch_id": "batch_20260807_182706",
+ "started_at": "2026-08-07T21:06:14Z",
+ "finished_at": "2026-08-07T21:06:44Z",
+ "timeout": 1800,
+ "exit_code": 1,
+ "remote_log": {
+  "host": "t_h20",
+  "container": "v0.13.0_torch2.5.1_compile",
+  "raw_log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379.log",
+  "size_bytes": 74882,
+  "captured_at": "2026-08-07T21:06:44Z"
+ },
+ "tests": [
+  {
+   "id": 29160,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[LlamaForCausalLMEagle3]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Test can_initialize failed when called with args ('LlamaForCausalLMEagle3', <_pytest.monkeypatch.MonkeyPatch object at 0x7ef6c03ce3c0>, <tests.models.registry.HfExampleModels object at 0x7ef724f50260>) and kwargs {} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/models/test_initialization.py\", line 119, in can_initialize\n    LLM(\n  Fi",
+   "duration_ms": 715,
+   "exit_code": 1,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_LlamaForCausalLMEagle3.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_LlamaForCausalLMEagle3.xml"
+  },
+  {
+   "id": 29161,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Fairseq2LlamaForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 339,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Fairseq2LlamaForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Fairseq2LlamaForCausalLM.xml"
+  },
+  {
+   "id": 29162,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[GraniteForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, pass 'local_files_only=False' as input.",
+   "duration_ms": 279,
+   "exit_code": 1,
+   "gpu_id": 3,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_GraniteForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_GraniteForCausalLM.xml"
+  },
+  {
+   "id": 29163,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Qwen3NextMTP]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Test can_initialize failed when called with args ('Qwen3NextMTP', <_pytest.monkeypatch.MonkeyPatch object at 0x7fb8294d2570>, <tests.models.registry.HfExampleModels object at 0x7fb88e28c470>) and kwargs {} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/models/test_initialization.py\", line 119, in can_initialize\n    LLM(\n  File \"/gpfs/",
+   "duration_ms": 8005,
+   "exit_code": 1,
+   "gpu_id": 4,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3NextMTP.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Qwen3NextMTP.xml"
+  },
+  {
+   "id": 29164,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[LlamaModel]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 307,
+   "exit_code": 0,
+   "gpu_id": 5,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_LlamaModel.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_LlamaModel.xml"
+  },
+  {
+   "id": 29165,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[OlmoForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 3682,
+   "exit_code": 0,
+   "gpu_id": 6,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_OlmoForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_OlmoForCausalLM.xml"
+  },
+  {
+   "id": 29166,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[OPTForCausalLM]",
+   "status": "passed",
+   "error_type": null,
+   "error_message": null,
+   "duration_ms": 3384,
+   "exit_code": 0,
+   "gpu_id": 0,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_OPTForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_OPTForCausalLM.xml"
+  },
+  {
+   "id": 29167,
+   "test_node": "tests/models/test_initialization.py::test_can_initialize_large_subset[Eagle3Qwen2_5vlForCausalLM]",
+   "status": "failed",
+   "error_type": "assertion",
+   "error_message": "AssertionError: Test can_initialize failed when called with args ('Eagle3Qwen2_5vlForCausalLM', <_pytest.monkeypatch.MonkeyPatch object at 0x7fd784eb6840>, <tests.models.registry.HfExampleModels object at 0x7fd7e9c78320>) and kwargs {} (exit code: 256):\nTraceback (most recent call last):\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/utils.py\", line 900, in wrapper\n    func(*args, **kwargs)\n  File \"/gpfs/gcsp/M2.7_verify/vllm/tests/models/test_initialization.py\", line 119, in can_initialize\n    LLM(\n",
+   "duration_ms": 736,
+   "exit_code": 1,
+   "gpu_id": 2,
+   "log_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/pytest_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Eagle3Qwen2_5vlForCausalLM.log",
+   "xml_path": "/gpfs/gcsp/M2.7_verify/vllm/ut_logs/batch_super_0379/result_batch_super_0379_tests_models_test_initialization_py_test_can_initialize_large_subset_Eagle3Qwen2_5vlForCausalLM.xml"
+  }
+ ],
+ "statistics": {
+  "total": 8,
+  "passed": 3,
+  "failed": 5,
+  "error": 0,
+  "skipped": 0,
+  "retriable_error": 0,
+  "ignored": 0
+ }
+}

@@ -24,6 +24,36 @@ manifest 同步：progress 35.1% → **59.4%**（executed 19,562 / passed 17,398
 pending 12,505）。详见
 [docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md](docs/reports/2026-08-06-vllm-0.13.0-torch2.5.1-8000cases-compat-issues.md)。
 
+## 2026-08-07/08（run ut-20260807-110322：pending 12,185 全量）
+
+| 指标 | 数值 |
+|------|:----:|
+| 总测试用例数 | 12,185 |
+| ✅ passed | 8,613 |
+| ❌ failed | 1,253 |
+| ⚠️ error | 333 |
+| ⏸️ ignored | 1,984（**待办重跑**） |
+| **通过率** | **70.7%** |
+
+**本周进展**：manifest 剩余 pending 12,185 全量执行（marlin 已修复基础上）。
+ignored 1,984 分类（detokenize 模型类 904 + peft ~250 + 慢测试 ~800 + distributed 17）；
+**execute_batch 层不稳定**（部分批次挂起——GPU 空闲 CPU 0）已记录待办。
+**manifest 同步：progress 59.4% → 90.3%**（executed 29,763 / passed 26,011 /
+pending 320=cuda:1 坏卡）。详见
+[docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md](docs/reports/2026-08-08-vllm-0.13.0-torch2.5.1-pending-12185-compat-issues.md)。
+
+## TODO（待办项）
+
+- [ ] **工作日处理**（2026-08-09 收尾）：剩余 pending 5,060（other 未跑 + timeout 1,717 未跑）决策 + ignored 241/models 931 记录跳过 + 兼容性 2,063（torch 2.8 评估）
+- [ ] **bifrost tokio 执行层专项**（假活根治——H20 时钟环境——探针兜底中）
+- [ ] **模型下载**（gated 模型——需 token/授权——models 931 依赖）
+- [x] ~~12,185 run 落盘（9,157/75.1%——2026-08-08）~~
+- [x] ~~manifest 分组重跑（skipped/models/other/timeout——passed +61——2026-08-09 中断收尾）~~
+- [x] ~~error 333~~ ✅ **已定性**（stale 节点——代码演进——下次 run 定向 collect）
+- [x] ~~cuda:1 320~~ ✅ **全部通过**（device-map + bifrost 修复）
+- [ ] **stale 591 定向 collect**（下次 run：--collect-only 校验——测试还在则更新节点 pending 跑，已删则移除）
+- [ ] **detokenize 大模型测试优化**：小批量（4/批）+ 更长超时
+
 ---
 
 ## 2026-08-05（run ut-20260718-164107 收官）
